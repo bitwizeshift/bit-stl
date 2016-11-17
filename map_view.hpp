@@ -1,13 +1,13 @@
 /**
  * \file map_view.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains a type-erased view of a map
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_MAP_VIEW_HPP
-#define BIT_MAP_VIEW_HPP
+#ifndef BIT_STL_MAP_VIEW_HPP
+#define BIT_STL_MAP_VIEW_HPP
 
 // local bit
 #include "set_view.hpp"
@@ -51,7 +51,7 @@ namespace bit {
     ///       if U is a set_view
     ///
     /// \param other the map-like type to view
-#ifndef BFG_DOXYGEN_BUILD
+#ifndef BIT_DOXYGEN_BUILD
     template<typename U,
              typename = std::enable_if_t<!std::is_same<std::decay_t<U>, map_view>::value> >
 #else
@@ -144,4 +144,4 @@ namespace bit {
 
 } // namespace bit
 
-#endif /* BIT_MAP_VIEW_HPP */
+#endif /* BIT_STL_MAP_VIEW_HPP */

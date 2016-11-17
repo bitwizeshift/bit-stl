@@ -524,6 +524,6 @@ namespace bit {
     return span<const byte>( static_cast<const byte*>(static_cast<const void*>(view.data())), view.size_bytes() );
   }
 
-} // namespace bfg
+} // namespace bit
 
 #endif /* BFSTL_DETAIL_ARRAY_VIEW_INL */

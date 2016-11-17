@@ -1,20 +1,21 @@
 /**
  * \file hashed_string_view.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains an implementation of a compile-time hashed
+ *        string view
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_HASHED_STRING_VIEW_HPP
-#define BIT_HASHED_STRING_VIEW_HPP
+#ifndef BIT_STL_HASHED_STRING_VIEW_HPP
+#define BIT_STL_HASHED_STRING_VIEW_HPP
 
 #include "string_view.hpp"
 
 namespace bit {
 
   ////////////////////////////////////////////////////////////////////////////
-  /// \class bfg::basic_hashed_string_view
+  /// \class bit::basic_hashed_string_view
   ///
   /// \brief The basic_hashed_string_view is a compile-time hashed wrapper
   ///        around a non-owning string (#basic_string_view).
@@ -196,4 +197,4 @@ namespace bit {
 
 #include "detail/hashed_string_view.inl"
 
-#endif /* BIT_HASHED_STRING_VIEW_HPP */
+#endif /* BIT_STL_HASHED_STRING_VIEW_HPP */

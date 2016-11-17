@@ -86,7 +86,7 @@
 #  define BIT_IS_ABSTRACT(T)             __is_abstract(T)
 #  define BIT_IS_BASE_OF(T,U)            __is_base_of(T,U) && !is_same<T,U>::value)
 #  define BIT_IS_CLASS(T)                __is_class(T)
-#  define BIT_IS_CONVERTIBLE(T,U)      ((__is_convertible_to(T,U) || (bfg::is_same<T,U>::value && !bfg::is_function<U>::value)) && !__is_abstract(U))
+#  define BIT_IS_CONVERTIBLE(T,U)      ((__is_convertible_to(T,U) || (bit::is_same<T,U>::value && !bit::is_function<U>::value)) && !__is_abstract(U))
 #  define BIT_IS_ENUM(T)                 __is_enum(T)
 
 #  if defined(_MSC_VER) && (_MSC_VER >= 1700)

@@ -1,7 +1,7 @@
 /**
  * \file string_tokenizer.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains a utility for tokenizing strings
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -154,7 +154,7 @@ namespace bit {
   using u16string_tokenizer = basic_string_tokenizer<char16_t>;
   using u32string_tokenizer = basic_string_tokenizer<char32_t>;
 
-} // namespace bfg
+} // namespace bit
 
 #include "detail/string_tokenizer.inl"
 

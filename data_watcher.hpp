@@ -1,25 +1,26 @@
 /**
  * \file const_data_watcher.hpp
  *
- * \brief Debug methods for the rest of the system
+ * \brief This header contains debug methods for the rest of the system
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_CONST_DATA_WATCHER_HPP
-#define BIT_CONST_DATA_WATCHER_HPP
+#ifndef BIT_STL_DATA_WATCHER_HPP
+#define BIT_STL_DATA_WATCHER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
 #endif
 
-#include "config.hpp"
+// bit::stl local libraries
+#include "stddef.hpp"
 #include "type_traits.hpp"
 
 namespace bit {
 
   /////////////////////////////////////////////////////////////////////////////
-  /// \class bfg::data_watcher
+  /// \class bit::data_watcher
   ///
   /// \brief A wrapper class around fundamental types that causes a breakpoint
   ///        any time the variable is set.
@@ -239,4 +240,4 @@ namespace bit {
 
 
 
-#endif /* BIT_CONST_DATA_WATCHER_HPP */
+#endif /* BIT_STL_DATA_WATCHER_HPP */

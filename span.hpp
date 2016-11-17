@@ -1,6 +1,9 @@
 /**
  * \file span.hpp
  *
+ * \brief This file contains a custom implementation of the gsl::span;
+ *        a mutable view of contiguous data.
+ *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
@@ -261,7 +264,7 @@ namespace bit {
     ///        function
     ///
     /// \param container the container to construct an span out of
-#ifndef BFG_DOXYGEN_BUILD
+#ifndef BIT_DOXYGEN_BUILD
     template<typename Container,
              typename = std::enable_if_t<is_contiguous_container<Container>::value>>
 #else
@@ -657,7 +660,7 @@ namespace bit {
   template<typename T, std::ptrdiff_t Extent>
   constexpr span<const byte> byte_cast( const span<const T,Extent>& view );
 
-} // namespace bfg
+} // namespace bit
 
 #include "detail/span.inl"
 

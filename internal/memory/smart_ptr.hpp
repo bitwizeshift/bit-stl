@@ -1,11 +1,3 @@
-/**
- * \file smart_ptr.hpp
- *
- * \brief todo: fill in documentation
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
-
 #ifndef BIT_INTERNAL_MEMORY_SMART_PTR_HPP
 #define BIT_INTERNAL_MEMORY_SMART_PTR_HPP
 

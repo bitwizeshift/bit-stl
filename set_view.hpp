@@ -1,7 +1,7 @@
 /**
  * \file set_view.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains an implementation of a type-erased set
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -106,7 +106,7 @@ namespace bit {
     ///       if U is a set_view
     ///
     /// \param other the set-like type to view
-#ifndef BFG_DOXYGEN_BUILD
+#ifndef BIT_DOXYGEN_BUILD
     template<typename U,
              typename = std::enable_if_t<!std::is_same<set_view,std::decay_t<U>>::value> >
 #else

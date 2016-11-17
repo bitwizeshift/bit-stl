@@ -8,90 +8,107 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_INTERNAL_BYTE_HPP
-#define BIT_INTERNAL_BYTE_HPP
+#ifndef BIT_STL_INTERNAL_BYTE_HPP
+#define BIT_STL_INTERNAL_BYTE_HPP
 
 #include <type_traits>
 
 namespace bit {
+  inline namespace stl {
 
-  /// \brief Signed byte type
-  enum class byte : unsigned char{};
+    /// \brief Unsigned byte type
+    enum class byte : unsigned char{};
 
-  //------------------------------------------------------------------------
-  // Byte Operators
-  //------------------------------------------------------------------------
+    //------------------------------------------------------------------------
+    // Byte Operators
+    //------------------------------------------------------------------------
 
-  template <typename IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
-  inline constexpr byte& operator<<=(byte& lhs, IntT shift)
-    noexcept
-  {
-      return lhs = byte(static_cast<unsigned char>(lhs) << shift);
-  }
+#ifndef BIT_DOXYGEN_BUILD
+    template<typename IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
+#else
+    template<typename IntT>
+#endif
+    inline constexpr byte& operator<<=(byte& lhs, IntT shift)
+      noexcept
+    {
+        return lhs = byte(static_cast<unsigned char>(lhs) << shift);
+    }
 
-  template <class IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
-  inline constexpr byte operator<<(byte lhs, IntT shift)
-    noexcept
-  {
-      return byte(static_cast<unsigned char>(lhs) << shift);
-  }
+#ifndef BIT_DOXYGEN_BUILD
+    template<typename IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
+#else
+    template<typename IntT>
+#endif
+    inline constexpr byte operator<<(byte lhs, IntT shift)
+      noexcept
+    {
+        return byte(static_cast<unsigned char>(lhs) << shift);
+    }
 
-  template <class IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
-  inline constexpr byte& operator>>=(byte& lhs, IntT shift)
-    noexcept
-  {
-      return lhs = byte(static_cast<unsigned char>(lhs) >> shift);
-  }
+#ifndef BIT_DOXYGEN_BUILD
+    template<typename IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
+#else
+    template<typename IntT>
+#endif
+    inline constexpr byte& operator>>=(byte& lhs, IntT shift)
+      noexcept
+    {
+        return lhs = byte(static_cast<unsigned char>(lhs) >> shift);
+    }
 
-  template <class IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
-  inline constexpr byte operator>>(byte lhs, IntT shift)
-    noexcept
-  {
-      return byte(static_cast<unsigned char>(lhs) >> shift);
-  }
+#ifndef BIT_DOXYGEN_BUILD
+    template<typename IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
+#else
+    template<typename IntT>
+#endif
+    inline constexpr byte operator>>(byte lhs, IntT shift)
+      noexcept
+    {
+        return byte(static_cast<unsigned char>(lhs) >> shift);
+    }
 
-  inline byte& operator|=(byte& lhs, byte rhs)
-    noexcept
-  {
-      return lhs = byte(static_cast<unsigned char>(lhs) | static_cast<unsigned char>(rhs));
-  }
+    inline byte& operator|=(byte& lhs, byte rhs)
+      noexcept
+    {
+        return lhs = byte(static_cast<unsigned char>(lhs) | static_cast<unsigned char>(rhs));
+    }
 
-  inline constexpr byte operator|(byte lhs, byte rhs)
-    noexcept
-  {
-      return byte(static_cast<unsigned char>(lhs) | static_cast<unsigned char>(rhs));
-  }
+    inline constexpr byte operator|(byte lhs, byte rhs)
+      noexcept
+    {
+        return byte(static_cast<unsigned char>(lhs) | static_cast<unsigned char>(rhs));
+    }
 
-  inline byte& operator&=(byte& lhs, byte rhs)
-    noexcept
-  {
-      return lhs = byte(static_cast<unsigned char>(lhs) & static_cast<unsigned char>(rhs));
-  }
+    inline byte& operator&=(byte& lhs, byte rhs)
+      noexcept
+    {
+        return lhs = byte(static_cast<unsigned char>(lhs) & static_cast<unsigned char>(rhs));
+    }
 
-  inline constexpr byte operator&(byte lhs, byte rhs)
-    noexcept
-  {
-      return byte(static_cast<unsigned char>(lhs) & static_cast<unsigned char>(rhs));
-  }
+    inline constexpr byte operator&(byte lhs, byte rhs)
+      noexcept
+    {
+        return byte(static_cast<unsigned char>(lhs) & static_cast<unsigned char>(rhs));
+    }
 
-  inline byte& operator^=(byte& lhs, byte rhs)
-    noexcept
-  {
-      return lhs = byte(static_cast<unsigned char>(lhs) ^ static_cast<unsigned char>(rhs));
-  }
+    inline byte& operator^=(byte& lhs, byte rhs)
+      noexcept
+    {
+        return lhs = byte(static_cast<unsigned char>(lhs) ^ static_cast<unsigned char>(rhs));
+    }
 
-  inline constexpr byte operator^(byte lhs, byte rhs)
-    noexcept
-  {
-      return byte(static_cast<unsigned char>(lhs) ^ static_cast<unsigned char>(rhs));
-  }
+    inline constexpr byte operator^(byte lhs, byte rhs)
+      noexcept
+    {
+        return byte(static_cast<unsigned char>(lhs) ^ static_cast<unsigned char>(rhs));
+    }
 
-  inline constexpr byte operator~(byte lhs)
-    noexcept
-  {
-    return byte(~static_cast<unsigned char>(lhs));
-  }
-
+    inline constexpr byte operator~(byte lhs)
+      noexcept
+    {
+      return byte(~static_cast<unsigned char>(lhs));
+    }
+  } // inline namespace stl
 } // namespace bit
 
-#endif /* BIT_INTERNAL_BYTE_HPP */
+#endif /* BIT_STL_INTERNAL_BYTE_HPP */

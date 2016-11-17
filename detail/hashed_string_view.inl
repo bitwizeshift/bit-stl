@@ -182,6 +182,6 @@ namespace bit {
     return str.hash();
   }
 
-} // namespace bfg
+} // namespace bit
 
 #endif /* BFSTL_DETAIL_HASHED_STRING_VIEW_INL */

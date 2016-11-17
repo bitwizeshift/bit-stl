@@ -121,7 +121,7 @@
 #  define BIT_HAS_VIRTUAL_DESTRUCTOR(T)   __has_virtual_destructor(T)
 
 #  define BIT_IS_ABSTRACT(T)              __is_abstract(T)
-#  define BIT_IS_BASE_OF(T,U)            (__is_base_of(T,U) && (!::bfg::is_same<T,U>::value))
+#  define BIT_IS_BASE_OF(T,U)            (__is_base_of(T,U) && (!::bit::is_same<T,U>::value))
 #  define BIT_IS_CLASS(T)                 __is_class(T)
 #  define BIT_IS_ENUM(T)                  __is_enum(T)
 #  define BIT_IS_POLYMORPHIC(T)           __is_polymorphic(T)

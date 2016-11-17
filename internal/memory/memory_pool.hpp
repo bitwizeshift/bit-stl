@@ -1,11 +1,3 @@
-/**
- * \file memory_pool.inl
- *
- * \brief todo: fill in documentation
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
-
 #ifndef BIT_INTERNAL_MEMORY_MEMORY_POOL_HPP
 #define BIT_INTERNAL_MEMORY_MEMORY_POOL_HPP
 

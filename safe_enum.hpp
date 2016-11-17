@@ -13,10 +13,10 @@
 # pragma once
 #endif
 
-namespace bfg{
+namespace bit {
 
   /////////////////////////////////////////////////////////////////////////////
-  /// \class bfg::safe_enum
+  /// \class bit::safe_enum
   ///
   /// Implements the Type-Safe Enum c++ idiom, wherein an enum type is safely
   /// encapsulated within a struct, and can only be referred when properly
@@ -73,7 +73,7 @@ namespace bfg{
   //---------------------------------------------------------------------------
 
   /////////////////////////////////////////////////////////////////////////////
-  /// \class bfg::safe_operable_enum
+  /// \class bit::safe_operable_enum
   ///
   /// Like the #safe_enum, this implements the Type Safe Enum c++ idiom, with
   /// the expanded capability of providing mathematical and bitwise operations
@@ -165,6 +165,6 @@ namespace bfg{
   };
 
 
-} // namespace bfg
+} // namespace bit
 
 #endif /* BIT_SAFE_ENUM_HPP */

@@ -6,15 +6,15 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_ASSERT_HPP
-#define BIT_ASSERT_HPP
+#ifndef BIT_STL_ASSERT_HPP
+#define BIT_STL_ASSERT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
 #endif
 
-// bit::core local libraries
-#include "config.hpp"
+// bit::stl local libraries
+#include "stddef.hpp"
 
 // Runtime assertion (Only available when in debug)
 #if defined(BIT_DEBUG)
@@ -262,4 +262,4 @@ namespace bit {
 #undef BIT_RUNTIME_ASSERT_DEFINE_VARIABLE
 #undef BIT_RUNTIME_ASSERT_DEFINE_POINTER
 
-#endif /* BIT_ASSERT_HPP */
+#endif /* BIT_STL_ASSERT_HPP */

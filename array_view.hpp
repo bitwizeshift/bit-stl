@@ -1,13 +1,14 @@
 /**
  * \file array_view.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains a type-erased view of immutable
+ *        contiguous data
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_ARRAY_VIEW_HPP
-#define BIT_ARRAY_VIEW_HPP
+#ifndef BIT_STL_ARRAY_VIEW_HPP
+#define BIT_STL_ARRAY_VIEW_HPP
 
 #include "type_traits.hpp"
 
@@ -81,7 +82,7 @@ namespace bit {
     /// \brief Constructs an array-view from a container
     ///
     /// \param containe the container to view
-#ifndef BFG_DOXYGEN_BUILD
+#ifndef BIT_DOXYGEN_BUILD
     template<typename Container,
              typename = std::enable_if_t<is_contiguous_container<Container>::value>>
 #else
@@ -271,4 +272,4 @@ namespace bit {
 
 #include "detail/array_view.inl"
 
-#endif /* BIT_ARRAY_VIEW_HPP */
+#endif /* BIT_STL_ARRAY_VIEW_HPP */

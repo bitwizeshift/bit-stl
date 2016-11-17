@@ -6,8 +6,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_BIMAP_HPP
-#define BIT_BIMAP_HPP
+#ifndef BIT_STL_BIMAP_HPP
+#define BIT_STL_BIMAP_HPP
 
 #include <map>
 #include <iterator>
@@ -426,4 +426,4 @@ namespace bit {
 
 #include "detail/bimap.inl"
 
-#endif /* BIT_BIMAP_HPP */
+#endif /* BIT_STL_BIMAP_HPP */

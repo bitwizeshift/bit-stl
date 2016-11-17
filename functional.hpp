@@ -1,13 +1,13 @@
 /**
  * \file functional.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains c++17 extensions of the functional library
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_FUNCTIONAL_HPP
-#define BIT_FUNCTIONAL_HPP
+#ifndef BIT_STL_FUNCTIONAL_HPP
+#define BIT_STL_FUNCTIONAL_HPP
 
 // std library
 #include <type_traits> // for std::is_base_of
@@ -114,4 +114,4 @@ namespace bit {
 
 #include "detail/functional.inl"
 
-#endif /* BIT_FUNCTIONAL_HPP */
+#endif /* BIT_STL_FUNCTIONAL_HPP */

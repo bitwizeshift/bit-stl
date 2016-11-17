@@ -1072,6 +1072,6 @@ namespace bit {
     return result;
   }
 
-} // namespace bfg
+} // namespace bit
 
 #endif /* BFSTL_DETAIL_STRING_VIEW_INL */

@@ -13,9 +13,8 @@
 # pragma once
 #endif
 
-// bit local libraries
-#include "config.hpp"
-#include "base_types.hpp"
+// bit::stl libraries
+#include "stddef.hpp"
 
 // std:: libraries
 #include <type_traits>

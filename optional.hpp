@@ -1,11 +1,13 @@
 /**
  * \file optional.hpp
  *
+ * \brief This header contains an implementation of c++17's \c std::optional
+ *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_OPTIONAL_HPP
-#define BIT_OPTIONAL_HPP
+#ifndef BIT_STL_OPTIONAL_HPP
+#define BIT_STL_OPTIONAL_HPP
 
 #include <initializer_list>
 #include <type_traits>
@@ -158,7 +160,7 @@ namespace bit {
     /// \param tag     The in_place tag
     /// \param ilist   An initializer list of entries to forward
     /// \param args... the arguments to pass to T's constructor
-#ifndef BFG_DOXYGEN_BUILD
+#ifndef BIT_DOXYGEN_BUILD
     template<typename U, typename...Args,
              typename = std::enable_if_t<std::is_constructible<T, std::initializer_list<U>&, Args&&...>::value>>
 #else
@@ -515,4 +517,4 @@ namespace bit {
 
 #include "detail/optional.inl"
 
-#endif /* BIT_OPTIONAL_HPP */
+#endif /* BIT_STL_OPTIONAL_HPP */

@@ -1,17 +1,18 @@
 /**
  * \file memory.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains custom and c++17 extensions to the memory library
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_MEMORY_HPP
-#define BIT_MEMORY_HPP
+#ifndef BIT_STL_MEMORY_HPP
+#define BIT_STL_MEMORY_HPP
 
-// bit local types
-#include "base_types.hpp"
+// bit::stl local libraries
+#include "stddef.hpp"
 
+// std types
 #include <limits>
 #include <memory>
 
@@ -245,16 +246,14 @@ namespace bit {
     /// \param val the ptr to hash
     /// \return the hash of the unique_ptr
     template<typename T, typename Deleter>
-    std::size_t hash_value( const std::unique_ptr<T,Deleter>& val )
-      noexcept;
+    std::size_t hash_value( const std::unique_ptr<T,Deleter>& val ) noexcept;
 
     /// \brief Hashes a shared_ptr
     ///
     /// \param val the ptr to hash
     /// \return the hash of the unique_ptr
     template<typename T>
-    std::size_t hash_value( const std::shared_ptr<T>& val )
-      noexcept;
+    std::size_t hash_value( const std::shared_ptr<T>& val ) noexcept;
 
   } // inline namespace stl
 } // namespace bit
@@ -265,4 +264,4 @@ namespace bit {
 
 #include "detail/memory.inl"
 
-#endif /* BIT_MEMORY_HPP */
+#endif /* BIT_STL_MEMORY_HPP */

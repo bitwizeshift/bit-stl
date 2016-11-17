@@ -140,6 +140,6 @@ namespace bit {
     return false;
   }
 
-} // namespace bfg
+} // namespace bit
 
 #endif /* BFSTL_DETAIL_STRING_TOKENIZER_INL */

@@ -1,7 +1,7 @@
 /**
  * \file string_span.hpp
  *
- * \brief todo: fill in documentation
+ * \brief Thie file contains a mutable view of a string
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */

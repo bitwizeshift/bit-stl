@@ -194,14 +194,14 @@
 #elif defined(__MSC_VER)
 # define BIT_UNREACHABLE() __assume(0)
 #else
-namespace bfg{
+namespace bit{
   namespace internal{
     struct unreachable_impl{ unreachable_impl& operator=(const unreachable_impl&); };
   } // internal
 } // real
 
 # define BIT_UNREACHABLE() {                                            \
-    ::bfg::internal::unreachable_impl                                   \
+    ::bit::internal::unreachable_impl                                   \
     BIT_JOIN(unreachable_,__LINE__);                                    \
     BIT_JOIN(unreachable_,__LINE__) = BIT_JOIN(unreachable_,__LINE__);  \
   }

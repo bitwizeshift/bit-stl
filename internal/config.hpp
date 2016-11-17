@@ -54,13 +54,13 @@
 #  define BIT_NOOP() ((void)0)
 #endif
 
-#include "internal/config/macros.hpp"
-#include "internal/config/platform.hpp"
-#include "internal/config/compiler.hpp"
-#include "internal/config/compiler_traits.hpp"
-#include "internal/config/library_export.hpp"
-#include "internal/config/breakpoint.hpp"
-#include "internal/config/protect_functions.hpp"
+#include "config/macros.hpp"
+#include "config/platform.hpp"
+#include "config/compiler.hpp"
+#include "config/compiler_traits.hpp"
+#include "config/library_export.hpp"
+#include "config/breakpoint.hpp"
+#include "config/protect_functions.hpp"
 
 //! \def BIT_DEFINE_ENUM_BITWISE_OPERATORS( Type )
 //!

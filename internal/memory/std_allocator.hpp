@@ -36,7 +36,7 @@ namespace bit {
     /// \endcode
     ///
     /// \tparam T         the type of this allocator
-    /// \tparam Allocator the bfg::Allocator this STLAllocator wraps around
+    /// \tparam Allocator the bit::Allocator this STLAllocator wraps around
     //////////////////////////////////////////////////////////////////////////
     template<typename T, typename Allocator>
     class std_allocator final
