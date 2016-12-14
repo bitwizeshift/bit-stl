@@ -15,232 +15,138 @@
 
 // bit::stl local libraries
 #include "stddef.hpp"
+#include "source_location.hpp"
 
 // Runtime assertion (Only available when in debug)
-#if defined(BIT_DEBUG)
-#  include <iostream>
-
-// Define an assert overload of type 'type' and display it to the user
-#  define BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(type)                      \
-      inline RuntimeAssert& variable( const char* name, type value )       \
-      {                                                                    \
-        std::cerr << m_message << "   o Variable " << name << ": "         \
-                  << value << " (" BIT_STRINGIZE(type) ")\n";           \
-        return (*this);                                                    \
-      }
-
-// Define an assert overload of pointer-to-type 'type' and display it to the user
-#  define BIT_RUNTIME_ASSERT_DEFINE_POINTER(type)                              \
-      inline RuntimeAssert& variable( const char* name, type* value )             \
-      {                                                                           \
-        std::cerr << m_message << "   o Pointer " << name << ": "                 \
-                  << ((void*) value) << " -> " << *value                          \
-                  << " (" BIT_STRINGIZE(type) "*)\n";                          \
-        return (*this);                                                           \
-      }                                                                           \
-      inline RuntimeAssert& variable( const char* name, const type* value )       \
-      {                                                                           \
-        std::cerr << m_message << "   o Pointer " << name << ": "                 \
-                  << ((void*) value) << " -> " << *value                          \
-                  << " (const " BIT_STRINGIZE(type) "*)\n";                    \
-        return (*this);                                                           \
-      }
-
+#if defined(BIT_DEBUG) || defined(BIT_ALWAYS_ASSERT)
+# if BIT_COMPILER_EXCEPTIONS_ENABLED
+#   include <iostream>
+# endif
 
 namespace bit {
+  namespace stl {
 
-#ifdef BIT_COMPILER_EXCEPTIONS_ENABLED
-  class assertion_failure final : public std::runtime_error
-  {
-  public:
+# if !BIT_COMPILER_EXCEPTIONS_ENABLED
 
-    assertion_failure(const char* message, source_location source );
-
-    source_location source() const noexcept;
-
-  };
-#endif
-
-  namespace detail {
+    //========================================================================
+    // assertion_failure
+    //========================================================================
 
     //////////////////////////////////////////////////////////////////////////
-    /// \class bit::detail::RuntimeAssert
-    ///
-    /// \brief Implementation of a runtime assertion that accepts variable
-    ///        names and values to be displayed to the user.
+    /// \brief An exception thrown from assertion failures when
+    ///        BIT_COMPILER_EXCEPTIONS_ENABLED is defined
     //////////////////////////////////////////////////////////////////////////
-    class RuntimeAssert {
-
+    class assertion_failure final : public std::runtime_error
+    {
       //----------------------------------------------------------------------
-      // Constructor
-      //----------------------------------------------------------------------
-    public:
-
-      /// Initializes a RuntimeAssert
-      inline RuntimeAssert(const char* format)
-        : m_message(format)
-      {
-        std::cerr << m_message << "\n";
-      }
-
-      /// Initializes a RuntimeAssert with a message
-      inline RuntimeAssert(const char* format, const char* message)
-        :  m_message(format)
-      {
-        std::cerr << m_message << " " << message << "\n";
-      }
-
-      //----------------------------------------------------------------------
-      // Primitive Types
+      // Constructors
       //----------------------------------------------------------------------
     public:
 
-      /// Prints a boolean variable type
-      inline RuntimeAssert& variable( const char* name, bool value ){
-        std::cerr << m_message << "   o Variable " << name << ": "
-                  << (value ? "true" : "false") << " (bool)\n";
-        return (*this);
-      }
-
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(float)
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(double)
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(long double)
-
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(char)
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(signed char)
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(unsigned char)
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(signed short)
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(unsigned short)
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(signed int)
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(unsigned int)
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(signed long)
-      BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(unsigned long)
-
-      // Long Long (only when supported)
-#      if defined(BIT_COMPILER_HAS_LONG_LONG)
-        BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(signed long long)
-        BIT_RUNTIME_ASSERT_DEFINE_VARIABLE(unsigned long long)
-#      endif
+      /// \brief Constructs an assertion_failure exception from a message
+      ///        and a source location
+      ///
+      /// \param message the message to display when calling .what()
+      /// \param source  the source location of this assertion failure
+      assertion_failure(const char* message, source_location source );
 
       //----------------------------------------------------------------------
-      // Pointer Types
+      // Accessors
       //----------------------------------------------------------------------
     public:
 
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(float)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(double)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(long double)
-
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(char)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(signed char)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(unsigned char)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(signed short)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(unsigned short)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(signed int)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(unsigned int)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(signed long)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(unsigned long)
-
-      // Long Long (only when supported)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(signed long long)
-      BIT_RUNTIME_ASSERT_DEFINE_POINTER(unsigned long long)
-
-      //----------------------------------------------------------------------
-      // Generic Variable Types
-      //----------------------------------------------------------------------
-    public:
-
-      /// Prints a void pointer. This overload will not dereference the pointer
-      inline RuntimeAssert& variable( const char* name, const void* value )
-      {
-        std::cerr << m_message << "   o Variable " << name << ": "
-                  << ((void*) value) << " (void*)\n";
-        return (*this);
-      }
-
-      /// Prints a nullptr
-      inline RuntimeAssert& variable( const char* name, const ::std::nullptr_t )
-      {
-        std::cerr << m_message << "   o Variable " << name
-                  << ": nullptr (nullptr_t)\n";
-        return (*this);
-      }
-
-      //-----------------------------------------------------------------------
-
-      /// Triggers a compiler breakpoint, flushing std::err to the screen
-      inline void breakpoint()
-      {
-        std::flush(std::cerr); // Make sure it prints before the end
-        BIT_BREAKPOINT();
-      }
+      /// \brief Retrieves the source of this assertion
+      ///
+      /// \return the location where this assertion was hit
+      source_location source() const noexcept;
 
       //----------------------------------------------------------------------
       // Private Members
       //----------------------------------------------------------------------
     private:
 
-      const char* m_message; /// The message to show to the user
+      source_location m_location;
     };
 
+    //------------------------------------------------------------------------
+    // Constructors
+    //------------------------------------------------------------------------
 
-  } // namespace detail
+    inline assertion_failure::assertion_failure( const char* message, source_location source )
+      : std::runtime_error(message),
+        m_location( std::move(source) )
+    {
+
+    }
+
+    //------------------------------------------------------------------------
+    // Accessors
+    //------------------------------------------------------------------------
+
+    inline source_location assertion_failure::source()
+      const noexcept
+    {
+      return m_location;
+    }
+
+
+#   define BIT_INTERNAL_ASSERT(condition,message) \
+      throw ::bit::stl::assertion_failure("assertion_failure: condition '" condition "' failed with message \"" message "\"", BIT_MAKE_SOURCE_LOCATION() );
+
+# else
+    namespace detail {
+
+      inline void assert_internal(string_view message, source_location source)
+      {
+        std::cerr << "[assertion] " << source.file_name() << "(" << source.line() << ")::" << source.function_name() << "\n"
+                     "[assertion] " << message << "\n";
+        BIT_BREAKPOINT();
+      }
+
+    } // namespace detail
+#   define BIT_INTERNAL_ASSERT(condition,message) ::bit::stl::detail::assert_internal("assertion failure: condition '" condition "' failed with message \"" message "\"", BIT_MAKE_SOURCE_LOCATION() );
+# endif
+#else
+# define BIT_INTERNAL_ASSERT(...)
+#endif
+  } // namespace stl
 } // namespace bit
 
-#  define BIT_ASSERT_IMPL_VAR(x)    .variable( BIT_STRINGIZE(x), x )
-#  define BIT_ASSERT_IMPL_VARS(...) BIT_EXPAND_VA_ARGS(BIT_ASSERT_IMPL_VAR, __VA_ARGS__)
-
-#  define BIT_ASSERT_IMPL_FIRST(...)
-#  define BIT_ASSERT_IMPL_REST(throwaway,...)  BIT_ASSERT_IMPL_VARS(__VA_ARGS__)
-
-#  define BIT_ASSERT_VARS(...) BIT_JOIN(BIT_ASSERT_IMPL_,BIT_VA_REST_NUM(__VA_ARGS__))(__VA_ARGS__)
-
-//-----------------------------------------------------------------------------
-
-# ifndef BIT_COMPILER_EXCEPTIONS_ENABLED
+//============================================================================
+// Assertion Macros
+//============================================================================
 
 //! \def BIT_ASSERT(condition, message, ...)
 //!
 //! \brief A runtime assertion when \a condition fails, displaying \a message
 //!        to the user.
-//!
-//! Optionally the name and values can be displayed if entered in the list of
-//! comma separated variables
-#   define BIT_ASSERT(condition, ...) \
-      do{                                                                                           \
-        if(!(condition)){                                                                           \
-          ::bit::detail::RuntimeAssert(                                                          \
-            __FILE__ "(" BIT_STRINGIZE(__LINE__) "): [Assert]",                                  \
-            "Assertion \"" #condition "\" failed with message \"" BIT_VA_FIRST(__VA_ARGS__) "\"" \
-            ) BIT_ASSERT_VARS( __VA_ARGS__ )                                                     \
-            .breakpoint();                                                                          \
-        }                                                                                           \
-      } while(0)
-
-# else
-
-#   define BIT_ASSERT(conditiong, ...) \
-      do{
-        if(!(condition)){
-          throw ::bit::assertion_failure("Assertion \"" #condition "\" failed with message \"" BIT_VA_FIRST(__VA_ARGS__) "\"")
-        }
-      }while(0)
-
-# endif
-
+#if defined(BIT_DEBUG) || defined(BIT_ALWAYS_ASSERT)
+# define BIT_ASSERT(condition,message)                            \
+    do {                                                          \
+      if(!(condition))                                            \
+      {                                                           \
+        BIT_INTERNAL_ASSERT( BIT_STRINGIZE(condition), message ); \
+      }                                                           \
+    } while(0)
 #else
-#  define BIT_WARNING( condition, ... )
+# define BIT_ASSERT(...)
 #endif
 
-//! \def BIT_ASSERT_NULL(var)
-//!
-//! \brief Asserts that \a var should be null
-#define BIT_ASSERT_NULL(var) BIT_ASSERT((var==nullptr), BIT_STRINGIZE(var) " should be null!", var)
-
-//! \def BIT_ASSERT_NOT_NULL(var)
-//!
-//! \brief Asserts that \a var should not be null
-#define BIT_ASSERT_NOT_NULL(var) BIT_ASSERT((var!=nullptr),  BIT_STRINGIZE(var) " should not be null!", var)
+#if defined(BIT_DEBUG) || defined(BIT_ALWAYS_ASSERT)
+# if BIT_COMPILER_EXCEPTIONS_ENABLED
+#   define BIT_ASSERT_OR_THROW(exception,condition,message) \
+  do {                                                      \
+    if(!(condition)) {                                      \
+      throw exception(message);                             \
+    }                                                       \
+  } while(0)
+# else
+#   define BIT_ASSERT_OR_THROW(exception,condition,message) \
+  BIT_ASSERT(condition,message)
+# endif
+#else
+# define BIT_ASSERT_OR_THROW(...)
+#endif
 
 //! \def BIT_SANITY_CHECK(a,b)
 //!
@@ -251,15 +157,12 @@ namespace bit {
 //!       operations, such as a class's "operator ==", to ensure that
 //!       operator == and operator != don't always return the same value
 #if defined(BIT_DEBUG)
-#  define BIT_SANITY_CHECK(a,b) BIT_ASSERT(                      \
+#  define BIT_SANITY_CHECK(a,b) BIT_ASSERT(                     \
     !((a)&&(b)),                                                \
     "Sanity check failed: "                                     \
-    "Conditions " #a " and " #b " cannot both be true.", a, b )
+    "Conditions " #a " and " #b " cannot both be true." )
 #else
-#  define BIT_SANITY_CHECK(a,b) BIT_NOOP()
+#  define BIT_SANITY_CHECK(a,b)
 #endif
-
-#undef BIT_RUNTIME_ASSERT_DEFINE_VARIABLE
-#undef BIT_RUNTIME_ASSERT_DEFINE_POINTER
 
 #endif /* BIT_STL_ASSERT_HPP */

@@ -24,7 +24,7 @@
 
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
     /// \addtogroup bit
     /// \{
@@ -86,7 +86,7 @@ namespace bit {
     To copy_cast(const From& from) noexcept;
 
   /// \}
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
 #include "detail/casts.inl"
