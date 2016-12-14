@@ -6,8 +6,8 @@
  *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_INTERNAL_CONFIG_COMPILER_GENERIC_HPP
-#define BIT_INTERNAL_CONFIG_COMPILER_GENERIC_HPP
+#ifndef BIT_STL_INTERNAL_CONFIG_COMPILER_GENERIC_HPP
+#define BIT_STL_INTERNAL_CONFIG_COMPILER_GENERIC_HPP
 
 //-----------------------------------------------------------------------------
 // Compiler Detection
@@ -90,4 +90,4 @@
 #  define BIT_COMPILER_SYMBOL_LOCAL   __attribute__((visibility("hidden")))
 #endif
 
-#endif /* BIT_INTERNAL_CONFIG_COMPILER_GENERIC_HPP */
+#endif /* BIT_STL_INTERNAL_CONFIG_COMPILER_GENERIC_HPP */

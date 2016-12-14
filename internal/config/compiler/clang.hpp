@@ -5,8 +5,8 @@
  *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_INTERNAL_CONFIG_COMPILER_CLANG_HPP
-#define BIT_INTERNAL_CONFIG_COMPILER_CLANG_HPP
+#ifndef BIT_STL_INTERNAL_CONFIG_COMPILER_CLANG_HPP
+#define BIT_STL_INTERNAL_CONFIG_COMPILER_CLANG_HPP
 
 //-----------------------------------------------------------------------------
 // Compiler Detection
@@ -76,6 +76,10 @@
 #    define BIT_COMPILER_HAS_CPP11_DECLTYPE         1
 #  endif
 #endif // c++11
+
+#if __cplusplus >= 201402L
+#   define BIT_COMPILER_HAS_CPP14_DEPRECATED        1
+#endif
 
 //-----------------------------------------------------------------------------
 // C++ Type Traits Intrinsics Detection
@@ -182,6 +186,11 @@
 #define BIT_WEAK __attribute__((weak))
 #define BIT_COMPILER_WEAK_SUPPORTED 1
 
+#ifdef __EXCEPTIONS
+# define BIT_COMPILER_EXCEPTIONS_ENABLED 1
+#else
+# define BIT_COMPILER_EXCEPTIONS_ENABLED 0
+#endif
 
 //----------------------------------------------------------------------------
 // Symbol Import/Export (DLL/shared library)
@@ -192,4 +201,4 @@
 #define BIT_COMPILER_SYMBOL_VISIBLE __attribute__((visibility("default")))
 #define BIT_COMPILER_SYMBOL_LOCAL   __attribute__((visibility("hidden")))
 
-#endif /* BIT_INTERNAL_CONFIG_COMPILER_CLANG_HPP */
+#endif /* BIT_STL_INTERNAL_CONFIG_COMPILER_CLANG_HPP */

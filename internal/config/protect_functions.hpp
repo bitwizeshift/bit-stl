@@ -15,8 +15,8 @@
  *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_INTERNAL_CONFIG_PROTECT_FUNCTIONS_HPP
-#define BIT_INTERNAL_CONFIG_PROTECT_FUNCTIONS_HPP
+#ifndef BIT_STL_INTERNAL_CONFIG_PROTECT_FUNCTIONS_HPP
+#define BIT_STL_INTERNAL_CONFIG_PROTECT_FUNCTIONS_HPP
 
 //-----------------------------------------------------------------------------
 // I/O protections
@@ -146,4 +146,4 @@
 # define _wfopen   _wfopen_ERROR_USE_FILESYSTEM_INSTEAD
 #endif
 
-#endif /* BIT_INTERNAL_CONFIG_PROTECT_FUNCTIONS_HPP */
+#endif /* BIT_STL_INTERNAL_CONFIG_PROTECT_FUNCTIONS_HPP */

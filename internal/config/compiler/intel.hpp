@@ -6,8 +6,8 @@
  *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_INTERNAL_CONFIG_COMPILER_INTEL_HPP
-#define BIT_INTERNAL_CONFIG_COMPILER_INTEL_HPP
+#ifndef BIT_STL_INTERNAL_CONFIG_COMPILER_INTEL_HPP
+#define BIT_STL_INTERNAL_CONFIG_COMPILER_INTEL_HPP
 
 //-----------------------------------------------------------------------------
 // Compiler Detection
@@ -215,6 +215,16 @@
 # define BIT_COMPILER_HAS_INT128    1
 #endif
 
+#ifdef __GNUC__
+# ifdef __EXCEPTIONS
+#   define BIT_COMPILER_EXCEPTIONS_ENABLED 1
+# else
+#   define BIT_COMPILER_EXCEPTIONS_ENABLED 0
+# endif
+#else
+// need to update with MSVC detection
+#endif
+
 //-----------------------------------------------------------------------------
 // Symbol Import/Export (DLL/shared library)
 //-----------------------------------------------------------------------------
@@ -237,4 +247,4 @@
 # define BIT_COMPILER_SYMBOL_LOCAL
 #endif
 
-#endif /* BIT_INTERNAL_CONFIG_COMPILER_INTEL_HPP */
+#endif /* BIT_STL_INTERNAL_CONFIG_COMPILER_INTEL_HPP */

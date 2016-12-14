@@ -4,14 +4,15 @@
  * \brief This header contains important configuration information for setting
  *        up the compilation environment.
  *
- * This header is included in almost all other libraries and is necessary for
- * detecting compiler/platform-specific features, such as available libraries
+ * This header is included stddef and is necessary for detecting
+ * compiler/platform-specific features, such as available libraries
  * and intrinsic methods.
  *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
+ * \note This is an internal header file, included by other library headers.
+ *       Do not attempt to use it directly.
  */
-#ifndef BIT_CONFIG_HPP
-#define BIT_CONFIG_HPP
+#ifndef BIT_STL_INTERNAL_CONFIG_HPP
+#define BIT_STL_INTERNAL_CONFIG_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -51,8 +52,17 @@
 //! \def BIT_NOOP()
 //! \brief Macro function indicating no operation will occur
 #ifndef BIT_NOOP
-#  define BIT_NOOP() ((void)0)
+# define BIT_NOOP() ((void)0)
 #endif
+
+//! \def BIT_UNUSED
+//!
+//! \brief Explicitly marks a variable \p var as being unused within a given function.
+//!
+//! This is used to silence compiler warnings
+//!
+//! \param var the variable to explicitly mark as unused
+#define BIT_UNUSED(var) do { (void)(var); } while (0)
 
 #include "config/macros.hpp"
 #include "config/platform.hpp"
@@ -107,4 +117,4 @@
   inline Type  operator++( Type &a, int ) { Type t = a; ++a; return t; } \
   inline Type  operator--( Type &a, int ) { Type t = a; --a; return t; }
 
-#endif /* BIT_CONFIG_HPP */
+#endif /* BIT_STL_INTERNAL_CONFIG_HPP */

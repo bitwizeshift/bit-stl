@@ -3,8 +3,8 @@
  *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_INTERNAL_CONFIG_COMPILER_TRAITS_HPP
-#define BIT_INTERNAL_CONFIG_COMPILER_TRAITS_HPP
+#ifndef BIT_STL_INTERNAL_CONFIG_COMPILER_TRAITS_HPP
+#define BIT_STL_INTERNAL_CONFIG_COMPILER_TRAITS_HPP
 
 //-----------------------------------------------------------------------------
 // Clang detection mechanisms
@@ -187,21 +187,23 @@
 //!   BIT_UNREACHABLE();
 //! }
 //! \endcode
-#if defined(BIT_COMPILER_CLANG) && __has_builtin(__builtin_unreachable)
+#if defined(BIT_COMPILER_CLANG)
 # define BIT_UNREACHABLE() __builtin_unreachable()
 #elif defined(__GNUC__) && ((__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 5)))
 # define BIT_UNREACHABLE() __builtin_unreachable()
 #elif defined(__MSC_VER)
 # define BIT_UNREACHABLE() __assume(0)
 #else
-namespace bit{
-  namespace internal{
-    struct unreachable_impl{ unreachable_impl& operator=(const unreachable_impl&); };
-  } // internal
-} // real
+namespace bit {
+  namespace stl {
+    namespace detail{
+      struct unreachable_impl{ unreachable_impl& operator=(const unreachable_impl&); };
+    } // namespace detail
+  } // namespace stl
+} // namespace bit
 
 # define BIT_UNREACHABLE() {                                            \
-    ::bit::internal::unreachable_impl                                   \
+    ::bit::stl::detail::unreachable_impl                                \
     BIT_JOIN(unreachable_,__LINE__);                                    \
     BIT_JOIN(unreachable_,__LINE__) = BIT_JOIN(unreachable_,__LINE__);  \
   }
@@ -349,7 +351,9 @@ namespace bit{
 //! \code
 //! void memcpy( void* BIT_RESTRICT to, const void* BIT_RESTRICT from, size_t size ); // Pointers are always relative to either 'to' or 'from'
 //! \endcode
-#if defined(BIT_COMPILER_GNUC) && (BIT_COMPILER_VERSION >= 3100)
+#if defined(BIT_COMPILER_CLANG)
+# define BIT_RESTRICT __restrict__
+#elif defined(BIT_COMPILER_GNUC) && (BIT_COMPILER_VERSION >= 3100)
 # define BIT_RESTRICT __restrict__
 #elif (defined(BIT_COMPILER_MSVC) && BIT_COMPILER_VERSION >= 1400) || defined(BIT_COMPILER_INTEL)
 # define BIT_RESTRICT __restrict
@@ -397,25 +401,6 @@ namespace bit{
 # define BIT_USE_RESULT __attribute__(__warn_unuse_result__)
 #else
 # define BIT_USE_RESULT
-#endif
-
-
-//! \def BIT_STATIC_CONSTANT(type, assignment)
-//!
-//! \brief Expands to an assignment of a static class constant value
-//!
-//! This macro exists to circumvent compiler warnings for compilers not
-//! properly supporting in class member initialization.
-//! This also helps to decorate the declaration, making the intention more clear
-//!
-//! Use:
-//! \code
-//! BIT_STATIC_CONSTANT(int, x = 5); // expands to "static const int x = 5;"
-//! \endcode
-#ifdef BIT_COMPILER_NO_INCLASS_MEMBER_INITIALIZATION
-# define BIT_STATIC_CONSTANT(type,assignment) enum { assignment }
-#else
-# define BIT_STATIC_CONSTANT(type,assignment) static constexpr type assignment
 #endif
 
 
@@ -515,7 +500,7 @@ namespace bit{
 //! \def BIT_DEPRECATED
 //!
 //! \brief Creates a compiler message when a function marked as deprecated is called
-#if BIT_COMPILER_HAS_CPP14_DEPRECATED
+#ifdef BIT_COMPILER_HAS_CPP14_DEPRECATED
 # define BIT_DEPRECATED [[deprecated]]
 #elif defined(__GNUC__) && (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
 # define BIT_DEPRECATED   __attribute__((deprecated))
@@ -525,4 +510,4 @@ namespace bit{
 # define BIT_DEPRECATED
 #endif
 
-#endif /* BIT_INTERNAL_CONFIG_COMPILER_TRAITS_HPP */
+#endif /* BIT_STL_INTERNAL_CONFIG_COMPILER_TRAITS_HPP */

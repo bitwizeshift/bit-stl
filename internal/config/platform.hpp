@@ -5,8 +5,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_INTERNAL_CONFIG_PLATFORM_HPP
-#define BIT_INTERNAL_CONFIG_PLATFORM_HPP
+#ifndef BIT_STL_INTERNAL_CONFIG_PLATFORM_HPP
+#define BIT_STL_INTERNAL_CONFIG_PLATFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -170,4 +170,4 @@
 # define BIT_PLATFORM_WORD_SIZE BIT_PLATFORM_PTR_SIZE
 #endif
 
-#endif /* BIT_INTERNAL_CONFIG_PLATFORM_HPP */
+#endif /* BIT_STL_INTERNAL_CONFIG_PLATFORM_HPP */

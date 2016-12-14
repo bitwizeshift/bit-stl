@@ -5,8 +5,8 @@
  *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_INTERNAL_CONFIG_COMPILER_GCC_HPP
-#define BIT_INTERNAL_CONFIG_COMPILER_GCC_HPP
+#ifndef BIT_STL_INTERNAL_CONFIG_COMPILER_GCC_HPP
+#define BIT_STL_INTERNAL_CONFIG_COMPILER_GCC_HPP
 
 //-----------------------------------------------------------------------------
 // Compiler Detection
@@ -185,6 +185,12 @@
 #  define BIT_COMPILER_HAS_INT128    1
 #endif
 
+#ifdef __EXCEPTIONS
+# define BIT_COMPILER_EXCEPTIONS_ENABLED 1
+#else
+# define BIT_COMPILER_EXCEPTIONS_ENABLED 0
+#endif
+
 //----------------------------------------------------------------------------
 // Symbol Import/Export (DLL/shared library)
 //----------------------------------------------------------------------------
@@ -207,4 +213,4 @@
 #  define BIT_COMPILER_SYMBOL_LOCAL
 #endif
 
-#endif /* BIT_INTERNAL_CONFIG_COMPILER_GCC_HPP */
+#endif /* BIT_STL_INTERNAL_CONFIG_COMPILER_GCC_HPP */
