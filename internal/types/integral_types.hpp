@@ -16,7 +16,7 @@
 #include <cstddef> // for std::size_t and std::ptrdiff_t
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
     //------------------------------------------------------------------------
     // Integer Types
@@ -66,7 +66,7 @@ namespace bit {
     using umaxint = std::uintmax_t; ///< Maximum unsigned integer type
 
     //! \}
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
 #endif /* BIT_STL_INTERNAL_INTEGRAL_TYPES_HPP */

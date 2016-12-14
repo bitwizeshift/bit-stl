@@ -19,10 +19,9 @@
 
 // std libraries
 #include <cstdlib> // Used for size_t
-#include <climits> // Used for integer limits
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
 //! \addtogroup stl
 //! \{
@@ -50,11 +49,11 @@ namespace bit {
     //--------------------------------------------------------------------------
 
     using size_t  = std::size_t; ///< Type representing size of objects
-    using align_t = bit::size_t; ///< Type representing alignment of an object
-    using index_t = bit::size_t; ///< Type representing index of objects
+    using align_t = std::size_t; ///< Type representing alignment of an object
+    using index_t = std::size_t; ///< Type representing index of objects
 
 //! \}
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
 #include "internal/types/integral_types.hpp"
@@ -63,7 +62,7 @@ namespace bit {
 #include "internal/types/byte.hpp"
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
 //! \addtogroup stl
 //! \{
@@ -156,7 +155,7 @@ namespace bit {
     constexpr aligned_offset_tag aligned_offset = {};
 
 //! \}
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
 #endif /* BIT_STL_STDDEF_HPP */

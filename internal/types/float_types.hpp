@@ -15,7 +15,7 @@
 #define BIT_STL_INTERNAL_FLOAT_TYPES_HPP
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
 //! \addtogroup bit
 //! \{
@@ -79,7 +79,7 @@ namespace bit {
     };
 
 //! \}
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
 #endif /* BIT_STL_INTERNAL_FLOAT_TYPES_HPP */

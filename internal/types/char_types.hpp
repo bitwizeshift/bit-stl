@@ -6,7 +6,7 @@
 #define BIT_STL_INTERNAL_CHAR_TYPES_HPP
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
 //! \addtogroup stl
 //! \{
@@ -48,7 +48,7 @@ namespace bit {
 #endif
 
 //! \}
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
 #endif /* BIT_STL_INTERNAL_CHAR_TYPES_HPP */

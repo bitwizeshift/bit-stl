@@ -14,7 +14,7 @@
 #include <type_traits>
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
     /// \brief Unsigned byte type
     enum class byte : unsigned char{};
@@ -108,7 +108,7 @@ namespace bit {
     {
       return byte(~static_cast<unsigned char>(lhs));
     }
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
 #endif /* BIT_STL_INTERNAL_BYTE_HPP */
