@@ -11,18 +11,31 @@
 
 // bit::stl local libraries
 #include "stddef.hpp"
+#include "type_traits.hpp"
 
 // std types
 #include <limits>
 #include <memory>
 
 namespace bit {
-
-  inline namespace stl {
+  namespace stl {
 
     /// \brief A pointer that represents ownership
     template<typename T>
     using owner = T;
+
+    //------------------------------------------------------------------------
+    // Pointer Manipulation
+    //------------------------------------------------------------------------
+
+    /// \brief Obtains the actual address of the object referenced
+    ///        through an iterator \p it
+    ///
+    /// \param it the iterator
+    /// \return pointer to the value referenced from the iterator
+    template<typename InputIterator>
+    constexpr auto address_from( InputIterator& it ) noexcept
+      -> typename std::iterator_traits<InputIterator>::value_type*;
 
     /// \brief Dereferences all levels of pointer indirection from the
     ///        supplied pointer
@@ -32,10 +45,24 @@ namespace bit {
     /// \param ptr the pointer to dereference
     /// \return reference to the dereferenced pointer
     template<typename T>
-    constexpr auto& dereference(T* ptr);
+    constexpr decltype(auto) dereference(T& ptr);
 
     //------------------------------------------------------------------------
-    // Pointer Manipulation
+
+    /// \brief Converts a pointer \p ptr into an integral type representing
+    ///        the address
+    ///
+    /// \param ptr the pointer to convert to an integral value
+    /// \return the numeric address of the given pointer
+    std::uintptr_t to_address( const void* ptr ) noexcept;
+
+    /// \brief Converts a numeric address \p address into a pointer pointing
+    ///        to the address location
+    ///
+    /// \param address the address value to convert to a pointer
+    /// \return the pointer pointing to the given address
+    void* from_address( std::uintptr_t address ) noexcept;
+
     //------------------------------------------------------------------------
 
     /// \brief Retrieves the distance between two pointers
@@ -49,10 +76,23 @@ namespace bit {
     constexpr std::size_t pointer_distance( const void* lhs,
                                             const void* rhs ) noexcept;
 
-
+    /// \brief Retrieve the difference between two pointers in bytes
+    ///
+    /// \param lhs the left pointer to get the difference from
+    /// \param rhs the right pointer to get the difference from
+    /// \return the difference in bytes between the two pointers
     constexpr std::ptrdiff_t pointer_difference( const void* lhs,
                                                  const void* rhs ) noexcept;
 
+    //------------------------------------------------------------------------
+
+    /// \brief Determines if the pointer \p ptr is within the pointer range
+    ///        range [\p first,\p last)
+    ///
+    /// \param ptr the pointer to determine whether or not its in range
+    /// \param first the first entry of the range
+    /// \param last the last entry in the range (exclusive)
+    /// \return \c true if \p ptr exists between [\p first, \p last)
     constexpr bool in_region( const void* ptr,
                               const void* first,
                               const void* last ) noexcept;
@@ -61,28 +101,27 @@ namespace bit {
     // Pointer Alignment
     //------------------------------------------------------------------------
 
-
-    /// \brief Aligns a pointer forward
+    /// \brief Aligns a pointer forward to the given alignment boundary,
+    ///        with a specified offset
     ///
-    /// \param ptr    [inout] The pointer to align forward
-    /// \param align  [in] The alignment
-    /// \param offset [in] The offset for the alignment
-    /// \return the adjust
-    template<typename T>
-    std::size_t align_forward( T** ptr,
-                               std::size_t align,
-                               std::size_t offset = 0 );
+    /// \param ptr    the pointer to align
+    /// \param align  the alignment boundary to align to
+    /// \param offset the amount to offset from the alignment
+    /// \return a pair containing the address and the adjustment amount
+    std::pair<void*,std::size_t> align_forward( void* ptr,
+                                                std::size_t align,
+                                                std::size_t offset = 0 ) noexcept;
 
-    /// \brief Aligns a pointer backward and calculates the adjustment
+    /// \brief Aligns a pointer backward to the given alignment boundary,
+    ///        with a specified offset
     ///
-    /// \param ptr    [inout] The pointer to align back
-    /// \param align  [in] The alignment
-    /// \param offset [in] The offset for the alignment
-    /// \return The calculated adjust
-    template<typename T>
-    std::size_t align_backward( T** ptr,
-                                std::size_t align,
-                                std::size_t offset = 0 );
+    /// \param ptr    the pointer to align
+    /// \param align  the alignment boundary to align to
+    /// \param offset the amount to offset from the alignment
+    /// \return a pair containing the address and the adjustment amount
+    std::pair<void*,std::size_t> align_backward( void* ptr,
+                                                 std::size_t align,
+                                                 std::size_t offset = 0 ) noexcept;
 
     //------------------------------------------------------------------------
     // Alignment Detection
@@ -130,6 +169,18 @@ namespace bit {
     template<typename T, typename...Args>
     T* uninitialized_construct_at( void* ptr, Args&&...args );
 
+    /// \brief Constructs an instance of type \p T with the given \p tuple
+    ///        at the memory location specified in \p ptr.
+    ///
+    /// This forwards the arguments from the \p tuple to the constructor
+    /// of T, as if by calling make_from_tuple
+    ///
+    /// \param ptr   The memory location to construct into
+    /// \param tuple The tuple containing arguments to forward to T
+    /// \return Pointer ot the initialzied memory (cast of \p ptr)
+    template<typename T, typename Tuple>
+    T* uninitialized_tuple_construct_at( void* ptr, Tuple&& tuple );
+
     /// \brief Constructs an instance of type \p T with the given \p args
     ///        at the memory addresses in the given range [\p first, \p last )
     ///
@@ -162,35 +213,27 @@ namespace bit {
 
     //------------------------------------------------------------------------
     // Destruction
-    //----------------------------------------------------------------------==
+    //------------------------------------------------------------------------
 
-    inline namespace cpp17 {
+    /// \brief Calls the destructor of the object pointed to by p, as if by p->~T().
+    ///
+    /// \param p a pointer to the object to be destroyed
+    template<typename T>
+    void destroy_at( T* p );
 
-      //----------------------------------------------------------------------
-      // C++17 features
-      //----------------------------------------------------------------------
+    /// \brief Destroys the objects in the range \c [first, \c last)
+    ///
+    /// \param first the start of the range to destroy
+    /// \param end   the end of the range to destroy
+    template<typename ForwardIterator>
+    void destroy( ForwardIterator first, ForwardIterator last );
 
-      /// \brief Calls the destructor of the object pointed to by p, as if by p->~T().
-      ///
-      /// \param p a pointer to the object to be destroyed
-      template<typename T>
-      void destroy_at( T* p );
-
-      /// \brief Destroys the objects in the range \c [first, \c last)
-      ///
-      /// \param first the start of the range to destroy
-      /// \param end   the end of the range to destroy
-      template<typename ForwardIterator>
-      void destroy( ForwardIterator first, ForwardIterator last );
-
-      /// \brief Destroys the \p n objects in the range starting at \p first
-      ///
-      /// \param first the start of the range to destroy
-      /// \param n     the number of entries to destroy
-      template<typename ForwardIterator>
-      ForwardIterator destroy_n( ForwardIterator first, std::size_t n );
-
-    } // namespace cpp17
+    /// \brief Destroys the \p n objects in the range starting at \p first
+    ///
+    /// \param first the start of the range to destroy
+    /// \param n     the number of entries to destroy
+    template<typename ForwardIterator>
+    ForwardIterator destroy_n( ForwardIterator first, std::size_t n );
 
     /// \brief Destroys an array of entries at the given \p ptr
     ///
@@ -255,10 +298,12 @@ namespace bit {
     template<typename T>
     std::size_t hash_value( const std::shared_ptr<T>& val ) noexcept;
 
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
-#include "internal/memory/memory_pool.hpp"
+//#include "internal/memory/memory_pool.hpp"
+//#include "internal/memory/aligned_memory_pool.hpp"
+#include "internal/memory/indirect_ptr.hpp"
 #include "internal/memory/smart_ptr.hpp"
 #include "internal/memory/std_allocator.hpp"
 

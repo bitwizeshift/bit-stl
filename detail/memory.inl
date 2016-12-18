@@ -3,7 +3,16 @@
 
 namespace bit {
 
-  inline namespace stl {
+  namespace stl {
+
+    template<typename InputIterator>
+    constexpr auto address_from( InputIterator& it ) noexcept
+      -> typename std::iterator_traits<InputIterator>::value_type*
+    {
+      return std::addressof(*it);
+    }
+
+    //------------------------------------------------------------------------
 
     namespace detail {
 
@@ -14,7 +23,7 @@ namespace bit {
       }
 
       template<typename T>
-      inline constexpr auto& dereference(T* ptr)
+      inline constexpr decltype(auto) dereference(T* ptr)
       {
         return dereference(*ptr);
       }
@@ -22,9 +31,21 @@ namespace bit {
     } // namespace detail
 
     template<typename T>
-    inline constexpr auto& dereference(T* ptr)
+    inline constexpr decltype(auto) dereference(T& ptr)
     {
       return detail::dereference(ptr);
+    }
+
+    inline std::uintptr_t to_address( const void* ptr )
+      noexcept
+    {
+      return reinterpret_cast<std::uintptr_t>(ptr);
+    }
+
+    inline void* from_address( std::uintptr_t address )
+      noexcept
+    {
+      return reinterpret_cast<void*>(address);
     }
 
     //------------------------------------------------------------------------
@@ -58,18 +79,26 @@ namespace bit {
     // Pointer Alignment
     //------------------------------------------------------------------------
 
-    template<typename T>
-    inline std::size_t align_forward( T** ptr,
-                                      std::size_t align,
-                                      std::size_t offset )
+    inline std::pair<void*,std::size_t>
+      align_forward( void* ptr, std::size_t align, std::size_t offset )
+      noexcept
     {
-      //BIT_ASSERT( is_power_of_two(align), "Align must be power of two.", align );
+      auto old_ptr = static_cast<byte*>(ptr);
+      auto address = to_address(old_ptr);
+      auto new_ptr = from_address( ((address + offset + static_cast<std::uintptr_t>(align-1)) & static_cast<std::uintptr_t>(~(align-1))) - offset );
 
-      const std::uintptr_t address     = reinterpret_cast<std::uintptr_t>(*ptr);
-      const std::uintptr_t new_address = ((address + offset + static_cast<std::uintptr_t>(align-1)) & static_cast<std::uintptr_t>(~(align-1))) - offset;
-      *ptr = reinterpret_cast<void*>(new_address);
+      return std::make_pair( new_ptr, (static_cast<byte*>(new_ptr) - old_ptr) );
+    }
 
-      return static_cast<size_t>( new_address - address );
+    inline std::pair<void*,std::size_t>
+      align_backward( void* ptr, std::size_t align, std::size_t offset )
+      noexcept
+    {
+      auto old_ptr = static_cast<byte*>(ptr);
+      auto address = to_address(old_ptr);
+      auto new_ptr = from_address( (address & (~static_cast<std::uintptr_t>(align-1))) + offset );
+
+      return std::make_pair( new_ptr, (old_ptr - static_cast<byte*>(new_ptr)) );
     }
 
     //------------------------------------------------------------------------
@@ -132,6 +161,28 @@ namespace bit {
       return static_cast<T*>(ptr);
     }
 
+    namespace detail {
+
+      template <typename T, typename Tuple, std::size_t... I>
+      inline T* uninitialized_tuple_construct_at_impl( void* ptr, Tuple&& t, std::index_sequence<I...> )
+      {
+        new (ptr) T(std::get<I>(std::forward<Tuple>(t))...);
+        return static_cast<T*>(ptr);
+      }
+
+    } // namespace detail
+
+
+    template<typename T, typename Tuple>
+    inline T* uninitialized_tuple_construct_at( void* ptr, Tuple&& tuple )
+    {
+      return detail::uninitialized_tuple_construct_at_impl<T>(
+        ptr,
+        std::forward<Tuple>(tuple),
+        std::make_index_sequence<std::tuple_size<std::decay_t<Tuple>>::value>()
+      );
+    }
+
 
     template<typename ForwardIterator, typename...Args>
     inline void uninitialized_construct( ForwardIterator first, ForwardIterator last, Args&&...args )
@@ -173,35 +224,31 @@ namespace bit {
     }
 
     //------------------------------------------------------------------------
-    // C++17 features
+    // Destruction
     //------------------------------------------------------------------------
 
-    inline namespace cpp17 {
+    template<typename T>
+    inline void destroy_at( T* p )
+    {
+      p->~T();
+    }
 
-      template<typename T>
-      inline void destroy_at( T* p )
-      {
-        p->~T();
+    template<typename ForwardIterator>
+    inline void destroy( ForwardIterator first, ForwardIterator last )
+    {
+      for(; first != last; ++first) {
+        destroy_at( std::addressof(*first) );
       }
+    }
 
-      template<typename ForwardIterator>
-      inline void destroy( ForwardIterator first, ForwardIterator last )
-      {
-        for(; first != last; ++first) {
-          destroy_at( std::addressof(*first) );
-        }
+    template<typename ForwardIterator>
+    inline ForwardIterator destroy_n( ForwardIterator first, std::size_t n )
+    {
+      for (; n > 0; ++first, --n) {
+        destroy_at( std::addressof(*first) );
       }
-
-      template<typename ForwardIterator>
-      inline ForwardIterator destroy_n( ForwardIterator first, std::size_t n )
-      {
-        for (; n > 0; ++first, --n) {
-          destroy_at( std::addressof(*first) );
-        }
-        return first;
-      }
-
-    } // namespace cpp17
+      return first;
+    }
 
     template<typename T>
     inline void destroy_array_at( T* ptr )
@@ -260,7 +307,7 @@ namespace bit {
       return reinterpret_cast<std::size_t>( val.get() );
     }
 
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
 #endif /* BIT_DETAIL_MEMORY_INL */
