@@ -1,14 +1,16 @@
-#ifndef BIT_INTERNAL_MEMORY_MEMORY_POOL_HPP
-#define BIT_INTERNAL_MEMORY_MEMORY_POOL_HPP
+#ifndef BIT_STL_INTERNAL_MEMORY_MEMORY_POOL_HPP
+#define BIT_STL_INTERNAL_MEMORY_MEMORY_POOL_HPP
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
     //////////////////////////////////////////////////////////////////////////
-    /// \class bit::memory_pool
-    ///
     /// \brief This class acts as a thin wrapper around memory, allowing it to
-    ///        know its own size and boundary
+    ///        know its own size and boundary.
+    ///
+    /// Unlike aligned_memory_pool, which keeps with it a chunk of
+    /// aligned memory, this pool wraps around non-owned memory to easily
+    /// represent its size and details
     //////////////////////////////////////////////////////////////////////////
     class memory_pool
     {
@@ -17,13 +19,13 @@ namespace bit {
       //----------------------------------------------------------------------
     public:
 
-      using element_type  = byte;                ///< The type of data in this memory pool
-      using pointer       = element_type*;        ///< Pointers of the memory type
-      using const_pointer = const element_type*;  ///< Constant pointer of the memory type
-      using void_pointer       = void*;           ///< Pointer to void
-      using const_void_pointer = const void*;     ///< Constant pointer to void
+      using element_type       = byte;                 ///< The type of data in this memory pool
+      using pointer            = element_type*;        ///< Pointers of the memory type
+      using const_pointer      = const element_type*;  ///< Constant pointer of the memory type
+      using void_pointer       = void*;                ///< Pointer to void
+      using const_void_pointer = const void*;          ///< Constant pointer to void
 
-      using size_type     = std::size_t;          ///< Type representing the size
+      using size_type          = std::size_t;          ///< Type representing the size
 
       //----------------------------------------------------------------------
       // Constructors
@@ -179,7 +181,7 @@ namespace bit {
     template<class Pool>
     inline constexpr memory_pool::memory_pool( Pool&& pool )
       noexcept
-      : m_memory( static_cast<bit::byte*>( pool.ptr()) ),
+      : m_memory( static_cast<stl::byte*>( pool.ptr()) ),
         m_size( pool.size() ),
         m_align( pool.align() )
     {
@@ -256,7 +258,7 @@ namespace bit {
     {
       return static_cast<void*>(m_memory);
     }
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
-#endif /* BIT_INTERNAL_MEMORY_MEMORY_POOL_HPP */
+#endif /* BIT_STL_INTERNAL_MEMORY_MEMORY_POOL_HPP */

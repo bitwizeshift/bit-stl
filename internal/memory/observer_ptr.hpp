@@ -2,7 +2,7 @@
 #define BIT_STL_INTERNAL_MEMORY_OBSERVER_PTR_HPP
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
     //////////////////////////////////////////////////////////////////////////
     /// \brief An observer pointer is a vocabulary type intended to be a
@@ -25,7 +25,7 @@ namespace bit {
 
       /// \brief Constructs an observer_ptr that has no corresponding watched
       ///        object
-      constexpr observer_ptr() = default;
+      constexpr observer_ptr();
 
       /// \brief Constructs an observer_ptr that has no corresponding watched
       ///        object

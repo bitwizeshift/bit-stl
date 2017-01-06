@@ -2,7 +2,7 @@
 #define BIT_INTERNAL_MEMORY_STD_ALLOCATOR_INL
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
     //---------------------------------------------------------------------------
     // Constructors
@@ -36,7 +36,9 @@ namespace bit {
     std_allocator<T,Allocator>::allocate( size_type n )
     {
       pointer ptr = static_cast<pointer>( m_allocator.alloc( sizeof(T)*n, alignof(T), 0 ) );
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
       if(!ptr) throw std::bad_alloc();
+#endif
       return ptr;
     }
 
@@ -127,7 +129,7 @@ namespace bit {
     }
 
 
-  }  // inline namespace stl
+  }  // namespace stl
 }  // namespace bit
 
 #endif /* BIT_INTERNAL_MEMORY_STD_ALLOCATOR_INL */

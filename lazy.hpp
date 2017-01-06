@@ -100,12 +100,15 @@ namespace bit {
         >
       >{};
 
-    }
+    } // namespace detail
 
     //////////////////////////////////////////////////////////////////////////
-    /// \brief
+    /// \brief Lazy class used for lazy-loading any type
     ///
+    /// The stored lazy-loaded class, \c T, will always be instantiated
+    /// before being accessed, and destructed when put out of scope.
     ///
+    /// \tparam T the type contained within this \c Lazy
     //////////////////////////////////////////////////////////////////////////
     template<typename T>
     class lazy
@@ -220,7 +223,7 @@ namespace bit {
       ///
       /// \param value the value to use to use to initialzie the lazy
 #ifndef BIT_DOXYGEN_BUILD
-      template<typename U = T, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && std::is_convertible<U&&, T>::value>* = nullptr>
+      template<typename U = T, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !is_callable<U&>::value && std::is_convertible<U&&, T>::value>* = nullptr>
 #else
       template<typename U>
 #endif
@@ -228,24 +231,11 @@ namespace bit {
 
       /// \copydoc lazy( U&& )
 #ifndef BIT_DOXYGEN_BUILD
-      template<typename U = T, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !std::is_convertible<U&&, T>::value>* = nullptr>
+      template<typename U = T, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !is_callable<U&>::value && !std::is_convertible<U&&, T>::value>* = nullptr>
 #else
       template<typename U>
 #endif
       explicit lazy( U&& value );
-
-      /// \brief Constructs a lazy given a construction function
-      ///
-      /// \note The construction function must return a std::tuple containing the
-      ///       arguments to forward to the constructor.
-      ///
-      /// \param ctor the function specifying arguments to pass to the constructor
-#ifndef BIT_DOXYGEN_BUILD
-      template<typename Ctor, typename = std::enable_if_t<is_callable<Ctor>::value>>
-#else
-      template<typename Ctor>
-#endif
-      explicit lazy( Ctor&& ctor );
 
       /// \brief Destructs this lazy, and the contents of the lazy
       ~lazy();
@@ -324,6 +314,12 @@ namespace bit {
 
       /// \brief Explicitly initializes this lazy if not initialized before
       void initialize() const;
+
+      /// \brief Destroys any contained value, if one is contained
+      ///
+      /// The arguments to be used for construction are maintained for
+      /// future invocations, and can be changed by a call to \c operator=
+      void reset();
 
       /// \brief Swaps this with the \p other lazy
       ///
@@ -415,7 +411,7 @@ namespace bit {
 
       using storage_type = std::aligned_storage_t<sizeof(T),alignof(T)>;
 
-      template<typename> friend class lazy;
+      struct ctor_tag{};
 
       //----------------------------------------------------------------------
       // Private Members
@@ -425,6 +421,21 @@ namespace bit {
       std::function<void(void* ptr)> m_ctor_function;  ///< The construction function
       mutable storage_type           m_storage;        ///< The storage type
       mutable bool                   m_is_initialized; ///< Is this lazy initialized
+
+      //----------------------------------------------------------------------
+      // Private Constructors
+      //----------------------------------------------------------------------
+    private:
+
+      /// \brief Constructs a lazy given a construction function
+      ///
+      /// \note The construction function must return a std::tuple containing the
+      ///       arguments to forward to the constructor.
+      ///
+      /// \param tag the tag used for tag dispatch
+      /// \param ctor the function specifying arguments to pass to the constructor
+      template<typename Ctor>
+      explicit lazy( ctor_tag tag, Ctor&& ctor );
 
       //----------------------------------------------------------------------
       // Private Member Functions
@@ -439,6 +450,18 @@ namespace bit {
 
       /// \brief Destroys the underlying type of the lazy
       void destruct();
+
+      //----------------------------------------------------------------------
+      // Friends
+      //----------------------------------------------------------------------
+    private:
+
+      template<typename>
+      friend class lazy;
+
+      template<typename U,typename Ctor>
+      friend lazy<U> make_lazy_generator( Ctor&& );
+
     };
 
     //------------------------------------------------------------------------
@@ -474,6 +497,16 @@ namespace bit {
     /// \return the lazy instance
     template<typename T, typename U, typename...Args>
     lazy<T> make_lazy( std::initializer_list<U> ilist, Args&&...args );
+
+    /// \brief Makes a lazy type that uses a generator function to generate
+    ///        the arguments that will be forwarded to T's constructor
+    ///
+    /// \tparam T The type of the lazy to construct
+    /// \param ctor A function that returns a tuple of arguments used to
+    ///             forward to T's constructor
+    /// \return The newly constructed lazy
+    template<typename T, typename Ctor>
+    lazy<T> make_lazy_generator( Ctor&& ctor );
 
     //-----------------------------------------------------------------------
 

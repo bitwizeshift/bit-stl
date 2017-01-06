@@ -9,7 +9,7 @@ namespace bit {
     constexpr auto address_from( InputIterator& it ) noexcept
       -> typename std::iterator_traits<InputIterator>::value_type*
     {
-      return std::addressof(*it);
+      return std::addressof( *it );
     }
 
     //------------------------------------------------------------------------
@@ -149,7 +149,7 @@ namespace bit {
     template<typename T>
     inline T* uninitialized_move_at( void* ptr, T&& other )
     {
-      new (ptr) T(other);
+      new (ptr) T(std::move(other));
       return static_cast<T*>(ptr);
     }
 

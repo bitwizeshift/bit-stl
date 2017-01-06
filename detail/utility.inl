@@ -2,7 +2,7 @@
 #define BFSTL_DETAIL_UTILITY_INL
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
     template<typename T>
     inline constexpr decltype(auto) fwd(T&& x)
@@ -50,7 +50,7 @@ namespace bit {
     }
 
     template<typename Func>
-    void final_act<Func>::cancel()
+    void final_act<Func>::cancel() noexcept
     {
       m_will_invoke = false;
     }
@@ -105,7 +105,7 @@ namespace bit {
                                       InputIterator first,
                                       InputIterator last )
     {
-      if(first==last) return seed;
+      if(first==last) return;
 
       for(; first != last; ++first )
       {
@@ -216,23 +216,24 @@ namespace bit {
     inline std::size_t hash_value( float val )
       noexcept
     {
-      return reinterpret_cast<std::size_t>(val);
+      return static_cast<std::size_t>(val);
     }
 
     inline std::size_t hash_value( double val )
       noexcept
     {
-      return reinterpret_cast<std::size_t>(val);
+      return static_cast<std::size_t>(val);
     }
 
     inline std::size_t hash_value( long double val )
       noexcept
     {
-      return reinterpret_cast<std::size_t>(val);
+      return static_cast<std::size_t>(val);
     }
 
     template<typename T>
     inline std::size_t hash_value( T* const& val )
+      noexcept
     {
       return reinterpret_cast<std::size_t>(val);
     }
@@ -249,7 +250,7 @@ namespace bit {
       return hash_range( std::begin(val), std::end(val) );
     }
 
-    template<typename Enum, typename = std::enable_if_t<std::is_enum<Enum>::value>>
+    template<typename Enum, typename>
     inline constexpr std::size_t hash_value( Enum val )
       noexcept
     {
@@ -360,7 +361,7 @@ namespace bit {
             std::make_index_sequence<std::tuple_size<std::decay_t<Tuple>>::value>{}
         );
     }
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
 #endif /* BFSTL_DETAIL_UTILITY_INL */

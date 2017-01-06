@@ -7,8 +7,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_SUPPRESS_WARNINGS_HEADER_HPP
-#define BIT_SUPPRESS_WARNINGS_HEADER_HPP
+#ifndef BIT_STL_SUPPRESS_WARNINGS_HEADER_HPP
+#define BIT_STL_SUPPRESS_WARNINGS_HEADER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -32,4 +32,4 @@
 # pragma warning(disable: 4100) // unreferenced formal parameter
 #endif
 
-#endif /* BIT_SUPPRESS_WARNINGS_HEADER_HPP */
+#endif /* BIT_STL_SUPPRESS_WARNINGS_HEADER_HPP */

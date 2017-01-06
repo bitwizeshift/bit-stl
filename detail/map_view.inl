@@ -80,7 +80,7 @@ namespace bit {
     }
 
     template<typename Key, typename T>
-    constexpr explicit map_view<Key,T>::operator bool()
+    constexpr map_view<Key,T>::operator bool()
       const noexcept
     {
       return m_vtable;

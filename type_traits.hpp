@@ -6,8 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_TYPE_TRAITS_HPP
-#define BIT_TYPE_TRAITS_HPP
+#ifndef BIT_STL_TYPE_TRAITS_HPP
+#define BIT_STL_TYPE_TRAITS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -25,4 +25,4 @@
 #include "internal/traits/type_transformations.hpp"
 #include "internal/traits/type_relationships.hpp"
 
-#endif /* BIT_TYPE_TRAITS_HPP */
+#endif /* BIT_STL_TYPE_TRAITS_HPP */

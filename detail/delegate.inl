@@ -81,12 +81,14 @@ namespace bit {
     //--------------------------------------------------------------------------
 
     template<typename R, typename ... Args>
+    template<typename...Arguments,typename>
     inline constexpr typename delegate<R(Args...)>::return_type
-      delegate<R(Args...)>::invoke( Args&&... args )
+      delegate<R(Args...)>::invoke( Arguments&&... args )
       const
     {
       BIT_ASSERT( m_delegate_stub.second != nullptr, "Cannot invoke unbound delegate");
-      return m_delegate_stub.second( m_delegate_stub.first, std::forward<Args>(args)... );
+
+      return m_delegate_stub.second( m_delegate_stub.first, std::forward<Arguments>(args)... );
     }
 
   } // namespace stl

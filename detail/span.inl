@@ -124,23 +124,53 @@ namespace bit {
     //------------------------------------------------------------------------
 
     template<typename T, std::ptrdiff_t Extent>
-    inline constexpr typename span<T,Extent>::value_type*
+    inline constexpr typename span<T,Extent>::pointer
+      span<T,Extent>::data()
+      noexcept
+    {
+      return m_storage.data();
+    }
+
+    template<typename T, std::ptrdiff_t Extent>
+    inline constexpr typename span<T,Extent>::const_pointer
       span<T,Extent>::data()
       const noexcept
     {
       return m_storage.data();
     }
 
+    //------------------------------------------------------------------------
+
     template<typename T, std::ptrdiff_t Extent>
     inline constexpr typename span<T,Extent>::reference
+      span<T,Extent>::operator[] ( index_type pos )
+      noexcept
+    {
+      return m_storage.data()[pos];
+    }
+
+    template<typename T, std::ptrdiff_t Extent>
+    inline constexpr typename span<T,Extent>::const_reference
       span<T,Extent>::operator[] ( index_type pos )
       const noexcept
     {
       return m_storage.data()[pos];
     }
 
+    //------------------------------------------------------------------------
+
     template<typename T, std::ptrdiff_t Extent>
     inline constexpr typename span<T,Extent>::reference
+      span<T,Extent>::at( index_type pos )
+    {
+      BIT_ASSERT_OR_THROW(std::out_of_range, pos >= 0, "span::at: position out of range");
+      BIT_ASSERT_OR_THROW(std::out_of_range, static_cast<size_type>(pos) < size(), "span::at: position out of range");
+
+      return *(data() + pos);
+    }
+
+    template<typename T, std::ptrdiff_t Extent>
+    inline constexpr typename span<T,Extent>::const_reference
       span<T,Extent>::at( index_type pos )
       const
     {
@@ -150,16 +180,36 @@ namespace bit {
       return *(data() + pos);
     }
 
+    //------------------------------------------------------------------------
+
     template<typename T, std::ptrdiff_t Extent>
     inline constexpr typename span<T,Extent>::reference
+      span<T,Extent>::front()
+      noexcept
+    {
+      return *data();
+    }
+
+    template<typename T, std::ptrdiff_t Extent>
+    inline constexpr typename span<T,Extent>::const_reference
       span<T,Extent>::front()
       const noexcept
     {
       return *data();
     }
 
+    //------------------------------------------------------------------------
+
     template<typename T, std::ptrdiff_t Extent>
     inline constexpr typename span<T,Extent>::reference
+      span<T,Extent>::back()
+      noexcept
+    {
+      return *(data() + (size() - 1));
+    }
+
+    template<typename T, std::ptrdiff_t Extent>
+    inline constexpr typename span<T,Extent>::const_reference
       span<T,Extent>::back()
       const noexcept
     {
@@ -195,21 +245,7 @@ namespace bit {
       const size_type max_length = offset > size() ? 0 : size() - offset;
       const size_type length     = count == dynamic_extent ? max_length : std::min(count,max_length);
 
-      return span<T,dynamic_extent>( data() + offset, length );
-    }
-
-    template<typename T, std::ptrdiff_t Extent>
-    template<std::ptrdiff_t Offset, std::ptrdiff_t Count>
-    inline constexpr span<T,Count>
-      span<T,Extent>::subspan()
-      const noexcept
-    {
-      static_assert( Offset < Count || Count == dynamic_extent, "Index out of range" );
-
-      constexpr size_type max_length = Offset > size() ? 0 : size() - Offset;
-      constexpr size_type length     = Count == dynamic_extent ? max_length : std::min(Count,max_length);
-
-      return span<T,Count>( data() + offset, length );
+      return span<T,dynamic_extent>( m_storage.data() + offset, length );
     }
 
     template<typename T, std::ptrdiff_t Extent>
@@ -237,7 +273,7 @@ namespace bit {
       span<T,Extent>::begin()
       const noexcept
     {
-      return data() ? data() : nullptr;
+      return iterator( data() ? data() : nullptr );
     }
 
     template<typename T, std::ptrdiff_t Extent>
@@ -245,7 +281,7 @@ namespace bit {
       span<T,Extent>::end()
       const noexcept
     {
-      return data() ? (data() + size()) : nullptr;
+      return iterator( data() ? (data() + size()) : nullptr );
     }
 
     template<typename T, std::ptrdiff_t Extent>
@@ -253,7 +289,7 @@ namespace bit {
       span<T,Extent>::cbegin()
       const noexcept
     {
-      return data() ? data() : nullptr;
+      return const_iterator( data() ? data() : nullptr );
     }
 
     template<typename T, std::ptrdiff_t Extent>
@@ -261,7 +297,7 @@ namespace bit {
       span<T,Extent>::cend()
       const noexcept
     {
-      return data() ? data() + size() : nullptr;
+      return const_iterator( data() ? data() + size() : nullptr );
     }
 
     //------------------------------------------------------------------------

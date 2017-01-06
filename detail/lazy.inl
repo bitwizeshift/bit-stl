@@ -162,7 +162,7 @@ namespace bit {
     //------------------------------------------------------------------------
 
     template<typename T>
-    template<typename U, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && std::is_convertible<U&&, T>::value>*>
+    template<typename U, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !is_callable<U&>::value && std::is_convertible<U&&, T>::value>*>
     inline lazy<T>::lazy( U&& other )
       : m_ctor_function([other](void* ptr) mutable { uninitialized_tuple_construct_at<T>(ptr, std::forward_as_tuple( std::move(other) ) );} ),
         m_is_initialized(false)
@@ -173,20 +173,9 @@ namespace bit {
     //------------------------------------------------------------------------
 
     template<typename T>
-    template<typename U, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !std::is_convertible<U&&, T>::value>*>
+    template<typename U, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !is_callable<U&>::value && !std::is_convertible<U&&, T>::value>*>
     inline lazy<T>::lazy( U&& other )
       : m_ctor_function([other](void* ptr) mutable { uninitialized_tuple_construct_at<T>(ptr, std::forward_as_tuple( std::move(other) ) );} ),
-        m_is_initialized(false)
-    {
-
-    }
-
-    //------------------------------------------------------------------------
-
-    template<typename T>
-    template<typename Ctor, typename>
-    inline lazy<T>::lazy( Ctor&& ctor )
-      : m_ctor_function([ctor](void* ptr){ uninitialized_tuple_construct_at<T>(ptr, ctor()); }),
         m_is_initialized(false)
     {
 
@@ -302,6 +291,11 @@ namespace bit {
       lazy_construct();
     }
 
+    template<typename T>
+    inline void lazy<T>::reset()
+    {
+      destruct();
+    }
 
     template<typename T>
     inline void lazy<T>::swap( lazy& other )
@@ -444,6 +438,19 @@ namespace bit {
 
 
     //------------------------------------------------------------------------
+    // Private Constructor
+    //------------------------------------------------------------------------
+
+    template<typename T>
+    template<typename Ctor>
+    inline lazy<T>::lazy( ctor_tag, Ctor&& ctor )
+      : m_ctor_function([ctor](void* ptr){ uninitialized_tuple_construct_at<T>(ptr, ctor()); }),
+        m_is_initialized(false)
+    {
+
+    }
+
+    //------------------------------------------------------------------------
     // Private Member Functions
     //------------------------------------------------------------------------
 
@@ -471,6 +478,7 @@ namespace bit {
     {
       if(m_is_initialized) {
         destroy_at<T>( static_cast<T*>(static_cast<void*>(std::addressof(m_storage))) );
+        m_is_initialized = false;
       }
     }
 
@@ -497,6 +505,13 @@ namespace bit {
     {
       return lazy<T>( in_place, std::move(ilist), std::forward<Args>(args)... );
     }
+
+    template<typename T, typename Ctor>
+    lazy<T> make_lazy_generator( Ctor&& ctor )
+    {
+      return lazy<T>( typename lazy<T>::ctor_tag{}, std::forward<Ctor>(ctor) );
+    }
+
 
     //------------------------------------------------------------------------
 

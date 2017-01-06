@@ -2,7 +2,7 @@
 #define BIT_STL_DETAIL_CASTS_INL
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
     //------------------------------------------------------------------------
     // Casts
@@ -16,9 +16,8 @@ namespace bit {
 
 #ifdef BIT_DEBUG
       To to = static_cast<To>(from);
-      if(static_cast<From>(to) != from) throw bad_narrow_cast();
-      if(!is_same_sign<To, From>::value && ((to < To{}) != (from < From{})))
-          throw bad_narrow_cast("narrowing_error");
+      BIT_ASSERT_OR_THROW(bad_narrow_cast, static_cast<From>(to) != from, "narrow_cast: unable to perform narrowing");
+      BIT_ASSERT_OR_THROW(bad_narrow_cast, (!is_same_sign<To, From>::value && ((to < To{}) != (from < From{}))), "narrow_cast: unable to perform narrowing");
 
       return to;
 #else // If compiling in non-debug, then assume static cast
@@ -31,8 +30,7 @@ namespace bit {
     template<typename To, typename From>
     inline To pointer_cast( From ptr ) noexcept
     {
-      if( static_cast<To>(ptr) == dynamic_cast<To>(ptr) )
-        throw bad_pointer_cast("bad_pointer_cast: destination type is not dynamically castable");
+      BIT_ASSERT_OR_THROW(bad_narrow_cast, static_cast<To>(ptr) == dynamic_cast<To>(ptr), "pointer_cast: destination type is not dynamically castable");
 
       return static_cast<To>(ptr);
     }
@@ -54,7 +52,7 @@ namespace bit {
       );
       return value.to;
     }
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
 #endif /* BIT_STL_DETAIL_CASTS_INL */

@@ -4,6 +4,10 @@
 namespace bit {
   namespace stl {
 
+    //========================================================================
+    // basic_string_view
+    //========================================================================
+
     //------------------------------------------------------------------------
     // Constructor
     //------------------------------------------------------------------------
@@ -86,14 +90,6 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr const typename basic_string_view<CharT,Traits>::value_type*
-      basic_string_view<CharT,Traits>::c_str()
-      const noexcept
-    {
-      return m_str;
-    }
-
-    template<typename CharT, typename Traits>
-    inline constexpr const typename basic_string_view<CharT,Traits>::value_type*
       basic_string_view<CharT,Traits>::data()
       const noexcept
     {
@@ -114,10 +110,10 @@ namespace bit {
       const
     {
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
-      return pos < m_size ? m_str[pos] : throw std::out_of_range("Input out of range in basic_string_view::at"), m_str[pos];
-#else
-      return m_str[pos];
+      if( pos >= m_size ) throw std::out_of_range("basic_string_view::at: index out of range");
 #endif
+
+      return m_str[pos];
     }
 
     template<typename CharT, typename Traits>
@@ -141,7 +137,7 @@ namespace bit {
     //------------------------------------------------------------------------
 
     template<typename CharT, typename Traits>
-    inline void
+    inline constexpr void
       basic_string_view<CharT,Traits>::remove_prefix( size_type n )
       noexcept
     {
@@ -149,7 +145,7 @@ namespace bit {
     }
 
     template<typename CharT, typename Traits>
-    inline void
+    inline constexpr void
       basic_string_view<CharT,Traits>::remove_suffix( size_type n )
       noexcept
     {
@@ -157,7 +153,7 @@ namespace bit {
     }
 
     template<typename CharT, typename Traits>
-    inline void
+    inline constexpr void
       basic_string_view<CharT,Traits>::swap( basic_string_view& v )
       noexcept
     {
@@ -172,7 +168,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     template<class Allocator>
-    inline constexpr basic_string_view<CharT,Traits>::operator
+    inline basic_string_view<CharT,Traits>::operator
       std::basic_string<CharT, Traits, Allocator>()
       const
     {
@@ -191,81 +187,88 @@ namespace bit {
       const
     {
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
-      if(pos >= m_size) throw std::out_of_range("Index out of range in basic_string_view::copy");
+      if( pos >= m_size ) throw std::out_of_range("basic_string_view::copy: index out of range");
 #endif
+
       const size_type rcount = std::min(m_size - pos,count+1);
       std::copy( m_str + pos, m_str + pos + rcount, dest);
       return rcount;
     }
 
     template<typename CharT, typename Traits>
-    inline basic_string_view<CharT,Traits>
+    inline constexpr basic_string_view<CharT,Traits>
       basic_string_view<CharT,Traits>::substr( size_type pos,
                                                size_type len )
       const
     {
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+      if( pos >= m_size ) throw std::out_of_range("basic_string_view::substr: index out of range");
+#endif
+
       const size_type max_length = pos > m_size ? 0 : m_size - pos;
 
-#if BIT_COMPILER_EXCEPTIONS_ENABLED
-      return pos < m_size ? basic_string_view<CharT,Traits>( m_str + pos, len > max_length ? max_length : len ) : throw std::out_of_range("Index out of range in basic_string_view::substr");
-#else
       return basic_string_view<CharT,Traits>( m_str + pos, len > max_length ? max_length : len );
-#endif
     }
 
     //------------------------------------------------------------------------
 
     template<typename CharT, typename Traits>
-    inline int basic_string_view<CharT,Traits>::compare( basic_string_view v )
+    inline constexpr int
+      basic_string_view<CharT,Traits>::compare( basic_string_view v )
       const noexcept
     {
       const size_type rlen = std::min(m_size,v.m_size);
-      const int compare = Traits::compare(m_str,v.m_str,rlen);
+      const int compare    = Traits::compare(m_str,v.m_str,rlen);
 
       return (compare ? compare : (m_size < v.m_size ? -1 : (m_size > v.m_size ? 1 : 0)));
     }
 
     template<typename CharT, typename Traits>
-    inline int basic_string_view<CharT,Traits>::compare( size_type pos,
-                                                         size_type count,
-                                                         basic_string_view v )
+    inline constexpr int
+      basic_string_view<CharT,Traits>::compare( size_type pos,
+                                                size_type count,
+                                                basic_string_view v )
       const
     {
       return substr(pos,count).compare(v);
     }
 
     template<typename CharT, typename Traits>
-    inline int basic_string_view<CharT,Traits>::compare( size_type pos1,
-                                                         size_type count1,
-                                                         basic_string_view v,
-                                                         size_type pos2,
-                                                         size_type count2 )
+    inline constexpr int
+      basic_string_view<CharT,Traits>::compare( size_type pos1,
+                                                size_type count1,
+                                                basic_string_view v,
+                                                size_type pos2,
+                                                size_type count2 )
       const
     {
       return substr(pos1,count1).compare( v.substr(pos2,count2) );
     }
 
     template<typename CharT, typename Traits>
-    inline int basic_string_view<CharT,Traits>::compare( const value_type* s )
+    inline constexpr int
+      basic_string_view<CharT,Traits>::compare( const value_type* s )
       const
     {
       return compare(basic_string_view<CharT,Traits>(s));
     }
 
     template<typename CharT, typename Traits>
-    inline int basic_string_view<CharT,Traits>::compare( size_type pos,
-                                                         size_type count,
-                                                         const value_type* s )
+    inline constexpr int
+      basic_string_view<CharT,Traits>::compare( size_type pos,
+                                                size_type count,
+                                                const value_type* s )
       const
     {
       return substr(pos, count).compare( basic_string_view<CharT,Traits>(s) );
     }
 
     template<typename CharT, typename Traits>
-    inline int basic_string_view<CharT,Traits>::compare( size_type pos,
-                                                         size_type count1,
-                                                         const value_type* s,
-                                                         size_type count2 )
+    inline constexpr int
+      basic_string_view<CharT,Traits>::compare( size_type pos,
+                                                size_type count1,
+                                                const value_type* s,
+                                                size_type count2 )
       const
     {
       return substr(pos, count1).compare( basic_string_view<CharT,Traits>(s, count2) );
@@ -278,20 +281,16 @@ namespace bit {
                                              size_type pos )
       const
     {
-      if(v.size()==0 || size()==0)
-      {
+      if(v.size()==0 || size()==0) {
         return npos;
       }
 
       const size_type max_index = m_size - v.size() + 1;
 
-      for( size_type i = pos; i < max_index; ++i )
-      {
+      for( size_type i = pos; i < max_index; ++i ) {
         size_type j = v.size();
-        for( ; j > 0; --j )
-        {
-          if( v[j-1] != m_str[i+j-1] )
-          {
+        for( ; j > 0; --j ) {
+          if( v[j-1] != m_str[i+j-1] ) {
             break;
           }
         }
@@ -311,7 +310,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::find( value_type const* s,
+      basic_string_view<CharT,Traits>::find( const value_type* s,
                                              size_type pos,
                                              size_type count )
       const
@@ -321,7 +320,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::find( value_type const* s,
+      basic_string_view<CharT,Traits>::find( const value_type* s,
                                             size_type pos )
       const
     {
@@ -336,20 +335,16 @@ namespace bit {
                                               size_type pos )
       const
     {
-      if(v.size()==0 || size()==0)
-      {
+      if(v.size()==0 || size()==0) {
         return npos;
       }
 
       const size_type max_index = m_size - v.size()+1;
 
-      for( size_type i = std::min(max_index,pos); i > 0; --i )
-      {
+      for( size_type i = std::min(max_index,pos); i > 0; --i ) {
         size_type j = 0;
-        for( ; j < v.size(); ++j )
-        {
-          if( v[j] != m_str[i+j-1] )
-          {
+        for( ; j < v.size(); ++j ) {
+          if( v[j] != m_str[i+j-1] ) {
             break;
           }
         }
@@ -369,7 +364,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::rfind( value_type const* s,
+      basic_string_view<CharT,Traits>::rfind( const value_type* s,
                                               size_type pos,
                                               size_type count )
       const
@@ -379,7 +374,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::rfind( value_type const* s,
+      basic_string_view<CharT,Traits>::rfind( const value_type* s,
                                               size_type pos )
       const
     {
@@ -399,12 +394,9 @@ namespace bit {
         return npos;
       }
 
-      for( size_type i = pos; i < m_size; ++i )
-      {
-        for( size_type j = 0; j < v.size(); ++j )
-        {
-          if( v[j] == m_str[i] )
-          {
+      for( size_type i = pos; i < m_size; ++i ) {
+        for( size_type j = 0; j < v.size(); ++j ) {
+          if( v[j] == m_str[i] ) {
             return i;
           }
         }
@@ -423,7 +415,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::find_first_of( value_type const* s,
+      basic_string_view<CharT,Traits>::find_first_of( const value_type* s,
                                                       size_type pos,
                                                       size_type count )
       const
@@ -433,7 +425,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::find_first_of( value_type const* s,
+      basic_string_view<CharT,Traits>::find_first_of( const value_type* s,
                                                       size_type pos )
       const
     {
@@ -448,17 +440,13 @@ namespace bit {
                                                      size_type pos )
       const
     {
-      if(v.size()==0 || size()==0)
-      {
+      if(v.size()==0 || size()==0) {
         return npos;
       }
 
-      for( size_type i = std::min(m_size,pos); i > 0; --i )
-      {
-        for( size_type j = 0; j < v.size(); ++j )
-        {
-          if( v[j] == m_str[i-1] )
-          {
+      for( size_type i = std::min(m_size,pos); i > 0; --i ) {
+        for( size_type j = 0; j < v.size(); ++j ) {
+          if( v[j] == m_str[i-1] ) {
             return i-1;
           }
         }
@@ -477,7 +465,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::find_last_of( value_type const* s,
+      basic_string_view<CharT,Traits>::find_last_of( const value_type* s,
                                                      size_type pos,
                                                      size_type count )
       const
@@ -487,7 +475,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::find_last_of( value_type const* s,
+      basic_string_view<CharT,Traits>::find_last_of( const value_type* s,
                                                      size_type pos )
       const
     {
@@ -502,23 +490,18 @@ namespace bit {
                                                           size_type pos )
       const
     {
-      if(v.size()==0 || size()==0)
-      {
+      if(v.size()==0 || size()==0) {
         return npos;
       }
 
-      for( size_type i = pos; i < m_size; ++i )
-      {
+      for( size_type i = pos; i < m_size; ++i ) {
         size_type j = 0;
-        for( ; j < v.size(); ++j )
-        {
-          if( v[j] == m_str[i] )
-          {
+        for( ; j < v.size(); ++j ) {
+          if( v[j] == m_str[i] ) {
             break;
           }
         }
-        if( j == v.size() )
-        {
+        if( j == v.size() ) {
           return i;
         }
       }
@@ -536,7 +519,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::find_first_not_of( value_type const* s,
+      basic_string_view<CharT,Traits>::find_first_not_of( const value_type* s,
                                                           size_type pos,
                                                           size_type count )
       const
@@ -546,7 +529,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::find_first_not_of( value_type const* s,
+      basic_string_view<CharT,Traits>::find_first_not_of( const value_type* s,
                                                           size_type pos )
       const
     {
@@ -561,23 +544,18 @@ namespace bit {
                                                          size_type pos )
       const
     {
-      if(v.size()==0 || size()==0)
-      {
+      if(v.size()==0 || size()==0) {
         return npos;
       }
 
-      for( size_type i = std::min(m_size,pos); i > 0; --i )
-      {
+      for( size_type i = std::min(m_size,pos); i > 0; --i ) {
         size_type j = 0;
-        for( ; j < v.size(); ++j )
-        {
-          if( v[j] == m_str[i-1] )
-          {
+        for( ; j < v.size(); ++j ) {
+          if( v[j] == m_str[i-1] ) {
             break;
           }
         }
-        if( j == v.size() )
-        {
+        if( j == v.size() ) {
           return i-1;
         }
       }
@@ -595,7 +573,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::find_last_not_of( value_type const* s,
+      basic_string_view<CharT,Traits>::find_last_not_of( const value_type* s,
                                                          size_type pos,
                                                          size_type count )
       const
@@ -605,7 +583,7 @@ namespace bit {
 
     template<typename CharT, typename Traits>
     inline constexpr typename basic_string_view<CharT,Traits>::size_type
-      basic_string_view<CharT,Traits>::find_last_not_of( value_type const* s,
+      basic_string_view<CharT,Traits>::find_last_not_of( const value_type* s,
                                                          size_type pos )
       const
     {
@@ -621,7 +599,7 @@ namespace bit {
       basic_string_view<CharT,Traits>::begin()
       const noexcept
     {
-      return m_str;
+      return const_iterator{m_str};
     }
 
     template<typename CharT, typename Traits>
@@ -629,7 +607,7 @@ namespace bit {
       basic_string_view<CharT,Traits>::cbegin()
       const noexcept
     {
-      return m_str;
+      return const_iterator{m_str};
     }
 
     template<typename CharT, typename Traits>
@@ -637,7 +615,7 @@ namespace bit {
       basic_string_view<CharT,Traits>::end()
       const noexcept
     {
-      return m_str + m_size;
+      return const_iterator{m_str + m_size};
     }
 
     template<typename CharT, typename Traits>
@@ -645,7 +623,7 @@ namespace bit {
       basic_string_view<CharT,Traits>::cend()
       const noexcept
     {
-      return m_str + m_size;
+      return const_iterator{m_str + m_size};
     }
 
     //------------------------------------------------------------------------
@@ -681,6 +659,39 @@ namespace bit {
     {
       return const_reverse_iterator{m_str + (m_size - 1)};
     }
+
+    //========================================================================
+    // basic_zstring_view
+    //========================================================================
+
+    //------------------------------------------------------------------------
+    // Constructors
+    //------------------------------------------------------------------------
+
+    template<typename CharT, typename Traits>
+    constexpr basic_zstring_view<CharT,Traits>::basic_zstring_view( const value_type* str )
+      noexcept
+      : basic_string_view<CharT,Traits>(str,Traits::length(str))
+    {
+
+    }
+
+    //------------------------------------------------------------------------
+    // Element Access
+    //------------------------------------------------------------------------
+
+    template<typename CharT, typename Traits>
+    constexpr const typename basic_zstring_view<CharT,Traits>::value_type*
+      basic_zstring_view<CharT,Traits>::c_str()
+      const noexcept
+    {
+      return basic_zstring_view<CharT,Traits>::data();
+    }
+
+    //========================================================================
+    // Free Functions
+    //========================================================================
+
     //------------------------------------------------------------------------
     // Public Functions
     //------------------------------------------------------------------------

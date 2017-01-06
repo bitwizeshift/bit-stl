@@ -1,8 +1,8 @@
-#ifndef BIT_INTERNAL_MEMORY_SMART_PTR_HPP
-#define BIT_INTERNAL_MEMORY_SMART_PTR_HPP
+#ifndef BIT_STL_INTERNAL_MEMORY_SMART_PTR_HPP
+#define BIT_STL_INTERNAL_MEMORY_SMART_PTR_HPP
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
     //------------------------------------------------------------------------
     // Deleters
@@ -62,4 +62,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_INTERNAL_MEMORY_SMART_PTR_HPP */
+#endif /* BIT_STL_INTERNAL_MEMORY_SMART_PTR_HPP */

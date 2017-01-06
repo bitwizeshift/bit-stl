@@ -18,213 +18,133 @@
 #include "type_traits.hpp"
 
 namespace bit {
+  namespace stl {
 
-  /////////////////////////////////////////////////////////////////////////////
-  /// \class bit::data_watcher
-  ///
-  /// \brief A wrapper class around fundamental types that causes a breakpoint
-  ///        any time the variable is set.
-  ///
-  /// \note In non-debug builds, const_data_watcher is not defined so that it
-  ///       cannot exist in release.
-  /////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    /// \class bit::data_watcher
+    ///
+    /// \brief A wrapper class around fundamental types that causes a
+    ///        breakpoint any time the variable is set.
+    ///
+    /// \note In non-debug builds, const_data_watcher is not defined so that
+    ///       it cannot exist in release.
+    ///
+    /// \tparam T the type of this debug_watcher to watch
+    //////////////////////////////////////////////////////////////////////////
 #ifdef BIT_DEBUG
-  template<typename T>
-  class data_watcher final
-  {
-    //-------------------------------------------------------------------------
-    // Public Members
-    //-------------------------------------------------------------------------
-  public:
-
-    typedef data_watcher<T> this_type;
-
-    typedef T        value_type;
-    typedef T&       reference;
-    typedef const T& const_reference;
-    typedef T*       pointer;
-    typedef const T* const_pointer;
-
-    //-------------------------------------------------------------------------
-    // Assignment
-    //-------------------------------------------------------------------------
-  public:
-
-    /// \brief Assign a value to this data watcher
-    ///
-    /// \param val the value to assign
-    /// \return reference to the newly changed value
-    inline const T& operator=( const value_type& val )
-      noexcept
+    template<typename T>
+    class data_watcher final
     {
-      return set( val );
-    }
+      //----------------------------------------------------------------------
+      // Public Members
+      //----------------------------------------------------------------------
+    public:
 
-    /// \brief Assign a value to this data watcher
-    ///
-    /// \param x the value to assign
-    /// \return reference to the newly changed value
-    inline const T& operator=( const data_watcher<T>& x )
-      noexcept
-    {
-      return set( x.get() );
-    }
+      using value_type = T;
+      using deref_type = decltype(*std::declval<T>());
 
-    /// \brief Assign a value to this data watcher
-    ///
-    /// \param x the value to assign
-    /// \return reference to the newly changed value
-    template<typename U>
-    inline const T& operator=( const data_watcher<U>& x )
-      noexcept
-    {
-      return set( x.get() );
-    }
+      //----------------------------------------------------------------------
+      // Constructor
+      //----------------------------------------------------------------------
+    public:
 
-    //-------------------------------------------------------------------------
-    // Get/Set
-    //-------------------------------------------------------------------------
-  public:
+      template<typename...Args, std::enable_if_t<std::is_constructible<T,Args...>::value>* = nullptr>
+      data_watcher( Args&&...args );
 
-    /// \brief Sets the variable, setting a breakpoint before the value changes
-    ///
-    /// \return reference to the data
-    inline const reference set( const value_type& val )
-    {
-      BIT_BREAKPOINT();
-      m_data = val;
-      return m_data;
-    }
+      data_watcher( const data_watcher& other );
 
-    /// \brief Gets the variable being watched
-    ///
-    /// \return reference to the data
-    inline const reference get() const
-      noexcept
-    {
-      return m_data;
-    }
+      data_watcher( data_watcher&& other );
 
-    //-------------------------------------------------------------------------
-    // Operators
-    //-------------------------------------------------------------------------
-  public:
+      template<typename U, std::enable_if_t<std::is_constructible<T,U&&>::value>* = nullptr>
+      data_watcher( const data_watcher<U>& other );
 
-    inline const reference operator+=( const value_type& val )
-    {
-      BIT_BREAKPOINT();
-      m_data+=val;
-      return (*this);
-    }
+      template<typename U, std::enable_if_t<std::is_constructible<T,U&&>::value>* = nullptr>
+      data_watcher( data_watcher<U>&& other );
 
-    inline const reference operator-=( const value_type& val )
-    {
-      BIT_BREAKPOINT();
-      m_data-=val;
-      return (*this);
-    }
+      //----------------------------------------------------------------------
+      // Assignment
+      //----------------------------------------------------------------------
+    public:
 
-    inline const reference operator/=( const value_type& val )
-    {
-      BIT_BREAKPOINT();
-      m_data/=val;
-      return (*this);
-    }
+      /// \brief Assign a value to this data watcher
+      ///
+      /// \param val the value to assign
+      /// \return reference to the newly changed value
+      data_watcher& operator=( const value_type& value );
 
-    inline const reference operator*=( const value_type& val )
-    {
-      BIT_BREAKPOINT();
-      m_data*=val;
-      return (*this);
-    }
+      data_watcher& operator=( value_type&& value );
 
-    inline const reference operator%=( const value_type& val )
-    {
-      BIT_BREAKPOINT();
-      m_data%=val;
-      return (*this);
-    }
+      data_watcher& operator=( const data_watcher& other ) = default;
 
-    //-------------------------------------------------------------------------
+      data_watcher& operator=( data_watcher&& other ) = default;
 
-    inline const reference operator&=( const value_type& val )
-    {
-      BIT_BREAKPOINT();
-      m_data&=val;
-      return (*this);
-    }
+      template<typename U>
+      data_watcher& operator=( const data_watcher<U>& other );
 
-    inline const reference operator^=( const value_type& val )
-    {
-      BIT_BREAKPOINT();
-      m_data^=val;
-      return (*this);
-    }
+      template<typename U>
+      data_watcher& operator=( data_watcher<U>&& other );
 
-    inline const reference operator|=( const value_type& val )
-    {
-      BIT_BREAKPOINT();
-      m_data|=val;
-      return (*this);
-    }
+      //----------------------------------------------------------------------
+      // Observers
+      //----------------------------------------------------------------------
+    public:
 
-    //-------------------------------------------------------------------------
+      operator value_type&() &;
 
-    inline const reference operator++()
-    {
-      BIT_BREAKPOINT();
-      m_data++;
-      return (*this);
-    }
+      operator value_type&&() &&;
 
-    inline const reference operator--()
-    {
-      BIT_BREAKPOINT();
-      m_data--;
-      return (*this);
-    }
+      value_type& operator->();
 
-    inline value_type operator++( int )
-    {
-      BIT_BREAKPOINT();
-      ++m_data;
-      return (*this);
-    }
+      const value_type& operator->() const;
 
-    inline value_type operator--( int )
-    {
-      BIT_BREAKPOINT();
-      --m_data;
-      return (*this);
-    }
+      deref_type& operator*() &;
 
-    //-------------------------------------------------------------------------
+      const deref_type& operator*() const &;
 
-    inline operator const value_type&()
-      const noexcept
-    {
-      return m_data;
-    }
+      deref_type&& operator*() &&;
 
-    inline const pointer operator->()
-      const noexcept
-    {
-      return &m_data;
-    }
+      const deref_type&& operator*() const &&;
 
-    inline const reference operator*()
-      const noexcept
-    {
-      return m_data;
-    }
+      //----------------------------------------------------------------------
+      // Operators
+      //----------------------------------------------------------------------
+    public:
 
-    //-------------------------------------------------------------------------
-    // Private Members
-    //-------------------------------------------------------------------------
-  private:
+      data_watcher& operator+=( const value_type& val );
 
-    value_type m_data; ///< Internal data to be watched
-  };
+      data_watcher& operator-=( const value_type& val );
+
+      data_watcher& operator/=( const value_type& val );
+
+      data_watcher& operator*=( const value_type& val );
+
+      data_watcher& operator%=( const value_type& val );
+
+      //----------------------------------------------------------------------
+
+      data_watcher& operator&=( const value_type& val );
+
+      data_watcher& operator^=( const value_type& val );
+
+      data_watcher& operator|=( const value_type& val );
+
+      //----------------------------------------------------------------------
+
+      data_watcher& operator++();
+
+      data_watcher& operator--();
+
+      data_watcher& operator++( int );
+
+      data_watcher& operator--( int );
+
+      //----------------------------------------------------------------------
+      // Private Members
+      //----------------------------------------------------------------------
+    private:
+
+      value_type m_data; ///< Internal data to be watched
+    };
 
 #else
 
@@ -236,8 +156,7 @@ namespace bit {
 
 #endif
 
+  } // namespace stl
 }  // namespace bit
-
-
 
 #endif /* BIT_STL_DATA_WATCHER_HPP */

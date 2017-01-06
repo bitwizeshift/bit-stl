@@ -173,8 +173,8 @@ namespace bit {
     ///
     /// This is based on Microsoft's implementation of the gsl::span
     ///
-    /// \tparam T The type of this array view
-    /// \tparam N The maximum size of this array view (default: unbounded)
+    /// \tparam T The type of this span
+    /// \tparam Extent The maximum size of this span (default: unbounded)
     ///
     /// \ingroup stl
     //////////////////////////////////////////////////////////////////////////
@@ -187,10 +187,10 @@ namespace bit {
     public:
 
       using value_type      = T;
-      using pointer         = T*;
-      using const_pointer   = const T*;
-      using reference       = T&;
-      using const_reference = const T*;
+      using pointer         = std::add_pointer_t<value_type>;
+      using const_pointer   = std::add_pointer_t<std::add_const_t<value_type>>;
+      using reference       = std::add_lvalue_reference_t<value_type>;
+      using const_reference = std::add_lvalue_reference_t<std::add_const_t<value_type>>;
 
       using size_type  = std::ptrdiff_t;
       using index_type = std::ptrdiff_t;
@@ -333,33 +333,48 @@ namespace bit {
       /// \brief Gets the data of the current span
       ///
       /// \return the data this non-const span contains
-      constexpr value_type* data() const noexcept;
+      constexpr pointer data() noexcept;
+
+      /// \copydoc span::data()
+      constexpr const_pointer data() const noexcept;
 
       /// \brief Accesses the element at index \p pos
       ///
       /// \param pos the index to access
       /// \return const reference to the entry
-      constexpr reference operator[]( index_type pos ) const noexcept;
+      constexpr reference operator[]( index_type pos ) noexcept;
+
+      /// \copydoc span::operator[]
+      constexpr const_reference operator[]( index_type pos ) const noexcept;
 
       /// \brief Accesses the element at index \p pos
       ///
       /// \param pos the index to access
       /// \return const reference to the entry
-      constexpr reference at( index_type pos ) const;
+      constexpr reference at( index_type pos );
+
+      /// \copydoc span::at( index_type )
+      constexpr const_reference at( index_type pos ) const;
 
       /// \brief Access the first entry of the span
       ///
       /// \note Undefined behavior if span is empty
       ///
       /// \return reference to the first entry of the span
-      constexpr reference front() const noexcept;
+      constexpr reference front() noexcept;
+
+      /// \copydoc span::front()
+      constexpr const_reference front() const noexcept;
 
       /// \brief References the last entry of the span
       ///
       /// \note Undefined behavior if span is empty
       ///
       /// \return reference to the last entry of the span
-      constexpr reference back() const noexcept;
+      constexpr reference back() noexcept;
+
+      /// \copydoc span::back()
+      constexpr const_reference back() const noexcept;
 
       //----------------------------------------------------------------------
       // Operations
@@ -382,14 +397,6 @@ namespace bit {
       /// \param count  the length of the subview
       /// \return the created span subview
       constexpr span<T,dynamic_extent> subspan( size_type offset, size_type count = dynamic_extent ) const;
-
-      /// \brief Returns a subview of this span
-      ///
-      /// \tparam Offset the position of the first entry in the subview
-      /// \tparam Count  the length of the subview
-      /// \return the created span subview
-      template<std::ptrdiff_t Offset, std::ptrdiff_t Count = dynamic_extent>
-      constexpr span<T,Count> subspan() const noexcept;
 
       /// \brief Returns a subview consisting of the first \p n entries
       ///        of the span
@@ -428,12 +435,12 @@ namespace bit {
 
       //----------------------------------------------------------------------
 
-      /// \brief Retrieves the reverse begin iterator for this array_View
+      /// \brief Retrieves the reverse begin iterator for this span
       ///
       /// \return the reverse begin iterator
       constexpr reverse_iterator rbegin() const noexcept;
 
-      /// \brief Retrieves the reverse end iterator for this array_View
+      /// \brief Retrieves the reverse end iterator for this span
       ///
       /// \return the reverse end iterator
       constexpr reverse_iterator rend() const noexcept;

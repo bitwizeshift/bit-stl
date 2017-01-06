@@ -8,6 +8,8 @@
 #ifndef BIT_STL_ITERATOR_HPP
 #define BIT_STL_ITERATOR_HPP
 
+#include <type_traits>
+
 namespace bit {
   namespace stl {
 

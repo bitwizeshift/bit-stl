@@ -9,6 +9,8 @@
 #ifndef BIT_STL_POINTER_ITERATOR_HPP
 #define BIT_STL_POINTER_ITERATOR_HPP
 
+#include <memory>
+
 namespace bit {
 
   namespace stl {

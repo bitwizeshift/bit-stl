@@ -26,24 +26,36 @@
 namespace bit {
   namespace stl {
 
-    /// \addtogroup bit
+    /// \addtogroup stl
     /// \{
 
     //------------------------------------------------------------------------
     // Casts
     //------------------------------------------------------------------------
 
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
     /// \brief An exception for failed narrow_casts
     struct bad_narrow_cast : public std::runtime_error
     {
-      using std::logic_error::logic_error;
+      //----------------------------------------------------------------------
+      // Constructors
+      //----------------------------------------------------------------------
+    public:
+
+      using std::runtime_error::runtime_error;
     };
 
     /// \brief An exception for failed pointer cast
     struct bad_pointer_cast : public std::runtime_error
     {
-      using std::logic_error::logic_error;
+      //----------------------------------------------------------------------
+      // Constructors
+      //----------------------------------------------------------------------
+    public:
+
+      using std::runtime_error::runtime_error;
     };
+#endif
 
     /// \brief Performs a bounded casting safely between numeric types.
     ///
@@ -70,7 +82,7 @@ namespace bit {
     /// \param ptr the pointer to cast
     /// \return the statically casted pointer
     template<typename To, typename From>
-    constexpr To pointer_cast( From ptr ) noexcept;
+    To pointer_cast( From ptr ) noexcept;
 
     // -----------------------------------------------------------------------
 
@@ -85,7 +97,7 @@ namespace bit {
     template<typename To, typename From>
     To copy_cast(const From& from) noexcept;
 
-  /// \}
+    /// \}
   } // namespace stl
 } // namespace bit
 

@@ -6,223 +6,135 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_SET_VIEW_HPP
-#define BIT_SET_VIEW_HPP
+#ifndef BIT_STL_SET_VIEW_HPP
+#define BIT_STL_SET_VIEW_HPP
+
+#include "internal/associative_vtables.hpp"
 
 #include <type_traits>
 
 namespace bit {
 
-  namespace detail {
+  namespace stl {
 
+    //////////////////////////////////////////////////////////////////////////
+    /// \brief A lightweight, non-owning wrapper around set operations
+    ///
+    //////////////////////////////////////////////////////////////////////////
     template<typename T>
-    class set_vtable
+    class set_view
     {
-    public:
       //----------------------------------------------------------------------
       // Public Member Types
       //----------------------------------------------------------------------
+    public:
 
-      template<typename Key, class Value>
-      using get_function_t    = Value(*)(void*, Key const&);
-      template<typename Key>
-      using exists_function_t = bool(*)(void*, const Key&);
-      using size_function_t   = std::size_t(*)(void*);
+      using value_type      = std::decay_t<T>;
+      using pointer         = value_type*;
+      using const_pointer   = const value_type*;
+      using reference       = value_type&;
+      using const_reference = const value_type&;
+
+      using size_type       = std::size_t;
 
       //----------------------------------------------------------------------
-      // Public Members
+      // Constructor / Destructor / Assignment
       //----------------------------------------------------------------------
     public:
 
-      exists_function_t<T> count_ptr = nullptr;
-      size_function_t      size_ptr   = nullptr;
+      /// \brief Constructs an empty set_view
+      constexpr set_view() noexcept;
 
-      template<typename S>
-      static void build_vtable( set_vtable* table )
-      {
-        auto const container_function = [](void* ptr, T const& k) -> bool
-        {
-          S* ps = static_cast<S*>(ptr);
-          return ps->count( k );
-        };
-
-        auto const size_function = [](void* ptr) -> std::size_t
-        {
-          S* ps = static_cast<S*>(ptr);
-
-          return ps->size();
-        };
-
-        table->count_ptr = +container_function;
-        table->size_ptr   = +size_function;
-      }
-
-      template<typename S>
-      static const set_vtable* get_vtable()
-      {
-        static const set_vtable retval = []
-        {
-          set_vtable retval;
-          build_vtable<S>(&retval);
-          return retval;
-        }();
-
-        return &retval;
-      }
-    };
-  }
-
-  ////////////////////////////////////////////////////////////////////////////
-  /// \brief A lightweight, non-owning wrapper around set operations
-  ///
-  ////////////////////////////////////////////////////////////////////////////
-  template<typename T>
-  class set_view final
-  {
-    //------------------------------------------------------------------------
-    // Public Member Types
-    //------------------------------------------------------------------------
-  public:
-
-    using value_type      = std::decay_t<T>;
-    using pointer         = value_type*;
-    using const_pointer   = const value_type*;
-    using reference       = value_type&;
-    using const_reference = const value_type&;
-
-    using size_type       = std::size_t;
-
-    //------------------------------------------------------------------------
-    // Constructor / Destructor / Assignment
-    //------------------------------------------------------------------------
-  public:
-
-    /// \brief Constructs an empty set_view
-    constexpr set_view();
-
-    /// \brief Constructs a set_view from a given set
-    ///
-    /// \note This constructor does not participate in overload resolution
-    ///       if U is a set_view
-    ///
-    /// \param other the set-like type to view
+      /// \brief Constructs a set_view from a given set
+      ///
+      /// \note This constructor does not participate in overload resolution
+      ///       if Set is a set_view
+      ///
+      /// \param other the set-like type to view
 #ifndef BIT_DOXYGEN_BUILD
-    template<typename U,
-             typename = std::enable_if_t<!std::is_same<set_view,std::decay_t<U>>::value> >
+      template<typename Set,
+               typename = std::enable_if_t<!std::is_same<set_view,std::decay_t<Set>>::value> >
 #else
-    template<typename U>
+      template<typename Set>
 #endif
-    constexpr set_view( U&& other );
+      constexpr set_view( Set&& other ) noexcept;
 
-    /// \brief Constructs a set_view by copying another set_view
-    ///
-    /// \param other the set view to copy
-    constexpr set_view( const set_view& other );
+      /// \brief Constructs a set_view by copying another set_view
+      ///
+      /// \param other the set view to copy
+      constexpr set_view( const set_view& other ) noexcept = default;
 
-    /// \brief Constructs a set_view by moving another set_view
-    ///
-    /// \param other the set_view to move
-    constexpr set_view( set_view&& other );
+      /// \brief Constructs a set_view by moving another set_view
+      ///
+      /// \param other the set_view to move
+      constexpr set_view( set_view&& other ) noexcept = default;
 
-    /// \brief Destructs the set_view
-    ~set_view() = default;
+      /// \brief Destructs the set_view
+      ~set_view() noexcept = default;
 
-    //------------------------------------------------------------------------
-    // Assignment Operators
-    //------------------------------------------------------------------------
-  public:
+      //----------------------------------------------------------------------
+      // Assignment Operators
+      //----------------------------------------------------------------------
+    public:
 
-    set_view& operator=( set_view other );
+      set_view& operator=( const set_view& other ) noexcept = default;
 
-    //------------------------------------------------------------------------
-    // Capacity
-    //------------------------------------------------------------------------
-  public:
+      set_view& operator=( set_view&& other ) noexcept = default;
 
-    /// \brief Checks if this set_view is empty
-    bool empty() const noexcept;
+      //----------------------------------------------------------------------
+      // Capacity
+      //----------------------------------------------------------------------
+    public:
 
-    size_type size() const noexcept;
+      /// \brief Checks if this set_view is empty
+      ///
+      /// \return \c true if this set_view is empty
+      bool empty() const noexcept;
 
-    //------------------------------------------------------------------------
-    // Lookup
-    //------------------------------------------------------------------------
-  public:
+      /// \brief Gets the size of this set_view
+      ///
+      /// \return the number of entries in this set_view
+      size_type size() const noexcept;
 
-    size_type count( const value_type& t ) const noexcept;
+      //----------------------------------------------------------------------
+      // Lookup
+      //----------------------------------------------------------------------
+    public:
 
-    bool contains( const value_type& t ) const noexcept;
+      /// \brief Counts the number of entries in this set_view
+      ///
+      /// \return the number of entries in this set_view
+      size_type count( const value_type& value ) const noexcept;
 
-    explicit operator bool() const noexcept;
+      /// \brief Checks the contents of this set_view
+      ///
+      /// \return \c true if this set_view contains
+      bool contains( const value_type& value ) const noexcept;
 
-    //------------------------------------------------------------------------
-    // Private Member Types
-    //------------------------------------------------------------------------
-  private:
+      /// \brief This operator determines whether this set_view is currently
+      ///        viewing a set type
+      explicit operator bool() const noexcept;
 
-    using vtable_type = detail::set_vtable<T>;
+      //----------------------------------------------------------------------
+      // Private Member Types
+      //----------------------------------------------------------------------
+    private:
 
+      using vtable_type = detail::set_vtable<T>;
 
-    //------------------------------------------------------------------------
-    // Private Members
-    //------------------------------------------------------------------------
-  private:
+      //----------------------------------------------------------------------
+      // Private Members
+      //----------------------------------------------------------------------
+    private:
 
-    const vtable_type* m_vtable;
-    const void*        m_instance;
+      const vtable_type* m_vtable;
+      const void*        m_instance;
 
-    friend std::size_t hash_value( const set_view<T>& );
+    };
 
-  };
-
-  /// \brief Hashes a given set_view
-  ///
-  /// \param val the set_view to hash
-  /// \return the hash of the set_view
-  template<typename T>
-  std::size_t hash_value( const set_view<T>& val ) noexcept;
-
-
-  template<typename T>
-  inline std::size_t hash_value( const set_view<T>& val )
-    noexcept
-  {
-    return reinterpret_cast<std::size_t>(val.m_instance);
-  }
-
-
-  template<typename T>
-  bool set_view<T>::empty() const noexcept
-  {
-    return size() == 0;
-  }
-
-  template<typename T>
-  typename set_view<T>::size_type set_view<T>::size() const noexcept
-  {
-    if( m_vtable ) return m_vtable->size_ptr( m_instance );
-    return 0;
-  }
-
-  template<typename T>
-  typename set_view<T>::size_type set_view<T>::count( const value_type& key ) const noexcept
-  {
-    if( m_vtable ) return m_vtable->count_ptr( m_instance );
-    return 0;
-  }
-
-  template<typename T>
-  bool set_view<T>::contains( const value_type& key ) const noexcept
-  {
-    return count( key ) != 0;
-  }
-
-  template<typename T>
-  set_view<T>::operator bool() const noexcept
-  {
-    return m_vtable;
-  }
-
+  } // namespace stl
 } // namespace bit
 
-#endif /* BIT_SET_VIEW_HPP */
+#include "detail/set_view.inl"
+
+#endif /* BIT_STL_SET_VIEW_HPP */

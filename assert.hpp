@@ -26,7 +26,7 @@
 namespace bit {
   namespace stl {
 
-# if !BIT_COMPILER_EXCEPTIONS_ENABLED
+# if BIT_COMPILER_EXCEPTIONS_ENABLED
 
     //========================================================================
     // assertion_failure
@@ -48,7 +48,7 @@ namespace bit {
       ///
       /// \param message the message to display when calling .what()
       /// \param source  the source location of this assertion failure
-      assertion_failure(const char* message, source_location source );
+      assertion_failure( const char* message, source_location source );
 
       //----------------------------------------------------------------------
       // Accessors
@@ -137,7 +137,7 @@ namespace bit {
 #   define BIT_ASSERT_OR_THROW(exception,condition,message) \
   do {                                                      \
     if(!(condition)) {                                      \
-      throw exception(message);                             \
+      throw exception{message};                             \
     }                                                       \
   } while(0)
 # else

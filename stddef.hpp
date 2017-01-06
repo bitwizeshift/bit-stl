@@ -67,6 +67,14 @@ namespace bit {
 //! \addtogroup stl
 //! \{
 
+    /// \brief An alias for lvalue-references to an array of N entries
+    template<typename T, std::size_t N>
+    using array_ref_t = T (&)[N];
+
+    /// \brief An alias for rvalue-references to an array of N entries
+    template<typename T, std::size_t N>
+    using array_rref_t = T (&&)[N];
+
     //------------------------------------------------------------------------
     // Tag-Based Dispatching
     //------------------------------------------------------------------------

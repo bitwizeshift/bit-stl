@@ -17,7 +17,7 @@
 #include <utility>     // for std::forward
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
     namespace detail {
 
       /// \brief Used to disambiguate unspecialized in_place
@@ -42,6 +42,7 @@ namespace bit {
     struct in_place_tag
     {
       in_place_tag() = delete;
+      in_place_tag(int){}
     };
 
     /// \brief This function is a special disambiguation tag for variadic functions, used in
@@ -49,7 +50,7 @@ namespace bit {
     ///
     /// \note Calling this function results in undefined behaviour.
 #ifndef BIT_DOXYGEN_BUILD
-    in_place_tag in_place( detail::in_place_ctor_tag = detail::in_place_ctor_tag() );
+    inline in_place_tag in_place( detail::in_place_ctor_tag = detail::in_place_ctor_tag() ){ return {0}; }
 #else
     in_place_tag in_place();
 #endif
@@ -60,7 +61,7 @@ namespace bit {
     /// \note Calling this function results in undefined behaviour.
     template<typename T>
 #ifndef BIT_DOXYGEN_BUILD
-    in_place_tag in_place( detail::in_place_ctor_type_tag<T> = detail::in_place_ctor_type_tag<T>() );
+    inline in_place_tag in_place( detail::in_place_ctor_type_tag<T> = detail::in_place_ctor_type_tag<T>() ){ return {0}; }
 #else
     in_place_Tag in_place();
 #endif
@@ -71,7 +72,7 @@ namespace bit {
     /// \note Calling this function results in undefined behaviour.
     template<std::size_t I>
 #ifndef BIT_DOXYGEN_BUILD
-    in_place_tag in_place( detail::in_place_ctor_index_tag<I> = detail::in_place_ctor_index_tag<I>() );
+    inline in_place_tag in_place( detail::in_place_ctor_index_tag<I> = detail::in_place_ctor_index_tag<I>() ){ return {0}; }
 #else
     in_place_tag in_place();
 #endif
@@ -86,6 +87,24 @@ namespace bit {
     /// \brief A tag type used for type-based dispatching in_place calls
     template <std::size_t I>
     using in_place_index_t = in_place_tag(&)( detail::in_place_ctor_index_tag<I> );
+
+    /// \brief Type-trait to determine if the type is an in_place type
+    ///
+    /// The result is aliased as \c ::value
+    template<typename T>
+    struct is_in_place : std::false_type{};
+
+    template<>
+    struct is_in_place<in_place_t> : std::true_type{};
+
+    template<typename T>
+    struct is_in_place<in_place_type_t<T>> : std::true_type{};
+
+    template<std::size_t I>
+    struct is_in_place<in_place_index_t<I>> : std::true_type{};
+
+    template<typename T>
+    constexpr bool is_in_place_v = is_in_place<T>::value;
 
     //--------------------------------------------------------------------------
     // Final Act
@@ -380,7 +399,7 @@ namespace bit {
 #else
     template<typename Enum>
 #endif
-    constexpr std::size_t hash_value( Enum val );
+    constexpr std::size_t hash_value( Enum val ) noexcept;
 
     /// \brief Hashes any given container
     ///
@@ -397,7 +416,7 @@ namespace bit {
 #else
     template<typename Container>
 #endif
-    constexpr std::size_t hash_value( const Container& container );
+    constexpr std::size_t hash_value( const Container& container ) noexcept;
 
     /// \brief Hashes a std::pair
     ///
@@ -458,7 +477,123 @@ namespace bit {
     template <typename F, typename Tuple>
     constexpr decltype(auto) apply( F&& f, Tuple&& t );
 
-  } // inline namespace stl
+    //------------------------------------------------------------------------
+    //
+    //------------------------------------------------------------------------
+
+    //////////////////////////////////////////////////////////////////////////
+    /// \brief A wrapper to propagate the const qualifier
+    //////////////////////////////////////////////////////////////////////////
+    template<typename T>
+    class propagate_const
+    {
+
+      template<typename U>
+      using is_enabled_and_explicit = conjunction<
+        std::is_constructible<T, U&&>,
+        negation<std::is_convertible<U&&, T>>
+      >;
+
+      template<typename U>
+      using is_enabled_and_implicit = conjunction<
+        std::is_constructible<T, U&&>,
+        std::is_convertible<U&&, T>
+      >;
+
+      //----------------------------------------------------------------------
+      // Public Member Types
+      //----------------------------------------------------------------------
+    public:
+
+      using element_type = std::remove_reference_t<decltype(*std::declval<T&>())>;
+
+      //----------------------------------------------------------------------
+      // Constructors
+      //----------------------------------------------------------------------
+    public:
+
+      constexpr propagate_const() = default;
+
+      constexpr propagate_const( propagate_const&& p ) = default;
+
+#ifndef BIT_DOXYGEN_BUILD
+      template<typename U, std::enable_if_t<is_enabled_and_explicit<U>::value>* = nullptr>
+#else
+      template<typename U>
+#endif
+      constexpr propagate_const( propagate_const<U>&& pu );
+
+#ifndef BIT_DOXYGEN_BUILD
+      template<typename U, std::enable_if_t<is_enabled_and_implicit<U>::value>* = nullptr>
+#else
+      template<typename U>
+#endif
+      explicit constexpr propagate_const( propagate_const<U>&& pu );
+
+#ifndef BIT_DOXYGEN_BUILD
+      template<typename U, std::enable_if_t<is_enabled_and_explicit<U>::value>* = nullptr>
+#else
+      template<typename U>
+#endif
+      constexpr propagate_const( U&& u );
+
+#ifndef BIT_DOXYGEN_BUILD
+      template<typename U, std::enable_if_t<is_enabled_and_implicit<U>::value>* = nullptr>
+#else
+      template<typename U>
+#endif
+      explicit constexpr propagate_const( U&& u );
+
+      propagate_const( const propagate_const& ) = delete;
+
+      //----------------------------------------------------------------------
+      // Assignment
+      //----------------------------------------------------------------------
+    public:
+
+      constexpr propagate_const& operator=( propagate_const&& p ) = default;
+
+      template<typename U>
+      constexpr propagate_const& operator=( propagate_const<U>&& pu );
+
+      template<typename U>
+      constexpr propagate_const& operator=( U&& u );
+
+      propagate_const& operator=( const propagate_const& ) = delete;
+
+      //----------------------------------------------------------------------
+      // Member Functions
+      //----------------------------------------------------------------------
+    public:
+
+      constexpr void swap( propagate_const& pt );
+
+      //----------------------------------------------------------------------
+      // Observers
+      //----------------------------------------------------------------------
+    public:
+
+      constexpr element_type* get();
+
+      constexpr const element_type* get() const;
+
+      constexpr explicit operator bool() const;
+
+      constexpr element_type& operator*();
+
+      constexpr const element_type& operator*() const;
+
+      constexpr element_type* operator->();
+
+      constexpr const element_type* operator->() const;
+
+      constexpr operator element_type*();
+
+      constexpr operator const element_type*() const;
+
+    };
+
+  } // namespace stl
 } // namespace bit
 
 #include "detail/utility.inl"

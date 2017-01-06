@@ -6,8 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_SUPPRESS_WARNINGS_FOOTER_HPP
-#define BIT_SUPPRESS_WARNINGS_FOOTER_HPP
+#ifndef BIT_STL_SUPPRESS_WARNINGS_FOOTER_HPP
+#define BIT_STL_SUPPRESS_WARNINGS_FOOTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -23,4 +23,4 @@
 # pragma warning(pop)
 #endif
 
-#endif /* BIT_SUPPRESS_WARNINGS_FOOTER_HPP */
+#endif /* BIT_STL_SUPPRESS_WARNINGS_FOOTER_HPP */

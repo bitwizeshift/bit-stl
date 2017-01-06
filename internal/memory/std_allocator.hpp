@@ -10,7 +10,7 @@
 #define BIT_INTERNAL_MEMORY_STD_ALLOCATOR_HPP
 
 namespace bit {
-  inline namespace stl {
+  namespace stl {
 
     //////////////////////////////////////////////////////////////////////////
     /// \brief This class serves as a wrapper around the base Allocator
@@ -197,7 +197,7 @@ namespace bit {
     template <class T, class U, class Allocator>
     bool operator!=(const std_allocator<T,Allocator>&, const std_allocator<U,Allocator>&);
 
-  } // inline namespace stl
+  } // namespace stl
 } // namespace bit
 
 #include "std_allocator.inl"

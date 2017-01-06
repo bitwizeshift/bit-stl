@@ -27,7 +27,7 @@ namespace bit {
     ///        without requiring heap allocations.
     ///
     /// The syntax is a little off as a result, requiring a call to
-    /// #Delegate::bind.
+    /// Delegate::bind.
     ///
     /// Example
     /// \code
@@ -119,7 +119,8 @@ namespace bit {
       ///
       /// \param args the arguments for the invokation
       /// \return the return value for the invoked delegate
-      constexpr return_type invoke( Args&&...args ) const;
+      template<typename...Arguments, typename = std::enable_if_t<std::is_convertible<std::tuple<Arguments...>,std::tuple<Args...>>::value>>
+      constexpr return_type invoke( Arguments&&...args ) const;
 
       //-----------------------------------------------------------------------------
       // Private Member Types
