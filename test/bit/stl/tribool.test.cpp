@@ -6,9 +6,9 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#include "../../catch.hpp"
-
 #include <bit/stl/tribool.hpp>
+
+#include "../../catch.hpp"
 
 //----------------------------------------------------------------------------
 // Constructor

@@ -7,7 +7,7 @@
  */
 
 #include <bit/stl/hashed_string_view.hpp>
-#include <iostream>
+
 #include "../../catch.hpp"
 
 // hashes from https://www.tools4noobs.com/online_tools/hash/

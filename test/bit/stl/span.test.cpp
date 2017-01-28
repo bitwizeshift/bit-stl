@@ -5,8 +5,10 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
+
 #include <bit/stl/span.hpp>
 #include <bit/stl/string_view.hpp>
+
 #include <vector>
 #include <array>
 

@@ -9,10 +9,10 @@
 #include <bit/stl/string_view.hpp>
 #include <bit/stl/array_view.hpp>
 
-#include "../../catch.hpp"
-
 #include <string>
 #include <cstring>
+
+#include "../../catch.hpp"
 
 //============================================================================
 // basic_string_view

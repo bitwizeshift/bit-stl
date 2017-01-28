@@ -8,9 +8,9 @@
 
 #include <bit/stl/set_view.hpp>
 
-#include "../../catch.hpp"
-
 #include <set>
+
+#include "../../catch.hpp"
 
 //----------------------------------------------------------------------------
 // Constructors

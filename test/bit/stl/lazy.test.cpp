@@ -8,9 +8,9 @@
 
 #include <bit/stl/lazy.hpp>
 
-#include "../../catch.hpp"
-
 #include <string>
+
+#include "../../catch.hpp"
 
 //----------------------------------------------------------------------------
 // Constructor / Destructor
