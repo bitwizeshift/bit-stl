@@ -216,14 +216,6 @@ namespace bit {
 
     //---------------------------------------------------------------------------
 
-    /// \struct bit::bit_size
-    ///
-    /// \brief Calculates the number of bits type T takes
-    template<typename T>
-    using bit_sizeof = std::integral_constant<std::size_t, (sizeof(T) * CHAR_BIT)>;
-
-    //---------------------------------------------------------------------------
-
     /// \brief Normalizes character types T to non-signed/unsigned character
     ///        types
     ///

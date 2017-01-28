@@ -66,9 +66,9 @@ namespace bit {
 
       }
 
-      constexpr clamp( const T& other ) = default;
+      constexpr clamp( const T& other ) : m_value(other){};
 
-      constexpr clamp( T&& other ) = default;
+      constexpr clamp( T&& other ) : m_value(std::move(other)){};
 
       /// \brief Converts this value to the underlying clamp type
       constexpr operator T()
