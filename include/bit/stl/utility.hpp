@@ -15,6 +15,7 @@
 // std libraries
 #include <type_traits> // for std::remove_reference
 #include <utility>     // for std::forward
+#include <stdexcept>   // for std::out_of_range
 
 namespace bit {
   namespace stl {
