@@ -64,6 +64,16 @@ namespace bit {
 
     }
 
+    template<typename T>
+    inline constexpr array_view<T>::array_view( std::initializer_list<value_type> ilist )
+      noexcept
+      : m_ptr(ilist.begin()),
+        m_size(ilist.end() - ilist.begin())
+    {
+
+    }
+
+
     //------------------------------------------------------------------------
 
     template<typename T>

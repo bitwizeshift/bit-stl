@@ -47,7 +47,7 @@ namespace bit {
     ///
     /// The result is aliased as \c ::type
     template<typename T>
-    using unqualified = detail::unqualified< typename std::decay< std::decay_t<T> >::type >;
+    using unqualified = detail::unqualified< std::decay_t<T> >;
 
     /// \brief Convenience alias for retrieving the \c ::type field of
     ///        unqualified
@@ -209,16 +209,10 @@ namespace bit {
 
     //---------------------------------------------------------------------------
 
-
     // todo: integer promotion
 
     template<typename T>
     struct promote{};
-
-
-    //---------------------------------------------------------------------------
-
-
 
     //---------------------------------------------------------------------------
 
@@ -331,7 +325,7 @@ namespace bit {
     struct remove_member_function_pointer_const<R (T::*)(Args...) const> : identity<R (T::*)(Args...)>{};
 
     template<typename R, typename T, typename...Args>
-    struct remove_member_function_pointer_const<R (T::*)(Args...) const volatile> : identity<R (T::*)(Args...)>{};
+    struct remove_member_function_pointer_const<R (T::*)(Args...) const volatile> : identity<R (T::*)(Args...) volatile>{};
 
     /// \brief Convenience template to retrieve the \c ::type of
     ///        remove_member_function_const
@@ -350,7 +344,7 @@ namespace bit {
     struct remove_member_function_pointer_volatile<R (T::*)(Args...) volatile> : identity<R (T::*)(Args...)>{};
 
     template<typename R, typename T, typename...Args>
-    struct remove_member_function_pointer_volatile<R (T::*)(Args...) const volatile> : identity<R (T::*)(Args...)>{};
+    struct remove_member_function_pointer_volatile<R (T::*)(Args...) const volatile> : identity<R (T::*)(Args...) const>{};
 
     /// \brief Convenience template to retrieve the \c ::type of
     ///        remove_member_function_volatile

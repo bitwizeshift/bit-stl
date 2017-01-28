@@ -1049,6 +1049,27 @@ namespace bit {
       return lhs >= basic_string_view<CharT,Traits>(rhs);
     }
 
+    template<typename CharT, typename Traits, typename Allocator>
+    inline std::basic_string<CharT,Traits,Allocator> operator + ( const std::basic_string<CharT,Traits,Allocator>& lhs,
+                                                                  const basic_string_view<CharT,Traits>& rhs )
+    {
+      return std::basic_string<CharT,Traits>(lhs).append(rhs.data(),rhs.size());
+    }
+
+    template<typename CharT, typename Traits, typename Allocator>
+    inline std::basic_string<CharT,Traits,Allocator> operator + ( const basic_string_view<CharT,Traits>& lhs,
+                                                                  const std::basic_string<CharT,Traits,Allocator>& rhs )
+    {
+      return std::basic_string<CharT,Traits>(lhs).append(rhs.data(),rhs.size());
+    }
+
+    template<typename CharT, typename Traits, typename Allocator>
+    inline std::basic_string<CharT,Traits,Allocator>& operator += ( std::basic_string<CharT,Traits,Allocator>& lhs,
+                                                                    const basic_string_view<CharT,Traits>& rhs )
+    {
+      return lhs.append(rhs.data(),rhs.size());
+    }
+
     //------------------------------------------------------------------------
     // Hash Functions
     //------------------------------------------------------------------------
@@ -1083,6 +1104,7 @@ namespace bit {
       }
       return result;
     }
+
   } // namespace stl
 } // namespace bit
 

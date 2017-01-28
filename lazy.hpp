@@ -128,6 +128,8 @@ namespace bit {
       /// \brief Constructs a lazy type that will be default-constructed
       lazy() noexcept;
 
+      //----------------------------------------------------------------------
+
       /// \brief Copy-constructs a lazy type
       ///
       /// If the lazy being copied was already initialized, this too will
@@ -143,6 +145,8 @@ namespace bit {
       ///
       /// \param other the lazy being moved
       lazy( lazy&& other );
+
+      //----------------------------------------------------------------------
 
       /// \brief Copy-constructs a lazy type from a convertible lazy
       ///
@@ -167,6 +171,8 @@ namespace bit {
 #endif
       explicit lazy( const lazy<U>& other );
 
+      //----------------------------------------------------------------------
+
       /// \brief Move-constructs a lazy type from a convertible lazy
       ///
       /// If the lazy being moved was already initialized, this too will
@@ -189,6 +195,8 @@ namespace bit {
       template<typename U>
 #endif
       explicit lazy( lazy<U>&& other );
+
+      //----------------------------------------------------------------------
 
       /// \brief Constructs an uninitialized lazy that will be constructed
       ///        with the arguments specified in \p args...
@@ -218,6 +226,8 @@ namespace bit {
                      std::initializer_list<U> ilist,
                      Args&&... args );
 
+      //----------------------------------------------------------------------
+
       /// \brief Constructs this lazy by deferring construction of the underlying
       ///        type as if by direct initializing by type U
       ///
@@ -236,6 +246,8 @@ namespace bit {
       template<typename U>
 #endif
       explicit lazy( U&& value );
+
+      //----------------------------------------------------------------------
 
       /// \brief Destructs this lazy, and the contents of the lazy
       ~lazy();

@@ -194,20 +194,7 @@
 #elif defined(__MSC_VER)
 # define BIT_UNREACHABLE() __assume(0)
 #else
-namespace bit {
-  namespace stl {
-    namespace detail{
-      struct unreachable_impl{ unreachable_impl& operator=(const unreachable_impl&); };
-    } // namespace detail
-  } // namespace stl
-} // namespace bit
-
-# define BIT_UNREACHABLE() {                                            \
-    ::bit::stl::detail::unreachable_impl                                \
-    BIT_JOIN(unreachable_,__LINE__);                                    \
-    BIT_JOIN(unreachable_,__LINE__) = BIT_JOIN(unreachable_,__LINE__);  \
-  }
-
+# define BIT_UNREACHABLE()
 #endif
 
 
@@ -250,6 +237,24 @@ namespace bit {
 # define BIT_RETURN_NONNULL
 #endif
 
+
+//! \def BIT_NODISCARD
+//!
+//! \brief Compiler hint to warn when a function's result is not used
+//!
+//! Example use:
+//! \code
+//! BIT_NODISCARD int foo();
+//! ...
+//! foo(); // <-- Generates warning to compiler
+//! \endcode
+#if __cplusplus >= 201700L
+# define BIT_NODISCARD [[nodiscard]]
+#elif defined(__GNUC__) || defined(__clang__)
+# define BIT_NODISCARD __attribute__((warn_unused_result))
+#else
+# define BIT_NODISCARD
+#endif
 
 //! \def BIT_FORCE_INLINE
 //!
@@ -329,7 +334,7 @@ namespace bit {
 //! than Windows. This forces higher priority to these elements, making them
 //! construct in the proper order
 #if defined(BIT_PLATFORM_LINUX)
-# define BIT_CONSTRUCT_EARLY BIT_INIT_PRIORITY(x)
+# define BIT_CONSTRUCT_EARLY BIT_INIT_PRIORITY(0)
 #else
 # define BIT_CONSTRUCT_EARLY
 #endif
@@ -384,23 +389,6 @@ namespace bit {
 # define BIT_ALLOCATED __declspec(restrict)
 #else
 # define BIT_ALLOCATED
-#endif
-
-
-//! \def BIT_USE_RESULT
-//!
-//! \brief Compiler hint to warn when a function's result is not used
-//!
-//! Example use:
-//! \code
-//! BIT_USE_RESULT int foo();
-//! ...
-//! foo(); // <-- Generates warning to compiler
-//! \endcode
-#if defined(BIT_COMPILER_GNUC) || defined(BIT_COMPILER_CLANG) || defined(BIT_COMPILER_INTEL_GNUC)
-# define BIT_USE_RESULT __attribute__(__warn_unuse_result__)
-#else
-# define BIT_USE_RESULT
 #endif
 
 
@@ -509,5 +497,6 @@ namespace bit {
 #else
 # define BIT_DEPRECATED
 #endif
+
 
 #endif /* BIT_STL_INTERNAL_CONFIG_COMPILER_TRAITS_HPP */

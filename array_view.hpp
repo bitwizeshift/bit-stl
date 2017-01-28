@@ -87,13 +87,10 @@ namespace bit {
       template<std::size_t N>
       constexpr array_view( const value_type (&array)[N] ) noexcept;
 
-      /// Disallow array rvalue-references
-      template<std::size_t N>
-      constexpr array_view( value_type (&&array)[N] ) = delete;
-
-      /// Disallow array rvalue-references
-      template<std::size_t N>
-      constexpr array_view( const value_type (&&array)[N] ) = delete;
+      /// \brief Constructs an array_view from a given initializer list
+      ///
+      /// \param ilist the initializer list for the container
+      constexpr array_view( std::initializer_list<value_type> ilist ) noexcept;
 
       /// \brief Constructs an array-view from a container
       ///

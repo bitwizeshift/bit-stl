@@ -14,6 +14,7 @@
 #endif
 
 #include <utility>
+#include "../invoke.hpp"
 
 namespace bit {
   namespace stl {
@@ -198,11 +199,11 @@ namespace bit {
 
     namespace detail {
 
-      template<typename Func, typename R = void, typename = void>
+      template<typename Fn, typename R = void, typename = void>
       struct is_callable : std::false_type{};
 
-      template<typename Func>
-      struct is_callable<Func,void,void_t<std::result_of_t<Func>>>
+      template<typename Fn>
+      struct is_callable<Fn,void,void_t<std::result_of_t<Fn>>>
         : std::true_type{};
 
       template<typename Func, typename R>
@@ -216,6 +217,115 @@ namespace bit {
 
     template<typename Func, typename R = void>
     constexpr bool is_callable_v = is_callable<Func,R>::value;
+
+    //------------------------------------------------------------------------
+
+    namespace detail {
+
+      template<typename Fn, typename...Args>
+      struct is_invokable
+      {
+        template<typename Fn2, typename...Args2>
+        static auto test( Fn2&&, Args2&&... )
+          -> decltype(invoke_impl(std::declval<Fn2>(), std::declval<Args2>()...), std::true_type{});
+
+        static auto test(...)
+          -> std::false_type;
+
+        static constexpr bool value =
+          decltype(test(std::declval<Fn>(), std::declval<Args>()...))::value;
+      };
+
+    } // namespace detail
+
+    /// \brief Type trait to determine whether \p Fn is invokable with
+    ///        \p Args...
+    ///
+    /// Formally, the expression:
+    /// \code
+    /// INVOKE( std::declval<Fn>(), std::declval<Args>()... )
+    /// \endcode
+    /// is well formed
+    ///
+    /// The result is aliased as \c ::value
+    template<typename Fn, typename...Args>
+    using is_invokable = detail::is_invokable<Fn,Args...>;
+
+    /// \brief Type-trait helper to retrieve the \c ::value of is_invokable
+    template<typename Fn, typename...Args>
+    constexpr bool is_invokable_v = is_invokable<Fn,Args...>::value;
+
+    //------------------------------------------------------------------------
+
+    namespace detail {
+
+      template<typename Fn, typename...Args>
+      struct is_nothrow_invokable
+      {
+        template<typename Fn2, typename...Args2>
+        static auto test( Fn2&&, Args2&&... )
+          -> decltype(invoke_impl(std::declval<Fn2>(), std::declval<Args2>()...),
+                      std::integral_constant<bool,noexcept(invoke_impl(std::declval<Fn2>(), std::declval<Args2>()...))>{});
+
+        static auto test(...)
+          -> std::false_type;
+
+        static constexpr bool value =
+          decltype(test(std::declval<Fn>(), std::declval<Args>()...))::value;
+      };
+
+    } // namespace detail
+
+    /// \brief Type trait to determine whether \p Fn is nothrow invokable with
+    ///        \p Args...
+    ///
+    /// Formally, the expression:
+    /// \code
+    /// INVOKE( std::declval<Fn>(), std::declval<Args>()... )
+    /// \endcode
+    /// is well formed and is known not to throw
+    ///
+    /// The result is aliased as \c ::value
+    template<typename Fn, typename...Args>
+    using is_nothrow_invokable = detail::is_nothrow_invokable<Fn,Args...>;
+
+    /// \brief Type-trait helper to retrieve the \c ::value of is_nothrow_invokable
+    template<typename Fn, typename...Args>
+    constexpr bool is_nothrow_invokable_v = is_nothrow_invokable<Fn,Args...>::value;
+
+    //------------------------------------------------------------------------
+
+    namespace detail {
+
+      template<typename Fn>
+      struct normalize_function;
+
+      template<typename R, typename...Args>
+      struct normalize_function<R(*)(Args...)> : identity<R(Args...)>{};
+
+      template<typename R, typename C, typename...Args>
+      struct normalize_function<R(C::*)(Args...)> : identity<R(Args...)>{};
+
+      template<typename R, typename C, typename...Args>
+      struct normalize_function<R(C::*)(Args...) const> : identity<R(Args...)>{};
+
+      template<typename R, typename C, typename...Args>
+      struct normalize_function<R(C::*)(Args...) volatile> : identity<R(Args...)>{};
+
+      template<typename R, typename C, typename...Args>
+      struct normalize_function<R(C::*)(Args...) const volatile> : identity<R(Args...)>{};
+
+    } // namespace detail
+
+    /// \brief Type trait to normalize a function to a value-type
+    ///
+    /// The result is aliased as \c ::type
+    template<typename Fn>
+    using normalize_function = detail::normalize_function<std::decay_t<Fn>>;
+
+    template<typename Fn>
+    using normalize_function_t = typename normalize_function<Fn>::type;
+
   } // namespace stl
 } // namespace bit
 

@@ -30,7 +30,7 @@ namespace bit {
     template<typename To, typename From>
     inline To pointer_cast( From ptr ) noexcept
     {
-      BIT_ASSERT_OR_THROW(bad_narrow_cast, static_cast<To>(ptr) == dynamic_cast<To>(ptr), "pointer_cast: destination type is not dynamically castable");
+      BIT_ASSERT_OR_THROW(bad_pointer_cast, static_cast<To>(ptr) == dynamic_cast<To>(ptr), "pointer_cast: destination type is not dynamically castable");
 
       return static_cast<To>(ptr);
     }

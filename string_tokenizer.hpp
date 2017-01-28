@@ -15,15 +15,21 @@ namespace bit {
   namespace stl {
 
     /////////////////////////////////////////////////////////////////////////////
-    /// \class bit::basic_string_tokenizer
-    ///
     /// \brief A tokenizer class for strings.
     ///
-    /// This class performs simple tokenization of strings in a lightweight
-    /// manner, by making heavy-use of basic_string_view types.
+    /// The tokenizer can be either owning or non-owning, in which case it either
+    /// uses basic_string or basic_string_view respectively.
     ///
+    /// All tokens are served as non-owning strings, leaving it the responsibility
+    /// of the consumer to take ownership of the result. This facilitates lightweight
+    /// comparisons if the tokenizer is used in a context where the results are
+    /// analyzed from within a scope where the tokenizer stays alive.
+    ///
+    /// \tparam CharT The character type to tokenize
+    /// \tparam Traits The traits for the character type
+    /// \tparam Owning Boolean indicating whether to own the string being tokenized
     /////////////////////////////////////////////////////////////////////////////
-    template<typename CharT, typename Traits = std::char_traits<CharT>>
+    template<typename CharT, typename Traits = std::char_traits<CharT>, bool Owning = false>
     class basic_string_tokenizer final
     {
       //-------------------------------------------------------------------------
@@ -31,9 +37,15 @@ namespace bit {
       //-------------------------------------------------------------------------
     public:
 
-      using value_type  = CharT;
-      using traits_type = Traits;
-      using string_type = basic_string_view<CharT,Traits>;
+      using value_type       = CharT;
+      using traits_type      = Traits;
+      using string_view_type = basic_string_view<CharT,Traits>;
+
+      using string_type = std::conditional_t<
+        Owning,
+        std::basic_string<CharT,Traits>,
+        basic_string_view<CharT,Traits>
+      >;
 
       using size_type = typename basic_string_view<CharT,Traits>::size_type;
 
@@ -70,12 +82,12 @@ namespace bit {
       /// \brief Retrieves the delimiters for this tokenizer
       ///
       /// \return the delimiters
-      constexpr string_type delimiters() const noexcept;
+      constexpr string_view_type delimiters() const noexcept;
 
       /// \brief Retrieves the string used in this tokenizer
       ///
       /// \return the string
-      constexpr string_type buffer() const noexcept;
+      constexpr string_view_type buffer() const noexcept;
 
       /// \brief Returns whether this tokenizer includes the delimiters
       ///
@@ -95,21 +107,22 @@ namespace bit {
       /// \brief Gets the next token in this string tokenizer's string.
       ///
       /// \return the next token
-      string_type next() noexcept;
+      string_view_type next() noexcept;
 
       /// \brief Gets the next token in this string tokenizer's string.
       ///
       /// First, the set of characters considered to be delimiters by this
-      /// basic_string_tokenizer object is changed to be the characters in
-      /// the string \p delim.
+      /// basic_string_tokenizer object is temporarily changed to be the
+      /// characters in the string \p delim.
       ///
       /// Then the next token in the string after the current position is
       /// returned. The current position is advanced beyond the recognized
-      /// token. The new delimiter set remains the default after this call
+      /// token. The delimiter used for parsing is unchanged by the end of
+      /// this invocation
       ///
       /// \param delim the delimiter to match
       /// \return the next token
-      string_type next( const string_type& delim ) noexcept;
+      string_view_type next( const string_view_type& delim ) noexcept;
 
       /// \brief Resets the current position within this string tokenizer
       ///        to the beginning of the buffer
@@ -129,14 +142,14 @@ namespace bit {
       /// \brief Retrieves the next token in the series
       ///
       /// \param delim the delimiters to check
-      string_type next_token( const string_type& delim ) noexcept;
+      string_view_type next_token( const string_view_type& delim ) noexcept;
 
       /// Returns whether or not the supplied argument is a delimiter
       ///
       /// \param c value to check if delimiter
       /// \param delim the delimiters to check
       /// \return true if argument is a delimiter
-      bool is_delimiter( value_type c, const string_type& delim ) const noexcept;
+      bool is_delimiter( value_type c, const string_view_type& delim ) const noexcept;
 
       //-------------------------------------------------------------------------
       // Private Members
@@ -150,10 +163,15 @@ namespace bit {
 
     };
 
-    using string_tokenizer    = basic_string_tokenizer<char>;
-    using wstring_tokenizer   = basic_string_tokenizer<wchar_t>;
-    using u16string_tokenizer = basic_string_tokenizer<char16_t>;
-    using u32string_tokenizer = basic_string_tokenizer<char32_t>;
+    using string_tokenizer    = basic_string_tokenizer<char,std::char_traits<char>,true>;
+    using wstring_tokenizer   = basic_string_tokenizer<wchar_t,std::char_traits<wchar_t>,true>;
+    using u16string_tokenizer = basic_string_tokenizer<char16_t,std::char_traits<char16_t>,true>;
+    using u32string_tokenizer = basic_string_tokenizer<char32_t,std::char_traits<char32_t>,true>;
+
+    using string_view_tokenizer    = basic_string_tokenizer<char,std::char_traits<char>,false>;
+    using wstring_view_tokenizer   = basic_string_tokenizer<wchar_t,std::char_traits<wchar_t>,false>;
+    using u16string_view_tokenizer = basic_string_tokenizer<char16_t,std::char_traits<char16_t>,false>;
+    using u32string_view_tokenizer = basic_string_tokenizer<char32_t,std::char_traits<char32_t>,false>;
 
   } // namespace stl
 } // namespace bit

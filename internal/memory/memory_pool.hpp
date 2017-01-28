@@ -54,7 +54,7 @@ namespace bit {
       /// \brief Constructs a memory_pool out of any other type of pool
       ///
       /// \param pool the memory pool
-      template<class Pool>
+      template<typename Pool>
       constexpr memory_pool( Pool&& pool ) noexcept;
 
       //----------------------------------------------------------------------
@@ -178,7 +178,7 @@ namespace bit {
 
     }
 
-    template<class Pool>
+    template<typename Pool>
     inline constexpr memory_pool::memory_pool( Pool&& pool )
       noexcept
       : m_memory( static_cast<stl::byte*>( pool.ptr()) ),
@@ -192,7 +192,7 @@ namespace bit {
     // Assignment
     //------------------------------------------------------------------------
 
-    memory_pool& memory_pool::operator = ( const memory_pool& other )
+    inline memory_pool& memory_pool::operator = ( const memory_pool& other )
       noexcept
     {
       m_memory = other.m_memory;
@@ -201,7 +201,7 @@ namespace bit {
       return (*this);
     }
 
-    memory_pool& memory_pool::operator = ( memory_pool&& other )
+    inline memory_pool& memory_pool::operator = ( memory_pool&& other )
       noexcept
     {
       m_memory = std::move(other.m_memory);

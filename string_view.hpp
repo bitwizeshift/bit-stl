@@ -626,6 +626,9 @@ namespace bit {
     /// \brief A wrapper around non-owned zero-terminated strings.
     ///
     /// This is an extension to the C++17 string_view
+    ///
+    /// This class is used to interop with C libraries that expect normal
+    /// strings
     //////////////////////////////////////////////////////////////////////////
     template<
       typename CharT,
@@ -785,6 +788,19 @@ namespace bit {
     template<typename CharT, typename Traits>
     bool operator >= ( const basic_string_view<CharT,Traits>& lhs,
                        const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+
+    template<typename CharT, typename Traits, typename Allocator>
+    std::basic_string<CharT,Traits,Allocator> operator + ( const std::basic_string<CharT,Traits,Allocator>& lhs,
+                                                           const basic_string_view<CharT,Traits>& rhs );
+
+    template<typename CharT, typename Traits, typename Allocator>
+    std::basic_string<CharT,Traits,Allocator> operator + ( const basic_string_view<CharT,Traits>& lhs,
+                                                           const std::basic_string<CharT,Traits,Allocator>& rhs );
+
+    template<typename CharT, typename Traits, typename Allocator>
+    std::basic_string<CharT,Traits,Allocator>& operator += ( std::basic_string<CharT,Traits,Allocator>& lhs,
+                                                             const basic_string_view<CharT,Traits>& rhs );
 
     //------------------------------------------------------------------------
     // Type Aliases

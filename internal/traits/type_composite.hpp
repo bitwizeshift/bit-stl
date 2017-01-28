@@ -337,6 +337,12 @@ namespace bit {
     template<typename T, T t1, T t2>
     using type_le = bool_constant<(t1 <= t2)>;
 
+    template<typename...Clauses>
+    struct enable_if_c : std::enable_if<conjunction<Clauses...>::value>{};
+
+    template<typename...Clauses>
+    using enable_if_c_t = typename enable_if_c<Clauses...>::type;
+
   } // namespace stl
 } // namespace bit
 #endif /* BIT_STL_INTERNAL_TYPE_COMPOSITE_HPP */

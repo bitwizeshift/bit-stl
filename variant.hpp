@@ -182,10 +182,42 @@ namespace bit {
 
       ~variant();
 
+      //----------------------------------------------------------------------
+      // Assignment
+      //----------------------------------------------------------------------
     public:
 
+      variant& operator=( const variant& rhs );
+      variant& operator=( variant&& rhs );
 
+      template <typename T>
+      variant& operator=( T&& t );
+
+      //----------------------------------------------------------------------
+      // Observers
+      //----------------------------------------------------------------------
     public:
+
+      constexpr std::size_t index() const;
+
+      constexpr bool valueless_by_exception() const;
+
+      //----------------------------------------------------------------------
+      // Modifiers
+      //----------------------------------------------------------------------
+    public:
+
+      template <typename T, typename... Args>
+      void emplace(Args&&... args);
+
+      template <typename T, typename U, typename... Args>
+      void emplace(std::initializer_list<U> il, Args&&... args);
+
+      template <std::size_t I, typename... Args>
+      void emplace(Args&&... args);
+
+      template <std::size_t I, typename U, typename... Args>
+      void emplace(std::initializer_list<U> il, Args&&... args);
 
       //----------------------------------------------------------------------
       // Private Member Types

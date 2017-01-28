@@ -42,7 +42,7 @@ namespace bit {
     ///
     /// \tparam Function signature and return type
     ////////////////////////////////////////////////////////////////////////////
-    template<typename Function> class delegate;
+    template<typename Fn> class delegate;
 
     template<typename R, typename...Args>
     class delegate<R(Args...)> final
@@ -122,6 +122,10 @@ namespace bit {
       template<typename...Arguments, typename = std::enable_if_t<std::is_convertible<std::tuple<Arguments...>,std::tuple<Args...>>::value>>
       constexpr return_type invoke( Arguments&&...args ) const;
 
+      /// \copydoc delegate::invoke( Arguments&&... )
+      template<typename...Arguments, typename = std::enable_if_t<std::is_convertible<std::tuple<Arguments...>,std::tuple<Args...>>::value>>
+      constexpr return_type operator()( Arguments&&...args ) const;
+
       //-----------------------------------------------------------------------------
       // Private Member Types
       //-----------------------------------------------------------------------------
@@ -138,6 +142,7 @@ namespace bit {
       stub_type m_delegate_stub; ///< The internal stub for this delegate
 
     };
+
   } // namespace stl
 }  // namespace bit
 

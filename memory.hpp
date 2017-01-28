@@ -301,11 +301,9 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-//#include "internal/memory/memory_pool.hpp"
-//#include "internal/memory/aligned_memory_pool.hpp"
+#include "internal/memory/memory_pool.hpp"
+#include "internal/memory/aligned_memory_pool.hpp"
 #include "internal/memory/indirect_ptr.hpp"
-#include "internal/memory/smart_ptr.hpp"
-#include "internal/memory/std_allocator.hpp"
 
 #include "detail/memory.inl"
 

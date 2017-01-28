@@ -58,13 +58,17 @@ namespace bit {
 
       /// \brief Clamps a value to between 0 and 1
       ///
-      /// \tparam value the value to clamp
+      /// \param value the value to clamp
       constexpr clamp( T value )
         noexcept
         : m_value( value > T(1) ? T(1) : value < T(0) ? T(0) : value )
       {
 
       }
+
+      constexpr clamp( const T& other ) = default;
+
+      constexpr clamp( T&& other ) = default;
 
       /// \brief Converts this value to the underlying clamp type
       constexpr operator T()

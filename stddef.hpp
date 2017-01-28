@@ -14,48 +14,11 @@
 # pragma once
 #endif
 
+// std libraries
+#include <cstdlib>
+
 // bit::stl internal configuration library
 #include "internal/config.hpp"
-
-// std libraries
-#include <cstdlib> // Used for size_t
-
-namespace bit {
-  namespace stl {
-
-//! \addtogroup stl
-//! \{
-
-    //--------------------------------------------------------------------------
-    // System-Specific Lexical Types
-    //--------------------------------------------------------------------------
-
-    using word  = int;          ///< Signed instruction-sized integer (Word)
-    using uword = unsigned int; ///< Unsigned instruction-sized integer (Word)
-
-    //---------------------------------------------------------------------------
-
-    using uchar  = unsigned char;  ///< Unsigned char type
-    using ushort = unsigned short; ///< Unsigned short type
-    using uint   = unsigned int;   ///< Unsigned int type
-    using ulong  = unsigned long;  ///< Unsigned long type
-
-#ifdef BIT_COMPILER_HAS_LONG_LONG
-    using ulonglong = unsigned long long;
-#endif
-
-    //--------------------------------------------------------------------------
-    // Generic Structures
-    //--------------------------------------------------------------------------
-
-    using size_t  = std::size_t; ///< Type representing size of objects
-    using align_t = std::size_t; ///< Type representing alignment of an object
-    using index_t = std::size_t; ///< Type representing index of objects
-
-//! \}
-  } // namespace stl
-} // namespace bit
-
 #include "internal/types/integral_types.hpp"
 #include "internal/types/char_types.hpp"
 #include "internal/types/float_types.hpp"
@@ -74,6 +37,27 @@ namespace bit {
     /// \brief An alias for rvalue-references to an array of N entries
     template<typename T, std::size_t N>
     using array_rref_t = T (&&)[N];
+
+    //--------------------------------------------------------------------------
+    // System-Specific Lexical Types
+    //--------------------------------------------------------------------------
+
+    using word  = int;          ///< Signed instruction-sized integer (Word)
+    using uword = unsigned int; ///< Unsigned instruction-sized integer (Word)
+
+    //---------------------------------------------------------------------------
+
+    using uchar     = unsigned char;  ///< Unsigned char type
+    using ushort    = unsigned short; ///< Unsigned short type
+    using uint      = unsigned int;   ///< Unsigned int type
+    using ulong     = unsigned long;  ///< Unsigned long type
+    using ulonglong = unsigned long long;
+
+    //--------------------------------------------------------------------------
+
+    using size_t  = std::size_t; ///< Type representing size of objects
+    using align_t = std::size_t; ///< Type representing alignment of an object
+    using index_t = std::size_t; ///< Type representing index of objects
 
     //------------------------------------------------------------------------
     // Tag-Based Dispatching

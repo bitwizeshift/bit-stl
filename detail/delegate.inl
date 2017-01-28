@@ -86,7 +86,18 @@ namespace bit {
       delegate<R(Args...)>::invoke( Arguments&&... args )
       const
     {
-      BIT_ASSERT( m_delegate_stub.second != nullptr, "Cannot invoke unbound delegate");
+      BIT_ASSERT( m_delegate_stub.second != nullptr, "delegate::invoke: cannot invoke unbound delegate");
+
+      return m_delegate_stub.second( m_delegate_stub.first, std::forward<Arguments>(args)... );
+    }
+
+    template<typename R, typename ... Args>
+    template<typename...Arguments,typename>
+    inline constexpr typename delegate<R(Args...)>::return_type
+      delegate<R(Args...)>::operator()( Arguments&&... args )
+      const
+    {
+      BIT_ASSERT( m_delegate_stub.second != nullptr, "delegate::operator(): cannot invoke unbound delegate");
 
       return m_delegate_stub.second( m_delegate_stub.first, std::forward<Arguments>(args)... );
     }

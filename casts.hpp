@@ -86,7 +86,7 @@ namespace bit {
 
     // -----------------------------------------------------------------------
 
-    /// \brief Performs a cast between types by copying bytes from \p from to
+    /// \brief Performs a ca st between types by copying bytes from \p from to
     ///        the new type.
     ///
     /// This is safer than calling #byte_cast or #union_cast as it will
