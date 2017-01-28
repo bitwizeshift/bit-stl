@@ -14,6 +14,8 @@
 #ifndef BIT_STL_INTERNAL_FLOAT_TYPES_HPP
 #define BIT_STL_INTERNAL_FLOAT_TYPES_HPP
 
+#include <utility> // for std::move
+
 namespace bit {
   namespace stl {
 

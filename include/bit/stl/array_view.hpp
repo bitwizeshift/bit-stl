@@ -13,8 +13,6 @@
 #include "type_traits.hpp"
 #include "pointer_iterator.hpp"
 
-#include <utility> // for std::move
-
 namespace bit {
   namespace stl {
 
