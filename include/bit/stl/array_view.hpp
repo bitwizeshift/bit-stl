@@ -13,6 +13,8 @@
 #include "type_traits.hpp"
 #include "pointer_iterator.hpp"
 
+#include <stdexcept>
+
 namespace bit {
   namespace stl {
 

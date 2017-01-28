@@ -36,23 +36,23 @@ matrix:
       env:
         - TOOLSET=g++-6 BUILD_TYPE='Release'
 
-    # Linux clang-3.5
+    # Linux clang-3.8
     - os: linux
       compiler: clang
       addons:
         apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.5']
-          packages: ['clang-3.5']
+          sources: [ 'ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.8' ]
+          packages: [ 'clang-3.8' ]
       env:
-        - TOOLSET=clang++-3.5 BUILD_TYPE='Debug'
+        - TOOLSET=clang++-3.8 BUILD_TYPE='Debug'
     - os: linux
       compiler: clang
       addons:
         apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.5']
-          packages: ['clang-3.5']
+      sources: [ 'ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.8' ]
+      packages: [ 'clang-3.8' ]
       env:
-        - TOOLSET=clang++-3.5 BUILD_TYPE='Release'
+        - TOOLSET=clang++-3.8 BUILD_TYPE='Release'
 
     # OSX clang
     - os: osx
@@ -81,5 +81,5 @@ install:
 
 script:
   - mkdir build/ && cd build/
-  - $CMAKE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic" ../
+  - $CMAKE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic" -DBIT_BUILD_TESTS=1 ../
   - $CMAKE --build .
