@@ -124,55 +124,18 @@ endif()
 # bit::stl : Export
 #-----------------------------------------------------------------------------
 
-set(PACKAGE_NAME Stl)
-set(PACKAGE_VERSION_MAJOR "${BIT_STL_VERSION_MAJOR}")
-set(PACKAGE_VERSION_MINOR "${BIT_STL_VERSION_MINOR}")
-set(PACKAGE_VERSION       "${BIT_STL_VERSION}")
-
-configure_file("cmake/modules/templates/PackageConfig.cmake.in"
-               "${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}Config.cmake.in"
-               @ONLY)
-
-configure_file("cmake/modules/templates/PackageConfigVersion.cmake.in"
-               "${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}ConfigVersion.cmake"
-               @ONLY)
-
-set(PACKAGE_VERSION_MAJOR)
-set(PACKAGE_VERSION_MINOR)
-set(PACKAGE_VERSION)
-
-if( BIT_STL_VERSION_MINOR )
-  set(target_dir "stl-${BIT_STL_VERSION_MAJOR}.${BIT_STL_VERSION_MINOR}")
-elseif( BIT_STL_VERSION_MAJOR )
-  set(target_dir "stl-${BIT_STL_VERSION_MAJOR}")
-else()
-  set(target_dir "stl")
-endif()
+include(ExportLibrary)
 
 if( EXISTS "$ENV{BIT_HOME}" )
-
   set(CMAKE_INSTALL_PREFIX "$ENV{BIT_HOME}")
-
 endif()
 
-set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${target_dir}")
-
-install( DIRECTORY include/bit
-                   ${CMAKE_CURRENT_BINARY_DIR}/include/bit
-         DESTINATION include )
-
-install( FILES ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}ConfigVersion.cmake
-               ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}Config.cmake.in
-         DESTINATION "lib" )
-
-install( TARGETS "stl"
-         EXPORT "StlTargets"
-         LIBRARY DESTINATION "lib"
-         ARCHIVE DESTINATION "lib"
-         RUNTIME DESTINATION "bin"
-         INCLUDES DESTINATION "include" )
-
-install( EXPORT "StlTargets"
-         NAMESPACE bit::
-         DESTINATION "lib"
-         FILE "StlTargets.cmake" )
+export_library( TARGETS stl
+                PACKAGE Stl
+                VERSION ${BIT_STL_VERSION}
+                MAJOR_VERSION ${BIT_STL_VERSION_MAJOR}
+                MINOR_VERSION ${BIT_STL_VERSION_MINOR}
+                INCLUDE_PATHS "${CMAKE_CURRENT_LIST_DIR}/include"
+                              "${CMAKE_CURRENT_BINARY_DIR}/include"
+                NAMESPACE "bit::"
+                PREFIX_PACKAGE )
