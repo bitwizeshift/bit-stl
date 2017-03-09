@@ -1,24 +1,26 @@
 cmake_minimum_required(VERSION 3.1)
 
+enable_testing()
+
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 
 include(AddIndependenceCheck)
 include(GitBuildInformation)
 include(MakeVersionHeader)
 
-project("bit::stl")
+#-----------------------------------------------------------------------------
+# Project Setup
+#-----------------------------------------------------------------------------
+
+option(BIT_STL_COMPILE_INDEPENDENCE_TESTS "Include each header independently in a .cpp file to determine header independence" on)
+option(BIT_STL_COMPILE_UNIT_TESTS "Compile and run the unit tests for this library" on)
+
+project("BitStl")
 
 if( CMAKE_BUILD_TYPE STREQUAL "" )
   message(STATUS "CMAKE_BUILD_TYPE not set; defaulting to 'Debug'")
   set(CMAKE_BUILD_TYPE DEBUG)
 endif()
-
-#-----------------------------------------------------------------------------
-# Options
-#-----------------------------------------------------------------------------
-
-option(BIT_STL_COMPILE_INDEPENDENCE_TESTS "Include each header independently in a .cpp file to determine header independence" on)
-option(BIT_STL_COMPILE_UNIT_TESTS "Compile and run the unit tests for this library" on)
 
 #-----------------------------------------------------------------------------
 # Version Info
@@ -88,9 +90,12 @@ set(headers
       "include/bit/stl/utility.hpp"
 )
 
-add_library(bit_stl INTERFACE)
-target_include_directories(bit_stl INTERFACE include)
-target_compile_options(bit_stl INTERFACE -std=c++14 $<$<CONFIG:DEBUG>:-DDEBUG>)
+add_library(stl INTERFACE)
+add_library(bit::stl ALIAS stl)
+
+target_include_directories(stl INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include> $<INSTALL_INTERFACE:include>)
+target_compile_options(stl INTERFACE -std=c++14 $<$<CONFIG:DEBUG>:-DDEBUG>)
+
 
 #-----------------------------------------------------------------------------
 # bit::stl : Independence Tests
@@ -98,8 +103,10 @@ target_compile_options(bit_stl INTERFACE -std=c++14 $<$<CONFIG:DEBUG>:-DDEBUG>)
 
 if( BIT_STL_COMPILE_INDEPENDENCE_TESTS )
 
-  add_independence_check(bit_stl_independence ${headers})
-  target_compile_options(bit_stl_independence PRIVATE -std=c++14 $<$<CONFIG:DEBUG>:-DDEBUG>)
+  add_independence_check(stl_independence ${headers})
+  target_compile_options(stl_independence PRIVATE -std=c++14 $<$<CONFIG:DEBUG>:-DDEBUG>)
+
+  add_library(bit::stl::independence ALIAS stl_independence)
 
 endif()
 
@@ -117,44 +124,55 @@ endif()
 # bit::stl : Export
 #-----------------------------------------------------------------------------
 
+set(PACKAGE_NAME Stl)
 set(PACKAGE_VERSION_MAJOR "${BIT_STL_VERSION_MAJOR}")
 set(PACKAGE_VERSION_MINOR "${BIT_STL_VERSION_MINOR}")
 set(PACKAGE_VERSION       "${BIT_STL_VERSION}")
 
-configure_file("cmake/package/package-config-version.cmake.in"
-               "${CMAKE_CURRENT_BINARY_DIR}/bit_stl-config-version.cmake"
+configure_file("cmake/modules/templates/PackageConfig.cmake.in"
+               "${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}Config.cmake.in"
+               @ONLY)
+
+configure_file("cmake/modules/templates/PackageConfigVersion.cmake.in"
+               "${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}ConfigVersion.cmake"
                @ONLY)
 
 set(PACKAGE_VERSION_MAJOR)
 set(PACKAGE_VERSION_MINOR)
 set(PACKAGE_VERSION)
 
-#-----------------------------------------------------------------------------
+if( BIT_STL_VERSION_MINOR )
+  set(target_dir "stl-${BIT_STL_VERSION_MAJOR}.${BIT_STL_VERSION_MINOR}")
+elseif( BIT_STL_VERSION_MAJOR )
+  set(target_dir "stl-${BIT_STL_VERSION_MAJOR}")
+else()
+  set(target_dir "stl")
+endif()
 
-# set(PACKAGE_TARGET "bit_stl")
-# set(PACKAGE_TARGETS_FILE "BitStlTargets")
-# configure_file("cmake/package/package-config.cmake.in"
-#                "${CMAKE_CURRENT_BINARY_DIR}/BitStlConfig.cmake"
-#                @ONLY)
-# set(PACKAGE_TARGET)
+if( EXISTS "$ENV{BIT_HOME}" )
 
-# set(lib_dir "lib/bit-stl-${BIT_STL_VERSION}")
-# set(lib_config_dir "${lib_dir}/${CMAKE_BUILD_TYPE}")
+  set(CMAKE_INSTALL_PREFIX "$ENV{BIT_HOME}")
 
-# install( TARGETS "bit_stl"
-#          EXPORT "BitStlTargets"
-#          LIBRARY DESTINATION "lib"
-#          ARCHIVE DESTINATION "lib"
-#          RUNTIME DESTINATION "bin"
-#          INCLUDES DESTINATION "include" )
+endif()
 
-# install( EXPORT "BitStlTargets"
-#          DESTINATION "${cmake}"
-#          FILE "BitStlTargets.cmake" )
+set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${target_dir}")
 
-# install( FILES "${CMAKE_CURRENT_BINARY_DIR}/bit_stl-config-version.cmake"
-#                "${CMAKE_CURRENT_BINARY_DIR}/bit_stl-config.cmake"
-#          DESTINATION
-#                 ${lib_dir} )
+install( DIRECTORY include/bit
+                   ${CMAKE_CURRENT_BINARY_DIR}/include/bit
+         DESTINATION include )
 
-#install(EXPORT bit_stl DESTINATION "${lib_config_dir}")
+install( FILES ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}ConfigVersion.cmake
+               ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}Config.cmake.in
+         DESTINATION "lib" )
+
+install( TARGETS "stl"
+         EXPORT "StlTargets"
+         LIBRARY DESTINATION "lib"
+         ARCHIVE DESTINATION "lib"
+         RUNTIME DESTINATION "bin"
+         INCLUDES DESTINATION "include" )
+
+install( EXPORT "StlTargets"
+         NAMESPACE bit::
+         DESTINATION "lib"
+         FILE "StlTargets.cmake" )
