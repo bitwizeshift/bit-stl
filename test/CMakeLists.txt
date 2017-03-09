@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-find_package(Catch)
+find_package(Catch REQUIRED)
 
 set(sources
       main.test.cpp

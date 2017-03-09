@@ -85,6 +85,6 @@ install:
 
 script:
   - mkdir build/ && cd build/
-  - $CMAKE .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_PREFIX_PATH=../catch -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic" -DBIT_STL_COMPILE_UNIT_TESTS=On
+  - $CMAKE .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_PREFIX_PATH=$(cd $(dirname ../catch) && echo $PWD/$(basename ../catch)) -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic" -DBIT_STL_COMPILE_UNIT_TESTS=On
   - $CMAKE --build .
   - $CMAKE --build . --target test
