@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
 
-include(AddTestExecutable)
-
 find_package(Catch)
 
 set(sources
@@ -19,6 +17,20 @@ set(sources
       bit/stl/type_traits.test.cpp
 )
 
-add_test_executable(bit_stl_test ${sources})
+add_executable(stl_test ${sources})
 
-target_link_libraries(bit_stl_test PRIVATE bit_stl "philsquared::Catch")
+target_link_libraries(stl_test PRIVATE "bit::stl" "philsquared::Catch")
+
+#-----------------------------------------------------------------------------
+# Testing
+#-----------------------------------------------------------------------------
+
+add_test( NAME "stl_test_default"
+          WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+          COMMAND "$<TARGET_FILE:stl_test>" )
+
+#-----------------------------------------------------------------------------
+
+add_test( NAME "stl_test_all"
+          WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+          COMMAND "$<TARGET_FILE:stl_test>" "*" )
