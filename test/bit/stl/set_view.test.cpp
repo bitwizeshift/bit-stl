@@ -10,7 +10,7 @@
 
 #include <set>
 
-#include "../../catch.hpp"
+#include <catch.hpp>
 
 //----------------------------------------------------------------------------
 // Constructors

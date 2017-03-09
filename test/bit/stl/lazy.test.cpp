@@ -10,7 +10,7 @@
 
 #include <string>
 
-#include "../../catch.hpp"
+#include <catch.hpp>
 
 //----------------------------------------------------------------------------
 // Constructor / Destructor

@@ -8,7 +8,7 @@
 
 #include <bit/stl/tribool.hpp>
 
-#include "../../catch.hpp"
+#include <catch.hpp>
 
 //----------------------------------------------------------------------------
 // Constructor

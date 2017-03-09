@@ -94,8 +94,10 @@ add_library(stl INTERFACE)
 add_library(bit::stl ALIAS stl)
 
 target_include_directories(stl INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include> $<INSTALL_INTERFACE:include>)
-target_compile_options(stl INTERFACE -std=c++14 $<$<CONFIG:DEBUG>:-DDEBUG>)
-
+target_compile_options(stl INTERFACE -std=c++14
+  $<$<CONFIG:DEBUG>:-DDEBUG>
+  $<$<CONFIG:RELEASE>:-DNDEBUG -DRELEASE>
+)
 
 #-----------------------------------------------------------------------------
 # bit::stl : Independence Tests
@@ -104,7 +106,10 @@ target_compile_options(stl INTERFACE -std=c++14 $<$<CONFIG:DEBUG>:-DDEBUG>)
 if( BIT_STL_COMPILE_INDEPENDENCE_TESTS )
 
   add_independence_check(stl_independence ${headers})
-  target_compile_options(stl_independence PRIVATE -std=c++14 $<$<CONFIG:DEBUG>:-DDEBUG>)
+  target_compile_options(stl_independence PRIVATE -std=c++14
+    $<$<CONFIG:DEBUG>:-DDEBUG>
+    $<$<CONFIG:RELEASE>:-DNDEBUG -DRELEASE>
+  )
 
   add_library(bit::stl::independence ALIAS stl_independence)
 

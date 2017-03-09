@@ -12,7 +12,7 @@
 #include <map>
 #include <array>
 
-#include "../../catch.hpp"
+#include <catch.hpp>
 
 namespace {
 

@@ -8,7 +8,7 @@
 
 #include <bit/stl/expected.hpp>
 
-#include "../../catch.hpp"
+#include <catch.hpp>
 
 #include <string>
 

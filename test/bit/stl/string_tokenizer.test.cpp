@@ -8,7 +8,7 @@
 
 #include <bit/stl/string_tokenizer.hpp>
 
-#include "../../catch.hpp"
+#include <catch.hpp>
 
 //----------------------------------------------------------------------------
 // Constructors

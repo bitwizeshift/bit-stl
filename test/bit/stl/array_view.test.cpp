@@ -8,7 +8,7 @@
 
 #include <bit/stl/array_view.hpp>
 
-#include "../../catch.hpp"
+#include <catch.hpp>
 
 //----------------------------------------------------------------------------
 // Constructors

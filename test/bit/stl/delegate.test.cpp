@@ -8,7 +8,7 @@
 
 #include <bit/stl/delegate.hpp>
 
-#include "../../catch.hpp"
+#include <catch.hpp>
 
 namespace {
 

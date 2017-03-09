@@ -65,6 +65,10 @@ matrix:
 install:
   - cd ../
 
+  # Get dependency 'catch'
+  - mkdir -p catch/include
+  - wget https://github.com/philsquared/Catch/releases/download/v1.8.1/catch.hpp -P catch/include
+
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget --no-check-certificate https://www.cmake.org/files/v3.3/cmake-3.3.1-Linux-x86_64.tar.gz; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar -xzf cmake-3.3.1-Linux-x86_64.tar.gz; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CMAKE=$TRAVIS_BUILD_DIR/../cmake-3.3.1-Linux-x86_64/bin/cmake; fi
@@ -81,5 +85,6 @@ install:
 
 script:
   - mkdir build/ && cd build/
-  - $CMAKE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic" -DBIT_BUILD_TESTS=1 ../
+  - $CMAKE .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_PREFIX_PATH=../catch -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic" -DBIT_STL_COMPILE_UNIT_TESTS=On
   - $CMAKE --build .
+  - $CMAKE --build . --target test

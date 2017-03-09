@@ -12,7 +12,7 @@
 #include <vector>
 #include <array>
 
-#include "../../catch.hpp"
+#include <catch.hpp>
 
 //----------------------------------------------------------------------------
 // Constructors

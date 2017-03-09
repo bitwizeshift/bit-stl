@@ -12,7 +12,7 @@
 #include <string>
 #include <cstring>
 
-#include "../../catch.hpp"
+#include <catch.hpp>
 
 //============================================================================
 // basic_string_view

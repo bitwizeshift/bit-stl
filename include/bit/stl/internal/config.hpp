@@ -27,27 +27,16 @@
 //! \brief Debug build
 //!
 //!
-//! \def BIT_RELEASE
-//! \brief Release Build
-//!
-//!
 //! \def BIT_UNIT_TEST
 //! \brief Unit Test Build
 #if !defined(BIT_DEBUG) && (defined(DEBUG) || defined(_DEBUG))
 #  define BIT_DEBUG     1
 #endif
 
-#if !defined(BIT_RELEASE) && (defined(RELEASE) || defined(_RELEASE))
-#  define BIT_RELEASE   1
-#endif
-
 #if !defined(BIT_UNIT_TEST) && (defined(UNIT_TEST) || defined(_UNIT_TEST))
 #  define BIT_UNIT_TEST 1
 #endif
 
-#if !(defined(BIT_DEBUG) || defined(BIT_RELEASE))
-#  error No build type specified; specify DEBUG or RELEASE at build time.
-#endif
 
 //! \def BIT_NOOP()
 //! \brief Macro function indicating no operation will occur

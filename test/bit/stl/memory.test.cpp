@@ -8,7 +8,7 @@
 
 #include <bit/stl/memory.hpp>
 
-#include "../../catch.hpp"
+#include <catch.hpp>
 
 //----------------------------------------------------------------------------
 // Pointer Manipulation

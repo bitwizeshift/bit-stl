@@ -106,11 +106,11 @@ namespace bit {
     } // namespace detail
 #   define BIT_INTERNAL_ASSERT(condition,message) ::bit::stl::detail::assert_internal("assertion failure: condition '" condition "' failed with message \"" message "\"", BIT_MAKE_SOURCE_LOCATION() );
 # endif
+  } // namespace stl
+} // namespace bit
 #else
 # define BIT_INTERNAL_ASSERT(...)
 #endif
-  } // namespace stl
-} // namespace bit
 
 //============================================================================
 // Assertion Macros
