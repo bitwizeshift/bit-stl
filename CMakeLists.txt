@@ -93,7 +93,7 @@ set(headers
 add_library(stl INTERFACE)
 add_library(bit::stl ALIAS stl)
 
-target_include_directories(stl INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include> $<INSTALL_INTERFACE:include>)
+target_include_directories(stl INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>)
 target_compile_options(stl INTERFACE -std=c++14
   $<$<CONFIG:DEBUG>:-DDEBUG>
   $<$<CONFIG:RELEASE>:-DNDEBUG -DRELEASE>
