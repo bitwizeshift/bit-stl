@@ -116,7 +116,15 @@ namespace bit {
     ///
     /// \param x the value to forward
     template<typename T>
-    inline constexpr decltype(auto) fwd(T&& x) noexcept;
+    constexpr decltype(auto) fwd(T&& x) noexcept;
+
+    /// \brief A wrapper function that acts like std::forward while decaying
+    ///        the underlying type
+    ///
+    /// \param x the value to forward
+    /// \return the decay-forwarded value
+    template<typename T>
+    constexpr decltype(auto) decay_forward(T&& x) noexcept;
 
     ////////////////////////////////////////////////////////////////////////////
     /// \brief This class leverages RAII to perform cleanup actions at the end

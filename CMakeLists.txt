@@ -88,6 +88,7 @@ set(headers
       "include/bit/stl/tuple.hpp"
       "include/bit/stl/type_traits.hpp"
       "include/bit/stl/utility.hpp"
+      "include/bit/stl/pointer_wrapper.hpp"
 )
 
 add_library(stl INTERFACE)
