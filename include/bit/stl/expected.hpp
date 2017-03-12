@@ -262,7 +262,7 @@ namespace bit {
       /// \brief Swaps the contents of this with \p rhs
       ///
       /// \param rhs the right-hand-side to exchange with
-      void swap( expected<T>& rhs );
+      void swap( expected<T>& rhs ) noexcept;
 
       /// \brief Emplaces a value into this expected.
       ///
