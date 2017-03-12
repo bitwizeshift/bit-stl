@@ -1,13 +1,15 @@
 /**
  * \file indirect_ptr.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains a pointer used for multiple levels of
+ *        indirection
  *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
+ * \note This is an internal header file, included by other library headers.
+ *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_STL_INTERNAL_MEMORY_INDIRECT_PTR_HPP
-#define BIT_STL_INTERNAL_MEMORY_INDIRECT_PTR_HPP
+#ifndef BIT_STL_DETAIL_MEMORY_INDIRECT_PTR_HPP
+#define BIT_STL_DETAIL_MEMORY_INDIRECT_PTR_HPP
 
 namespace bit {
   namespace stl {
@@ -16,7 +18,7 @@ namespace bit {
     /// \brief An indirect pointer wherein dereferences provide the value
     ///        pointed at by the given pointer
     ///
-    ///
+    /// \tparam T the underlying pointer type
     //////////////////////////////////////////////////////////////////////////
     template<typename T>
     class indirect_ptr
@@ -150,190 +152,9 @@ namespace bit {
     template<typename T>
     bool operator>=( const indirect_ptr<T>& lhs, const indirect_ptr<T>& rhs ) noexcept;
 
-    //------------------------------------------------------------------------
-    // Constructor
-    //------------------------------------------------------------------------
-
-    template<typename T>
-    inline constexpr indirect_ptr<T>::indirect_ptr()
-      noexcept
-      : m_ptr(nullptr)
-    {
-
-    }
-
-    template<typename T>
-    inline constexpr indirect_ptr<T>::indirect_ptr( T* ptr )
-      noexcept
-      : m_ptr(ptr)
-    {
-
-    }
-
-    //------------------------------------------------------------------------
-    // Modifiers
-    //------------------------------------------------------------------------
-
-    template<typename T>
-    inline constexpr void indirect_ptr<T>::swap( indirect_ptr<T>& rhs )
-      noexcept
-    {
-      using std::swap;
-      swap(m_ptr,rhs.m_ptr);
-    }
-
-    //------------------------------------------------------------------------
-    // Observers
-    //------------------------------------------------------------------------
-
-    template<typename T>
-    inline constexpr typename indirect_ptr<T>::element_type*
-      indirect_ptr<T>::get()
-      const noexcept
-    {
-      return m_ptr;
-    }
-
-    template<typename T>
-    inline constexpr typename indirect_ptr<T>::element_type&
-      indirect_ptr<T>::operator*()
-      const noexcept
-    {
-      return dereference(m_ptr);
-    }
-
-    template<typename T>
-    inline constexpr typename indirect_ptr<T>::element_type*
-      indirect_ptr<T>::operator->()
-      const noexcept
-    {
-      return std::addressof(dereference(m_ptr));
-    }
-
-    template<typename T>
-    inline constexpr typename indirect_ptr<T>::element_type&
-      indirect_ptr<T>::operator[]( std::ptrdiff_t n )
-      const noexcept
-    {
-      return m_ptr[n];
-    }
-
-    template<typename T>
-    inline constexpr indirect_ptr<T>::operator bool()
-      const noexcept
-    {
-      return static_cast<bool>(m_ptr);
-    }
-
-    //------------------------------------------------------------------------
-    // Mutators
-    //------------------------------------------------------------------------
-
-    template<typename T>
-    inline constexpr void swap( indirect_ptr<T>& lhs, indirect_ptr<T>& rhs )
-      noexcept
-    {
-      lhs.swap(rhs);
-    }
-
-    //------------------------------------------------------------------------
-    // Observers
-    //------------------------------------------------------------------------
-
-    template<typename T>
-    inline constexpr indirect_ptr<T>& indirect_ptr<T>::operator+=( std::ptrdiff_t n )
-      noexcept
-    {
-      m_ptr += n;
-      return (*this);
-    }
-
-    template<typename T>
-    inline constexpr indirect_ptr<T>& indirect_ptr<T>::operator-=( std::ptrdiff_t n )
-      noexcept
-    {
-      m_ptr -= n;
-      return (*this);
-    }
-
-    template<typename T>
-    inline constexpr indirect_ptr<T>& indirect_ptr<T>::operator++()
-      noexcept
-    {
-      ++m_ptr;
-      return (*this);
-    }
-
-    template<typename T>
-    inline constexpr indirect_ptr<T> indirect_ptr<T>::operator++(int)
-      noexcept
-    {
-      return indirect_ptr<T>(m_ptr++);
-    }
-
-    template<typename T>
-    inline constexpr indirect_ptr<T>& indirect_ptr<T>::operator--()
-      noexcept
-    {
-      --m_ptr;
-      return (*this);
-    }
-
-    template<typename T>
-    inline constexpr indirect_ptr<T> indirect_ptr<T>::operator--(int)
-      noexcept
-    {
-      return indirect_ptr<T>(m_ptr--);
-    }
-
-    //------------------------------------------------------------------------
-    // Equality
-    //------------------------------------------------------------------------
-
-    template<typename T>
-    inline bool operator==( const indirect_ptr<T>& lhs, const indirect_ptr<T>& rhs )
-      noexcept
-    {
-      return lhs.get() == rhs.get();
-    }
-
-    template<typename T>
-    bool operator!=( const indirect_ptr<T>& lhs, const indirect_ptr<T>& rhs )
-      noexcept
-    {
-      return lhs.get() != rhs.get();
-    }
-
-    template<typename T>
-    bool operator< ( const indirect_ptr<T>& lhs, const indirect_ptr<T>& rhs )
-      noexcept
-    {
-      return lhs.get() < rhs.get();
-    }
-
-    template<typename T>
-    bool operator<=( const indirect_ptr<T>& lhs, const indirect_ptr<T>& rhs )
-      noexcept
-    {
-      return lhs.get() <= rhs.get();
-    }
-
-    template<typename T>
-    bool operator> ( const indirect_ptr<T>& lhs, const indirect_ptr<T>& rhs )
-      noexcept
-    {
-      return lhs.get() > rhs.get();
-    }
-
-    template<typename T>
-    bool operator>=( const indirect_ptr<T>& lhs, const indirect_ptr<T>& rhs )
-      noexcept
-    {
-      return lhs.get() >= rhs.get();
-    }
-
-
   } // inline namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_INTERNAL_MEMORY_INDIRECT_PTR_HPP */
+#include "indirect_ptr.inl"
+
+#endif /* BIT_STL_DETAIL_MEMORY_INDIRECT_PTR_HPP */
