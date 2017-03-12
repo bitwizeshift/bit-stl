@@ -7,8 +7,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_INTERNAL_TYPE_COMPOSITE_HPP
-#define BIT_STL_INTERNAL_TYPE_COMPOSITE_HPP
+#ifndef BIT_STL_DETAIL_TYPE_TRAITS_TYPE_COMPOSITE_HPP
+#define BIT_STL_DETAIL_TYPE_TRAITS_TYPE_COMPOSITE_HPP
 
 #if defined(__GNUC__) && (__GNUC__ >= 4)
 #  pragma GCC system_header
@@ -17,8 +17,6 @@
 namespace bit {
   namespace stl {
 
-    /// \struct bit::sfinae_base
-    ///
     /// \brief Base class for sfinae types
     struct sfinae_base
     {
@@ -136,19 +134,21 @@ namespace bit {
 
     /// \brief Type trait to determine whether a type is the same with a different
     ///        CV qualifier
-    template<typename Qualified, typename Unqualified>
-    using is_same_remove_cv = std::is_same<std::remove_cv_t<Qualified>,std::remove_cv_t<Unqualified>>;
+    template<typename T, typename U>
+    using is_same_remove_cv = std::is_same<std::remove_cv_t<T>,std::remove_cv_t<U>>;
 
-    template<typename Qualified, typename Unqualified>
-    constexpr bool is_same_remove_cv_v = is_same_remove_cv<Qualified,Unqualified>::value;
+    template<typename T, typename U>
+    constexpr bool is_same_remove_cv_v = is_same_remove_cv<T,U>::value;
 
     //---------------------------------------------------------------------------
 
-    template<typename Qualified, typename Unqualified>
-    using is_same_decay = std::is_same<std::decay_t<Qualified>,std::decay_t<Unqualified>>;
+    /// \brief Type trait to determine whether a type is the same with a different
+    ///        decay type
+    template<typename T, typename U>
+    using is_same_decay = std::is_same<std::decay_t<T>,std::decay_t<U>>;
 
-    template<typename Qualified, typename Unqualified>
-    constexpr bool is_same_decay_v = is_same_decay<Qualified,Unqualified>::value;
+    template<typename T, typename U>
+    constexpr bool is_same_decay_v = is_same_decay<T,U>::value;
 
     //---------------------------------------------------------------------------
 
@@ -337,12 +337,41 @@ namespace bit {
     template<typename T, T t1, T t2>
     using type_le = bool_constant<(t1 <= t2)>;
 
-    template<typename...Clauses>
-    struct enable_if_c : std::enable_if<conjunction<Clauses...>::value>{};
+    //---------------------------------------------------------------------------
 
+    /// \brief Type trait to sfinae-disable an overload when a condition is \c true
+    ///
+    /// \tparam B the boolean instance
+    template<bool B, typename T = void>
+    struct disable_if : std::enable_if<!B,T>{};
+
+    /// \brief Convenience alias to access the \c ::type member of
+    ///        \c disable_if_t
+    template<bool B, typename T = void>
+    using disable_if_t = typename disable_if<B,T>::type;
+
+    /// \brief Convenience alias to determine multiple boolean
+    ///        clauses at one for a \c disable_if
+    template<typename...Clauses>
+    using disable_if_c = disable_if<conjunction<Clauses...>::value>;
+
+    /// \brief Convenience alias to retrieve the \c ::type member of
+    ///        \c disable_if_c
+    template<typename...Clauses>
+    using disable_if_c_t = typename disable_if_c<Clauses...>::type;
+
+    //---------------------------------------------------------------------------
+
+    /// \brief Convenience alias to determine multiple boolean
+    ///        clauses at one for a \c enable_if
+    template<typename...Clauses>
+    using enable_if_c = std::enable_if<conjunction<Clauses...>::value>;
+
+    /// \brief Convenience alias to retrieve the \c ::type member of
+    ///        \c enable_if_c
     template<typename...Clauses>
     using enable_if_c_t = typename enable_if_c<Clauses...>::type;
 
   } // namespace stl
 } // namespace bit
-#endif /* BIT_STL_INTERNAL_TYPE_COMPOSITE_HPP */
+#endif /* BIT_STL_DETAIL_TYPE_TRAITS_TYPE_COMPOSITE_HPP */

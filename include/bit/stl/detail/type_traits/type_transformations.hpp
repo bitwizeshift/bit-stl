@@ -1,13 +1,13 @@
 /**
- * \file bit/core/internal/type_transformations.hpp
+ * \file type_transformations.hpp
  *
  * \brief This internal header provides transformations for types.
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_INTERNAL_TYPE_TRANSFORMATIONS_HPP
-#define BIT_INTERNAL_TYPE_TRANSFORMATIONS_HPP
+#ifndef BIT_STL_DETAIL_TYPE_TRAITS_TYPE_TRANSFORMATIONS_HPP
+#define BIT_STL_DETAIL_TYPE_TRAITS_TYPE_TRANSFORMATIONS_HPP
 
 // Prevent warnings for __int128 when using -wpedantic from being warned
 #if defined(__GNUC__) && (__GNUC__ >= 4)
@@ -368,4 +368,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_INTERNAL_TYPE_TRANSFORMATIONS_HPP */
+#endif /* BIT_STL_DETAIL_TYPE_TRAITS_TYPE_TRANSFORMATIONS_HPP */

@@ -19,10 +19,10 @@
 // std:: libraries
 #include <type_traits>
 
-#include "internal/traits/type_composite.hpp"
-#include "internal/traits/type_function.hpp"
-#include "internal/traits/type_container.hpp"
-#include "internal/traits/type_transformations.hpp"
-#include "internal/traits/type_relationships.hpp"
+#include "detail/type_traits/type_composite.hpp"
+#include "detail/type_traits/type_function.hpp"
+#include "detail/type_traits/type_container.hpp"
+#include "detail/type_traits/type_transformations.hpp"
+#include "detail/type_traits/type_relationships.hpp"
 
 #endif /* BIT_STL_TYPE_TRAITS_HPP */

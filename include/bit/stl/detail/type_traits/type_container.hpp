@@ -6,8 +6,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_INTERNAL_TRAITS_TYPE_CONTAINER_HPP
-#define BIT_STL_INTERNAL_TRAITS_TYPE_CONTAINER_HPP
+#ifndef BIT_STL_DETAIL_TYPE_TRAITS_TYPE_CONTAINER_HPP
+#define BIT_STL_DETAIL_TYPE_TRAITS_TYPE_CONTAINER_HPP
 
 #if defined(__GNUC__) && (__GNUC__ >= 4)
 #  pragma GCC system_header
@@ -555,4 +555,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_INTERNAL_TRAITS_TYPE_CONTAINER_HPP */
+#endif /* BIT_STL_DETAIL_TYPE_TRAITS_TYPE_CONTAINER_HPP */
