@@ -745,6 +745,31 @@ namespace bit {
     bool operator == ( const basic_string_view<CharT,Traits>& lhs,
                        const basic_string_view<CharT,Traits>& rhs ) noexcept;
 
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator == ( const basic_string_view<CharT,Traits>& lhs,
+                       CharT (&rhs)[N] ) noexcept;
+
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator == ( CharT (&lhs)[N],
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator == ( basic_string_view<CharT,Traits> lhs,
+                       const CharT* rhs )  noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator == ( const CharT* lhs,
+                       const basic_string_view<CharT,Traits>& rhs )  noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator == ( const std::basic_string<CharT,Traits,Allocator>& lhs,
+                       const basic_string_view<CharT,Traits>& rhs )  noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator == ( const basic_string_view<CharT,Traits>& lhs,
+                       const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
+
+    //----------------------------------------------------------------------------
 
     /// \brief Compares inequality between the two basic_string_views
     ///
@@ -754,6 +779,33 @@ namespace bit {
     template<typename CharT, typename Traits>
     bool operator != ( const basic_string_view<CharT,Traits>& lhs,
                        const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator != ( const basic_string_view<CharT,Traits>& lhs,
+                       CharT (&rhs)[N] ) noexcept;
+
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator != ( CharT (&lhs)[N],
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator != ( const basic_string_view<CharT,Traits>& lhs,
+                       const CharT* rhs ) noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator != ( const CharT* lhs,
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator != ( const std::basic_string<CharT,Traits,Allocator>& lhs,
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator != ( const basic_string_view<CharT,Traits>& lhs,
+                       const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
+
+    //----------------------------------------------------------------------------
 
     /// \brief Checks if the left string is less than the right substring
     ///
@@ -765,6 +817,36 @@ namespace bit {
     bool operator < ( const basic_string_view<CharT,Traits>& lhs,
                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
 
+    template<typename CharT, typename Traits>
+    bool operator < ( const basic_string_view<CharT,Traits>& lhs,
+                      const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator < ( const basic_string_view<CharT,Traits>& lhs,
+                      CharT (&rhs)[N] ) noexcept;
+
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator < ( CharT (&lhs)[N],
+                      const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator < ( const basic_string_view<CharT,Traits>& lhs,
+                      const CharT* rhs )  noexcept;
+
+    template<typename CharT, typename Traits>
+    bool  operator < ( const CharT* lhs,
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator < ( const std::basic_string<CharT,Traits,Allocator>& lhs,
+                      const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator < ( const basic_string_view<CharT,Traits>& lhs,
+                      const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
+
+    //----------------------------------------------------------------------------
+
     ///
     /// \param lhs
     /// \param rhs
@@ -772,6 +854,36 @@ namespace bit {
     template<typename CharT, typename Traits>
     bool operator > ( const basic_string_view<CharT,Traits>& lhs,
                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator > ( const basic_string_view<CharT,Traits>& lhs,
+                      const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator > ( const basic_string_view<CharT,Traits>& lhs,
+                      CharT (&rhs)[N] ) noexcept;
+
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator > ( CharT (&lhs)[N],
+                      const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator > ( const basic_string_view<CharT,Traits>& lhs,
+                      const CharT* rhs ) noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator > ( const CharT* lhs,
+                      const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator > ( const std::basic_string<CharT,Traits,Allocator>& lhs,
+                      const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator > ( const basic_string_view<CharT,Traits>& lhs,
+                      const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
+
+    //----------------------------------------------------------------------------
 
     ///
     /// \param lhs
@@ -781,6 +893,36 @@ namespace bit {
     bool operator <= ( const basic_string_view<CharT,Traits>& lhs,
                        const basic_string_view<CharT,Traits>& rhs ) noexcept;
 
+    template<typename CharT, typename Traits>
+    bool operator <= ( const basic_string_view<CharT,Traits>& lhs,
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator <= ( const basic_string_view<CharT,Traits>& lhs,
+                       CharT (&rhs)[N] ) noexcept;
+
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator <= ( CharT (&lhs)[N],
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator <= ( const basic_string_view<CharT,Traits>& lhs,
+                       const CharT* rhs ) noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator <= ( const CharT* lhs,
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator <= ( const std::basic_string<CharT,Traits,Allocator>& lhs,
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator <= ( const basic_string_view<CharT,Traits>& lhs,
+                       const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
+
+    //----------------------------------------------------------------------------
+
     ///
     /// \param lhs
     /// \param rhs
@@ -789,6 +931,37 @@ namespace bit {
     bool operator >= ( const basic_string_view<CharT,Traits>& lhs,
                        const basic_string_view<CharT,Traits>& rhs ) noexcept;
 
+    template<typename CharT, typename Traits>
+    bool operator >= ( const basic_string_view<CharT,Traits>& lhs,
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator >= ( const basic_string_view<CharT,Traits>& lhs,
+                       CharT (&rhs)[N] ) noexcept;
+
+    template<typename CharT, typename Traits, std::size_t N>
+    bool operator >= ( CharT (&lhs)[N],
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator >= ( const basic_string_view<CharT,Traits>& lhs,
+                       const CharT* rhs ) noexcept;
+
+    template<typename CharT, typename Traits>
+    bool operator >= ( const CharT* lhs,
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator >= ( const std::basic_string<CharT,Traits,Allocator>& lhs,
+                       const basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    template<typename CharT, typename Traits, typename Allocator>
+    bool operator >= ( const basic_string_view<CharT,Traits>& lhs,
+                       const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
+
+    //----------------------------------------------------------------------------
+    // String Concatenation
+    //----------------------------------------------------------------------------
 
     template<typename CharT, typename Traits, typename Allocator>
     std::basic_string<CharT,Traits,Allocator> operator + ( const std::basic_string<CharT,Traits,Allocator>& lhs,
