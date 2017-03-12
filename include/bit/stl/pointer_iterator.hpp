@@ -1,7 +1,9 @@
 /**
  * \file pointer_iterator.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains a type used for creating unique iterators out
+ *        of pointers. This allows for iterators that are incompatible to
+ *        pointers, but are as lightweight as a normal ponter.
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -9,10 +11,9 @@
 #ifndef BIT_STL_POINTER_ITERATOR_HPP
 #define BIT_STL_POINTER_ITERATOR_HPP
 
-#include <memory>
+#include <memory> // std::pointer_traits
 
 namespace bit {
-
   namespace stl {
 
     //////////////////////////////////////////////////////////////////////////
