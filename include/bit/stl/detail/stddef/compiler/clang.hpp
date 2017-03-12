@@ -5,8 +5,8 @@
  *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_STL_INTERNAL_CONFIG_COMPILER_CLANG_HPP
-#define BIT_STL_INTERNAL_CONFIG_COMPILER_CLANG_HPP
+#ifndef BIT_STL_DETAIL_STDDEF_COMPILER_CLANG_HPP
+#define BIT_STL_DETAIL_STDDEF_COMPILER_CLANG_HPP
 
 //-----------------------------------------------------------------------------
 // Compiler Detection
@@ -201,4 +201,4 @@
 #define BIT_COMPILER_SYMBOL_VISIBLE __attribute__((visibility("default")))
 #define BIT_COMPILER_SYMBOL_LOCAL   __attribute__((visibility("hidden")))
 
-#endif /* BIT_STL_INTERNAL_CONFIG_COMPILER_CLANG_HPP */
+#endif /* BIT_STL_DETAIL_STDDEF_COMPILER_CLANG_HPP */

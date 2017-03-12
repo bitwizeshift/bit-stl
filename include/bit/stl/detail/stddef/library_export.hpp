@@ -6,8 +6,8 @@
  *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_STL_INTERNAL_CONFIG_LIBRARY_EXPORT_HPP
-#define BIT_STL_INTERNAL_CONFIG_LIBRARY_EXPORT_HPP
+#ifndef BIT_STL_DETAIL_STDDEF_LIBRARY_EXPORT_HPP
+#define BIT_STL_DETAIL_STDDEF_LIBRARY_EXPORT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -130,4 +130,4 @@
 # define BIT_EXPORT( type, name, args ) BIT_EXPORT_A(type, name, args, BIT_EMPTY )
 #endif
 
-#endif /* BIT_STL_INTERNAL_CONFIG_LIBRARY_EXPORT_HPP */
+#endif /* BIT_STL_DETAIL_STDDEF_LIBRARY_EXPORT_HPP */

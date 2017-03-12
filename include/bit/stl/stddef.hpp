@@ -17,12 +17,95 @@
 // std libraries
 #include <cstdlib>
 
-// bit::stl internal configuration library
-#include "internal/config.hpp"
-#include "internal/types/integral_types.hpp"
-#include "internal/types/char_types.hpp"
-#include "internal/types/float_types.hpp"
-#include "internal/types/byte.hpp"
+
+//! \def BIT_DEBUG
+//! \brief Debug build
+//!
+//! \def BIT_UNIT_TEST
+//! \brief Unit Test Build
+#if !defined(BIT_DEBUG) && (defined(DEBUG) || defined(_DEBUG))
+#  define BIT_DEBUG     1
+#endif
+
+#if !defined(BIT_UNIT_TEST) && (defined(UNIT_TEST) || defined(_UNIT_TEST))
+#  define BIT_UNIT_TEST 1
+#endif
+
+//! \def BIT_NOOP()
+//! \brief Macro function indicating no operation will occur
+#ifndef BIT_NOOP
+# define BIT_NOOP() ((void)0)
+#endif
+
+//! \def BIT_UNUSED
+//!
+//! \brief Explicitly marks a variable \p var as being unused within a given function.
+//!
+//! This is used to silence compiler warnings
+//!
+//! \param var the variable to explicitly mark as unused
+#define BIT_UNUSED(var) do { (void)(var); } while (0)
+
+// bit::stl types
+#include "detail/stddef/types/integral_types.hpp"
+#include "detail/stddef/types/char_types.hpp"
+#include "detail/stddef/types/float_types.hpp"
+#include "detail/stddef/types/byte.hpp"
+
+// bit::stl
+#include "detail/stddef/macros.hpp"
+#include "detail/stddef/platform.hpp"
+#include "detail/stddef/compiler.hpp"
+#include "detail/stddef/compiler_traits.hpp"
+#include "detail/stddef/library_export.hpp"
+#include "detail/stddef/breakpoint.hpp"
+#include "detail/stddef/protect_functions.hpp"
+
+//! \def BIT_STL_DEFINE_ENUM_BITWISE_OPERATORS( Type )
+//!
+//! \brief Defines all bitwise operators globally so that enums of type \a Type
+//!        can be used as flags without violating restrictions of enums
+#define BIT_STL_DEFINE_ENUM_BITWISE_OPERATORS( Type ) \
+  inline Type  operator|  ( Type  lhs, Type rhs ) { return Type( int( lhs ) | int( rhs ) ); } \
+  inline Type  operator&  ( Type  lhs, Type rhs ) { return Type( int( lhs ) & int( rhs ) ); } \
+  inline Type  operator^  ( Type  lhs, Type rhs ) { return Type( int( lhs ) ^ int( rhs ) ); } \
+  inline Type  operator<< ( Type  lhs, int  rhs ) { return Type( int( lhs ) << rhs ); } \
+  inline Type  operator>> ( Type  lhs, int  rhs ) { return Type( int( lhs ) >> rhs ); } \
+  inline Type& operator|= ( Type& lhs, Type rhs ) { return lhs = lhs |  rhs; } \
+  inline Type& operator&= ( Type& lhs, Type rhs ) { return lhs = lhs &  rhs; } \
+  inline Type& operator^= ( Type& lhs, Type rhs ) { return lhs = lhs ^  rhs; } \
+  inline Type& operator<<=( Type& lhs, int  rhs ) { return lhs = lhs << rhs; } \
+  inline Type& operator>>=( Type& lhs, int  rhs ) { return lhs = lhs >> rhs; } \
+  inline Type  operator~  ( Type  lhs )           { return Type( ~int( lhs ) ); }
+
+//! \def BIT_STL_DEFINE_ENUM_ARITHMETIC_OPERATORS( Type )
+//!
+//! \brief Defines all bitwise operators globally so that enums of type \a Type
+//!        can be used as flags without violating restrictions of enums
+#define BIT_STL_DEFINE_ENUM_ARITHMETIC_OPERATORS( Type ) \
+  inline Type  operator+ ( Type  lhs, Type rhs ) { return Type( int( lhs ) + int( rhs ) ); } \
+  inline Type  operator- ( Type  lhs, Type rhs ) { return Type( int( lhs ) - int( rhs ) ); } \
+  inline Type  operator* ( Type  lhs, Type rhs ) { return Type( int( lhs ) * int( rhs ) ); } \
+  inline Type  operator/ ( Type  lhs, Type rhs ) { return Type( int( lhs ) / int( rhs ) ); } \
+  inline Type  operator% ( Type  lhs, Type rhs ) { return Type( int( lhs ) % int( rhs ) ); } \
+  inline Type& operator+=( Type& lhs, Type rhs ) { return lhs = lhs + rhs;   } \
+  inline Type& operator-=( Type& lhs, Type rhs ) { return lhs = lhs - rhs;   } \
+  inline Type& operator*=( Type& lhs, Type rhs ) { return lhs = lhs * rhs;   } \
+  inline Type& operator/=( Type& lhs, Type rhs ) { return lhs = lhs / rhs;   } \
+  inline Type& operator%=( Type& lhs, Type rhs ) { return lhs = lhs % rhs;   } \
+  inline Type  operator+ ( Type  lhs )           { return lhs;               } \
+  inline Type  operator- ( Type  lhs )           { return Type(- int(lhs) ); }
+
+//! \def BIT_STL_DEFINE_ENUM_INCREMENT_OPERATORS( Type )
+//!
+//! \brief Defines all bitwise operators globally so that enums of type \a Type
+//!        can easily be incremented and decremented while still being enums
+#define BIT_STL_DEFINE_ENUM_INCREMENT_OPERATORS( Type ) \
+  inline Type &operator++( Type &a      ) { return a = Type( int( a ) + 1 ); } \
+  inline Type &operator--( Type &a      ) { return a = Type( int( a ) - 1 ); } \
+  inline Type  operator++( Type &a, int ) { Type t = a; ++a; return t; } \
+  inline Type  operator--( Type &a, int ) { Type t = a; --a; return t; }
+
 
 namespace bit {
   namespace stl {
@@ -37,6 +120,52 @@ namespace bit {
     /// \brief An alias for rvalue-references to an array of N entries
     template<typename T, std::size_t N>
     using array_rref_t = T (&&)[N];
+
+    namespace detail {
+
+      template<typename Fn>
+      struct function_t;
+
+      template<typename R, typename...Args>
+      struct function_t<R(Args...)> {
+        using type = R(*)(Args...);
+      };
+
+      //----------------------------------------------------------------------
+
+      template<typename T, typename Fn>
+      struct member_function_t;
+
+      template<typename T, typename R, typename...Args>
+      struct member_function_t<T,R(Args...)> {
+        using type = R(T::*)(Args...);
+      };
+
+      template<typename T, typename R, typename...Args>
+      struct member_function_t<const T,R(Args...)> {
+        using type = R(T::*)(Args...) const;
+      };
+
+      template<typename T, typename R, typename...Args>
+      struct member_function_t<volatile T,R(Args...)> {
+        using type = R(T::*)(Args...) volatile;
+      };
+
+      template<typename T, typename R, typename...Args>
+      struct member_function_t<const volatile T,R(Args...)> {
+        using type = R(T::*)(Args...) const volatile;
+      };
+
+    } // namespace detail
+
+    /// \brief A type alias for member function pointers to make it more
+    ///        readable.
+    template<typename T, typename Fn>
+    using member_function_t = typename detail::member_function_t<T,Fn>::type;
+
+    /// \brief A type alias for function pointers to make it more readable
+    template<typename Fn>
+    using function_t = typename detail::function_t<Fn>::type;
 
     //--------------------------------------------------------------------------
     // System-Specific Lexical Types
@@ -55,9 +184,10 @@ namespace bit {
 
     //--------------------------------------------------------------------------
 
-    using size_t  = std::size_t; ///< Type representing size of objects
-    using align_t = std::size_t; ///< Type representing alignment of an object
-    using index_t = std::size_t; ///< Type representing index of objects
+    using size_t  = std::size_t;    ///< Type representing size of objects
+    using align_t = std::size_t;    ///< Type representing alignment of an object
+    using index_t = std::ptrdiff_t; ///< Type representing index of objects
+    using hash_t  = std::size_t;    ///< Type used for hashes
 
     //------------------------------------------------------------------------
     // Tag-Based Dispatching
@@ -72,11 +202,11 @@ namespace bit {
     /// known string sizes from pointers at compile time -- but can be
     /// extended to any generic form of array/pointer
     //////////////////////////////////////////////////////////////////////////
-    template<typename T>
+    template<typename CharT>
     struct const_type_wrapper final
     {
-      constexpr const_type_wrapper( const T* ptr ) : ptr(ptr){}
-      const T* ptr;
+      constexpr const_type_wrapper( const CharT* ptr ) : ptr(ptr){}
+      const CharT* ptr;
     };
 
     using const_char_wrapper   = const_type_wrapper<char>;     /// For ansi strings
@@ -85,66 +215,25 @@ namespace bit {
     using const_char32_wrapper = const_type_wrapper<char32_t>; /// For UTF32 strings
     using const_tchar_wrapper  = const_type_wrapper<tchar>;    /// For specified string types
 
-    /// \struct bit::ctor_do_not_initialize
-    ///
-    /// \brief Constructor tag used to disable ctor value initialization
-    struct ctor_do_not_initialize_tag{};
-
-    /// \struct bit::ctor_zero_out
-    ///
     /// \brief Constructor tag used to zero out the entire class
     struct ctor_zero_out_tag{};
 
-    /// \struct bit::ctor_do_not_convert_tag
-    ///
     /// \brief Constructor tag used to disable automatic internal conversion
     struct ctor_do_not_convert_tag{};
 
-    /// \struct bit::ctor_va_args
-    ///
     /// \brief Constructor tag used as a placeholder to not conflict with
     ///        variadic constructors
     struct ctor_va_args_tag{};
 
-    /// \struct bit::aligned_tag
-    ///
-    /// \brief Tag used for tag-based dispatching to correctly call aligned
-    ///        operator new and delete
-    struct aligned_tag{};
-
-    /// \struct bit::offset_tag
-    ///
-    /// \brief Tag used for tag-based dispatching to correctly call offset
-    ///        operator new and delete
-    struct offset_tag{};
-
-    /// \struct bit::aligned_offset_tag
-    ///
-    /// \brief Tag used for tag-base dispatching to correctly call aligned/offset
-    ///        operator new and delete
-    struct aligned_offset_tag : aligned_tag, offset_tag{};
-
     //--------------------------------------------------------------------------
     // Predefined Tags
     //--------------------------------------------------------------------------
-
-    /// Predefined constant for disabling initialization
-    constexpr ctor_do_not_initialize_tag ctor_dni = {};
 
     /// Predefined constant for zeroing out a constructor
     constexpr ctor_zero_out_tag ctor_zero_out = {};
 
     /// Predefined constant for disabling internal conversion
     constexpr ctor_do_not_convert_tag ctor_dnc = {};
-
-    /// Predefined constant for aligned tag
-    constexpr aligned_tag aligned = {};
-
-    /// Predefined constant for offset tag
-    constexpr offset_tag  offset = {};
-
-    /// Predefined constant for aligned offset tag
-    constexpr aligned_offset_tag aligned_offset = {};
 
 //! \}
   } // namespace stl

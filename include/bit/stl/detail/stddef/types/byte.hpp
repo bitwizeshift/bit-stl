@@ -8,8 +8,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_INTERNAL_BYTE_HPP
-#define BIT_STL_INTERNAL_BYTE_HPP
+#ifndef BIT_STL_DETAIL_STDDEF_TYPES_BYTE_HPP
+#define BIT_STL_DETAIL_STDDEF_TYPES_BYTE_HPP
 
 #include <type_traits>
 
@@ -111,4 +111,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_INTERNAL_BYTE_HPP */
+#endif /* BIT_STL_DETAIL_STDDEF_TYPES_BYTE_HPP */

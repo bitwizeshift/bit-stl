@@ -3,8 +3,8 @@
  *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_STL_INTERNAL_CONFIG_COMPILER_TRAITS_HPP
-#define BIT_STL_INTERNAL_CONFIG_COMPILER_TRAITS_HPP
+#ifndef BIT_STL_DETAIL_STDDEF_COMPILER_TRAITS_HPP
+#define BIT_STL_DETAIL_STDDEF_COMPILER_TRAITS_HPP
 
 //-----------------------------------------------------------------------------
 // Clang detection mechanisms
@@ -499,4 +499,4 @@
 #endif
 
 
-#endif /* BIT_STL_INTERNAL_CONFIG_COMPILER_TRAITS_HPP */
+#endif /* BIT_STL_DETAIL_STDDEF_COMPILER_TRAITS_HPP */

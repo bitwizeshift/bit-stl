@@ -5,22 +5,11 @@
  *       Do not attempt to use it directly.
  */
 
-/*
- * Symbols Defined:
- *
- * BIT_SINGLE_PRECISION : Defined if BIT_DOUBLE_PRECISION and
- *                         BIT_SINGLE_PRECISION are not defined.
- */
-#ifndef BIT_STL_INTERNAL_FLOAT_TYPES_HPP
-#define BIT_STL_INTERNAL_FLOAT_TYPES_HPP
-
-#include <utility> // for std::move
+#ifndef BIT_STL_DETAIL_STDDEF_TYPES_FLOAT_TYPES_HPP
+#define BIT_STL_DETAIL_STDDEF_TYPES_FLOAT_TYPES_HPP
 
 namespace bit {
   namespace stl {
-
-//! \addtogroup bit
-//! \{
 
     //------------------------------------------------------------------------
     // Floating point types
@@ -36,15 +25,6 @@ namespace bit {
     using f32   = float;       ///< 32-bit floating point (single precision)
     using f64   = double;      ///< 64-bit floating point (double precision)
     using highp = long double; ///< High-precision floating point
-
-#if defined(BIT_DOUBLE_PRECISION)
-    using precision = f64; ///< Precision type
-#else
-# ifndef BIT_SINGLE_PRECISION
-#   define BIT_SINGLE_PRECISION // defined for consistency
-# endif
-    using precision = f32; ///< Precision type
-#endif
 
     //////////////////////////////////////////////////////////////////////////
     /// \brief A type used for clamping floating-point values to values
@@ -68,9 +48,9 @@ namespace bit {
 
       }
 
-      constexpr clamp( const T& other ) : m_value(other){};
+      constexpr clamp( const T& other ) noexcept : m_value(other){};
 
-      constexpr clamp( T&& other ) : m_value(std::move(other)){};
+      constexpr clamp( T&& other ) noexcept = default;
 
       /// \brief Converts this value to the underlying clamp type
       constexpr operator T()
@@ -84,8 +64,7 @@ namespace bit {
       T m_value;
     };
 
-//! \}
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_INTERNAL_FLOAT_TYPES_HPP */
+#endif /* BIT_STL_DETAIL_STDDEF_TYPES_FLOAT_TYPES_HPP */

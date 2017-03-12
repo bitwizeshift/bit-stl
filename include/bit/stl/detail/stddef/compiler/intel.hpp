@@ -6,8 +6,8 @@
  *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_STL_INTERNAL_CONFIG_COMPILER_INTEL_HPP
-#define BIT_STL_INTERNAL_CONFIG_COMPILER_INTEL_HPP
+#ifndef BIT_STL_DETAIL_STDDEF_COMPILER_INTEL_HPP
+#define BIT_STL_DETAIL_STDDEF_COMPILER_INTEL_HPP
 
 //-----------------------------------------------------------------------------
 // Compiler Detection
@@ -247,4 +247,4 @@
 # define BIT_COMPILER_SYMBOL_LOCAL
 #endif
 
-#endif /* BIT_STL_INTERNAL_CONFIG_COMPILER_INTEL_HPP */
+#endif /* BIT_STL_DETAIL_STDDEF_COMPILER_INTEL_HPP */
