@@ -12,15 +12,13 @@
 
 // local bit libraries
 #include "type_traits.hpp"
+#include "pointer_iterator.hpp"
 #include "assert.hpp"
 
 #include <iterator>
 #include <limits>
 
-#include "pointer_iterator.hpp"
-
 namespace bit {
-
   namespace stl {
 
     // Private Type Traits
@@ -602,32 +600,23 @@ namespace bit {
     template<typename T>
     struct is_dynamic_span< span<T,dynamic_extent> > : std::true_type{};
 
-    namespace detail {
+    inline namespace casts {
 
+      /// \brief Casts an span viewing a non-const object into a byte view
+      ///
+      /// \param view the view to cast
+      /// \return the view as a stream of bytes
       template<typename T, std::ptrdiff_t Extent>
-      struct calculate_extent_as_bytes
-        : std::integral_constant<std::ptrdiff_t,Extent * sizeof(T)>{};
+      constexpr span<byte> byte_cast( const span<T,Extent>& view );
 
-      template<typename T>
-      struct calculate_extent_as_bytes<T,dynamic_extent>
-        : std::integral_constant<std::ptrdiff_t,dynamic_extent>{};
+      /// \brief Casts an span viewing a const object into a const byte view
+      ///
+      /// \param view the view to cast
+      /// \return the view as a stream of const bytes
+      template<typename T, std::ptrdiff_t Extent>
+      constexpr span<const byte> byte_cast( const span<const T,Extent>& view );
 
-    } // namespace detail
-
-    /// \brief Casts an span viewing a non-const object into a byte view
-    ///
-    /// \param view the view to cast
-    /// \return the view as a stream of bytes
-    template<typename T, std::ptrdiff_t Extent>
-    constexpr span<byte> byte_cast( const span<T,Extent>& view );
-
-    /// \brief Casts an span viewing a const object into a const byte view
-    ///
-    /// \param view the view to cast
-    /// \return the view as a stream of const bytes
-    template<typename T, std::ptrdiff_t Extent>
-    constexpr span<const byte> byte_cast( const span<const T,Extent>& view );
-
+    } // inline namespace casts
   } // namespace stl
 } // namespace bit
 
