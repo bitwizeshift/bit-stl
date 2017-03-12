@@ -14,7 +14,7 @@
 #endif
 
 #include <utility>
-#include "../../internal/invoke.hpp"
+#include "../invoke.hpp"
 
 namespace bit {
   namespace stl {

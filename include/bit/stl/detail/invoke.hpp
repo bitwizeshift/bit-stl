@@ -1,13 +1,14 @@
 /**
  * \file invoke.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This provides the definition for the standards meta-function INVOKE
  *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
+ * \note This is an internal header file, included by other library headers.
+ *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_STL_INTERNAL_INVOKE_HPP
-#define BIT_STL_INTERNAL_INVOKE_HPP
+#ifndef BIT_STL_DETAIL_INVOKE_HPP
+#define BIT_STL_DETAIL_INVOKE_HPP
 
 #include <type_traits> // for std::is_base_of
 #include <utility>     // for std::forward
@@ -101,4 +102,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_INTERNAL_INVOKE_HPP */
+#endif /* BIT_STL_DETAIL_INVOKE_HPP */
