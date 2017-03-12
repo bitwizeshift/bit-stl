@@ -24,6 +24,7 @@ namespace bit {
 
     class tribool;
 
+    /// The type used to mark an indeterminate tribool
     using indeterminate_t = bool(*)(const tribool&, detail::tribool_t);
 
     //////////////////////////////////////////////////////////////////////////
@@ -59,6 +60,8 @@ namespace bit {
       ///
       /// \param other the other tribool to move
       constexpr tribool( tribool&& other ) = default;
+
+      //----------------------------------------------------------------------
 
       /// \brief Copy-assigns a tribool
       ///
@@ -111,9 +114,9 @@ namespace bit {
       //----------------------------------------------------------------------
     private:
 
-      friend constexpr bool operator == ( const tribool&, const tribool& );
-      friend constexpr tribool operator && ( const tribool&, const tribool& );
-      friend constexpr tribool operator || ( const tribool&, const tribool& );
+      friend constexpr bool operator == ( const tribool&, const tribool& ) noexcept;
+      friend constexpr tribool operator && ( const tribool&, const tribool& ) noexcept;
+      friend constexpr tribool operator || ( const tribool&, const tribool& ) noexcept;
       friend constexpr bool indeterminate( const tribool&, detail::tribool_t ) noexcept;
     };
 
@@ -140,14 +143,26 @@ namespace bit {
     /// \param lhs the left entry
     /// \param rhs the right entry
     /// \return \c true if \p lhs has the same state as \p rhs
-    constexpr bool operator==( const tribool& lhs, const tribool& rhs );
+    constexpr bool operator==( const tribool& lhs, const tribool& rhs ) noexcept;
+
+    /// \copydoc operator==( const tribool&, const tribool& )
+    constexpr bool operator==( indeterminate_t, const tribool& rhs ) noexcept;
+
+    /// \copydoc operator==( const tribool&, const tribool& )
+    constexpr bool operator==( const tribool& lhs, indeterminate_t ) noexcept;
 
     /// \brief Equality comparison between two tribooleans
     ///
     /// \param lhs the left entry
     /// \param rhs the right entry
     /// \return \c true if \p lhs has the same state as \p rhs
-    constexpr bool operator!=( const tribool& lhs, const tribool& rhs );
+    constexpr bool operator!=( const tribool& lhs, const tribool& rhs ) noexcept;
+
+    /// \copydoc operator!=( const tribool&, const tribool& )
+    constexpr bool operator!=( indeterminate_t, const tribool& rhs ) noexcept;
+
+    /// \copydoc operator!=( const tribool&, const tribool& )
+    constexpr bool operator!=( const tribool& lhs, indeterminate_t ) noexcept;
 
   } // namespace stl
 } // namespace bit
