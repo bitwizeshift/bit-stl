@@ -9,12 +9,11 @@
 #ifndef BIT_STL_SET_VIEW_HPP
 #define BIT_STL_SET_VIEW_HPP
 
-#include "internal/associative_vtables.hpp"
+#include "detail/associative_vtables.hpp"
 
 #include <type_traits>
 
 namespace bit {
-
   namespace stl {
 
     //////////////////////////////////////////////////////////////////////////

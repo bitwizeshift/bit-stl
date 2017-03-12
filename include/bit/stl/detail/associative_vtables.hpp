@@ -1,13 +1,14 @@
 /**
  * \file associative_vtables.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains associative-type vtables used in set_view.hpp
+ *        and map_view.hpp
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_INTERNAL_ASSOCIATIVE_VTABLES_HPP
-#define BIT_STL_INTERNAL_ASSOCIATIVE_VTABLES_HPP
+#ifndef BIT_STL_DETAIL_ASSOCIATIVE_VTABLES_HPP
+#define BIT_STL_DETAIL_ASSOCIATIVE_VTABLES_HPP
 
 #include "../stddef.hpp"
 #include <memory>
@@ -153,4 +154,4 @@ namespace bit {
 
 
 
-#endif /* BIT_STL_INTERNAL_ASSOCIATIVE_VTABLES_HPP */
+#endif /* BIT_STL_DETAIL_ASSOCIATIVE_VTABLES_HPP */
