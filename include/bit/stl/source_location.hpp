@@ -98,62 +98,9 @@ namespace bit {
     //!        invoked
 #   define BIT_MAKE_SOURCE_LOCATION() ::bit::stl::source_location( __FILE__, __func__, __LINE__ )
 
-    //========================================================================
-    // Inline Definitions
-    //========================================================================
-
-    inline bool operator==( const source_location& lhs,
-                            const source_location& rhs )
-      noexcept
-    {
-      return lhs.file_name() == rhs.file_name() &&
-             lhs.function_name() == rhs.function_name() &&
-             lhs.line() == rhs.line();
-    }
-
-    inline bool operator!=( const source_location& lhs,
-                            const source_location& rhs )
-      noexcept
-    {
-      return !(lhs==rhs);
-    }
-
-    //------------------------------------------------------------------------
-    // Constructor
-    //------------------------------------------------------------------------
-
-    inline constexpr source_location::source_location( string_view file_name,
-                                                       string_view function_name,
-                                                       std::size_t line )
-      : m_file(file_name),
-        m_function(function_name),
-        m_line(line)
-    {
-
-    }
-
-    //------------------------------------------------------------------------
-    // Access
-    //------------------------------------------------------------------------
-
-    inline constexpr std::size_t source_location::line()
-      const noexcept
-    {
-      return m_line;
-    }
-
-    inline constexpr string_view source_location::function_name()
-      const noexcept
-    {
-      return m_function;
-    }
-
-    inline constexpr string_view source_location::file_name()
-      const noexcept
-    {
-      return m_file;
-    }
   } // namespace stl
 } // namespace bit
+
+#include "detail/source_location.inl"
 
 #endif /* BIT_STL_SOURCE_LOCATION_HPP */
