@@ -88,9 +88,16 @@ namespace bit {
 
     } // namespace detail
 
+    /// \brief type-trait to determine whether the type is a string_span
+    ///
+    /// The result is aliased as \c ::value
     template<typename T>
     using is_string_span = detail::is_string_span<std::remove_cv_t<T>>;
 
+    /// \brief type-trait to determine whether the type is a null-terminated
+    ///        string
+    ///
+    /// The result is aliased as \c ::value
     template<typename T>
     using is_zstring_span = detail::is_zstring_span<std::remove_cv_t<T>>;
 
@@ -113,8 +120,6 @@ namespace bit {
     /// \tparam CharT the type of character to wrap around
     /// \tparam Traits the type of traits to use
     /// \tparam Extent The maximum size of this string span (default: unbounded)
-    ///
-    /// \ingroup stl
     //////////////////////////////////////////////////////////////////////////
     template<
       typename CharT,
@@ -405,11 +410,11 @@ namespace bit {
     //////////////////////////////////////////////////////////////////////////
     /// \brief A light-weight non-owning wrapper around strings.
     ///
+    /// This is just a limited API of the basic_string_span
+    ///
     /// \tparam CharT the type of character to wrap around
     /// \tparam Traits the type of traits to use
     /// \tparam Extent The maximum size of this string span (default: unbounded)
-    ///
-    /// \ingroup stl
     //////////////////////////////////////////////////////////////////////////
     template<
       typename CharT,
@@ -446,7 +451,32 @@ namespace bit {
       /// \brief Constructs a string_span from null-terminated string
       ///
       /// \param str the null-terminated string
-      basic_zstring_span( value_type* str ) noexcept;
+      constexpr basic_zstring_span( value_type* str ) noexcept;
+
+      /// \brief Copy-constructs a basic_zstring_span from another one
+      ///
+      /// \param other the other basic_zstring_span to copy
+      constexpr basic_zstring_span( const basic_zstring_span& other ) noexcept = default;
+
+      /// \brief Move-constructs a basic_zstring_span from another one
+      ///
+      /// \param other the other basic_zstring_span to move
+      constexpr basic_zstring_span( basic_zstring_span&& other ) noexcept = default;
+
+      //----------------------------------------------------------------------
+      // Assignment
+      //----------------------------------------------------------------------
+    public:
+
+      /// \brief Copy-assigns a basic_zstring_span
+      ///
+      /// \param other the basic_string_span to copy
+      constexpr basic_zstring_span& operator=( const basic_zstring_span& other ) noexcept = default;
+
+      /// \brief Move-assigns a basic_zstring_span
+      ///
+      /// \param other the basic_string_span to move
+      constexpr basic_zstring_span& operator=( basic_zstring_span&& other ) noexcept = default;
 
       //----------------------------------------------------------------------
       // Element Access

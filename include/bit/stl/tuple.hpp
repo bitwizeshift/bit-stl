@@ -7,8 +7,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_TUPLE_HPP
-#define BIT_TUPLE_HPP
+#ifndef BIT_STL_TUPLE_HPP
+#define BIT_STL_TUPLE_HPP
 
 // local bfstd library
 #include "functional.hpp"
@@ -18,8 +18,7 @@
 #include <utility> // for std::forward
 
 namespace bit {
-
-  /// \addtogroup bit {
+  namespace stl {
 
   /// \brief Invoke the Callable object \p function with a \p tuple of
   ///        arguments
@@ -38,9 +37,9 @@ namespace bit {
   template<typename T, typename Tuple>
   constexpr T make_from_tuple( Tuple&& tuple );
 
-  /// }
-}
+  } // namespace stl
+} // namespace bit
 
 #include "detail/tuple.inl"
 
-#endif /* BIT_TUPLE_HPP */
+#endif /* BIT_STL_TUPLE_HPP */

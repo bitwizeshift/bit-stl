@@ -10,7 +10,7 @@
 #define BIT_STL_MAP_VIEW_HPP
 
 // local bit::stl
-#include "internal/associative_vtables.hpp"
+#include "detail/associative_vtables.hpp"
 
 namespace bit {
   namespace stl {

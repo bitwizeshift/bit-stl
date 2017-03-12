@@ -12,7 +12,7 @@
 // std library
 #include <functional>  // for std::function
 
-#include "internal/invoke.hpp"
+#include "detail/invoke.hpp"
 
 namespace bit {
   namespace stl {

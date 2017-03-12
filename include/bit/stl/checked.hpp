@@ -131,7 +131,7 @@ namespace bit {
       /// \brief Creates an error success state
       ///
       /// \return the success state
-      static error_code success();
+      static error_code success() noexcept;
 
       //----------------------------------------------------------------------
       // Constructor
@@ -144,24 +144,26 @@ namespace bit {
       /// \param value The value for the error code
       /// \param category The category for the error code
       template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value>* = nullptr>
-      explicit error_code( Enum value, const std::error_category& category );
+      explicit error_code( Enum value, const std::error_category& category )
+        noexcept;
 
       /// \brief Constructs an error when given the integer value for the code,
       ///        and the error_category
       ///
       /// \param value the integer value of the error code
       /// \param category the category for the error code
-      explicit error_code( int value, const std::error_category& category );
+      explicit error_code( int value, const std::error_category& category )
+        noexcept;
 
       /// \brief Copy-constructs an error
       ///
       /// \param other the other error to copy
-      error_code( const error_code& ) = default;
+      error_code( const error_code& other ) noexcept = default;
 
       /// \brief Move-constructs an error
       ///
       /// \param other the other error to move
-      error_code( error_code&& );
+      error_code( error_code&& other ) noexcept;
 
       /// \brief Delete the copy-assign operator
       error_code& operator=( const error_code& ) = delete;
@@ -177,14 +179,14 @@ namespace bit {
       /// \brief Get the integer value of the error
       ///
       /// \return the integral value
-      int value() const;
+      int value() const noexcept;
 
       /// \brief Get the error category by pointer
       ///
       /// The error category is null on successful error states
       ///
       /// \return a pointer to the error category
-      const std::error_category* category() const;
+      const std::error_category* category() const noexcept;
 
       /// \brief Get the message for the given error
       ///
@@ -194,12 +196,12 @@ namespace bit {
       /// \brief Returns\c true if this error contains an error value
       ///
       /// \return \c true if this contains an error value, \c false otherwise
-      bool is_error() const;
+      bool is_error() const noexcept;
 
       /// \brief Contextually convertible to bool
       ///
       /// \return \c true if this error is a success state
-      explicit operator bool() const;
+      explicit operator bool() const noexcept;
 
       //----------------------------------------------------------------------
       // Private Constructors
@@ -207,7 +209,7 @@ namespace bit {
     private:
 
       /// \brief Constructs a success error condition
-      error_code();
+      error_code() noexcept;
 
       //----------------------------------------------------------------------
       // Private Members
@@ -229,14 +231,16 @@ namespace bit {
     /// \param category
     /// \return
     template<typename Error, std::enable_if_t<std::is_enum<Error>::value>* = nullptr>
-    error_code make_error( Error error, const std::error_category& category );
+    error_code make_error( Error error, const std::error_category& category )
+      noexcept;
 
     /// \brief
     ///
     /// \param error
     /// \param category
     /// \return
-    error_code make_error( int error, const std::error_category& category );
+    error_code make_error( int error, const std::error_category& category )
+      noexcept;
 
     //========================================================================
     // checked
@@ -263,12 +267,13 @@ namespace bit {
     public:
 
       /// \brief Default constructs a checked type
-      checked();
+      checked()
+        noexcept( std::is_nothrow_default_constructible<T>::value );
 
       /// \brief Constructs a checked from a given error
       ///
       /// \param err the error to use
-      explicit checked( error_code err );
+      explicit checked( error_code err ) noexcept;
 
       //----------------------------------------------------------------------
 
@@ -280,7 +285,8 @@ namespace bit {
       /// \brief Move-constructs a checked
       ///
       /// \param other the other entry to move
-      checked( checked&& other );
+      checked( checked&& other )
+        noexcept( std::is_nothrow_move_constructible<T>::value );
 
       //----------------------------------------------------------------------
 
@@ -302,7 +308,8 @@ namespace bit {
 #else
       template<typename U>
 #endif
-      checked( checked<U>&& other );
+      checked( checked<U>&& other )
+        noexcept(std::is_nothrow_constructible<T,U&&>::value);
 
       /// \copydoc checked( checked<U>&& )
 #ifndef BIT_DOXYGEN_BUILD
@@ -310,7 +317,8 @@ namespace bit {
 #else
       template<typename U>
 #endif
-      explicit checked( checked<U>&& other );
+      explicit checked( checked<U>&& other )
+        noexcept(std::is_nothrow_constructible<T,U&&>::value);
 
       //----------------------------------------------------------------------
 
@@ -319,7 +327,8 @@ namespace bit {
       ///
       /// \param args the arguments to use for deferred construction
       template<typename...Args>
-      explicit checked( in_place_t, Args&&...args );
+      explicit checked( in_place_t, Args&&...args )
+        noexcept(std::is_nothrow_constructible<T,Args...>::value);
 
       /// \brief Constructs an initialized checked that will be constructed
       ///        with the arguments specified in \p ilist and \p args...
@@ -327,7 +336,8 @@ namespace bit {
       /// \param ilist the initializer list to forward for deferred construction
       /// \param args the arguments to use for deferred construction
       template<typename U, typename...Args>
-      explicit checked( in_place_t, std::initializer_list<U> ilist, Args&&...args );
+      explicit checked( in_place_t, std::initializer_list<U> ilist, Args&&...args )
+        noexcept(std::is_nothrow_constructible<T,std::initializer_list<U>,Args...>::value);
 
       //----------------------------------------------------------------------
 
@@ -340,7 +350,8 @@ namespace bit {
 #else
       template<typename U>
 #endif
-      checked( U&& value );
+      checked( U&& value )
+        noexcept(std::is_nothrow_constructible<T,U>::value);
 
       /// \copydoc checked( U&& )
 #ifndef BIT_DOXYGEN_BUILD
@@ -348,7 +359,8 @@ namespace bit {
 #else
       template<typename U>
 #endif
-      explicit checked( U&& value );
+      explicit checked( U&& value )
+        noexcept(std::is_nothrow_constructible<T,U>::value);
 
       /// \brief Destructs this checked type, calling abort if its unchecked
       ~checked();
@@ -360,7 +372,7 @@ namespace bit {
 
       checked& operator=( const checked& other ) = delete;
 
-      checked& operator=( checked&& other );
+      checked& operator=( checked&& other ) noexcept;
 
       //----------------------------------------------------------------------
       // Observers
@@ -410,16 +422,16 @@ namespace bit {
       /// Undefined behaviour if this checked does not contain a value
       ///
       /// \return reference to the contained value
-      T& operator*() &;
+      T& operator*() & noexcept;
 
       /// \copydoc operator*() noexcept
-      const T& operator*() const &;
+      const T& operator*() const & noexcept;
 
       /// \copydoc operator*() noexcept
-      T&& operator*() &&;
+      T&& operator*() && noexcept;
 
       /// \copydoc operator*() noexcept
-      const T&& operator*() const &&;
+      const T&& operator*() const && noexcept;
 
       //----------------------------------------------------------------------
 

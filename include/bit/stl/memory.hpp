@@ -17,6 +17,10 @@
 #include <limits>
 #include <memory>
 
+// internal details
+#include "detail/memory/indirect_ptr.hpp"
+#include "detail/memory/observer_ptr.hpp"
+
 namespace bit {
   namespace stl {
 
@@ -64,85 +68,15 @@ namespace bit {
     void* from_address( std::uintptr_t address ) noexcept;
 
     //------------------------------------------------------------------------
-
-    /// \brief Retrieves the distance between two pointers
-    ///
-    /// \note The distance is the positive number of bytes separating
-    ///       \p lhs from \p rhs
-    ///
-    /// \param lhs the left pointer
-    /// \param rhs the right pointer
-    /// \return the number of bytes between the two
-    constexpr std::size_t pointer_distance( const void* lhs,
-                                            const void* rhs ) noexcept;
-
-    /// \brief Retrieve the difference between two pointers in bytes
-    ///
-    /// \param lhs the left pointer to get the difference from
-    /// \param rhs the right pointer to get the difference from
-    /// \return the difference in bytes between the two pointers
-    constexpr std::ptrdiff_t pointer_difference( const void* lhs,
-                                                 const void* rhs ) noexcept;
-
-    //------------------------------------------------------------------------
-
-    /// \brief Determines if the pointer \p ptr is within the pointer range
-    ///        range [\p first,\p last)
-    ///
-    /// \param ptr the pointer to determine whether or not its in range
-    /// \param first the first entry of the range
-    /// \param last the last entry in the range (exclusive)
-    /// \return \c true if \p ptr exists between [\p first, \p last)
-    constexpr bool in_region( const void* ptr,
-                              const void* first,
-                              const void* last ) noexcept;
-
-    //------------------------------------------------------------------------
-    // Pointer Alignment
-    //------------------------------------------------------------------------
-
-    /// \brief Aligns a pointer forward to the given alignment boundary,
-    ///        with a specified offset
-    ///
-    /// \param ptr    the pointer to align
-    /// \param align  the alignment boundary to align to
-    /// \param offset the amount to offset from the alignment
-    /// \return a pair containing the address and the adjustment amount
-    std::pair<void*,std::size_t> align_forward( void* ptr,
-                                                std::size_t align,
-                                                std::size_t offset = 0 ) noexcept;
-
-    /// \brief Aligns a pointer backward to the given alignment boundary,
-    ///        with a specified offset
-    ///
-    /// \param ptr    the pointer to align
-    /// \param align  the alignment boundary to align to
-    /// \param offset the amount to offset from the alignment
-    /// \return a pair containing the address and the adjustment amount
-    std::pair<void*,std::size_t> align_backward( void* ptr,
-                                                 std::size_t align,
-                                                 std::size_t offset = 0 ) noexcept;
-
-    //------------------------------------------------------------------------
-    // Alignment Detection
-    //------------------------------------------------------------------------
-
-    /// \brief Determines whether the given pointer is aligned to the
-    ///        specified alignment
-    ///
-    /// \param ptr The pointer to determine the alignment of
-    /// \param align the alignment to check
-    bool is_aligned( const void* ptr, std::size_t align ) noexcept;
-
-    /// \brief Determines the alignment of a given pointer
-    ///
-    /// \param ptr the pointer to determine the alignment of
-    /// \return the alignment of the supplied pointer
-    std::size_t align_of( const void* ptr ) noexcept;
-
-    //------------------------------------------------------------------------
     // Uninitialized Construction
     //------------------------------------------------------------------------
+
+    /// \brief Default constructs an instance of type \p T in the given memory
+    ///
+    /// \param ptr The memory location to construct into
+    /// \return Pointer to the initialized memory (cast of \p ptr)
+    template<typename T>
+    T* uninitialized_default_construct_at( void* ptr );
 
     /// \brief Copy constructs an instance of type \p T in the given memory
     ///
@@ -199,18 +133,6 @@ namespace bit {
     template<typename ForwardIterator, typename Size, typename...Args>
     ForwardIterator uninitialized_construct_n( ForwardIterator first, Size n, Args&&...args );
 
-    /// \brief Creates a pointer in uninitialized memory that contains size
-    ///        information about the number of entries it should hold
-    ///
-    /// \note This does not initialize the memory, it simply encodes the size
-    ///       with the array in an implementation-defined way
-    ///
-    /// \param ptr   The memory location to construct into
-    /// \param count The number of entries
-    /// \return Pointer to the memory containing the array size
-    template<typename Size>
-    constexpr void* uninitialized_create_array_at( void* ptr, Size count );
-
     //------------------------------------------------------------------------
     // Destruction
     //------------------------------------------------------------------------
@@ -245,42 +167,6 @@ namespace bit {
     void destroy_array_at( T* ptr );
 
     //------------------------------------------------------------------------
-    // Array Utilities
-    //------------------------------------------------------------------------
-
-    /// \brief Default constructs an instance of type \p T in the given memory
-    ///
-    /// \param ptr The memory location to construct into
-    /// \return Pointer to the initialized memory (cast of \p ptr)
-    template<typename T>
-    T* uninitialized_default_construct_at( void* ptr );
-
-    /// \brief Retrieves the size of any given array that was constructed with
-    ///        one of the uninitialized array construct calls.
-    constexpr std::size_t array_size( const void* ptr ) noexcept;
-
-    /// \brief Retrieves the max size that an array created with
-    ///        \c uninitialized_default_construct_at
-    ///
-    /// \return the max size the array can hold
-    constexpr std::size_t array_max_size() noexcept;
-
-    /// \brief Retrieves the implementation-defined array offset size used in
-    ///        uninitialized_create_array_at
-    ///
-    /// This is used to ensure the appropriate offset when reserving raw-memory
-    /// for use as an array, or for doing an aligned offset allocation
-    ///
-    /// e.g.:
-    /// \code
-    /// void* ptr       = aligned_offset_malloc( 10, alignof(int), array_offset() );
-    /// int*  array_ptr = uninitialized_create_array_at( ptr, 10 );
-    /// \endcode
-    ///
-    /// \return the offset size
-    constexpr std::size_t array_offset() noexcept;
-
-    //------------------------------------------------------------------------
     // Hashing
     //------------------------------------------------------------------------
 
@@ -300,10 +186,6 @@ namespace bit {
 
   } // namespace stl
 } // namespace bit
-
-#include "internal/memory/memory_pool.hpp"
-#include "internal/memory/aligned_memory_pool.hpp"
-#include "internal/memory/indirect_ptr.hpp"
 
 #include "detail/memory.inl"
 

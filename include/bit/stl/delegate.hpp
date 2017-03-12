@@ -143,6 +143,16 @@ namespace bit {
 
     };
 
+#if __cplusplus >= 201703L
+
+      template<auto Fn>
+      auto make_delegate();
+
+      template<auto Fn, typename T>
+      auto make_delegate( T* );
+
+#endif
+
   } // namespace stl
 }  // namespace bit
 

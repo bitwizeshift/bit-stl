@@ -5,7 +5,6 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
 #ifndef BIT_STL_OPTIONAL_HPP
 #define BIT_STL_OPTIONAL_HPP
 
