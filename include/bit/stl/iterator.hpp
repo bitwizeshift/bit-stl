@@ -8,7 +8,8 @@
 #ifndef BIT_STL_ITERATOR_HPP
 #define BIT_STL_ITERATOR_HPP
 
-#include <type_traits>
+#include <utility>
+#include <iterator>
 
 namespace bit {
   namespace stl {
@@ -19,7 +20,7 @@ namespace bit {
     /// A range is a contruct that wraps the iterator begin/end range in a
     /// single type
     //////////////////////////////////////////////////////////////////////////
-    template<typename Container>
+    template<typename I, typename S>
     class range
     {
       //----------------------------------------------------------------------
@@ -27,20 +28,19 @@ namespace bit {
       //----------------------------------------------------------------------
     public:
 
-      using iterator = decltype( std::declval<Container&>().begin() );
-      using sentinel = decltype( std::declval<Container&>().end() );
-      using const_iterator = decltype( std::declval<const Container&>().begin() );
-      using const_sentinel = decltype( std::declval<const Container&>().end() );
+      using iterator = I;
+      using sentinel = S;
 
       //----------------------------------------------------------------------
       // Constructor
       //----------------------------------------------------------------------
     public:
 
-      /// \brief Constructs a range from a given
+      /// \brief Constructs a range from a given iterator range
       ///
-      /// \param container the container to use for this range
-      constexpr range( Container& container ) noexcept;
+      /// \param iterator the start of the input range
+      /// \param sentinel the end input range
+      constexpr range( I iterator, S sentinel ) noexcept;
 
       /// \brief Constructs a range by copying another range
       ///
@@ -67,25 +67,73 @@ namespace bit {
       /// \param returns the end iterator
       constexpr sentinel end();
 
-      /// \copydoc begin()
-      constexpr const_iterator begin() const;
-
-      /// \copydoc end()
-      constexpr const_sentinel end() const;
-
-      /// \copydoc begin()
-      constexpr const_iterator cbegin() const;
-
-      /// \copydoc end()
-      constexpr const_sentinel cend() const;
-
       //----------------------------------------------------------------------
       // Private Member Types
       //----------------------------------------------------------------------
     private:
 
-      Container& m_container; ///< The container to create a range
+      iterator m_first;
+      sentinel m_last;
     };
+
+    //------------------------------------------------------------------------
+    // Ranges
+    //------------------------------------------------------------------------
+
+    /// \brief Makes a range from a given \p iterator \p sentinel pair
+    ///
+    /// \param iterator the beginning of a range
+    /// \param sentinel the end of a range
+    /// \return the type-deduced range
+    template<typename I, typename S>
+    constexpr range<I,S> make_range( I iterator, S sentinel );
+
+    /// \brief This function acts as an identity function, and exists solely
+    ///        for completion.
+    ///
+    /// \param range a range to iterate over
+    /// \return reference to the original range
+    template<typename Range>
+    constexpr Range&& make_range( Range&& range );
+
+    //------------------------------------------------------------------------
+
+    /// \brief Makes a movable range from a given \p iterator \p sentinal pair
+    ///
+    /// \param iterator the beginning of a range
+    /// \param sentinel the end of a range
+    /// \return the type-deduced range
+    template<typename I, typename S>
+    constexpr auto make_move_range( I iterator, S sentinel )
+      -> range<std::move_iterator<I>,std::move_iterator<S>>;
+
+    /// \brief Makes a reverse range from a given \p iterator \p sentinal pair
+    ///
+    /// \param irange the range to deduce
+    /// \return the type-deduced range
+    template<typename Range>
+    constexpr auto make_move_range( Range&& r )
+      -> decltype(make_move_range( r.begin(), r.end() ));
+
+    //------------------------------------------------------------------------
+
+    /// \brief Makes a reverse range from a given \p iterator \p sentinal pair
+    ///
+    /// \param iterator the beginning of a range
+    /// \param sentinel the end of a range
+    /// \return the type-deduced range
+    template<typename I, typename S>
+    constexpr auto make_reverse_range( I iterator, S sentinel )
+      -> range<std::reverse_iterator<I>,std::reverse_iterator<S>>;
+
+    /// \brief Makes a reverse range from a given \p iterator \p sentinal pair
+    ///
+    /// \param irange the range to deduce
+    /// \return the type-deduced range
+    template<typename Range>
+    constexpr auto make_reverse_range( Range&& r )
+      -> decltype(make_reverse_range( r.begin(), r.end() ));
+
   } // namespace stl
 } // namespace bit
 
