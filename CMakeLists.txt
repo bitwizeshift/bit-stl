@@ -30,10 +30,10 @@ git_build_information( MINOR_VARIABLE BIT_STL_VERSION_MINOR
                        PATCH_VARIABLE BIT_STL_VERSION_PATCH
                        BUILD_VARIABLE BIT_STL_BUILD_NUMBER
                        BRANCH_VARIABLE BIT_STL_BRANCH
-                       HASH 830231538303f1b6e166a2ee6761fe8c23b4eb69
+                       HASH v1.0
 )
 
-set(BIT_STL_VERSION_MAJOR 0 CACHE STRING "major version of bit::stl" FORCE)
+set(BIT_STL_VERSION_MAJOR 1 CACHE STRING "major version of bit::stl" FORCE)
 set(BIT_STL_VERSION_MINOR ${BIT_STL_VERSION_MINOR} CACHE STRING "minor version of bit::stl" FORCE)
 set(BIT_STL_VERSION_PATCH ${BIT_STL_VERSION_PATCH} CACHE STRING "patch version of bit::stl" FORCE)
 set(BIT_STL_VERSION "${BIT_STL_VERSION_MAJOR}.${BIT_STL_VERSION_MINOR}.${BIT_STL_VERSION_PATCH}" CACHE STRING "version of bit::stl" FORCE)
