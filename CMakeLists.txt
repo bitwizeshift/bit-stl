@@ -79,7 +79,6 @@ set(headers
       "include/bit/stl/numeric.hpp"
       "include/bit/stl/optional.hpp"
       "include/bit/stl/pointer_iterator.hpp"
-      "include/bit/stl/safe_enum.hpp"
       "include/bit/stl/set_view.hpp"
       "include/bit/stl/source_location.hpp"
       "include/bit/stl/span.hpp"
