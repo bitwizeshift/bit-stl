@@ -66,6 +66,7 @@ set(headers
       "include/bit/stl/checked.hpp"
       "include/bit/stl/data_watcher.hpp"
       "include/bit/stl/delegate.hpp"
+      "include/bit/stl/enum.hpp"
       "include/bit/stl/expected.hpp"
       "include/bit/stl/functional.hpp"
       "include/bit/stl/hashed_string_view.hpp"
