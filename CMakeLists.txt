@@ -26,15 +26,17 @@ endif()
 # Version Info
 #-----------------------------------------------------------------------------
 
-git_build_information( MINOR_VARIABLE BIT_STL_VERSION_MINOR
-                       PATCH_VARIABLE BIT_STL_VERSION_PATCH
+git_build_information( PATCH_VARIABLE BIT_STL_VERSION_PATCH
                        BUILD_VARIABLE BIT_STL_BUILD_NUMBER
                        BRANCH_VARIABLE BIT_STL_BRANCH
-                       HASH v1.0
+                       REF v1.0
+                       PATHSPECS ${CMAKE_CURRENT_LIST_DIR}/include
+                                 ${CMAKE_CURRENT_LIST_DIR}/cmake
+                                 ${CMAKE_CURRENT_LIST_FILE}
 )
 
 set(BIT_STL_VERSION_MAJOR 1 CACHE STRING "major version of bit::stl" FORCE)
-set(BIT_STL_VERSION_MINOR ${BIT_STL_VERSION_MINOR} CACHE STRING "minor version of bit::stl" FORCE)
+set(BIT_STL_VERSION_MINOR 0 CACHE STRING "minor version of bit::stl" FORCE)
 set(BIT_STL_VERSION_PATCH ${BIT_STL_VERSION_PATCH} CACHE STRING "patch version of bit::stl" FORCE)
 set(BIT_STL_VERSION "${BIT_STL_VERSION_MAJOR}.${BIT_STL_VERSION_MINOR}.${BIT_STL_VERSION_PATCH}" CACHE STRING "version of bit::stl" FORCE)
 set(BIT_STL_BUILD_NUMBER "${BIT_STL_BUILD_NUMBER}" CACHE STRING "build number of bit::stl" FORCE)
