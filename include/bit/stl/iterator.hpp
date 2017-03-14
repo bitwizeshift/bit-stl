@@ -45,12 +45,12 @@ namespace bit {
       /// \brief Constructs a range by copying another range
       ///
       /// \param other the other range to copy
-      constexpr range( const range& other ) noexcept = default;
+      constexpr range( const range& other ) = default;
 
       /// \brief Constructs a range by moving another range
       ///
       /// \param other the other range to move
-      constexpr range( range&& other ) noexcept = default;
+      constexpr range( range&& other ) = default;
 
       //----------------------------------------------------------------------
       // Iterators
