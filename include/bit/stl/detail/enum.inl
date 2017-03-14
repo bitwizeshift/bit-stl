@@ -9,7 +9,7 @@ template<typename Enum>
 inline bit::stl::string_view
   bit::stl::enum_traits<Enum>::to_string( Enum e )
 {
-//  BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: to_string functionality not implemented for given enum");
+  BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: to_string functionality not implemented for given enum");
   return "";
 }
 
@@ -17,8 +17,24 @@ template<typename Enum>
 inline Enum
   bit::stl::enum_traits<Enum>::from_string( string_view s )
 {
-//  BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: from_string functionality not implemented for given enum");
+  BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: from_string functionality not implemented for given enum");
   return Enum();
+}
+
+template<typename Enum>
+inline const Enum*
+  bit::stl::enum_traits<Enum>::begin()
+{
+  BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: begin functionality not implemented for given enum");
+  return nullptr;
+}
+
+template<typename Enum>
+inline const Enum*
+  bit::stl::enum_traits<Enum>::end()
+{
+  BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: end functionality not implemented for given enum");
+  return nullptr;
 }
 
 template<typename Enum>
@@ -26,7 +42,7 @@ inline constexpr typename bit::stl::enum_range<Enum>::iterator
   bit::stl::enum_range<Enum>::begin()
   const noexcept
 {
-  return iterator{ bit::stl::enum_sequence<Enum>::begin };
+  return iterator{ bit::stl::enum_traits<Enum>::begin() };
 }
 
 template<typename Enum>
@@ -34,7 +50,7 @@ inline constexpr typename bit::stl::enum_range<Enum>::sentinel
   bit::stl::enum_range<Enum>::end()
   const noexcept
 {
-  return sentinel{ bit::stl::enum_sequence<Enum>::end };
+  return sentinel{ bit::stl::enum_traits<Enum>::end() };
 }
 
 template<typename Enum>

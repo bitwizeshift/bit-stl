@@ -24,34 +24,12 @@ namespace bit {
     ///
     /// The latter case can only occur for bitfields or manual static_casts
     //////////////////////////////////////////////////////////////////////////
-    class bad_enum_cast : public std::exception
+    class bad_enum_cast : public std::runtime_error
     {
     public:
 
-      bad_enum_cast() = default;
+      using std::runtime_error::runtime_error;
     };
-
-    /// \brief A type used to indicate the sequence for a given enum.
-    ///
-    /// This type should be specialized for any enum that requires an
-    /// iterable interface. The only 2 members required are \c ::begin
-    /// and \c ::end, which must be \c enum* .
-    ///
-    /// \c ::begin
-    /// \c ::end
-    template<typename Enum>
-    struct enum_sequence;
-
-    /// \brief Type trait to determine whether a specialization exists for
-    ///
-    template<typename Enum, typename = void>
-    struct has_enum_sequence : std::false_type{};
-
-    template<typename Enum>
-    struct has_enum_sequence<Enum,
-      void_t<decltype(static_cast<const Enum*>(enum_sequence<Enum>::begin)),
-             decltype(static_cast<const Enum*>(enum_sequence<Enum>::end))>>
-      : std::true_type{};
 
     /// Type used for iterating an enum_range
     template<typename Enum>
@@ -62,6 +40,11 @@ namespace bit {
     ///
     /// Implementations should provide specialiations of this type to enable
     /// to_string and from_string functionality with \c enum_cast
+    ///
+    /// This struct also must specialize a begin() and end() function that
+    /// returns type const Enum*, if an enum is to be used for iteration
+    ///
+    /// \tparam Enum the enum type
     //////////////////////////////////////////////////////////////////////////
     template<typename Enum>
     struct enum_traits
@@ -75,16 +58,27 @@ namespace bit {
       ///
       /// This function only asserts or throws without a specialization
       static Enum from_string( string_view s );
+
+      /// \brief Gets the start iterator for an enum range
+      ///
+      /// \return the start iterator
+      static const Enum* begin();
+
+      /// \brief Gets the end iterator for an enum range
+      ///
+      /// \return the end iterator
+      static const Enum* end();
     };
 
     //////////////////////////////////////////////////////////////////////////
     /// \brief A range for enumerable values
     ///
+    /// \tparam Enum The enum type for this range
     //////////////////////////////////////////////////////////////////////////
     template<typename Enum>
     class enum_range
     {
-      static_assert( has_enum_sequence<Enum>::value, "Enum type doesn't have a specialization of enum_sequence" );
+      static_assert( std::is_enum<Enum>::value, "Enum must be an enum type");
 
       //----------------------------------------------------------------------
       // Public Member Types
