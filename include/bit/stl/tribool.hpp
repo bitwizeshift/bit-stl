@@ -9,6 +9,8 @@
 #ifndef BIT_STL_TRIBOOL_HPP
 #define BIT_STL_TRIBOOL_HPP
 
+#include <cstdlib>
+
 namespace bit {
   namespace stl {
 
@@ -133,6 +135,8 @@ namespace bit {
 #else
     constexpr bool indeterminate( const tribool& t ) noexcept;
 #endif
+
+    constexpr std::size_t hash_value( tribool t ) noexcept;
 
     //------------------------------------------------------------------------
     // Equality Comparisons

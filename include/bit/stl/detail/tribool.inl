@@ -43,10 +43,19 @@ inline constexpr bit::stl::tribool bit::stl::tribool::operator !()
 // Free Functions
 //----------------------------------------------------------------------------
 
-constexpr bool bit::stl::indeterminate( const tribool& t, detail::tribool_t )
+inline constexpr bool
+  bit::stl::indeterminate( const tribool& t, detail::tribool_t )
   noexcept
 {
   return t.m_state == tribool::state::e_indeterminate;
+}
+
+inline constexpr std::size_t bit::stl::hash_value( tribool t )
+  noexcept
+{
+  if( t ) return 1;
+  else if( !t ) return 2;
+  return 0;
 }
 
 //----------------------------------------------------------------------------
