@@ -131,9 +131,16 @@ namespace bit {
         using type = R(*)(Args...);
       };
 
+#if __cplusplus >= 201703L
+      template<typename R, typename...Args>
+      struct function_t<R(Args...) noexcept> {
+        using type = R(*)(Args...) noexcept;
+      }
+#endif
+
       //----------------------------------------------------------------------
 
-      template<typename T, typename Fn>
+      template<typename T, typename R>
       struct member_function_t;
 
       template<typename T, typename R, typename...Args>
@@ -156,12 +163,36 @@ namespace bit {
         using type = R(T::*)(Args...) const volatile;
       };
 
+#if __cplusplus >= 201703L
+      template<typename T, typename R, typename...Args>
+      struct member_function_t<T,R(Args...) noexcept> {
+        using type = R(T::*)(Args...) noexcept;
+      };
+
+      template<typename T, typename R, typename...Args>
+      struct member_function_t<const T,R(Args...) noexcept> {
+        using type = R(T::*)(Args...) const noexcept;
+      };
+
+      template<typename T, typename R, typename...Args>
+      struct member_function_t<volatile T,R(Args...) noexcept> {
+        using type = R(T::*)(Args...) volatile noexcept;
+      };
+
+      template<typename T, typename R, typename...Args>
+      struct member_function_t<const volatile T,R(Args...) noexcept> {
+        using type = R(T::*)(Args...) const volatile noexcept;
+      };
+#endif
     } // namespace detail
+
+    template<typename T, typename R>
+    using member_t = R T::*;
 
     /// \brief A type alias for member function pointers to make it more
     ///        readable.
-    template<typename T, typename Fn>
-    using member_function_t = typename detail::member_function_t<T,Fn>::type;
+    template<typename T, typename R>
+    using member_function_t = typename detail::member_function_t<T,R>::type;
 
     /// \brief A type alias for function pointers to make it more readable
     template<typename Fn>
