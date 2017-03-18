@@ -64,7 +64,7 @@ namespace bit {
 #ifndef BIT_DOXYGEN_BUILD
     inline in_place_tag in_place( detail::in_place_ctor_type_tag<T> = detail::in_place_ctor_type_tag<T>() ){ return {0}; }
 #else
-    in_place_Tag in_place();
+    in_place_tag in_place();
 #endif
 
     /// \brief This function is a special disambiguation tag for variadic functions, used in

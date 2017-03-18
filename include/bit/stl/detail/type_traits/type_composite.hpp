@@ -152,6 +152,34 @@ namespace bit {
 
     //---------------------------------------------------------------------------
 
+    template<typename T, typename...Ts>
+    struct are_same : std::false_type{};
+
+    template<typename T, typename...Ts>
+    struct are_same<T,T,Ts...> : are_same<T,Ts...>{};
+
+    template<typename T>
+    struct are_same<T,T> : std::true_type{};
+
+    template<typename T, typename...Ts>
+    constexpr bool are_same_v = are_same<T,Ts...>::value;
+
+    //---------------------------------------------------------------------------
+
+    template<typename T, typename U, typename...Ts>
+    struct is_one_of : is_one_of<T,Ts...>{};
+
+    template<typename T, typename...Ts>
+    struct is_one_of<T,T,Ts...> : std::true_type{};
+
+    template<typename T, typename U>
+    struct is_one_of<T,U> : std::false_type{};
+
+    template<typename T, typename...Ts>
+    constexpr bool is_one_of_v = is_one_of<T,Ts...>::value;
+
+    //---------------------------------------------------------------------------
+
     /// \brief Type trait to determine the \c bool_constant from a logical
     ///        AND operation of boolean values
     ///
@@ -371,6 +399,19 @@ namespace bit {
     ///        \c enable_if_c
     template<typename...Clauses>
     using enable_if_c_t = typename enable_if_c<Clauses...>::type;
+
+    //---------------------------------------------------------------------------
+
+    /// \brief Type trait to determine if all \p Froms are convertible
+    ///        to \p To
+    ///
+    /// \tparam To the type to try to convert to
+    /// \tparam Froms The types to try to convert from
+    template<typename To, typename...Froms>
+    struct are_convertible : conjunction< std::is_convertible<Froms,To>... >{};
+
+    template<typename To, typename...Froms>
+    constexpr bool are_convertible_v = are_convertible<To,Froms...>::value;
 
   } // namespace stl
 } // namespace bit
