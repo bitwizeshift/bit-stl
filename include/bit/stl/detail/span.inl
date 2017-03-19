@@ -68,7 +68,7 @@ template<typename T, std::ptrdiff_t Extent>
 template<typename Container, typename>
 inline constexpr bit::stl::span<T,Extent>::span( Container&& container )
   noexcept
-  : m_storage( container.data(), container.size() )
+  : m_storage( container.data(), static_cast<size_type>(container.size()) )
 {
 
 }
@@ -396,23 +396,103 @@ inline constexpr bool
 // Free Functions
 //============================================================================
 
+//----------------------------------------------------------------------------
+// to_bytes
+//----------------------------------------------------------------------------
+
 template<typename T, std::ptrdiff_t Extent>
 inline constexpr bit::stl::span<bit::stl::byte>
-  bit::stl::casts::byte_cast( const span<T,Extent>& view )
+  bit::stl::casts::to_bytes( span<T,Extent> span )
 {
-  return span<bit::stl::byte>(
-    static_cast<bit::stl::byte*>(static_cast<void*>(view.data())),
-    view.size_bytes()
+  return bit::stl::span<byte>(
+    static_cast<byte*>(static_cast<void*>(span.data())),
+    span.size_bytes()
   );
 }
 
-template<typename T, std::ptrdiff_t Extent>
-inline constexpr bit::stl::span<const bit::stl::byte>
-  bit::stl::casts::byte_cast( const span<const T,Extent>& view )
+template<typename T>
+inline constexpr bit::stl::span<bit::stl::byte>
+  bit::stl::casts::to_bytes( span<T> span )
 {
-  return span<const bit::stl::byte>(
-    static_cast<const bit::stl::byte*>(static_cast<const void*>(view.data())),
-    view.size_bytes()
+  return bit::stl::span<byte>(
+    static_cast<byte*>(static_cast<void*>(span.data())),
+    span.size_bytes()
+  );
+}
+
+//----------------------------------------------------------------------------
+
+template<typename T, std::ptrdiff_t Extent>
+constexpr bit::stl::span<const bit::stl::byte>
+  bit::stl::casts::to_bytes( span<const T,Extent> span )
+{
+  return bit::stl::span<const byte>(
+    static_cast<const byte*>(static_cast<const void*>(span.data())),
+    span.size_bytes()
+  );
+}
+
+template<typename T>
+constexpr bit::stl::span<const bit::stl::byte>
+  bit::stl::casts::to_bytes( span<const T> span )
+{
+  return bit::stl::span<const byte>(
+    static_cast<const byte*>(static_cast<const void*>(span.data())),
+    span.size_bytes()
+  );
+}
+
+//----------------------------------------------------------------------------
+// from_bytes
+//----------------------------------------------------------------------------
+
+template<typename T, std::ptrdiff_t Extent>
+constexpr bit::stl::span<T>
+  bit::stl::casts::from_bytes( span<byte,Extent> span )
+{
+  BIT_ASSERT( span.size_bytes() % sizeof(T) == 0, "from_bytes: Span does not contain enough bytes to convert to T");
+
+  return bit::stl::span<T>(
+    static_cast<T*>(static_cast<void*>(span.data())),
+    span.size_bytes() / sizeof(T)
+  );
+}
+
+template<typename T>
+constexpr bit::stl::span<T>
+  bit::stl::casts::from_bytes( span<byte> span )
+{
+  BIT_ASSERT( span.size_bytes() % sizeof(T) == 0, "from_bytes: Span does not contain enough bytes to convert to T");
+
+  return bit::stl::span<T>(
+    static_cast<T*>(static_cast<void*>(span.data())),
+    span.size_bytes() / sizeof(T)
+  );
+}
+
+//----------------------------------------------------------------------------
+
+template<typename T, std::ptrdiff_t Extent>
+constexpr bit::stl::span<const T>
+  bit::stl::casts::from_bytes( span<const byte,Extent> span )
+{
+  BIT_ASSERT( span.size_bytes() % sizeof(T) == 0, "from_bytes: Span does not contain enough bytes to convert to T");
+
+  return bit::stl::span<const T>(
+    static_cast<const T*>(static_cast<const void*>(span.data())),
+    span.size_bytes() / sizeof(const T)
+  );
+}
+
+template<typename T>
+constexpr bit::stl::span<const T>
+  bit::stl::casts::from_bytes( span<const byte> span )
+{
+  BIT_ASSERT( span.size_bytes() % sizeof(T) == 0, "from_bytes: Span does not contain enough bytes to convert to T");
+
+  return bit::stl::span<const T>(
+    static_cast<const T*>(static_cast<const void*>(span.data())),
+    span.size_bytes() / sizeof(const T)
   );
 }
 
