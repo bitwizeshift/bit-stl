@@ -628,6 +628,13 @@ namespace bit {
       template<typename T>
       constexpr span<const byte> to_bytes( span<const T> span );
 
+      template<typename Container, std::enable_if_t<is_contiguous_container<Container>::value>* = nullptr>
+      constexpr span<match_cv_qualifiers_t<typename Container::value_type, byte>>
+        to_bytes( Container& container );
+
+      template<typename Container, std::enable_if_t<is_contiguous_container<Container>::value>* = nullptr>
+      constexpr span<const byte> to_bytes( const Container& container );
+
       //----------------------------------------------------------------------
       // from_bytes
       //----------------------------------------------------------------------

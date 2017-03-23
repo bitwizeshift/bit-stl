@@ -443,6 +443,33 @@ constexpr bit::stl::span<const bit::stl::byte>
 }
 
 //----------------------------------------------------------------------------
+
+template<typename Container, std::enable_if_t<bit::stl::is_contiguous_container<Container>::value>*>
+constexpr bit::stl::span<bit::stl::match_cv_qualifiers_t<typename Container::value_type, bit::stl::byte>>
+  bit::stl::casts::to_bytes( Container& container )
+{
+  using value_type = match_cv_qualifiers_t<typename Container::value_type,byte>;
+  using void_type  = match_cv_qualifiers_t<typename Container::value_type,void>;
+
+  return bit::stl::span<value_type>(
+    static_cast<value_type*>(static_cast<void_type*>(container.data())),
+    container.size() * sizeof(value_type)
+  );
+}
+
+template<typename Container, std::enable_if_t<bit::stl::is_contiguous_container<Container>::value>*>
+constexpr bit::stl::span<const bit::stl::byte>
+  bit::stl::casts::to_bytes( const Container& container )
+{
+  using value_type = typename Container::value_type;
+
+  return bit::stl::span<const byte>(
+    static_cast<const byte*>(static_cast<const void*>(container.data())),
+    container.size() * sizeof(value_type)
+  );
+}
+
+//----------------------------------------------------------------------------
 // from_bytes
 //----------------------------------------------------------------------------
 
