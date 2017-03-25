@@ -2,34 +2,28 @@
 #define BIT_STL_DETAIL_ITERATOR_INL
 
 //------------------------------------------------------------------------
-// Constructor
+// Iterator Adapters : make utilities
 //------------------------------------------------------------------------
 
-template<typename I, typename S>
-constexpr bit::stl::range<I,S>::range( I iterator, S sentinel )
-  noexcept
-  : m_first(std::move(iterator)),
-    m_last(std::move(sentinel))
+template<std::size_t N,typename Iter>
+inline constexpr bit::stl::tuple_element_iterator<N,Iter>
+  bit::stl::make_tuple_element_iterator( Iter iter )
 {
-
+  return tuple_element_iterator<N,std::decay_t<Iter>>( iter );
 }
 
-//------------------------------------------------------------------------
-// Iterators
-//------------------------------------------------------------------------
-
-template<typename I, typename S>
-constexpr typename bit::stl::range<I,S>::iterator
-  bit::stl::range<I,S>::begin()
+template<typename Iter>
+inline constexpr bit::stl::tuple_element_iterator<0,Iter>
+  bit::stl::make_key_iterator( Iter iter )
 {
-  return m_first;
+  return tuple_element_iterator<0,Iter>( iter );
 }
 
-template<typename I, typename S>
-constexpr typename bit::stl::range<I,S>::sentinel
-  bit::stl::range<I,S>::end()
+template<typename Iter>
+inline constexpr bit::stl::tuple_element_iterator<1,Iter>
+  bit::stl::make_value_iterator( Iter iter )
 {
-  return m_last;
+  return tuple_element_iterator<1,Iter>( iter );
 }
 
 //------------------------------------------------------------------------
@@ -48,6 +42,61 @@ inline constexpr Range&&
   bit::stl::make_range( Range&& range )
 {
   return std::forward<Range>(range);
+}
+
+//------------------------------------------------------------------------
+
+template<std::size_t N, typename I, typename S>
+inline constexpr auto bit::stl::make_tuple_element_range( I iterator, S sentinel )
+  -> bit::stl::range<bit::stl::tuple_element_iterator<N,I>,
+                     bit::stl::tuple_element_iterator<N,S>>
+{
+  return { make_tuple_element_iterator<N,I>( iterator ),
+           make_tuple_element_iterator<N,S>( sentinel ) };
+}
+
+template<std::size_t N, typename Range>
+inline constexpr auto bit::stl::make_tuple_element_range( Range&& r )
+  -> decltype(make_tuple_element_range( r.begin(), r.end()))
+{
+  return make_tuple_element_range<N>( std::forward<Range>(r).begin(),
+                                      std::forward<Range>(r).end() );
+}
+
+//------------------------------------------------------------------------
+
+template<typename I, typename S>
+constexpr auto bit::stl::make_key_range( I iterator, S sentinel )
+  -> bit::stl::range<bit::stl::tuple_element_iterator<0,I>,
+                     bit::stl::tuple_element_iterator<0,S>>
+{
+  return make_tuple_element_iterator<0>( iterator, sentinel );
+}
+
+template<typename Range>
+constexpr auto bit::stl::make_key_range( Range&& r )
+  -> decltype(make_key_range( r.begin(), r.end()))
+{
+  return make_tuple_element_iterator<0>( std::forward<Range>(r).begin(),
+                                         std::forward<Range>(r).end() );
+}
+
+//------------------------------------------------------------------------
+
+template<typename I, typename S>
+constexpr auto bit::stl::make_value_range( I iterator, S sentinel )
+  -> bit::stl::range<bit::stl::tuple_element_iterator<1,I>,
+                     bit::stl::tuple_element_iterator<1,S>>
+{
+  return make_tuple_element_iterator<1>( iterator, sentinel );
+}
+
+template<typename Range>
+constexpr auto bit::stl::make_value_range( Range&& r )
+  -> decltype(make_value_range( r.begin(), r.end()))
+{
+  return make_tuple_element_iterator<1>( std::forward<Range>(r).begin(),
+                                         std::forward<Range>(r).end() );
 }
 
 //------------------------------------------------------------------------
@@ -89,5 +138,7 @@ inline constexpr auto
   return make_reverse_range( std::forward<Range>(r).begin(),
                              std::forward<Range>(r).end() );
 }
+
+//------------------------------------------------------------------------
 
 #endif /* BIT_STL_DETAIL_ITERATOR_INL */
