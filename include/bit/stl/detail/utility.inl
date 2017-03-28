@@ -386,4 +386,19 @@ inline constexpr decltype(auto) bit::stl::apply( F&& f, Tuple&& t )
     );
 }
 
+template<typename Container, bit::stl::underlying_container_type_t<Container>*>
+bit::stl::underlying_container_type_t<Container>&
+  bit::stl::get_underlying_container( Container& container )
+{
+  struct I : private Container {
+    static decltype(auto) get( Container& container )
+    {
+      return (container.*&I::c);
+    }
+  };
+
+  return I::get( container );
+}
+
+
 #endif /* BFSTL_DETAIL_UTILITY_INL */

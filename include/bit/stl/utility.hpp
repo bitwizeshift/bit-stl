@@ -490,6 +490,41 @@ namespace bit {
     //
     //------------------------------------------------------------------------
 
+    namespace detail {
+
+      template<typename Ptr>
+      struct type_of_member_ptr;
+
+      template<typename T, typename U>
+      struct type_of_member_ptr<U T::*> : identity<U>{};
+
+      template<typename Ptr>
+      using type_of_member_t = typename type_of_member_ptr<Ptr>::type;
+
+    } // namespace detail
+
+    template<typename T>
+    class underlying_container_type
+    {
+    private:
+      struct I : private T{
+        using type = typename detail::type_of_member_ptr<decltype(&I::c)>::type;
+      };
+    public:
+      using type = typename I::type;
+    };
+
+    template<typename T>
+    using underlying_container_type_t = typename underlying_container_type<T>::type;
+
+    /// \brief Gets the underlying container of a given container adapter
+    ///
+    /// \param container reference to the container adapter
+    /// \return reference to the underlying container
+    template<typename Container, underlying_container_type_t<Container>* = nullptr>
+    underlying_container_type_t<Container>&
+      get_underlying_container( Container& container );
+
     //////////////////////////////////////////////////////////////////////////
     /// \brief A wrapper to propagate the const qualifier
     //////////////////////////////////////////////////////////////////////////
