@@ -12,6 +12,7 @@
 
 #include "utility.hpp"
 
+#include <memory>    // std::addressof
 #include <stdexcept>
 
 namespace bit {
