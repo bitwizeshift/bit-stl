@@ -17,9 +17,10 @@
 #include <limits>
 #include <memory>
 
-// internal details
+// IWYU pragma: begin_exports
 #include "detail/memory/indirect_ptr.hpp"
 #include "detail/memory/observer_ptr.hpp"
+// IWYU pragma: end_exports
 
 namespace bit {
   namespace stl {

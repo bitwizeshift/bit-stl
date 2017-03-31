@@ -29,7 +29,7 @@
 # error "Platform not recognized!"
 #endif
 
-#include BIT_PLATFORM_CONFIG_FILE
+#include BIT_PLATFORM_CONFIG_FILE // IWYU pragma: export
 
 #if 0 // Used for dependency scanners to detect possible inclusions
 # include "platform/linux.hpp"

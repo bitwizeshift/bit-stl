@@ -47,12 +47,11 @@
 #define BIT_UNUSED(var) do { (void)(var); } while (0)
 
 // bit::stl types
+// IWYU pragma: begin_exports
 #include "detail/stddef/types/integral_types.hpp"
 #include "detail/stddef/types/char_types.hpp"
 #include "detail/stddef/types/float_types.hpp"
 #include "detail/stddef/types/byte.hpp"
-
-// bit::stl
 #include "detail/stddef/macros.hpp"
 #include "detail/stddef/platform.hpp"
 #include "detail/stddef/compiler.hpp"
@@ -60,6 +59,7 @@
 #include "detail/stddef/library_export.hpp"
 #include "detail/stddef/breakpoint.hpp"
 #include "detail/stddef/protect_functions.hpp"
+// IWYU pragma: end_exports
 
 //! \def BIT_STL_DEFINE_ENUM_BITWISE_OPERATORS( Type )
 //!

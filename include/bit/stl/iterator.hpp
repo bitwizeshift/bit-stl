@@ -11,8 +11,10 @@
 #include <tuple>
 #include <iterator>
 
+// IWYU pragma: begin_exports
 #include "detail/iterator/tuple_element_iterator.hpp"
 #include "detail/iterator/range.hpp"
+// IWYU pragma: end_exports
 
 namespace bit {
   namespace stl {

@@ -30,7 +30,7 @@
 #  define BIT_COMPILER_CONFIG_FILE "compiler/generic.hpp"
 #endif
 
-#include BIT_COMPILER_CONFIG_FILE
+#include BIT_COMPILER_CONFIG_FILE // IWYU pragma: export
 
 #if 0 // Used for dependency scanners to detect possible inclusions
 #  include "compiler/intel.hpp"
