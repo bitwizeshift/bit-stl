@@ -168,6 +168,9 @@ namespace bit {
     /// \copydoc operator!=( const tribool&, const tribool& )
     constexpr bool operator!=( const tribool& lhs, indeterminate_t ) noexcept;
 
+    constexpr tribool operator && ( const tribool& lhs, const tribool& rhs) noexcept;
+    constexpr tribool operator || ( const tribool& lhs, const tribool& rhs) noexcept;
+
   } // namespace stl
 } // namespace bit
 
