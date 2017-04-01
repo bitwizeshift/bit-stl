@@ -41,7 +41,7 @@ inline bit::stl::expected<T>::
 template<typename T>
 template<typename Exception, typename...Args>
 inline bit::stl::expected<T>::
-  expected( in_place_type_t<Exception> tag, Args&&...args )
+  expected( in_place_type_t<Exception>, Args&&...args )
   noexcept( std::is_nothrow_constructible<Exception,Args...>::value )
   : expected( in_place<std::exception_ptr>,
               std::make_exception_ptr(Exception(std::forward<Args>(args)...)))
@@ -54,7 +54,7 @@ inline bit::stl::expected<T>::
 template<typename T>
 template<typename Exception, typename U, typename...Args>
 inline bit::stl::expected<T>::
-  expected( in_place_type_t<Exception> tag,
+  expected( in_place_type_t<Exception>,
             std::initializer_list<U> ilist, Args&&...args )
   noexcept( std::is_nothrow_constructible<Exception,std::initializer_list<U>,Args...>::value )
   : expected( in_place<std::exception_ptr>,
@@ -68,7 +68,7 @@ inline bit::stl::expected<T>::
 template<typename T>
 template<typename...Args>
 inline constexpr bit::stl::expected<T>::
-  expected( in_place_t tag, Args&&...args )
+  expected( in_place_t, Args&&...args )
   noexcept( std::is_nothrow_constructible<Args...>::value )
   : m_storage( in_place<T>, std::forward<Args>(args)... ),
     m_is_exception(false)
@@ -81,7 +81,7 @@ inline constexpr bit::stl::expected<T>::
 template<typename T>
 template<typename U, typename...Args>
 inline constexpr bit::stl::expected<T>::
-  expected( in_place_t tag, std::initializer_list<U> ilist, Args&&...args )
+  expected( in_place_t, std::initializer_list<U> ilist, Args&&...args )
   noexcept( std::is_nothrow_constructible<std::initializer_list<U>,Args...>::value )
   : m_storage( in_place<T>, ilist, std::forward<Args>(args)... ),
     m_is_exception(false)

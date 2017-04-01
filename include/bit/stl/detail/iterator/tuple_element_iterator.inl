@@ -80,7 +80,7 @@ inline constexpr typename bit::stl::tuple_element_iterator<N,Iter>::difference_t
   bit::stl::tuple_element_iterator<N,Iter>::operator-( const tuple_element_iterator& rhs )
   const noexcept
 {
-
+  return (tuple_element_iterator(m_iter)-rhs);
 }
 
 //----------------------------------------------------------------------------

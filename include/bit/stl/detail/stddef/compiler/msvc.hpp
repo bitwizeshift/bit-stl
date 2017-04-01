@@ -136,6 +136,8 @@
 
 #if defined(_CPPUNWIND)
 # define BIT_COMPILER_EXCEPTIONS_ENABLED 1
+#else
+# define BIT_COMPILER_EXCEPTIONS_ENABLED 0
 #endif
 
 #if defined(_NATIVE_WCHAR_T_DEFINED)

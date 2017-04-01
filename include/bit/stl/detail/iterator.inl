@@ -126,8 +126,8 @@ inline constexpr auto
   bit::stl::make_reverse_range( I iterator, S sentinel )
   -> range<std::reverse_iterator<I>,std::reverse_iterator<S>>
 {
-  return { std::make_reverse_iterator(std::move(iterator)),
-           std::make_reverse_iterator(std::move(sentinel)) };
+  return { std::make_reverse_iterator(iterator),
+           std::make_reverse_iterator(sentinel) };
 }
 
 template<typename Range>

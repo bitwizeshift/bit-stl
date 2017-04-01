@@ -438,7 +438,7 @@ inline constexpr bool
 
 template<typename T>
 inline constexpr bool
-  bit::stl::operator<( const optional<T>& opt, nullopt_t )
+  bit::stl::operator<( const optional<T>&, nullopt_t )
   noexcept
 {
   return false;
@@ -462,7 +462,7 @@ inline constexpr bool
 
 template<typename T>
 inline constexpr bool
-  bit::stl::operator>( nullopt_t, const optional<T>& opt )
+  bit::stl::operator>( nullopt_t, const optional<T>& )
   noexcept
 {
   return false;
@@ -478,7 +478,7 @@ inline constexpr bool
 
 template<typename T>
 inline constexpr bool
-  bit::stl::operator<=( nullopt_t, const optional<T>& opt )
+  bit::stl::operator<=( nullopt_t, const optional<T>& )
   noexcept
 {
   return true;
@@ -486,7 +486,7 @@ inline constexpr bool
 
 template<typename T>
 inline constexpr bool
-  bit::stl::operator>=( const optional<T>& opt, nullopt_t )
+  bit::stl::operator>=( const optional<T>&, nullopt_t )
   noexcept
 {
   return true;

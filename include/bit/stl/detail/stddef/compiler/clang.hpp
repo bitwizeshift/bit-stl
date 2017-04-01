@@ -186,7 +186,7 @@
 #define BIT_WEAK __attribute__((weak))
 #define BIT_COMPILER_WEAK_SUPPORTED 1
 
-#ifdef __EXCEPTIONS
+#if defined(__EXCEPTIONS)
 # define BIT_COMPILER_EXCEPTIONS_ENABLED 1
 #else
 # define BIT_COMPILER_EXCEPTIONS_ENABLED 0

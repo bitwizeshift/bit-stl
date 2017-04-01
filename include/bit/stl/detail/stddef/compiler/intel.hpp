@@ -222,7 +222,11 @@
 #   define BIT_COMPILER_EXCEPTIONS_ENABLED 0
 # endif
 #else
-// need to update with MSVC detection
+# if defined(_CPPUNWIND)
+#   define BIT_COMPILER_EXCEPTIONS_ENABLED 1
+# else
+#   define BIT_COMPILER_EXCEPTIONS_ENABLED 0
+# endif
 #endif
 
 //-----------------------------------------------------------------------------

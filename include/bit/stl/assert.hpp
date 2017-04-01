@@ -132,20 +132,16 @@ namespace bit {
 # define BIT_ASSERT(...)
 #endif
 
-#if defined(BIT_DEBUG) || defined(BIT_ALWAYS_ASSERT)
-# if BIT_COMPILER_EXCEPTIONS_ENABLED
-#   define BIT_ASSERT_OR_THROW(exception,condition,message) \
-  do {                                                      \
-    if(!(condition)) {                                      \
-      throw exception{message};                             \
-    }                                                       \
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+# define BIT_ASSERT_OR_THROW(exception,condition,message) \
+  do {                                                    \
+    if(!(condition)) {                                    \
+      throw exception{message};                           \
+    }                                                     \
   } while(0)
-# else
-#   define BIT_ASSERT_OR_THROW(exception,condition,message) \
-  BIT_ASSERT(condition,message)
-# endif
 #else
-# define BIT_ASSERT_OR_THROW(...)
+# define BIT_ASSERT_OR_THROW(exception,condition,message) \
+  BIT_ASSERT(condition,message)
 #endif
 
 //! \def BIT_SANITY_CHECK(a,b)

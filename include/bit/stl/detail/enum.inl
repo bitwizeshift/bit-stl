@@ -7,7 +7,7 @@
 
 template<typename Enum>
 inline bit::stl::string_view
-  bit::stl::enum_traits<Enum>::to_string( Enum e )
+  bit::stl::enum_traits<Enum>::to_string( Enum )
 {
   BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: to_string functionality not implemented for given enum");
   return "";
@@ -15,7 +15,7 @@ inline bit::stl::string_view
 
 template<typename Enum>
 inline Enum
-  bit::stl::enum_traits<Enum>::from_string( string_view s )
+  bit::stl::enum_traits<Enum>::from_string( string_view )
 {
   BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: from_string functionality not implemented for given enum");
   return Enum();

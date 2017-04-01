@@ -53,7 +53,7 @@ inline typename bit::stl::set_view<T>::size_type
   bit::stl::set_view<T>::count( const value_type& key )
   const noexcept
 {
-  if( m_vtable ) return m_vtable->count_ptr( m_instance );
+  if( m_vtable ) return m_vtable->count_ptr( m_instance, key );
   return 0;
 }
 

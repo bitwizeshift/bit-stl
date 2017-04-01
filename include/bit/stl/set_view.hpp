@@ -102,13 +102,15 @@ namespace bit {
 
       /// \brief Counts the number of entries in this set_view
       ///
+      /// \param key the key to count
       /// \return the number of entries in this set_view
-      size_type count( const value_type& value ) const noexcept;
+      size_type count( const value_type& key ) const noexcept;
 
       /// \brief Checks the contents of this set_view
       ///
+      /// \param key the key to find
       /// \return \c true if this set_view contains
-      bool contains( const value_type& value ) const noexcept;
+      bool contains( const value_type& key ) const noexcept;
 
       /// \brief This operator determines whether this set_view is currently
       ///        viewing a set type

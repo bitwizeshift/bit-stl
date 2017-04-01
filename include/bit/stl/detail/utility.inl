@@ -290,7 +290,7 @@ namespace bit {
       template<typename...Args, std::size_t...Idxs>
       inline constexpr void hash_tuple_combine( std::size_t& seed,
                                                 const std::tuple<Args...>& tuple,
-                                                std::index_sequence<Idxs...> idx )
+                                                std::index_sequence<Idxs...> )
       {
         hash_tuple_combine( seed, std::get<Idxs>(tuple)... );
       }

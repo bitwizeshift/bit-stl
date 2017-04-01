@@ -7,9 +7,9 @@
 #ifndef BIT_STL_ITERATOR_HPP
 #define BIT_STL_ITERATOR_HPP
 
-#include <utility>
-#include <tuple>
-#include <iterator>
+#include <utility>  // std::move
+#include <tuple>    // std::tuple_element
+#include <iterator> // std::make_move_iterator
 
 // IWYU pragma: begin_exports
 #include "detail/iterator/tuple_element_iterator.hpp"

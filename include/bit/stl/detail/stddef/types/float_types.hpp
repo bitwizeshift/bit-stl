@@ -48,9 +48,13 @@ namespace bit {
 
       }
 
-      constexpr clamp( const T& other ) noexcept : m_value(other){};
+      constexpr clamp( const clamp& other ) noexcept = default;
 
-      constexpr clamp( T&& other ) noexcept = default;
+      constexpr clamp( clamp&& other ) noexcept = default;
+
+      clamp& operator=( const clamp& other ) noexcept = default;
+
+      clamp& operator=( clamp&& other ) noexcept = default;
 
       /// \brief Converts this value to the underlying clamp type
       constexpr operator T()
