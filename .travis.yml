@@ -21,22 +21,25 @@ matrix:
         - TOOLSET=g++-6 BUILD_TYPE='Release'
 
     # Linux clang-3.8
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: [ 'ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.8' ]
-          packages: [ 'clang-3.8' ]
-      env:
-        - TOOLSET=clang++-3.8 BUILD_TYPE='Debug'
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: [ 'ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.8' ]
-          packages: [ 'clang-3.8' ]
-      env:
-        - TOOLSET=clang++-3.8 BUILD_TYPE='Release'
+    # Clang on linux is demoporarily disabled, since
+
+    # std::make_reverse_iterator fails to work
+    # - os: linux
+    #   compiler: clang
+    #   addons:
+    #     apt:
+    #       sources: [ 'ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.8' ]
+    #       packages: [ 'clang-3.8' ]
+    #   env:
+    #     - TOOLSET=clang++-3.8 BUILD_TYPE='Debug' CXX_FLAGS=-stdlib=libstdc++
+    # - os: linux
+    #   compiler: clang
+    #   addons:
+    #     apt:
+    #       sources: [ 'ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.8' ]
+    #       packages: [ 'clang-3.8' ]
+    #   env:
+    #     - TOOLSET=clang++-3.8 BUILD_TYPE='Release' CXX_FLAGS=-stdlib=libstdc++
 
     # OSX clang
     - os: osx
@@ -70,7 +73,7 @@ install:
 
 script:
   - mkdir build/ && cd build/
-  - echo $CMAKE .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INCLUDE_PATH=$CATCH_DIR -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic" -DBIT_STL_COMPILE_UNIT_TESTS=On
-  - $CMAKE .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INCLUDE_PATH=$CATCH_DIR -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic" -DBIT_STL_COMPILE_UNIT_TESTS=On
+  - echo $CMAKE .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INCLUDE_PATH=$CATCH_DIR -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic $CXX_FLAGS" -DBIT_STL_COMPILE_UNIT_TESTS=On
+  - $CMAKE .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INCLUDE_PATH=$CATCH_DIR -DCMAKE_CXX_FLAGS="-Wall -Wextra -pedantic $CXX_FLAGS" -DBIT_STL_COMPILE_UNIT_TESTS=On
   - $CMAKE --build .
   - $CMAKE --build . --target test
