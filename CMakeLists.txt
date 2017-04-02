@@ -62,6 +62,7 @@ make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/include")
 
 set(headers
+      "include/bit/stl/array.hpp"
       "include/bit/stl/array_view.hpp"
       "include/bit/stl/assert.hpp"
       "include/bit/stl/casts.hpp"
