@@ -128,4 +128,95 @@ To bit::stl::casts::enum_cast( From from )
   return detail::enum_caster<To,From>::cast( from );
 }
 
+
+//============================================================================
+// Enum Operators
+//============================================================================
+
+//----------------------------------------------------------------------------
+// Unary Operators
+//----------------------------------------------------------------------------
+
+template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>*>
+inline constexpr Enum operator ~( Enum e ) noexcept
+{
+  using enum_type = std::underlying_type_t<Enum>;
+  return static_cast<Enum>(~static_cast<enum_type>(e));
+}
+
+//----------------------------------------------------------------------------
+// Binary Operators
+//----------------------------------------------------------------------------
+
+template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>*>
+inline constexpr Enum operator|( Enum lhs, Enum rhs ) noexcept
+{
+  using enum_type = std::underlying_type_t<Enum>;
+  return static_cast<Enum>(static_cast<enum_type>(lhs) | static_cast<enum_type>(rhs));
+}
+
+template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>*>
+inline constexpr Enum operator&( Enum lhs, Enum rhs ) noexcept
+{
+  using enum_type = std::underlying_type_t<Enum>;
+  return static_cast<Enum>(static_cast<enum_type>(lhs) & static_cast<enum_type>(rhs));
+}
+
+template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>*>
+inline constexpr Enum operator^( Enum lhs, Enum rhs ) noexcept
+{
+  using enum_type = std::underlying_type_t<Enum>;
+  return static_cast<Enum>(static_cast<enum_type>(lhs) ^ static_cast<enum_type>(rhs));
+}
+
+template<typename Enum, typename Integer, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value && std::is_integral<Integer>::value>*>
+inline constexpr Enum operator <<( Enum lhs, Integer rhs ) noexcept
+{
+  using enum_type = std::underlying_type_t<Enum>;
+
+  return static_cast<Enum>(static_cast<enum_type>(lhs) << rhs);
+}
+
+template<typename Enum, typename Integer, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value && std::is_integral<Integer>::value>*>
+inline constexpr Enum operator >>( Enum lhs, Integer rhs ) noexcept
+{
+  using enum_type = std::underlying_type_t<Enum>;
+
+  return static_cast<Enum>(static_cast<enum_type>(lhs) >> rhs);
+}
+
+//----------------------------------------------------------------------------
+// Compound Operators
+//----------------------------------------------------------------------------
+
+template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>*>
+inline Enum& operator |=( Enum& lhs, Enum rhs ) noexcept
+{
+  return lhs = (lhs | rhs);
+}
+
+template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>*>
+inline Enum& operator &=( Enum& lhs, Enum rhs ) noexcept
+{
+  return lhs = (lhs & rhs);
+}
+
+template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>*>
+inline Enum& operator ^=( Enum& lhs, Enum rhs ) noexcept
+{
+  return lhs = (lhs ^ rhs);
+}
+
+template<typename Enum, typename Integer, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value && std::is_integral<Integer>::value>*>
+inline Enum& operator <<=( Enum& lhs, Integer rhs ) noexcept
+{
+  return lhs = (lhs << rhs);
+}
+
+template<typename Enum, typename Integer, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value && std::is_integral<Integer>::value>*>
+inline Enum& operator >>=( Enum& lhs, Integer rhs ) noexcept
+{
+  return lhs = (lhs >> rhs);
+}
+
 #endif /* BIT_STL_DETAIL_ENUM_INL */
