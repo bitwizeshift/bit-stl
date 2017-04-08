@@ -93,6 +93,20 @@ namespace bit {
       constexpr basic_hashed_string_view( const char_type* str, size_type count ) noexcept;
 
       //----------------------------------------------------------------------
+
+      /// \brief Copy-assigns a basic_hashed_string_view from another
+      ///
+      /// \param other the other view to copy
+      /// \return reference to \c (*this)
+      basic_hashed_string_view& operator=( const basic_hashed_string_view& other ) noexcept = default;
+
+      /// \brief Move-assigns a basic_hashed_string_view from another
+      ///
+      /// \param other the other view to move
+      /// \return reference to \c (*this)
+      basic_hashed_string_view& operator=( basic_hashed_string_view&& other ) noexcept = default;
+
+      //----------------------------------------------------------------------
       // Accessors
       //----------------------------------------------------------------------
     public:
