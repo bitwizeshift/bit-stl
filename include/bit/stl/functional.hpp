@@ -25,8 +25,8 @@ namespace bit {
     /// \param args     arguments to pass to \p function
     template<typename Func, typename... Args>
     auto invoke(Func&& function, Args&&... args)
-      noexcept( noexcept( detail::invoke_impl(std::forward<Func>(function), std::forward<Args>(args)...) ) )
-      -> decltype( detail::invoke_impl(std::forward<Func>(function), std::forward<Args>(args)...) );
+      noexcept( noexcept( detail::INVOKE(std::forward<Func>(function), std::forward<Args>(args)...) ) )
+      -> decltype( detail::INVOKE(std::forward<Func>(function), std::forward<Args>(args)...) );
 
   } // namespace stl
 } // namespace bit
