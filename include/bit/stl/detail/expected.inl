@@ -1,6 +1,10 @@
 #ifndef BIT_STL_DETAIL_EXPECTED_INL
 #define BIT_STL_DETAIL_EXPECTED_INL
 
+//============================================================================
+// expected<T>
+//============================================================================
+
 //----------------------------------------------------------------------------
 // Constructors / Assignment / Destructor
 //----------------------------------------------------------------------------
@@ -254,6 +258,25 @@ inline bool bit::stl::expected<T>::has_exception()
 //----------------------------------------------------------------------------
 
 template<typename T>
+inline void bit::stl::expected<T>::throw_if_exception()
+  const
+{
+  if( m_is_exception )
+  {
+    if( m_storage.exception )
+    {
+      std::rethrow_exception( m_storage.exception );
+    }
+    else
+    {
+      throw bad_expected_access();
+    }
+  }
+}
+
+//----------------------------------------------------------------------------
+
+template<typename T>
 inline constexpr typename bit::stl::expected<T>::value_type*
   bit::stl::expected<T>::operator->()
   noexcept
@@ -428,23 +451,6 @@ inline void
 //----------------------------------------------------------------------------
 
 template<typename T>
-inline void bit::stl::expected<T>::throw_if_exception()
-  const
-{
-  if( m_is_exception )
-  {
-    if( m_storage.exception )
-    {
-      std::rethrow_exception( m_storage.exception );
-    }
-    else
-    {
-      throw bad_expected_access();
-    }
-  }
-}
-
-template<typename T>
 inline void bit::stl::expected<T>::destruct()
 {
   if( m_is_exception )
@@ -491,6 +497,238 @@ inline void
     throw;
   }
 }
+
+//============================================================================
+// expected<void>
+//============================================================================
+
+//----------------------------------------------------------------------------
+// Constructors / Assignment / Destructor
+//----------------------------------------------------------------------------
+
+inline constexpr bit::stl::expected<void>::expected()
+  noexcept
+  : m_storage(),
+    m_is_exception(false)
+{
+
+}
+
+//----------------------------------------------------------------------------
+
+inline bit::stl::expected<void>::expected( in_place_type_t<std::exception_ptr> )
+  : expected( in_place<std::exception_ptr>, std::current_exception() )
+{
+
+}
+
+//----------------------------------------------------------------------------
+
+inline bit::stl::expected<void>::expected( in_place_type_t<std::exception_ptr>,
+                                           std::exception_ptr ptr )
+  : m_storage( in_place<std::exception_ptr>,
+               ptr ? std::move(ptr) :
+                     std::make_exception_ptr(bad_expected_access()) ),
+    m_is_exception(true)
+{
+
+}
+
+//----------------------------------------------------------------------------
+
+template<typename Exception, typename...Args>
+inline bit::stl::expected<void>::expected( in_place_type_t<Exception>,
+                                           Args&&...args )
+  noexcept( std::is_nothrow_constructible<Exception,Args...>::value )
+  : expected( in_place<std::exception_ptr>,
+              std::make_exception_ptr(Exception(std::forward<Args>(args)...)))
+{
+
+}
+
+//----------------------------------------------------------------------------
+
+template<typename Exception, typename U, typename...Args>
+inline bit::stl::expected<void>::expected( in_place_type_t<Exception>,
+                                           std::initializer_list<U> ilist,
+                                           Args&&...args )
+  noexcept( std::is_nothrow_constructible<Exception,std::initializer_list<U>,Args...>::value )
+  : expected( in_place<std::exception_ptr>,
+              std::make_exception_ptr( Exception( ilist, std::forward<Args>(args)... ) ) )
+{
+
+}
+
+//----------------------------------------------------------------------------
+
+inline bit::stl::expected<void>::expected( const expected& other )
+  : m_storage(),
+    m_is_exception(other.m_is_exception)
+{
+  if(other.m_is_exception) {
+    new (&m_storage.exception) std::exception_ptr(other.m_storage.exception);
+  }
+}
+
+//----------------------------------------------------------------------------
+
+inline bit::stl::expected<void>::expected( expected&& other )
+  : m_storage(),
+    m_is_exception(other.m_is_exception)
+{
+  if(other.m_is_exception) {
+    new (&m_storage.exception) std::exception_ptr( std::move(other.m_storage.exception) );
+  }
+}
+
+//----------------------------------------------------------------------------
+
+inline bit::stl::expected<void>&
+  bit::stl::expected<void>::operator=( const expected& other )
+{
+  if( m_is_exception && other.m_is_exception ) {
+    m_storage.exception = other.m_storage.exception;
+  } else if( other.m_is_exception ) {
+    new (&m_storage.exception) std::exception_ptr(other.m_storage.exception);
+  } else {
+    destruct();
+  }
+
+  return (*this);
+}
+
+//----------------------------------------------------------------------------
+
+inline bit::stl::expected<void>&
+  bit::stl::expected<void>::operator=( expected&& other )
+{
+  if( m_is_exception && other.m_is_exception ) {
+    m_storage.exception = std::move(other.m_storage.exception);
+  } else if( other.m_is_exception ) {
+    new (&m_storage.exception) std::exception_ptr( std::move(other.m_storage.exception) );
+  } else {
+    destruct();
+  }
+
+  return (*this);
+}
+
+inline bit::stl::expected<void>::~expected()
+{
+  destruct();
+}
+
+//----------------------------------------------------------------------------
+// Observers
+//----------------------------------------------------------------------------
+
+
+inline constexpr bit::stl::expected<void>::operator bool()
+  const noexcept
+{
+  return !m_is_exception;
+}
+
+inline constexpr bool bit::stl::expected<void>::valueless_by_exception()
+  const noexcept
+{
+  return m_is_exception && m_storage.exception == nullptr;
+}
+
+
+template<typename Exception>
+inline bool bit::stl::expected<void>::has_exception()
+  const noexcept
+{
+  if( !m_is_exception ) return false;
+  if( !m_storage.exception ) return false;
+
+  try {
+    std::rethrow_exception( m_storage.exception );
+  } catch ( const Exception& ) {
+    return true;
+  } catch ( ... ) {
+    return false;
+  }
+  return false; // this case shouldn't be hit
+}
+
+inline bool bit::stl::expected<void>::has_exception()
+  const noexcept
+{
+  return m_is_exception;
+}
+
+//----------------------------------------------------------------------------
+
+inline void bit::stl::expected<void>::throw_if_exception()
+  const
+{
+  if( m_is_exception ) {
+    if( m_storage.exception ) {
+      std::rethrow_exception( m_storage.exception );
+    } else {
+      throw bad_expected_access();
+    }
+  }
+}
+
+//----------------------------------------------------------------------------
+// Mutators
+//----------------------------------------------------------------------------
+
+inline void bit::stl::expected<void>::swap( expected<void>& rhs )
+  noexcept
+{
+  using std::swap;
+
+  if( m_is_exception && rhs.m_is_exception ) {
+    swap( m_storage.exception, rhs.m_storage.exception );
+  } else if( m_is_exception ) {
+    auto exception = std::move(m_storage.exception);
+
+    destruct();
+    reconstruct_exception( rhs, std::move(exception) );
+  } else {
+    reconstruct_exception( *this, std::move(rhs.m_storage.exception) );
+    rhs.destruct();
+  }
+}
+
+
+//----------------------------------------------------------------------------
+// Private Member Functions
+//----------------------------------------------------------------------------
+
+inline void bit::stl::expected<void>::destruct()
+{
+  if( m_is_exception )
+  {
+    m_storage.exception.~exception_ptr();
+    m_is_exception = false;
+  }
+}
+
+
+template<typename...Args>
+inline void
+  bit::stl::expected<void>::reconstruct_exception( expected<void>& expected,
+                                                   Args&&...args )
+{
+  try {
+    expected.destruct();
+    new (&expected.m_storage.exception) std::exception_ptr( std::forward<Args>(args)... );
+    expected.m_is_exception = true;
+  } catch (...) {
+    new (&expected.m_storage.exception) std::exception_ptr( nullptr );
+    expected.m_is_exception = true;
+    throw;
+  }
+}
+
+//============================================================================
+// Utility Functions
+//============================================================================
 
 //----------------------------------------------------------------------------
 // Comparison Operators
@@ -694,6 +932,12 @@ inline constexpr std::size_t bit::stl::hash_value( const expected<T>& val )
   if( val ) {
     return hash_value( val.value() );
   }
+  return 0;
+}
+
+inline constexpr std::size_t bit::stl::hash_value( const expected<void>& val )
+  noexcept
+{
   return 0;
 }
 

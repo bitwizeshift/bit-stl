@@ -18,6 +18,10 @@
 namespace bit {
   namespace stl {
 
+    //========================================================================
+    // bad_expected_access
+    //========================================================================
+
     //////////////////////////////////////////////////////////////////////////
     /// \brief An exception indicating a bad access was attempted for an
     ///        expected type
@@ -33,6 +37,9 @@ namespace bit {
       bad_expected_access() : std::logic_error("bit::bad_expected_access"){}
     };
 
+    //========================================================================
+    // expected<T>
+    //========================================================================
 
     //////////////////////////////////////////////////////////////////////////
     /// \brief An expected type is a combination of an optional and an
@@ -190,6 +197,12 @@ namespace bit {
 
       //------------------------------------------------------------------------
 
+      /// \brief Throws an exception if this type is currently holding an
+      ///        exception
+      void throw_if_exception() const;
+
+      //------------------------------------------------------------------------
+
       /// \brief Access the contained value by pointer
       ///
       /// \note It is undefined behaviour to access this while holding onto
@@ -342,10 +355,6 @@ namespace bit {
       /// \param ptr the exception pointer
       explicit expected( in_place_type_t<std::exception_ptr> tag, std::exception_ptr );
 
-      /// \brief Throws an exception if this type is currently holding an
-      ///        exception
-      void throw_if_exception() const;
-
       /// \brief Destructs the underlying type
       void destruct();
 
@@ -362,6 +371,191 @@ namespace bit {
       /// \param args     the args to forward for construction
       template<typename...Args>
       static void reconstruct_exception( expected<T>& expected, Args&&...args );
+    };
+
+    //========================================================================
+    // expected<T>
+    //========================================================================
+
+    template<>
+    class expected<void>
+    {
+      //----------------------------------------------------------------------
+      // Public Member Types
+      //----------------------------------------------------------------------
+    public:
+
+      using value_type = void;
+
+      //----------------------------------------------------------------------
+      // Constructors
+      //----------------------------------------------------------------------
+    public:
+
+      /// \brief Default-constructs this expected without an exception
+      constexpr expected() noexcept;
+
+      /// \brief Constructs an expected from the current exception
+      ///
+      /// \note If \c std::current_exception() returns null, then the
+      ///       expected will contain a bad_expected_access.
+      ///
+      /// \param tag The type tag for tag dispatch
+      explicit expected( in_place_type_t<std::exception_ptr> tag );
+
+      /// \brief Constructs an expected of the exception type, forwarding
+      ///        \p args to the constructor
+      ///
+      /// \param tag  The type tag for the exception to throw
+      /// \param args The arguments to the exception type
+      template<typename Exception, typename...Args>
+      explicit expected( in_place_type_t<Exception> tag, Args&&...args )
+        noexcept( std::is_nothrow_constructible<Exception,Args...>::value );
+
+      /// \brief Constructs an expected of the exception type, forwarding
+      ///        \p ilist and \p args to the constructor
+      ///
+      /// \param tag   The type tag for the exception to throw
+      /// \param ilist The initializer list to forward to the constructor
+      /// \param args  The arguments to the exception type
+      template<typename Exception, typename U, typename...Args>
+      explicit expected( in_place_type_t<Exception> tag, std::initializer_list<U> ilist, Args&&...args )
+        noexcept( std::is_nothrow_constructible<Exception,std::initializer_list<U>,Args...>::value );
+
+      /// \brief Copy-constructs an expected from another expected
+      ///
+      /// \param other the other expected to copy
+      expected( const expected& other );
+
+      /// \brief Move-constructs an expected from another expected
+      ///
+      /// \param other the other expected to move
+      expected( expected&& other );
+
+      /// \brief Copy-constructs an expected type
+      ///
+      /// \param other the other expected to copy
+      expected& operator=( const expected& other );
+
+      /// \brief Move-constructs an expected type
+      ///
+      /// \param other the other expected to move
+      expected& operator=( expected&& other );
+
+      /// \brief Deletes the expected type
+      ~expected();
+
+      //----------------------------------------------------------------------
+      // Observers
+      //----------------------------------------------------------------------
+    public:
+
+      /// \brief Queries whether or not this expected contains a value.
+      ///
+      /// This is \c true when the it contains a value, false on exception
+      constexpr explicit operator bool() const noexcept;
+
+      /// \brief Queries whether this exception is valueless due to an
+      ///        exception
+      ///
+      /// This state is only achieved through a failure in between a
+      /// destructor and constructor call
+      ///
+      /// \return \c true if this expected is valueless by construction
+      constexpr bool valueless_by_exception() const noexcept;
+
+      /// \brief Queries whether or not this expected contains an exception
+      ///        of type \p Exception
+      ///
+      /// \tparam Exception the exception type to query
+      /// \return \c true when it contains an exception convertible to type
+      ///         \p Exception
+      template<typename Exception>
+      bool has_exception() const noexcept;
+
+      /// \brief Queries whether or not this expected contains an exception
+      ///        of type \p Exception
+      ///
+      /// \return \c true when it contains an exception
+      bool has_exception() const noexcept;
+
+      //------------------------------------------------------------------------
+
+      /// \brief Throws an exception if this type is currently holding an
+      ///        exception
+      void throw_if_exception() const;
+
+      //------------------------------------------------------------------------
+      // Modifiers
+      //------------------------------------------------------------------------
+    public:
+
+      /// \brief Swaps the contents of this with \p rhs
+      ///
+      /// \param rhs the right-hand-side to exchange with
+      void swap( expected<void>& rhs ) noexcept;
+
+      //----------------------------------------------------------------------
+      // Private Member Types
+      //----------------------------------------------------------------------
+    private:
+
+      /// \brief An empty type to use as a placeholder in a union.
+      ///
+      /// This is trivially destructible to avoid any need for calling a
+      /// destructor first
+      struct empty_type{ constexpr empty_type() = default; };
+
+      ////////////////////////////////////////////////////////////////////////
+      /// \brief A constexpr storage type
+      ///
+      ////////////////////////////////////////////////////////////////////////
+      union storage_type
+      {
+        empty_type         empty;
+        std::exception_ptr exception;
+
+        constexpr storage_type()
+          : empty{}
+        {}
+
+        template<typename...Args>
+        constexpr storage_type( in_place_type_t<std::exception_ptr>, Args&&...args )
+          : exception( std::forward<Args>(args)... )
+        {}
+
+        ~storage_type() noexcept{};
+      };
+
+      //----------------------------------------------------------------------
+      // Private Members
+      //----------------------------------------------------------------------
+    private:
+
+      storage_type m_storage;      ///< The storage type
+      bool         m_is_exception; ///< Whether or not this is an exception
+
+      //----------------------------------------------------------------------
+      // Private Member Functions
+      //----------------------------------------------------------------------
+    private:
+
+      /// \brief Private constructor that forwards the exception ptr to the
+      ///        expected
+      ///
+      /// \param tag The type tag for tag dispatch
+      /// \param ptr the exception pointer
+      explicit expected( in_place_type_t<std::exception_ptr> tag, std::exception_ptr );
+
+      /// \brief Destructs the underlying type
+      void destruct();
+
+      /// \brief Reconstructs an expected into an exception from the given arguments
+      ///
+      /// \param expected the expected to construct
+      /// \param args     the args to forward for construction
+      template<typename...Args>
+      static void reconstruct_exception( expected<void>& expected, Args&&...args );
     };
 
     //------------------------------------------------------------------------
@@ -493,6 +687,12 @@ namespace bit {
     /// \return the hash of the string
     template<typename T>
     constexpr std::size_t hash_value( const expected<T>& val ) noexcept;
+
+    /// \brief Retrieves the hash from a given expected
+    ///
+    /// \param val the expected to retrieve the hash from
+    /// \return \c 0
+    constexpr std::size_t hash_value( const expected<void>& val ) noexcept;
 
   } // inline namespace bit
 } // namespace bit
