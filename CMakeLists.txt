@@ -72,6 +72,7 @@ set(headers
       "include/bit/stl/enum.hpp"
       "include/bit/stl/expected.hpp"
       "include/bit/stl/functional.hpp"
+      "include/bit/stl/hashed_string.hpp"
       "include/bit/stl/hashed_string_view.hpp"
       "include/bit/stl/iterator.hpp"
       "include/bit/stl/lazy.hpp"
