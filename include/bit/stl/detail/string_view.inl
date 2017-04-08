@@ -1140,40 +1140,13 @@ inline std::basic_string<CharT,Traits,Allocator>&
 // Hash Functions
 //----------------------------------------------------------------------------
 
-namespace bit {
-namespace stl {
-namespace detail {
-
-  template<std::size_t> constexpr std::size_t fnv1_prime();
-  template<std::size_t> constexpr std::size_t fnv1_offset();
-
-  template<> constexpr std::size_t fnv1_prime<4>(){ return 16777619ul; }
-  template<> constexpr std::size_t fnv1_prime<8>(){ return 1099511628211ull; }
-
-  template<> constexpr std::size_t fnv1_offset<4>(){ return 2166136261ul; }
-  template<> constexpr std::size_t fnv1_offset<8>(){ return 14695981039346656037ull; }
-
-}
-}
-}
 
 template<typename CharT, typename Traits>
 inline constexpr std::size_t
   bit::stl::hash_value( const basic_string_view<CharT,Traits>& str )
   noexcept
 {
-  constexpr auto offset = detail::fnv1_offset<sizeof(std::size_t)>();
-  constexpr auto prime  = detail::fnv1_prime<sizeof(std::size_t)>();
-
-  auto count  = str.size();
-  auto result = offset;
-  auto ptr    = str.data();
-  while (count--)
-  {
-    result ^= static_cast<std::size_t>(*(ptr++));
-    result *= prime;
-  }
-  return result;
+  return detail::string_hash( str.data(), str.size() );
 }
 
 #endif /* BIT_STL_DETAIL_STRING_VIEW_INL */

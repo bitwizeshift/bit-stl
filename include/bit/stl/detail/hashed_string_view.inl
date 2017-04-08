@@ -79,14 +79,6 @@ template<typename CharT, typename Traits>
 
 template<typename CharT, typename Traits>
   inline constexpr const typename bit::stl::basic_hashed_string_view<CharT,Traits>::char_type*
-  bit::stl::basic_hashed_string_view<CharT,Traits>::c_str()
-  const noexcept
-{
-  return m_view.data();
-}
-
-template<typename CharT, typename Traits>
-  inline constexpr const typename bit::stl::basic_hashed_string_view<CharT,Traits>::char_type*
   bit::stl::basic_hashed_string_view<CharT,Traits>::data()
   const noexcept
 {
@@ -111,63 +103,6 @@ template<typename CharT, typename Traits>
   swap(m_view,other.m_view);
 }
 
-//----------------------------------------------------------------------------
-// Equality Comparisons
-//----------------------------------------------------------------------------
-
-template<typename CharT, typename Traits>
-inline constexpr bool
-  bit::stl::operator == ( const basic_hashed_string_view<CharT,Traits>& lhs,
-                          const basic_hashed_string_view<CharT,Traits>& rhs )
-  noexcept
-{
-  return lhs.hash() == rhs.hash();
-}
-
-template<typename CharT, typename Traits>
-inline constexpr bool
-  bit::stl::operator != ( const basic_hashed_string_view<CharT,Traits>& lhs,
-                          const basic_hashed_string_view<CharT,Traits>& rhs )
-  noexcept
-{
-  return lhs.hash() != rhs.hash();
-}
-
-template<typename CharT, typename Traits>
-inline constexpr bool
-  bit::stl::operator < ( const basic_hashed_string_view<CharT,Traits>& lhs,
-                         const basic_hashed_string_view<CharT,Traits>& rhs )
-  noexcept
-{
-  return lhs.hash() < rhs.hash();
-}
-
-template<typename CharT, typename Traits>
-inline constexpr bool
-  bit::stl::operator > ( const basic_hashed_string_view<CharT,Traits>& lhs,
-                         const basic_hashed_string_view<CharT,Traits>& rhs )
-  noexcept
-{
-  return lhs.hash() > rhs.hash();
-}
-
-template<typename CharT, typename Traits>
-inline constexpr bool
-  bit::stl::operator <= ( const basic_hashed_string_view<CharT,Traits>& lhs,
-                          const basic_hashed_string_view<CharT,Traits>& rhs )
-  noexcept
-{
-  return lhs.hash() <= rhs.hash();
-}
-
-template<typename CharT, typename Traits>
-inline constexpr bool
-  bit::stl::operator >= ( const basic_hashed_string_view<CharT,Traits>& lhs,
-                          const basic_hashed_string_view<CharT,Traits>& rhs )
-  noexcept
-{
-  return lhs.hash() >= rhs.hash();
-}
 
 //----------------------------------------------------------------------------
 // Mutators
@@ -192,6 +127,64 @@ inline constexpr std::size_t
   noexcept
 {
   return str.hash();
+}
+
+//----------------------------------------------------------------------------
+// Equality Comparisons
+//----------------------------------------------------------------------------
+
+template<typename CharT, typename Traits>
+inline constexpr bool
+  bit::stl::operator == ( const basic_hashed_string_view<CharT,Traits>& lhs,
+                          const basic_hashed_string_view<CharT,Traits>& rhs )
+  noexcept
+{
+  return lhs.hash() == rhs.hash() && lhs.view() == rhs.view();
+}
+
+template<typename CharT, typename Traits>
+inline constexpr bool
+  bit::stl::operator != ( const basic_hashed_string_view<CharT,Traits>& lhs,
+                          const basic_hashed_string_view<CharT,Traits>& rhs )
+  noexcept
+{
+  return !(lhs==rhs);
+}
+
+template<typename CharT, typename Traits>
+inline constexpr bool
+  bit::stl::operator < ( const basic_hashed_string_view<CharT,Traits>& lhs,
+                         const basic_hashed_string_view<CharT,Traits>& rhs )
+  noexcept
+{
+  return lhs.hash() == rhs.hash() ? lhs.view() < rhs.view() : lhs.hash() < rhs.hash();
+}
+
+template<typename CharT, typename Traits>
+inline constexpr bool
+  bit::stl::operator > ( const basic_hashed_string_view<CharT,Traits>& lhs,
+                         const basic_hashed_string_view<CharT,Traits>& rhs )
+  noexcept
+{
+  return (rhs < lhs);
+}
+
+template<typename CharT, typename Traits>
+inline constexpr bool
+  bit::stl::operator <= ( const basic_hashed_string_view<CharT,Traits>& lhs,
+                          const basic_hashed_string_view<CharT,Traits>& rhs )
+  noexcept
+{
+  return !(rhs < lhs);
+}
+
+template<typename CharT, typename Traits>
+inline constexpr bool
+  bit::stl::operator >= ( const basic_hashed_string_view<CharT,Traits>& lhs,
+                          const basic_hashed_string_view<CharT,Traits>& rhs )
+  noexcept
+{
+  return !(lhs < rhs);
 }
 
 #endif /* BIT_STL_DETAIL_HASHED_STRING_VIEW_INL */
