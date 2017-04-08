@@ -113,6 +113,44 @@ namespace bit {
     constexpr bool is_cv_member_function_poiner_v
       = is_cv_member_function_pointer<Func>::value;
 
+    //--------------------------------------------------------------------------
+    // Type Relationships
+    //--------------------------------------------------------------------------
+
+    template<typename Fn, typename... Types>
+    using is_invocable = is_detected<invoke_result_t,Fn,Types...>;
+
+    template<typename Fn, typename... Types>
+    constexpr bool is_invocable_v = is_invocable<Fn,Types...>::value;
+
+    //--------------------------------------------------------------------------
+
+    template<typename R, typename Fn, typename... Types>
+    using is_invocable_r = is_detected_convertible<R,invoke_result_t,Fn,Types...>;
+
+    template<typename R, typename Fn, typename... Types>
+    constexpr bool is_invocable_r_v = is_invocable_r<R,Fn,Types...>::value;
+
+    //--------------------------------------------------------------------------
+
+    template<typename Fn, typename... Types>
+    using is_nothrow_invocable = conjunction<bool_constant<noexcept( detail::INVOKE( std::declval<Fn>(), std::declval<Types>()... ) )>,
+                                             is_invocable<Fn,Types...>>;
+
+    template<typename Fn, typename... Types>
+    constexpr bool is_nothrow_invocable_v = is_nothrow_invocable<Fn,Types...>::value;
+
+    //--------------------------------------------------------------------------
+
+    template<typename R, typename Fn, typename... Types>
+    using is_nothrow_invocable_r = conjunction<bool_constant<noexcept( detail::INVOKE( std::declval<Fn>(), std::declval<Types>()... ) )>,
+                                               is_invocable_r<R,Fn,Types...>>;
+
+    template<typename R, typename Fn, typename... Types>
+    constexpr bool is_nothrow_invocable_r_v = is_nothrow_invocable_r<R,Fn,Types...>::value;
+
+    //--------------------------------------------------------------------------
+
   } // namespace stl
 } // namespace bit
 

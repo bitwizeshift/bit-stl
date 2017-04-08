@@ -237,48 +237,51 @@ namespace bit {
     //--------------------------------------------------------------------------
 
     template<typename Func>
-    struct make_uniform_function;
+    struct uniform_function;
 
     template<typename R, typename...Args>
-    struct make_uniform_function<R(*)(Args...)> : identity<R(*)(Args...)>{};
+    struct uniform_function<R(*)(Args...)> : identity<R(*)(Args...)>{};
 
     template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...)> : identity<R(*)(C&,Args...)>{};
+    struct uniform_function<R(C::*)(Args...)> : identity<R(*)(C&,Args...)>{};
 
     template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...) const> : identity<R(*)(const C&, Args...)>{};
+    struct uniform_function<R(C::*)(Args...) const> : identity<R(*)(const C&, Args...)>{};
 
     template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...) volatile> : identity<R(*)(volatile C&, Args...)>{};
+    struct uniform_function<R(C::*)(Args...) volatile> : identity<R(*)(volatile C&, Args...)>{};
 
     template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...) const volatile> : identity<R(*)(const volatile C&, Args...)>{};
-
-
-    template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...) &> : identity<R(*)(C&,Args...)>{};
-
-    template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...) const &> : identity<R(*)(const C&, Args...)>{};
-
-    template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...) volatile &> : identity<R(*)(volatile C&, Args...)>{};
-
-    template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...) const volatile &> : identity<R(*)(const volatile C&, Args...)>{};
+    struct uniform_function<R(C::*)(Args...) const volatile> : identity<R(*)(const volatile C&, Args...)>{};
 
 
     template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...) &&> : identity<R(*)(C&&,Args...)>{};
+    struct uniform_function<R(C::*)(Args...) &> : identity<R(*)(C&,Args...)>{};
 
     template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...) const &&> : identity<R(*)(const C&&, Args...)>{};
+    struct uniform_function<R(C::*)(Args...) const &> : identity<R(*)(const C&, Args...)>{};
 
     template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...) volatile &&> : identity<R(*)(volatile C&&, Args...)>{};
+    struct uniform_function<R(C::*)(Args...) volatile &> : identity<R(*)(volatile C&, Args...)>{};
 
     template<typename C, typename R, typename...Args>
-    struct make_uniform_function<R(C::*)(Args...) const volatile &&> : identity<R(*)(const volatile C&&, Args...)>{};
+    struct uniform_function<R(C::*)(Args...) const volatile &> : identity<R(*)(const volatile C&, Args...)>{};
+
+
+    template<typename C, typename R, typename...Args>
+    struct uniform_function<R(C::*)(Args...) &&> : identity<R(*)(C&&,Args...)>{};
+
+    template<typename C, typename R, typename...Args>
+    struct uniform_function<R(C::*)(Args...) const &&> : identity<R(*)(const C&&, Args...)>{};
+
+    template<typename C, typename R, typename...Args>
+    struct uniform_function<R(C::*)(Args...) volatile &&> : identity<R(*)(volatile C&&, Args...)>{};
+
+    template<typename C, typename R, typename...Args>
+    struct uniform_function<R(C::*)(Args...) const volatile &&> : identity<R(*)(const volatile C&&, Args...)>{};
+
+    template<typename Func>
+    using uniform_function_t = typename uniform_function<Func>::type;
 
     //--------------------------------------------------------------------------
 
@@ -364,6 +367,16 @@ namespace bit {
     ///        remove_member_function_cv
     template<typename T>
     using remove_member_function_pointer_cv_t = typename remove_member_function_pointer_cv<T>::type;
+
+    //--------------------------------------------------------------------------
+    // Miscellaneous transformations
+    //--------------------------------------------------------------------------
+
+    template<typename F, typename... Types>
+    class invoke_result : identity<decltype(detail::INVOKE( std::declval<F>(), std::declval<Types>()... ))>{};
+
+    template<typename F, typename... Types>
+    using invoke_result_t = typename invoke_result<F,Types...>::type;
 
   } // namespace stl
 } // namespace bit
