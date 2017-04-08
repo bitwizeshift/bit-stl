@@ -79,14 +79,6 @@ template<typename CharT, typename Traits>
 
 template<typename CharT, typename Traits>
   inline constexpr const typename bit::stl::basic_hashed_string_view<CharT,Traits>::char_type*
-  bit::stl::basic_hashed_string_view<CharT,Traits>::c_str()
-  const noexcept
-{
-  return m_view.data();
-}
-
-template<typename CharT, typename Traits>
-  inline constexpr const typename bit::stl::basic_hashed_string_view<CharT,Traits>::char_type*
   bit::stl::basic_hashed_string_view<CharT,Traits>::data()
   const noexcept
 {
@@ -109,6 +101,32 @@ template<typename CharT, typename Traits>
   using std::swap; // for use with ADL
   swap(m_hash,other.m_hash);
   swap(m_view,other.m_view);
+}
+
+
+//----------------------------------------------------------------------------
+// Mutators
+//----------------------------------------------------------------------------
+
+template<typename CharT, typename Traits>
+inline void
+  bit::stl::swap( basic_hashed_string_view<CharT,Traits>& lhs,
+                  basic_hashed_string_view<CharT,Traits>& rhs )
+  noexcept
+{
+  lhs.swap(rhs);
+}
+
+//----------------------------------------------------------------------------
+// Hash Functions
+//----------------------------------------------------------------------------
+
+template<typename CharT, typename Traits>
+inline constexpr std::size_t
+  bit::stl::hash_value( const basic_hashed_string_view<CharT,Traits>& str )
+  noexcept
+{
+  return str.hash();
 }
 
 //----------------------------------------------------------------------------
@@ -167,31 +185,6 @@ inline constexpr bool
   noexcept
 {
   return lhs.hash() >= rhs.hash();
-}
-
-//----------------------------------------------------------------------------
-// Mutators
-//----------------------------------------------------------------------------
-
-template<typename CharT, typename Traits>
-inline void
-  bit::stl::swap( basic_hashed_string_view<CharT,Traits>& lhs,
-                  basic_hashed_string_view<CharT,Traits>& rhs )
-  noexcept
-{
-  lhs.swap(rhs);
-}
-
-//----------------------------------------------------------------------------
-// Hash Functions
-//----------------------------------------------------------------------------
-
-template<typename CharT, typename Traits>
-inline constexpr std::size_t
-  bit::stl::hash_value( const basic_hashed_string_view<CharT,Traits>& str )
-  noexcept
-{
-  return str.hash();
 }
 
 #endif /* BIT_STL_DETAIL_HASHED_STRING_VIEW_INL */

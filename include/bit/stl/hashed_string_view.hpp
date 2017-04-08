@@ -10,12 +10,13 @@
 #ifndef BIT_STL_HASHED_STRING_VIEW_HPP
 #define BIT_STL_HASHED_STRING_VIEW_HPP
 
+#include "string.hpp"
 #include "string_view.hpp"
 
 namespace bit {
   namespace stl {
 
-    ////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
     /// \brief The basic_hashed_string_view is a compile-time hashed wrapper
     ///        around a non-owning string (#basic_string_view).
     ///
@@ -24,16 +25,16 @@ namespace bit {
     ///
     /// Since the hash is stored with the string, it allows easy checking of
     /// the hash multiple times without any concerns for performance.
-    ////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
     template<
       typename CharT,
       typename Traits = std::char_traits<CharT>
     >
     class basic_hashed_string_view final
     {
-      //------------------------------------------------------------------------
+      //----------------------------------------------------------------------
       // Public Member Types
-      //------------------------------------------------------------------------
+      //----------------------------------------------------------------------
     public:
 
       using string_view_type = basic_string_view<CharT,Traits>;
@@ -45,14 +46,14 @@ namespace bit {
 
       struct const_char_wrapper
       {
-        const_char_wrapper( const char_type* ptr ) : ptr(ptr){}
+        constexpr const_char_wrapper( const char_type* ptr ) : ptr(ptr){}
 
         const char_type* ptr;
       };
 
-      //------------------------------------------------------------------------
+      //----------------------------------------------------------------------
       // Constructors
-      //------------------------------------------------------------------------
+      //----------------------------------------------------------------------
     public:
 
       /// \brief Default constructs a basic_hashed_string_view without any content
@@ -91,9 +92,9 @@ namespace bit {
       /// \param count the size of the string
       constexpr basic_hashed_string_view( const char_type* str, size_type count ) noexcept;
 
-      //------------------------------------------------------------------------
+      //----------------------------------------------------------------------
       // Accessors
-      //------------------------------------------------------------------------
+      //----------------------------------------------------------------------
     public:
 
       /// \brief Accessor to retrieve the hash from this hashed_string_view
@@ -105,11 +106,6 @@ namespace bit {
       ///
       /// \return the string being viewed
       constexpr string_view_type view() const noexcept;
-
-      /// \brief Gets the data of the current basic_string_view
-      ///
-      /// \return the data this basic_string_view contains
-      constexpr const char_type* c_str() const noexcept;
 
       /// \brief Gets the data of the current basic_string_view
       ///
@@ -126,18 +122,56 @@ namespace bit {
       /// \param other the other hashed string to swap with
       void swap( basic_hashed_string_view& other ) noexcept;
 
-      //------------------------------------------------------------------------
+      //----------------------------------------------------------------------
       // Private Members
-      //------------------------------------------------------------------------
+      //----------------------------------------------------------------------
     private:
 
       string_view_type m_view; ///< The string that this hash string represents
       hash_type        m_hash; ///< The type for this hash
     };
 
-    //--------------------------------------------------------------------------
+    //------------------------------------------------------------------------
+    // Public Types
+    //------------------------------------------------------------------------
+
+    using hashed_string_view    = basic_hashed_string_view<char>;
+    using hashed_wstring_view   = basic_hashed_string_view<wchar_t>;
+    using hashed_u16string_view = basic_hashed_string_view<char16_t>;
+    using hashed_u32string_view = basic_hashed_string_view<char32_t>;
+
+    namespace ci {
+
+      using hashed_string_view    = basic_hashed_string_view<char, insensitive_char_traits<char>>;
+      using hashed_wstring_view   = basic_hashed_string_view<wchar_t, insensitive_char_traits<wchar_t>>;
+      using hashed_u16string_view = basic_hashed_string_view<char16_t, insensitive_char_traits<char16_t>>;
+      using hashed_u32string_view = basic_hashed_string_view<char32_t, insensitive_char_traits<char32_t>>;
+
+    } // namespace ci
+
+    //------------------------------------------------------------------------
+    // Mutators
+    //------------------------------------------------------------------------
+
+    template<typename CharT, typename Traits>
+    void swap( basic_hashed_string_view<CharT,Traits>& lhs,
+               basic_hashed_string_view<CharT,Traits>& rhs ) noexcept;
+
+    //------------------------------------------------------------------------
+    // Hash Functions
+    //------------------------------------------------------------------------
+
+    /// \brief Retrieves the hash from a given basic_hashed_string_view
+    ///
+    /// \param str the basic_hashed_string_view to retrieve the hash from
+    /// \return the hash of the string
+    template<typename CharT, typename Traits>
+    constexpr std::size_t hash_value( const basic_hashed_string_view<CharT,Traits>& str )
+      noexcept;
+
+    //------------------------------------------------------------------------
     // Comparison Operators
-    //--------------------------------------------------------------------------
+    //------------------------------------------------------------------------
 
     template<typename CharT, typename Traits>
     constexpr bool operator == ( const basic_hashed_string_view<CharT,Traits>& lhs,
@@ -163,34 +197,6 @@ namespace bit {
     constexpr bool operator >= ( const basic_hashed_string_view<CharT,Traits>& lhs,
                                  const basic_hashed_string_view<CharT,Traits>& rhs ) noexcept;
 
-    //--------------------------------------------------------------------------
-    // Mutators
-    //--------------------------------------------------------------------------
-
-    template<typename CharT, typename Traits>
-    void swap( basic_hashed_string_view<CharT,Traits>& lhs,
-               basic_hashed_string_view<CharT,Traits>& rhs ) noexcept;
-
-    //--------------------------------------------------------------------------
-    // Public Types
-    //--------------------------------------------------------------------------
-
-    using hashed_string_view    = basic_hashed_string_view<char>;
-    using hashed_wstring_view   = basic_hashed_string_view<wchar_t>;
-    using hashed_u16string_view = basic_hashed_string_view<char16_t>;
-    using hashed_u32string_view = basic_hashed_string_view<char32_t>;
-
-    //--------------------------------------------------------------------------
-    // Hash Functions
-    //--------------------------------------------------------------------------
-
-    /// \brief Retrieves the hash from a given basic_hashed_string_view
-    ///
-    /// \param str the basic_hashed_string_view to retrieve the hash from
-    /// \return the hash of the string
-    template<typename CharT, typename Traits>
-    constexpr std::size_t hash_value( const basic_hashed_string_view<CharT,Traits>& str )
-      noexcept;
   } // namespace stl
 } // namespace bit
 

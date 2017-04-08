@@ -84,6 +84,7 @@ set(headers
       "include/bit/stl/source_location.hpp"
       "include/bit/stl/span.hpp"
       "include/bit/stl/stddef.hpp"
+      "include/bit/stl/string.hpp"
       "include/bit/stl/string_span.hpp"
       "include/bit/stl/string_tokenizer.hpp"
       "include/bit/stl/string_view.hpp"
