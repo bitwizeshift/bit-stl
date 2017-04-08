@@ -719,6 +719,46 @@ namespace bit {
     };
 
     //------------------------------------------------------------------------
+    // Type Aliases
+    //------------------------------------------------------------------------
+
+    using string_view    = basic_string_view<char>;
+    using wstring_view   = basic_string_view<wchar_t>;
+    using u16string_view = basic_string_view<char16_t>;
+    using u32string_view = basic_string_view<char32_t>;
+
+    using zstring_view    = basic_zstring_view<char>;
+    using wzstring_view   = basic_zstring_view<wchar_t>;
+    using u16zstring_view = basic_zstring_view<char16_t>;
+    using u32zstring_view = basic_zstring_view<char32_t>;
+
+    namespace ci {
+
+      using string_view    = basic_string_view<char, insensitive_char_traits<char>>;
+      using wstring_view   = basic_string_view<wchar_t, insensitive_char_traits<wchar_t>>;
+      using u16string_view = basic_string_view<char16_t, insensitive_char_traits<char16_t>>;
+      using u32string_view = basic_string_view<char32_t, insensitive_char_traits<char32_t>>;
+
+      using zstring_view    = basic_zstring_view<char, insensitive_char_traits<char>>;
+      using wzstring_view   = basic_zstring_view<wchar_t, insensitive_char_traits<wchar_t>>;
+      using u16zstring_view = basic_zstring_view<char16_t, insensitive_char_traits<char16_t>>;
+      using u32zstring_view = basic_zstring_view<char32_t, insensitive_char_traits<char32_t>>;
+
+    } // namespace ci
+
+    //------------------------------------------------------------------------
+    // Hash Functions
+    //------------------------------------------------------------------------
+
+    /// \brief Retrieves the hash from a given basic_string_view
+    ///
+    /// \param str the basic_ string_view to retrieve the hash from
+    /// \return the hash of the string
+    template<typename CharT, typename Traits>
+    constexpr std::size_t hash_value( const basic_string_view<CharT,Traits>& str )
+      noexcept;
+
+    //------------------------------------------------------------------------
     // Public Functions
     //------------------------------------------------------------------------
 
@@ -734,6 +774,21 @@ namespace bit {
     template<typename CharT, typename Traits>
     void swap( basic_string_view<CharT,Traits>& lhs,
                basic_string_view<CharT,Traits>& rhs ) noexcept;
+
+    //------------------------------------------------------------------------
+    // Literals
+    //------------------------------------------------------------------------
+
+    inline namespace literals {
+      inline namespace string_view_literals {
+
+        constexpr string_view operator "" _sv(const char* str, size_t len) noexcept;
+        constexpr wstring_view operator "" _sv(const wchar_t* str, size_t len) noexcept;
+        constexpr u16string_view operator "" _sv(const char16_t* str, size_t len) noexcept;
+        constexpr u32string_view operator "" _sv(const char32_t* str, size_t len) noexcept;
+
+      } // inline namespace string_view_literals
+    } // inline namespace literals
 
     //------------------------------------------------------------------------
     // Comparison Functions
@@ -977,46 +1032,6 @@ namespace bit {
     template<typename CharT, typename Traits, typename Allocator>
     std::basic_string<CharT,Traits,Allocator>& operator += ( std::basic_string<CharT,Traits,Allocator>& lhs,
                                                              const basic_string_view<CharT,Traits>& rhs );
-
-    //------------------------------------------------------------------------
-    // Type Aliases
-    //------------------------------------------------------------------------
-
-    using string_view    = basic_string_view<char>;
-    using wstring_view   = basic_string_view<wchar_t>;
-    using u16string_view = basic_string_view<char16_t>;
-    using u32string_view = basic_string_view<char32_t>;
-
-    using zstring_view    = basic_zstring_view<char>;
-    using wzstring_view   = basic_zstring_view<wchar_t>;
-    using u16zstring_view = basic_zstring_view<char16_t>;
-    using u32zstring_view = basic_zstring_view<char32_t>;
-
-    namespace ci {
-
-      using string_view    = basic_string_view<char, insensitive_char_traits<char>>;
-      using wstring_view   = basic_string_view<wchar_t, insensitive_char_traits<wchar_t>>;
-      using u16string_view = basic_string_view<char16_t, insensitive_char_traits<char16_t>>;
-      using u32string_view = basic_string_view<char32_t, insensitive_char_traits<char32_t>>;
-
-      using zstring_view    = basic_zstring_view<char, insensitive_char_traits<char>>;
-      using wzstring_view   = basic_zstring_view<wchar_t, insensitive_char_traits<wchar_t>>;
-      using u16zstring_view = basic_zstring_view<char16_t, insensitive_char_traits<char16_t>>;
-      using u32zstring_view = basic_zstring_view<char32_t, insensitive_char_traits<char32_t>>;
-
-    } // namespace ci
-
-    //------------------------------------------------------------------------
-    // Hash Functions
-    //------------------------------------------------------------------------
-
-    /// \brief Retrieves the hash from a given basic_string_view
-    ///
-    /// \param str the basic_ string_view to retrieve the hash from
-    /// \return the hash of the string
-    template<typename CharT, typename Traits>
-    constexpr std::size_t hash_value( const basic_string_view<CharT,Traits>& str )
-      noexcept;
 
   } // namespace stl
 } // namespace bit

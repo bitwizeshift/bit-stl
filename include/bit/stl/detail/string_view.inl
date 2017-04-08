@@ -696,6 +696,18 @@ constexpr const typename bit::stl::basic_zstring_view<CharT,Traits>::value_type*
 //============================================================================
 
 //----------------------------------------------------------------------------
+// Hash Functions
+//----------------------------------------------------------------------------
+
+template<typename CharT, typename Traits>
+inline constexpr std::size_t
+  bit::stl::hash_value( const basic_string_view<CharT,Traits>& str )
+  noexcept
+{
+  return detail::string_hash( str.data(), str.size() );
+}
+
+//----------------------------------------------------------------------------
 // Public Functions
 //----------------------------------------------------------------------------
 
@@ -715,6 +727,42 @@ inline void
   noexcept
 {
   lhs.swap(rhs);
+}
+
+//----------------------------------------------------------------------------
+// Literals
+//----------------------------------------------------------------------------
+
+inline constexpr bit::stl::string_view
+  bit::stl::literals::string_view_literals::operator "" _sv( const char* str,
+                                                             std::size_t len )
+  noexcept
+{
+  return {str,len};
+}
+
+inline constexpr bit::stl::wstring_view
+  bit::stl::literals::string_view_literals::operator "" _sv( const wchar_t* str,
+                                                             std::size_t len )
+  noexcept
+{
+  return {str,len};
+}
+
+inline constexpr bit::stl::u16string_view
+  bit::stl::literals::string_view_literals::operator "" _sv( const char16_t* str,
+                                                             std::size_t len )
+  noexcept
+{
+  return {str,len};
+}
+
+inline constexpr bit::stl::u32string_view
+  bit::stl::literals::string_view_literals::operator "" _sv( const char32_t* str,
+                                                             std::size_t len )
+  noexcept
+{
+  return {str,len};
 }
 
 //----------------------------------------------------------------------------
@@ -1134,19 +1182,6 @@ inline std::basic_string<CharT,Traits,Allocator>&
                           const basic_string_view<CharT,Traits>& rhs )
 {
   return lhs.append(rhs.data(),rhs.size());
-}
-
-//----------------------------------------------------------------------------
-// Hash Functions
-//----------------------------------------------------------------------------
-
-
-template<typename CharT, typename Traits>
-inline constexpr std::size_t
-  bit::stl::hash_value( const basic_string_view<CharT,Traits>& str )
-  noexcept
-{
-  return detail::string_hash( str.data(), str.size() );
 }
 
 #endif /* BIT_STL_DETAIL_STRING_VIEW_INL */
