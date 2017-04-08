@@ -139,7 +139,7 @@ inline constexpr bool
                           const basic_hashed_string_view<CharT,Traits>& rhs )
   noexcept
 {
-  return lhs.hash() == rhs.hash();
+  return lhs.hash() == rhs.hash() && lhs.view() == rhs.view();
 }
 
 template<typename CharT, typename Traits>
@@ -148,7 +148,7 @@ inline constexpr bool
                           const basic_hashed_string_view<CharT,Traits>& rhs )
   noexcept
 {
-  return lhs.hash() != rhs.hash();
+  return !(lhs==rhs);
 }
 
 template<typename CharT, typename Traits>
@@ -157,7 +157,7 @@ inline constexpr bool
                          const basic_hashed_string_view<CharT,Traits>& rhs )
   noexcept
 {
-  return lhs.hash() < rhs.hash();
+  return lhs.hash() == rhs.hash() ? lhs.view() < rhs.view() : lhs.hash() < rhs.hash();
 }
 
 template<typename CharT, typename Traits>
@@ -166,7 +166,7 @@ inline constexpr bool
                          const basic_hashed_string_view<CharT,Traits>& rhs )
   noexcept
 {
-  return lhs.hash() > rhs.hash();
+  return (rhs < lhs);
 }
 
 template<typename CharT, typename Traits>
@@ -175,7 +175,7 @@ inline constexpr bool
                           const basic_hashed_string_view<CharT,Traits>& rhs )
   noexcept
 {
-  return lhs.hash() <= rhs.hash();
+  return !(rhs < lhs);
 }
 
 template<typename CharT, typename Traits>
@@ -184,7 +184,7 @@ inline constexpr bool
                           const basic_hashed_string_view<CharT,Traits>& rhs )
   noexcept
 {
-  return lhs.hash() >= rhs.hash();
+  return !(lhs < rhs);
 }
 
 #endif /* BIT_STL_DETAIL_HASHED_STRING_VIEW_INL */

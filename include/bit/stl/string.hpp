@@ -9,6 +9,8 @@
 #ifndef BIT_STL_STRING_HPP
 #define BIT_STL_STRING_HPP
 
+#include "detail/string_hash.hpp"
+
 #include <string> // std::char_traits
 #include <locale> // std::toupper<CharT>
 
@@ -45,10 +47,10 @@ namespace bit {
 
     /// \brief Hashes a std::basic_string
     ///
-    /// \param v the string to hash
+    /// \param str the string to hash
     /// \return the hash
     template<typename CharT, typename Traits, typename Allocator>
-    std::size_t hash_value( const std::basic_string<CharT,Traits,Allocator>& v ) noexcept;
+    std::size_t hash_value( const std::basic_string<CharT,Traits,Allocator>& str ) noexcept;
 
   } // namespace traits
 } // namespace bit

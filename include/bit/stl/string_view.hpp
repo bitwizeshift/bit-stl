@@ -21,6 +21,8 @@
 #include <string>
 #include <ostream>
 
+#include "detail/string_hash.hpp"
+
 namespace bit {
   namespace stl {
 
