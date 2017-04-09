@@ -453,7 +453,7 @@ namespace bit {
       /// \brief Queries whether or not this expected contains a value.
       ///
       /// This is \c true when the it contains a value, false on exception
-      constexpr explicit operator bool() const noexcept;
+      explicit operator bool() const noexcept;
 
       /// \brief Queries whether this exception is valueless due to an
       ///        exception
@@ -462,7 +462,7 @@ namespace bit {
       /// destructor and constructor call
       ///
       /// \return \c true if this expected is valueless by construction
-      constexpr bool valueless_by_exception() const noexcept;
+      bool valueless_by_exception() const noexcept;
 
       /// \brief Queries whether or not this expected contains an exception
       ///        of type \p Exception

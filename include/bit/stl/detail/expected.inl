@@ -623,13 +623,13 @@ inline bit::stl::expected<void>::~expected()
 //----------------------------------------------------------------------------
 
 
-inline constexpr bit::stl::expected<void>::operator bool()
+inline bit::stl::expected<void>::operator bool()
   const noexcept
 {
   return !m_is_exception;
 }
 
-inline constexpr bool bit::stl::expected<void>::valueless_by_exception()
+inline bool bit::stl::expected<void>::valueless_by_exception()
   const noexcept
 {
   return m_is_exception && m_storage.exception == nullptr;
