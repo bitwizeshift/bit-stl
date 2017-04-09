@@ -478,7 +478,7 @@ namespace bit {
           : ExtentType(ext),
             m_data(data)
         {
-          BIT_ASSERT( (!data && ExtentType::size() == 0) || (data && ExtentType::size()) >= 0, "span::storage_type: Invalid span size");
+          BIT_ASSERT( (!data && ExtentType::size() == 0) || (data && ExtentType::size() >= 0), "span::storage_type: Invalid span size");
         }
 
         //--------------------------------------------------------------------
