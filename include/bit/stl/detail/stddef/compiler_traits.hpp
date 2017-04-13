@@ -102,7 +102,7 @@
 #  if (__cplusplus >= 201402L)
 #    define BIT_STANDARD_CPP14   1
 #  endif
-#  if (__cplusplus >= 201701L)
+#  if (__cplusplus >= 201703L)
 #    define BIT_STANDARD_CPP17   1
 #  endif
 #endif
@@ -248,7 +248,7 @@
 //! ...
 //! foo(); // <-- Generates warning to compiler
 //! \endcode
-#if __cplusplus >= 201700L
+#if __cplusplus >= 201703L
 # define BIT_NODISCARD [[nodiscard]]
 #elif defined(__GNUC__) || defined(__clang__)
 # define BIT_NODISCARD __attribute__((warn_unused_result))
@@ -496,6 +496,16 @@
 # define BIT_DEPRECATED   __declspec(deprecated)
 #else
 # define BIT_DEPRECATED
+#endif
+
+#ifdef BIT_COMPILER_HAS_CPP14_DEPRECATED
+# define BIT_DEPRECATED_MSG(msg) [[deprecated(msg)]]
+#elif defined(__GNUC__) && (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
+# define BIT_DEPRECATED_MSG(msg) __attribute__((deprecated(msg)))
+#elif defined(_MSC_VER) && (_MSC_VER >= 1300)
+# define BIT_DEPRECATED_MSG(msg) __declspec(deprecated(msg))
+#else
+# define BIT_DEPRECATED_MSG(msg)
 #endif
 
 

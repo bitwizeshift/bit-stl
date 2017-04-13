@@ -267,6 +267,7 @@ namespace bit {
     constexpr ctor_do_not_convert_tag ctor_dnc = {};
 
 //! \}
+
   } // namespace stl
 } // namespace bit
 
