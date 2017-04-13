@@ -26,7 +26,6 @@
 namespace bit {
   namespace stl {
 
-#if BIT_COMPILER_EXCEPTIONS_ENABLED
     //////////////////////////////////////////////////////////////////////////
     /// \brief An exception for failed narrow_casts.
     ///
@@ -56,7 +55,6 @@ namespace bit {
 
       using std::runtime_error::runtime_error;
     };
-#endif
 
     inline namespace casts {
 

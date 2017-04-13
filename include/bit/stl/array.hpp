@@ -33,7 +33,7 @@ namespace bit {
         = std::array<array_return_type_helper_t<T, Types...>,sizeof...(Types)>;
 
       struct to_array_impl;
-    } // namespace details
+    } // namespace detail
 
     /// \brief Make utility for creating a std::array
     ///

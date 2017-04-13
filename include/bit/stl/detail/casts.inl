@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------------
 
 template<typename To, typename From>
-inline constexpr To bit::stl::narrow_cast( From from ) noexcept
+inline constexpr To bit::stl::casts::narrow_cast( From from ) noexcept
 {
   static_assert( std::is_integral<To>::value, "Type casted to must be integral" );
   static_assert( std::is_integral<From>::value, "Type casted from must be integral" );
@@ -25,7 +25,7 @@ inline constexpr To bit::stl::narrow_cast( From from ) noexcept
 //----------------------------------------------------------------------------
 
 template<typename To, typename From>
-inline To bit::stl::pointer_cast( From ptr ) noexcept
+inline To bit::stl::casts::pointer_cast( From ptr ) noexcept
 {
   BIT_ASSERT_OR_THROW(bad_pointer_cast, static_cast<To>(ptr) == dynamic_cast<To>(ptr), "pointer_cast: destination type is not dynamically castable");
 
@@ -35,7 +35,7 @@ inline To bit::stl::pointer_cast( From ptr ) noexcept
 //----------------------------------------------------------------------------
 
 template<typename To, typename From>
-inline To bit::stl::copy_cast(const From& from)
+inline To bit::stl::casts::copy_cast(const From& from)
   noexcept
 {
   struct Unnamed{
