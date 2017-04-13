@@ -59,7 +59,7 @@ namespace bit {
     ///
     /// \param ptr the pointer to convert to an integral value
     /// \return the numeric address of the given pointer
-    std::uintptr_t to_address( const void* ptr ) noexcept;
+    std::uintptr_t to_address( void* ptr ) noexcept;
 
     /// \brief Converts a numeric address \p address into a pointer pointing
     ///        to the address location

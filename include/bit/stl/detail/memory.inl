@@ -35,7 +35,7 @@ inline constexpr decltype(auto) bit::stl::dereference(T& ptr)
   return detail::dereference(ptr);
 }
 
-inline std::uintptr_t bit::stl::to_address( const void* ptr )
+inline std::uintptr_t bit::stl::to_address( void* ptr )
   noexcept
 {
   return reinterpret_cast<std::uintptr_t>(ptr);

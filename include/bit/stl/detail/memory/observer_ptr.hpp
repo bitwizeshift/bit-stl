@@ -3,10 +3,30 @@
 
 namespace bit {
   namespace stl {
+    namespace detail {
+
+      template<typename T>
+      struct is_ptr_observable
+      {
+        template<typename U>
+        static auto test( U* t )
+          -> decltype(std::declval<const void*>() = t->get(), std::true_type{});
+
+        static auto test(...) -> std::false_type;
+
+        static constexpr bool value = decltype(test( std::declval<T*>() ))::value;
+      };
+
+      template<typename T>
+      using make_observer_element_type_t
+        = std::remove_pointer_t<std::decay_t<decltype(std::declval<T>().get())>>;
+
+    } // namespace detail
 
     //////////////////////////////////////////////////////////////////////////
-    /// \brief An observer pointer is a vocabulary type intended to be a
-    ///        drop-in replacement for non-owning raw pointers.
+    /// \brief A lightweight wrapper around a pointer type
+    ///
+    /// \tparam the underlying pointer type
     //////////////////////////////////////////////////////////////////////////
     template<typename T>
     class observer_ptr
@@ -16,72 +36,116 @@ namespace bit {
       //----------------------------------------------------------------------
     public:
 
-      using element_type = T;
+      using pointer      = T*; ///<
+      using element_type = T;  ///<
 
       //----------------------------------------------------------------------
-      // Constructor
+      // Constructors / Assignment
       //----------------------------------------------------------------------
     public:
 
-      /// \brief Constructs an observer_ptr that has no corresponding watched
-      ///        object
-      constexpr observer_ptr();
+      /// \brief Default-constructs an observer_ptr to \c nullptr
+      constexpr observer_ptr() noexcept;
 
-      /// \brief Constructs an observer_ptr that has no corresponding watched
-      ///        object
+      /// \brief Constructs an observer_ptr pointing to \c nullptr
+      constexpr observer_ptr( std::nullptr_t ) noexcept;
+
+      /// \brief Constructs an observer_ptr that points to \p ptr
       ///
-      /// \param null a nullptr
-      constexpr observer_ptr( std::nullptr_t null );
+      /// \param ptr the pointer value
+      constexpr explicit observer_ptr( pointer ptr ) noexcept;
 
-      /// \brief Constructs an observer_ptr from a given pointer
+      /// \brief Copy-converts an observer_ptr from another one that points
+      ///        to U
       ///
-      /// \param ptr the pointer
-      constexpr observer_ptr( element_type* ptr );
+      /// \param other the other pointer to copy convert
+      template<typename U, std::enable_if<std::is_convertible<U*,T*>::value>* = nullptr>
+      constexpr observer_ptr( const observer_ptr<U>& other ) noexcept;
 
-      /// \brief Constructs an observer_ptr from another, convertible
-      ///        observer_ptr
+      /// \brief Move-converts an observer_ptr from another one that points
+      ///        to U
       ///
-      /// \param ptr the observer_ptr to convert
-      template<typename U>
-      constexpr observer_ptr( observer_ptr<U> ptr );
+      /// \param other the other pointer to move convert
+      template<typename U, std::enable_if<std::is_convertible<U*,T*>::value>* = nullptr>
+      observer_ptr( observer_ptr<U>&& other ) noexcept;
 
-      /// \brief Copy-constructs this observer_ptr from another
+      /// \brief Copy-constructs an observer_ptr from another one
       ///
       /// \param other the other observer_ptr to copy
-      constexpr observer_ptr( const observer_ptr& other ) = default;
+      constexpr observer_ptr( const observer_ptr& other ) noexcept = default;
 
-      /// \brief Move-constructs this observer_ptr from another
+      /// \brief Move-constructs an observer_ptr from another one
       ///
       /// \param other the other observer_ptr to move
-      constexpr observer_ptr( observer_ptr&& other ) = default;
+      constexpr observer_ptr( observer_ptr&& other ) noexcept = default;
+
+      //----------------------------------------------------------------------
+
+      /// \brief Assigns this observer_ptr to \c nullptr
+      ///
+      /// \return reference to \c (*this)
+      observer_ptr& operator=( std::nullptr_t ) noexcept;
+
+      /// \brief Copy-assigns an observer_ptr from another one
+      ///
+      /// \param other the other observer_ptr to copy
+      /// \return reference to \c (*this)
+      observer_ptr& operator=( const observer_ptr& other ) noexcept = default;
+
+      /// \brief Move-assigns an observer_ptr from another one
+      ///
+      /// \param other the other observer_ptr to move
+      /// \return reference to \c (*this)
+      observer_ptr& operator=( observer_ptr&& other ) noexcept = default;
 
       //----------------------------------------------------------------------
       // Modifiers
       //----------------------------------------------------------------------
     public:
 
-      constexpr void reset(element_type* p = nullptr) noexcept;
+      /// \brief Resets this observer_ptr to point to \p ptr
+      ///
+      /// \param ptr the pointer to reset to
+      void reset( pointer ptr = pointer() ) noexcept;
 
-      constexpr void swap(observer_ptr& other) noexcept;
+      /// \brief Resets this observer_ptr to \c nullptr
+      void reset( std::nullptr_t ) noexcept;
+
+      /// \brief Swaps this observer_ptr with another observer_ptr
+      ///
+      /// \param other the other observer_ptr
+      void swap( observer_ptr& other ) noexcept;
 
       //----------------------------------------------------------------------
       // Observers
       //----------------------------------------------------------------------
     public:
 
-      constexpr element_type* get() const noexcept;
+      /// \brief Gets the underlying pointer
+      ///
+      /// \return the underlying pointer
+      constexpr pointer get() const noexcept;
 
+      /// \brief Explicitly convertible to bool. This is \c true when the
+      ///        underlying pointer is non-null
       constexpr explicit operator bool() const noexcept;
 
-      constexpr element_type& operator*() const;
+      /// \brief Dereferences the observer_ptr
+      ///
+      /// \return the underlying pointer
+      constexpr pointer operator->() const noexcept;
 
-      constexpr element_type* operator->() const noexcept;
+      /// \brief Dereferences the observer_ptr
+      ///
+      /// \return the underlying reference
+      constexpr std::add_lvalue_reference_t<T> operator*() const noexcept;
 
       //----------------------------------------------------------------------
       // Conversions
       //----------------------------------------------------------------------
     public:
 
+      /// \brief Explicitly convertible to pointer type
       constexpr explicit operator element_type*() const noexcept;
 
       //----------------------------------------------------------------------
@@ -89,29 +153,139 @@ namespace bit {
       //----------------------------------------------------------------------
     private:
 
-      element_type* m_ptr;
+      T* m_ptr; ///< The underlying pointer
     };
 
-    /// \brief Makes an observer pointer from another pointer
-    ///
-    /// \param ptr the pointer to make an observer
-    /// \return an observer pointer
-    template<typename T>
-    constexpr observer_ptr<T> make_observer( T* ptr ) noexcept;
+    //------------------------------------------------------------------------
+    // Free Functions
+    //------------------------------------------------------------------------
 
-    /// \brief Swaps two observer_ptr
+    /// \brief Swaps the observer_ptr \p lhs with \p rhs
     ///
-    /// \param lhs the left observer_ptr
-    /// \param rhs the right observer_ptr
+    /// \param lhs the left one to swap
+    /// \param rhs the right one to swap
     template<typename T>
     void swap( observer_ptr<T>& lhs, observer_ptr<T>& rhs ) noexcept;
 
-    /// \brief Hashes the current observer pointer
+    /// \brief Makes an observer_ptr from a raw pointer
     ///
-    /// \param val the value to hash
-    /// \return the hash of the observer_ptr
+    /// \param ptr the pointer
+    /// \return an observer_ptr
     template<typename T>
-    std::size_t hash_value( const observer_ptr<T>& val ) noexcept;
+    constexpr observer_ptr<T> make_observer( T* ptr ) noexcept;
+
+    /// \brief Makes an observer_ptr from a raw pointer, and coerces it to
+    ///        the specified type
+    ///
+    /// \tparam T the type to convert to
+    /// \param ptr the pointer
+    /// \return an observer_ptr
+    template<typename T, typename U, std::enable_if_t<!std::is_same<T,U>::value && std::is_convertible<U*,T*>::value>* = nullptr>
+    constexpr observer_ptr<T> make_observer( U* ptr ) noexcept;
+
+    /// \brief Makes an observer_ptr from a smart pointer
+    ///
+    /// \param ptr the pointer
+    /// \return an observer_ptr
+    template<typename Pointer>
+    constexpr auto make_observer( const Pointer& ptr ) noexcept
+      -> decltype( make_observer( ptr.get() ) );
+
+    /// \brief Makes an observer_ptr from a smart pointer
+    ///
+    /// \tparam T explicit type of the pointer
+    /// \param ptr the pointer
+    /// \return an observer_ptr
+    template<typename T, typename Pointer, std::enable_if<detail::is_ptr_observable<Pointer>::value>* = nullptr>
+    constexpr observer_ptr<T> make_observer( const Pointer& ptr ) noexcept;
+
+    inline namespace casts {
+
+      /// \brief Creates a new instance of observer_ptr whose stored pointer
+      ///        is the result of a static_cast
+      ///
+      /// \param ptr the pointer to static_cast
+      /// \return the result of a static_cast
+      template<typename T, typename U>
+      constexpr observer_ptr<T> static_pointer_cast( const observer_ptr<U>& ptr ) noexcept;
+
+      template<typename T, typename U>
+      constexpr observer_ptr<T> dynamic_pointer_cast( const observer_ptr<U>& ptr ) noexcept;
+
+      template<typename T, typename U>
+      constexpr observer_ptr<T> const_pointer_cast( const observer_ptr<U>& ptr ) noexcept;
+
+      template<typename T, typename U>
+      constexpr observer_ptr<T> reinterpret_pointer_cast( const observer_ptr<T>& ptr ) noexcept;
+
+    } // inline namespace casts
+
+    //------------------------------------------------------------------------
+    // Comparisons
+    //------------------------------------------------------------------------
+
+    template<typename T, typename U>
+    constexpr bool operator==( const observer_ptr<T>& lhs,
+                               const observer_ptr<U>& rhs ) noexcept;
+    template<typename T, typename U>
+    constexpr bool operator!=( const observer_ptr<T>& lhs,
+                               const observer_ptr<U>& rhs ) noexcept;
+    template<typename T, typename U>
+    constexpr bool operator<( const observer_ptr<T>& lhs,
+                              const observer_ptr<U>& rhs ) noexcept;
+    template<typename T, typename U>
+    constexpr bool operator>( const observer_ptr<T>& lhs,
+                              const observer_ptr<U>& rhs ) noexcept;
+    template<typename T, typename U>
+    constexpr bool operator<=( const observer_ptr<T>& lhs,
+                               const observer_ptr<U>& rhs ) noexcept;
+    template<typename T, typename U>
+    constexpr bool operator>=( const observer_ptr<T>& lhs,
+                               const observer_ptr<U>& rhs ) noexcept;
+
+    //------------------------------------------------------------------------
+
+    template<typename T>
+    constexpr bool operator==( std::nullptr_t,
+                               const observer_ptr<T>& rhs ) noexcept;
+    template<typename T>
+    constexpr bool operator==( const observer_ptr<T>& lhs,
+                               std::nullptr_t ) noexcept;
+
+    template<typename T>
+    constexpr bool operator!=( std::nullptr_t,
+                               const observer_ptr<T>& rhs ) noexcept;
+    template<typename T>
+    constexpr bool operator!=( const observer_ptr<T>& lhs,
+                               std::nullptr_t ) noexcept;
+
+    template<typename T>
+    constexpr bool operator<( std::nullptr_t,
+                              const observer_ptr<T>& rhs ) noexcept;
+    template<typename T>
+    constexpr bool operator<( const observer_ptr<T>& lhs,
+                              std::nullptr_t ) noexcept;
+
+    template<typename T>
+    constexpr bool operator>( std::nullptr_t,
+                              const observer_ptr<T>& rhs ) noexcept;
+    template<typename T>
+    constexpr bool operator>( const observer_ptr<T>& lhs,
+                              std::nullptr_t ) noexcept;
+
+    template<typename T>
+    constexpr bool operator<=( std::nullptr_t,
+                               const observer_ptr<T>& rhs ) noexcept;
+    template<typename T>
+    constexpr bool operator<=( const observer_ptr<T>& lhs,
+                               std::nullptr_t ) noexcept;
+
+    template<typename T>
+    constexpr bool operator>=( std::nullptr_t,
+                               const observer_ptr<T>& rhs ) noexcept;
+    template<typename T>
+    constexpr bool operator>=( const observer_ptr<T>& lhs,
+                               std::nullptr_t ) noexcept;
 
   } // namespace stl
 } // namespace bit
