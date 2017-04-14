@@ -51,13 +51,15 @@ install:
 
 before_build:
   - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+  - set CATCH_DIR=%cd%\catch\include
+  - mkdir %CATCH_DIR%
+  - appveyor DownloadFile https://github.com/philsquared/Catch/releases/download/v1.8.1/catch.hpp -FileName %CATCH_DIR%\catch.hpp
   - cd C:\projects\bit-stl
   - git submodule init
   - git submodule update
 
-
 build_script:
   - mkdir build
   - cd build
-  - cmake .. -GNinja -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_CXX_FLAGS="-fms-compatibility-version=19 -Wall -Wextra -pedantic" -DBIT_BUILD_TESTS=%BUILD_TESTS%
+  - cmake .. -GNinja -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_INCLUDE_PATH=%CATCH_DIR% -DCMAKE_CXX_FLAGS="-fms-compatibility-version=19 -Wall -Wextra -pedantic" -DBIT_BUILD_TESTS=%BUILD_TESTS%
   - cmake --build .
