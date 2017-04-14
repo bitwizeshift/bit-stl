@@ -1,7 +1,7 @@
 # `bit::stl` Standard library
 
 [![Build Status](https://travis-ci.org/bitwizeshift/bit-stl.svg?branch=master)](https://travis-ci.org/bitwizeshift/bit-stl)
-[![Build status](https://ci.appveyor.com/api/projects/status/50vmwi1src4ihwmk/branch/master?svg=true)](https://ci.appveyor.com/project/bitwizeshift/bit-stl/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/q3k3qns2amtdhliy?svg=true)](https://ci.appveyor.com/project/bitwizeshift/bit-stl)
 [![Github Issues](https://img.shields.io/github/issues/bitwizeshift/bit-stl.svg)](http://github.com/bitwizeshift/bit-stl/issues)
 [![Tested Compilers](https://img.shields.io/badge/compilers-clang-blue.svg)](#tested-compilers)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](http://bitwizeshift.github.io/bit-stl)
