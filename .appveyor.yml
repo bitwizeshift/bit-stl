@@ -46,7 +46,7 @@ install:
   # Setup the path to Clang-cl
   ############################################################################
   - set PATH="C:\Program Files\LLVM\bin";%PATH%
-  - clang-cl -v
+  - clang -v
 
 
 before_build:
@@ -61,5 +61,5 @@ before_build:
 build_script:
   - mkdir build
   - cd build
-  - cmake .. -GNinja -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_INCLUDE_PATH=%CATCH_DIR% -DCMAKE_CXX_FLAGS="-fms-compatibility-version=19 -Wall -Wextra -pedantic" -DBIT_BUILD_TESTS=%BUILD_TESTS%
+  - cmake .. -GNinja -DCMAKE_CXX_COMPILER=clang -DCMAKE_INCLUDE_PATH=%CATCH_DIR% -DCMAKE_CXX_FLAGS="-fms-compatibility-version=20 -fexceptions -Xclang -fcxx-exceptions -Wall -Wextra -pedantic" -DBIT_BUILD_TESTS=%BUILD_TESTS%
   - cmake --build .
