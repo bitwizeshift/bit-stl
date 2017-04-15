@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/bitwizeshift/bit-stl.svg?branch=master)](https://travis-ci.org/bitwizeshift/bit-stl)
 [![Build status](https://ci.appveyor.com/api/projects/status/q3k3qns2amtdhliy?svg=true)](https://ci.appveyor.com/project/bitwizeshift/bit-stl)
 [![Github Issues](https://img.shields.io/github/issues/bitwizeshift/bit-stl.svg)](http://github.com/bitwizeshift/bit-stl/issues)
-[![Tested Compilers](https://img.shields.io/badge/compilers-clang-blue.svg)](#tested-compilers)
+[![Tested Compilers](https://img.shields.io/badge/compilers-gcc%20%7C%20clang-blue.svg)](#tested-compilers)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](http://bitwizeshift.github.io/bit-stl)
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/bitwizeshift/bit-stl/master/LICENSE.md)
 [![Github Releases](https://img.shields.io/github/release/bitwizeshift/bit-stl.svg)](https://github.com/bitwizeshift/bit-stl/releases)
