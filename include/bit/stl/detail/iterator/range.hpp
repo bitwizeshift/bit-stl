@@ -13,6 +13,8 @@ namespace bit {
   namespace stl {
 
     //////////////////////////////////////////////////////////////////////////
+    /// \class range range.hpp <bit/stl/iterator.hpp>
+    ///
     /// \brief Constructs a range from a given Container
     ///
     /// A range is a contruct that wraps the iterator begin/end range in a

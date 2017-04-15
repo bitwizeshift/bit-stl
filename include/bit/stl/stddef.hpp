@@ -46,6 +46,36 @@
 //! \param var the variable to explicitly mark as unused
 #define BIT_UNUSED(var) (void)(var);
 
+/// \brief The parent namespace for all projects
+namespace bit {
+
+/// \brief The standard namespace for this project
+///
+/// Every class, free function, and sub-namespace will be defined inside
+/// of this namespace.
+namespace stl {
+
+/// \brief Inline namespace for managing cast utilities
+///
+/// This allows for better granularity, so that simple casts can be imported
+/// and used globally
+inline namespace casts{} // namespace casts
+
+/// \brief Inline namespace for managing literal operators
+///
+/// This follows the c++ standard's approach to literals by storing any
+/// \c operator"" overloads in this namespace
+inline namespace literals{} // namespace literals
+
+/// \brief Private namespace for managing implementation-details within
+///        headers
+///
+/// \internal
+namespace detail {} // namespace detail
+
+} // namespace stl
+} // namespace bit
+
 // bit::stl types
 // IWYU pragma: begin_exports
 #include "detail/stddef/types/integral_types.hpp"
@@ -63,9 +93,6 @@
 
 namespace bit {
   namespace stl {
-
-//! \addtogroup stl
-//! \{
 
     /// \brief An alias for lvalue-references to an array of N entries
     template<typename T, std::size_t N>
@@ -220,8 +247,6 @@ namespace bit {
 
     /// Predefined constant for disabling internal conversion
     constexpr ctor_do_not_convert_tag ctor_dnc = {};
-
-//! \}
 
   } // namespace stl
 } // namespace bit

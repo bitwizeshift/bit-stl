@@ -1,4 +1,6 @@
 /**
+ * \file integral_types.hpp
+ *
  * \brief This internal header declares fixed size integral types
  *
  * \note This is an internal header file, included by other library headers.
@@ -21,9 +23,6 @@ namespace bit {
     //------------------------------------------------------------------------
     // Integer Types
     //------------------------------------------------------------------------
-
-    //! \addtogroup bit
-    //! \{
 
     // Basic signed
     using s8  = std::int8_t;    ///< Signed 8-bit integer
@@ -65,7 +64,6 @@ namespace bit {
     using smaxint = std::intmax_t;  ///< Maximum signed integer type
     using umaxint = std::uintmax_t; ///< Maximum unsigned integer type
 
-    //! \}
   } // namespace stl
 } // namespace bit
 
