@@ -17,16 +17,8 @@
 #include "stddef.hpp"
 #include "source_location.hpp"
 
-// Runtime assertion (Only available when in debug)
-#if defined(BIT_DEBUG) || defined(BIT_ALWAYS_ASSERT)
-# if BIT_COMPILER_EXCEPTIONS_ENABLED
-#   include <iostream>
-# endif
-
 namespace bit {
   namespace stl {
-
-# if BIT_COMPILER_EXCEPTIONS_ENABLED
 
     //========================================================================
     // assertion_failure
@@ -68,26 +60,43 @@ namespace bit {
       source_location m_location;
     };
 
-    //------------------------------------------------------------------------
-    // Constructors
-    //------------------------------------------------------------------------
+  } // namespace stl
+} // namespace bit
 
-    inline assertion_failure::assertion_failure( const char* message, source_location source )
-      : std::runtime_error(message),
-        m_location( std::move(source) )
-    {
+//----------------------------------------------------------------------------
+// Constructors
+//----------------------------------------------------------------------------
 
-    }
+inline bit::stl::assertion_failure
+  ::assertion_failure( const char* message, source_location source )
+  : std::runtime_error(message),
+    m_location( std::move(source) )
+{
 
-    //------------------------------------------------------------------------
-    // Accessors
-    //------------------------------------------------------------------------
+}
 
-    inline source_location assertion_failure::source()
-      const noexcept
-    {
-      return m_location;
-    }
+//------------------------------------------------------------------------
+// Accessors
+//------------------------------------------------------------------------
+
+inline bit::stl::source_location bit::stl::assertion_failure::source()
+  const noexcept
+{
+  return m_location;
+}
+
+// Runtime assertion (Only available when in debug)
+#if defined(BIT_DEBUG) || defined(BIT_ALWAYS_ASSERT)
+# if BIT_COMPILER_EXCEPTIONS_ENABLED
+#   include <iostream>
+# endif
+
+namespace bit {
+  namespace stl {
+
+# if BIT_COMPILER_EXCEPTIONS_ENABLED
+
+
 
 
 #   define BIT_INTERNAL_ASSERT(condition,message) \
@@ -99,7 +108,7 @@ namespace bit {
       inline void assert_internal(string_view message, source_location source)
       {
         std::cerr << "[assertion] " << source.file_name() << "(" << source.line() << ")::" << source.function_name() << "\n"
-                     "[assertion] " << message << "\n";
+                     "[assertion] " << message << "\n" << std::flush;
         BIT_BREAKPOINT();
       }
 

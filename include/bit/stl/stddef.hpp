@@ -23,12 +23,12 @@
 //!
 //! \def BIT_UNIT_TEST
 //! \brief Unit Test Build
-#if !defined(BIT_DEBUG) && (defined(DEBUG) || defined(_DEBUG))
-#  define BIT_DEBUG     1
+#if !defined(BIT_DEBUG) && !defined(NDEBUG)
+# define BIT_DEBUG     1
 #endif
 
 #if !defined(BIT_UNIT_TEST) && (defined(UNIT_TEST) || defined(_UNIT_TEST))
-#  define BIT_UNIT_TEST 1
+# define BIT_UNIT_TEST 1
 #endif
 
 //! \def BIT_NOOP()
@@ -44,7 +44,7 @@
 //! This is used to silence compiler warnings
 //!
 //! \param var the variable to explicitly mark as unused
-#define BIT_UNUSED(var) do { (void)(var); } while (0)
+#define BIT_UNUSED(var) (void)(var);
 
 // bit::stl types
 // IWYU pragma: begin_exports
@@ -60,52 +60,6 @@
 #include "detail/stddef/breakpoint.hpp"
 #include "detail/stddef/protect_functions.hpp"
 // IWYU pragma: end_exports
-
-//! \def BIT_STL_DEFINE_ENUM_BITWISE_OPERATORS( Type )
-//!
-//! \brief Defines all bitwise operators globally so that enums of type \a Type
-//!        can be used as flags without violating restrictions of enums
-#define BIT_STL_DEFINE_ENUM_BITWISE_OPERATORS( Type ) \
-  inline Type  operator|  ( Type  lhs, Type rhs ) { return Type( int( lhs ) | int( rhs ) ); } \
-  inline Type  operator&  ( Type  lhs, Type rhs ) { return Type( int( lhs ) & int( rhs ) ); } \
-  inline Type  operator^  ( Type  lhs, Type rhs ) { return Type( int( lhs ) ^ int( rhs ) ); } \
-  inline Type  operator<< ( Type  lhs, int  rhs ) { return Type( int( lhs ) << rhs ); } \
-  inline Type  operator>> ( Type  lhs, int  rhs ) { return Type( int( lhs ) >> rhs ); } \
-  inline Type& operator|= ( Type& lhs, Type rhs ) { return lhs = lhs |  rhs; } \
-  inline Type& operator&= ( Type& lhs, Type rhs ) { return lhs = lhs &  rhs; } \
-  inline Type& operator^= ( Type& lhs, Type rhs ) { return lhs = lhs ^  rhs; } \
-  inline Type& operator<<=( Type& lhs, int  rhs ) { return lhs = lhs << rhs; } \
-  inline Type& operator>>=( Type& lhs, int  rhs ) { return lhs = lhs >> rhs; } \
-  inline Type  operator~  ( Type  lhs )           { return Type( ~int( lhs ) ); }
-
-//! \def BIT_STL_DEFINE_ENUM_ARITHMETIC_OPERATORS( Type )
-//!
-//! \brief Defines all bitwise operators globally so that enums of type \a Type
-//!        can be used as flags without violating restrictions of enums
-#define BIT_STL_DEFINE_ENUM_ARITHMETIC_OPERATORS( Type ) \
-  inline Type  operator+ ( Type  lhs, Type rhs ) { return Type( int( lhs ) + int( rhs ) ); } \
-  inline Type  operator- ( Type  lhs, Type rhs ) { return Type( int( lhs ) - int( rhs ) ); } \
-  inline Type  operator* ( Type  lhs, Type rhs ) { return Type( int( lhs ) * int( rhs ) ); } \
-  inline Type  operator/ ( Type  lhs, Type rhs ) { return Type( int( lhs ) / int( rhs ) ); } \
-  inline Type  operator% ( Type  lhs, Type rhs ) { return Type( int( lhs ) % int( rhs ) ); } \
-  inline Type& operator+=( Type& lhs, Type rhs ) { return lhs = lhs + rhs;   } \
-  inline Type& operator-=( Type& lhs, Type rhs ) { return lhs = lhs - rhs;   } \
-  inline Type& operator*=( Type& lhs, Type rhs ) { return lhs = lhs * rhs;   } \
-  inline Type& operator/=( Type& lhs, Type rhs ) { return lhs = lhs / rhs;   } \
-  inline Type& operator%=( Type& lhs, Type rhs ) { return lhs = lhs % rhs;   } \
-  inline Type  operator+ ( Type  lhs )           { return lhs;               } \
-  inline Type  operator- ( Type  lhs )           { return Type(- int(lhs) ); }
-
-//! \def BIT_STL_DEFINE_ENUM_INCREMENT_OPERATORS( Type )
-//!
-//! \brief Defines all bitwise operators globally so that enums of type \a Type
-//!        can easily be incremented and decremented while still being enums
-#define BIT_STL_DEFINE_ENUM_INCREMENT_OPERATORS( Type ) \
-  inline Type &operator++( Type &a      ) { return a = Type( int( a ) + 1 ); } \
-  inline Type &operator--( Type &a      ) { return a = Type( int( a ) - 1 ); } \
-  inline Type  operator++( Type &a, int ) { Type t = a; ++a; return t; } \
-  inline Type  operator--( Type &a, int ) { Type t = a; --a; return t; }
-
 
 namespace bit {
   namespace stl {
@@ -140,6 +94,7 @@ namespace bit {
 
       //----------------------------------------------------------------------
 
+      /// \brief
       template<typename T, typename R>
       struct member_function_t;
 

@@ -83,15 +83,29 @@ namespace bit {
 #endif
 
     /// \brief A tag type used for dispatching in_place calls
+#ifndef BIT_DOXYGEN_BUILD
     using in_place_t = in_place_tag(&)( detail::in_place_ctor_tag );
+#else
+    using in_place_t = in_place_tag(&)( /* implementation defined */ );
+#endif
 
     /// \brief A tag type used for type-based dispatching in_place calls
+#ifndef BIT_DOXYGEN_BUILD
     template<typename T>
     using in_place_type_t = in_place_tag(&)( detail::in_place_ctor_type_tag<T> );
+#else
+    template<typename T>
+    using in_place_type_t = in_place_tag(&)( /* implementation defined */ );
+#endif
 
     /// \brief A tag type used for type-based dispatching in_place calls
+#ifndef BIT_DOXYGEN_BUILD
     template <std::size_t I>
     using in_place_index_t = in_place_tag(&)( detail::in_place_ctor_index_tag<I> );
+#else
+    template <std::size_t I>
+    using in_place_index_t = in_place_tag(&)( /* implementation defined */ );
+#endif
 
     /// \brief Type-trait to determine if the type is an in_place type
     ///

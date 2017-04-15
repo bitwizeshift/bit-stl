@@ -8,10 +8,11 @@
 #ifndef BIT_STL_OPTIONAL_HPP
 #define BIT_STL_OPTIONAL_HPP
 
+#include "utility.hpp"
+
 #include <initializer_list>
 #include <type_traits>
 #include <memory>
-#include "utility.hpp"
 
 namespace bit {
   namespace stl {
