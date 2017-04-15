@@ -80,8 +80,6 @@ namespace bit {
 
     namespace detail{
 
-      /// \struct bit::detail::cv_selector
-      ///
       /// \brief Helper to select the proper cv-qualifiers
       template<
         typename Unqualified,

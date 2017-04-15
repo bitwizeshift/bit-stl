@@ -58,9 +58,6 @@ namespace bit {
 
     inline namespace casts {
 
-      /// \addtogroup stl
-      /// \{
-
       //----------------------------------------------------------------------
       // Casts
       //----------------------------------------------------------------------
@@ -105,7 +102,6 @@ namespace bit {
       template<typename To, typename From>
       To copy_cast( const From& from ) noexcept;
 
-      /// \}
     } // inline namespace casts
   } // namespace stl
 } // namespace bit

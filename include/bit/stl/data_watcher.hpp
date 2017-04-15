@@ -21,8 +21,6 @@ namespace bit {
   namespace stl {
 
     //////////////////////////////////////////////////////////////////////////
-    /// \class bit::data_watcher
-    ///
     /// \brief A wrapper class around fundamental types that causes a
     ///        breakpoint any time the variable is set.
     ///

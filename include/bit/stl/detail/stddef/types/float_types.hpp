@@ -1,4 +1,6 @@
 /**
+ * \file float_types.hpp
+ *
  * \brief This internal header declares fixed size floating types
  *
  * \note This is an internal header file, included by other library headers.

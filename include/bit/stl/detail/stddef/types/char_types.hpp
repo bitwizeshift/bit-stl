@@ -1,4 +1,8 @@
 /**
+ * \file char_types.hpp
+ *
+ * \brief This internal header declares character types
+ *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
@@ -7,9 +11,6 @@
 
 namespace bit {
   namespace stl {
-
-//! \addtogroup stl
-//! \{
 
     // Decide tchar type; implementation specific character type
     // that supports multiple character encodings
@@ -47,7 +48,6 @@ namespace bit {
 
 #endif
 
-//! \}
   } // namespace stl
 } // namespace bit
 

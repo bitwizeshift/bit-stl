@@ -47,15 +47,12 @@ namespace bit {
 
     //--------------------------------------------------------------------------
 
-    /// \struct bit::empty
-    ///
-    /// This utility is used for creating composite classes
+    /// \brief This utility is used for creating composite classes
     template <typename T>
     struct empty{};
 
-    /// \struct bit::identity
-    ///
-    /// This utility is used for creating composite classes for type-traits
+    /// \brief This utility is used for creating composite classes for
+    ///        type-traits
     template<typename T>
     struct identity
     {
@@ -74,8 +71,6 @@ namespace bit {
 
     //--------------------------------------------------------------------------
 
-    /// \struct bit::int_to_type
-    ///
     /// \brief This template is designed to provide compile-time constants as
     ///        types.
     template<int i>

@@ -107,27 +107,27 @@ namespace bit {
     } // namespace detail
 
     ////////////////////////////////////////////////////////////////////////////
-    ///
-    ///
+    /// \brief An exception thrown when an optional is attempted to be accessed
+    ///        while not containing a value
     ////////////////////////////////////////////////////////////////////////////
     class bad_optional_access : public std::logic_error
     {
     public:
-      bad_optional_access() : std::logic_error("bit::bad_optional_access"){}
+      bad_optional_access() : std::logic_error("bad_optional_access"){}
 
     };
 
+    /// \brief This type represents null optional value
     struct nullopt_t
     {
       nullopt_t() = delete;
       constexpr nullopt_t(int){}
     };
 
+    /// \brief Instance of a nullopt type
     constexpr nullopt_t nullopt = nullopt_t(0);
 
     ////////////////////////////////////////////////////////////////////////////
-    /// \class bit::optional
-    ///
     /// \brief The class template optional manages an optional contained value,
     ///        i.e. a value that may or may not be present.
     ///

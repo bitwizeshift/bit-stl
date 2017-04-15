@@ -18,6 +18,7 @@
 #include <iterator>
 #include <limits>
 
+
 namespace bit {
   namespace stl {
 
@@ -173,8 +174,6 @@ namespace bit {
     ///
     /// \tparam T The type of this span
     /// \tparam Extent The maximum size of this span (default: unbounded)
-    ///
-    /// \ingroup stl
     //////////////////////////////////////////////////////////////////////////
     template<typename T, std::ptrdiff_t Extent = dynamic_extent>
     class span final
@@ -228,7 +227,7 @@ namespace bit {
       /// \brief Constructs an span by copying another span
       ///
       /// \param other the other span
-#ifndef BIT_DOXYGEN
+#ifndef BIT_DOXYGEN_BUILD
       template<typename U, std::ptrdiff_t OtherExtent, typename = enable_if_allowed_t<U,OtherExtent>>
 #else
       template<typename U, std::ptrdiff_t OtherExtent>
@@ -238,7 +237,7 @@ namespace bit {
       /// \brief Constructs an span by moving another span
       ///
       /// \param other the other span
-#ifndef BIT_DOXYGEN
+#ifndef BIT_DOXYGEN_BUILD
       template<typename U, std::ptrdiff_t OtherExtent, typename = enable_if_allowed_t<U,OtherExtent>>
 #else
       template<typename U, std::ptrdiff_t OtherExtent>

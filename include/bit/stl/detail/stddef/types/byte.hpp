@@ -1,13 +1,12 @@
 /**
+ * \file byte.hpp
+ *
  * \brief This header is mostly taken from Microsoft's implementation of
  *        the GSL byte-type.
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
 #ifndef BIT_STL_DETAIL_STDDEF_TYPES_BYTE_HPP
 #define BIT_STL_DETAIL_STDDEF_TYPES_BYTE_HPP
 
