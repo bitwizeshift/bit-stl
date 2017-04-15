@@ -238,7 +238,12 @@ TAB_SIZE               = 2
 # "Side Effects:". You can put \n's in the value part of an alias to insert
 # newlines.
 
-ALIASES                =
+# 2 user-defined aliases: 'requires' to specify a required concept, and
+# 'satisfies' to specify a satisfied concept
+ALIASES  = "requires{2}=\par Requires\n\p \1 satisfies \ref \2"
+ALIASES += "satisfies{1}=\par Satisfies\n\ref \1\n\ingroup \1"
+ALIASES += "concept{1}=\defgroup \1\n\ingroup concepts
+ALIASES += "concept{2}=\defgroup \1\n\ingroup \2
 
 # This tag can be used to specify a number of word-keyword mappings (TCL only).
 # A mapping has the form "name=value". For example adding "class=itcl::class"
