@@ -152,6 +152,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-
-
 #endif /* BIT_STL_DETAIL_ASSOCIATIVE_VTABLES_HPP */

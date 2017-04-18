@@ -29,6 +29,17 @@ namespace bit {
       constexpr std::size_t string_hash( const CharT* str, std::size_t count ) noexcept;
 
     } // namespace detail
+
+    inline namespace literals {
+      inline namespace hash_literals {
+
+        constexpr std::size_t operator "" _hash( const char* str, std::size_t n ) noexcept;
+        constexpr std::size_t operator "" _hash( const wchar_t* str , std::size_t n ) noexcept;
+        constexpr std::size_t operator "" _hash( const char16_t* str , std::size_t n ) noexcept;
+        constexpr std::size_t operator "" _hash( const char32_t* str , std::size_t n ) noexcept;
+
+      } // inline namespace hash_literals
+    } // inline namespace literals
   } // namespace stl
 } // namespace bit
 
@@ -48,6 +59,38 @@ inline constexpr std::size_t
     result *= prime;
   }
   return result;
+}
+
+inline constexpr std::size_t
+  bit::stl::literals::hash_literals
+  ::operator "" _hash( const char* str, std::size_t n )
+  noexcept
+{
+  return detail::string_hash( str, n );
+}
+
+inline constexpr std::size_t
+  bit::stl::literals::hash_literals
+  ::operator "" _hash( const wchar_t* str, std::size_t n )
+  noexcept
+{
+  return detail::string_hash( str, n );
+}
+
+inline constexpr std::size_t
+  bit::stl::literals::hash_literals
+  ::operator "" _hash( const char16_t* str, std::size_t n )
+  noexcept
+{
+  return detail::string_hash( str, n );
+}
+
+inline constexpr std::size_t
+  bit::stl::literals::hash_literals
+  ::operator "" _hash( const char32_t* str, std::size_t n )
+  noexcept
+{
+  return detail::string_hash( str, n );
 }
 
 #endif /* BIT_STL_DETAIL_STRING_HASH_HPP */

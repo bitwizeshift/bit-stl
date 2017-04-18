@@ -52,7 +52,7 @@ namespace bit {
     template<typename CharT, typename Traits, typename Allocator>
     std::size_t hash_value( const std::basic_string<CharT,Traits,Allocator>& str ) noexcept;
 
-  } // namespace traits
+  } // namespace stl
 } // namespace bit
 
 #include "detail/string.inl"
