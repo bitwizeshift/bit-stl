@@ -251,8 +251,21 @@ namespace bit {
       ///
       /// \return \c true if the buffer is full
       bool full() const noexcept;
+
+      /// \brief Returns the number of elements in this circular buffer
+      ///
+      /// \return the number of elements in this buffer
       size_type size() const noexcept;
+
+      /// \brief Returns the max size of this buffer
+      ///
+      /// \note This result is always the same as capacity
+      /// \return the max number of elements this circular_buffer can contain
       size_type max_size() const noexcept;
+
+      /// \brief Returns the capacity of this buffer
+      ///
+      /// \return the capacity of this circular_buffer
       size_type capacity() const noexcept;
 
       //----------------------------------------------------------------------
@@ -260,10 +273,22 @@ namespace bit {
       //----------------------------------------------------------------------
     public:
 
+      /// \brief Returns a reference to the front element of this
+      ///        circular_buffer
+      ///
+      /// \return reference to the front element of this circular_buffer
       reference front() noexcept;
+
+      /// \copydoc front()
       const_reference front() const noexcept;
 
+      /// \brief Returns a reference to the back element of this
+      ///        circular_buffer
+      ///
+      /// \return reference to the front element of this circular_buffer
       reference back() noexcept;
+
+      /// \copydoc back()
       const_reference back() const noexcept;
 
       //----------------------------------------------------------------------
@@ -271,23 +296,51 @@ namespace bit {
       //----------------------------------------------------------------------
     public:
 
+      /// \brief Gets the iterator to the beginning of this range
+      ///
+      /// \return the begin iterator
       iterator begin() noexcept;
+
+      /// \copydoc begin
       const_iterator begin() const noexcept;
+
+      /// \copydoc begin
       const_iterator cbegin() const noexcept;
 
+      /// \brief Gets the iterator to the end of this range
+      ///
+      /// \return the end iterator
       iterator end() noexcept;
+
+      /// \copydoc end
       const_iterator end() const noexcept;
+
+      /// \copydoc end
       const_iterator cend() const noexcept;
 
       //----------------------------------------------------------------------
 
-      reverse_iterator rend() noexcept;
-      const_reverse_iterator rend() const noexcept;
-      const_reverse_iterator crend() const noexcept;
-
+      /// \brief Gets the iterator to the beginning of the reverse range
+      ///
+      /// \return the reverse iterator
       reverse_iterator rbegin() noexcept;
+
+      /// \copydoc rbegin()
       const_reverse_iterator rbegin() const noexcept;
+
+      /// \copydoc rbegin()
       const_reverse_iterator crbegin() const noexcept;
+
+      /// \brief Gets the iterator to the end of the reverse range
+      ///
+      /// \return the reverse iterator
+      reverse_iterator rend() noexcept;
+
+      /// \copydoc rend()
+      const_reverse_iterator rend() const noexcept;
+
+      /// \copydoc rend()
+      const_reverse_iterator crend() const noexcept;
 
       //----------------------------------------------------------------------
       // Private Members
