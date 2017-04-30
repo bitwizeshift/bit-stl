@@ -17,7 +17,6 @@
 namespace bit {
   namespace stl {
 
-
     //////////////////////////////////////////////////////////////////////////
     /// \brief A circular buffer with a queue API
     ///
