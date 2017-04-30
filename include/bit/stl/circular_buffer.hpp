@@ -133,6 +133,12 @@ namespace bit {
       //----------------------------------------------------------------------
     public:
 
+      /// \brief Constructs a null circular_buffer
+      circular_buffer() noexcept;
+
+      /// \brief Constructs a null circular_buffer
+      explicit circular_buffer( std::nullptr_t ) noexcept;
+
       /// \brief Constructs a circular buffer from an uninitialized buffer
       ///        that holds \p size \p T entries
       ///
@@ -145,14 +151,18 @@ namespace bit {
       /// \param other the other circular_buffer to move
       circular_buffer( circular_buffer&& other ) noexcept;
 
+      //----------------------------------------------------------------------
+
+      /// \brief Destructs this circular_buffer, destructing all instances
+      ~circular_buffer();
+
+      //----------------------------------------------------------------------
+
       /// \brief Move-assigns a circular_buffer from another one
       ///
       /// \param other the other circular_buffer to move
       /// \return a reference to \c (*this)
-      circular_buffer& operator=( circular_buffer&& other ) noexcept = default;
-
-      /// \brief Destructs this circular_buffer, destructing all instances
-      ~circular_buffer();
+      circular_buffer& operator=(circular_buffer&& other ) noexcept;
 
       //----------------------------------------------------------------------
       // Modifiers
@@ -167,7 +177,7 @@ namespace bit {
       ///
       /// \param args the arguments to forward to T
       template<typename...Args>
-      void emplace_back( Args&&...args );
+      reference emplace_back( Args&&...args );
 
       /// \brief Invokes \p T's constructor with the given \p args, storing
       ///        the result at the beginning of the bugger
@@ -177,7 +187,7 @@ namespace bit {
       ///
       /// \param args the arguments to forward to T
       template<typename...Args>
-      void emplace_front( Args&&...args );
+      reference emplace_front( Args&&...args );
 
       //----------------------------------------------------------------------
 
@@ -282,6 +292,8 @@ namespace bit {
       /// \copydoc front()
       const_reference front() const noexcept;
 
+      //----------------------------------------------------------------------
+
       /// \brief Returns a reference to the back element of this
       ///        circular_buffer
       ///
@@ -290,6 +302,16 @@ namespace bit {
 
       /// \copydoc back()
       const_reference back() const noexcept;
+
+      //----------------------------------------------------------------------
+
+      /// \brief Gets a pointer to the underlying buffer
+      ///
+      /// \return the pointer
+      pointer data() noexcept;
+
+      /// \copydoc data()
+      const_pointer data() const noexcept;
 
       //----------------------------------------------------------------------
       // Iterators
@@ -363,6 +385,41 @@ namespace bit {
       T*& increment( T*& iter ) noexcept;
       T*& decrement( T*& iter ) noexcept;
     };
+
+    //------------------------------------------------------------------------
+    // Free-functions
+    //------------------------------------------------------------------------
+
+    template<typename T>
+    void swap( circular_buffer<T>& lhs, circular_buffer<T>& rhs ) noexcept;
+
+    //------------------------------------------------------------------------
+    // Comparison
+    //------------------------------------------------------------------------
+
+    template<typename T>
+    bool operator==( const circular_buffer<T>& lhs,
+                     const circular_buffer<T>& rhs ) noexcept;
+
+    template<typename T>
+    bool operator!=( const circular_buffer<T>& lhs,
+                     const circular_buffer<T>& rhs ) noexcept;
+
+    template<typename T>
+    bool operator<( const circular_buffer<T>& lhs,
+                    const circular_buffer<T>& rhs ) noexcept;
+
+    template<typename T>
+    bool operator>( const circular_buffer<T>& lhs,
+                    const circular_buffer<T>& rhs ) noexcept;
+
+    template<typename T>
+    bool operator<=( const circular_buffer<T>& lhs,
+                     const circular_buffer<T>& rhs ) noexcept;
+
+    template<typename T>
+    bool operator>=( const circular_buffer<T>& lhs,
+                     const circular_buffer<T>& rhs ) noexcept;
 
   } // namespace stl
 } // namespace bit

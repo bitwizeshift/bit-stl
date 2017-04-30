@@ -118,6 +118,22 @@ inline bool
 //----------------------------------------------------------------------------
 
 template<typename T>
+inline bit::stl::circular_buffer<T>::circular_buffer()
+  noexcept
+  : circular_buffer( nullptr )
+{
+
+}
+
+template<typename T>
+inline bit::stl::circular_buffer<T>::circular_buffer( std::nullptr_t )
+  noexcept
+  : circular_buffer(nullptr,0)
+{
+
+}
+
+template<typename T>
 inline bit::stl::circular_buffer<T>::circular_buffer( void* buffer,
                                                       std::size_t size )
   noexcept
@@ -140,7 +156,7 @@ inline bit::stl::circular_buffer<T>
     m_capacity( other.m_capacity ),
     m_size( other.m_size )
 {
-  other.m_size = 0;
+  other.m_size   = 0;
   other.m_buffer = nullptr;
 }
 
@@ -150,13 +166,31 @@ inline bit::stl::circular_buffer<T>::~circular_buffer()
   clear();
 }
 
+template<typename T>
+bit::stl::circular_buffer<T>&
+  bit::stl::circular_buffer<T>::operator=(circular_buffer&& other )
+  noexcept
+{
+  clear();
+  m_buffer   = other.m_buffer;
+  m_begin    = other.m_begin;
+  m_end      = other.m_end;
+  m_capacity = other.m_capacity;
+  m_size     = other.m_size;
+
+  // Only set the size and buffer so that it's in a destructible state
+  other.m_size = 0;
+  other.m_buffer = nullptr;
+}
+
 //----------------------------------------------------------------------------
 // Modifiers
 //----------------------------------------------------------------------------
 
 template<typename T>
 template<typename...Args>
-inline void bit::stl::circular_buffer<T>::emplace_back( Args&&...args )
+inline typename bit::stl::circular_buffer<T>::reference
+  bit::stl::circular_buffer<T>::emplace_back( Args&&...args )
 {
   if(full()) {
     stl::destroy_at( m_begin );
@@ -171,17 +205,20 @@ inline void bit::stl::circular_buffer<T>::emplace_back( Args&&...args )
     new (m_end) T( std::forward<Args>(args)... );
 #ifdef BIT_COMPILER_EXCEPTIONS_ENABLED
   } catch (...) {
-    decrement( m_end );
     --m_size;
     throw;
   }
 #endif
+  auto result = m_end;
   increment( m_end );
+
+  return (*result);
 }
 
 template<typename T>
 template<typename...Args>
-inline void bit::stl::circular_buffer<T>::emplace_front( Args&&...args )
+inline typename bit::stl::circular_buffer<T>::reference
+  bit::stl::circular_buffer<T>::emplace_front( Args&&...args )
 {
   if(full()) {
     decrement( m_end );
@@ -202,6 +239,7 @@ inline void bit::stl::circular_buffer<T>::emplace_front( Args&&...args )
     throw;
   }
 #endif
+  return (*m_begin);
 }
 
 //----------------------------------------------------------------------
@@ -358,6 +396,24 @@ inline typename bit::stl::circular_buffer<T>::const_reference
 }
 
 //----------------------------------------------------------------------------
+
+template<typename T>
+inline typename bit::stl::circular_buffer<T>::pointer
+  bit::stl::circular_buffer<T>::data()
+  noexcept
+{
+  return m_buffer;
+}
+
+template<typename T>
+inline typename bit::stl::circular_buffer<T>::const_pointer
+  bit::stl::circular_buffer<T>::data()
+  const noexcept
+{
+  return m_buffer;
+}
+
+//----------------------------------------------------------------------------
 // Iteration
 //----------------------------------------------------------------------------
 
@@ -484,6 +540,68 @@ inline T*& bit::stl::circular_buffer<T>::decrement( T*& iter )
     return (iter = &m_buffer[m_capacity-1]);
   }
   return --iter;
+}
+
+//----------------------------------------------------------------------------
+// Free-functions
+//----------------------------------------------------------------------------
+
+template<typename T>
+void bit::stl::swap( circular_buffer<T>& lhs, circular_buffer<T>& rhs ) noexcept
+{
+  lhs.swap(rhs);
+}
+
+//----------------------------------------------------------------------------
+// Comparisons
+//----------------------------------------------------------------------------
+
+template<typename T>
+bool bit::stl::operator==( const circular_buffer<T>& lhs,
+                           const circular_buffer<T>& rhs )
+  noexcept
+{
+  return std::equal(lhs.begin(),lhs.end(),rhs.begin(),lhs.end());
+}
+
+template<typename T>
+bool bit::stl::operator!=( const circular_buffer<T>& lhs,
+                           const circular_buffer<T>& rhs )
+  noexcept
+{
+  return !(lhs==rhs);
+}
+
+template<typename T>
+bool bit::stl::operator<( const circular_buffer<T>& lhs,
+                          const circular_buffer<T>& rhs )
+  noexcept
+{
+  return std::lexicographical_compare(lhs.begin(),lhs.end(),rhs.begin(),rhs.end());
+}
+
+template<typename T>
+bool bit::stl::operator>( const circular_buffer<T>& lhs,
+                          const circular_buffer<T>& rhs )
+  noexcept
+{
+  return (rhs<lhs);
+}
+
+template<typename T>
+bool bit::stl::operator<=( const circular_buffer<T>& lhs,
+                           const circular_buffer<T>& rhs )
+  noexcept
+{
+  return !(rhs<lhs);
+}
+
+template<typename T>
+bool bit::stl::operator>=( const circular_buffer<T>& lhs,
+                           const circular_buffer<T>& rhs )
+  noexcept
+{
+  return !(lhs<rhs);
 }
 
 #endif /* BIT_STL_DETAIL_CIRCULAR_BUFFER_INL */

@@ -9,7 +9,7 @@
 #ifndef BIT_STL_HASHED_STRING_HPP
 #define BIT_STL_HASHED_STRING_HPP
 
-#include "string.hpp"
+#include "string.hpp"             // bit::stl::hash_value
 #include "hashed_string_view.hpp" // bit::stl::hashed_string_view
 
 #include <string>      // std::basic_string
