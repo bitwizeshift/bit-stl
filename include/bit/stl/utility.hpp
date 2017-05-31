@@ -543,6 +543,39 @@ namespace bit {
     underlying_container_type_t<Container>&
       get_underlying_container( Container& container );
 
+    namespace detail {
+      template<typename TypeList>
+      struct for_each_type_impl;
+    }
+
+    /// \brief A type used for containing a series of other types
+    template<typename...Ts>
+    struct type_list{};
+
+    /// \brief Iterates each type specified in TypeList, instantiating the
+    ///        operator() operator with the specified template arguments,
+    ///        and forwards arguments to each instantiation.
+    ///
+    /// Example:
+    /// \code
+    /// struct DoSomething {
+    ///   template<typename T>
+    ///   void operator( int ) {
+    ///     // do something with 'T'
+    ///   }
+    /// };
+    ///
+    /// for_each_type<type_list<int,float>>( DoSomething(), 42 );
+    /// \endcode
+    ///
+    /// will call "operator()<int>( 42 )" followed by "operator()<float>( 42 )"
+    ///
+    /// \tparam TypeList The list of types to invoke
+    /// \param functor the functor to invoke for each type
+    /// \param args... additional arguments to forward
+    template<typename TypeList, typename Functor, typename...Args>
+    void for_each_type( Functor&& functor, Args&&...args );
+
   } // namespace stl
 } // namespace bit
 

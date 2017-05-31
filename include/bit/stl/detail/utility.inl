@@ -400,5 +400,54 @@ bit::stl::underlying_container_type_t<Container>&
   return I::get( container );
 }
 
+template<typename T0, typename...Tn>
+struct bit::stl::detail::for_each_type_impl<bit::stl::type_list<T0,Tn...>>
+{
+    template<typename Functor, typename...Args>
+    static void invoke( Functor&& functor, Args&&...args )
+    {
+      std::forward<Functor>(functor).template operator()<T0>( std::forward<Args>(args)... );
+
+      for_each_type_impl<type_list<Tn...>>::invoke( std::forward<Functor>(functor), std::forward<Args>(args)... );
+    }
+};
+
+template<typename...Ts, typename...Tn>
+struct bit::stl::detail::for_each_type_impl<bit::stl::type_list<bit::stl::type_list<Ts...>,Tn...>>
+{
+  template<typename Functor, typename...Args>
+  static void invoke( Functor&& functor, Args&&...args )
+  {
+    std::forward<Functor>(functor).template operator()<Ts...>( std::forward<Args>(args)... );
+
+    for_each_type_impl<type_list<Tn...>>::invoke( std::forward<Functor>(functor), std::forward<Args>(args)... );
+  }
+};
+
+template<typename T0>
+struct bit::stl::detail::for_each_type_impl<bit::stl::type_list<T0>>
+{
+  template<typename Functor, typename...Args>
+  static void invoke( Functor&& functor, Args&&...args )
+  {
+    std::forward<Functor>(functor).template operator()<T0>( std::forward<Args>(args)... );
+  }
+};
+
+template<typename...Ts>
+struct bit::stl::detail::for_each_type_impl<bit::stl::type_list<Ts...>>
+{
+  template<typename Functor, typename...Args>
+  static void invoke( Functor&& functor, Args&&...args )
+  {
+    std::forward<Functor>(functor).template operator()<Ts...>( std::forward<Args>(args)... );
+  }
+};
+
+template<typename TypeList, typename Functor, typename...Args>
+void bit::stl::for_each_type( Functor&& functor, Args&&...args )
+{
+  detail::for_each_type_impl<TypeList>::invoke( std::forward<Functor>(functor), std::forward<Args>(args)... );
+}
 
 #endif /* BFSTL_DETAIL_UTILITY_INL */
