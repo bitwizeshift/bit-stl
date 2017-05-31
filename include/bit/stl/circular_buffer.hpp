@@ -12,10 +12,12 @@
 #include "memory.hpp" // stl::destroy_at
 
 #include <iterator> // std::bidirectional_iterator_tag, std::reverse_iterator
+#include <algorithm> // std::equal, std::lexicographical_compare
 
 namespace bit {
   namespace stl {
     namespace detail {
+
       //////////////////////////////////////////////////////////////////////////
       ///
       /// \tparam T the underlying type
