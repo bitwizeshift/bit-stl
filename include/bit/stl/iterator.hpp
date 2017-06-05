@@ -153,20 +153,11 @@ namespace bit {
 
     /// \brief Makes a reverse range from a given \p iterator \p sentinal pair
     ///
-    /// \param iterator the beginning of a range
-    /// \param sentinel the end of a range
-    /// \return the type-deduced range
-    template<typename I, typename S>
-    constexpr auto make_reverse_range( I iterator, S sentinel )
-      -> range<std::reverse_iterator<I>,std::reverse_iterator<S>>;
-
-    /// \brief Makes a reverse range from a given \p iterator \p sentinal pair
-    ///
     /// \param irange the range to deduce
     /// \return the type-deduced range
     template<typename Range>
     constexpr auto make_reverse_range( Range&& r )
-      -> decltype(make_reverse_range( r.begin(), r.end() ));
+      -> decltype(make_range( r.rbegin(), r.rend() ));
 
     //------------------------------------------------------------------------
 

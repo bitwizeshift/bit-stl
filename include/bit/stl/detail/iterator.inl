@@ -121,22 +121,13 @@ inline constexpr auto
 
 //------------------------------------------------------------------------
 
-template<typename I, typename S>
-inline constexpr auto
-  bit::stl::make_reverse_range( I iterator, S sentinel )
-  -> range<std::reverse_iterator<I>,std::reverse_iterator<S>>
-{
-  return { std::make_reverse_iterator(iterator),
-           std::make_reverse_iterator(sentinel) };
-}
-
 template<typename Range>
 inline constexpr auto
   bit::stl::make_reverse_range( Range&& r )
-  -> decltype(make_reverse_range( r.begin(), r.end() ))
+  -> decltype(make_range( r.rbegin(), r.rend() ))
 {
-  return make_reverse_range( std::forward<Range>(r).begin(),
-                             std::forward<Range>(r).end() );
+  return make_range( std::forward<Range>(r).rbegin(),
+                     std::forward<Range>(r).rend() );
 }
 
 //------------------------------------------------------------------------
@@ -144,11 +135,11 @@ inline constexpr auto
 template<typename Range0, typename...RangeN>
 inline constexpr auto
   bit::stl::make_zip_range( Range0&& r0, RangeN&&...rn )
-  -> bit::stl::range<bit::stl::zip_iterator<decltype( std::declval<Range0>().begin()), decltype(std::declval<RangeN>().begin())...>,
-                     bit::stl::zip_iterator<decltype( std::declval<Range0>().end()), decltype(std::declval<RangeN>().end())...>>
+  -> bit::stl::range<bit::stl::zip_iterator<decltype(std::declval<Range0>().begin()), decltype(std::declval<RangeN>().begin())...>,
+                     bit::stl::zip_iterator<decltype(std::declval<Range0>().end()), decltype(std::declval<RangeN>().end())...>>
 {
-  using begin_iterator = bit::stl::zip_iterator<decltype( std::declval<Range0>().begin()), decltype(std::declval<RangeN>().begin())...>;
-  using end_iterator   = bit::stl::zip_iterator<decltype( std::declval<Range0>().end()), decltype(std::declval<RangeN>().end())...>;
+  using begin_iterator = bit::stl::zip_iterator<decltype(std::declval<Range0>().begin()), decltype(std::declval<RangeN>().begin())...>;
+  using end_iterator   = bit::stl::zip_iterator<decltype(std::declval<Range0>().end()), decltype(std::declval<RangeN>().end())...>;
 
   return { begin_iterator{r0.begin(), rn.begin()...}, end_iterator{r0.end(), rn.end()...} };
 }

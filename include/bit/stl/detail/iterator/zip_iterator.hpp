@@ -106,12 +106,18 @@ namespace bit {
       //----------------------------------------------------------------------
     public:
 
-      constexpr bool operator == ( const zip_iterator& rhs ) const noexcept;
-      constexpr bool operator != ( const zip_iterator& rhs ) const noexcept;
-      constexpr bool operator <  ( const zip_iterator& rhs ) const noexcept;
-      constexpr bool operator <= ( const zip_iterator& rhs ) const noexcept;
-      constexpr bool operator >  ( const zip_iterator& rhs ) const noexcept;
-      constexpr bool operator >= ( const zip_iterator& rhs ) const noexcept;
+      template<typename...Its>
+      constexpr bool operator == ( const zip_iterator<Its...>& rhs ) const noexcept;
+      template<typename...Its>
+      constexpr bool operator != ( const zip_iterator<Its...>& rhs ) const noexcept;
+      template<typename...Its>
+      constexpr bool operator <  ( const zip_iterator<Its...>& rhs ) const noexcept;
+      template<typename...Its>
+      constexpr bool operator <= ( const zip_iterator<Its...>& rhs ) const noexcept;
+      template<typename...Its>
+      constexpr bool operator >  ( const zip_iterator<Its...>& rhs ) const noexcept;
+      template<typename...Its>
+      constexpr bool operator >= ( const zip_iterator<Its...>& rhs ) const noexcept;
 
       //----------------------------------------------------------------------
       // Private Member Types
@@ -158,6 +164,9 @@ namespace bit {
 
       template<std::size_t Idx>
       constexpr void decrement( std::index_sequence<Idx> );
+
+      template<typename...> friend class zip_iterator;
+
     };
 
   } // namespace memory

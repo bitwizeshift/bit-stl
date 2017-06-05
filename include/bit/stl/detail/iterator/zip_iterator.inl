@@ -120,42 +120,48 @@ inline constexpr typename bit::stl::zip_iterator<InputIterators...>::reference
 //----------------------------------------------------------------------------
 
 template<typename...InputIterators>
-constexpr bool bit::stl::zip_iterator<InputIterators...>::operator == ( const zip_iterator& rhs )
+template<typename...Its>
+constexpr bool bit::stl::zip_iterator<InputIterators...>::operator == ( const zip_iterator<Its...>& rhs )
   const noexcept
 {
   return m_storage == rhs.m_storage;
 }
 
 template<typename...InputIterators>
-constexpr bool bit::stl::zip_iterator<InputIterators...>::operator != ( const zip_iterator& rhs )
+template<typename...Its>
+constexpr bool bit::stl::zip_iterator<InputIterators...>::operator != ( const zip_iterator<Its...>& rhs )
   const noexcept
 {
   return m_storage != rhs.m_storage;
 }
 
 template<typename...InputIterators>
-constexpr bool bit::stl::zip_iterator<InputIterators...>::operator <  ( const zip_iterator& rhs )
+template<typename...Its>
+constexpr bool bit::stl::zip_iterator<InputIterators...>::operator < ( const zip_iterator<Its...>& rhs )
   const noexcept
 {
   return m_storage < rhs.m_storage;
 }
 
 template<typename...InputIterators>
-constexpr bool bit::stl::zip_iterator<InputIterators...>::operator <= ( const zip_iterator& rhs )
+template<typename...Its>
+constexpr bool bit::stl::zip_iterator<InputIterators...>::operator <= ( const zip_iterator<Its...>& rhs )
   const noexcept
 {
   return m_storage <= rhs.m_storage;
 }
 
 template<typename...InputIterators>
-constexpr bool bit::stl::zip_iterator<InputIterators...>::operator >  ( const zip_iterator& rhs )
+template<typename...Its>
+constexpr bool bit::stl::zip_iterator<InputIterators...>::operator > ( const zip_iterator<Its...>& rhs )
   const noexcept
 {
-  return m_storage > rhs.m_storage;
+  return m_storage >= rhs.m_storage;
 }
 
 template<typename...InputIterators>
-constexpr bool bit::stl::zip_iterator<InputIterators...>::operator >= ( const zip_iterator& rhs )
+template<typename...Its>
+constexpr bool bit::stl::zip_iterator<InputIterators...>::operator >= ( const zip_iterator<Its...>& rhs )
   const noexcept
 {
   return m_storage >= rhs.m_storage;
