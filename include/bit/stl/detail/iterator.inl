@@ -141,4 +141,16 @@ inline constexpr auto
 
 //------------------------------------------------------------------------
 
+template<typename Range0, typename...RangeN>
+inline constexpr auto
+  bit::stl::make_zip_range( Range0&& r0, RangeN&&...rn )
+  -> bit::stl::range<bit::stl::zip_iterator<decltype( std::declval<Range0>().begin()), decltype(std::declval<RangeN>().begin())...>,
+                     bit::stl::zip_iterator<decltype( std::declval<Range0>().end()), decltype(std::declval<RangeN>().end())...>>
+{
+  using begin_iterator = bit::stl::zip_iterator<decltype( std::declval<Range0>().begin()), decltype(std::declval<RangeN>().begin())...>;
+  using end_iterator   = bit::stl::zip_iterator<decltype( std::declval<Range0>().end()), decltype(std::declval<RangeN>().end())...>;
+
+  return { begin_iterator{r0.begin(), rn.begin()...}, end_iterator{r0.end(), rn.end()...} };
+}
+
 #endif /* BIT_STL_DETAIL_ITERATOR_INL */

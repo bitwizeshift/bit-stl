@@ -13,6 +13,7 @@
 
 // IWYU pragma: begin_exports
 #include "detail/iterator/tuple_element_iterator.hpp"
+#include "detail/iterator/zip_iterator.hpp"
 #include "detail/iterator/range.hpp"
 // IWYU pragma: end_exports
 
@@ -166,6 +167,18 @@ namespace bit {
     template<typename Range>
     constexpr auto make_reverse_range( Range&& r )
       -> decltype(make_reverse_range( r.begin(), r.end() ));
+
+    //------------------------------------------------------------------------
+
+    /// \brief Makes a zip range from a selection of zip iterators
+    ///
+    /// \param r0 the first range entry
+    /// \param rn the rest of the range entries
+    /// \return the type-deduced range
+    template<typename Range0, typename...RangeN>
+    constexpr auto make_zip_range( Range0&& r0, RangeN&&...rn )
+      -> range<zip_iterator<decltype( std::declval<Range0>().begin()), decltype(std::declval<RangeN>().begin())...>,
+               zip_iterator<decltype( std::declval<Range0>().end()), decltype(std::declval<RangeN>().end())...>>;
 
   } // namespace stl
 } // namespace bit
