@@ -104,4 +104,41 @@ inline constexpr typename bit::stl::delegate<R(Args...)>::return_type
   return m_delegate_stub.second( m_delegate_stub.first, std::forward<Arguments>(args)... );
 }
 
+template<typename Fn>
+inline bool bit::stl::operator==(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+{
+  return lhs.m_delegate_stub == rhs.m_delegate_stub;
+}
+
+template<typename Fn>
+inline bool bit::stl::operator!=(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+{
+  return !(lhs==rhs);
+}
+
+template<typename Fn>
+inline bool bit::stl::operator<(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+{
+  return lhs.m_delegate_stub < rhs.m_delegate_stub;
+}
+
+template<typename Fn>
+inline bool bit::stl::operator>(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+{
+  return (rhs < lhs);
+}
+
+template<typename Fn>
+inline bool bit::stl::operator<=(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+{
+  return !(rhs < lhs);
+}
+
+template<typename Fn>
+inline bool bit::stl::operator>=(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+{
+  return !(lhs < rhs);
+}
+
+
 #endif /* BIT_STL_DETAIL_DELEGATE_INL */

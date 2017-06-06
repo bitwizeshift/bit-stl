@@ -141,7 +141,22 @@ namespace bit {
 
       stub_type m_delegate_stub; ///< The internal stub for this delegate
 
+      friend bool operator==(const delegate& lhs, const delegate& rhs);
+      friend bool operator<(const delegate& lhs, const delegate& rhs);
     };
+
+    template<typename Fn>
+    bool operator==(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+    template<typename Fn>
+    bool operator!=(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+    template<typename Fn>
+    bool operator<(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+    template<typename Fn>
+    bool operator>(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+    template<typename Fn>
+    bool operator<=(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+    template<typename Fn>
+    bool operator>=(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
 
 #if __cplusplus >= 201703L
 
