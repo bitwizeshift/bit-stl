@@ -185,6 +185,24 @@ namespace bit {
     template<typename T>
     std::size_t hash_value( const std::shared_ptr<T>& val ) noexcept;
 
+    //------------------------------------------------------------------------
+    // Comparisons
+    //------------------------------------------------------------------------
+
+    /// \brief Performs a deep comparison of two pointer-like objects
+    ///
+    /// \param lhs the left pointer
+    /// \param rhs the right pointer
+    /// \return \c true if \p lhs is the same as \p rhs
+    /// \{
+    template<typename T, typename U>
+    constexpr bool deep_compare( const T& lhs, const U& rhs ) noexcept;
+    template<typename T>
+    constexpr bool deep_compare( std::nullptr_t, const T& rhs ) noexcept;
+    template<typename T>
+    constexpr bool deep_compare( const T& lhs, std::nullptr_t ) noexcept;
+    constexpr bool deep_compare( std::nullptr_t, std::nullptr_t ) noexcept;
+    /// \}
   } // namespace stl
 } // namespace bit
 

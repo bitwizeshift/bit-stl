@@ -119,7 +119,7 @@ inline void bit::stl::uninitialized_construct( ForwardIterator first,
     }
   } catch (...) {
     for (; first != current; ++first) {
-      first->~Value();
+      first->~type();
     }
     throw;
   }
@@ -204,6 +204,33 @@ inline std::size_t
   noexcept
 {
   return reinterpret_cast<std::size_t>( val.get() );
+}
+
+template<typename T, typename U>
+inline constexpr bool bit::stl::deep_compare( const T& lhs, const U& rhs )
+  noexcept
+{
+  return (lhs == rhs) || (lhs && rhs && (*lhs == *rhs));
+}
+
+template<typename T>
+inline constexpr bool deep_compare( std::nullptr_t, const T& rhs )
+  noexcept
+{
+  return nullptr == rhs;
+}
+
+template<typename T>
+inline constexpr bool deep_compare( const T& lhs, std::nullptr_t )
+  noexcept
+{
+  return lhs == nullptr;
+}
+
+inline constexpr bool deep_compare( std::nullptr_t, std::nullptr_t )
+  noexcept
+{
+  return true;
 }
 
 #endif /* BIT_STL_DETAIL_MEMORY_INL */
