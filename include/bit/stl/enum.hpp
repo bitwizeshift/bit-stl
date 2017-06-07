@@ -141,57 +141,75 @@ namespace bit {
       To enum_cast( From from );
 
     } // inline namespace casts
+
+    /// \brief This namespace introduces bitwise operations to any enums that
+    ///        specialize \c is_enum_bitmask
+    ///
+    /// This namespace behaves a lot like std::rel_ops. To make use of this,
+    /// use this namespace either from within another namespace, or from the
+    /// top level. These overloads will only selectively enable if
+    /// \c bit::stl::is_enum_bitmask has been specialized to be true for that
+    /// enum.
+    namespace enum_ops {
+
+      namespace detail {
+        template<typename T>
+        struct is_enum_and_bitmask : std::integral_constant<bool,std::is_enum<T>::value && is_enum_bitmask<T>::value>{};
+
+      } // namespace detail
+
+      //======================================================================
+      // Enum Operators
+      //======================================================================
+
+      //----------------------------------------------------------------------
+      // Unary Operators
+      //----------------------------------------------------------------------
+
+      template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
+      constexpr Enum operator ~( Enum e ) noexcept;
+
+      //----------------------------------------------------------------------
+      // Binary Operators
+      //----------------------------------------------------------------------
+
+      template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
+      constexpr Enum operator |( Enum lhs, Enum rhs ) noexcept;
+
+      template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
+      constexpr Enum operator &( Enum lhs, Enum rhs ) noexcept;
+
+      template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
+      constexpr Enum operator ^( Enum lhs, Enum rhs ) noexcept;
+
+      template<typename Enum, typename Integer, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value && std::is_integral<Integer>::value>>
+      constexpr Enum operator <<( Enum lhs, Integer rhs ) noexcept;
+
+      template<typename Enum, typename Integer, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value && std::is_integral<Integer>::value>>
+      constexpr Enum operator >>( Enum lhs, Integer rhs ) noexcept;
+
+      //----------------------------------------------------------------------
+      // Compound Operators
+      //----------------------------------------------------------------------
+
+      template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
+      Enum& operator |=( Enum& lhs, Enum rhs ) noexcept;
+
+      template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
+      Enum& operator &=( Enum& lhs, Enum rhs ) noexcept;
+
+      template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
+      Enum& operator^=( Enum& lhs, Enum rhs ) noexcept;
+
+      template<typename Enum, typename Integer, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value && std::is_integral<Integer>::value>>
+      Enum& operator<<=( Enum& lhs, Integer rhs ) noexcept;
+
+      template<typename Enum, typename Integer, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value && std::is_integral<Integer>::value>>
+      Enum& operator>>=( Enum& lhs, Integer rhs ) noexcept;
+
+    } // namespace enum_ops
   } // namespace stl
 } // namespace bit
-
-//============================================================================
-// Enum Operators
-//============================================================================
-
-//----------------------------------------------------------------------------
-// Unary Operators
-//----------------------------------------------------------------------------
-
-template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>* = nullptr>
-constexpr Enum operator ~( Enum e ) noexcept;
-
-//----------------------------------------------------------------------------
-// Binary Operators
-//----------------------------------------------------------------------------
-
-template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>* = nullptr>
-constexpr Enum operator |( Enum lhs, Enum rhs ) noexcept;
-
-template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>* = nullptr>
-constexpr Enum operator &( Enum lhs, Enum rhs ) noexcept;
-
-template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>* = nullptr>
-constexpr Enum operator ^( Enum lhs, Enum rhs ) noexcept;
-
-template<typename Enum, typename Integer, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value && std::is_integral<Integer>::value>* = nullptr>
-constexpr Enum operator <<( Enum lhs, Integer rhs ) noexcept;
-
-template<typename Enum, typename Integer, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value && std::is_integral<Integer>::value>* = nullptr>
-constexpr Enum operator >>( Enum lhs, Integer rhs ) noexcept;
-
-//----------------------------------------------------------------------------
-// Compound Operators
-//----------------------------------------------------------------------------
-
-template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>* = nullptr>
-Enum& operator |=( Enum& lhs, Enum rhs ) noexcept;
-
-template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>* = nullptr>
-Enum& operator &=( Enum& lhs, Enum rhs ) noexcept;
-
-template<typename Enum, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value>* = nullptr>
-Enum& operator^=( Enum& lhs, Enum rhs ) noexcept;
-
-template<typename Enum, typename Integer, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value && std::is_integral<Integer>::value>* = nullptr>
-Enum& operator<<=( Enum& lhs, Integer rhs ) noexcept;
-
-template<typename Enum, typename Integer, std::enable_if_t<std::is_enum<Enum>::value && bit::stl::is_enum_bitmask<Enum>::value && std::is_integral<Integer>::value>* = nullptr>
-Enum& operator>>=( Enum& lhs, Integer rhs ) noexcept;
 
 #include "detail/enum.inl"
 
