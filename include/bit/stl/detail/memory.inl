@@ -115,7 +115,7 @@ inline void bit::stl::uninitialized_construct( ForwardIterator first,
   ForwardIterator current = first;
   try {
     for (; current != last; ++current) {
-      ::new (static_cast<void*>(std::addressof(*current))) type( std::forward<Args>(args)... );
+      new (static_cast<void*>(std::addressof(*current))) type( std::forward<Args>(args)... );
     }
   } catch (...) {
     for (; first != current; ++first) {
@@ -137,7 +137,7 @@ inline ForwardIterator
   ForwardIterator current = first;
   try {
     for(; n > 0; ++current, --n) {
-      new (static_cast<void*>(std::addressof(*current))) type(std::forward<Args>(args)...);
+      new (static_cast<void*>(std::addressof(*current))) type( std::forward<Args>(args)... );
     }
     return current;
   }  catch (...) {

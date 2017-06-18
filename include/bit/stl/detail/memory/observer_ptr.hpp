@@ -1,5 +1,14 @@
-#ifndef BIT_STL_INTERNAL_MEMORY_OBSERVER_PTR_HPP
-#define BIT_STL_INTERNAL_MEMORY_OBSERVER_PTR_HPP
+/**
+ * \file observer_ptr.hpp
+ *
+ * \brief This header contains a dummy smart-pointer, whose sole purpose
+ *        is to behave like a well-defined raw-pointer.
+ *
+ * \note This is an internal header file, included by other library headers.
+ *       Do not attempt to use it directly.
+ */
+#ifndef BIT_STL_DETAIL_MEMORY_OBSERVER_PTR_HPP
+#define BIT_STL_DETAIL_MEMORY_OBSERVER_PTR_HPP
 
 namespace bit {
   namespace stl {
@@ -25,6 +34,10 @@ namespace bit {
 
     //////////////////////////////////////////////////////////////////////////
     /// \brief A lightweight wrapper around a pointer type
+    ///
+    /// This is essentially a 'dumb' smart pointer, in that it behaves
+    /// identically to a raw pointer, but exposes a smart-pointer API with
+    /// raw-pointer semantics.
     ///
     /// \tparam the underlying pointer type
     //////////////////////////////////////////////////////////////////////////
@@ -77,7 +90,7 @@ namespace bit {
       /// \brief Move-constructs an observer_ptr from another one
       ///
       /// \param other the other observer_ptr to move
-      constexpr observer_ptr( observer_ptr&& other ) noexcept = default;
+      observer_ptr( observer_ptr&& other ) noexcept;
 
       //----------------------------------------------------------------------
 
@@ -96,7 +109,7 @@ namespace bit {
       ///
       /// \param other the other observer_ptr to move
       /// \return reference to \c (*this)
-      observer_ptr& operator=( observer_ptr&& other ) noexcept = default;
+      observer_ptr& operator=( observer_ptr&& other ) noexcept;
 
       //----------------------------------------------------------------------
       // Modifiers
@@ -166,6 +179,13 @@ namespace bit {
     /// \param rhs the right one to swap
     template<typename T>
     void swap( observer_ptr<T>& lhs, observer_ptr<T>& rhs ) noexcept;
+
+    /// \brief Hashes this observer_ptr
+    ///
+    /// \param val the value to hash
+    /// \return the hash of the underlying pointer
+    template<typename T>
+    std::size_t hash_value( const observer_ptr<T>& val ) noexcept;
 
     /// \brief Makes an observer_ptr from a raw pointer
     ///
@@ -292,4 +312,4 @@ namespace bit {
 
 #include "observer_ptr.inl"
 
-#endif /* BIT_STL_INTERNAL_MEMORY_OBSERVER_PTR_HPP */
+#endif /* BIT_STL_DETAIL_MEMORY_OBSERVER_PTR_HPP */

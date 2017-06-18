@@ -47,6 +47,14 @@ inline bit::stl::observer_ptr<T>::observer_ptr( observer_ptr<U>&& other )
   other.reset();
 }
 
+template<typename T>
+inline bit::stl::observer_ptr<T>::observer_ptr( observer_ptr&& other )
+  noexcept
+  : observer_ptr( other.get() )
+{
+  other.m_ptr = nullptr;
+}
+
 //----------------------------------------------------------------------------
 
 template<typename T>
@@ -57,6 +65,15 @@ inline bit::stl::observer_ptr<T>&
   m_ptr = nullptr;
 
   return (*this);
+}
+
+template<typename T>
+inline bit::stl::observer_ptr<T>&
+  bit::stl::observer_ptr<T>::operator=( observer_ptr&& other )
+  noexcept
+{
+  m_ptr = other.m_ptr;
+  other.m_ptr = nullptr;
 }
 
 //----------------------------------------------------------------------------
@@ -141,6 +158,13 @@ inline void bit::stl::swap( observer_ptr<T>& lhs, observer_ptr<T>& rhs )
   noexcept
 {
   lhs.swap(rhs);
+}
+
+template<typename T>
+inline std::size_t bit::stl::hash_value( const observer_ptr<T>& other )
+  noexcept
+{
+  return hash_value( other.get() );
 }
 
 template<typename T>

@@ -20,6 +20,8 @@
 // IWYU pragma: begin_exports
 #include "detail/memory/indirect_ptr.hpp"
 #include "detail/memory/observer_ptr.hpp"
+#include "detail/memory/fat_ptr.hpp"
+#include "detail/memory/offset_ptr.hpp"
 // IWYU pragma: end_exports
 
 namespace bit {

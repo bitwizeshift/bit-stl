@@ -7,7 +7,6 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-
 #ifndef BIT_STL_DETAIL_MEMORY_INDIRECT_PTR_HPP
 #define BIT_STL_DETAIL_MEMORY_INDIRECT_PTR_HPP
 
