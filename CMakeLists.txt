@@ -7,10 +7,14 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 include(AddIndependenceCheck)
 include(GitBuildInformation)
 include(MakeVersionHeader)
+include(EnableCcache)
 
 #-----------------------------------------------------------------------------
 # Project Setup
 #-----------------------------------------------------------------------------
+
+# enable cacche to speed up compilations
+enable_ccache()
 
 option(BIT_STL_COMPILE_INDEPENDENCE_TESTS "Include each header independently in a .cpp file to determine header independence" on)
 option(BIT_STL_COMPILE_UNIT_TESTS "Compile and run the unit tests for this library" on)
