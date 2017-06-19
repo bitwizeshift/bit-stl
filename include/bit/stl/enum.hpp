@@ -11,8 +11,8 @@
 
 #include "type_traits.hpp"
 #include "string_view.hpp"
-#include "pointer_iterator.hpp"
 #include "assert.hpp"
+#include "detail/iterator/pointer_iterator.hpp"
 
 namespace bit {
   namespace stl {

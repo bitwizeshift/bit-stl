@@ -87,7 +87,6 @@ namespace bit {
     template<std::uintmax_t a, std::uintmax_t b>
     struct static_square_sum_of_range : std::integral_constant<std::uintmax_t, ((b*b*b)/3 + b*b/2 + b/6) - ((a*a*a)/3 + a*a/2 + a/6)>{};
 
-
   } // namespace stl
 } // namespace bit
 

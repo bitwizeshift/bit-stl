@@ -466,7 +466,6 @@ namespace bit {
     inline void lazy<T>::lazy_construct() const
     {
       if(!m_is_initialized) {
-
         m_ctor_function( std::addressof(m_storage) );
         m_is_initialized = true;
       }

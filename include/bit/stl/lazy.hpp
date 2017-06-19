@@ -1,7 +1,8 @@
 /**
  * \file lazy.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains an implementation of a lazy-initializing
+ *        wrapper class
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -430,9 +431,9 @@ namespace bit {
       //----------------------------------------------------------------------
     private:
 
-      std::function<void(void* ptr)> m_ctor_function;  ///< The construction function
-      mutable storage_type           m_storage;        ///< The storage type
-      mutable bool                   m_is_initialized; ///< Is this lazy initialized
+      std::function<void(void*)> m_ctor_function;  ///< The construction function
+      mutable storage_type       m_storage;        ///< The storage type
+      mutable bool               m_is_initialized; ///< Is this lazy initialized
 
       //----------------------------------------------------------------------
       // Private Constructors

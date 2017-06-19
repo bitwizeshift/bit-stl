@@ -14,8 +14,8 @@
 #endif
 
 #include "stddef.hpp"
-#include "pointer_iterator.hpp"
 #include "string.hpp"
+#include "detail/iterator/pointer_iterator.hpp"
 
 #include <algorithm>
 #include <string>

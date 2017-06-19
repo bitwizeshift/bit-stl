@@ -11,7 +11,7 @@
 #define BIT_STL_ARRAY_VIEW_HPP
 
 #include "type_traits.hpp"
-#include "pointer_iterator.hpp"
+#include "detail/iterator/pointer_iterator.hpp"
 
 #include <stdexcept>
 

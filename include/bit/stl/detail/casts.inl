@@ -45,7 +45,7 @@ inline To bit::stl::casts::copy_cast(const From& from)
   std::memcpy(
     static_cast<byte*>( static_cast<void*>(&value.to) ),
     static_cast<const byte*>( static_cast<const void*>(&from) ),
-    ((sizeof(From) < sizeof(To)) ? sizeof(From) : sizeof(To))
+    std::min(sizeof(From),sizeof(To))
   );
   return value.to;
 }

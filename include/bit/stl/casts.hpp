@@ -91,11 +91,12 @@ namespace bit {
 
       // ---------------------------------------------------------------------
 
-      /// \brief Performs a ca st between types by copying bytes from \p from
+      /// \brief Performs a cast between types by copying bytes from \p from
       ///        to the new type.
       ///
-      /// This is safer than calling #byte_cast or #union_cast as it will
-      /// conform to the proper alignment requirements
+      /// \note Bytes are truncated to fit into type \p To. If the size of
+      ///       \p From is smaller than \p To, the remaining bytes are left
+      ///       untouched (and thus may be UB to access)
       ///
       /// \param from the value to convert
       /// \return the converted value

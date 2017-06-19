@@ -18,7 +18,7 @@ namespace bit {
 
     //////////////////////////////////////////////////////////////////////////
     /// \brief The basic_hashed_string_view is a compile-time hashed wrapper
-    ///        around a non-owning string (#basic_string_view).
+    ///        around a non-owning string (basic_string_view).
     ///
     /// This provides compile-time hashed values for string literals, or
     /// constant-time hashed values for non-literal strings.
@@ -164,7 +164,7 @@ namespace bit {
     } // namespace ci
 
     //------------------------------------------------------------------------
-    // Mutators
+    // Modifiers
     //------------------------------------------------------------------------
 
     template<typename CharT, typename Traits>

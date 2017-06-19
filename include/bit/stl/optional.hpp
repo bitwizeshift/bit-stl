@@ -158,9 +158,11 @@ namespace bit {
     ///   object that does not contain a value.
     /// - The object is assigned from a value of nullopt_t or from an optional
     ///   that does not contain a value
+    ///
+    /// \tparam T the underlying type
     ////////////////////////////////////////////////////////////////////////////
     template<typename T>
-    class optional final
+    class optional
     {
       //------------------------------------------------------------------------
       // Public Member Types

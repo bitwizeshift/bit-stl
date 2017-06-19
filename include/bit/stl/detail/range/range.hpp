@@ -9,6 +9,8 @@
 #ifndef BIT_STL_DETAIL_ITERATOR_RANGE_HPP
 #define BIT_STL_DETAIL_ITERATOR_RANGE_HPP
 
+#include <utility> // std::move
+
 namespace bit {
   namespace stl {
 

@@ -22,7 +22,7 @@
 // I/O protections
 //-----------------------------------------------------------------------------
 
-#if defined( DISABLE_BUFFER_IO_FUNCTIONS )
+#if defined( BIT_DISABLE_BUFFER_IO_FUNCTIONS )
 # ifdef printf
 #   undef printf
 # endif
@@ -38,7 +38,7 @@
 // String protection
 //-----------------------------------------------------------------------------
 
-#if defined( DISABLE_STRING_FUNCTIONS )
+#if defined( BIT_DISABLE_STRING_FUNCTIONS )
 # if strcmp
 #   undef strcmp
 # endif
@@ -134,7 +134,7 @@
 // File I/O protection
 //-----------------------------------------------------------------------------
 
-#if defined( DISABLE_FILE_IO_FUNCTIONS )
+#if defined( BIT_DISABLE_FILE_IO_FUNCTIONS )
 # ifdef fopen
 #   undef fopen
 # endif

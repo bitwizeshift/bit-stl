@@ -12,6 +12,10 @@
 #ifndef BIT_STL_DETAIL_TUPLE_ELEMENT_ITERATOR_ITERATOR_HPP
 #define BIT_STL_DETAIL_TUPLE_ELEMENT_ITERATOR_ITERATOR_HPP
 
+#include <iterator>    // std::iterator_traits
+#include <type_traits> // std::common_type
+#include <tuple>       // std::tuple
+
 namespace bit {
   namespace stl {
 

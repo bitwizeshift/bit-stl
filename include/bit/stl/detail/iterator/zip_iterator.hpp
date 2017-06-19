@@ -12,6 +12,7 @@
 
 #include <iterator>    // std::iterator_traits
 #include <type_traits> // std::common_type
+#include <tuple>       // std::tuple
 
 namespace bit {
   namespace stl {

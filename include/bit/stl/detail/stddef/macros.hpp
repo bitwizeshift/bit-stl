@@ -91,8 +91,7 @@
 # endif
 #endif
 
-// todo: Update when C++17's __cplusplus identifier is standardized
-#if __cplusplus >= 201700L
+#if __cplusplus >= 201703L
 # define BIT_ENCODE_UTF8(x) BIT_JOIN(u8,x)
 # ifndef __UTF8FILE__
 #   define __UTF8FILE__ BIT_ENCODE_UTF8(__FILE__)

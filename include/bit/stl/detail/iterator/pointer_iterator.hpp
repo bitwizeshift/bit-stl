@@ -5,13 +5,15 @@
  *        of pointers. This allows for iterators that are incompatible to
  *        pointers, but are as lightweight as a normal ponter.
  *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
+ * \note This is an internal header file, included by other library headers.
+ *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_STL_POINTER_ITERATOR_HPP
-#define BIT_STL_POINTER_ITERATOR_HPP
+#ifndef BIT_STL_DETAIL_ITERATOR_POINTER_ITERATOR_HPP
+#define BIT_STL_DETAIL_ITERATOR_POINTER_ITERATOR_HPP
 
 #include <memory> // std::pointer_traits
+#include <iterator> // std::random_access_iterator_tag
 
 namespace bit {
   namespace stl {
@@ -23,7 +25,7 @@ namespace bit {
     /// not-convertible to normal pointers
     ///
     /// \tparam Ptr the pointer type to wrap
-    /// \tparam U a type to make this iterator unique, and not-comparable with
+    /// \tparam U a type to make this iterator unique, and not comparable with
     ///           other pointer_iterators
     //////////////////////////////////////////////////////////////////////////
     template<typename Ptr, typename U = void>
@@ -48,7 +50,7 @@ namespace bit {
       /// \brief Constructs a pointer_iterator from a given pointer
       ///
       /// \param ptr the pointer to construct this pointer_iterator
-      constexpr explicit pointer_iterator( const Ptr& ptr ) noexcept;
+      constexpr pointer_iterator( const Ptr& ptr ) noexcept;
 
       /// \brief Copy-constructs a pointer_iterator
       ///
@@ -143,6 +145,6 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#include "detail/pointer_iterator.inl"
+#include "pointer_iterator.inl"
 
-#endif /* BIT_STL_POINTER_ITERATOR_HPP */
+#endif /* BIT_STL_DETAIL_ITERATOR_POINTER_ITERATOR_HPP */

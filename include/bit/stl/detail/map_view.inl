@@ -25,7 +25,7 @@ constexpr bit::stl::map_view<Key,T>::map_view( Map&& other )
 }
 
 //------------------------------------------------------------------------
-// Elemental Access
+// Element Access
 //------------------------------------------------------------------------
 
 template<typename Key, typename T>
@@ -56,9 +56,8 @@ typename bit::stl::map_view<Key,T>::size_type
 }
 
 //------------------------------------------------------------------------
-// Lookup
+// Observers
 //------------------------------------------------------------------------
-
 
 template<typename Key, typename T>
 typename bit::stl::map_view<Key,T>::size_type

@@ -71,7 +71,7 @@ inline namespace literals{} // namespace literals
 ///        headers
 ///
 /// \internal
-namespace detail {} // namespace detail
+namespace detail{} // namespace detail
 
 } // namespace stl
 } // namespace bit

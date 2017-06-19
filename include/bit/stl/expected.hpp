@@ -13,7 +13,7 @@
 #include "utility.hpp"
 
 #include <memory>    // std::addressof
-#include <stdexcept>
+#include <stdexcept> // std::logic_error
 
 namespace bit {
   namespace stl {
@@ -34,7 +34,7 @@ namespace bit {
     class bad_expected_access : public std::logic_error
     {
     public:
-      bad_expected_access() : std::logic_error("bit::bad_expected_access"){}
+      bad_expected_access() : std::logic_error("bit::stl::bad_expected_access"){}
     };
 
     //========================================================================
@@ -51,8 +51,10 @@ namespace bit {
     /// If it is an exception, and the value is attempted to be accessed, it
     /// will instead throw the stored exception.
     ///
-    /// The type of the exception can also be queries, allowing for a query-
+    /// The type of the exception can also be queried, allowing for a query-
     /// based API rather than forcing stack-unwinding
+    ///
+    /// \tparam T the underlying expected type
     //////////////////////////////////////////////////////////////////////////
     template<typename T>
     class expected

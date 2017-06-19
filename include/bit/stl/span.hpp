@@ -12,7 +12,7 @@
 
 // local bit libraries
 #include "type_traits.hpp"
-#include "pointer_iterator.hpp"
+#include "detail/iterator/pointer_iterator.hpp"
 #include "assert.hpp"
 
 #include <iterator>

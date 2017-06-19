@@ -532,7 +532,7 @@ namespace bit {
     checked<T> make_checked( std::initializer_list<U> ilist, Args&&...args );
 
   } // namespace stl
-} // inline namespace bit
+} // namespace bit
 
 #include "detail/checked.inl"
 

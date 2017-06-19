@@ -474,7 +474,7 @@ inline void
     expected.destruct();
     new (&expected.m_storage.value) value_type( std::forward<Args>(args)... );
     expected.m_is_exception = false;
-  } catch (...) {
+  } catch (...) { // if exception thrown, trigger valueless_by_exception state
     new (&expected.m_storage.exception) std::exception_ptr( nullptr );
     expected.m_is_exception = true;
     throw;
@@ -491,7 +491,7 @@ inline void
     expected.destruct();
     new (&expected.m_storage.exception) std::exception_ptr( std::forward<Args>(args)... );
     expected.m_is_exception = true;
-  } catch (...) {
+  } catch (...) { // if exception thrown, trigger valueless_by_exception state
     new (&expected.m_storage.exception) std::exception_ptr( nullptr );
     expected.m_is_exception = true;
     throw;
@@ -528,7 +528,7 @@ inline bit::stl::expected<void>::expected( in_place_type_t<std::exception_ptr>,
                                            std::exception_ptr ptr )
   : m_storage( in_place<std::exception_ptr>,
                ptr ? std::move(ptr) :
-                     std::make_exception_ptr(bad_expected_access()) ),
+                     std::make_exception_ptr(nullptr) ),
     m_is_exception(true)
 {
 
@@ -541,7 +541,7 @@ inline bit::stl::expected<void>::expected( in_place_type_t<Exception>,
                                            Args&&...args )
   noexcept( std::is_nothrow_constructible<Exception,Args...>::value )
   : expected( in_place<std::exception_ptr>,
-              std::make_exception_ptr(Exception(std::forward<Args>(args)...)))
+              std::make_exception_ptr( Exception(std::forward<Args>(args)...))  )
 {
 
 }

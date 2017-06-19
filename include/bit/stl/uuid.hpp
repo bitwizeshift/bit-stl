@@ -11,7 +11,7 @@
 #define BIT_STL_UUID_HPP
 
 #include "stddef.hpp"
-#include "pointer_iterator.hpp"
+#include "detail/iterator/pointer_iterator.hpp"
 
 #include <algorithm>
 

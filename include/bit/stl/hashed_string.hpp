@@ -120,7 +120,7 @@ namespace bit {
       basic_hashed_string& operator=( string_view_type other );
 
       //----------------------------------------------------------------------
-      // Accessors
+      // Observers
       //----------------------------------------------------------------------
     public:
 
@@ -187,7 +187,7 @@ namespace bit {
     } // namespace ci
 
     //------------------------------------------------------------------------
-    // Mutators
+    // Modifiers
     //------------------------------------------------------------------------
 
     template<typename CharT, typename Traits, typename Allocator>
