@@ -44,8 +44,8 @@ namespace bit {
     ////////////////////////////////////////////////////////////////////////////
     template<typename Fn> class delegate;
 
-    template<typename R, typename...Args>
-    class delegate<R(Args...)> final
+    template<typename R, typename...Types>
+    class delegate<R(Types...)> final
     {
       //-----------------------------------------------------------------------------
       // Public Member Types
@@ -53,13 +53,13 @@ namespace bit {
     public:
 
       using return_type        = R;
-      using free_function_type = return_type (*)(Args...);
+      using free_function_type = return_type (*)(Types...);
 
       template<class C>
-      using member_function_type = return_type (C::*)(Args...);
+      using member_function_type = return_type (C::*)(Types...);
 
       template<class C>
-      using const_member_function_type = return_type (C::*)(Args...) const;
+      using const_member_function_type = return_type (C::*)(Types...) const;
 
       //-----------------------------------------------------------------------------
       // Constructor / Destructor
@@ -81,6 +81,7 @@ namespace bit {
       template<free_function_type function>
       constexpr void bind() noexcept;
 
+      /// \{
       /// \brief Binds a member function to this delegate
       ///
       /// \tparam C The type of instance to bind
@@ -89,6 +90,11 @@ namespace bit {
       template <class C, member_function_type<C> member_function>
       constexpr void bind( C* instance ) noexcept;
 
+      template <class C, member_function_type<C> member_function>
+      constexpr void bind( C& instance ) noexcept;
+      /// \}
+
+      /// \{
       /// \brief Binds a const member function to this delegate
       ///
       /// \tparam C the type of instance to bind
@@ -96,6 +102,16 @@ namespace bit {
       /// \param instance the instance to call the member function on
       template <class C, const_member_function_type<C> member_function>
       constexpr void bind( const C* instance ) noexcept;
+
+      template <class C, const_member_function_type<C> member_function>
+      constexpr void bind( const C& instance ) noexcept;
+
+      template <class C, const_member_function_type<C> member_function>
+      constexpr void cbind( const C* instance ) noexcept;
+
+      template <class C, const_member_function_type<C> member_function>
+      constexpr void cbind( const C& instance ) noexcept;
+      /// \}
 
       //-----------------------------------------------------------------------------
       // Queries
@@ -119,19 +135,19 @@ namespace bit {
       ///
       /// \param args the arguments for the invokation
       /// \return the return value for the invoked delegate
-      template<typename...Arguments, typename = std::enable_if_t<std::is_convertible<std::tuple<Arguments...>,std::tuple<Args...>>::value>>
-      constexpr return_type invoke( Arguments&&...args ) const;
+      template<typename...Args, typename = std::enable_if_t<std::is_convertible<std::tuple<Args...>,std::tuple<Types...>>::value>>
+      constexpr return_type invoke( Args&&...args ) const;
 
-      /// \copydoc delegate::invoke( Arguments&&... )
-      template<typename...Arguments, typename = std::enable_if_t<std::is_convertible<std::tuple<Arguments...>,std::tuple<Args...>>::value>>
-      constexpr return_type operator()( Arguments&&...args ) const;
+      /// \copydoc delegate::invoke( Args&&... )
+      template<typename...Args, typename = std::enable_if_t<std::is_convertible<std::tuple<Args...>,std::tuple<Types...>>::value>>
+      constexpr return_type operator()( Args&&...args ) const;
 
       //-----------------------------------------------------------------------------
       // Private Member Types
       //-----------------------------------------------------------------------------
     private:
 
-      using internal_function_type = return_type (*)(void*, Args...);
+      using internal_function_type = return_type (*)(void*, Types...);
       using stub_type              = std::pair<void*, internal_function_type>;
 
       //-----------------------------------------------------------------------------

@@ -5,8 +5,8 @@
 // Constructor
 //----------------------------------------------------------------------------
 
-template<typename R, typename ... Args>
-constexpr bit::stl::delegate<R(Args...)>::delegate()
+template<typename R, typename ... Types>
+constexpr bit::stl::delegate<R(Types...)>::delegate()
   noexcept
   : m_delegate_stub(nullptr,nullptr)
 {
@@ -17,62 +17,102 @@ constexpr bit::stl::delegate<R(Args...)>::delegate()
 // Function Binding
 //----------------------------------------------------------------------------
 
-template<typename R, typename ... Args>
-template<R (*function)(Args...)>
+template<typename R, typename ... Types>
+template<R (*function)(Types...)>
 inline constexpr void
-  bit::stl::delegate<R(Args...)>::bind()
+  bit::stl::delegate<R(Types...)>::bind()
   noexcept
 {
-  const auto callback = [](void*, Args...args )
+  const auto callback = [](void*, Types...args )
   {
-    return function(std::forward<Args>(args)...);
+    return function(std::forward<Types>(args)...);
   };
   m_delegate_stub.first  = nullptr;
   m_delegate_stub.second = +callback;
 }
 
-template<typename R, typename ... Args>
-template<typename C, R (C::*member_function)(Args...)>
+//----------------------------------------------------------------------------
+
+template<typename R, typename ... Types>
+template<typename C, R (C::*member_function)(Types...)>
 inline constexpr void
-  bit::stl::delegate<R(Args...)>::bind( C* instance )
+  bit::stl::delegate<R(Types...)>::bind( C* instance )
   noexcept
 {
-  const auto callback = [](void* ptr, Args...args )
+  const auto callback = [](void* ptr, Types...args )
   {
-    return (static_cast<C*>(ptr)->*member_function)(std::forward<Args>(args)...);
+    return (static_cast<C*>(ptr)->*member_function)(std::forward<Types>(args)...);
   };
   m_delegate_stub.first  = instance;
   m_delegate_stub.second = +callback;
 }
 
-template<typename R, typename ... Args>
-template<typename C, R (C::*member_function)(Args...) const>
+template<typename R, typename ... Types>
+template<typename C, R (C::*member_function)(Types...)>
 inline constexpr void
-  bit::stl::delegate<R(Args...)>::bind( const C* instance )
+  bit::stl::delegate<R(Types...)>::bind( C& instance )
   noexcept
 {
-   const auto callback = [](void* ptr, Args...args )
+  bind<C,member_function>( std::addressof(instance) );
+}
+
+//----------------------------------------------------------------------------
+
+template<typename R, typename ... Types>
+template<typename C, R (C::*member_function)(Types...) const>
+inline constexpr void
+  bit::stl::delegate<R(Types...)>::bind( const C* instance )
+  noexcept
+{
+  cbind<C,member_function>( instance );
+}
+
+template<typename R, typename ... Types>
+template<typename C, R (C::*member_function)(Types...) const>
+inline constexpr void
+  bit::stl::delegate<R(Types...)>::bind( const C& instance )
+  noexcept
+{
+  cbind<C,member_function>( std::addressof(instance) );
+}
+
+template<typename R, typename ... Types>
+template<typename C, R (C::*member_function)(Types...) const>
+inline constexpr void
+  bit::stl::delegate<R(Types...)>::cbind( const C* instance )
+  noexcept
+{
+  const auto callback = [](void* ptr, Types...args )
   {
-    return (static_cast<const C*>(ptr)->*member_function)(std::forward<Args>(args)...);
+    return (static_cast<const C*>(ptr)->*member_function)(std::forward<Types>(args)...);
   };
   m_delegate_stub.first  = const_cast<C*>(instance); // needed for const
   m_delegate_stub.second = +callback;
+}
+
+template<typename R, typename ... Types>
+template<typename C, R (C::*member_function)(Types...) const>
+inline constexpr void
+  bit::stl::delegate<R(Types...)>::cbind( const C& instance )
+  noexcept
+{
+  cbind<C,member_function>( std::addressof(instance) );
 }
 
 //----------------------------------------------------------------------------
 // Queries
 //----------------------------------------------------------------------------
 
-template<typename R, typename ... Args>
+template<typename R, typename ... Types>
 inline constexpr bool
-  bit::stl::delegate<R(Args...)>::is_bound()
+  bit::stl::delegate<R(Types...)>::is_bound()
   const noexcept
 {
   return m_delegate_stub.second != nullptr;
 }
 
-template<typename R, typename...Args>
-inline constexpr bit::stl::delegate<R(Args...)>::operator bool()
+template<typename R, typename...Types>
+inline constexpr bit::stl::delegate<R(Types...)>::operator bool()
   const noexcept
 {
   return m_delegate_stub.second != nullptr;
@@ -82,26 +122,26 @@ inline constexpr bit::stl::delegate<R(Args...)>::operator bool()
 // Invocation
 //----------------------------------------------------------------------------
 
-template<typename R, typename ... Args>
-template<typename...Arguments,typename>
-inline constexpr typename bit::stl::delegate<R(Args...)>::return_type
-  bit::stl::delegate<R(Args...)>::invoke( Arguments&&... args )
+template<typename R, typename ... Types>
+template<typename...Args,typename>
+inline constexpr typename bit::stl::delegate<R(Types...)>::return_type
+  bit::stl::delegate<R(Types...)>::invoke( Args&&... args )
   const
 {
   BIT_ASSERT( m_delegate_stub.second != nullptr, "delegate::invoke: cannot invoke unbound delegate");
 
-  return m_delegate_stub.second( m_delegate_stub.first, std::forward<Arguments>(args)... );
+  return m_delegate_stub.second( m_delegate_stub.first, std::forward<Args>(args)... );
 }
 
-template<typename R, typename ... Args>
-template<typename...Arguments,typename>
-inline constexpr typename bit::stl::delegate<R(Args...)>::return_type
-  bit::stl::delegate<R(Args...)>::operator()( Arguments&&... args )
+template<typename R, typename ... Types>
+template<typename...Args,typename>
+inline constexpr typename bit::stl::delegate<R(Types...)>::return_type
+  bit::stl::delegate<R(Types...)>::operator()( Args&&... args )
   const
 {
   BIT_ASSERT( m_delegate_stub.second != nullptr, "delegate::operator(): cannot invoke unbound delegate");
 
-  return m_delegate_stub.second( m_delegate_stub.first, std::forward<Arguments>(args)... );
+  return m_delegate_stub.second( m_delegate_stub.first, std::forward<Args>(args)... );
 }
 
 template<typename Fn>
