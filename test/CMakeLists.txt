@@ -15,6 +15,7 @@ set(sources
       bit/stl/string_view.test.cpp
       bit/stl/tribool.test.cpp
       bit/stl/type_traits.test.cpp
+      bit/stl/utility.compressed_pair.test.cpp
 )
 
 add_executable(stl_test ${sources})
