@@ -25,8 +25,20 @@ namespace bit {
       public:
         template<typename U1, typename U2>
         constexpr compressed_pair_impl( U1&& u1, U2&& u2 ) : T1(std::forward<U1>(u1)), m_second(std::forward<U2>(u2)){}
+
+        template<typename Tuple1, typename Tuple2, std::size_t...Idxs1, std::size_t...Idxs2>
+        constexpr compressed_pair_impl( Tuple1 tuple1, Tuple2 tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
+          : T1( std::get<Idxs1>(tuple1)... ),
+            m_second( std::get<Idxs2>(tuple2)... )
+        {
+
+        }
+
         constexpr T1& first(){ return (*this); }
+        constexpr const T1& first() const{ return (*this); }
+
         constexpr T1& second(){ return m_second; }
+        constexpr const T1& second() const{ return m_second; }
       private:
         T1 m_second;
       };
@@ -37,8 +49,20 @@ namespace bit {
       public:
         template<typename U1, typename U2>
         constexpr compressed_pair_impl( U1&& u1, U2&& u2 ) : T1(std::forward<U1>(u1)), T2(std::forward<U2>(u2)){}
+
+        template<typename Tuple1, typename Tuple2, std::size_t...Idxs1, std::size_t...Idxs2>
+        constexpr compressed_pair_impl( Tuple1 tuple1, Tuple2 tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
+          : T1( std::get<Idxs1>(tuple1)... ),
+            T2( std::get<Idxs2>(tuple2)... )
+        {
+
+        }
+
         constexpr T1& first(){ return (*this); }
+        constexpr const T1& first() const{ return (*this); }
+
         constexpr T2& second(){ return (*this); }
+        constexpr const T2& second() const{ return (*this); }
       };
 
       template<typename T1, typename T2>
@@ -47,8 +71,20 @@ namespace bit {
       public:
         template<typename U1, typename U2>
         constexpr compressed_pair_impl( U1&& u1, U2&& u2 ) : T1(std::forward<U1>(u1)), m_second(std::forward<U2>(u2)){}
+
+        template<typename Tuple1, typename Tuple2, std::size_t...Idxs1, std::size_t...Idxs2>
+        constexpr compressed_pair_impl( Tuple1 tuple1, Tuple2 tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
+          : T1( std::get<Idxs1>(tuple1)... ),
+            m_second( std::get<Idxs2>(tuple2)... )
+        {
+
+        }
+
         constexpr T1& first(){ return (*this); }
+        constexpr const T1& first() const{ return (*this); }
+
         constexpr T2& second(){ return m_second; }
+        constexpr const T2& second() const{ return m_second; }
       private:
         T2 m_second;
       };
@@ -59,8 +95,20 @@ namespace bit {
       public:
         template<typename U1, typename U2>
         constexpr compressed_pair_impl( U1&& u1, U2&& u2 ) : T2(std::forward<U2>(u2)), m_first(std::forward<U1>(u1)){}
+
+        template<typename Tuple1, typename Tuple2, std::size_t...Idxs1, std::size_t...Idxs2>
+        constexpr compressed_pair_impl( Tuple1 tuple1, Tuple2 tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
+          : T2( std::get<Idxs2>(tuple2)... ),
+            m_first( std::get<Idxs1>(tuple1)... )
+        {
+
+        }
+
         constexpr T1& first(){ return m_first; }
+        constexpr const T1& first() const{ return m_first; }
+
         constexpr T2& second(){ return (*this); }
+        constexpr const T2& second() const{ return (*this); }
       private:
         T1 m_first;
       };
@@ -71,8 +119,21 @@ namespace bit {
       public:
         template<typename U1, typename U2>
         constexpr compressed_pair_impl( U1&& u1, U2&& u2 ) : m_first(std::forward<U1>(u1)), m_second(std::forward<U2>(u2)){}
+
+        template<typename Tuple1, typename Tuple2, std::size_t...Idxs1, std::size_t...Idxs2>
+        constexpr compressed_pair_impl( Tuple1 tuple1, Tuple2 tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
+          : m_first( std::get<Idxs1>(tuple1)... ),
+            m_second( std::get<Idxs2>(tuple2)... )
+        {
+
+        }
+
         constexpr T1& first(){ return m_first; }
+        constexpr const T1& first() const{ return m_first; }
+
         constexpr T2& second(){ return (*this); }
+        constexpr const T2& second() const{ return (*this); }
+
       private:
         T1 m_first;
         T2 m_second;
@@ -92,7 +153,15 @@ namespace bit {
       constexpr compressed_pair( compressed_pair&& other ) = default;
 
       template<typename U1, typename U2>
-      constexpr compressed_pair( U1&& u1, U2&& u2 ) : detail::compressed_pair_impl<T1,T2>( std::forward<U1>(u1), std::forward<U2>(u2) ){}
+      constexpr compressed_pair( U1&& u1, U2&& u2 )
+        : detail::compressed_pair_impl<T1,T2>( std::forward<U1>(u1), std::forward<U2>(u2) ){}
+
+      template<typename...Args1, typename...Args2>
+      constexpr compressed_pair( std::piecewise_construct_t, std::tuple<Args1...> first, std::tuple<Args2...> second )
+        : detail::compressed_pair_impl<T1,T2>( std::move(first), std::move(second), std::make_index_sequence<sizeof...(Args1)>{}, std::make_index_sequence<sizeof...(Args2)>{})
+      {
+
+      }
     };
 
     template<typename T1, typename T2>
