@@ -250,15 +250,6 @@ namespace bit {
       return { std::forward<Args>(args)... };
     }
 
-
-    template<std::size_t N, typename...Args>
-    constexpr std::tuple_element_t<N,std::tuple<Args...>>&
-      get( compressed_tuple<Args...>& );
-
-    template<std::size_t N, typename...Args>
-    constexpr const std::tuple_element_t<N,std::tuple<Args...>>&
-      get( const compressed_tuple<Args...>& );
-
   } // namespace stl
 } // namespace bit
 
