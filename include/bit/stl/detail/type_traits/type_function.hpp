@@ -169,34 +169,6 @@ namespace bit {
 
     //--------------------------------------------------------------------------
 
-    /// \brief Type trait to determine whether \p T can be passed as \p U
-    ///        to a function argument
-    ///
-    /// The result is aliased as \c ::value
-    template<typename T, typename U>
-    struct is_passable_as : std::is_convertible<T,U>{};
-
-    template<typename T>
-    struct is_passable_as<T,T> : std::is_copy_constructible<T>{};
-
-    template<typename T>
-    struct is_passable_as<T const, T> : std::is_copy_constructible<T>{};
-
-    template<typename T>
-    struct is_passable_as<T const, T const&> : std::true_type{};
-
-    template<typename T>
-    struct is_passable_as<T, T&> : std::true_type{};
-
-    template<typename T>
-    struct is_passable_as<T, T const&> : std::true_type{};
-
-    template<typename T>
-    struct is_passable_as<T*, T*> : std::true_type{};
-
-    template<typename T>
-    struct is_passable_as<T*, T const*> : std::true_type{};
-
     namespace detail {
 
       template<typename Fn, typename R = void, typename = void>
