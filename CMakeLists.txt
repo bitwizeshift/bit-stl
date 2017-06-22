@@ -91,7 +91,6 @@ set(headers
       include/bit/stl/pointer_wrapper.hpp
       include/bit/stl/range.hpp
       include/bit/stl/set_view.hpp
-      include/bit/stl/signal.hpp
       include/bit/stl/source_location.hpp
       include/bit/stl/span.hpp
       include/bit/stl/stddef.hpp
