@@ -7,7 +7,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 include(AddIndependenceCheck)
 include(GitBuildInformation)
 include(MakeVersionHeader)
-include(EnableCcache)
+include(EnableCCache)
 
 #-----------------------------------------------------------------------------
 # Project Setup
