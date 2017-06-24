@@ -16,7 +16,7 @@
 namespace bit {
   namespace stl {
     namespace detail {
-      template<typename T1, typename T2, bool = std::is_final<T1>::value, bool = std::is_final<T2>::value>
+      template<typename T1, typename T2, bool = std::is_class<T1>::value &&std::is_final<T1>::value, bool = std::is_class<T2>::value && std::is_final<T2>::value>
       class compressed_pair_impl;
 
       template<typename T1>
