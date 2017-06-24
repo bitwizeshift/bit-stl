@@ -269,6 +269,22 @@ inline constexpr bool bit::stl::operator==( const observer_ptr<T>& lhs,
   return lhs.get() == nullptr;
 }
 
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator==( const T* lhs,
+                                     const observer_ptr<U>& rhs )
+  noexcept
+{
+  return lhs == rhs.get();
+}
+
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator==( const observer_ptr<T>& lhs,
+                                     const U* rhs )
+  noexcept
+{
+  return lhs.get() == rhs;
+}
+
 //----------------------------------------------------------------------------
 
 template<typename T>
@@ -285,6 +301,22 @@ inline constexpr bool bit::stl::operator!=( const observer_ptr<T>& lhs,
   noexcept
 {
   return lhs.get() != nullptr;
+}
+
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator!=( const T* lhs,
+                                     const observer_ptr<U>& rhs )
+  noexcept
+{
+  return lhs != rhs.get();
+}
+
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator!=( const observer_ptr<T>& lhs,
+                                     const U* rhs )
+  noexcept
+{
+  return lhs.get() != rhs;
 }
 
 //----------------------------------------------------------------------------
@@ -305,6 +337,22 @@ inline constexpr bool bit::stl::operator<( const observer_ptr<T>& lhs,
   return lhs.get() < nullptr;
 }
 
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator<( const T* lhs,
+                                    const observer_ptr<U>& rhs )
+  noexcept
+{
+  return lhs < rhs.get();
+}
+
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator<( const observer_ptr<T>& lhs,
+                                    const U* rhs )
+  noexcept
+{
+  return lhs.get() < rhs;
+}
+
 //----------------------------------------------------------------------------
 
 template<typename T>
@@ -321,6 +369,23 @@ inline constexpr bool bit::stl::operator>( const observer_ptr<T>& lhs,
   noexcept
 {
   return lhs.get() > nullptr;
+}
+
+
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator>( const T* lhs,
+                                     const observer_ptr<U>& rhs )
+  noexcept
+{
+  return lhs > rhs.get();
+}
+
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator>( const observer_ptr<T>& lhs,
+                                    const U* rhs )
+  noexcept
+{
+  return lhs.get() > rhs;
 }
 
 //----------------------------------------------------------------------------
@@ -341,6 +406,22 @@ inline constexpr bool bit::stl::operator<=( const observer_ptr<T>& lhs,
   return lhs.get() <= nullptr;
 }
 
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator<=( const T* lhs,
+                                     const observer_ptr<U>& rhs )
+  noexcept
+{
+  return lhs <= rhs.get();
+}
+
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator<=( const observer_ptr<T>& lhs,
+                                     const U* rhs )
+  noexcept
+{
+  return lhs.get() <= rhs;
+}
+
 //----------------------------------------------------------------------------
 
 template<typename T>
@@ -357,6 +438,22 @@ inline constexpr bool bit::stl::operator>=( const observer_ptr<T>& lhs,
   noexcept
 {
   return lhs.get() >= nullptr;
+}
+
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator>=( const T* lhs,
+                                     const observer_ptr<U>& rhs )
+  noexcept
+{
+  return lhs >= rhs.get();
+}
+
+template<typename T, typename U, typename>
+constexpr bool bit::stl::operator>=( const observer_ptr<T>& lhs,
+                                     const U* rhs )
+  noexcept
+{
+  return lhs.get() >= rhs;
 }
 
 #endif /* BIT_STL_DETAIL_MEMORY_OBSERVER_PTR_INL */

@@ -272,12 +272,30 @@ namespace bit {
     constexpr bool operator==( const observer_ptr<T>& lhs,
                                std::nullptr_t ) noexcept;
 
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<T*,U*>::value>>
+    constexpr bool operator==( const T* lhs,
+                               const observer_ptr<U>& rhs ) noexcept;
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<U*,T*>::value>>
+    constexpr bool operator==( const observer_ptr<T>& lhs,
+                               const U* rhs ) noexcept;
+
+    //------------------------------------------------------------------------
+
     template<typename T>
     constexpr bool operator!=( std::nullptr_t,
                                const observer_ptr<T>& rhs ) noexcept;
     template<typename T>
     constexpr bool operator!=( const observer_ptr<T>& lhs,
                                std::nullptr_t ) noexcept;
+
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<T*,U*>::value>>
+    constexpr bool operator!=( const T* lhs,
+                               const observer_ptr<U>& rhs ) noexcept;
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<U*,T*>::value>>
+    constexpr bool operator!=( const observer_ptr<T>& lhs,
+                               const U* rhs ) noexcept;
+
+    //------------------------------------------------------------------------
 
     template<typename T>
     constexpr bool operator<( std::nullptr_t,
@@ -286,12 +304,30 @@ namespace bit {
     constexpr bool operator<( const observer_ptr<T>& lhs,
                               std::nullptr_t ) noexcept;
 
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<T*,U*>::value>>
+    constexpr bool operator<( const T* lhs,
+                              const observer_ptr<U>& rhs ) noexcept;
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<U*,T*>::value>>
+    constexpr bool operator<( const observer_ptr<T>& lhs,
+                              const U* rhs ) noexcept;
+
+    //------------------------------------------------------------------------
+
     template<typename T>
     constexpr bool operator>( std::nullptr_t,
                               const observer_ptr<T>& rhs ) noexcept;
     template<typename T>
     constexpr bool operator>( const observer_ptr<T>& lhs,
                               std::nullptr_t ) noexcept;
+
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<T*,U*>::value>>
+    constexpr bool operator>( const T* lhs,
+                              const observer_ptr<U>& rhs ) noexcept;
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<U*,T*>::value>>
+    constexpr bool operator>( const observer_ptr<T>& lhs,
+                              const U* rhs ) noexcept;
+
+    //------------------------------------------------------------------------
 
     template<typename T>
     constexpr bool operator<=( std::nullptr_t,
@@ -300,12 +336,28 @@ namespace bit {
     constexpr bool operator<=( const observer_ptr<T>& lhs,
                                std::nullptr_t ) noexcept;
 
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<T*,U*>::value>>
+    constexpr bool operator<=( const T* lhs,
+                               const observer_ptr<U>& rhs ) noexcept;
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<U*,T*>::value>>
+    constexpr bool operator<=( const observer_ptr<T>& lhs,
+                               const U* rhs ) noexcept;
+
+    //------------------------------------------------------------------------
+
     template<typename T>
     constexpr bool operator>=( std::nullptr_t,
                                const observer_ptr<T>& rhs ) noexcept;
     template<typename T>
     constexpr bool operator>=( const observer_ptr<T>& lhs,
                                std::nullptr_t ) noexcept;
+
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<T*,U*>::value>>
+    constexpr bool operator>=( const T* lhs,
+                               const observer_ptr<U>& rhs ) noexcept;
+    template<typename T, typename U, typename = std::enable_if_t<std::is_convertible<U*,T*>::value>>
+    constexpr bool operator>=( const observer_ptr<T>& lhs,
+                               const U* rhs ) noexcept;
 
   } // namespace stl
 } // namespace bit
