@@ -345,6 +345,18 @@ namespace bit {
       template<typename Deleter, typename U>
       friend Deleter* get_deleter( clone_ptr<U>& p ) noexcept;
 
+      template<typename To, typename From>
+      friend clone_ptr<To> static_pointer_cast( clone_ptr<From>&& other );
+
+      template<typename To, typename From>
+      friend clone_ptr<To> dynamic_pointer_cast( clone_ptr<From>&& other );
+
+      template<typename To, typename From>
+      friend clone_ptr<To> const_pointer_cast( clone_ptr<From>&& other );
+
+      template<typename To, typename From>
+      friend clone_ptr<To> reinterpret_pointer_cast( clone_ptr<From>&& other );
+
       template<typename U>
       friend class clone_ptr;
     };
@@ -381,6 +393,26 @@ namespace bit {
     /// \return the deleter
     template<typename Deleter, typename T>
     Deleter* get_deleter( const clone_ptr<T>& p ) noexcept;
+
+    //------------------------------------------------------------------------
+    // Casts
+    //------------------------------------------------------------------------
+
+    inline namespace casts {
+
+      template<typename To, typename From>
+      clone_ptr<To> static_pointer_cast( clone_ptr<From>&& other );
+
+      template<typename To, typename From>
+      clone_ptr<To> dynamic_pointer_cast( clone_ptr<From>&& other );
+
+      template<typename To, typename From>
+      clone_ptr<To> const_pointer_cast( clone_ptr<From>&& other );
+
+      template<typename To, typename From>
+      clone_ptr<To> reinterpret_pointer_cast( clone_ptr<From>&& other );
+
+    } // inline namespace casts
 
   } // namespace stl
 } // namespace bit
@@ -929,6 +961,74 @@ Deleter* bit::stl::get_deleter( const clone_ptr<T>& p )
   noexcept
 {
   return static_cast<Deleter*>( p.get_deleter( typeid(Deleter) ) );
+}
+
+//----------------------------------------------------------------------------
+// Casts
+//----------------------------------------------------------------------------
+
+template<typename To, typename From>
+bit::stl::clone_ptr<To>
+  bit::stl::casts::static_pointer_cast( clone_ptr<From>&& other )
+{
+  using tag_type = typename clone_ptr<To>::ctor_tag;
+
+  auto* ptr   = static_cast<To*>(other.get());
+  auto* block = other.m_control_block;
+
+  other.m_ptr = nullptr;
+  other.m_control_block = nullptr;
+
+  return { tag_type{}, block, ptr };
+}
+
+template<typename To, typename From>
+bit::stl::clone_ptr<To>
+  bit::stl::casts::dynamic_pointer_cast( clone_ptr<From>&& other )
+{
+  using tag_type = typename clone_ptr<To>::ctor_tag;
+
+  auto* ptr = dynamic_cast<To*>(other.get());
+
+  if( ptr ) {
+    auto* block = other.m_control_block;
+
+    other.m_ptr = nullptr;
+    other.m_control_block = nullptr;
+
+    return { tag_type{}, block, ptr };
+  }
+  return {};
+}
+
+template<typename To, typename From>
+bit::stl::clone_ptr<To>
+  bit::stl::casts::const_pointer_cast( clone_ptr<From>&& other )
+{
+  using tag_type = typename clone_ptr<To>::ctor_tag;
+
+  auto* ptr   = const_cast<To*>(other.get());
+  auto* block = other.m_control_block;
+
+  other.m_ptr = nullptr;
+  other.m_control_block = nullptr;
+
+  return { tag_type{}, block, ptr };
+}
+
+template<typename To, typename From>
+bit::stl::clone_ptr<To>
+  bit::stl::casts::reinterpret_pointer_cast( clone_ptr<From>&& other )
+{
+  using tag_type = typename clone_ptr<To>::ctor_tag;
+
+  auto* ptr   = reinterpret_cast<To*>(other.get());
+  auto* block = other.m_control_block;
+
+  other.m_ptr = nullptr;
+  other.m_control_block = nullptr;
+
+  return { tag_type{}, block, ptr };
 }
 
 #endif /* BIT_STL_DETAIL_MEMORY_CLONE_PTR_HPP */
