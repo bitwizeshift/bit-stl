@@ -371,7 +371,7 @@ namespace bit {
     //--------------------------------------------------------------------------
 
     template<typename F, typename... Types>
-    class invoke_result : identity<decltype(detail::INVOKE( std::declval<F>(), std::declval<Types>()... ))>{};
+    struct invoke_result : identity<decltype(detail::INVOKE( std::declval<F>(), std::declval<Types>()... ))>{};
 
     template<typename F, typename... Types>
     using invoke_result_t = typename invoke_result<F,Types...>::type;

@@ -269,7 +269,7 @@ namespace bit {
     ///
     /// The result is aliased as \c ::value
     template<typename...>
-    struct conjunction : std::true_type { };
+    struct conjunction;
 
     template<typename B1>
     struct conjunction<B1>
@@ -277,7 +277,7 @@ namespace bit {
 
     template<typename B1, typename... Bn>
     struct conjunction<B1, Bn...>
-      : std::conditional_t<B1::value != false, conjunction<Bn...>, B1>  {};
+      : std::conditional_t<B1::value, conjunction<Bn...>, B1>  {};
 
     //---------------------------------------------------------------------------
 
@@ -333,7 +333,7 @@ namespace bit {
 
     template<typename B1, typename... Bn>
     struct disjunction<B1, Bn...>
-      : std::conditional_t<B1::value != false, B1, conjunction<Bn...>>  {};
+      : std::conditional_t<B1::value != false, B1, disjunction<Bn...>>  {};
 
     //---------------------------------------------------------------------------
 
@@ -461,6 +461,36 @@ namespace bit {
     ///        \c enable_if_c
     template<typename...Clauses>
     using enable_if_c_t = typename enable_if_c<Clauses...>::type;
+
+    //---------------------------------------------------------------------------
+
+    /// \brief Similar to enable_if, but doesn't sfinae-away a type; instead
+    ///        produces an uninstantiable unique type when true
+    ///
+    /// This is used to selectively disable constructors, since sfinae doesn't
+    /// work for copy/move constructors
+    template<bool b, typename T>
+    struct block_if : identity<T>{};
+
+    template<typename T>
+    struct block_if<true,T>
+    {
+      class type{ type() = delete; ~type() = delete; };
+    };
+
+    /// \brief Inverse of \c block_if
+    template<bool b, typename T>
+    using block_unless = block_if<!b,T>;
+
+    /// \brief Convenience aliase to retrieve the \c ::type member of
+    ///        \c block_if
+    template<bool b, typename T>
+    using block_if_t = typename block_if<b,T>::type;
+
+    /// \brief Convenience aliase to retrieve the \c ::type member of
+    ///        \c block_unless
+    template<bool b, typename T>
+    using block_unless_t = typename block_if<!b,T>::type;
 
     //---------------------------------------------------------------------------
 

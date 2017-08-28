@@ -11,6 +11,8 @@
 #ifndef BIT_STL_DETAIL_TYPE_TRAITS_TYPE_RELATIONSHIPS_HPP
 #define BIT_STL_DETAIL_TYPE_TRAITS_TYPE_RELATIONSHIPS_HPP
 
+#include "../invoke.hpp"
+
 namespace bit {
   namespace stl {
 
@@ -70,6 +72,9 @@ namespace bit {
       pointer_rank<T>::value == pointer_rank<U>::value &&
       std::is_pointer<T>::value == std::is_pointer<U>::value
     >{};
+
+    template<typename T, typename U>
+    constexpr bool is_same_pointer_v = is_same_pointer<T,U>::value;
 
     //--------------------------------------------------------------------------
 
@@ -150,6 +155,20 @@ namespace bit {
     constexpr bool is_nothrow_invocable_r_v = is_nothrow_invocable_r<R,Fn,Types...>::value;
 
     //--------------------------------------------------------------------------
+    // Plural Comparisons
+    //--------------------------------------------------------------------------
+
+    template<typename...Ts>
+    struct type_list{};
+
+    template<typename To, typename...Froms>
+    struct are_convertible_to : conjunction<std::is_convertible<Froms,To>...>{};
+
+    template<typename Derived, typename...Bases>
+    struct are_bases_of : conjunction<std::is_base_of<Bases,Derived>...>{};
+
+    template<typename Base, typename...Derived>
+    struct is_bases_of : conjunction<std::is_base_of<Base,Derived>...>{};
 
   } // namespace stl
 } // namespace bit
