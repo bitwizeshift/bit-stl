@@ -1034,6 +1034,10 @@ namespace bit {
                                                              const basic_string_view<CharT,Traits>& rhs );
 
   } // namespace stl
+
+  inline namespace literals {
+    using namespace stl::literals;
+  } // inline namespace literals
 } // namespace bit
 
 #include "detail/string_view.inl"

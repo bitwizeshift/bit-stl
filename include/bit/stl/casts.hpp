@@ -77,7 +77,7 @@ namespace bit {
       template<typename To, typename From>
       constexpr To narrow_cast( From from ) noexcept;
 
-      // ---------------------------------------------------------------------
+      //----------------------------------------------------------------------
 
       /// \brief Statically casts a pointer if the pointer is dynamically
       ///        castable to that type, asserting otherwise.
@@ -89,7 +89,7 @@ namespace bit {
       template<typename To, typename From>
       To pointer_cast( From ptr ) noexcept;
 
-      // ---------------------------------------------------------------------
+      //----------------------------------------------------------------------
 
       /// \brief Performs a cast between types by copying bytes from \p from
       ///        to the new type.
@@ -105,6 +105,10 @@ namespace bit {
 
     } // inline namespace casts
   } // namespace stl
+
+  inline namespace casts {
+    using namespace stl::casts;
+  } // inline namespace casts
 } // namespace bit
 
 #include "detail/casts.inl"

@@ -209,6 +209,10 @@ namespace bit {
 
     } // namespace enum_ops
   } // namespace stl
+
+  inline namespace casts {
+    using namespace stl::casts;
+  } // inline namespace casts
 } // namespace bit
 
 #include "detail/enum.inl"
