@@ -177,6 +177,19 @@ namespace bit {
     template<typename Fn>
     bool operator>=(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
 
+    //------------------------------------------------------------------------
+    // Make Utilities
+    //------------------------------------------------------------------------
+//
+//    template<typename Sig, function_t<Sig> function>
+//    delegate<Sig> make_delegate() noexcept;
+//
+//    template<typename T, typename Sig, member_function_t<T,Sig> member_function>
+//    delegate<Sig> make_delegate( T& instance ) noexcept;
+//
+//    template<typename T, typename Sig, member_function_t<T,Sig> member_function>
+//    delegate<Sig> make_delegate( T* instance ) noexcept;
+
 #if __cplusplus >= 201703L
 
       template<auto Fn>

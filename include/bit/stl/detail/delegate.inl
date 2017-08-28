@@ -180,5 +180,32 @@ inline bool bit::stl::operator>=(const delegate<Fn>& lhs, const delegate<Fn>& rh
   return !(lhs < rhs);
 }
 
+//----------------------------------------------------------------------------
+// Make Utilities
+//----------------------------------------------------------------------------
+
+//template<typename Sig, bit::stl::function_t<Sig> function>
+//bit::stl::delegate<Sig> bit::stl::make_delegate()
+//  noexcept
+//{
+//  auto result = delegate<Sig>();
+//  return result.bind<function>();
+//}
+//
+//template<typename T, typename Sig, bit::stl::member_function_t<T,Sig> member_function>
+//bit::stl::delegate<Sig> bit::stl::make_delegate( T& instance )
+//  noexcept
+//{
+//  auto result = delegate<Sig>();
+//  return result.bind<member_function>( instance );
+//}
+//
+//template<typename T, typename Sig, bit::stl::member_function_t<T,Sig> member_function>
+//bit::stl::delegate<Sig> bit::stl::make_delegate( T* instance )
+//  noexcept
+//{
+//  auto result = delegate<Sig>();
+//  return result.bind<member_function>( instance );
+//}
 
 #endif /* BIT_STL_DETAIL_DELEGATE_INL */
