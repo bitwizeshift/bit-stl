@@ -91,7 +91,6 @@ set(headers
       include/bit/stl/type_traits.hpp
       include/bit/stl/utility.hpp
       include/bit/stl/uuid.hpp
-      include/bit/stl/variant.hpp
 )
 
 add_library(stl INTERFACE)
