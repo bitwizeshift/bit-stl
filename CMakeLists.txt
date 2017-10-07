@@ -5,7 +5,6 @@ enable_testing()
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 
 include(AddIndependenceCheck)
-include(GitBuildInformation)
 include(MakeVersionHeader)
 include(EnableCCache)
 
@@ -30,22 +29,13 @@ endif()
 # Version Info
 #-----------------------------------------------------------------------------
 
-git_build_information( PATCH_VARIABLE BIT_STL_VERSION_PATCH
-                       BUILD_VARIABLE BIT_STL_BUILD_NUMBER
-                       BRANCH_VARIABLE BIT_STL_BRANCH
-                       REF a2931bfe0ea8fa69d341138a719333eaf02e1b02 # v1.1 -- CI doesn't seem to pull tags
-                       PATHSPECS ${CMAKE_CURRENT_LIST_DIR}/include
-                                 ${CMAKE_CURRENT_LIST_DIR}/cmake
-                                 ${CMAKE_CURRENT_LIST_FILE}
-)
-
 set(BIT_STL_VERSION_MAJOR 1 CACHE STRING "major version of bit::stl" FORCE)
 set(BIT_STL_VERSION_MINOR 1 CACHE STRING "minor version of bit::stl" FORCE)
-set(BIT_STL_VERSION_PATCH ${BIT_STL_VERSION_PATCH} CACHE STRING "patch version of bit::stl" FORCE)
-set(BIT_STL_VERSION "${BIT_STL_VERSION_MAJOR}.${BIT_STL_VERSION_MINOR}.${BIT_STL_VERSION_PATCH}" CACHE STRING "version of bit::stl" FORCE)
-set(BIT_STL_BUILD_NUMBER "${BIT_STL_BUILD_NUMBER}" CACHE STRING "build number of bit::stl" FORCE)
+set(BIT_STL_VERSION_PATCH 166 CACHE STRING "patch version of bit::stl" FORCE)
 
-message(STATUS "bit::stl ${BIT_STL_VERSION} (${BIT_STL_BRANCH} ${BIT_STL_BUILD_NUMBER})")
+set(BIT_STL_VERSION "${BIT_STL_VERSION_MAJOR}.${BIT_STL_VERSION_MINOR}.${BIT_STL_VERSION_PATCH}" CACHE STRING "version of bit::stl" FORCE)
+
+message(STATUS "bit::stl ${BIT_STL_VERSION}")
 
 #-----------------------------------------------------------------------------
 # bit::stl
@@ -57,10 +47,8 @@ make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
   MAJOR ${BIT_STL_VERSION_MAJOR}
   MINOR ${BIT_STL_VERSION_MINOR}
   PATCH ${BIT_STL_VERSION_PATCH}
-  BUILD ${BIT_STL_BUILD_NUMBER}
   PREFIX BIT_STL
   SUFFIX "a"
-  TAG ${BIT_STL_BRANCH}
 )
 
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/include")
