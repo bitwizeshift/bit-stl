@@ -33,7 +33,7 @@ endif()
 git_build_information( PATCH_VARIABLE BIT_STL_VERSION_PATCH
                        BUILD_VARIABLE BIT_STL_BUILD_NUMBER
                        BRANCH_VARIABLE BIT_STL_BRANCH
-                       REF v1.1
+                       REF a2931bfe0ea8fa69d341138a719333eaf02e1b02 # v1.1 -- CI doesn't seem to pull tags
                        PATHSPECS ${CMAKE_CURRENT_LIST_DIR}/include
                                  ${CMAKE_CURRENT_LIST_DIR}/cmake
                                  ${CMAKE_CURRENT_LIST_FILE}
@@ -103,6 +103,7 @@ set(headers
       include/bit/stl/type_traits.hpp
       include/bit/stl/utility.hpp
       include/bit/stl/uuid.hpp
+      include/bit/stl/variant.hpp
 )
 
 add_library(stl INTERFACE)
