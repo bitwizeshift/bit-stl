@@ -17,6 +17,7 @@ enable_ccache()
 
 option(BIT_STL_COMPILE_INDEPENDENCE_TESTS "Include each header independently in a .cpp file to determine header independence" on)
 option(BIT_STL_COMPILE_UNIT_TESTS "Compile and run the unit tests for this library" on)
+option(BIT_STL_GENERATE_DOCUMENTATION "Generates doxygen documentation" off)
 
 project("BitStl")
 
@@ -132,9 +133,15 @@ endif()
 #-----------------------------------------------------------------------------
 
 if( BIT_STL_COMPILE_UNIT_TESTS )
-
   add_subdirectory(test)
+endif()
 
+#-----------------------------------------------------------------------------
+# bit::stl : Documentation
+#-----------------------------------------------------------------------------
+
+if( BIT_STL_GENERATE_DOCUMENTATION )
+  add_subdirectory(doc)
 endif()
 
 #-----------------------------------------------------------------------------

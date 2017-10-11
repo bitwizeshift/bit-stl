@@ -1,6 +1,12 @@
+# Eclipse
 /.project
 /.cproject
 /.settings/
 /.vscode/
-/doc/
+
+# CLion
+/.idea/
+/cmake-build-*/
+
+# General CMake
 /build/
