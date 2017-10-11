@@ -41,7 +41,8 @@ message(STATUS "bit::stl ${BIT_STL_VERSION}")
 # bit::stl
 #-----------------------------------------------------------------------------
 
-set(CMAKE_CXX_VERSION 14)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED true)
 
 make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
   MAJOR ${BIT_STL_VERSION_MAJOR}
@@ -50,8 +51,6 @@ make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
   PREFIX BIT_STL
   SUFFIX "a"
 )
-
-include_directories("${CMAKE_CURRENT_BINARY_DIR}/include")
 
 set(headers
       include/bit/stl/array.hpp
@@ -96,10 +95,11 @@ set(headers
 add_library(stl INTERFACE)
 add_library(bit::stl ALIAS stl)
 
-target_include_directories(stl INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>)
-target_compile_options(stl INTERFACE -std=c++14
-  $<$<CONFIG:DEBUG>:-DDEBUG>
-  $<$<CONFIG:RELEASE>:-DNDEBUG -DRELEASE>
+target_include_directories(stl INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+                                         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>)
+target_compile_definitions(stl INTERFACE
+  $<$<CONFIG:DEBUG>:DEBUG>
+  $<$<CONFIG:RELEASE>:DEBUG RELEASE>
 )
 
 #-----------------------------------------------------------------------------
@@ -109,10 +109,19 @@ target_compile_options(stl INTERFACE -std=c++14
 if( BIT_STL_COMPILE_INDEPENDENCE_TESTS )
 
   add_independence_check(stl_independence ${headers})
-  target_compile_options(stl_independence PRIVATE -std=c++14
-    $<$<CONFIG:DEBUG>:-DDEBUG>
-    $<$<CONFIG:RELEASE>:-DNDEBUG -DRELEASE>
+
+  target_compile_definitions(stl_independence PRIVATE
+    $<$<CONFIG:DEBUG>:DEBUG>
+    $<$<CONFIG:RELEASE>:DEBUG RELEASE>
   )
+
+  if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    target_compile_options(stl_independence PRIVATE -Wall -pedantic)
+  elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
+    target_compile_options(stl_independence PRIVATE -Wall -pedantic)
+  elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" )
+    # TODO: Determine MSVC necessary compiler flags
+  endif()
 
   add_library(bit::stl::independence ALIAS stl_independence)
 
