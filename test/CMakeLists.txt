@@ -18,20 +18,20 @@ set(sources
       bit/stl/utility.compressed_pair.test.cpp
 )
 
-add_executable(stl_test ${sources})
+add_executable(bit_stl_test ${sources})
 
-target_link_libraries(stl_test PRIVATE "bit::stl" "philsquared::Catch")
+target_link_libraries(bit_stl_test PRIVATE "bit::stl" "philsquared::Catch")
 
 #-----------------------------------------------------------------------------
 # Testing
 #-----------------------------------------------------------------------------
 
-add_test( NAME "stl_test_default"
+add_test( NAME "bit_stl_test_default"
           WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-          COMMAND "$<TARGET_FILE:stl_test>" )
+          COMMAND "$<TARGET_FILE:bit_stl_test>" )
 
 #-----------------------------------------------------------------------------
 
-add_test( NAME "stl_test_all"
+add_test( NAME "bit_stl_test_all"
           WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-          COMMAND "$<TARGET_FILE:stl_test>" "*" )
+          COMMAND "$<TARGET_FILE:bit_stl_test>" "*" )
