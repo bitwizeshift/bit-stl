@@ -9,7 +9,7 @@
 #ifndef BIT_STRING_TOKENIZER_HPP
 #define BIT_STRING_TOKENIZER_HPP
 
-#include "string_view.hpp"
+#include "containers/string_view.hpp"
 
 namespace bit {
   namespace stl {

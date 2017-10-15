@@ -30,9 +30,9 @@ endif()
 # Version Info
 #-----------------------------------------------------------------------------
 
-set(BIT_STL_VERSION_MAJOR 1 CACHE STRING "major version of bit::stl" FORCE)
-set(BIT_STL_VERSION_MINOR 1 CACHE STRING "minor version of bit::stl" FORCE)
-set(BIT_STL_VERSION_PATCH 166 CACHE STRING "patch version of bit::stl" FORCE)
+set(BIT_STL_VERSION_MAJOR 2 CACHE STRING "major version of bit::stl" FORCE)
+set(BIT_STL_VERSION_MINOR 0 CACHE STRING "minor version of bit::stl" FORCE)
+set(BIT_STL_VERSION_PATCH 0 CACHE STRING "patch version of bit::stl" FORCE)
 
 set(BIT_STL_VERSION "${BIT_STL_VERSION_MAJOR}.${BIT_STL_VERSION_MINOR}.${BIT_STL_VERSION_PATCH}" CACHE STRING "version of bit::stl" FORCE)
 
@@ -54,43 +54,55 @@ make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
 )
 
 set(headers
-  include/bit/stl/array.hpp
-  include/bit/stl/array_view.hpp
-  include/bit/stl/assert.hpp
-  include/bit/stl/casts.hpp
-  include/bit/stl/checked.hpp
-  include/bit/stl/circular_array.hpp
-  include/bit/stl/circular_buffer.hpp
-  include/bit/stl/circular_deque.hpp
-  include/bit/stl/circular_queue.hpp
-  include/bit/stl/data_watcher.hpp
-  include/bit/stl/delegate.hpp
-  include/bit/stl/enum.hpp
-  include/bit/stl/expected.hpp
-  include/bit/stl/functional.hpp
-  include/bit/stl/hashed_string.hpp
-  include/bit/stl/hashed_string_view.hpp
-  include/bit/stl/iterator.hpp
-  include/bit/stl/lazy.hpp
-  include/bit/stl/map_view.hpp
-  include/bit/stl/memory.hpp
-  include/bit/stl/numeric.hpp
-  include/bit/stl/optional.hpp
-  include/bit/stl/pointer_wrapper.hpp
-  include/bit/stl/range.hpp
-  include/bit/stl/set_view.hpp
-  include/bit/stl/source_location.hpp
-  include/bit/stl/span.hpp
-  include/bit/stl/stddef.hpp
-  include/bit/stl/string.hpp
-  include/bit/stl/string_span.hpp
+  # utilities
+  include/bit/stl/utilities/assert.hpp
+  include/bit/stl/utilities/casts.hpp
+  include/bit/stl/utilities/checked.hpp
+  include/bit/stl/utilities/delegate.hpp
+  include/bit/stl/utilities/enum.hpp
+  include/bit/stl/utilities/expected.hpp
+  include/bit/stl/utilities/functional.hpp
+  include/bit/stl/utilities/lazy.hpp
+  include/bit/stl/utilities/optional.hpp
+  include/bit/stl/utilities/pointer_wrapper.hpp
+  include/bit/stl/utilities/source_location.hpp
+  include/bit/stl/utilities/stddef.hpp
+  include/bit/stl/utilities/tribool.hpp
+  include/bit/stl/utilities/tuple.hpp
+  include/bit/stl/utilities/type_traits.hpp
+  include/bit/stl/utilities/utility.hpp
+  include/bit/stl/utilities/uuid.hpp
+
+  # containers
+  include/bit/stl/containers/array.hpp
+  include/bit/stl/containers/array_view.hpp
+  include/bit/stl/containers/circular_array.hpp
+  include/bit/stl/containers/circular_buffer.hpp
+  include/bit/stl/containers/circular_deque.hpp
+  include/bit/stl/containers/circular_queue.hpp
+  include/bit/stl/containers/hashed_string.hpp
+  include/bit/stl/containers/hashed_string_view.hpp
+  include/bit/stl/containers/map_view.hpp
+  include/bit/stl/containers/set_view.hpp
+  include/bit/stl/containers/span.hpp
+  include/bit/stl/containers/string.hpp
+  include/bit/stl/containers/string_span.hpp
+  include/bit/stl/containers/string_view.hpp
+
+  # iterators
+  include/bit/stl/iterators/iterator.hpp
+
+  # ranges
+  include/bit/stl/ranges/range.hpp
+
+  # memory
+  include/bit/stl/memory/memory.hpp
+
+  # numeric
+  include/bit/stl/numeric/numeric.hpp
+
+  # not sure where this goes yet
   include/bit/stl/string_tokenizer.hpp
-  include/bit/stl/string_view.hpp
-  include/bit/stl/tribool.hpp
-  include/bit/stl/tuple.hpp
-  include/bit/stl/type_traits.hpp
-  include/bit/stl/utility.hpp
-  include/bit/stl/uuid.hpp
 )
 
 add_library(bit_stl INTERFACE)
