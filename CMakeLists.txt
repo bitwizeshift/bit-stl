@@ -4,9 +4,9 @@ enable_testing()
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 
-include(AddIndependenceCheck)
+include(AddHeaderSelfContainmentTest)
 include(MakeVersionHeader)
-include(EnableCCache)
+include(EnableCcache)
 
 #-----------------------------------------------------------------------------
 # Project Setup
@@ -15,8 +15,8 @@ include(EnableCCache)
 # enable cacche to speed up compilations
 enable_ccache()
 
-option(BIT_STL_COMPILE_INDEPENDENCE_TESTS "Include each header independently in a .cpp file to determine header independence" on)
-option(BIT_STL_COMPILE_UNIT_TESTS "Compile and run the unit tests for this library" on)
+option(BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS "Include each header independently in a .cpp file to determine header self-containment" off)
+option(BIT_STL_COMPILE_UNIT_TESTS "Compile and run the unit tests for this library" off)
 option(BIT_STL_GENERATE_DOCUMENTATION "Generates doxygen documentation" off)
 
 project("BitStl")
@@ -54,51 +54,53 @@ make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
 )
 
 set(headers
-      include/bit/stl/array.hpp
-      include/bit/stl/array_view.hpp
-      include/bit/stl/assert.hpp
-      include/bit/stl/casts.hpp
-      include/bit/stl/checked.hpp
-      include/bit/stl/circular_array.hpp
-      include/bit/stl/circular_buffer.hpp
-      include/bit/stl/circular_deque.hpp
-      include/bit/stl/circular_queue.hpp
-      include/bit/stl/data_watcher.hpp
-      include/bit/stl/delegate.hpp
-      include/bit/stl/enum.hpp
-      include/bit/stl/expected.hpp
-      include/bit/stl/functional.hpp
-      include/bit/stl/hashed_string.hpp
-      include/bit/stl/hashed_string_view.hpp
-      include/bit/stl/iterator.hpp
-      include/bit/stl/lazy.hpp
-      include/bit/stl/map_view.hpp
-      include/bit/stl/memory.hpp
-      include/bit/stl/numeric.hpp
-      include/bit/stl/optional.hpp
-      include/bit/stl/pointer_wrapper.hpp
-      include/bit/stl/range.hpp
-      include/bit/stl/set_view.hpp
-      include/bit/stl/source_location.hpp
-      include/bit/stl/span.hpp
-      include/bit/stl/stddef.hpp
-      include/bit/stl/string.hpp
-      include/bit/stl/string_span.hpp
-      include/bit/stl/string_tokenizer.hpp
-      include/bit/stl/string_view.hpp
-      include/bit/stl/tribool.hpp
-      include/bit/stl/tuple.hpp
-      include/bit/stl/type_traits.hpp
-      include/bit/stl/utility.hpp
-      include/bit/stl/uuid.hpp
+  include/bit/stl/array.hpp
+  include/bit/stl/array_view.hpp
+  include/bit/stl/assert.hpp
+  include/bit/stl/casts.hpp
+  include/bit/stl/checked.hpp
+  include/bit/stl/circular_array.hpp
+  include/bit/stl/circular_buffer.hpp
+  include/bit/stl/circular_deque.hpp
+  include/bit/stl/circular_queue.hpp
+  include/bit/stl/data_watcher.hpp
+  include/bit/stl/delegate.hpp
+  include/bit/stl/enum.hpp
+  include/bit/stl/expected.hpp
+  include/bit/stl/functional.hpp
+  include/bit/stl/hashed_string.hpp
+  include/bit/stl/hashed_string_view.hpp
+  include/bit/stl/iterator.hpp
+  include/bit/stl/lazy.hpp
+  include/bit/stl/map_view.hpp
+  include/bit/stl/memory.hpp
+  include/bit/stl/numeric.hpp
+  include/bit/stl/optional.hpp
+  include/bit/stl/pointer_wrapper.hpp
+  include/bit/stl/range.hpp
+  include/bit/stl/set_view.hpp
+  include/bit/stl/source_location.hpp
+  include/bit/stl/span.hpp
+  include/bit/stl/stddef.hpp
+  include/bit/stl/string.hpp
+  include/bit/stl/string_span.hpp
+  include/bit/stl/string_tokenizer.hpp
+  include/bit/stl/string_view.hpp
+  include/bit/stl/tribool.hpp
+  include/bit/stl/tuple.hpp
+  include/bit/stl/type_traits.hpp
+  include/bit/stl/utility.hpp
+  include/bit/stl/uuid.hpp
 )
 
-add_library(stl INTERFACE)
-add_library(bit::stl ALIAS stl)
+add_library(bit_stl INTERFACE)
+add_library(bit::stl ALIAS bit_stl)
 
-target_include_directories(stl INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
-                                         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>)
-target_compile_definitions(stl INTERFACE
+target_include_directories(bit_stl INTERFACE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+)
+target_compile_definitions(bit_stl INTERFACE
   $<$<CONFIG:DEBUG>:DEBUG>
   $<$<CONFIG:RELEASE>:DEBUG RELEASE>
 )
@@ -107,24 +109,24 @@ target_compile_definitions(stl INTERFACE
 # bit::stl : Independence Tests
 #-----------------------------------------------------------------------------
 
-if( BIT_STL_COMPILE_INDEPENDENCE_TESTS )
+if( BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS )
 
-  add_independence_check(stl_independence ${headers})
+  # Add containment test and alias as 'bit::stl::header_self_containment_test'
+  add_header_self_containment_test(bit_stl_header_self_containment_test ${headers})
+  add_library(bit::stl::header_self_containment_test ALIAS bit_stl_header_self_containment_test)
 
-  target_compile_definitions(stl_independence PRIVATE
+  target_compile_definitions(bit_stl_header_self_containment_test PRIVATE
     $<$<CONFIG:DEBUG>:DEBUG>
-    $<$<CONFIG:RELEASE>:DEBUG RELEASE>
+    $<$<CONFIG:RELEASE>:NDEBUG RELEASE>
   )
 
   if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    target_compile_options(stl_independence PRIVATE -Wall -pedantic)
+    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -pedantic)
   elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-    target_compile_options(stl_independence PRIVATE -Wall -pedantic)
+    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -pedantic)
   elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" )
     # TODO: Determine MSVC necessary compiler flags
   endif()
-
-  add_library(bit::stl::independence ALIAS stl_independence)
 
 endif()
 
@@ -154,7 +156,7 @@ if( EXISTS "$ENV{BIT_HOME}" )
   set(CMAKE_INSTALL_PREFIX "$ENV{BIT_HOME}")
 endif()
 
-export_library( TARGETS stl
+export_library( TARGETS bit_stl
                 PACKAGE Stl
                 VERSION ${BIT_STL_VERSION}
                 MAJOR_VERSION ${BIT_STL_VERSION_MAJOR}
