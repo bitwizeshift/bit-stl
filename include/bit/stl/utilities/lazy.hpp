@@ -15,6 +15,8 @@
 
 #include "../memory/memory.hpp"
 
+#include <functional> // std::function
+
 namespace bit {
   namespace stl {
 
