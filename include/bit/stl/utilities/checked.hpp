@@ -19,6 +19,7 @@
 #include "../memory/memory.hpp"
 
 #include <system_error>
+#include <string>       // std::string
 
 namespace bit {
   namespace stl {
