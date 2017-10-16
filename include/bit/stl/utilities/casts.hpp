@@ -19,9 +19,8 @@
 #include "type_traits.hpp"
 
 // std libraries
-#include <cstring> // for std::memcpy
-#include <limits>  // for std::numeric_limits
-
+#include <cstring> // std::memcpy
+#include <limits>  // std::numeric_limits
 
 namespace bit {
   namespace stl {
@@ -48,9 +47,9 @@ namespace bit {
     //////////////////////////////////////////////////////////////////////////
     struct bad_pointer_cast : public std::runtime_error
     {
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Constructors
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       using std::runtime_error::runtime_error;
@@ -58,9 +57,9 @@ namespace bit {
 
     inline namespace casts {
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Casts
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Performs a bounded casting safely between numeric types.
       ///
@@ -77,7 +76,7 @@ namespace bit {
       template<typename To, typename From>
       constexpr To narrow_cast( From from ) noexcept;
 
-      //----------------------------------------------------------------------
+      //---------------------------------------------------------------------=-
 
       /// \brief Statically casts a pointer if the pointer is dynamically
       ///        castable to that type, asserting otherwise.
@@ -89,7 +88,7 @@ namespace bit {
       template<typename To, typename From>
       To pointer_cast( From ptr ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Performs a cast between types by copying bytes from \p from
       ///        to the new type.
@@ -102,6 +101,20 @@ namespace bit {
       /// \return the converted value
       template<typename To, typename From>
       To copy_cast( const From& from ) noexcept;
+
+      //-----------------------------------------------------------------------
+
+      /// \brief Performs an implicit cast between two types, such that the
+      ///        cast is actually performed using the implicit language
+      ///        casting
+      ///
+      /// This can be used to signal cases that would otherwise produce
+      /// warnings when type promotions are performed.
+      ///
+      /// \tparam To the type to convert to
+      /// \param from the type being converted
+      template<typename To, typename From>
+      To implicit_cast( From&& from );
 
     } // inline namespace casts
   } // namespace stl

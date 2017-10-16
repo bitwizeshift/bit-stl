@@ -1,9 +1,9 @@
 #ifndef BIT_STL_UTILITIES_DETAIL_CASTS_INL
 #define BIT_STL_UTILITIES_DETAIL_CASTS_INL
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Casts
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename To, typename From>
 inline constexpr To bit::stl::casts::narrow_cast( From from ) noexcept
@@ -22,7 +22,7 @@ inline constexpr To bit::stl::casts::narrow_cast( From from ) noexcept
 #endif
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename To, typename From>
 inline To bit::stl::casts::pointer_cast( From ptr ) noexcept
@@ -32,7 +32,7 @@ inline To bit::stl::casts::pointer_cast( From ptr ) noexcept
   return static_cast<To>(ptr);
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename To, typename From>
 inline To bit::stl::casts::copy_cast(const From& from)
@@ -43,11 +43,19 @@ inline To bit::stl::casts::copy_cast(const From& from)
   } value = {};
 
   std::memcpy(
-    static_cast<byte*>( static_cast<void*>(&value.to) ),
-    static_cast<const byte*>( static_cast<const void*>(&from) ),
-    std::min(sizeof(From),sizeof(To))
+    static_cast<void*>(&value.to),
+    static_cast<const void*>(&from),
+    (sizeof(From) < sizeof(To) ? sizeof(From) : sizeof(To))
   );
   return value.to;
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename To, typename From>
+inline To bit::stl::casts::implicit_cast( From&& from )
+{
+  return std::forward<From>(from);
 }
 
 #endif /* BIT_STL_UTILITIES_DETAIL_CASTS_INL */
