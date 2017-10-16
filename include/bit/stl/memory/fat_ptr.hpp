@@ -6,14 +6,14 @@
  *        for allocators to preserve size-information without requiring
  *        heap-based record-keeping
  *
- * \note This is an internal header file, included by other library headers.
- *       Do not attempt to use it directly.
+ * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_MEMORY_DETAIL_FAT_PTR_HPP
-#define BIT_STL_MEMORY_DETAIL_FAT_PTR_HPP
+#ifndef BIT_STL_MEMORY_FAT_PTR_HPP
+#define BIT_STL_MEMORY_FAT_PTR_HPP
 
-#include <cstdlib> // std::size_t
-#include <utility> // std::swap
+#include <cstddef>     // std::size_t
+#include <utility>     // std::swap
+#include <type_traits> // std::is_void, std::is_abstract
 
 namespace bit {
   namespace stl {
@@ -350,6 +350,6 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#include "fat_ptr.inl"
+#include "detail/fat_ptr.inl"
 
-#endif // BIT_STL_MEMORY_DETAIL_FAT_PTR_HPP
+#endif // BIT_STL_MEMORY_FAT_PTR_HPP

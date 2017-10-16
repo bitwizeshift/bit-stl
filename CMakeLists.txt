@@ -108,6 +108,7 @@ set(headers
   include/bit/stl/ranges/zip_range.hpp
 
   # memory
+  include/bit/stl/memory/fat_ptr.hpp
   include/bit/stl/memory/memory.hpp
 
   # numeric
