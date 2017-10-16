@@ -12,7 +12,7 @@
 #include "type_traits.hpp"
 #include "../containers/string_view.hpp"
 #include "assert.hpp"
-#include "../iterators/iterator.hpp" // pointer_iterator
+#include "../iterators/tagged_iterator.hpp"
 
 namespace bit {
   namespace stl {
@@ -33,7 +33,7 @@ namespace bit {
 
     /// Type used for iterating an enum_range
     template<typename Enum>
-    using enum_iterator = pointer_iterator<const Enum*,Enum>;
+    using enum_iterator = tagged_iterator<const Enum*,Enum>;
 
     /// \brief Type-trait to determine whether a type is an enum_bitmask
     ///

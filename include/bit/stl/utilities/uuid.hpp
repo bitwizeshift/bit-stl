@@ -10,7 +10,6 @@
 #define BIT_STL_UTILITIES_UTILITIES_UUID_HPP
 
 #include "stddef.hpp"
-#include "../iterators/iterator.hpp" // pointer_iterator
 
 #include <algorithm>
 
@@ -35,8 +34,8 @@ namespace bit {
       using const_reference = const value_type&;
       using const_pointer   = const value_type*;
 
-      using iterator        = pointer_iterator<const byte*,uuid>;
-      using const_iterator  = pointer_iterator<const byte*,uuid>;
+      using iterator        = const byte*;
+      using const_iterator  = const byte*;
 
       using size_type = std::size_t;
 

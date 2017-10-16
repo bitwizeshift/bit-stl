@@ -3,8 +3,7 @@
  *
  * \brief This header contains the internal implementation of a zip iterator
  *
- * \note This is an internal header file, included by other library headers.
- *       Do not attempt to use it directly.
+ * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 #ifndef BIT_STL_ITERATOR_DETAIL_ZIP_ITERATOR_HPP
 #define BIT_STL_ITERATOR_DETAIL_ZIP_ITERATOR_HPP
@@ -12,6 +11,7 @@
 #include <iterator>    // std::iterator_traits
 #include <type_traits> // std::common_type
 #include <tuple>       // std::tuple
+#include <cstddef>     // std::ptrdiff_t
 
 namespace bit {
   namespace stl {
@@ -166,12 +166,11 @@ namespace bit {
       constexpr void decrement( std::index_sequence<Idx> );
 
       template<typename...> friend class zip_iterator;
-
     };
 
   } // namespace memory
 } // namespace bit
 
-#include "zip_iterator.inl"
+#include "detail/zip_iterator.inl"
 
 #endif /* BIT_STL_ITERATOR_DETAIL_ZIP_ITERATOR_HPP */

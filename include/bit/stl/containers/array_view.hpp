@@ -10,8 +10,8 @@
 #ifndef BIT_STL_CONTAINERS_ARRAY_VIEW_HPP
 #define BIT_STL_CONTAINERS_ARRAY_VIEW_HPP
 
-#include "../utilities/type_traits.hpp" // bool_constant
-#include "../iterators/iterator.hpp"    // pointer_iterator
+#include "../utilities/type_traits.hpp"     // bool_constant
+#include "../iterators/tagged_iterator.hpp" // tagged_iterator
 
 #include <stdexcept>
 
@@ -48,8 +48,8 @@ namespace bit {
       using size_type       = std::size_t;
       using difference_type = std::ptrdiff_t;
 
-      using iterator               = pointer_iterator<T*,array_view>;
-      using const_iterator         = pointer_iterator<T*,array_view>;
+      using iterator               = tagged_iterator<const T*,array_view>;
+      using const_iterator         = tagged_iterator<const T*,array_view>;
       using reverse_iterator       = std::reverse_iterator<iterator>;
       using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 

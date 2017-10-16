@@ -90,7 +90,9 @@ set(headers
   include/bit/stl/containers/string_view.hpp
 
   # iterators
-  include/bit/stl/iterators/iterator.hpp
+  include/bit/stl/iterators/tagged_iterator.hpp
+  include/bit/stl/iterators/tuple_element_iterator.hpp
+  include/bit/stl/iterators/zip_iterator.hpp
 
   # ranges
   include/bit/stl/ranges/range.hpp

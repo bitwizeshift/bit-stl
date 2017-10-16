@@ -11,9 +11,9 @@
 #define BIT_STL_CONTAINERS_SPAN_HPP
 
 // local bit libraries
-#include "../utilities/type_traits.hpp" // ...
-#include "../iterators/iterator.hpp"      // pointer_iterator
-#include "../utilities/assert.hpp"        // BIT_STL_CONTAINERS_ASSERT
+#include "../utilities/type_traits.hpp"     // ...
+#include "../iterators/tagged_iterator.hpp" // tagged_iterator
+#include "../utilities/assert.hpp"          // BIT_STL_CONTAINERS_ASSERT
 
 #include <iterator>
 #include <limits>
@@ -192,8 +192,8 @@ namespace bit {
       using size_type  = std::ptrdiff_t;
       using index_type = std::ptrdiff_t;
 
-      using iterator               = pointer_iterator<T*,span<T,Extent>>;
-      using const_iterator         = pointer_iterator<const T*,span<T,Extent>>;
+      using iterator               = tagged_iterator<T*,span<T,Extent>>;
+      using const_iterator         = tagged_iterator<const T*,span<T,Extent>>;
       using reverse_iterator       = std::reverse_iterator<iterator>;
       using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 

@@ -5,15 +5,15 @@
  *        an adapter that wraps around iterators that iterate tuples to only
  *        return specific tuple elements.
  *
- * \note This is an internal header file, included by other library headers.
- *       Do not attempt to use it directly.
+ * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 #ifndef BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_HPP
 #define BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_HPP
 
-#include <iterator>    // std::iterator_traits
+#include <iterator>    // std::iterator_traits, std::iterator
 #include <type_traits> // std::common_type
 #include <tuple>       // std::tuple
+#include <cstddef>     // std::size_t
 
 namespace bit {
   namespace stl {
@@ -22,7 +22,7 @@ namespace bit {
     /// \class tuple_element_iterator tuple_element_iterator.hpp <bit/stl/iterator.hpp>
     ///
     //////////////////////////////////////////////////////////////////////////
-    template<std::size_t N,typename Iter>
+    template<std::size_t N,typename Iterator>
     class tuple_element_iterator
     {
       //----------------------------------------------------------------------
@@ -30,11 +30,11 @@ namespace bit {
       //----------------------------------------------------------------------
     public:
 
-      using value_type = std::tuple_element_t<N,typename std::iterator_traits<Iter>::value_type>;
-      using difference_type = typename std::iterator_traits<Iter>::difference_type;
-      using pointer = value_type*;
-      using reference = value_type&;
-      using iterator_category = typename std::iterator_traits<Iter>::iterator_category;
+      using value_type        = std::tuple_element_t<N,typename std::iterator_traits<Iterator>::value_type>;
+      using difference_type   = typename std::iterator_traits<Iterator>::difference_type;
+      using pointer           = value_type*;
+      using reference         = value_type&;
+      using iterator_category = typename std::iterator_traits<Iterator>::iterator_category;
 
       //----------------------------------------------------------------------
       // Constructor / Assignment
@@ -44,7 +44,7 @@ namespace bit {
       /// \brief Constructs a tuple_element_iterator from an underlying iterator
       ///
       /// \param iter the iterator
-      constexpr explicit tuple_element_iterator( Iter iter );
+      constexpr explicit tuple_element_iterator( Iterator iter );
 
       /// \brief Copy constructs a tuple_element_iterator from another iterator
       ///
@@ -115,12 +115,45 @@ namespace bit {
       //----------------------------------------------------------------------
     private:
 
-      Iter m_iter; ///< The underlying iterator
+      Iterator m_iter; ///< The underlying iterator
     };
+
+    //-------------------------------------------------------------------------
+    // Utility
+    //-------------------------------------------------------------------------
+
+    /// \brief Utility function to type-deduce and make an iterator for
+    ///        iterating specific tuple elements
+    ///
+    /// \param it the iterator
+    /// \return the tuple element iterator
+    template<std::size_t N,typename Iterator>
+    constexpr tuple_element_iterator<N,Iterator>
+      make_tuple_element_iterator( Iterator it );
+
+    /// \brief Convenience function for making a tuple iterator that only
+    ///        iterates the first tuple element, which is the key in
+    ///        associative containers
+    ///
+    /// \param it the iterator
+    /// \return the tuple element iterator
+    template<typename Iterator>
+    constexpr tuple_element_iterator<0,Iterator>
+      make_key_iterator( Iterator it );
+
+    /// \brief Convenience function for making a tuple iterator that only
+    ///        iterates the second tuple element, which is the value in
+    ///        associative containers
+    ///
+    /// \param it the iterator
+    /// \return the tuple element iterator
+    template<typename Iterator>
+    constexpr tuple_element_iterator<1,Iterator>
+      make_value_iterator( Iterator it );
 
   } // namespace stl
 } // namespace bit
 
-#include "tuple_element_iterator.inl"
+#include "detail/tuple_element_iterator.inl"
 
 #endif /* BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_HPP */

@@ -217,7 +217,7 @@ inline constexpr bit::stl::array_view<T>
 //------------------------------------------------------------------------
 
 template<typename T>
-inline constexpr typename bit::stl::array_view<T>::iterator
+inline constexpr typename bit::stl::array_view<T>::const_iterator
   bit::stl::array_view<T>::begin()
   const noexcept
 {
@@ -227,7 +227,7 @@ inline constexpr typename bit::stl::array_view<T>::iterator
 //------------------------------------------------------------------------
 
 template<typename T>
-inline constexpr typename bit::stl::array_view<T>::iterator
+inline constexpr typename bit::stl::array_view<T>::const_iterator
   bit::stl::array_view<T>::end()
   const noexcept
 {
@@ -257,7 +257,7 @@ inline constexpr typename bit::stl::array_view<T>::const_iterator
 //------------------------------------------------------------------------
 
 template<typename T>
-inline constexpr typename bit::stl::array_view<T>::reverse_iterator
+inline constexpr typename bit::stl::array_view<T>::const_reverse_iterator
   bit::stl::array_view<T>::rbegin()
   const noexcept
 {
@@ -267,7 +267,7 @@ inline constexpr typename bit::stl::array_view<T>::reverse_iterator
 //------------------------------------------------------------------------
 
 template<typename T>
-inline constexpr typename bit::stl::array_view<T>::reverse_iterator
+inline constexpr typename bit::stl::array_view<T>::const_reverse_iterator
   bit::stl::array_view<T>::rend()
   const noexcept
 {

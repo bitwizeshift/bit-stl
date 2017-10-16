@@ -146,8 +146,8 @@ namespace bit {
       using size_type  = std::ptrdiff_t;
       using index_type = std::ptrdiff_t;
 
-      using iterator               = pointer_iterator<CharT*,basic_string_span>;
-      using const_iterator         = pointer_iterator<const CharT*,basic_string_span>;
+      using iterator               = tagged_iterator<CharT*,basic_string_span>;
+      using const_iterator         = tagged_iterator<const CharT*,basic_string_span>;
       using reverse_iterator       = std::reverse_iterator<iterator>;
       using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 

@@ -15,7 +15,7 @@
 
 #include "string.hpp"
 #include "../utilities/stddef.hpp"
-#include "../iterators/iterator.hpp" // pointer_iterator
+#include "../iterators/tagged_iterator.hpp" // tagged_iterator
 
 #include <algorithm>
 #include <string>
@@ -54,7 +54,7 @@ namespace bit {
       using reference       = std::add_lvalue_reference_t<value_type>;
       using const_reference = std::add_lvalue_reference_t<const value_type>;
 
-      using const_iterator         = pointer_iterator<const_pointer,basic_string_view>;
+      using const_iterator         = tagged_iterator<const_pointer,basic_string_view>;
       using iterator               = const_iterator;
       using const_reverse_iterator = std::reverse_iterator<const_iterator>;
       using reverse_iterator       = const_reverse_iterator;
