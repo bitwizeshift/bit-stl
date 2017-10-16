@@ -4,11 +4,13 @@
  * \brief This header contains a pointer used for multiple levels of
  *        indirection
  *
- * \note This is an internal header file, included by other library headers.
- *       Do not attempt to use it directly.
+ * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_MEMORY_DETAIL_INDIRECT_PTR_HPP
-#define BIT_STL_MEMORY_DETAIL_INDIRECT_PTR_HPP
+#ifndef BIT_STL_MEMORY_INDIRECT_PTR_HPP
+#define BIT_STL_MEMORY_INDIRECT_PTR_HPP
+
+#include <memory>      // std::addressof
+#include <type_traits> // std::remove_extent
 
 namespace bit {
   namespace stl {
@@ -154,6 +156,6 @@ namespace bit {
   } // inline namespace stl
 } // namespace bit
 
-#include "indirect_ptr.inl"
+#include "detail/indirect_ptr.inl"
 
-#endif /* BIT_STL_MEMORY_DETAIL_INDIRECT_PTR_HPP */
+#endif /* BIT_STL_MEMORY_INDIRECT_PTR_HPP */

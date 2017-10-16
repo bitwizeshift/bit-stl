@@ -17,7 +17,6 @@
 #include <memory>
 
 // IWYU pragma: begin_exports
-#include "detail/indirect_ptr.hpp"
 #include "detail/observer_ptr.hpp"
 #include "detail/offset_ptr.hpp"
 // IWYU pragma: end_exports
