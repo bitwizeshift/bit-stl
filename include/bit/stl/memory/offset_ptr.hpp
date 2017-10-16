@@ -3,11 +3,10 @@
  *
  * \brief todo: fill in documentation
  *
- * \note This is an internal header file, included by other library headers.
- *       Do not attempt to use it directly.
+ * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_MEMORY_DETAIL_OFFSET_PTR_HPP
-#define BIT_STL_MEMORY_DETAIL_OFFSET_PTR_HPP
+#ifndef BIT_STL_MEMORY_OFFSET_PTR_HPP
+#define BIT_STL_MEMORY_OFFSET_PTR_HPP
 
 #include <cstdlib>     // std::ptrdiff_t
 #include <cstdint>     // std::uintptr_t
@@ -332,6 +331,6 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#include "offset_ptr.inl"
+#include "detail/offset_ptr.inl"
 
-#endif // BIT_STL_MEMORY_DETAIL_OFFSET_PTR_HPP
+#endif // BIT_STL_MEMORY_OFFSET_PTR_HPP

@@ -16,10 +16,6 @@
 #include <limits>
 #include <memory>
 
-// IWYU pragma: begin_exports
-#include "detail/offset_ptr.hpp"
-// IWYU pragma: end_exports
-
 namespace bit {
   namespace stl {
 
