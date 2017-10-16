@@ -26,10 +26,6 @@
 # define BIT_DEBUG     1
 #endif
 
-#if !defined(BIT_UNIT_TEST) && (defined(UNIT_TEST) || defined(_UNIT_TEST))
-# define BIT_UNIT_TEST 1
-#endif
-
 //! \def BIT_NOOP()
 //! \brief Macro function indicating no operation will occur
 #ifndef BIT_NOOP
@@ -43,7 +39,7 @@
 //! This is used to silence compiler warnings
 //!
 //! \param var the variable to explicitly mark as unused
-#define BIT_UNUSED(var) (void)(var);
+#define BIT_UNUSED(var) (void)(var)
 
 /// \brief The parent namespace for all projects
 namespace bit {

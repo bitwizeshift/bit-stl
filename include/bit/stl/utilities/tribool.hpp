@@ -8,7 +8,7 @@
 #ifndef BIT_STL_UTILITIES_TRIBOOL_HPP
 #define BIT_STL_UTILITIES_TRIBOOL_HPP
 
-#include <cstdlib>
+#include <cstddef> // std::size_t
 
 namespace bit {
   namespace stl {

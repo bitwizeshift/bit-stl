@@ -17,6 +17,8 @@
 #include "stddef.hpp"
 #include "source_location.hpp"
 
+#include <stdexcept> // std::runtime_error
+
 namespace bit {
   namespace stl {
 

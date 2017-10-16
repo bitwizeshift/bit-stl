@@ -6,11 +6,10 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
 #ifndef BIT_STL_UTILITIES_SOURCE_LOCATION_HPP
 #define BIT_STL_UTILITIES_SOURCE_LOCATION_HPP
 
-#include "../containers/string_view.hpp" // string_view
+#include <cstddef> // std::size_t
 
 namespace bit {
   namespace stl {
@@ -36,8 +35,8 @@ namespace bit {
       /// \param file_name     The name of the file
       /// \param function_name The name of the function
       /// \param line          The line number of the given
-      constexpr source_location( string_view file_name,
-                                 string_view function_name,
+      constexpr source_location( const char* file_name,
+                                 const char* function_name,
                                  std::size_t line );
 
       /// \brief Copies a given source_location
@@ -59,20 +58,20 @@ namespace bit {
       /// \brief Retrieves the function_name of the source_location
       ///
       /// \return the name of the function
-      constexpr string_view function_name() const noexcept;
+      constexpr const char* function_name() const noexcept;
 
       /// \brief Retrieves the file_name of the source_location
       ///
       /// \return the name of the file
-      constexpr string_view file_name() const noexcept;
+      constexpr const char* file_name() const noexcept;
 
       //----------------------------------------------------------------------
       // Private Members
       //----------------------------------------------------------------------
     private:
 
-      string_view m_file;     ///< The current file
-      string_view m_function; ///< The current function
+      const char* m_file;     ///< The current file
+      const char* m_function; ///< The current function
       std::size_t m_line;     ///< The line number
     };
 

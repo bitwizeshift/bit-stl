@@ -9,7 +9,7 @@
 #ifndef BIT_STL_UTILITIES_UTILITIES_UUID_HPP
 #define BIT_STL_UTILITIES_UTILITIES_UUID_HPP
 
-#include "stddef.hpp"
+#include "byte.hpp" // byte
 
 #include <algorithm>
 
