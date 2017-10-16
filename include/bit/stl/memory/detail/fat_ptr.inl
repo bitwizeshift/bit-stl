@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_MEMORY_FAT_PTR_INL
-#define BIT_STL_DETAIL_MEMORY_FAT_PTR_INL
+#ifndef BIT_STL_MEMORY_DETAIL_FAT_PTR_INL
+#define BIT_STL_MEMORY_DETAIL_FAT_PTR_INL
 
 //============================================================================
 // fat_ptr<T>
@@ -319,4 +319,4 @@ constexpr bool bit::stl::operator>=( const fat_ptr<T>& lhs,
   return !(lhs<rhs);
 }
 
-#endif // BIT_STL_DETAIL_MEMORY_FAT_PTR_INL
+#endif // BIT_STL_MEMORY_DETAIL_FAT_PTR_INL

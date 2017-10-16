@@ -6,8 +6,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_DETAIL_CIRCULAR_BUFFER_STORAGE_HPP
-#define BIT_STL_DETAIL_CIRCULAR_BUFFER_STORAGE_HPP
+#ifndef BIT_STL_CONTAINERS_DETAIL_CIRCULAR_BUFFER_STORAGE_HPP
+#define BIT_STL_CONTAINERS_DETAIL_CIRCULAR_BUFFER_STORAGE_HPP
 
 namespace bit {
   namespace stl {
@@ -51,4 +51,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_DETAIL_CIRCULAR_BUFFER_STORAGE_HPP */
+#endif /* BIT_STL_CONTAINERS_DETAIL_CIRCULAR_BUFFER_STORAGE_HPP */

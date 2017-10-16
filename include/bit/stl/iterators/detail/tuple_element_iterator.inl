@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_TUPLE_ELEMENT_ITERATOR_ITERATOR_INL
-#define BIT_STL_DETAIL_TUPLE_ELEMENT_ITERATOR_ITERATOR_INL
+#ifndef BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_INL
+#define BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_INL
 
 
 //----------------------------------------------------------------------------
@@ -155,4 +155,4 @@ inline constexpr bool
   return m_iter >= rhs.m_iter;
 }
 
-#endif /* BIT_STL_DETAIL_TUPLE_ELEMENT_ITERATOR_ITERATOR_INL */
+#endif /* BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_INL */

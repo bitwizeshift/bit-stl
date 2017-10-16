@@ -6,8 +6,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_FUNCTIONAL_HPP
-#define BIT_STL_FUNCTIONAL_HPP
+#ifndef BIT_STL_UTILITIES_FUNCTIONAL_HPP
+#define BIT_STL_UTILITIES_FUNCTIONAL_HPP
 
 // std library
 #include <functional>  // for std::function
@@ -33,4 +33,4 @@ namespace bit {
 
 #include "detail/functional.inl"
 
-#endif /* BIT_STL_FUNCTIONAL_HPP */
+#endif /* BIT_STL_UTILITIES_FUNCTIONAL_HPP */

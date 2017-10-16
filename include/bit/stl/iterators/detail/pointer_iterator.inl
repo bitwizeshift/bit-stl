@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_ITERATOR_POINTER_ITERATOR_INL
-#define BIT_STL_DETAIL_ITERATOR_POINTER_ITERATOR_INL
+#ifndef BIT_STL_ITERATORS_DETAIL_POINTER_ITERATOR_INL
+#define BIT_STL_ITERATORS_DETAIL_POINTER_ITERATOR_INL
 
 //----------------------------------------------------------------------------
 // Constructors
@@ -187,4 +187,4 @@ inline constexpr bit::stl::pointer_iterator<Ptr,U>
   return pointer_iterator<Ptr,U>(lhs) -= rhs;
 }
 
-#endif /* BIT_STL_DETAIL_ITERATOR_POINTER_ITERATOR_INL */
+#endif /* BIT_STL_ITERATORS_DETAIL_POINTER_ITERATOR_INL */

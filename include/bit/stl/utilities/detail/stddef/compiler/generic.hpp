@@ -1,13 +1,14 @@
 /**
+ * \file compiler/generic.hpp
+ *
  * \brief This header attempts to detect a feature set from a generic
  *        (non-detected) c++ compiler.
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-
-#ifndef BIT_STL_DETAIL_STDDEF_COMPILER_GENERIC_HPP
-#define BIT_STL_DETAIL_STDDEF_COMPILER_GENERIC_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_GENERIC_HPP
+#define BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_GENERIC_HPP
 
 //-----------------------------------------------------------------------------
 // Compiler Detection
@@ -90,4 +91,4 @@
 #  define BIT_COMPILER_SYMBOL_LOCAL   __attribute__((visibility("hidden")))
 #endif
 
-#endif /* BIT_STL_DETAIL_STDDEF_COMPILER_GENERIC_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_GENERIC_HPP */

@@ -6,9 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
-#ifndef BIT_STL_TUPLE_HPP
-#define BIT_STL_TUPLE_HPP
+#ifndef BIT_STL_UTILITIES_TUPLE_HPP
+#define BIT_STL_UTILITIES_TUPLE_HPP
 
 // local bfstd library
 #include "functional.hpp"
@@ -42,4 +41,4 @@ namespace bit {
 
 #include "detail/tuple.inl"
 
-#endif /* BIT_STL_TUPLE_HPP */
+#endif /* BIT_STL_UTILITIES_TUPLE_HPP */

@@ -5,8 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_ITERATOR_HPP
-#define BIT_STL_ITERATOR_HPP
+#ifndef BIT_STL_ITERATORS_ITERATOR_HPP
+#define BIT_STL_ITERATORS_ITERATOR_HPP
 
 #include <utility>  // std::move
 #include <tuple>    // std::tuple_element
@@ -56,4 +56,4 @@ namespace bit {
 
 #include "detail/iterator.inl"
 
-#endif /* BIT_STL_ITERATOR_HPP */
+#endif /* BIT_STL_ITERATORS_ITERATOR_HPP */

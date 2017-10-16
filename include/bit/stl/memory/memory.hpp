@@ -5,9 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
-#ifndef BIT_STL_MEMORY_HPP
-#define BIT_STL_MEMORY_HPP
+#ifndef BIT_STL_MEMORY_MEMORY_HPP
+#define BIT_STL_MEMORY_MEMORY_HPP
 
 // bit::stl local libraries
 #include "../utilities/stddef.hpp"
@@ -210,4 +209,4 @@ namespace bit {
 
 #include "detail/memory.inl"
 
-#endif /* BIT_STL_MEMORY_HPP */
+#endif /* BIT_STL_MEMORY_MEMORY_HPP */

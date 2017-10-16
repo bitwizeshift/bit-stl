@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_MEMORY_OBSERVER_PTR_INL
-#define BIT_STL_DETAIL_MEMORY_OBSERVER_PTR_INL
+#ifndef BIT_STL_MEMORY_DETAIL_OBSERVER_PTR_INL
+#define BIT_STL_MEMORY_DETAIL_OBSERVER_PTR_INL
 
 //----------------------------------------------------------------------------
 // Constructors / Assignment
@@ -456,4 +456,4 @@ constexpr bool bit::stl::operator>=( const observer_ptr<T>& lhs,
   return lhs.get() >= rhs;
 }
 
-#endif /* BIT_STL_DETAIL_MEMORY_OBSERVER_PTR_INL */
+#endif /* BIT_STL_MEMORY_DETAIL_OBSERVER_PTR_INL */

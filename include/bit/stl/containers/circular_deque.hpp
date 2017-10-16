@@ -7,8 +7,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_CIRCULAR_DEQUE_HPP
-#define BIT_STL_CIRCULAR_DEQUE_HPP
+#ifndef BIT_STL_CONTAINERS_CIRCULAR_DEQUE_HPP
+#define BIT_STL_CONTAINERS_CIRCULAR_DEQUE_HPP
 
 #include "circular_buffer.hpp"
 
@@ -320,4 +320,4 @@ namespace bit {
 
 #include "detail/circular_deque.inl"
 
-#endif /* BIT_STL_CIRCULAR_DEQUE_HPP */
+#endif /* BIT_STL_CONTAINERS_CIRCULAR_DEQUE_HPP */

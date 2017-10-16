@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_SPAN_INL
-#define BIT_STL_DETAIL_SPAN_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_SPAN_INL
+#define BIT_STL_CONTAINERS_DETAIL_SPAN_INL
 
 //----------------------------------------------------------------------------
 // Constructors
@@ -523,4 +523,4 @@ constexpr bit::stl::span<const T>
   );
 }
 
-#endif /* BIT_STL_DETAIL_SPAN_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_SPAN_INL */

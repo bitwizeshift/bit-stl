@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_ENUM_INL
-#define BIT_STL_DETAIL_ENUM_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_ENUM_INL
+#define BIT_STL_UTILITIES_DETAIL_ENUM_INL
 
 //----------------------------------------------------------------------------
 // Inline Definitions
@@ -230,4 +230,4 @@ inline Enum& bit::stl::enum_ops::operator >>=( Enum& lhs, Integer rhs )
   return lhs = (lhs >> rhs);
 }
 
-#endif /* BIT_STL_DETAIL_ENUM_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_ENUM_INL */

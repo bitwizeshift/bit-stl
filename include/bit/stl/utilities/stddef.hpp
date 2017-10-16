@@ -6,9 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
-#ifndef BIT_STL_STDDEF_HPP
-#define BIT_STL_STDDEF_HPP
+#ifndef BIT_STL_UTILITIES_STDDEF_HPP
+#define BIT_STL_UTILITIES_STDDEF_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -81,15 +80,15 @@ namespace detail{} // namespace detail
 #include "detail/stddef/types/integral_types.hpp"
 #include "detail/stddef/types/char_types.hpp"
 #include "detail/stddef/types/float_types.hpp"
-#include "detail/stddef/types/byte.hpp"
 #include "detail/stddef/macros.hpp"
 #include "detail/stddef/platform.hpp"
 #include "detail/stddef/compiler.hpp"
 #include "detail/stddef/compiler_traits.hpp"
 #include "detail/stddef/library_export.hpp"
 #include "detail/stddef/breakpoint.hpp"
-#include "detail/stddef/protect_functions.hpp"
 // IWYU pragma: end_exports
+
+#include "byte.hpp"
 
 namespace bit {
   namespace stl {
@@ -180,8 +179,8 @@ namespace bit {
     ///
     /// \note member_function_t is unable to deduce it's template parameters
     ///       if used in a deduction context.
-    template<typename T, typename R>
-    using member_function_t = typename detail::member_function_t<T,R>::type;
+    template<typename T, typename Fn>
+    using member_function_t = typename detail::member_function_t<T,Fn>::type;
 
     /// \brief A type alias for function pointers to make it more readable
     ///
@@ -238,27 +237,7 @@ namespace bit {
     using const_char32_wrapper = const_type_wrapper<char32_t>; /// For UTF32 strings
     using const_tchar_wrapper  = const_type_wrapper<tchar>;    /// For specified string types
 
-    /// \brief Constructor tag used to zero out the entire class
-    struct ctor_zero_out_tag{};
-
-    /// \brief Constructor tag used to disable automatic internal conversion
-    struct ctor_do_not_convert_tag{};
-
-    /// \brief Constructor tag used as a placeholder to not conflict with
-    ///        variadic constructors
-    struct ctor_va_args_tag{};
-
-    //--------------------------------------------------------------------------
-    // Predefined Tags
-    //--------------------------------------------------------------------------
-
-    /// Predefined constant for zeroing out a constructor
-    constexpr ctor_zero_out_tag ctor_zero_out = {};
-
-    /// Predefined constant for disabling internal conversion
-    constexpr ctor_do_not_convert_tag ctor_dnc = {};
-
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_STDDEF_HPP */
+#endif /* BIT_STL_UTILITIES_STDDEF_HPP */

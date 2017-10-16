@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_ARRAY_VIEW_INL
-#define BIT_STL_DETAIL_ARRAY_VIEW_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_ARRAY_VIEW_INL
+#define BIT_STL_CONTAINERS_DETAIL_ARRAY_VIEW_INL
 
 //------------------------------------------------------------------------
 // Constructor
@@ -308,4 +308,4 @@ inline constexpr bit::stl::array_view<T>::
 
 }
 
-#endif /* BIT_STL_DETAIL_ARRAY_VIEW_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_ARRAY_VIEW_INL */

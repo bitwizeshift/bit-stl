@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_HASHED_STRING_INL
-#define BIT_STL_DETAIL_HASHED_STRING_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_HASHED_STRING_INL
+#define BIT_STL_CONTAINERS_DETAIL_HASHED_STRING_INL
 
 //----------------------------------------------------------------------------
 // Constructor / Assignment
@@ -408,4 +408,4 @@ inline bool
   return !(lhs < rhs);
 }
 
-#endif /* BIT_STL_DETAIL_HASHED_STRING_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_HASHED_STRING_INL */

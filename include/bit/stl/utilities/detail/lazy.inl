@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_LAZY_INL
-#define BIT_STL_DETAIL_LAZY_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_LAZY_INL
+#define BIT_STL_UTILITIES_DETAIL_LAZY_INL
 
 namespace bit {
   namespace stl {
@@ -645,4 +645,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_DETAIL_LAZY_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_LAZY_INL */

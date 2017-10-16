@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_UTILITY_COMPRESSED_PAIR_INL
-#define BIT_STL_DETAIL_UTILITY_COMPRESSED_PAIR_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_INL
+#define BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_INL
 
 //============================================================================
 // compressed_pair
@@ -216,4 +216,4 @@ constexpr bit::stl::compressed_pair<std::decay_t<T1>,std::decay_t<T2>>
   return {std::forward<T1>(x),std::forward<T2>(y)};
 }
 
-#endif /* BIT_STL_DETAIL_UTILITY_COMPRESSED_PAIR_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_INL */

@@ -8,9 +8,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-
-#ifndef BIT_STL_DETAIL_TUPLE_ELEMENT_ITERATOR_ITERATOR_HPP
-#define BIT_STL_DETAIL_TUPLE_ELEMENT_ITERATOR_ITERATOR_HPP
+#ifndef BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_HPP
+#define BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_HPP
 
 #include <iterator>    // std::iterator_traits
 #include <type_traits> // std::common_type
@@ -124,4 +123,4 @@ namespace bit {
 
 #include "tuple_element_iterator.inl"
 
-#endif /* BIT_STL_DETAIL_TUPLE_ELEMENT_ITERATOR_ITERATOR_HPP */
+#endif /* BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_HPP */

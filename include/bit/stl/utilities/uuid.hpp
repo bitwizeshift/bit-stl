@@ -6,9 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
-#ifndef BIT_STL_UUID_HPP
-#define BIT_STL_UUID_HPP
+#ifndef BIT_STL_UTILITIES_UTILITIES_UUID_HPP
+#define BIT_STL_UTILITIES_UTILITIES_UUID_HPP
 
 #include "stddef.hpp"
 #include "../iterators/iterator.hpp" // pointer_iterator
@@ -142,4 +141,4 @@ namespace bit {
 
 #include "detail/uuid.inl"
 
-#endif /* BIT_STL_UUID_HPP */
+#endif /* BIT_STL_UTILITIES_UTILITIES_UUID_HPP */

@@ -5,8 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_OPTIONAL_HPP
-#define BIT_STL_OPTIONAL_HPP
+#ifndef BIT_STL_UTILITIES_OPTIONAL_HPP
+#define BIT_STL_UTILITIES_OPTIONAL_HPP
 
 #include "type_traits.hpp"
 #include "utility.hpp"
@@ -628,4 +628,4 @@ namespace bit {
 
 #include "detail/optional.inl"
 
-#endif /* BIT_STL_OPTIONAL_HPP */
+#endif /* BIT_STL_UTILITIES_OPTIONAL_HPP */

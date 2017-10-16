@@ -6,9 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
-#ifndef BIT_STL_POINTER_WRAPPER_HPP
-#define BIT_STL_POINTER_WRAPPER_HPP
+#ifndef BIT_STL_UTILITIES_POINTER_WRAPPER_HPP
+#define BIT_STL_UTILITIES_POINTER_WRAPPER_HPP
 
 #include "utility.hpp"
 
@@ -169,4 +168,4 @@ namespace bit {
 
 #include "detail/pointer_wrapper.inl"
 
-#endif /* BIT_STL_POINTER_WRAPPER_HPP */
+#endif /* BIT_STL_UTILITIES_POINTER_WRAPPER_HPP */

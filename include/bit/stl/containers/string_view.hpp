@@ -6,8 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_STRING_VIEW_HPP
-#define BIT_STL_STRING_VIEW_HPP
+#ifndef BIT_STL_CONTAINERS_STRING_VIEW_HPP
+#define BIT_STL_CONTAINERS_STRING_VIEW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -1042,4 +1042,4 @@ namespace bit {
 
 #include "detail/string_view.inl"
 
-#endif /* BIT_STL_STRING_VIEW_HPP */
+#endif /* BIT_STL_CONTAINERS_STRING_VIEW_HPP */

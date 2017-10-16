@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_CASTS_INL
-#define BIT_STL_DETAIL_CASTS_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_CASTS_INL
+#define BIT_STL_UTILITIES_DETAIL_CASTS_INL
 
 //----------------------------------------------------------------------------
 // Casts
@@ -50,4 +50,4 @@ inline To bit::stl::casts::copy_cast(const From& from)
   return value.to;
 }
 
-#endif /* BIT_STL_DETAIL_CASTS_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_CASTS_INL */

@@ -8,9 +8,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-
-#ifndef BIT_STL_DETAIL_ITERATOR_POINTER_ITERATOR_HPP
-#define BIT_STL_DETAIL_ITERATOR_POINTER_ITERATOR_HPP
+#ifndef BIT_STL_ITERATORS_DETAIL_POINTER_ITERATOR_HPP
+#define BIT_STL_ITERATORS_DETAIL_POINTER_ITERATOR_HPP
 
 #include <memory> // std::pointer_traits
 #include <iterator> // std::random_access_iterator_tag
@@ -147,4 +146,4 @@ namespace bit {
 
 #include "pointer_iterator.inl"
 
-#endif /* BIT_STL_DETAIL_ITERATOR_POINTER_ITERATOR_HPP */
+#endif /* BIT_STL_ITERATORS_DETAIL_POINTER_ITERATOR_HPP */

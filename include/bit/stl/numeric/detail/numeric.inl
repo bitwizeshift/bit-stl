@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_NUMERIC_INL
-#define BIT_STL_DETAIL_NUMERIC_INL
+#ifndef BIT_STL_NUMERIC_DETAIL_NUMERIC_INL
+#define BIT_STL_NUMERIC_DETAIL_NUMERIC_INL
 
 //----------------------------------------------------------------------------
 //
@@ -24,4 +24,4 @@ inline constexpr std::common_type_t<T,U>
   (std::abs(b) * std::abs(a)) / (gcd(a,b));
 }
 
-#endif /* BIT_STL_DETAIL_NUMERIC_INL */
+#endif /* BIT_STL_NUMERIC_DETAIL_NUMERIC_INL */

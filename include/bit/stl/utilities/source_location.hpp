@@ -7,8 +7,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_SOURCE_LOCATION_HPP
-#define BIT_STL_SOURCE_LOCATION_HPP
+#ifndef BIT_STL_UTILITIES_SOURCE_LOCATION_HPP
+#define BIT_STL_UTILITIES_SOURCE_LOCATION_HPP
 
 #include "../containers/string_view.hpp" // string_view
 
@@ -103,4 +103,4 @@ namespace bit {
 
 #include "detail/source_location.inl"
 
-#endif /* BIT_STL_SOURCE_LOCATION_HPP */
+#endif /* BIT_STL_UTILITIES_SOURCE_LOCATION_HPP */

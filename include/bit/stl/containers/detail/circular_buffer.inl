@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_CIRCULAR_BUFFER_INL
-#define BIT_STL_DETAIL_CIRCULAR_BUFFER_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_CIRCULAR_BUFFER_INL
+#define BIT_STL_CONTAINERS_DETAIL_CIRCULAR_BUFFER_INL
 
 //============================================================================
 // circular_buffer_iterator
@@ -604,4 +604,4 @@ bool bit::stl::operator>=( const circular_buffer<T>& lhs,
   return !(lhs<rhs);
 }
 
-#endif /* BIT_STL_DETAIL_CIRCULAR_BUFFER_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_CIRCULAR_BUFFER_INL */

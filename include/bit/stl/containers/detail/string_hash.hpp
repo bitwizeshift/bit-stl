@@ -7,8 +7,8 @@
  *       Do not attempt to use it directly.
  */
 
-#ifndef BIT_STL_DETAIL_STRING_HASH_HPP
-#define BIT_STL_DETAIL_STRING_HASH_HPP
+#ifndef BIT_STL_CONTAINERS_DETAIL_STRING_HASH_HPP
+#define BIT_STL_CONTAINERS_DETAIL_STRING_HASH_HPP
 
 #include <cstdlib> // std::size_t
 
@@ -93,4 +93,4 @@ inline constexpr std::size_t
   return detail::string_hash( str, n );
 }
 
-#endif /* BIT_STL_DETAIL_STRING_HASH_HPP */
+#endif /* BIT_STL_CONTAINERS_DETAIL_STRING_HASH_HPP */

@@ -1,9 +1,11 @@
 /**
+ * \file breakpoint.hpp
+ *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_DETAIL_STDDEF_BREAKPOINT_HPP
-#define BIT_STL_DETAIL_STDDEF_BREAKPOINT_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_BREAKPOINT_HPP
+#define BIT_STL_UTILITIES_DETAIL_STDDEF_BREAKPOINT_HPP
 
 //! \def BIT_BREAKPOINT
 //!
@@ -35,4 +37,4 @@
 #  endif
 #endif
 
-#endif /* BIT_STL_DETAIL_STDDEF_BREAKPOINT_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_BREAKPOINT_HPP */

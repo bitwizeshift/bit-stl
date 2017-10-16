@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_CHECKED_INL
-#define BIT_STL_DETAIL_CHECKED_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_CHECKED_INL
+#define BIT_STL_UTILITIES_DETAIL_CHECKED_INL
 
 //============================================================================
 // error
@@ -475,4 +475,4 @@ inline bit::stl::checked<T>
   return checked<T>( in_place<T>, std::move(ilist), std::forward<Args>(args)... );
 }
 
-#endif /* BIT_STL_DETAIL_CHECKED_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_CHECKED_INL */

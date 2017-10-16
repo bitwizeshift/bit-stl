@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_CIRCULAR_ARRAY_INL
-#define BIT_STL_DETAIL_CIRCULAR_ARRAY_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_CIRCULAR_ARRAY_INL
+#define BIT_STL_CONTAINERS_DETAIL_CIRCULAR_ARRAY_INL
 
 //============================================================================
 // circular_array
@@ -312,4 +312,4 @@ typename bit::stl::circular_array<T,N>::const_reverse_iterator
   return m_buffer.crend();
 }
 
-#endif /* BIT_STL_DETAIL_CIRCULAR_ARRAY_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_CIRCULAR_ARRAY_INL */

@@ -5,8 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_DELEGATE_HPP
-#define BIT_STL_DELEGATE_HPP
+#ifndef BIT_STL_UTILITIES_DELEGATE_HPP
+#define BIT_STL_UTILITIES_DELEGATE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -205,4 +205,4 @@ namespace bit {
 
 #include "detail/delegate.inl"
 
-#endif /* BIT_STL_DELEGATE_HPP */
+#endif /* BIT_STL_UTILITIES_DELEGATE_HPP */

@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_RANGE_INL
-#define BIT_STL_DETAIL_RANGE_INL
+#ifndef BIT_STL_RANGES_DETAIL_RANGE_INL
+#define BIT_STL_RANGES_DETAIL_RANGE_INL
 
 //------------------------------------------------------------------------
 // Ranges
@@ -119,4 +119,4 @@ inline constexpr auto
   return { begin_iterator{r0.begin(), rn.begin()...}, end_iterator{r0.end(), rn.end()...} };
 }
 
-#endif /* BIT_STL_DETAIL_RANGE_INL */
+#endif /* BIT_STL_RANGES_DETAIL_RANGE_INL */

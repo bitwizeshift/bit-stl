@@ -6,8 +6,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_DETAIL_MEMORY_SCOPED_PTR_HPP
-#define BIT_STL_DETAIL_MEMORY_SCOPED_PTR_HPP
+#ifndef BIT_STL_MEMORY_DETAIL_SCOPED_PTR_HPP
+#define BIT_STL_MEMORY_DETAIL_SCOPED_PTR_HPP
 
 #include <memory>
 
@@ -437,4 +437,4 @@ namespace bit {
 
 #include "scoped_ptr.inl"
 
-#endif /* BIT_STL_DETAIL_MEMORY_SCOPED_PTR_HPP */
+#endif /* BIT_STL_MEMORY_DETAIL_SCOPED_PTR_HPP */

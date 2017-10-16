@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_CIRCULAR_QUEUE_INL
-#define BIT_STL_DETAIL_CIRCULAR_QUEUE_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_CIRCULAR_QUEUE_INL
+#define BIT_STL_CONTAINERS_DETAIL_CIRCULAR_QUEUE_INL
 
 //============================================================================
 // circular_queue
@@ -318,4 +318,4 @@ typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
   return m_storage.buffer.crend();
 }
 
-#endif /* BIT_STL_DETAIL_CIRCULAR_QUEUE_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_CIRCULAR_QUEUE_INL */

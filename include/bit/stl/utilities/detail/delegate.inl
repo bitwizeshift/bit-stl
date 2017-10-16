@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_DELEGATE_INL
-#define BIT_STL_DETAIL_DELEGATE_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_DELEGATE_INL
+#define BIT_STL_UTILITIES_DETAIL_DELEGATE_INL
 
 //----------------------------------------------------------------------------
 // Constructor
@@ -208,4 +208,4 @@ inline bool bit::stl::operator>=(const delegate<Fn>& lhs, const delegate<Fn>& rh
 //  return result.bind<member_function>( instance );
 //}
 
-#endif /* BIT_STL_DETAIL_DELEGATE_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_DELEGATE_INL */

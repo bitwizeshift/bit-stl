@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_STRING_INL
-#define BIT_STL_DETAIL_STRING_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_STRING_INL
+#define BIT_STL_CONTAINERS_DETAIL_STRING_INL
 
 //----------------------------------------------------------------------------
 // Char Traits
@@ -76,4 +76,4 @@ std::size_t bit::stl::hash_value( const std::basic_string<CharT,Traits,Allocator
   return detail::string_hash( str.data(), str.size() );
 }
 
-#endif /* BIT_STL_DETAIL_STRING_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_STRING_INL */

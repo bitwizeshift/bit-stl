@@ -1,4 +1,6 @@
 /**
+ * \file platform/win32.hpp
+ *
  * \brief This header detects features for Windows platforms
  *
  * \note This is an internal header file, included by other library headers.
@@ -20,8 +22,8 @@
  * BIT_PLATFORM_HAS_WINTHREADS  : Defined if platform uses winthreads (default)
  * BIT_PLATFORM_HAS_WINSOCKS    : Defined since platform uses winsocks
  */
-#ifndef BIT_STL_DETAIL_STDDEF_PLATFORM_WIN32_HPP
-#define BIT_STL_DETAIL_STDDEF_PLATFORM_WIN32_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_WIN32_HPP
+#define BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_WIN32_HPP
 
 //-----------------------------------------------------------------------------
 // Platform Detection
@@ -76,4 +78,4 @@
 # define BIT_USE_OGL_API 1
 #endif
 
-#endif /* BIT_STL_DETAIL_STDDEF_PLATFORM_WIN32_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_WIN32_HPP */

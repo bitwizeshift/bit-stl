@@ -5,9 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
-#ifndef BIT_STL_NUMERIC_HPP
-#define BIT_STL_NUMERIC_HPP
+#ifndef BIT_STL_NUMERIC_NUMERIC_HPP
+#define BIT_STL_NUMERIC_NUMERIC_HPP
 
 #include <cstdint>
 #include <type_traits>
@@ -92,4 +91,4 @@ namespace bit {
 
 #include "detail/numeric.inl"
 
-#endif /* BIT_STL_NUMERIC_HPP */
+#endif /* BIT_STL_NUMERIC_NUMERIC_HPP */

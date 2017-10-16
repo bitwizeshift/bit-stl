@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_ITERATOR_INL
-#define BIT_STL_DETAIL_ITERATOR_INL
+#ifndef BIT_STL_ITERATORS_DETAIL_ITERATOR_INL
+#define BIT_STL_ITERATORS_DETAIL_ITERATOR_INL
 
 //------------------------------------------------------------------------
 // Iterator Adapters : make utilities
@@ -26,4 +26,4 @@ inline constexpr bit::stl::tuple_element_iterator<1,Iter>
   return tuple_element_iterator<1,Iter>( iter );
 }
 
-#endif /* BIT_STL_DETAIL_ITERATOR_INL */
+#endif /* BIT_STL_ITERATORS_DETAIL_ITERATOR_INL */

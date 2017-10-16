@@ -7,13 +7,13 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_SPAN_HPP
-#define BIT_STL_SPAN_HPP
+#ifndef BIT_STL_CONTAINERS_SPAN_HPP
+#define BIT_STL_CONTAINERS_SPAN_HPP
 
 // local bit libraries
 #include "../utilities/type_traits.hpp" // ...
 #include "../iterators/iterator.hpp"      // pointer_iterator
-#include "../utilities/assert.hpp"        // BIT_STL_ASSERT
+#include "../utilities/assert.hpp"        // BIT_STL_CONTAINERS_ASSERT
 
 #include <iterator>
 #include <limits>
@@ -668,4 +668,4 @@ namespace bit {
 
 #include "detail/span.inl"
 
-#endif /* BIT_STL_SPAN_HPP */
+#endif /* BIT_STL_CONTAINERS_SPAN_HPP */

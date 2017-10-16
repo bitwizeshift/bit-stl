@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_UUID_INL
-#define BIT_STL_DETAIL_UUID_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_UUID_INL
+#define BIT_STL_UTILITIES_DETAIL_UUID_INL
 
 //----------------------------------------------------------------------------
 // Constructors
@@ -115,4 +115,4 @@ inline bool bit::stl::operator>=( const uuid& lhs, const uuid& rhs )
   return !(lhs < rhs);
 }
 
-#endif /* BIT_STL_DETAIL_UUID_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_UUID_INL */

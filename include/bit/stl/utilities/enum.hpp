@@ -6,8 +6,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_ENUM_HPP
-#define BIT_STL_ENUM_HPP
+#ifndef BIT_STL_UTILITIES_ENUM_HPP
+#define BIT_STL_UTILITIES_ENUM_HPP
 
 #include "type_traits.hpp"
 #include "../containers/string_view.hpp"
@@ -217,4 +217,4 @@ namespace bit {
 
 #include "detail/enum.inl"
 
-#endif /* BIT_STL_ENUM_HPP */
+#endif /* BIT_STL_UTILITIES_ENUM_HPP */

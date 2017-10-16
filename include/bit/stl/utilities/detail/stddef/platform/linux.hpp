@@ -1,4 +1,6 @@
 /**
+ * \file platform/linux.hpp
+ *
  * \brief This header detects features for generic Linux platforms.
  *
  * \note This is an internal header file, included by other library headers.
@@ -14,8 +16,8 @@
  * BIT_PLATFORM_HAS_NANOSLEEP : Defined if the platform supports nanosleep
  * BIT_PLATFORM_HAS_UNISTD_H  : Defined if <unistd.h> exists in the platform
  */
-#ifndef BIT_STL_DETAIL_STDDEF_PLATFORM_LINUX_HPP
-#define BIT_STL_DETAIL_STDDEF_PLATFORM_LINUX_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_LINUX_HPP
+#define BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_LINUX_HPP
 
 //-----------------------------------------------------------------------------
 // Platform Detection
@@ -52,4 +54,4 @@
 # define BIT_USE_OGL_API 1
 #endif
 
-#endif /* BIT_STL_DETAIL_STDDEF_PLATFORM_LINUX_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_LINUX_HPP */

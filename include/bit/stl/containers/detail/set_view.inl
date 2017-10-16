@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_SET_VIEW_INL
-#define BIT_STL_DETAIL_SET_VIEW_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_SET_VIEW_INL
+#define BIT_STL_CONTAINERS_DETAIL_SET_VIEW_INL
 
 //------------------------------------------------------------------------
 // Constructor
@@ -71,4 +71,4 @@ inline bit::stl::set_view<T>::operator bool()
   return m_vtable;
 }
 
-#endif /* BIT_STL_DETAIL_SET_VIEW_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_SET_VIEW_INL */

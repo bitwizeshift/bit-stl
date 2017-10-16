@@ -6,8 +6,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_DETAIL_ITERATOR_RANGE_HPP
-#define BIT_STL_DETAIL_ITERATOR_RANGE_HPP
+#ifndef BIT_STL_RANGES_DETAIL_RANGE_RANGE_HPP
+#define BIT_STL_RANGES_DETAIL_RANGE_RANGE_HPP
 
 #include <utility> // std::move
 
@@ -83,4 +83,4 @@ namespace bit {
 
 #include "range.inl"
 
-#endif /* BIT_STL_DETAIL_ITERATOR_RANGE_HPP */
+#endif /* BIT_STL_RANGES_DETAIL_RANGE_RANGE_HPP */

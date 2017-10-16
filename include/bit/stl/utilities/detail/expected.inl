@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_EXPECTED_INL
-#define BIT_STL_DETAIL_EXPECTED_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_EXPECTED_INL
+#define BIT_STL_UTILITIES_DETAIL_EXPECTED_INL
 
 //============================================================================
 // expected<T>
@@ -941,4 +941,4 @@ inline constexpr std::size_t bit::stl::hash_value( const expected<void>& val )
   return 0;
 }
 
-#endif /* BIT_STL_DETAIL_EXPECTED_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_EXPECTED_INL */

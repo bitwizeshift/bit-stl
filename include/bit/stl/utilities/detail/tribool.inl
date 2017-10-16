@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_TRIBOOL_INL
-#define BIT_STL_DETAIL_TRIBOOL_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_TRIBOOL_INL
+#define BIT_STL_UTILITIES_DETAIL_TRIBOOL_INL
 
 //----------------------------------------------------------------------------
 // Constructors
@@ -131,4 +131,4 @@ inline constexpr bit::stl::tribool
   return tribool(indeterminate);
 }
 
-#endif /* BIT_STL_DETAIL_TRIBOOL_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_TRIBOOL_INL */

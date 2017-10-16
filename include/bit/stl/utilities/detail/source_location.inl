@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_SOURCE_LOCATION_INL
-#define BIT_STL_DETAIL_SOURCE_LOCATION_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_SOURCE_LOCATION_INL
+#define BIT_STL_UTILITIES_DETAIL_SOURCE_LOCATION_INL
 
 //============================================================================
 // Inline Definitions
@@ -62,4 +62,4 @@ inline constexpr bit::stl::string_view
 
 
 
-#endif /* BIT_STL_DETAIL_SOURCE_LOCATION_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_SOURCE_LOCATION_INL */

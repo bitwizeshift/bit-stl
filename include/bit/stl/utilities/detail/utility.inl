@@ -1,5 +1,5 @@
-#ifndef BFSTL_DETAIL_UTILITY_INL
-#define BFSTL_DETAIL_UTILITY_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_UTILITY_INL
+#define BIT_STL_UTILITIES_DETAIL_UTILITY_INL
 
 template<typename T>
 inline constexpr decltype(auto) bit::stl::fwd(T&& x)
@@ -450,4 +450,4 @@ bit::stl::underlying_container_type_t<Container>&
 //  detail::for_each_type_impl<TypeList>::invoke( std::forward<Functor>(functor), std::forward<Args>(args)... );
 //}
 
-#endif /* BFSTL_DETAIL_UTILITY_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_UTILITY_INL */

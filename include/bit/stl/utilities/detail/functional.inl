@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_FUNCTIONAL_INL
-#define BIT_STL_DETAIL_FUNCTIONAL_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_FUNCTIONAL_INL
+#define BIT_STL_UTILITIES_DETAIL_FUNCTIONAL_INL
 
 namespace bit {
   namespace stl {
@@ -13,4 +13,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_DETAIL_FUNCTIONAL_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_FUNCTIONAL_INL */

@@ -5,9 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
-#ifndef BIT_STL_UTILITY_HPP
-#define BIT_STL_UTILITY_HPP
+#ifndef BIT_STL_UTILITIES_UTILITY_HPP
+#define BIT_STL_UTILITIES_UTILITY_HPP
 
 // bit::stl libraries
 #include "type_traits.hpp"
@@ -583,4 +582,4 @@ namespace bit {
 
 #include "detail/utility.inl"
 
-#endif /* BIT_STL_UTILITY_HPP */
+#endif /* BIT_STL_UTILITIES_UTILITY_HPP */

@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_MEMORY_INDIRECT_PTR_INL
-#define BIT_STL_DETAIL_MEMORY_INDIRECT_PTR_INL
+#ifndef BIT_STL_MEMORY_DETAIL_INDIRECT_PTR_INL
+#define BIT_STL_MEMORY_DETAIL_INDIRECT_PTR_INL
 
 //----------------------------------------------------------------------------
 // Constructor
@@ -196,4 +196,4 @@ inline bool bit::stl::operator>=( const indirect_ptr<T>& lhs,
   return lhs.get() >= rhs.get();
 }
 
-#endif /* BIT_STL_DETAIL_MEMORY_INDIRECT_PTR_INL */
+#endif /* BIT_STL_MEMORY_DETAIL_INDIRECT_PTR_INL */

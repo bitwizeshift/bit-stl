@@ -7,8 +7,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_EXPECTED_HPP
-#define BIT_STL_EXPECTED_HPP
+#ifndef BIT_STL_UTILITIES_EXPECTED_HPP
+#define BIT_STL_UTILITIES_EXPECTED_HPP
 
 #include "utility.hpp"
 
@@ -701,4 +701,4 @@ namespace bit {
 
 #include "detail/expected.inl"
 
-#endif /* BIT_STL_EXPECTED_HPP */
+#endif /* BIT_STL_UTILITIES_EXPECTED_HPP */

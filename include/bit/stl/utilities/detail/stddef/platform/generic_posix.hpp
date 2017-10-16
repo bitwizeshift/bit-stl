@@ -1,4 +1,6 @@
 /**
+ * \file platform/generic_posix.hpp
+ *
  * \brief This header detects features of generic Posix systems.
  *
  * \note This is an internal header file, included by other library headers.
@@ -16,8 +18,8 @@
  * BIT_PLATFORM_HAS_POSIX_MEMALIGN : Defined if platform has posix_memalign
  * BIT_PLATFORM_HAS_ALIGNED_ALLOC  : Defined if platform has c11's aligned_alloc
  */
-#ifndef BIT_STL_DETAIL_STDDEF_PLATFORM_GENERIC_POSIX_HPP
-#define BIT_STL_DETAIL_STDDEF_PLATFORM_GENERIC_POSIX_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_GENERIC_POSIX_HPP
+#define BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_GENERIC_POSIX_HPP
 
 #ifdef BIT_PLATFORM_HAS_UNISTD_H
 # include <unistd.h>
@@ -113,4 +115,4 @@
 
 #endif // BIT_PLATFORM_HAS_UNISTD_H
 
-#endif /* BIT_STL_DETAIL_STDDEF_PLATFORM_GENERIC_POSIX_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_GENERIC_POSIX_HPP */

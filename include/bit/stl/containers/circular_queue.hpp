@@ -7,8 +7,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_CIRCULAR_QUEUE_HPP
-#define BIT_STL_CIRCULAR_QUEUE_HPP
+#ifndef BIT_STL_CONTAINERS_CIRCULAR_QUEUE_HPP
+#define BIT_STL_CONTAINERS_CIRCULAR_QUEUE_HPP
 
 #include "circular_buffer.hpp"
 
@@ -278,4 +278,4 @@ namespace bit {
 
 #include "detail/circular_queue.inl"
 
-#endif /* BIT_STL_CIRCULAR_QUEUE_HPP */
+#endif /* BIT_STL_CONTAINERS_CIRCULAR_QUEUE_HPP */

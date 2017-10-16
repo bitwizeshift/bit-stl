@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_STRING_SPAN_INL
-#define BIT_STL_DETAIL_STRING_SPAN_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_STRING_SPAN_INL
+#define BIT_STL_CONTAINERS_DETAIL_STRING_SPAN_INL
 
 //============================================================================
 // basic_string_span
@@ -393,4 +393,4 @@ inline constexpr typename bit::stl::basic_zstring_span<CharT,Traits,Extent>::con
   return this->data();
 }
 
-#endif /* BIT_STL_DETAIL_STRING_SPAN_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_STRING_SPAN_INL */

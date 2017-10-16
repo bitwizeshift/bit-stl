@@ -6,8 +6,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_CHECKED_HPP
-#define BIT_STL_CHECKED_HPP
+#ifndef BIT_STL_UTILITIES_CHECKED_HPP
+#define BIT_STL_UTILITIES_CHECKED_HPP
 
 #define BIT_NODISCARD __attribute__((warn_unused_result))
 
@@ -536,4 +536,4 @@ namespace bit {
 
 #include "detail/checked.inl"
 
-#endif /* BIT_STL_CHECKED_HPP */
+#endif /* BIT_STL_UTILITIES_CHECKED_HPP */

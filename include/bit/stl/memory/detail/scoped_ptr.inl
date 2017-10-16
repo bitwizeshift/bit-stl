@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_MEMORY_SCOPED_PTR_INL
-#define BIT_STL_DETAIL_MEMORY_SCOPED_PTR_INL
+#ifndef BIT_STL_MEMORY_DETAIL_SCOPED_PTR_INL
+#define BIT_STL_MEMORY_DETAIL_SCOPED_PTR_INL
 
 //============================================================================
 // scoped_ptr<T>
@@ -537,4 +537,4 @@ inline constexpr bool bit::stl::operator>=( const scoped_ptr<T>& lhs,
   return lhs.get() >= nullptr;
 }
 
-#endif /* BIT_STL_DETAIL_MEMORY_SCOPED_PTR_INL */
+#endif /* BIT_STL_MEMORY_DETAIL_SCOPED_PTR_INL */

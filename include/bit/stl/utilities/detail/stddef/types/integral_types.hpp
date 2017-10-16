@@ -6,16 +6,15 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_DETAIL_STDDEF_TYPES_INTEGRAL_TYPES_HPP
-#define BIT_STL_DETAIL_STDDEF_TYPES_INTEGRAL_TYPES_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_TYPES_INTEGRAL_TYPES_HPP
+#define BIT_STL_UTILITIES_DETAIL_STDDEF_TYPES_INTEGRAL_TYPES_HPP
 
 // Prevent pedantic errors for __int128
 #if defined(__GNUC__) && (__GNUC__ >= 4)
 #  pragma GCC system_header
 #endif
 
-#include <cstdint>
-#include <cstddef> // for std::size_t and std::ptrdiff_t
+#include <cstdint> // std::int8_t, std::int16_t, etc
 
 namespace bit {
   namespace stl {
@@ -67,4 +66,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_DETAIL_STDDEF_TYPES_INTEGRAL_TYPES_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_TYPES_INTEGRAL_TYPES_HPP */

@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_ITERATOR_ZIP_ITERATOR_INL
-#define BIT_STL_DETAIL_ITERATOR_ZIP_ITERATOR_INL
+#ifndef BIT_STL_ITERATORS_DETAIL_ZIP_ITERATOR_INL
+#define BIT_STL_ITERATORS_DETAIL_ZIP_ITERATOR_INL
 
 //============================================================================
 // zip_iterator
@@ -237,4 +237,4 @@ inline constexpr void bit::stl::zip_iterator<InputIterators...>
   --std::get<Idx>(m_storage);
 }
 
-#endif /* BIT_STL_DETAIL_ITERATOR_ZIP_ITERATOR_INL */
+#endif /* BIT_STL_ITERATORS_DETAIL_ZIP_ITERATOR_INL */

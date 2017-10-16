@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_STRING_VIEW_INL
-#define BIT_STL_DETAIL_STRING_VIEW_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_STRING_VIEW_INL
+#define BIT_STL_CONTAINERS_DETAIL_STRING_VIEW_INL
 
 //============================================================================
 // basic_string_view
@@ -1184,4 +1184,4 @@ inline std::basic_string<CharT,Traits,Allocator>&
   return lhs.append(rhs.data(),rhs.size());
 }
 
-#endif /* BIT_STL_DETAIL_STRING_VIEW_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_STRING_VIEW_INL */

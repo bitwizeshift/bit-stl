@@ -7,8 +7,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_LAZY_HPP
-#define BIT_STL_LAZY_HPP
+#ifndef BIT_STL_UTILITIES_LAZY_HPP
+#define BIT_STL_UTILITIES_LAZY_HPP
 
 #include "type_traits.hpp"
 #include "functional.hpp"
@@ -663,4 +663,4 @@ namespace bit {
 
 #include "detail/lazy.inl"
 
-#endif /* BIT_STL_LAZY_HPP */
+#endif /* BIT_STL_UTILITIES_LAZY_HPP */

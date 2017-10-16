@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_ARRAY_INL
-#define BIT_STL_DETAIL_ARRAY_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_ARRAY_INL
+#define BIT_STL_CONTAINERS_DETAIL_ARRAY_INL
 
 template<typename T, typename...Args>
 inline constexpr bit::stl::detail::array_return_type_t<T,Args...>
@@ -41,4 +41,4 @@ inline constexpr std::array<T,N> bit::stl::to_array( T(&&array)[N] )
 }
 
 
-#endif /* BIT_STL_DETAIL_ARRAY_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_ARRAY_INL */

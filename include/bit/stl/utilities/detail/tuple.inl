@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_TUPLE_INL
-#define BIT_STL_DETAIL_TUPLE_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_TUPLE_INL
+#define BIT_STL_UTILITIES_DETAIL_TUPLE_INL
 
 namespace bit {
   namespace stl {
@@ -33,4 +33,4 @@ constexpr T bit::stl::make_from_tuple( Tuple&& tuple )
   return detail::make_from_tuple<T>( std::forward<Tuple>(tuple), std::make_index_sequence<std::tuple_size<std::decay_t<Tuple>>::value>() );
 }
 
-#endif /* BIT_STL_DETAIL_TUPLE_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_TUPLE_INL */

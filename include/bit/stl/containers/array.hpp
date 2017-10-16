@@ -6,8 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_ARRAY_HPP
-#define BIT_STL_ARRAY_HPP
+#ifndef BIT_STL_CONTAINERS_ARRAY_HPP
+#define BIT_STL_CONTAINERS_ARRAY_HPP
 
 #include <array>   // std::array
 #include <utility> // std::forward
@@ -70,4 +70,4 @@ namespace bit {
 
 #include "detail/array.inl"
 
-#endif /* BIT_STL_ARRAY_HPP */
+#endif /* BIT_STL_CONTAINERS_ARRAY_HPP */

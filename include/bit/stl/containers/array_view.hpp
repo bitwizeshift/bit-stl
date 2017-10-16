@@ -7,8 +7,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_ARRAY_VIEW_HPP
-#define BIT_STL_ARRAY_VIEW_HPP
+#ifndef BIT_STL_CONTAINERS_ARRAY_VIEW_HPP
+#define BIT_STL_CONTAINERS_ARRAY_VIEW_HPP
 
 #include "../utilities/type_traits.hpp" // bool_constant
 #include "../iterators/iterator.hpp"    // pointer_iterator
@@ -292,4 +292,4 @@ namespace bit {
 
 #include "detail/array_view.inl"
 
-#endif /* BIT_STL_ARRAY_VIEW_HPP */
+#endif /* BIT_STL_CONTAINERS_ARRAY_VIEW_HPP */

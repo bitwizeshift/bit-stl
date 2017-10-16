@@ -1,4 +1,6 @@
 /**
+ * \file macros.hpp
+ *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
@@ -25,8 +27,8 @@
  * BIT_VA_ARGS(...)      : Portable way of passing variadic arguments without a trailing comma on empty input
  * BIT_EMPTY             : Empty symbol for passing to macro parameters to avoid warnings
  */
-#ifndef BIT_STL_DETAIL_STDDEF_MACROS_HPP
-#define BIT_STL_DETAIL_STDDEF_MACROS_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_MACROS_HPP
+#define BIT_STL_UTILITIES_DETAIL_STDDEF_MACROS_HPP
 
 //! \def BIT_STRINGIZE(a)
 //!
@@ -450,4 +452,4 @@
 
 #define BIT_NAMESPACE_END(...) BIT_JOIN(BIT_NAMESPACE_END_, BIT_COUNT_VA_ARGS(__VA_ARGS__))(__VA_ARGS__)
 
-#endif /* BIT_STL_DETAIL_STDDEF_MACROS_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_MACROS_HPP */

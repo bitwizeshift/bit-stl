@@ -6,8 +6,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_STRING_HPP
-#define BIT_STL_STRING_HPP
+#ifndef BIT_STL_CONTAINERS_STRING_HPP
+#define BIT_STL_CONTAINERS_STRING_HPP
 
 #include "detail/string_hash.hpp"
 
@@ -57,4 +57,4 @@ namespace bit {
 
 #include "detail/string.inl"
 
-#endif /* BIT_STL_STRING_HPP */
+#endif /* BIT_STL_CONTAINERS_STRING_HPP */

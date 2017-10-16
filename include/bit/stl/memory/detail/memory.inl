@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_MEMORY_INL
-#define BIT_STL_DETAIL_MEMORY_INL
+#ifndef BIT_STL_MEMORY_DETAIL_INL
+#define BIT_STL_MEMORY_DETAIL_INL
 
 template<typename InputIterator>
 constexpr auto bit::stl::address_from( InputIterator& it ) noexcept
@@ -233,4 +233,4 @@ inline constexpr bool deep_compare( std::nullptr_t, std::nullptr_t )
   return true;
 }
 
-#endif /* BIT_STL_DETAIL_MEMORY_INL */
+#endif /* BIT_STL_MEMORY_DETAIL_INL */

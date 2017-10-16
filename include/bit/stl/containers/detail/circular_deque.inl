@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_CIRCULAR_DEQUE_INL
-#define BIT_STL_DETAIL_CIRCULAR_DEQUE_INL
+#ifndef BIT_STL_CONTAINERS_DETAIL_CIRCULAR_DEQUE_INL
+#define BIT_STL_CONTAINERS_DETAIL_CIRCULAR_DEQUE_INL
 
 //============================================================================
 // circular_deque
@@ -352,4 +352,4 @@ typename bit::stl::circular_deque<T,Allocator>::const_reverse_iterator
   return m_storage.buffer.crend();
 }
 
-#endif /* BIT_STL_DETAIL_CIRCULAR_DEQUE_INL */
+#endif /* BIT_STL_CONTAINERS_DETAIL_CIRCULAR_DEQUE_INL */

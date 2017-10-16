@@ -7,9 +7,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-
-#ifndef BIT_STL_DETAIL_UTILITY_COMPRESSED_PAIR_HPP
-#define BIT_STL_DETAIL_UTILITY_COMPRESSED_PAIR_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_HPP
+#define BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_HPP
 
 #include <type_traits>
 
@@ -366,4 +365,4 @@ namespace bit {
 
 #include "compressed_pair.inl"
 
-#endif /* BIT_STL_DETAIL_UTILITY_COMPRESSED_PAIR_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_HPP */

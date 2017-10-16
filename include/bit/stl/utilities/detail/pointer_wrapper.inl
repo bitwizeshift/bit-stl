@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_POINTER_WRAPPER_INL
-#define BIT_STL_DETAIL_POINTER_WRAPPER_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_POINTER_WRAPPER_INL
+#define BIT_STL_UTILITIES_DETAIL_POINTER_WRAPPER_INL
 
 //----------------------------------------------------------------------------
 // Constructors
@@ -131,4 +131,4 @@ bit::stl::pointer_wrapper<T> bit::stl::make_pointer_wrapper( Args&&...args )
   return pointer_wrapper<T>( in_place, std::forward<Args>(args)... );
 }
 
-#endif /* BIT_STL_DETAIL_POINTER_WRAPPER_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_POINTER_WRAPPER_INL */

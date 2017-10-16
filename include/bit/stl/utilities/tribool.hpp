@@ -5,9 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
-#ifndef BIT_STL_TRIBOOL_HPP
-#define BIT_STL_TRIBOOL_HPP
+#ifndef BIT_STL_UTILITIES_TRIBOOL_HPP
+#define BIT_STL_UTILITIES_TRIBOOL_HPP
 
 #include <cstdlib>
 
@@ -176,4 +175,4 @@ namespace bit {
 
 #include "detail/tribool.inl"
 
-#endif /* BIT_STL_TRIBOOL_HPP */
+#endif /* BIT_STL_UTILITIES_TRIBOOL_HPP */

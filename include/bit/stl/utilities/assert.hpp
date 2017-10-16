@@ -6,8 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_ASSERT_HPP
-#define BIT_STL_ASSERT_HPP
+#ifndef BIT_STL_UTILITIES_ASSERT_HPP
+#define BIT_STL_UTILITIES_ASSERT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -170,4 +170,4 @@ namespace bit {
 #  define BIT_SANITY_CHECK(a,b)
 #endif
 
-#endif /* BIT_STL_ASSERT_HPP */
+#endif /* BIT_STL_UTILITIES_ASSERT_HPP */

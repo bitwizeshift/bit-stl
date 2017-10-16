@@ -7,8 +7,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_DETAIL_MEMORY_CLONE_PTR_HPP
-#define BIT_STL_DETAIL_MEMORY_CLONE_PTR_HPP
+#ifndef BIT_STL_MEMORY_DETAIL_CLONE_PTR_HPP
+#define BIT_STL_MEMORY_DETAIL_CLONE_PTR_HPP
 
 #include "../../utilities/utility.hpp"
 
@@ -1031,4 +1031,4 @@ bit::stl::clone_ptr<To>
   return { tag_type{}, block, ptr };
 }
 
-#endif /* BIT_STL_DETAIL_MEMORY_CLONE_PTR_HPP */
+#endif /* BIT_STL_MEMORY_DETAIL_CLONE_PTR_HPP */

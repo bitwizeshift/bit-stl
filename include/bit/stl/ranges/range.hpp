@@ -5,9 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
-#ifndef BIT_STL_RANGE_HPP
-#define BIT_STL_RANGE_HPP
+#ifndef BIT_STL_RANGES_RANGE_HPP
+#define BIT_STL_RANGES_RANGE_HPP
 
 #include "../iterators/iterator.hpp"
 
@@ -146,4 +145,4 @@ namespace bit {
 
 #include "detail/range.inl"
 
-#endif /* BIT_STL_RANGE_HPP */
+#endif /* BIT_STL_RANGES_RANGE_HPP */

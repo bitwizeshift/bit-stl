@@ -6,8 +6,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_MAP_VIEW_HPP
-#define BIT_STL_MAP_VIEW_HPP
+#ifndef BIT_STL_CONTAINERS_MAP_VIEW_HPP
+#define BIT_STL_CONTAINERS_MAP_VIEW_HPP
 
 // local bit::stl
 #include "detail/associative_vtables.hpp" // IWYU pragma: export
@@ -150,4 +150,4 @@ namespace bit {
 
 #include "detail/map_view.inl"
 
-#endif /* BIT_STL_MAP_VIEW_HPP */
+#endif /* BIT_STL_CONTAINERS_MAP_VIEW_HPP */

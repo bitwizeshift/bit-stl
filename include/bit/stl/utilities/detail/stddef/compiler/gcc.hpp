@@ -1,12 +1,13 @@
 /**
+ * \file compiler/gcc.hpp
+ *
  * \brief This header detects compiler-specific features for GCC
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-
-#ifndef BIT_STL_DETAIL_STDDEF_COMPILER_GCC_HPP
-#define BIT_STL_DETAIL_STDDEF_COMPILER_GCC_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_GCC_HPP
+#define BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_GCC_HPP
 
 //-----------------------------------------------------------------------------
 // Compiler Detection
@@ -213,4 +214,4 @@
 #  define BIT_COMPILER_SYMBOL_LOCAL
 #endif
 
-#endif /* BIT_STL_DETAIL_STDDEF_COMPILER_GCC_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_GCC_HPP */

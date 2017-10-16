@@ -6,8 +6,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_CIRCULAR_BUFFER_HPP
-#define BIT_STL_CIRCULAR_BUFFER_HPP
+#ifndef BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP
+#define BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP
 
 #include "../memory/memory.hpp" // stl::destroy_at
 
@@ -428,4 +428,4 @@ namespace bit {
 
 #include "detail/circular_buffer.inl"
 
-#endif /* BIT_STL_CIRCULAR_BUFFER_HPP */
+#endif /* BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP */

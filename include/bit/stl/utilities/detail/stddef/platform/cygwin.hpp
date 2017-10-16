@@ -1,9 +1,12 @@
 /**
+ * \file platform/cygwin.hpp
+ *
  * \brief This header detects features for the Cygwin platform
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
+
 /*
  * Symbols Defined:
  *
@@ -15,8 +18,8 @@
  * BIT_PLATFORM_HAS_WINTHREADS    : Defined if platform supports winthreads
  * BIT_PLATFORM_HAS_STDINT_H      : Defined if <stdint.h> exists in the platform
  */
-#ifndef BIT_STL_DETAIL_STDDEF_PLATFORM_CYGWIN_HPP
-#define BIT_STL_DETAIL_STDDEF_PLATFORM_CYGWIN_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_CYGWIN_HPP
+#define BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_CYGWIN_HPP
 
 //-----------------------------------------------------------------------------
 // Platform Detection
@@ -68,4 +71,4 @@
 # define BIT_USE_OGL_API 1
 #endif
 
-#endif /* BIT_STL_DETAIL_STDDEF_PLATFORM_CYGWIN_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_CYGWIN_HPP */

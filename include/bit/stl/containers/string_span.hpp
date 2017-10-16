@@ -6,8 +6,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_STRING_SPAN_HPP
-#define BIT_STL_STRING_SPAN_HPP
+#ifndef BIT_STL_CONTAINERS_STRING_SPAN_HPP
+#define BIT_STL_CONTAINERS_STRING_SPAN_HPP
 
 #include "span.hpp"
 
@@ -494,4 +494,4 @@ namespace bit {
 
 #include "detail/string_span.inl"
 
-#endif /* BIT_STL_STRING_SPAN_HPP */
+#endif /* BIT_STL_CONTAINERS_STRING_SPAN_HPP */

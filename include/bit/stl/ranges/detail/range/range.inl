@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_ITERATOR_RANGE_INL
-#define BIT_STL_DETAIL_ITERATOR_RANGE_INL
+#ifndef BIT_STL_RANGES_DETAIL_RANGE_RANGE_INL
+#define BIT_STL_RANGES_DETAIL_RANGE_RANGE_INL
 
 //------------------------------------------------------------------------
 // Constructor
@@ -32,4 +32,4 @@ constexpr typename bit::stl::range<I,S>::sentinel
   return m_last;
 }
 
-#endif /* BIT_STL_DETAIL_ITERATOR_RANGE_INL */
+#endif /* BIT_STL_RANGES_DETAIL_RANGE_RANGE_INL */

@@ -7,8 +7,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_TYPE_TRAITS_HPP
-#define BIT_STL_TYPE_TRAITS_HPP
+#ifndef BIT_STL_UTILITIES_TYPE_TRAITS_HPP
+#define BIT_STL_UTILITIES_TYPE_TRAITS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -27,4 +27,4 @@
 #include "detail/type_traits/type_transformations.hpp"
 #include "detail/type_traits/type_relationships.hpp"
 
-#endif /* BIT_STL_TYPE_TRAITS_HPP */
+#endif /* BIT_STL_UTILITIES_TYPE_TRAITS_HPP */

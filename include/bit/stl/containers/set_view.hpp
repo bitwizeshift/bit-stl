@@ -5,8 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_SET_VIEW_HPP
-#define BIT_STL_SET_VIEW_HPP
+#ifndef BIT_STL_CONTAINERS_SET_VIEW_HPP
+#define BIT_STL_CONTAINERS_SET_VIEW_HPP
 
 #include "detail/associative_vtables.hpp" // IWYU pragma: export
 
@@ -137,4 +137,4 @@ namespace bit {
 
 #include "detail/set_view.inl"
 
-#endif /* BIT_STL_SET_VIEW_HPP */
+#endif /* BIT_STL_CONTAINERS_SET_VIEW_HPP */

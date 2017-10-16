@@ -6,8 +6,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_CIRCULAR_ARRAY_HPP
-#define BIT_STL_CIRCULAR_ARRAY_HPP
+#ifndef BIT_STL_CONTAINERS_CIRCULAR_ARRAY_HPP
+#define BIT_STL_CONTAINERS_CIRCULAR_ARRAY_HPP
 
 #include "circular_buffer.hpp"
 
@@ -276,4 +276,4 @@ namespace bit {
 
 #include "detail/circular_array.inl"
 
-#endif /* BIT_STL_CIRCULAR_ARRAY_HPP */
+#endif /* BIT_STL_CONTAINERS_CIRCULAR_ARRAY_HPP */

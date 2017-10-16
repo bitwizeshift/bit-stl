@@ -4,23 +4,26 @@
  * \brief This header is mostly taken from Microsoft's implementation of
  *        the GSL byte-type.
  *
- * \note This is an internal header file, included by other library headers.
- *       Do not attempt to use it directly.
+ * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_DETAIL_STDDEF_TYPES_BYTE_HPP
-#define BIT_STL_DETAIL_STDDEF_TYPES_BYTE_HPP
+#ifndef BIT_STL_UTILITIES_BYTE_HPP
+#define BIT_STL_UTILITIES_BYTE_HPP
 
-#include <type_traits>
+#include <type_traits> // std::is_integral, std::enable_if_t, etc
 
 namespace bit {
   namespace stl {
 
     /// \brief Unsigned byte type
+    ///
+    /// \note Due to a restriction in pre-C++-17, a conversion to a pointer of
+    ///       byte types results in undefined behavior due to a violation of
+    ///       strict-aliasing.
     enum class byte : unsigned char{};
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Byte Operators
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
 #ifndef BIT_DOXYGEN_BUILD
     template<typename IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
@@ -110,4 +113,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_DETAIL_STDDEF_TYPES_BYTE_HPP */
+#endif /* BIT_STL_UTILITIES_BYTE_HPP */

@@ -6,8 +6,8 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#ifndef BIT_STL_HASHED_STRING_HPP
-#define BIT_STL_HASHED_STRING_HPP
+#ifndef BIT_STL_CONTAINERS_HASHED_STRING_HPP
+#define BIT_STL_CONTAINERS_HASHED_STRING_HPP
 
 #include "string.hpp"             // bit::stl::hash_value
 #include "hashed_string_view.hpp" // bit::stl::hashed_string_view
@@ -298,4 +298,4 @@ namespace bit {
 
 #include "detail/hashed_string.inl"
 
-#endif /* BIT_STL_HASHED_STRING_HPP */
+#endif /* BIT_STL_CONTAINERS_HASHED_STRING_HPP */
