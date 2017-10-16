@@ -15,8 +15,9 @@
 #include "../iterators/tagged_iterator.hpp" // tagged_iterator
 #include "../utilities/assert.hpp"          // BIT_STL_CONTAINERS_ASSERT
 
-#include <iterator>
-#include <limits>
+#include <iterator>  //
+#include <limits>    //
+#include <algorithm> // std::min, std::max
 
 
 namespace bit {
