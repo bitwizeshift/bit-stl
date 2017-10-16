@@ -95,7 +95,11 @@ set(headers
   include/bit/stl/iterators/zip_iterator.hpp
 
   # ranges
+  include/bit/stl/ranges/move_range.hpp
   include/bit/stl/ranges/range.hpp
+  include/bit/stl/ranges/reverse_range.hpp
+  include/bit/stl/ranges/tuple_element_range.hpp
+  include/bit/stl/ranges/zip_range.hpp
 
   # memory
   include/bit/stl/memory/memory.hpp
