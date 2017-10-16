@@ -4,11 +4,16 @@
  * \brief This header contains a utility for propagating const to pointer
  *        types
  *
- * \note This is an internal header file, included by other library headers.
- *       Do not attempt to use it directly.
+ * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_UTILITIES_DETAIL_UTILITY_PROPAGATE_CONST_HPP
-#define BIT_STL_UTILITIES_DETAIL_UTILITY_PROPAGATE_CONST_HPP
+#ifndef BIT_STL_UTILITIES_PROPAGATE_CONST_HPP
+#define BIT_STL_UTILITIES_PROPAGATE_CONST_HPP
+
+// TODO(bitwizeshift): Finish implementing
+
+#include "type_traits.hpp" // conjunction, negation, etc
+
+#include <type_traits> // std::remove_reference_t, etc
 
 namespace bit {
   namespace stl {
@@ -127,4 +132,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_UTILITIES_DETAIL_UTILITY_PROPAGATE_CONST_HPP */
+#endif /* BIT_STL_UTILITIES_PROPAGATE_CONST_HPP */

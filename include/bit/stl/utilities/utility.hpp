@@ -16,10 +16,6 @@
 #include <utility>     // for std::forward
 #include <stdexcept>   // for std::out_of_range
 
-// IWYU pragma: begin_exports
-#include "detail/propagate_const.hpp"
-// IWYU pragma: end_exports
-
 namespace bit {
   namespace stl {
     namespace detail {

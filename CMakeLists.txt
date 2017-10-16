@@ -67,6 +67,7 @@ set(headers
   include/bit/stl/utilities/lazy.hpp
   include/bit/stl/utilities/optional.hpp
   include/bit/stl/utilities/pointer_wrapper.hpp
+  include/bit/stl/utilities/propagate_const.hpp
   include/bit/stl/utilities/source_location.hpp
   include/bit/stl/utilities/stddef.hpp
   include/bit/stl/utilities/tribool.hpp
