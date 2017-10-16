@@ -1,18 +1,16 @@
 /**
- * \file functional.hpp
+ * \file invoke.hpp
  *
- * \brief This header contains c++17 extensions of the functional library
+ * \brief TODO: Add description
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
+#ifndef BIT_STL_UTILITIES_INVOKE_HPP
+#define BIT_STL_UTILITIES_INVOKE_HPP
 
-#ifndef BIT_STL_UTILITIES_FUNCTIONAL_HPP
-#define BIT_STL_UTILITIES_FUNCTIONAL_HPP
+#include <utility> // std::forward
 
-// std library
-#include <functional>  // for std::function
-
-#include "detail/invoke.hpp"
+#include "detail/invoke.hpp" // detail::INVOKE
 
 namespace bit {
   namespace stl {
@@ -31,6 +29,6 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#include "detail/functional.inl"
+#include "detail/invoke.inl"
 
-#endif /* BIT_STL_UTILITIES_FUNCTIONAL_HPP */
+#endif /* BIT_STL_UTILITIES_INVOKE_HPP */

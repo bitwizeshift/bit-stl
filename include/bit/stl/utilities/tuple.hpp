@@ -9,9 +9,6 @@
 #ifndef BIT_STL_UTILITIES_TUPLE_HPP
 #define BIT_STL_UTILITIES_TUPLE_HPP
 
-// local bfstd library
-#include "functional.hpp"
-
 #include <cstddef> // for std::size_t
 #include <tuple>   // for std::tuple
 #include <utility> // for std::forward

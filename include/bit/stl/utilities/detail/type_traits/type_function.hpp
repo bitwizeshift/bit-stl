@@ -199,7 +199,7 @@ namespace bit {
       {
         template<typename Fn2, typename...Args2>
         static auto test( Fn2&&, Args2&&... )
-          -> decltype(invoke_impl(std::declval<Fn2>(), std::declval<Args2>()...), std::true_type{});
+          -> decltype(INVOKE(std::declval<Fn2>(), std::declval<Args2>()...), std::true_type{});
 
         static auto test(...)
           -> std::false_type;

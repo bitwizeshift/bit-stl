@@ -29,7 +29,7 @@ namespace bit {
       auto INVOKE(T Base::*pmf, Derived&& ref, Args&&... args)
         noexcept(noexcept((std::forward<Derived>(ref).*pmf)(std::forward<Args>(args)...)))
         -> std::enable_if_t<std::is_function<T>::value &&
-                           std::is_base_of<Base, std::decay_t<Derived>>::value,
+                            std::is_base_of<Base, std::decay_t<Derived>>::value,
            decltype((std::forward<Derived>(ref).*pmf)(std::forward<Args>(args)...))>
       {
         return (std::forward<Derived>(ref).*pmf)(std::forward<Args>(args)...);

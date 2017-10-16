@@ -63,10 +63,10 @@ set(headers
   include/bit/stl/utilities/delegate.hpp
   include/bit/stl/utilities/enum.hpp
   include/bit/stl/utilities/expected.hpp
-  include/bit/stl/utilities/functional.hpp
   include/bit/stl/utilities/final_act.hpp
   include/bit/stl/utilities/hash.hpp
   include/bit/stl/utilities/in_place.hpp
+  include/bit/stl/utilities/invoke.hpp
   include/bit/stl/utilities/lazy.hpp
   include/bit/stl/utilities/optional.hpp
   include/bit/stl/utilities/pointer_wrapper.hpp

@@ -13,11 +13,12 @@
 #endif
 
 // bit::stl local libraries
-#include "stddef.hpp"
-#include "assert.hpp"
-#include "functional.hpp"
+#include "stddef.hpp"      //
+#include "assert.hpp"      // BIT_ASSERT
+#include "type_traits.hpp" // is_invokable
 
-#include <utility>
+#include <type_traits> // std::enable_if
+#include <utility>     // std::forward, std::move
 
 namespace bit {
   namespace stl {
@@ -135,11 +136,11 @@ namespace bit {
       ///
       /// \param args the arguments for the invokation
       /// \return the return value for the invoked delegate
-      template<typename...Args, typename = std::enable_if_t<std::is_convertible<std::tuple<Args...>,std::tuple<Types...>>::value>>
+      template<typename...Args, typename = std::enable_if_t<is_invokable<R(Types...),Args...>::value>>
       constexpr return_type invoke( Args&&...args ) const;
 
       /// \copydoc delegate::invoke( Args&&... )
-      template<typename...Args, typename = std::enable_if_t<std::is_convertible<std::tuple<Args...>,std::tuple<Types...>>::value>>
+      template<typename...Args, typename = std::enable_if_t<is_invokable<R(Types...),Args...>::value>>
       constexpr return_type operator()( Args&&...args ) const;
 
       //-----------------------------------------------------------------------------
@@ -147,7 +148,7 @@ namespace bit {
       //-----------------------------------------------------------------------------
     private:
 
-      using internal_function_type = return_type (*)(void*, Types...);
+      using internal_function_type = return_type(*)(void*, Types...);
       using stub_type              = std::pair<void*, internal_function_type>;
 
       //-----------------------------------------------------------------------------

@@ -11,8 +11,9 @@
 
 #include "in_place.hpp" // in_place_t
 
-#include <type_traits>
-#include <utility>
+#include <type_traits> // std::remove_extent_t, std::enable_if_t, etc
+#include <utility>     // std::move, std::forward
+#include <memory>      // std::addressof
 
 namespace bit {
   namespace stl {

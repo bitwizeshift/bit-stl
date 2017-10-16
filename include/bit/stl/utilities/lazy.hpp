@@ -11,7 +11,6 @@
 #define BIT_STL_UTILITIES_LAZY_HPP
 
 #include "type_traits.hpp"
-#include "functional.hpp"
 #include "in_place.hpp"    // in_place_t
 
 #include "../memory/memory.hpp"
