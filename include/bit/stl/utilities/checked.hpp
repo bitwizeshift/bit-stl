@@ -11,10 +11,11 @@
 
 #define BIT_NODISCARD __attribute__((warn_unused_result))
 
-#include "stddef.hpp"
-#include "assert.hpp"
-#include "utility.hpp"
-#include "type_traits.hpp"
+#include "stddef.hpp"      //
+#include "assert.hpp"      // BIT_ASSERT
+#include "hash.hpp"        // hash_range
+#include "type_traits.hpp" // negation, disjunction etc
+#include "utility.hpp"     // in_place_t
 #include "../memory/memory.hpp"
 
 #include <system_error>
