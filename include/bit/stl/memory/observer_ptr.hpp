@@ -4,11 +4,13 @@
  * \brief This header contains a dummy smart-pointer, whose sole purpose
  *        is to behave like a well-defined raw-pointer.
  *
- * \note This is an internal header file, included by other library headers.
- *       Do not attempt to use it directly.
+ * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_MEMORY_DETAIL_OBSERVER_PTR_HPP
-#define BIT_STL_MEMORY_DETAIL_OBSERVER_PTR_HPP
+#ifndef BIT_STL_MEMORY_OBSERVER_PTR_HPP
+#define BIT_STL_MEMORY_OBSERVER_PTR_HPP
+
+#include <cstddef>     // std::nullptr_t, std::size_t
+#include <type_traits> // std::true_type, std::declval
 
 namespace bit {
   namespace stl {
@@ -362,6 +364,6 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#include "observer_ptr.inl"
+#include "detail/observer_ptr.inl"
 
-#endif /* BIT_STL_MEMORY_DETAIL_OBSERVER_PTR_HPP */
+#endif /* BIT_STL_MEMORY_OBSERVER_PTR_HPP */

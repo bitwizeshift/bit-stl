@@ -111,6 +111,7 @@ set(headers
   include/bit/stl/memory/fat_ptr.hpp
   include/bit/stl/memory/indirect_ptr.hpp
   include/bit/stl/memory/memory.hpp
+  include/bit/stl/memory/observer_ptr.hpp
   include/bit/stl/memory/scoped_ptr.hpp
 
   # numeric
