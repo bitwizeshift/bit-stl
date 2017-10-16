@@ -57,6 +57,7 @@ set(headers
   # utilities
   include/bit/stl/utilities/assert.hpp
   include/bit/stl/utilities/casts.hpp
+  include/bit/stl/utilities/compressed_pair.hpp
   include/bit/stl/utilities/checked.hpp
   include/bit/stl/utilities/delegate.hpp
   include/bit/stl/utilities/enum.hpp

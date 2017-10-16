@@ -6,7 +6,7 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#include <bit/stl/utilities/utility.hpp>
+#include <bit/stl/utilities/compressed_pair.hpp>
 
 #include <catch.hpp>
 

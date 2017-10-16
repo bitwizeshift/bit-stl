@@ -18,7 +18,6 @@
 
 // IWYU pragma: begin_exports
 #include "detail/propagate_const.hpp"
-#include "detail/compressed_pair.hpp"
 #include "detail/compressed_tuple.hpp"
 // IWYU pragma: end_exports
 

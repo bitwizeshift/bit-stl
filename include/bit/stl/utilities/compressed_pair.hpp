@@ -4,18 +4,24 @@
  * \brief This header contains a utility for compressing pairs that leverages
  *        EBO
  *
- * \note This is an internal header file, included by other library headers.
- *       Do not attempt to use it directly.
+ * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_HPP
-#define BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_HPP
+#ifndef BIT_STL_UTILITIES_COMPRESSED_PAIR_HPP
+#define BIT_STL_UTILITIES_COMPRESSED_PAIR_HPP
 
-#include <type_traits>
+#include "type_traits.hpp" // conjunction
+
+#include <type_traits> // std::is_constructible, std::decay_t, etc...
+#include <tuple>       // std::get
+#include <utility>     // std::forward
 
 namespace bit {
   namespace stl {
     namespace detail {
-      template<typename T1, typename T2, bool = std::is_class<T1>::value &&std::is_final<T1>::value, bool = std::is_class<T2>::value && std::is_final<T2>::value>
+      template<typename T1,
+               typename T2,
+               bool = std::is_class<T1>::value && std::is_final<T1>::value,
+               bool = std::is_class<T2>::value && std::is_final<T2>::value>
       class compressed_pair_impl;
 
       template<typename T1>
@@ -153,10 +159,7 @@ namespace bit {
           negation<std::is_convertible<U2,T2>>
         >
       >{};
-
-
     } // namespace detail
-
 
     //////////////////////////////////////////////////////////////////////////
     /// \brief \c compressed_pair is a \c struct template that provides a way
@@ -172,6 +175,8 @@ namespace bit {
     template<typename T1, typename T2>
     class compressed_pair : public detail::compressed_pair_impl<T1,T2>
     {
+      using base_type = detail::compressed_pair_impl<T1,T2>;
+
       //----------------------------------------------------------------------
       // Public Member Types
       //----------------------------------------------------------------------
@@ -304,13 +309,6 @@ namespace bit {
       ///
       /// \param other pair of values to swap
       void swap( compressed_pair& other );
-
-      //----------------------------------------------------------------------
-      // Private Member Types
-      //----------------------------------------------------------------------
-    private:
-
-      using base_type = detail::compressed_pair_impl<T1,T2>;
     };
 
     //------------------------------------------------------------------------
@@ -363,6 +361,6 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#include "compressed_pair.inl"
+#include "detail/compressed_pair.inl"
 
-#endif /* BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_HPP */
+#endif /* BIT_STL_UTILITIES_COMPRESSED_PAIR_HPP */

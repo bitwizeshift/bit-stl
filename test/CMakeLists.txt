@@ -4,12 +4,12 @@ find_package(Catch REQUIRED)
 
 set(sources
       # utilities
+      bit/stl/utilities/compressed_pair.test.cpp
       bit/stl/utilities/delegate.test.cpp
       bit/stl/utilities/expected.test.cpp
       bit/stl/utilities/lazy.test.cpp
       bit/stl/utilities/tribool.test.cpp
       bit/stl/utilities/type_traits.test.cpp
-      bit/stl/utilities/utility.compressed_pair.test.cpp
 
       # containers
       bit/stl/containers/array_view.test.cpp
