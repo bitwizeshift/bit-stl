@@ -9,7 +9,7 @@
 #ifndef BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP
 #define BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP
 
-#include "../memory/memory.hpp" // stl::destroy_at
+#include "../memory/uninitialized_storage.hpp" // destroy_at
 
 #include <iterator> // std::bidirectional_iterator_tag, std::reverse_iterator
 #include <algorithm> // std::equal, std::lexicographical_compare

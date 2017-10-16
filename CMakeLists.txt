@@ -115,6 +115,7 @@ set(headers
   include/bit/stl/memory/observer_ptr.hpp
   include/bit/stl/memory/offset_ptr.hpp
   include/bit/stl/memory/scoped_ptr.hpp
+  include/bit/stl/memory/uninitialized_storage.hpp
 
   # numeric
   include/bit/stl/numeric/numeric.hpp

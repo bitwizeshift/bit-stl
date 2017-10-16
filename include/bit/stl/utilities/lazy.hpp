@@ -13,7 +13,7 @@
 #include "type_traits.hpp"
 #include "in_place.hpp"    // in_place_t
 
-#include "../memory/memory.hpp"
+#include "../memory/uninitialized_storage.hpp" // uninitialized_construct_at
 
 #include <functional> // std::function
 
