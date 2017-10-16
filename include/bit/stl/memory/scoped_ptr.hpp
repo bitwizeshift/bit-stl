@@ -3,13 +3,14 @@
  *
  * \brief This
  *
- * \note This is an internal header file, included by other library headers.
- *       Do not attempt to use it directly.
+ * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_MEMORY_DETAIL_SCOPED_PTR_HPP
-#define BIT_STL_MEMORY_DETAIL_SCOPED_PTR_HPP
+#ifndef BIT_STL_MEMORY_SCOPED_PTR_HPP
+#define BIT_STL_MEMORY_SCOPED_PTR_HPP
 
-#include <memory>
+#include <memory>      // std::default_delete
+#include <cstddef>     // std::size_t
+#include <type_traits> // std::decay_t, etc
 
 namespace bit {
   namespace stl {
@@ -435,6 +436,6 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#include "scoped_ptr.inl"
+#include "detail/scoped_ptr.inl"
 
-#endif /* BIT_STL_MEMORY_DETAIL_SCOPED_PTR_HPP */
+#endif /* BIT_STL_MEMORY_SCOPED_PTR_HPP */

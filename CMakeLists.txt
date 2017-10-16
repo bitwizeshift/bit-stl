@@ -110,6 +110,7 @@ set(headers
   # memory
   include/bit/stl/memory/fat_ptr.hpp
   include/bit/stl/memory/memory.hpp
+  include/bit/stl/memory/scoped_ptr.hpp
 
   # numeric
   include/bit/stl/numeric/numeric.hpp
