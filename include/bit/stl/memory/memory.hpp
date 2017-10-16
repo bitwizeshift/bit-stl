@@ -19,10 +19,6 @@
 namespace bit {
   namespace stl {
 
-    /// \brief A pointer that represents ownership
-    template<typename T>
-    using owner = T;
-
     //------------------------------------------------------------------------
     // Pointer Manipulation
     //------------------------------------------------------------------------
