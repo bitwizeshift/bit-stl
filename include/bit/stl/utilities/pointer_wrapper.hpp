@@ -9,7 +9,7 @@
 #ifndef BIT_STL_UTILITIES_POINTER_WRAPPER_HPP
 #define BIT_STL_UTILITIES_POINTER_WRAPPER_HPP
 
-#include "utility.hpp"
+#include "in_place.hpp" // in_place_t
 
 #include <type_traits>
 #include <utility>

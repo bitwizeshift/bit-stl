@@ -14,8 +14,8 @@
 #include "stddef.hpp"      //
 #include "assert.hpp"      // BIT_ASSERT
 #include "hash.hpp"        // hash_range
+#include "in_place.hpp"    // in_place_t
 #include "type_traits.hpp" // negation, disjunction etc
-#include "utility.hpp"     // in_place_t
 #include "../memory/memory.hpp"
 
 #include <system_error>

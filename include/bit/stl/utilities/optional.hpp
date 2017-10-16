@@ -10,6 +10,7 @@
 
 #include "type_traits.hpp"
 #include "utility.hpp"
+#include "in_place.hpp" // in_place_t
 
 #include <initializer_list>
 #include <type_traits>

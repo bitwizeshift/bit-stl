@@ -10,8 +10,8 @@
 #ifndef BIT_STL_UTILITIES_EXPECTED_HPP
 #define BIT_STL_UTILITIES_EXPECTED_HPP
 
-#include "utility.hpp" // in_place_t
-#include "hash.hpp"    // hash_combine
+#include "in_place.hpp" // in_place_t
+#include "hash.hpp"     // hash_combine
 
 #include <memory>    // std::addressof
 #include <stdexcept> // std::logic_error

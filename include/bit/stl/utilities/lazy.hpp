@@ -12,7 +12,8 @@
 
 #include "type_traits.hpp"
 #include "functional.hpp"
-#include "utility.hpp"
+#include "in_place.hpp"    // in_place_t
+
 #include "../memory/memory.hpp"
 
 namespace bit {
