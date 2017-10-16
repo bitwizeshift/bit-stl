@@ -4,13 +4,15 @@
  * \brief This header contains a utility for compressing tuples to leverage
  *        EBO
  *
- * \note This is an internal header file, included by other library headers.
- *       Do not attempt to use it directly.
+ * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_TUPLE_HPP
-#define BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_TUPLE_HPP
+#ifndef BIT_STL_UTILITIES_COMPRESSED_TUPLE_HPP
+#define BIT_STL_UTILITIES_COMPRESSED_TUPLE_HPP
 
-#include <type_traits>
+#include <type_traits> // std::is_empty, std::is_final, etc
+#include <utility>     // std::forward
+
+// TODO(bitwizeshift): Clean up this file, extract implementation to *.inl
 
 namespace bit {
   namespace stl {
@@ -30,7 +32,7 @@ namespace bit {
       template<typename T, typename...Ts>
       struct is_in_list<T,type_list<T,Ts...>> : std::true_type{};
 
-      template<typename T0, typename List, bool = std::is_final<T0>::value, bool = is_in_list<T0,List>::value>
+      template<typename T0, typename List, bool = std::is_final<T0>::value || !std::is_empty<T0>::value, bool = is_in_list<T0,List>::value>
       class compressed_tuple_impl;
 
       template<typename T0, typename T1, typename...Ts,bool B>
@@ -253,4 +255,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_TUPLE_HPP */
+#endif /* BIT_STL_UTILITIES_COMPRESSED_TUPLE_HPP */
