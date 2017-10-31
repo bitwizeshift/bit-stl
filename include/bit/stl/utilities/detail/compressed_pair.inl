@@ -1,13 +1,17 @@
 #ifndef BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_INL
 #define BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_INL
 
-//============================================================================
-// compressed_pair
-//============================================================================
+//=============================================================================
+// detail::compressed_pair_impl
+//=============================================================================
 
-//----------------------------------------------------------------------------
+//=============================================================================
+// compressed_pair
+//=============================================================================
+
+//-----------------------------------------------------------------------------
 // Constructors
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 // (2)
 
@@ -137,9 +141,47 @@ bit::stl::compressed_pair<T1,T2>&
   return (*this);
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// Member Access
+//-----------------------------------------------------------------------------
+
+template<typename T1, typename T2>
+inline constexpr typename bit::stl::compressed_pair<T1,T2>::first_type&
+  bit::stl::compressed_pair<T1,T2>::first()
+  noexcept
+{
+  return base_type::first();
+}
+
+template<typename T1, typename T2>
+inline constexpr const typename bit::stl::compressed_pair<T1,T2>::first_type&
+  bit::stl::compressed_pair<T1,T2>::first()
+  const noexcept
+{
+  return base_type::first();
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename T1, typename T2>
+inline constexpr typename bit::stl::compressed_pair<T1,T2>::second_type&
+  bit::stl::compressed_pair<T1,T2>::second()
+  noexcept
+{
+  return base_type::second();
+}
+
+template<typename T1, typename T2>
+inline constexpr const typename bit::stl::compressed_pair<T1,T2>::second_type&
+  bit::stl::compressed_pair<T1,T2>::second()
+  const noexcept
+{
+  return base_type::second();
+}
+
+//-----------------------------------------------------------------------------
 // Modifiers
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T1, typename T2>
 void bit::stl::compressed_pair<T1,T2>::swap( compressed_pair& other )
@@ -151,9 +193,9 @@ void bit::stl::compressed_pair<T1,T2>::swap( compressed_pair& other )
 }
 
 
-//----------------------------------------------------------------------------
-// Non-member Functions
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// Free Functions
+//-----------------------------------------------------------------------------
 
 template<typename T1, typename T2>
 void bit::stl::swap( compressed_pair<T1,T2>& lhs, compressed_pair<T1,T2>& rhs )

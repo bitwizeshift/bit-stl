@@ -20,12 +20,14 @@ namespace bit {
     namespace detail {
       template<typename T1,
                typename T2,
-               bool = std::is_class<T1>::value && std::is_final<T1>::value,
-               bool = std::is_class<T2>::value && std::is_final<T2>::value>
+               bool = std::is_empty<T1>::value && !std::is_final<T1>::value,
+               bool = std::is_empty<T2>::value && !std::is_final<T2>::value>
       class compressed_pair_impl;
 
+      //-----------------------------------------------------------------------
+
       template<typename T1>
-      class compressed_pair_impl<T1,T1,false,false> : T1
+      class compressed_pair_impl<T1,T1,true,true> : T1
       {
       public:
         template<typename U1, typename U2>
@@ -39,8 +41,8 @@ namespace bit {
 
         }
 
-        constexpr T1& first(){ return (*this); }
-        constexpr const T1& first() const{ return (*this); }
+        constexpr T1& first(){ return static_cast<T1&>(*this); }
+        constexpr const T1& first() const{ return static_cast<const T1&>(*this); }
 
         constexpr T1& second(){ return m_second; }
         constexpr const T1& second() const{ return m_second; }
@@ -48,8 +50,10 @@ namespace bit {
         T1 m_second;
       };
 
+      //-----------------------------------------------------------------------
+
       template<typename T1, typename T2>
-      class compressed_pair_impl<T1,T2,false,false> : T1, T2
+      class compressed_pair_impl<T1,T2,true,true> : T1, T2
       {
       public:
         template<typename U1, typename U2>
@@ -63,15 +67,17 @@ namespace bit {
 
         }
 
-        constexpr T1& first(){ return (*this); }
-        constexpr const T1& first() const{ return (*this); }
+        constexpr T1& first(){ return static_cast<T1&>(*this); }
+        constexpr const T1& first() const{ return static_cast<const T1&>(*this); }
 
-        constexpr T2& second(){ return (*this); }
-        constexpr const T2& second() const{ return (*this); }
+        constexpr T2& second(){ return static_cast<T2&>(*this); }
+        constexpr const T2& second() const{ return static_cast<const T2&>(*this); }
       };
 
+      //-----------------------------------------------------------------------
+
       template<typename T1, typename T2>
-      class compressed_pair_impl<T1,T2,false,true> : T1
+      class compressed_pair_impl<T1,T2,true,false> : T1
       {
       public:
         template<typename U1, typename U2>
@@ -85,8 +91,8 @@ namespace bit {
 
         }
 
-        constexpr T1& first(){ return (*this); }
-        constexpr const T1& first() const{ return (*this); }
+        constexpr T1& first(){ return static_cast<T1&>(*this); }
+        constexpr const T1& first() const{ return static_cast<const T1&>(*this); }
 
         constexpr T2& second(){ return m_second; }
         constexpr const T2& second() const{ return m_second; }
@@ -94,8 +100,10 @@ namespace bit {
         T2 m_second;
       };
 
+      //-----------------------------------------------------------------------
+
       template<typename T1, typename T2>
-      class compressed_pair_impl<T1,T2,true,false> : T2
+      class compressed_pair_impl<T1,T2,false,true> : T2
       {
       public:
         template<typename U1, typename U2>
@@ -112,14 +120,16 @@ namespace bit {
         constexpr T1& first(){ return m_first; }
         constexpr const T1& first() const{ return m_first; }
 
-        constexpr T2& second(){ return (*this); }
-        constexpr const T2& second() const{ return (*this); }
+        constexpr T2& second(){ return static_cast<T1&>(*this); }
+        constexpr const T2& second() const{ return static_cast<const T2&>(*this); }
       private:
         T1 m_first;
       };
 
+      //-----------------------------------------------------------------------
+
       template<typename T1, typename T2>
-      class compressed_pair_impl<T1,T2,true,true>
+      class compressed_pair_impl<T1,T2,false,false>
       {
       public:
         template<typename U1, typename U2>
@@ -136,8 +146,8 @@ namespace bit {
         constexpr T1& first(){ return m_first; }
         constexpr const T1& first() const{ return m_first; }
 
-        constexpr T2& second(){ return (*this); }
-        constexpr const T2& second() const{ return (*this); }
+        constexpr T2& second(){ return m_second; }
+        constexpr const T2& second() const{ return m_second; }
 
       private:
         T1 m_first;
@@ -161,33 +171,34 @@ namespace bit {
       >{};
     } // namespace detail
 
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     /// \brief \c compressed_pair is a \c struct template that provides a way
     ///        to store two heterogeneous objects as a single unit that
     ///        leverages empty-base-optimization
     ///
-    /// A compressed pair is a specific case of a compressed_tuple with two
+    /// A compressed pair is a special case of a compressed_tuple with only two
     /// elements.
     ///
     /// \tparam T1 the first type
     /// \tparam T2 the second type
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     template<typename T1, typename T2>
-    class compressed_pair : public detail::compressed_pair_impl<T1,T2>
+    class compressed_pair
+      : public detail::compressed_pair_impl<T1,T2>
     {
       using base_type = detail::compressed_pair_impl<T1,T2>;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Public Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       using first_type  = T1;
       using second_type = T2;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Constructors / Assignment
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       // (1)
@@ -287,7 +298,7 @@ namespace bit {
       /// \param other the other pair to move
       constexpr compressed_pair( compressed_pair&& other ) = default;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       compressed_pair& operator=( const compressed_pair& other );
 
@@ -299,9 +310,30 @@ namespace bit {
       template<typename U1, typename U2>
       compressed_pair& operator=( compressed_pair<U1,U2>&& other );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
+      // Member Access
+      //-----------------------------------------------------------------------
+    public:
+
+      /// \{
+      /// \brief Accesses the first element of this compressed pair
+      ///
+      /// \return a reference to the first element
+      constexpr first_type& first() noexcept;
+      constexpr const first_type& first() const noexcept;
+      /// \}
+
+      /// \{
+      /// \brief Accesses the second element of this compressed pair
+      ///
+      /// \return a reference to the second element
+      constexpr second_type& second() noexcept;
+      constexpr const second_type& second() const noexcept;
+      ///\}
+
+      //-----------------------------------------------------------------------
       // Modifiers
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Swaps \c first with \c other.first and \c second with
@@ -311,9 +343,9 @@ namespace bit {
       void swap( compressed_pair& other );
     };
 
-    //------------------------------------------------------------------------
-    // Non-member Functions
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
+    // Utilities
+    //-------------------------------------------------------------------------
 
     /// \brief Swaps the contents of two compressed_pairs
     ///
@@ -322,7 +354,9 @@ namespace bit {
     template<typename T1, typename T2>
     void swap( compressed_pair<T1,T2>& lhs, compressed_pair<T1,T2>& rhs );
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
+    // Comparisons
+    //-------------------------------------------------------------------------
 
     template<typename T1, typename T2>
     constexpr bool operator==( const compressed_pair<T1,T2>& lhs,
@@ -348,7 +382,7 @@ namespace bit {
     constexpr bool operator>=( const compressed_pair<T1,T2>& lhs,
                                const compressed_pair<T1,T2>& rhs );
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     /// \brief Make utility to create a type-deduced compressed pair
     ///
