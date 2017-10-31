@@ -68,6 +68,7 @@ set(headers
   include/bit/stl/utilities/in_place.hpp
   include/bit/stl/utilities/invoke.hpp
   include/bit/stl/utilities/lazy.hpp
+  include/bit/stl/utilities/monostate.hpp
   include/bit/stl/utilities/optional.hpp
   include/bit/stl/utilities/pointer_wrapper.hpp
   include/bit/stl/utilities/propagate_const.hpp
