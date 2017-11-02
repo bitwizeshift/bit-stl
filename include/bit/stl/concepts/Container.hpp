@@ -33,12 +33,12 @@ namespace bit {
           typename T::const_iterator,
           typename T::difference_type,
           typename T::size_type,
-          decltype(typename T::iterator(std::declval<T&>().begin())),
-          decltype(typename T::iterator(std::declval<T&>().end())),
-          decltype(typename T::const_iterator(std::declval<T&>().cbegin())),
-          decltype(typename T::const_iterator(std::declval<T&>().cend())),
-          decltype(bool(std::declval<T&>() == std::declval<T&>() )),
-          decltype(bool(std::declval<T&>() != std::declval<T&>() )),
+          decltype(std::declval<T&>().begin()),
+          decltype(std::declval<T&>().end()),
+          decltype(std::declval<const T&>().cbegin()),
+          decltype(std::declval<const T&>().cend()),
+          decltype(bool(std::declval<const T&>() == std::declval<const T&>() )),
+          decltype(bool(std::declval<const T&>() != std::declval<const T&>() )),
           decltype(std::declval<T&>().swap( std::declval<T&>() )),
           decltype(typename T::size_type( std::declval<const T&>().size() )),
           decltype(typename T::size_type( std::declval<const T&>().max_size() )),
@@ -56,7 +56,7 @@ namespace bit {
     ///
     /// The result is aliased as \c ::value
     template<typename T>
-    struct is_container : detail::is_container_impl<T>{};
+    struct is_container : detail::is_container_impl<std::decay_t<T>>{};
 
     /// \brief Type trait to determine if a series of \c Types are all Containers
     ///
@@ -66,7 +66,5 @@ namespace bit {
 
   } // namespace stl
 } // namespace bit
-
-
 
 #endif /* BIT_STL_CONCEPTS_CONTAINER_HPP */

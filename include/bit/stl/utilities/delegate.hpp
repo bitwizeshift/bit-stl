@@ -19,6 +19,7 @@
 
 #include <type_traits> // std::enable_if
 #include <utility>     // std::forward, std::move
+#include <memory>      // std::addressof
 
 namespace bit {
   namespace stl {
