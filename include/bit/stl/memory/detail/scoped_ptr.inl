@@ -161,20 +161,6 @@ const Deleter& bit::stl::scoped_ptr<T,Deleter>::get_deleter()
   return m_storage;
 }
 
-//----------------------------------------------------------------------------
-// Private : Constructors
-//----------------------------------------------------------------------------
-
-template<typename T, typename Deleter>
-template<typename U>
-inline bit::stl::scoped_ptr<T,Deleter>
-  ::scoped_ptr( scoped_ptr<U,Deleter>&& other )
-  noexcept
-  : m_storage( other.release(), other.get_deleter() )
-{
-
-}
-
 //============================================================================
 // scoped_ptr<T[]>
 //============================================================================
@@ -329,46 +315,8 @@ const Deleter& bit::stl::scoped_ptr<T[],Deleter>::get_deleter()
 }
 
 //----------------------------------------------------------------------------
-// Private : Constructors
-//----------------------------------------------------------------------------
-
-template<typename T, typename Deleter>
-inline bit::stl::scoped_ptr<T[],Deleter>
-  ::scoped_ptr( scoped_ptr&& other )
-  noexcept
-  : m_storage( other.release(), other.get_deleter() )
-{
-
-}
-
-//----------------------------------------------------------------------------
 // Utilities
 //----------------------------------------------------------------------------
-
-template<typename T>
-struct bit::stl::detail::make_scoped_dispatch
-{
-  template<typename...Args>
-  static scoped_ptr<T> make( Args&&...args )
-  {
-    return scoped_ptr<T>( new T( std::forward<Args>(args)... ) );
-  }
-};
-
-template<typename T>
-struct bit::stl::detail::make_scoped_dispatch<T[]>
-{
-  static scoped_ptr<T[]> make( std::size_t size )
-  {
-    return scoped_ptr<T[]>( new T[ size ] );
-  }
-};
-
-template<typename T, typename...Args>
-bit::stl::scoped_ptr<T> bit::stl::make_scoped( Args&&...args )
-{
-  return detail::make_scoped_dispatch<T>::make( std::forward<Args>(args)... );
-}
 
 template<typename T, typename Deleter>
 void bit::stl::swap( scoped_ptr<T,Deleter>& lhs, scoped_ptr<T,Deleter>& rhs )

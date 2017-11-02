@@ -168,27 +168,6 @@ namespace bit {
 
       storage_type m_storage;
 
-      //----------------------------------------------------------------------
-      // Private Constructors
-      //----------------------------------------------------------------------
-    private:
-
-      /// \brief Private move constructor for make_scoped
-      ///
-      /// \param other the other scoped_ptr to move
-      template<typename U>
-      scoped_ptr( scoped_ptr<U,Deleter>&& other ) noexcept;
-
-      //----------------------------------------------------------------------
-      // Friends
-      //----------------------------------------------------------------------
-    private:
-
-      template<typename U, typename...Args>
-      friend scoped_ptr<U> make_scoped( Args&&... );
-
-      template<typename U>
-      friend struct detail::make_scoped_dispatch;
     };
 
     //------------------------------------------------------------------------
@@ -320,42 +299,11 @@ namespace bit {
 
       storage_type m_storage;
 
-      //----------------------------------------------------------------------
-      // Private Constructors
-      //----------------------------------------------------------------------
-    private:
-
-      /// \brief Private move constructor for make_scoped
-      ///
-      /// \remark this private constructor exists to allow for make_scoped to
-      ///         work
-      ///
-      /// \param other the other scoped_ptr to move
-      scoped_ptr( scoped_ptr&& other ) noexcept;
-
-      //----------------------------------------------------------------------
-      // Friends
-      //----------------------------------------------------------------------
-    private:
-
-      template<typename U,typename...Args>
-      friend scoped_ptr<U> make_scoped( Args&&... );
-
-      template<typename U>
-      friend struct detail::make_scoped_dispatch;
     };
 
     //------------------------------------------------------------------------
     // Utilities
     //------------------------------------------------------------------------
-
-    /// \brief Utility to make a scope_ptr, forwarding \p args to \p T's
-    ///        constructor
-    ///
-    /// \param args the arguments
-    /// \return the scoped_ptr
-    template<typename T, typename...Args>
-    scoped_ptr<T> make_scoped( Args&&...args );
 
     template<typename T, typename Deleter>
     void swap( scoped_ptr<T,Deleter>& lhs, scoped_ptr<T,Deleter>& rhs ) noexcept;
