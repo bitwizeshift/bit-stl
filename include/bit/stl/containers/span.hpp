@@ -642,66 +642,9 @@ namespace bit {
 
     inline namespace casts {
 
-      //----------------------------------------------------------------------
-      // to_bytes
-      //----------------------------------------------------------------------
-
-      /// \brief Casts a span viewing a non-const object into a byte view
-      ///
-      /// \param span the span to cast
-      /// \return the span as a stream of bytes
-      template<typename T, std::ptrdiff_t Extent>
-      constexpr span<byte> to_bytes( span<T,Extent> span );
-
-      /// \copydoc to_bytes( const span<T,Extent>& )
-      template<typename T>
-      constexpr span<byte> to_bytes( span<T> span );
-
-      /// \brief Casts a span viewing a const object into a const byte view
-      ///
-      /// \param span the span to cast
-      /// \return the span as a stream of const bytes
-      template<typename T, std::ptrdiff_t Extent>
-      constexpr span<const byte> to_bytes( span<const T,Extent> span );
-
-      /// \copydoc to_bytes( const span<const T,Extent>& )
-      template<typename T>
-      constexpr span<const byte> to_bytes( span<const T> span );
-
-      template<typename ContiguousContainer, std::enable_if_t<is_contiguous_container<std::decay_t<ContiguousContainer>>::value>* = nullptr>
-      constexpr span<match_cv_qualifiers_t<typename ContiguousContainer::value_type, byte>>
-        to_bytes( ContiguousContainer& container );
-
-      template<typename ContiguousContainer, std::enable_if_t<is_contiguous_container<std::decay_t<ContiguousContainer>>::value>* = nullptr>
-      constexpr span<const byte> to_bytes( const ContiguousContainer& container );
-
-      //----------------------------------------------------------------------
-      // from_bytes
-      //----------------------------------------------------------------------
-
-      /// \brief Casts a span viewing a non-const array of bytes to an
-      ///        object of T
-      ///
-      /// \param span the span to cast
-      /// \return the span as a stream of objects
-      template<typename T, std::ptrdiff_t Extent>
-      constexpr span<T> from_bytes( span<byte,Extent> span );
-
-      /// \copydoc from_bytes( const span<byte>& )
-      template<typename T>
-      constexpr span<T> from_bytes( span<byte> span );
-
-      /// \brief Casts a span viewing a const array of bytes to an
-      ///        object of T
-      ///
-      /// \param span the span to cast
-      /// \return the span as a stream of const objects
-      template<typename T, std::ptrdiff_t Extent>
-      constexpr span<const T> from_bytes( span<const byte,Extent> span );
-
-      /// \copydoc from_bytes( const span<const byte>& )
-      template<typename T>
-      constexpr span<const T> from_bytes( span<const byte> span );
+      // TODO: Add to_bytes and from_bytes
+      // This has been removed because casting any T to stl::byte violates
+      // strict aliasing under c++14, and causes undefined behaviour
 
     } // inline namespace casts
   } // namespace stl
