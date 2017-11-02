@@ -15,7 +15,7 @@
 #include "assert.hpp"      // BIT_ASSERT
 #include "hash.hpp"        // hash_range
 #include "in_place.hpp"    // in_place_t
-#include "type_traits.hpp" // negation, disjunction etc
+
 #include "../memory/memory.hpp"
 
 #include <system_error>
@@ -348,7 +348,7 @@ namespace bit {
       ///
       /// \param value the value to use to use to initialzie the checked
 #ifndef BIT_DOXYGEN_BUILD
-      template<typename U = T, std::enable_if_t<detail::checked_is_direct_initializable<T,U>::value && !is_callable<U&>::value && std::is_convertible<U&&, T>::value>* = nullptr>
+      template<typename U = T, std::enable_if_t<detail::checked_is_direct_initializable<T,U>::value && std::is_convertible<U&&, T>::value>* = nullptr>
 #else
       template<typename U>
 #endif
@@ -357,7 +357,7 @@ namespace bit {
 
       /// \copydoc checked( U&& )
 #ifndef BIT_DOXYGEN_BUILD
-      template<typename U = T, std::enable_if_t<detail::checked_is_direct_initializable<T,U>::value && !is_callable<U&>::value && !std::is_convertible<U&&, T>::value>* = nullptr>
+      template<typename U = T, std::enable_if_t<detail::checked_is_direct_initializable<T,U>::value && !std::is_convertible<U&&, T>::value>* = nullptr>
 #else
       template<typename U>
 #endif

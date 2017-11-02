@@ -8,7 +8,7 @@
 #ifndef BIT_STL_UTILITIES_HASH_HPP
 #define BIT_STL_UTILITIES_HASH_HPP
 
-#include "type_traits.hpp" // has_const_iterators
+#include "../concepts/Container.hpp"
 
 #include <cstddef>          // std::size_t
 #include <tuple>            // std::tuple, std::get
@@ -215,7 +215,7 @@ namespace bit {
   /// \param container the container to hash
   /// \return the hash value
 #ifndef BIT_DOXYGEN_BUILD
-  template<typename Container, typename = std::enable_if_t<has_const_iterators<Container>::value>>
+  template<typename Container, typename = std::enable_if_t<is_container<Container>::value>>
 #else
   template<typename Container>
 #endif

@@ -11,7 +11,12 @@
 #define BIT_STL_CONTAINERS_SPAN_HPP
 
 // local bit libraries
-#include "../utilities/type_traits.hpp"     // ...
+#include "../traits/bool_constant.hpp"
+#include "../traits/transformations/match_cv_qualifiers.hpp"
+#include "../traits/relationships/is_same_decay.hpp"
+
+#include "../concepts/ContiguousContainer.hpp"
+
 #include "../iterators/tagged_iterator.hpp" // tagged_iterator
 #include "../utilities/assert.hpp"          // BIT_STL_CONTAINERS_ASSERT
 
@@ -177,7 +182,7 @@ namespace bit {
     /// \tparam Extent The maximum size of this span (default: unbounded)
     //////////////////////////////////////////////////////////////////////////
     template<typename T, std::ptrdiff_t Extent = dynamic_extent>
-    class span final
+    class span
     {
       //----------------------------------------------------------------------
       // Public Member Types
@@ -190,8 +195,9 @@ namespace bit {
       using reference       = std::add_lvalue_reference_t<value_type>;
       using const_reference = std::add_lvalue_reference_t<std::add_const_t<value_type>>;
 
-      using size_type  = std::ptrdiff_t;
-      using index_type = std::ptrdiff_t;
+      using size_type       = std::ptrdiff_t;
+      using difference_type = std::ptrdiff_t;
+      using index_type      = std::ptrdiff_t;
 
       using iterator               = tagged_iterator<T*,span<T,Extent>>;
       using const_iterator         = tagged_iterator<const T*,span<T,Extent>>;
@@ -216,16 +222,32 @@ namespace bit {
         detail::is_allowed_element_type_conversion<U, value_type>::value
       >;
 
-      /// \brief Constructs an span containing 0 entries
+      template<typename U>
+      using enable_if_container_t = std::enable_if_t<
+        is_contiguous_container<std::decay_t<U>>::value &&
+        !is_same_decay<std::decay_t<U>,span>::value
+      >;
+
+      /// \brief Constructs a span containing 0 entries
       constexpr span() noexcept;
 
-      /// \brief Constructs an span containing 0 entries
+      /// \brief Constructs a span containing 0 entries
       constexpr span( std::nullptr_t ) noexcept;
 
-      /// \brief Constructs an span
+      /// \brief Constructs a span
       constexpr span( pointer first, pointer last ) noexcept;
 
-      /// \brief Constructs an span by copying another span
+      /// \brief Constructs a span by copying an existing one
+      ///
+      /// \param other the other span to copy
+      constexpr span( const span& other ) noexcept = default;
+
+      /// \brief Constructs a span by moving an existing one
+      ///
+      /// \param other the other span to move
+      constexpr span( span&& other ) noexcept = default;
+
+      /// \brief Constructs a span by copying another span
       ///
       /// \param other the other span
 #ifndef BIT_DOXYGEN_BUILD
@@ -235,7 +257,7 @@ namespace bit {
 #endif
       constexpr span( const span<U,OtherExtent>& other );
 
-      /// \brief Constructs an span by moving another span
+      /// \brief Constructs a span by moving another span
       ///
       /// \param other the other span
 #ifndef BIT_DOXYGEN_BUILD
@@ -245,7 +267,7 @@ namespace bit {
 #endif
       constexpr span( span<U,OtherExtent>&& other );
 
-      /// \brief Constructs an span from the specified \p ptr with
+      /// \brief Constructs a span from the specified \p ptr with
       ///        size \p count
       ///
       /// \param ptr   pointer to the data
@@ -253,31 +275,31 @@ namespace bit {
       template<typename U>
       constexpr span( U* ptr, size_type count ) noexcept;
 
-      /// \brief Constructs an span from a given array reference
+      /// \brief Constructs a span from a given array reference
       ///
       /// \param array a reference to a const T array of size N
       template<typename U, std::size_t N>
       constexpr span( U (&array)[N] ) noexcept;
 
-      /// \brief Constructs an span from a given contiguous container
+      /// \brief Constructs a span from a given contiguous container
       ///        that contains a data() member function and a size() member
       ///        function
       ///
-      /// \param container the container to construct an span out of
+      /// \param container the container to construct a span out of
 #ifndef BIT_DOXYGEN_BUILD
-      template<typename Container,
-               typename = std::enable_if_t<is_contiguous_container<Container>::value>>
+      template<typename ContiguousContainer,
+               typename = enable_if_container_t<ContiguousContainer>>
 #else
       template<typename Container>
 #endif
-      constexpr span( Container&& container ) noexcept;
+      constexpr span( ContiguousContainer& container ) noexcept;
 
       //----------------------------------------------------------------------
       // Assignment
       //----------------------------------------------------------------------
     public:
 
-      /// \brief Assigns an span
+      /// \brief Assigns a span
       ///
       /// This will automatically resize the span to refer to at most N
       /// bytes of the supplied view
@@ -306,6 +328,11 @@ namespace bit {
       ///
       /// \return the number of entries in the span
       constexpr size_type size() const noexcept;
+
+      /// \brief Returns the max size of this span
+      ///
+      /// \return the max size of this span
+      constexpr size_type max_size() const noexcept;
 
       /// \brief Returns the size of the span in bytes
       ///
@@ -373,6 +400,16 @@ namespace bit {
 
       /// \copydoc span::back()
       constexpr const_reference back() const noexcept;
+
+      //----------------------------------------------------------------------
+      // Modifiers
+      //----------------------------------------------------------------------
+    public:
+
+      /// \brief Swaps this span with \p other
+      ///
+      /// \param other the other span to swap with
+      void swap( span& other ) noexcept;
 
       //----------------------------------------------------------------------
       // Operations
@@ -473,7 +510,7 @@ namespace bit {
         ///
         /// \param data pointer to the data
         /// \param ext  the other extent to construct this storage_type from
-        template <class OtherExtentType>
+        template<typename OtherExtentType>
         constexpr storage_type(pointer data, OtherExtentType ext)
           : ExtentType(ext),
             m_data(data)
@@ -511,6 +548,9 @@ namespace bit {
     private:
 
       extent_storage m_storage; ///< The storage for this span
+
+      template<typename,std::ptrdiff_t>
+      friend class span;
     };
 
     //------------------------------------------------------------------------
@@ -578,7 +618,7 @@ namespace bit {
     // Type Traits
     //------------------------------------------------------------------------
 
-    /// \brief Is the given type an span ?
+    /// \brief Is the given type a span ?
     ///
     /// \tparam T the type to check
     ///
@@ -628,12 +668,12 @@ namespace bit {
       template<typename T>
       constexpr span<const byte> to_bytes( span<const T> span );
 
-      template<typename Container, std::enable_if_t<is_contiguous_container<Container>::value>* = nullptr>
-      constexpr span<match_cv_qualifiers_t<typename Container::value_type, byte>>
-        to_bytes( Container& container );
+      template<typename ContiguousContainer, std::enable_if_t<is_contiguous_container<std::decay_t<ContiguousContainer>>::value>* = nullptr>
+      constexpr span<match_cv_qualifiers_t<typename ContiguousContainer::value_type, byte>>
+        to_bytes( ContiguousContainer& container );
 
-      template<typename Container, std::enable_if_t<is_contiguous_container<Container>::value>* = nullptr>
-      constexpr span<const byte> to_bytes( const Container& container );
+      template<typename ContiguousContainer, std::enable_if_t<is_contiguous_container<std::decay_t<ContiguousContainer>>::value>* = nullptr>
+      constexpr span<const byte> to_bytes( const ContiguousContainer& container );
 
       //----------------------------------------------------------------------
       // from_bytes

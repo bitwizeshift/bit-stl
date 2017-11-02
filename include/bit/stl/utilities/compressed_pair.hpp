@@ -9,7 +9,9 @@
 #ifndef BIT_STL_UTILITIES_COMPRESSED_PAIR_HPP
 #define BIT_STL_UTILITIES_COMPRESSED_PAIR_HPP
 
-#include "type_traits.hpp" // conjunction
+#include "../traits/conjunction.hpp"
+#include "../traits/disjunction.hpp"
+#include "../traits/negation.hpp"
 
 #include <type_traits> // std::is_constructible, std::decay_t, etc...
 #include <tuple>       // std::get

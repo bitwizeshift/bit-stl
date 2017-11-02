@@ -64,10 +64,7 @@ inline constexpr bit::stl::enum_range<Enum>
 // Enum Casts
 //----------------------------------------------------------------------------
 
-namespace bit {
-namespace stl {
-inline namespace casts {
-namespace detail {
+namespace bit { namespace stl { inline namespace casts { namespace detail {
 
   template<typename To, typename From>
   struct enum_caster;
@@ -117,10 +114,7 @@ namespace detail {
     }
   };
 
-} // namespace detail
-} // inline namespace casts
-} // namespace stl
-} // namespace bit
+}}}} // namespace bit::stl::casts::detail
 
 template<typename To, typename From>
 To bit::stl::casts::enum_cast( From from )

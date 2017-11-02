@@ -10,7 +10,8 @@
 #ifndef BIT_STL_CONTAINERS_ARRAY_VIEW_HPP
 #define BIT_STL_CONTAINERS_ARRAY_VIEW_HPP
 
-#include "../utilities/type_traits.hpp"     // bool_constant
+#include "../traits/bool_constant.hpp"
+#include "../concepts/ContiguousContainer.hpp"
 #include "../iterators/tagged_iterator.hpp" // tagged_iterator
 
 #include <stdexcept>

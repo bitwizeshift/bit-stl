@@ -11,6 +11,11 @@
 
 #include "span.hpp"
 
+#include "../traits/negation.hpp"
+#include "../traits/conjunction.hpp"
+
+#include "../concepts/ContiguousContainer.hpp"
+
 namespace bit {
   namespace stl {
 

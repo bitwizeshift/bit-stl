@@ -54,6 +54,60 @@ make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
 )
 
 set(headers
+
+  # Type Traits
+  include/bit/stl/traits/bool_constant.hpp
+  include/bit/stl/traits/conjunction.hpp
+  include/bit/stl/traits/detected.hpp
+  include/bit/stl/traits/disjunction.hpp
+  include/bit/stl/traits/empty.hpp
+  include/bit/stl/traits/identity.hpp
+  include/bit/stl/traits/integral_constant.hpp
+  include/bit/stl/traits/negation.hpp
+  include/bit/stl/traits/nonesuch.hpp
+  include/bit/stl/traits/properties/arity.hpp
+  include/bit/stl/traits/properties/function_argument.hpp
+  include/bit/stl/traits/properties/index_of_type.hpp
+  include/bit/stl/traits/properties/is_const_member_function_pointer.hpp
+  include/bit/stl/traits/properties/is_cv_member_function_pointer.hpp
+  include/bit/stl/traits/properties/is_volatile_member_function_pointer.hpp
+  include/bit/stl/traits/properties/nth_type.hpp
+  include/bit/stl/traits/properties/pointer_rank.hpp
+  include/bit/stl/traits/relationships/are_same.hpp
+  include/bit/stl/traits/relationships/is_derived_from.hpp
+  include/bit/stl/traits/relationships/is_one_of.hpp
+  include/bit/stl/traits/relationships/is_same_constness.hpp
+  include/bit/stl/traits/relationships/is_same_cv.hpp
+  include/bit/stl/traits/relationships/is_same_decay.hpp
+  include/bit/stl/traits/relationships/is_same_sign.hpp
+  include/bit/stl/traits/relationships/is_same_volatility.hpp
+  include/bit/stl/traits/sfinae.hpp
+  include/bit/stl/traits/size_constant.hpp
+  include/bit/stl/traits/transformations/base_type.hpp
+  include/bit/stl/traits/transformations/function_signature.hpp
+  include/bit/stl/traits/transformations/match_cv_qualifiers.hpp
+  include/bit/stl/traits/transformations/match_ref_qualifiers.hpp
+  include/bit/stl/traits/transformations/match_sign_qualifiers.hpp
+  include/bit/stl/traits/transformations/normalize_char.hpp
+  include/bit/stl/traits/transformations/remove_pointers.hpp
+  include/bit/stl/traits/transformations/resolves_overload.hpp
+  include/bit/stl/traits/void_t.hpp
+
+  # Concepts
+  include/bit/stl/concepts/AssociativeContainer.hpp
+  include/bit/stl/concepts/BidirectionalIterator.hpp
+  include/bit/stl/concepts/Container.hpp
+  include/bit/stl/concepts/ContiguousContainer.hpp
+  include/bit/stl/concepts/EqualityComparable.hpp
+  include/bit/stl/concepts/ForwardIterator.hpp
+  include/bit/stl/concepts/InputIterator.hpp
+  include/bit/stl/concepts/Iterator.hpp
+  include/bit/stl/concepts/RandomAccessIterator.hpp
+  include/bit/stl/concepts/Range.hpp
+  include/bit/stl/concepts/ReverseRange.hpp
+  include/bit/stl/concepts/ReversibleContainer.hpp
+  include/bit/stl/concepts/SequenceContainer.hpp
+
   # utilities
   include/bit/stl/utilities/assert.hpp
   include/bit/stl/utilities/casts.hpp
@@ -76,7 +130,6 @@ set(headers
   include/bit/stl/utilities/stddef.hpp
   include/bit/stl/utilities/tribool.hpp
   include/bit/stl/utilities/tuple.hpp
-  include/bit/stl/utilities/type_traits.hpp
   include/bit/stl/utilities/utility.hpp
   include/bit/stl/utilities/uuid.hpp
 

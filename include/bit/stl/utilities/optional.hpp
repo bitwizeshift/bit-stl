@@ -8,9 +8,12 @@
 #ifndef BIT_STL_UTILITIES_OPTIONAL_HPP
 #define BIT_STL_UTILITIES_OPTIONAL_HPP
 
-#include "type_traits.hpp"
 #include "utility.hpp"
 #include "in_place.hpp" // in_place_t
+
+#include "../traits/conjunction.hpp"
+#include "../traits/disjunction.hpp"
+#include "../traits/negation.hpp"
 
 #include <initializer_list>
 #include <type_traits>

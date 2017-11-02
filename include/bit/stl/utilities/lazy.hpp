@@ -10,12 +10,16 @@
 #ifndef BIT_STL_UTILITIES_LAZY_HPP
 #define BIT_STL_UTILITIES_LAZY_HPP
 
-#include "type_traits.hpp"
 #include "in_place.hpp"    // in_place_t
+
+#include "../traits/conjunction.hpp"
+#include "../traits/disjunction.hpp"
+#include "../traits/negation.hpp"
 
 #include "../memory/uninitialized_storage.hpp" // uninitialized_construct_at
 
 #include <functional> // std::function
+#include <type_traits> // std::is_constructible, std::is_convertible, etc
 
 namespace bit {
   namespace stl {
@@ -236,7 +240,7 @@ namespace bit {
       ///
       /// \param value the value to use to use to initialzie the lazy
 #ifndef BIT_DOXYGEN_BUILD
-      template<typename U = T, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !is_callable<U&>::value && std::is_convertible<U&&, T>::value>* = nullptr>
+      template<typename U = T, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && std::is_convertible<U&&, T>::value>* = nullptr>
 #else
       template<typename U>
 #endif
@@ -244,7 +248,7 @@ namespace bit {
 
       /// \copydoc lazy( U&& )
 #ifndef BIT_DOXYGEN_BUILD
-      template<typename U = T, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !is_callable<U&>::value && !std::is_convertible<U&&, T>::value>* = nullptr>
+      template<typename U = T, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !std::is_convertible<U&&, T>::value>* = nullptr>
 #else
       template<typename U>
 #endif

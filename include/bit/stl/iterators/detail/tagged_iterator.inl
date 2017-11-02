@@ -84,6 +84,14 @@ inline constexpr typename bit::stl::tagged_iterator<Iterator,U>::difference_type
   return m_iter - rhs.m_iter;
 }
 
+template<typename Iterator, typename U>
+inline constexpr typename bit::stl::tagged_iterator<Iterator,U>::reference
+  bit::stl::tagged_iterator<Iterator,U>::operator[]( difference_type index )
+  noexcept
+{
+  return m_iter[index];
+}
+
 //----------------------------------------------------------------------------
 // Observers
 //----------------------------------------------------------------------------

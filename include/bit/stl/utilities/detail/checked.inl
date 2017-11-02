@@ -218,7 +218,7 @@ inline bit::stl::checked<T>::
 //------------------------------------------------------------------------
 
 template<typename T>
-template<typename U, std::enable_if_t<bit::stl::detail::checked_is_direct_initializable<T,U>::value && !bit::stl::is_callable<U&>::value && std::is_convertible<U&&, T>::value>*>
+template<typename U, std::enable_if_t<bit::stl::detail::checked_is_direct_initializable<T,U>::value && std::is_convertible<U&&, T>::value>*>
 inline bit::stl::checked<T>::checked( U&& value )
   noexcept(std::is_nothrow_constructible<T,U>::value)
   : m_storage( in_place<T>, std::forward<U>(value) ),
@@ -229,7 +229,7 @@ inline bit::stl::checked<T>::checked( U&& value )
 }
 
 template<typename T>
-template<typename U, std::enable_if_t<bit::stl::detail::checked_is_direct_initializable<T,U>::value && !bit::stl::is_callable<U&>::value && !std::is_convertible<U&&, T>::value>*>
+template<typename U, std::enable_if_t<bit::stl::detail::checked_is_direct_initializable<T,U>::value && !std::is_convertible<U&&, T>::value>*>
 inline bit::stl::checked<T>::checked( U&& value )
   noexcept(std::is_nothrow_constructible<T,U>::value)
   : m_storage( in_place<T>, std::forward<U>(value) ),

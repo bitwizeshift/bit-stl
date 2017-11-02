@@ -8,13 +8,6 @@ inline constexpr decltype(auto) bit::stl::fwd(T&& x)
   return std::forward<typename std::remove_reference<T>::type>( x );
 }
 
-template<typename T>
-inline constexpr decltype(auto) bit::stl::decay_forward(T&& x) noexcept
-{
-  using type = match_ref_qualifiers_t<match_cv_qualifiers_t<std::decay_t<T>,T>,T>;
-  return static_cast<type>(x);
-}
-
 //----------------------------------------------------------------------------
 // Indexing
 //----------------------------------------------------------------------------

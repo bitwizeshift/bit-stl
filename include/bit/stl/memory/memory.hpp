@@ -10,7 +10,10 @@
 
 // bit::stl local libraries
 #include "../utilities/stddef.hpp"
-#include "../utilities/type_traits.hpp"
+
+#include "../traits/conjunction.hpp"
+#include "../traits/disjunction.hpp"
+#include "../traits/negation.hpp"
 
 // std types
 #include <limits>

@@ -162,7 +162,7 @@ namespace bit {
     //------------------------------------------------------------------------
 
     template<typename T>
-    template<typename U, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !is_callable<U&>::value && std::is_convertible<U&&, T>::value>*>
+    template<typename U, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && std::is_convertible<U&&, T>::value>*>
     inline lazy<T>::lazy( U&& other )
       : m_ctor_function([other](void* ptr) mutable { uninitialized_tuple_construct_at<T>(ptr, std::forward_as_tuple( std::move(other) ) );} ),
         m_is_initialized(false)
@@ -173,7 +173,7 @@ namespace bit {
     //------------------------------------------------------------------------
 
     template<typename T>
-    template<typename U, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !is_callable<U&>::value && !std::is_convertible<U&&, T>::value>*>
+    template<typename U, std::enable_if_t<detail::lazy_is_direct_initializable<T,U>::value && !std::is_convertible<U&&, T>::value>*>
     inline lazy<T>::lazy( U&& other )
       : m_ctor_function([other](void* ptr) mutable { uninitialized_tuple_construct_at<T>(ptr, std::forward_as_tuple( std::move(other) ) );} ),
         m_is_initialized(false)

@@ -93,6 +93,8 @@ namespace bit {
 
       constexpr difference_type operator-( const tagged_iterator& rhs ) const noexcept;
 
+      constexpr reference operator[]( difference_type index ) noexcept;
+
       //----------------------------------------------------------------------
       // Observers
       //----------------------------------------------------------------------

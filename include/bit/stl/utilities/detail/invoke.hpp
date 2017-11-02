@@ -26,7 +26,7 @@ namespace bit {
       constexpr bool is_reference_wrapper_v = is_reference_wrapper<T>::value;
 
       template<typename Base, typename T, typename Derived, typename... Args>
-      auto INVOKE(T Base::*pmf, Derived&& ref, Args&&... args)
+      auto invoke_impl(T Base::*pmf, Derived&& ref, Args&&... args)
         noexcept(noexcept((std::forward<Derived>(ref).*pmf)(std::forward<Args>(args)...)))
         -> std::enable_if_t<std::is_function<T>::value &&
                             std::is_base_of<Base, std::decay_t<Derived>>::value,
@@ -36,7 +36,7 @@ namespace bit {
       }
 
       template<typename Base, typename T, typename RefWrap, typename... Args>
-      auto INVOKE(T Base::*pmf, RefWrap&& ref, Args&&... args)
+      auto invoke_impl(T Base::*pmf, RefWrap&& ref, Args&&... args)
         noexcept(noexcept((ref.get().*pmf)(std::forward<Args>(args)...)))
         -> std::enable_if_t<std::is_function<T>::value &&
                             is_reference_wrapper<std::decay_t<RefWrap>>::value,
@@ -47,7 +47,7 @@ namespace bit {
       }
 
       template<typename Base, typename T, typename Pointer, typename... Args>
-      auto INVOKE(T Base::*pmf, Pointer&& ptr, Args&&... args)
+      auto invoke_impl(T Base::*pmf, Pointer&& ptr, Args&&... args)
         noexcept(noexcept(((*std::forward<Pointer>(ptr)).*pmf)(std::forward<Args>(args)...)))
         -> std::enable_if_t<std::is_function<T>::value &&
                             !is_reference_wrapper<std::decay_t<Pointer>>::value &&
@@ -58,7 +58,7 @@ namespace bit {
       }
 
       template<typename Base, typename T, typename Derived>
-      auto INVOKE(T Base::*pmd, Derived&& ref)
+      auto invoke_impl(T Base::*pmd, Derived&& ref)
         noexcept(noexcept(std::forward<Derived>(ref).*pmd))
         -> std::enable_if_t<!std::is_function<T>::value &&
                             std::is_base_of<Base, std::decay_t<Derived>>::value,
@@ -68,7 +68,7 @@ namespace bit {
       }
 
       template<typename Base, typename T, typename RefWrap>
-      auto INVOKE(T Base::*pmd, RefWrap&& ref)
+      auto invoke_impl(T Base::*pmd, RefWrap&& ref)
         noexcept(noexcept(ref.get().*pmd))
         -> std::enable_if_t<!std::is_function<T>::value &&
                             is_reference_wrapper<std::decay_t<RefWrap>>::value,
@@ -78,7 +78,7 @@ namespace bit {
       }
 
       template<typename Base, typename T, typename Pointer>
-      auto INVOKE(T Base::*pmd, Pointer&& ptr)
+      auto invoke_impl(T Base::*pmd, Pointer&& ptr)
         noexcept(noexcept((*std::forward<Pointer>(ptr)).*pmd))
         -> std::enable_if_t<!std::is_function<T>::value &&
                             !is_reference_wrapper<std::decay_t<Pointer>>::value &&
@@ -89,13 +89,50 @@ namespace bit {
       }
 
       template<typename F, typename... Args>
-      auto INVOKE(F&& f, Args&&... args)
+      auto invoke_impl(F&& f, Args&&... args)
           noexcept(noexcept(std::forward<F>(f)(std::forward<Args>(args)...)))
        -> std::enable_if_t<!std::is_member_pointer<std::decay_t<F>>::value,
           decltype(std::forward<F>(f)(std::forward<Args>(args)...))>
       {
         return std::forward<F>(f)(std::forward<Args>(args)...);
       }
+
+      //=======================================================================
+      // is_invokable
+      //=======================================================================
+
+      template<typename Fn, typename...Args>
+      struct is_invocable
+      {
+        template<typename Fn2, typename...Args2>
+        static auto test( Fn2&&, Args2&&... )
+          -> decltype(invoke_impl(std::declval<Fn2>(), std::declval<Args2>()...), std::true_type{});
+
+        static auto test(...)
+          -> std::false_type;
+
+        static constexpr bool value =
+          decltype(test(std::declval<Fn>(), std::declval<Args>()...))::value;
+      };
+
+      //=======================================================================
+      // is_nothrow_invokable
+      //=======================================================================
+
+      template<typename Fn, typename...Args>
+      struct is_nothrow_invocable
+      {
+        template<typename Fn2, typename...Args2>
+        static auto test( Fn2&&, Args2&&... )
+          -> decltype(invoke_impl(std::declval<Fn2>(), std::declval<Args2>()...),
+                      std::integral_constant<bool,noexcept(invoke_impl(std::declval<Fn2>(), std::declval<Args2>()...))>{});
+
+        static auto test(...)
+          -> std::false_type;
+
+        static constexpr bool value =
+          decltype(test(std::declval<Fn>(), std::declval<Args>()...))::value;
+      };
 
     } // namespace detail
   } // namespace stl

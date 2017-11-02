@@ -13,9 +13,9 @@
 #endif
 
 // bit::stl local libraries
-#include "stddef.hpp"      //
-#include "assert.hpp"      // BIT_ASSERT
-#include "type_traits.hpp" // is_invokable
+#include "stddef.hpp" //
+#include "assert.hpp" // BIT_ASSERT
+#include "invoke.hpp" // is_invocable
 
 #include <type_traits> // std::enable_if
 #include <utility>     // std::forward, std::move
@@ -136,11 +136,11 @@ namespace bit {
       ///
       /// \param args the arguments for the invokation
       /// \return the return value for the invoked delegate
-      template<typename...Args, typename = std::enable_if_t<is_invokable<R(Types...),Args...>::value>>
+      template<typename...Args, typename = std::enable_if_t<is_invocable<R(Types...),Args...>::value>>
       constexpr return_type invoke( Args&&...args ) const;
 
       /// \copydoc delegate::invoke( Args&&... )
-      template<typename...Args, typename = std::enable_if_t<is_invokable<R(Types...),Args...>::value>>
+      template<typename...Args, typename = std::enable_if_t<is_invocable<R(Types...),Args...>::value>>
       constexpr return_type operator()( Args&&...args ) const;
 
       //-----------------------------------------------------------------------------

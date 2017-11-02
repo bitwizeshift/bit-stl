@@ -9,7 +9,9 @@
 #define BIT_STL_UTILITIES_UTILITY_HPP
 
 // bit::stl libraries
-#include "type_traits.hpp"
+
+#include "../traits/identity.hpp"
+#include "../traits/void_t.hpp"
 
 // std libraries
 #include <type_traits> // for std::remove_reference
@@ -25,14 +27,6 @@ namespace bit {
     /// \param x the value to forward
     template<typename T>
     constexpr decltype(auto) fwd(T&& x) noexcept;
-
-    /// \brief A wrapper function that acts like std::forward while decaying
-    ///        the underlying type
-    ///
-    /// \param x the value to forward
-    /// \return the decay-forwarded value
-    template<typename T>
-    constexpr decltype(auto) decay_forward(T&& x) noexcept;
 
     //--------------------------------------------------------------------------
     // Indexing

@@ -11,7 +11,9 @@
 
 // TODO(bitwizeshift): Finish implementing
 
-#include "type_traits.hpp" // conjunction, negation, etc
+#include "../traits/conjunction.hpp"
+#include "../traits/disjunction.hpp"
+#include "../traits/negation.hpp"
 
 #include <type_traits> // std::remove_reference_t, etc
 

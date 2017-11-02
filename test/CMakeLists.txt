@@ -9,7 +9,6 @@ set(sources
       bit/stl/utilities/expected.test.cpp
       bit/stl/utilities/lazy.test.cpp
       bit/stl/utilities/tribool.test.cpp
-      bit/stl/utilities/type_traits.test.cpp
 
       # containers
       bit/stl/containers/array_view.test.cpp

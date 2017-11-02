@@ -9,9 +9,8 @@
 #ifndef BIT_STL_UTILITIES_ENUM_HPP
 #define BIT_STL_UTILITIES_ENUM_HPP
 
-#include "type_traits.hpp"
-#include "../containers/string_view.hpp"
 #include "assert.hpp"
+#include "../containers/string_view.hpp"
 #include "../iterators/tagged_iterator.hpp"
 
 namespace bit {

@@ -33,7 +33,7 @@ template<typename T, std::ptrdiff_t Extent>
 template<typename U, std::ptrdiff_t OtherExtent, typename>
 inline constexpr bit::stl::span<T,Extent>::
   span( const span<U,OtherExtent>& other )
-  : m_storage(other.data(), bit::stl::detail::span_extent_type<OtherExtent>(other.size()))
+  : m_storage(other.m_storage.data(), bit::stl::detail::span_extent_type<OtherExtent>(other.size()))
 {
 
 }
@@ -41,7 +41,7 @@ inline constexpr bit::stl::span<T,Extent>::
 template<typename T, std::ptrdiff_t Extent>
 template<typename U, std::ptrdiff_t OtherExtent, typename>
 inline constexpr bit::stl::span<T,Extent>::span( span<U,OtherExtent>&& other )
-  : m_storage(other.data(), bit::stl::detail::span_extent_type<OtherExtent>(other.size()))
+  : m_storage(other.m_storage.data(), bit::stl::detail::span_extent_type<OtherExtent>(other.size()))
 {
 
 }
@@ -65,8 +65,8 @@ inline constexpr bit::stl::span<T,Extent>::span( U (&array)[N] )
 }
 
 template<typename T, std::ptrdiff_t Extent>
-template<typename Container, typename>
-inline constexpr bit::stl::span<T,Extent>::span( Container&& container )
+template<typename ContiguousContainer, typename>
+inline constexpr bit::stl::span<T,Extent>::span( ContiguousContainer& container )
   noexcept
   : m_storage( container.data(), static_cast<size_type>(container.size()) )
 {
@@ -88,6 +88,14 @@ inline constexpr typename bit::stl::span<T,Extent>::size_type
 template<typename T, std::ptrdiff_t Extent>
 inline constexpr typename bit::stl::span<T,Extent>::size_type
   bit::stl::span<T,Extent>::size()
+  const noexcept
+{
+  return m_storage.size();
+}
+
+template<typename T, std::ptrdiff_t Extent>
+inline constexpr typename bit::stl::span<T,Extent>::size_type
+  bit::stl::span<T,Extent>::max_size()
   const noexcept
 {
   return m_storage.size();
@@ -212,6 +220,19 @@ inline constexpr typename bit::stl::span<T,Extent>::const_reference
   const noexcept
 {
   return *(data() + (size() - 1));
+}
+
+//----------------------------------------------------------------------------
+// Modifiers
+//----------------------------------------------------------------------------
+
+template<typename T, std::ptrdiff_t Extent>
+inline void bit::stl::span<T,Extent>::swap( span& other )
+  noexcept
+{
+  using std::swap;
+
+  swap(m_storage,other.m_storage);
 }
 
 //----------------------------------------------------------------------------
@@ -444,12 +465,12 @@ constexpr bit::stl::span<const bit::stl::byte>
 
 //----------------------------------------------------------------------------
 
-template<typename Container, std::enable_if_t<bit::stl::is_contiguous_container<Container>::value>*>
-constexpr bit::stl::span<bit::stl::match_cv_qualifiers_t<typename Container::value_type, bit::stl::byte>>
-  bit::stl::casts::to_bytes( Container& container )
+template<typename ContiguousContainer, std::enable_if_t<bit::stl::is_contiguous_container<std::decay_t<ContiguousContainer>>::value>*>
+constexpr bit::stl::span<bit::stl::match_cv_qualifiers_t<typename ContiguousContainer::value_type, bit::stl::byte>>
+  bit::stl::casts::to_bytes( ContiguousContainer& container )
 {
-  using value_type = match_cv_qualifiers_t<typename Container::value_type,byte>;
-  using void_type  = match_cv_qualifiers_t<typename Container::value_type,void>;
+  using value_type = match_cv_qualifiers_t<typename ContiguousContainer::value_type,byte>;
+  using void_type  = match_cv_qualifiers_t<typename ContiguousContainer::value_type,void>;
 
   return bit::stl::span<value_type>(
     static_cast<value_type*>(static_cast<void_type*>(container.data())),
@@ -457,11 +478,11 @@ constexpr bit::stl::span<bit::stl::match_cv_qualifiers_t<typename Container::val
   );
 }
 
-template<typename Container, std::enable_if_t<bit::stl::is_contiguous_container<Container>::value>*>
+template<typename ContiguousContainer, std::enable_if_t<bit::stl::is_contiguous_container<std::decay_t<ContiguousContainer>>::value>*>
 constexpr bit::stl::span<const bit::stl::byte>
-  bit::stl::casts::to_bytes( const Container& container )
+  bit::stl::casts::to_bytes( const ContiguousContainer& container )
 {
-  using value_type = typename Container::value_type;
+  using value_type = typename ContiguousContainer::value_type;
 
   return bit::stl::span<const byte>(
     static_cast<const byte*>(static_cast<const void*>(container.data())),

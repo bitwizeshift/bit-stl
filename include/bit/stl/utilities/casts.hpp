@@ -16,7 +16,8 @@
 // bit::stl local libraries
 #include "stddef.hpp"
 #include "assert.hpp"
-#include "type_traits.hpp"
+
+#include "../traits/relationships/is_same_sign.hpp"
 
 // std libraries
 #include <cstring> // std::memcpy

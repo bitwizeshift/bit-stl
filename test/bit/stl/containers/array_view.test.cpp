@@ -8,6 +8,8 @@
 
 #include <bit/stl/containers/array_view.hpp>
 
+#include <vector>
+
 #include <catch.hpp>
 
 //----------------------------------------------------------------------------
