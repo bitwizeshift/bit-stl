@@ -54,7 +54,7 @@ namespace bit {
     ///
     /// The result is aliased as \c ::value
     template<typename T>
-    struct is_random_access_iterator : detail::is_random_access_iterator_impl<T>{};
+    struct is_random_access_iterator : detail::is_random_access_iterator_impl<std::decay_t<T>>{};
 
     /// \brief Type trait to determine if a series of \c Types are all RandomAccessIterators
     ///

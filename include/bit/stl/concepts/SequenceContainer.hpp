@@ -10,6 +10,4 @@
 
 
 
-
-
 #endif /* BIT_STL_CONCEPTS_SEQUENCECONTAINER_HPP */

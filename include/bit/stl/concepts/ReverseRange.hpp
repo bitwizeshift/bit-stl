@@ -31,7 +31,7 @@ namespace bit {
     } // namespace detail
 
     template<typename T>
-    struct is_reverse_range : detail::is_reverse_range_impl<T>{};
+    struct is_reverse_range : detail::is_reverse_range_impl<std::decay_t<T>>{};
 
     template<typename...Types>
     struct are_reverse_ranges : conjunction<is_reverse_range<Types>...>{};

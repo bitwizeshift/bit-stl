@@ -41,7 +41,7 @@ namespace bit {
     ///
     /// The result is aliased as \c ::value
     template<typename T>
-    struct is_iterator : detail::is_iterator_impl<T>{};
+    struct is_iterator : detail::is_iterator_impl<std::decay_t<T>>{};
 
     /// \brief Type trait to determine if a series of \c Types are all Iterators
     ///
