@@ -42,6 +42,7 @@ namespace bit {
     /// raw-pointer semantics.
     ///
     /// \tparam the underlying pointer type
+    /// \satisfies{NullablePointer}
     //////////////////////////////////////////////////////////////////////////
     template<typename T>
     class observer_ptr
@@ -51,8 +52,8 @@ namespace bit {
       //----------------------------------------------------------------------
     public:
 
-      using pointer      = T*; ///<
-      using element_type = T;  ///<
+      using pointer      = T*; ///< The underlying pointer type
+      using element_type = T;  ///< The element type
 
       //----------------------------------------------------------------------
       // Constructors / Assignment

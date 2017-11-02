@@ -2,9 +2,10 @@
  * \file fat_ptr.hpp
  *
  * \brief This header contains the definition of a pointer that contains
- *        knowledge about both its size and pointer. Its primary use is
- *        for allocators to preserve size-information without requiring
- *        heap-based record-keeping
+ *        knowledge about both its size and pointer.
+ *
+ * Its primary use is for allocators to preserve size-information without
+ * requiring heap-based record-keeping
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -29,6 +30,7 @@ namespace bit {
     /// simplify record-keeping of allocated memory.
     ///
     /// \tparam T The underlying pointer type
+    /// \satisfies{NullablePointer}
     //////////////////////////////////////////////////////////////////////////
     template<typename T>
     class fat_ptr

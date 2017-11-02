@@ -244,7 +244,7 @@ constexpr bit::stl::fat_ptr<To>
   noexcept
 {
   auto p = dynamic_cast<To*>(other.get());
-  return fat_ptr<To>{ p, p ? other.size() : nullptr };
+  return fat_ptr<To>{ p, p ? other.size() : 0 };
 }
 
 //----------------------------------------------------------------------------

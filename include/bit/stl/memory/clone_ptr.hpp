@@ -10,6 +10,8 @@
 #ifndef BIT_STL_MEMORY_CLONE_PTR_HPP
 #define BIT_STL_MEMORY_CLONE_PTR_HPP
 
+#include "allocator_deleter.hpp"
+
 #include "../utilities/utility.hpp"         //
 #include "../utilities/compressed_pair.hpp" // compressed_pair
 
@@ -131,44 +133,6 @@ namespace bit {
 
     } // namespace detail
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief
-    ///
-    ////////////////////////////////////////////////////////////////////////
-    template<typename Allocator>
-    class allocator_destructor
-    {
-      //--------------------------------------------------------------------
-      // Public Member Types
-      //--------------------------------------------------------------------
-    public:
-
-      using alloc_traits = std::allocator_traits<Allocator>;
-      using pointer   = typename alloc_traits::pointer;
-      using size_type = typename alloc_traits::size_type;
-
-      //--------------------------------------------------------------------
-      // Constructor
-      //--------------------------------------------------------------------
-    public:
-
-      allocator_destructor( Allocator& alloc, size_type size );
-
-      //--------------------------------------------------------------------
-      //
-      //--------------------------------------------------------------------
-    public:
-
-      void operator()( pointer p ) noexcept;
-
-      //--------------------------------------------------------------------
-      // Private Members
-      //--------------------------------------------------------------------
-    private:
-
-      Allocator& m_allocator;
-      size_type  m_size;
-    };
 
     //////////////////////////////////////////////////////////////////////////
     /// \brief clone_ptr is a smart pointer that owns and manages another

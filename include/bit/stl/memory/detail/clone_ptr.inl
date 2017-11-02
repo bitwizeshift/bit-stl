@@ -1,33 +1,6 @@
 #ifndef BIT_STL_MEMORY_DETAIL_CLONE_PTR_INL
 #define BIT_STL_MEMORY_DETAIL_CLONE_PTR_INL
 
-//============================================================================
-// allocator_destructor
-//============================================================================
-
-//----------------------------------------------------------------------------
-// Constructor
-//----------------------------------------------------------------------------
-
-template<typename Allocator>
-bit::stl::allocator_destructor<Allocator>
-  ::allocator_destructor( Allocator& alloc, size_type size )
-  : m_allocator(alloc),
-    m_size(size)
-{
-
-}
-
-//----------------------------------------------------------------------------
-// Observer
-//----------------------------------------------------------------------------
-
-template<typename Allocator>
-void bit::stl::allocator_destructor<Allocator>::operator()( pointer p )
-  noexcept
-{
-  alloc_traits::deallocate( m_allocator, p, m_size );
-}
 
 //============================================================================
 // detail::clone_ptr_pointer
@@ -67,7 +40,7 @@ bit::stl::detail::clone_ptr_base*
   using control_block = detail::clone_ptr_emplace<T,Allocator>;
   using alloc_traits  = typename std::allocator_traits<Allocator>::template rebind_traits<control_block>;
   using allocator     = typename alloc_traits::allocator_type;
-  using destructor    = allocator_destructor<allocator>;
+  using destructor    = allocator_deleter<allocator>;
 
   auto& alloc  = m_storage.second().first();
   auto  alloc2 = allocator();
@@ -135,7 +108,7 @@ bit::stl::detail::clone_ptr_base*
   using control_block = detail::clone_ptr_emplace<T,Allocator>;
   using alloc_traits  = typename std::allocator_traits<Allocator>::template rebind_traits<control_block>;
   using allocator     = typename alloc_traits::allocator_type;
-  using destructor    = allocator_destructor<allocator>;
+  using destructor    = allocator_deleter<allocator>;
 
   auto& alloc  = m_storage.first();
   auto  alloc2 = allocator();
@@ -398,7 +371,7 @@ void bit::stl::clone_ptr<T>::reset( U* ptr, Deleter deleter, Allocator alloc )
     using control_block = detail::clone_ptr_pointer<T,Deleter,Allocator>;
     using alloc_traits  = typename std::allocator_traits<Allocator>::template rebind_traits<control_block>;
     using allocator     = typename alloc_traits::allocator_type;
-    using destructor    = allocator_destructor<allocator>;
+    using destructor    = allocator_deleter<allocator>;
 
     allocator alloc2(alloc);
     destructor d{alloc2,1};
@@ -507,7 +480,7 @@ bit::stl::clone_ptr<T> bit::stl::make_clone( Args&&...args )
   using control_block = detail::clone_ptr_emplace<T,std::allocator<T>>;
   using allocator     = std::allocator<control_block>;
   using alloc_traits  = std::allocator_traits<allocator>;
-  using destructor    = allocator_destructor<allocator>;
+  using destructor    = allocator_deleter<allocator>;
 
   allocator alloc;
   destructor d{alloc,1};
@@ -527,7 +500,7 @@ bit::stl::clone_ptr<T>
   using control_block = detail::clone_ptr_emplace<T,Allocator>;
   using alloc_traits  = typename std::allocator_traits<Allocator>::template rebind_traits<control_block>;
   using allocator     = typename alloc_traits::allocator_type;
-  using destructor    = allocator_destructor<allocator>;
+  using destructor    = allocator_deleter<allocator>;
 
   allocator alloc2(alloc);
   destructor d{alloc2,1};
