@@ -98,10 +98,12 @@ set(headers
   include/bit/stl/concepts/BidirectionalIterator.hpp
   include/bit/stl/concepts/Container.hpp
   include/bit/stl/concepts/ContiguousContainer.hpp
+  include/bit/stl/concepts/Destructible.hpp
   include/bit/stl/concepts/EqualityComparable.hpp
   include/bit/stl/concepts/ForwardIterator.hpp
   include/bit/stl/concepts/InputIterator.hpp
   include/bit/stl/concepts/Iterator.hpp
+  include/bit/stl/concepts/NullablePointer.hpp
   include/bit/stl/concepts/RandomAccessIterator.hpp
   include/bit/stl/concepts/Range.hpp
   include/bit/stl/concepts/ReverseRange.hpp
