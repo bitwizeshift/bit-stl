@@ -13,14 +13,17 @@
 namespace bit {
   namespace stl {
 
-    template<typename T, typename U, typename...Ts>
-    struct is_one_of : is_one_of<T,Ts...>{};
+    template<typename T, typename...Ts>
+    struct is_one_of;
+
+    template<typename T, typename T0, typename...Ts>
+    struct is_one_of<T,T0,Ts...> : is_one_of<T,Ts...>{};
 
     template<typename T, typename...Ts>
     struct is_one_of<T,T,Ts...> : true_type{};
 
-    template<typename T, typename U>
-    struct is_one_of<T,U> : false_type{};
+    template<typename T>
+    struct is_one_of<T> : false_type{};
 
     template<typename T, typename...Ts>
     constexpr bool is_one_of_v = is_one_of<T,Ts...>::value;

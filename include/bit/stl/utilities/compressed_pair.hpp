@@ -9,9 +9,14 @@
 #ifndef BIT_STL_UTILITIES_COMPRESSED_PAIR_HPP
 #define BIT_STL_UTILITIES_COMPRESSED_PAIR_HPP
 
+#include "detail/tuple_size.hpp"
+#include "detail/tuple_element.hpp"
+
+#include "../traits/identity.hpp"
 #include "../traits/conjunction.hpp"
 #include "../traits/disjunction.hpp"
 #include "../traits/negation.hpp"
+#include "../traits/size_constant.hpp"
 
 #include <type_traits> // std::is_constructible, std::decay_t, etc...
 #include <tuple>       // std::get
@@ -98,7 +103,12 @@ namespace bit {
 
         constexpr T2& second(){ return m_second; }
         constexpr const T2& second() const{ return m_second; }
+
+        //---------------------------------------------------------------------
+        // Private Members
+        //---------------------------------------------------------------------
       private:
+
         T2 m_second;
       };
 
@@ -124,7 +134,12 @@ namespace bit {
 
         constexpr T2& second(){ return static_cast<T1&>(*this); }
         constexpr const T2& second() const{ return static_cast<const T2&>(*this); }
+
+        //---------------------------------------------------------------------
+        // Private Members
+        //---------------------------------------------------------------------
       private:
+
         T1 m_first;
       };
 
@@ -151,7 +166,11 @@ namespace bit {
         constexpr T2& second(){ return m_second; }
         constexpr const T2& second() const{ return m_second; }
 
+        //---------------------------------------------------------------------
+        // Private Members
+        //---------------------------------------------------------------------
       private:
+
         T1 m_first;
         T2 m_second;
       };
@@ -172,6 +191,18 @@ namespace bit {
         >
       >{};
     } // namespace detail
+
+    template<typename T1, typename T2>
+    class compressed_pair;
+
+    template<typename T, typename U>
+    struct tuple_element<0,compressed_pair<T,U>> : identity<T>{};
+
+    template<typename T, typename U>
+    struct tuple_element<1,compressed_pair<T,U>> : identity<U>{};
+
+    template<typename T, typename U>
+    struct tuple_size<compressed_pair<T,U>> : public size_constant<2>{};
 
     ///////////////////////////////////////////////////////////////////////////
     /// \brief \c compressed_pair is a \c struct template that provides a way
@@ -343,10 +374,54 @@ namespace bit {
       ///
       /// \param other pair of values to swap
       void swap( compressed_pair& other );
+
+      //-----------------------------------------------------------------------
+      // Private Members
+      //-----------------------------------------------------------------------
+    private:
+
+      /// \{
+      /// \brief Getter methods for accessing the first and second element
+      ///        from get overloads
+      ///
+      /// \return the retrieved entry
+      T1& get( size_constant<0> ) &;
+      const T1& get( size_constant<0> ) const &;
+      T1&& get( size_constant<0> ) &&;
+      const T1&& get( size_constant<0> ) const &&;
+      T1& get( size_constant<1> ) &;
+      const T1& get( size_constant<1> ) const &;
+      T1&& get( size_constant<1> ) &&;
+      const T1&& get( size_constant<1> ) const &&;
+      /// \}
+
+      //-----------------------------------------------------------------------
+      // Friends
+      //-----------------------------------------------------------------------
+    private:
+
+      template<std::size_t Idx, typename U1, typename U2>
+      friend constexpr tuple_element_t<Idx,compressed_pair<U1,U2>>&
+        get( compressed_pair<U1,U2>& p ) noexcept;
+
+      template<std::size_t Idx, typename U1, typename U2>
+      friend constexpr const tuple_element_t<Idx,compressed_pair<U1,U2>>&
+        get( const compressed_pair<U1,U2>& p ) noexcept;
+
+      template<std::size_t Idx, typename U1, typename U2>
+      friend constexpr tuple_element_t<Idx,compressed_pair<U1,U2>>&&
+        get( compressed_pair<U1,U2>&& p ) noexcept;
+
+      template<std::size_t Idx, typename U1, typename U2>
+      friend constexpr const tuple_element_t<Idx,compressed_pair<U1,U2>>&&
+        get( const compressed_pair<U1,U2>&& p ) noexcept;
     };
 
     //-------------------------------------------------------------------------
     // Utilities
+    //-------------------------------------------------------------------------
+
+
     //-------------------------------------------------------------------------
 
     /// \brief Swaps the contents of two compressed_pairs
@@ -355,6 +430,34 @@ namespace bit {
     /// \param rhs the right compressed pair to swap
     template<typename T1, typename T2>
     void swap( compressed_pair<T1,T2>& lhs, compressed_pair<T1,T2>& rhs );
+
+    //-------------------------------------------------------------------------
+
+    /// \brief Make utility to create a type-deduced compressed pair
+    ///
+    /// \param x the value to assign to \c first
+    /// \param y the value to assign to \c second
+    template<typename T1, typename T2>
+    constexpr compressed_pair<std::decay_t<T1>,std::decay_t<T2>>
+      make_compressed_pair( T1&& x, T2&& y );
+
+    //-------------------------------------------------------------------------
+
+    template<std::size_t Idx, typename U1, typename U2>
+    constexpr tuple_element_t<Idx,compressed_pair<U1,U2>>&
+      get( compressed_pair<U1,U2>& p ) noexcept;
+
+    template<std::size_t Idx, typename U1, typename U2>
+    constexpr const tuple_element_t<Idx,compressed_pair<U1,U2>>&
+      get( const compressed_pair<U1,U2>& p ) noexcept;
+
+    template<std::size_t Idx, typename U1, typename U2>
+    constexpr tuple_element_t<Idx,compressed_pair<U1,U2>>&&
+      get( compressed_pair<U1,U2>&& p ) noexcept;
+
+    template<std::size_t Idx, typename U1, typename U2>
+    constexpr const tuple_element_t<Idx,compressed_pair<U1,U2>>&&
+      get( const compressed_pair<U1,U2>&& p ) noexcept;
 
     //-------------------------------------------------------------------------
     // Comparisons
@@ -383,16 +486,6 @@ namespace bit {
     template<typename T1, typename T2>
     constexpr bool operator>=( const compressed_pair<T1,T2>& lhs,
                                const compressed_pair<T1,T2>& rhs );
-
-    //-------------------------------------------------------------------------
-
-    /// \brief Make utility to create a type-deduced compressed pair
-    ///
-    /// \param x the value to assign to \c first
-    /// \param y the value to assign to \c second
-    template<typename T1, typename T2>
-    constexpr compressed_pair<std::decay_t<T1>,std::decay_t<T2>>
-      make_compressed_pair( T1&& x, T2&& y );
 
   } // namespace stl
 } // namespace bit

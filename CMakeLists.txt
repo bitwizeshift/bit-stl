@@ -43,7 +43,8 @@ message(STATUS "bit::stl ${BIT_STL_VERSION}")
 #-----------------------------------------------------------------------------
 
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED true)
+set(CMAKE_CXX_STANDARD_REQUIRED on)
+set(CMAKE_CXX_EXTENSIONS off)
 
 make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
   MAJOR ${BIT_STL_VERSION_MAJOR}
@@ -74,6 +75,8 @@ set(headers
   include/bit/stl/traits/properties/nth_type.hpp
   include/bit/stl/traits/properties/pointer_rank.hpp
   include/bit/stl/traits/relationships/are_same.hpp
+  include/bit/stl/traits/relationships/is_base_of_any.hpp
+  include/bit/stl/traits/relationships/is_base_of_all.hpp
   include/bit/stl/traits/relationships/is_derived_from.hpp
   include/bit/stl/traits/relationships/is_one_of.hpp
   include/bit/stl/traits/relationships/is_same_constness.hpp
@@ -111,6 +114,8 @@ set(headers
   include/bit/stl/concepts/SequenceContainer.hpp
 
   # utilities
+  include/bit/stl/utilities/detail/tuple_element.hpp
+  include/bit/stl/utilities/detail/tuple_size.hpp
   include/bit/stl/utilities/assert.hpp
   include/bit/stl/utilities/casts.hpp
   include/bit/stl/utilities/compressed_pair.hpp
@@ -209,9 +214,9 @@ if( BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS )
   )
 
   if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -pedantic)
+    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
   elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -pedantic)
+    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
   elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" )
     # TODO: Determine MSVC necessary compiler flags
   endif()

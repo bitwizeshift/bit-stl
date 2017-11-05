@@ -17,7 +17,7 @@
 
 template<typename T1, typename T2>
 template<typename U1, typename U2, std::enable_if_t<bit::stl::detail::is_constructible<U1,U2,const U1&,const U2&>::value>*>
-constexpr bit::stl::compressed_pair<T1,T2>
+inline constexpr bit::stl::compressed_pair<T1,T2>
   ::compressed_pair( const T1& x, const T2& y )
   : base_type( x, y )
 {
@@ -25,7 +25,7 @@ constexpr bit::stl::compressed_pair<T1,T2>
 
 template<typename T1, typename T2>
 template<typename U1, typename U2, std::enable_if_t<bit::stl::detail::is_explicit_constructible<U1,U2,const U1&, const U2&>::value>*>
-constexpr bit::stl::compressed_pair<T1,T2>
+inline constexpr bit::stl::compressed_pair<T1,T2>
   ::compressed_pair( const T1& x, const T2& y )
   : base_type( x, y )
 {
@@ -35,7 +35,7 @@ constexpr bit::stl::compressed_pair<T1,T2>
 
 template<typename T1, typename T2>
 template<typename U1, typename U2, std::enable_if_t<bit::stl::detail::is_constructible<T1,T2,U1&&,U2&&>::value>*>
-constexpr bit::stl::compressed_pair<T1,T2>
+inline constexpr bit::stl::compressed_pair<T1,T2>
   ::compressed_pair( U1&& x, U2&& y )
   : base_type( std::forward<U1>(x), std::forward<U2>(y) )
 {
@@ -44,7 +44,7 @@ constexpr bit::stl::compressed_pair<T1,T2>
 
 template<typename T1, typename T2>
 template<typename U1, typename U2, std::enable_if_t<bit::stl::detail::is_explicit_constructible<T1,T2,U1&&,U2&&>::value>*>
-constexpr bit::stl::compressed_pair<T1,T2>
+inline constexpr bit::stl::compressed_pair<T1,T2>
   ::compressed_pair( U1&& x, U2&& y )
   : base_type(std::forward<U1>(x), std::forward<U2>(y) )
 {
@@ -54,7 +54,7 @@ constexpr bit::stl::compressed_pair<T1,T2>
 
 template<typename T1, typename T2>
 template<typename U1, typename U2, std::enable_if_t<bit::stl::detail::is_constructible<T1,T2,const U1&,const U2&>::value>*>
-constexpr bit::stl::compressed_pair<T1,T2>
+inline constexpr bit::stl::compressed_pair<T1,T2>
   ::compressed_pair( const compressed_pair<U1,U2>& other )
   : base_type( other.first(), other.second() )
 {
@@ -62,7 +62,7 @@ constexpr bit::stl::compressed_pair<T1,T2>
 
 template<typename T1, typename T2>
 template<typename U1, typename U2, std::enable_if_t<bit::stl::detail::is_explicit_constructible<T1,T2,const U1&,const U2&>::value>*>
-constexpr bit::stl::compressed_pair<T1,T2>
+inline constexpr bit::stl::compressed_pair<T1,T2>
   ::compressed_pair( const compressed_pair<U1,U2>& other )
   : base_type( other.first(), other.second() )
 {
@@ -72,7 +72,7 @@ constexpr bit::stl::compressed_pair<T1,T2>
 
 template<typename T1, typename T2>
 template<typename U1, typename U2, std::enable_if_t<bit::stl::detail::is_constructible<T1,T2,U1&&,U2&&>::value>*>
-constexpr bit::stl::compressed_pair<T1,T2>
+inline constexpr bit::stl::compressed_pair<T1,T2>
   ::compressed_pair( compressed_pair<U1,U2>&& other )
   : base_type( std::forward<U1>(other.first()), std::forward<U2>(other.second()))
 {
@@ -80,7 +80,7 @@ constexpr bit::stl::compressed_pair<T1,T2>
 
 template<typename T1, typename T2>
 template<typename U1, typename U2, std::enable_if_t<bit::stl::detail::is_explicit_constructible<T1,T2,U1&&,U2&&>::value>*>
-constexpr bit::stl::compressed_pair<T1,T2>
+inline constexpr bit::stl::compressed_pair<T1,T2>
   ::compressed_pair( compressed_pair<U1,U2>&& other )
   : base_type( std::forward<U1>(other.first()), std::forward<U2>(other.second()))
 {
@@ -90,7 +90,7 @@ constexpr bit::stl::compressed_pair<T1,T2>
 
 template<typename T1, typename T2>
 template<typename...Args1, typename...Args2>
-constexpr bit::stl::compressed_pair<T1,T2>
+inline constexpr bit::stl::compressed_pair<T1,T2>
   ::compressed_pair( std::piecewise_construct_t,
                      std::tuple<Args1...> first_args,
                      std::tuple<Args2...> second_args )
@@ -100,7 +100,7 @@ constexpr bit::stl::compressed_pair<T1,T2>
 //----------------------------------------------------------------------------
 
 template<typename T1, typename T2>
-bit::stl::compressed_pair<T1,T2>&
+inline bit::stl::compressed_pair<T1,T2>&
   bit::stl::compressed_pair<T1,T2>::operator=( const compressed_pair& other )
 {
   base_type::first()  = other.first();
@@ -111,7 +111,7 @@ bit::stl::compressed_pair<T1,T2>&
 
 template<typename T1, typename T2>
 template<typename U1, typename U2>
-bit::stl::compressed_pair<T1,T2>&
+inline bit::stl::compressed_pair<T1,T2>&
   bit::stl::compressed_pair<T1,T2>::operator=( const compressed_pair<U1,U2>& other )
 {
   base_type::first()  = other.first();
@@ -121,7 +121,7 @@ bit::stl::compressed_pair<T1,T2>&
 }
 
 template<typename T1, typename T2>
-bit::stl::compressed_pair<T1,T2>&
+inline bit::stl::compressed_pair<T1,T2>&
   bit::stl::compressed_pair<T1,T2>::operator=( compressed_pair&& other )
 {
   base_type::first()  = std::move(other.first());
@@ -132,7 +132,7 @@ bit::stl::compressed_pair<T1,T2>&
 
 template<typename T1, typename T2>
 template<typename U1, typename U2>
-bit::stl::compressed_pair<T1,T2>&
+inline bit::stl::compressed_pair<T1,T2>&
   bit::stl::compressed_pair<T1,T2>::operator=( compressed_pair<U1,U2>&& other )
 {
   base_type::first()  = std::move(other.first());
@@ -184,7 +184,7 @@ inline constexpr const typename bit::stl::compressed_pair<T1,T2>::second_type&
 //-----------------------------------------------------------------------------
 
 template<typename T1, typename T2>
-void bit::stl::compressed_pair<T1,T2>::swap( compressed_pair& other )
+inline void bit::stl::compressed_pair<T1,T2>::swap( compressed_pair& other )
 {
   using std::swap;
 
@@ -192,36 +192,143 @@ void bit::stl::compressed_pair<T1,T2>::swap( compressed_pair& other )
   swap( base_type::second(), other.second() );
 }
 
+//-----------------------------------------------------------------------------
+// Private Observers
+//-----------------------------------------------------------------------------
+
+template<typename T1, typename T2>
+inline T1& bit::stl::compressed_pair<T1,T2>::get( size_constant<0> )
+  &
+{
+  return first();
+}
+
+template<typename T1, typename T2>
+inline const T1& bit::stl::compressed_pair<T1,T2>::get( size_constant<0> )
+  const &
+{
+  return first();
+}
+
+template<typename T1, typename T2>
+inline T1&& bit::stl::compressed_pair<T1,T2>::get( size_constant<0> )
+  &&
+{
+  return std::move(first());
+}
+
+template<typename T1, typename T2>
+inline const T1&& bit::stl::compressed_pair<T1,T2>::get( size_constant<0> )
+  const &&
+{
+  return std::move(first());
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename T1, typename T2>
+inline T1& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
+  &
+{
+  return second();
+}
+
+template<typename T1, typename T2>
+inline const T1& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
+  const &
+{
+  return second();
+}
+
+template<typename T1, typename T2>
+inline T1&& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
+  &&
+{
+  return std::move(second());
+}
+
+template<typename T1, typename T2>
+inline const T1&& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
+  const &&
+{
+  return std::move(second());
+}
 
 //-----------------------------------------------------------------------------
 // Free Functions
 //-----------------------------------------------------------------------------
 
 template<typename T1, typename T2>
-void bit::stl::swap( compressed_pair<T1,T2>& lhs, compressed_pair<T1,T2>& rhs )
+inline void bit::stl::swap( compressed_pair<T1,T2>& lhs,
+                            compressed_pair<T1,T2>& rhs )
 {
   lhs.swap(rhs);
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T1, typename T2>
-constexpr bool bit::stl::operator==( const compressed_pair<T1,T2>& lhs,
-                                     const compressed_pair<T1,T2>& rhs )
+inline constexpr bit::stl::compressed_pair<std::decay_t<T1>,std::decay_t<T2>>
+  bit::stl::make_compressed_pair( T1&& x, T2&& y )
+{
+  return {std::forward<T1>(x),std::forward<T2>(y)};
+}
+
+//-----------------------------------------------------------------------------
+
+template<std::size_t Idx, typename T1, typename T2>
+inline constexpr bit::stl::tuple_element_t<Idx,bit::stl::compressed_pair<T1,T2>>&
+  bit::stl::get( compressed_pair<T1,T2>& p )
+  noexcept
+{
+  return p.get( size_constant<Idx>{} );
+}
+
+template<std::size_t Idx, typename T1, typename T2>
+inline constexpr const bit::stl::tuple_element_t<Idx,bit::stl::compressed_pair<T1,T2>>&
+  bit::stl::get( const compressed_pair<T1,T2>& p )
+  noexcept
+{
+  return p.get( size_constant<Idx>{} );
+}
+
+template<std::size_t Idx, typename T1, typename T2>
+inline constexpr bit::stl::tuple_element_t<Idx,bit::stl::compressed_pair<T1,T2>>&&
+  bit::stl::get( compressed_pair<T1,T2>&& p )
+  noexcept
+{
+  return std::move(p).get( size_constant<Idx>{} );
+}
+
+template<std::size_t Idx, typename T1, typename T2>
+inline constexpr const bit::stl::tuple_element_t<Idx,bit::stl::compressed_pair<T1,T2>>&&
+  bit::stl::get( const compressed_pair<T1,T2>&& p )
+  noexcept
+{
+  return std::move(p).get( size_constant<Idx>{} );
+}
+
+//-----------------------------------------------------------------------------
+// Comparison
+//-----------------------------------------------------------------------------
+
+template<typename T1, typename T2>
+inline constexpr bool bit::stl::operator==( const compressed_pair<T1,T2>& lhs,
+                                            const compressed_pair<T1,T2>& rhs )
 {
   return lhs.first() == rhs.first() && lhs.second() == rhs.second();
 }
 
 template<typename T1, typename T2>
-constexpr bool bit::stl::operator!=( const compressed_pair<T1,T2>& lhs,
-                                     const compressed_pair<T1,T2>& rhs )
+inline constexpr bool bit::stl::operator!=( const compressed_pair<T1,T2>& lhs,
+                                            const compressed_pair<T1,T2>& rhs )
 {
   return !(lhs==rhs);
 }
 
 template<typename T1, typename T2>
-constexpr bool bit::stl::operator<( const compressed_pair<T1,T2>& lhs,
-                                    const compressed_pair<T1,T2>& rhs )
+inline constexpr bool bit::stl::operator<( const compressed_pair<T1,T2>& lhs,
+                                           const compressed_pair<T1,T2>& rhs )
 {
   return (lhs.first()==rhs.first())
          ? lhs.second() < rhs.second()
@@ -229,33 +336,24 @@ constexpr bool bit::stl::operator<( const compressed_pair<T1,T2>& lhs,
 }
 
 template<typename T1, typename T2>
-constexpr bool bit::stl::operator<=( const compressed_pair<T1,T2>& lhs,
-                                     const compressed_pair<T1,T2>& rhs )
+inline constexpr bool bit::stl::operator<=( const compressed_pair<T1,T2>& lhs,
+                                            const compressed_pair<T1,T2>& rhs )
 {
   return (rhs<lhs);
 }
 
 template<typename T1, typename T2>
-constexpr bool bit::stl::operator>( const compressed_pair<T1,T2>& lhs,
-                                    const compressed_pair<T1,T2>& rhs )
+inline constexpr bool bit::stl::operator>( const compressed_pair<T1,T2>& lhs,
+                                           const compressed_pair<T1,T2>& rhs )
 {
   return !(rhs<lhs);
 }
 
 template<typename T1, typename T2>
-constexpr bool bit::stl::operator>=( const compressed_pair<T1,T2>& lhs,
-                                     const compressed_pair<T1,T2>& rhs )
+inline constexpr bool bit::stl::operator>=( const compressed_pair<T1,T2>& lhs,
+                                            const compressed_pair<T1,T2>& rhs )
 {
   return !(lhs<rhs);
-}
-
-//------------------------------------------------------------------------
-
-template<typename T1, typename T2>
-constexpr bit::stl::compressed_pair<std::decay_t<T1>,std::decay_t<T2>>
-  bit::stl::make_compressed_pair( T1&& x, T2&& y )
-{
-  return {std::forward<T1>(x),std::forward<T2>(y)};
 }
 
 #endif /* BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_INL */
