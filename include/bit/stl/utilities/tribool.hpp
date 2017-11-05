@@ -17,8 +17,8 @@ namespace bit {
 
       struct tribool_t
       {
-        tribool_t() = delete;
-        explicit tribool_t(int){};
+        constexpr tribool_t() = delete;
+        explicit constexpr tribool_t(int){};
       };
 
     } // namespace detail

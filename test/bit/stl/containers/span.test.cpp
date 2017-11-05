@@ -409,7 +409,7 @@ TEST_CASE("span::at( size_type )", "[accessor]")
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
   SECTION("Throws when out of range")
   {
-    REQUIRE_THROWS_AS(view.at(11),std::out_of_range&);
+    REQUIRE_THROWS_AS(view.at(11),std::out_of_range);
   }
 #endif
 
@@ -455,7 +455,7 @@ TEST_CASE("span::copy( value_type*, size_type, size_type )","[operation]")
   {
     int result[5];
 
-    REQUIRE_THROWS_AS( view.copy(result,11,11), std::out_of_range& );
+    REQUIRE_THROWS_AS(view.copy(result,11,11), std::out_of_range);
   }
 #endif
 
@@ -516,7 +516,7 @@ TEST_CASE("span::subspan( size_type, size_type )","[operation]")
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
   SECTION("Throws std::out_of_range if pos > size")
   {
-    REQUIRE_THROWS_AS( view.subspan(12), std::out_of_range& );
+    REQUIRE_THROWS_AS(view.subspan(12), std::out_of_range);
   }
 #endif
 

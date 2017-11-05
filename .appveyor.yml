@@ -5,7 +5,6 @@
 version: '{build}'
 
 os:
-  - Visual Studio 2015
   - Visual Studio 2017
 
 ################
@@ -16,11 +15,6 @@ environment:
   matrix:
   - additional_flags: ""
   - additional_flags: "/permissive- /std:c++latest"
-
-matrix:
-  exclude:
-    - additional_flags: "/permissive- /std:c++latest"
-      os: Visual Studio 2015
 
 build:
   verbosity: detailed
@@ -46,7 +40,7 @@ install:
   # Download Catch
   - set CATCH_DIR=%cd%\catch\include
   - mkdir %CATCH_DIR%
-  - appveyor DownloadFile https://github.com/philsquared/Catch/releases/download/v1.10.0/catch.hpp -FileName %CATCH_DIR%\catch.hpp
+  - appveyor DownloadFile https://github.com/catchorg/Catch2/releases/download/v2.0.1/catch.hpp -FileName %CATCH_DIR%\catch.hpp
 
 #####################
 # Update Submodules #
@@ -62,12 +56,13 @@ before_build:
 build_script:
   - mkdir build
   - cd build
-  - IF "%APPVEYOR_BUILD_WORKER_IMAGE%" == "Visual Studio 2015" ( SET GEN="Visual Studio 14 2015") ELSE (SET GEN="Visual Studio 15 2017")
-  - cmake .. -G%GEN% -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DCMAKE_INCLUDE_PATH=%CATCH_DIR% -DBIT_STL_COMPILE_UNIT_TESTS=On -DBIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS=On
+  - SET GEN="Visual Studio 15 2017"
+  - cmake .. -G%GEN% -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DCMAKE_INCLUDE_PATH=%CATCH_DIR% -DBIT_STL_COMPILE_UNIT_TESTS=On
   - cmake --build . --config %CONFIGURATION%
 
 #############
 # Test Step #
 #############
 test_script:
-  - cmake --build . --target test
+  - SET CTEST_OUTPUT_ON_FAILURE=1
+  - ctest -C %CONFIGURATION%

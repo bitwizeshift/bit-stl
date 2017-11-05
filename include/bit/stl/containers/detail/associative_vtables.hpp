@@ -84,8 +84,8 @@ namespace bit {
             return ps->size();
           };
 
-          table->count_ptr = +count_function;
-          table->size_ptr  = +size_function;
+          table->count_ptr = count_function;
+          table->size_ptr  = size_function;
         }
       };
 
@@ -141,7 +141,7 @@ namespace bit {
             return ps->at( key );
           };
 
-          table->at_ptr = +at_function;
+          table->at_ptr = at_function;
 
           set_vtable<Key>::build_vtable( table );
         }

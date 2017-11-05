@@ -6,7 +6,6 @@ set(sources
       # utilities
       bit/stl/utilities/compressed_pair.test.cpp
       bit/stl/utilities/delegate.test.cpp
-      bit/stl/utilities/expected.test.cpp
       bit/stl/utilities/lazy.test.cpp
       bit/stl/utilities/tribool.test.cpp
 

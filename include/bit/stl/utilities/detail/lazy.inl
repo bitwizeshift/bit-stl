@@ -11,7 +11,7 @@ namespace bit {
     template<typename T>
     inline lazy<T>::lazy()
       noexcept
-      : m_ctor_function(+[](void* ptr){ uninitialized_tuple_construct_at<T>(ptr, std::forward_as_tuple() ); }),
+      : m_ctor_function([](void* ptr){ uninitialized_tuple_construct_at<T>(ptr, std::forward_as_tuple() ); }),
         m_storage(),
         m_is_initialized(false)
     {

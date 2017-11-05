@@ -11,6 +11,9 @@
 
 #include <type_traits> // for std::is_base_of
 #include <utility>     // for std::forward
+#include <functional>  // std::reference_wrapper
+
+#include <type_traits> // std::true_type, std::false_type
 
 namespace bit {
   namespace stl {
@@ -26,7 +29,7 @@ namespace bit {
       constexpr bool is_reference_wrapper_v = is_reference_wrapper<T>::value;
 
       template<typename Base, typename T, typename Derived, typename... Args>
-      auto invoke_impl(T Base::*pmf, Derived&& ref, Args&&... args)
+      inline constexpr auto invoke_impl(T Base::*pmf, Derived&& ref, Args&&... args)
         noexcept(noexcept((std::forward<Derived>(ref).*pmf)(std::forward<Args>(args)...)))
         -> std::enable_if_t<std::is_function<T>::value &&
                             std::is_base_of<Base, std::decay_t<Derived>>::value,
@@ -36,7 +39,7 @@ namespace bit {
       }
 
       template<typename Base, typename T, typename RefWrap, typename... Args>
-      auto invoke_impl(T Base::*pmf, RefWrap&& ref, Args&&... args)
+      inline constexpr auto invoke_impl(T Base::*pmf, RefWrap&& ref, Args&&... args)
         noexcept(noexcept((ref.get().*pmf)(std::forward<Args>(args)...)))
         -> std::enable_if_t<std::is_function<T>::value &&
                             is_reference_wrapper<std::decay_t<RefWrap>>::value,
@@ -47,7 +50,7 @@ namespace bit {
       }
 
       template<typename Base, typename T, typename Pointer, typename... Args>
-      auto invoke_impl(T Base::*pmf, Pointer&& ptr, Args&&... args)
+      inline constexpr auto invoke_impl(T Base::*pmf, Pointer&& ptr, Args&&... args)
         noexcept(noexcept(((*std::forward<Pointer>(ptr)).*pmf)(std::forward<Args>(args)...)))
         -> std::enable_if_t<std::is_function<T>::value &&
                             !is_reference_wrapper<std::decay_t<Pointer>>::value &&
@@ -58,7 +61,7 @@ namespace bit {
       }
 
       template<typename Base, typename T, typename Derived>
-      auto invoke_impl(T Base::*pmd, Derived&& ref)
+      inline constexpr auto invoke_impl(T Base::*pmd, Derived&& ref)
         noexcept(noexcept(std::forward<Derived>(ref).*pmd))
         -> std::enable_if_t<!std::is_function<T>::value &&
                             std::is_base_of<Base, std::decay_t<Derived>>::value,
@@ -68,7 +71,7 @@ namespace bit {
       }
 
       template<typename Base, typename T, typename RefWrap>
-      auto invoke_impl(T Base::*pmd, RefWrap&& ref)
+      inline constexpr auto invoke_impl(T Base::*pmd, RefWrap&& ref)
         noexcept(noexcept(ref.get().*pmd))
         -> std::enable_if_t<!std::is_function<T>::value &&
                             is_reference_wrapper<std::decay_t<RefWrap>>::value,
@@ -78,7 +81,7 @@ namespace bit {
       }
 
       template<typename Base, typename T, typename Pointer>
-      auto invoke_impl(T Base::*pmd, Pointer&& ptr)
+      inline constexpr auto invoke_impl(T Base::*pmd, Pointer&& ptr)
         noexcept(noexcept((*std::forward<Pointer>(ptr)).*pmd))
         -> std::enable_if_t<!std::is_function<T>::value &&
                             !is_reference_wrapper<std::decay_t<Pointer>>::value &&
@@ -89,7 +92,7 @@ namespace bit {
       }
 
       template<typename F, typename... Args>
-      auto invoke_impl(F&& f, Args&&... args)
+      inline constexpr auto invoke_impl(F&& f, Args&&... args)
           noexcept(noexcept(std::forward<F>(f)(std::forward<Args>(args)...)))
        -> std::enable_if_t<!std::is_member_pointer<std::decay_t<F>>::value,
           decltype(std::forward<F>(f)(std::forward<Args>(args)...))>

@@ -25,8 +25,10 @@ namespace bit {
     /// \param function Callable object to be invoked
     /// \param args     arguments to pass to \p function
     template<typename Func, typename... Args>
-    auto invoke(Func&& function, Args&&... args)
+    constexpr auto invoke(Func&& function, Args&&... args)
+#ifndef _MSC_VER
       noexcept( noexcept( detail::invoke_impl(std::forward<Func>(function), std::forward<Args>(args)...) ) )
+#endif
       -> decltype( detail::invoke_impl(std::forward<Func>(function), std::forward<Args>(args)...) );
 
 

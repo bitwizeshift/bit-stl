@@ -28,7 +28,7 @@ inline constexpr void
     return function(std::forward<Types>(args)...);
   };
   m_delegate_stub.first  = nullptr;
-  m_delegate_stub.second = +callback;
+  m_delegate_stub.second = callback;
 }
 
 //----------------------------------------------------------------------------
@@ -44,7 +44,7 @@ inline constexpr void
     return (static_cast<C*>(ptr)->*member_function)(std::forward<Types>(args)...);
   };
   m_delegate_stub.first  = instance;
-  m_delegate_stub.second = +callback;
+  m_delegate_stub.second = callback;
 }
 
 template<typename R, typename ... Types>
@@ -87,7 +87,7 @@ inline constexpr void
     return (static_cast<const C*>(ptr)->*member_function)(std::forward<Types>(args)...);
   };
   m_delegate_stub.first  = const_cast<C*>(instance); // needed for const
-  m_delegate_stub.second = +callback;
+  m_delegate_stub.second = callback;
 }
 
 template<typename R, typename ... Types>

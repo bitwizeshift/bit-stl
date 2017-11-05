@@ -4,8 +4,10 @@
 namespace bit {
   namespace stl {
     template<typename Func, typename... Args>
-    auto invoke(Func&& func, Args&&... args)
-      noexcept( noexcept( detail::invoke_impl(std::forward<Func>(func), std::forward<Args>(args)...) ) )
+    inline constexpr auto invoke(Func&& func, Args&&... args)
+#ifndef _MSC_VER
+      noexcept( noexcept( bit::stl::detail::invoke_impl(std::forward<Func>(func), std::forward<Args>(args)...) ) )
+#endif
       -> decltype( detail::invoke_impl(std::forward<Func>(func), std::forward<Args>(args)...) )
     {
       return detail::invoke_impl(std::forward<Func>(func), std::forward<Args>(args)...);
