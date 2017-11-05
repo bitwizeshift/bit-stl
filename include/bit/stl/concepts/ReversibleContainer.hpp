@@ -17,27 +17,27 @@
 
 namespace bit {
   namespace stl {
-  namespace detail {
+    namespace detail {
 
-    template<typename T, typename = void>
-    struct is_reversible_container_impl : false_type{};
+      template<typename T, typename = void>
+      struct is_reversible_container_impl : false_type{};
 
-    template<typename T>
-    struct is_reversible_container_impl<T,
-      void_t<
-        typename T::reverse_iterator,
-        typename T::const_reverse_iterator,
-        decltype(typename T::reverse_iterator( std::declval<T&>().rbegin() )),
-        decltype(typename T::reverse_iterator( std::declval<T&>().rend() )),
-        decltype(typename T::const_reverse_iterator( std::declval<T&>().crbegin() )),
-        decltype(typename T::const_reverse_iterator( std::declval<T&>().crend() ))
-      >
-    > : conjunction<
-      is_container<T>,
-      is_bidirectional_iterator<typename T::reverse_iterator>,
-      is_bidirectional_iterator<typename T::const_reverse_iterator>
-    >{};
-  } // namespace detail
+      template<typename T>
+      struct is_reversible_container_impl<T,
+        void_t<
+          typename T::reverse_iterator,
+          typename T::const_reverse_iterator,
+          decltype(typename T::reverse_iterator( std::declval<T&>().rbegin() )),
+          decltype(typename T::reverse_iterator( std::declval<T&>().rend() )),
+          decltype(typename T::const_reverse_iterator( std::declval<T&>().crbegin() )),
+          decltype(typename T::const_reverse_iterator( std::declval<T&>().crend() ))
+        >
+      > : conjunction<
+        is_container<T>,
+        is_bidirectional_iterator<typename T::reverse_iterator>,
+        is_bidirectional_iterator<typename T::const_reverse_iterator>
+      >{};
+    } // namespace detail
 
   /// \brief Type trait to determine if a given type is a ReversibleContainer
   ///
