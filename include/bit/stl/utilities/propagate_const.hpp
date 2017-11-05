@@ -184,9 +184,16 @@ namespace bit {
       constexpr operator const element_type*() const;
 #else
       template<typename U=T, typename = std::enable_if_t<std::is_pointer<U>::value || std::is_convertible<U,element_type*>::value>>
-      constexpr operator element_type*();
+      constexpr operator element_type*()
+      {
+        return m_pointer;
+      }
+
       template<typename U=T, typename = std::enable_if_t<std::is_pointer<U>::value || std::is_convertible<U,const element_type*>::value>>
-      constexpr operator const element_type*() const;
+      constexpr operator const element_type*() const
+      {
+        return m_pointer;
+      }
 #endif
       /// \}
 

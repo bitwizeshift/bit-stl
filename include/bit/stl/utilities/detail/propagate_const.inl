@@ -127,23 +127,6 @@ inline constexpr const typename bit::stl::propagate_const<T>::element_type*
 }
 
 //-----------------------------------------------------------------------------
-
-template<typename T>
-template<typename, typename>
-inline constexpr bit::stl::propagate_const<T>::operator element_type*()
-{
-  return m_pointer;
-}
-
-template<typename T>
-template<typename, typename>
-inline constexpr bit::stl::propagate_const<T>::operator const element_type*()
-  const
-{
-  return m_pointer;
-}
-
-//-----------------------------------------------------------------------------
 // Private Implementation
 //-----------------------------------------------------------------------------
 
