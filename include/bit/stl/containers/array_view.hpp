@@ -27,6 +27,8 @@ namespace bit {
     ///
     /// This type behaves like a const span, but is only constructible from
     /// contiguous data containers and raw arrays, not from pointer + size.
+    ///
+    /// \satisfies{ContiguousContainer}
     ///////////////////////////////////////////////////////////////////////////
     template<typename T>
     class array_view
@@ -36,7 +38,6 @@ namespace bit {
         is_contiguous_container<Container>::value &&
         !std::is_same<std::decay_t<Container>, array_view>::value
        >{};
-
 
       //-----------------------------------------------------------------------
       // Public Member Types
@@ -135,6 +136,11 @@ namespace bit {
       ///
       /// \return the number of entries in the array_view
       constexpr size_type size() const noexcept;
+
+      /// \brief Returns the max size of this array_view
+      ///
+      /// \return the max number of entries in this array_view
+      constexpr size_type max_size() const noexcept;
 
       /// \brief Returns whether the array_view is empty
       ///

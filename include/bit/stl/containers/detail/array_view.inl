@@ -97,6 +97,14 @@ inline constexpr typename bit::stl::array_view<T>::size_type
   return m_size;
 }
 
+template<typename T>
+inline constexpr typename bit::stl::array_view<T>::size_type
+  bit::stl::array_view<T>::max_size()
+  const noexcept
+{
+  return m_size;
+}
+
 //-----------------------------------------------------------------------------
 
 template<typename T>
