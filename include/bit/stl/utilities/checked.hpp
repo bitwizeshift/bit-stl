@@ -9,9 +9,7 @@
 #ifndef BIT_STL_UTILITIES_CHECKED_HPP
 #define BIT_STL_UTILITIES_CHECKED_HPP
 
-#define BIT_NODISCARD __attribute__((warn_unused_result))
-
-#include "stddef.hpp"      //
+#include "stddef.hpp"      // BIT_NODISCARD
 #include "assert.hpp"      // BIT_ASSERT
 #include "hash.hpp"        // hash_range
 #include "in_place.hpp"    // in_place_t

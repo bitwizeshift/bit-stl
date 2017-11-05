@@ -122,7 +122,7 @@ inline bit::stl::error_code
 template<typename T>
 inline bit::stl::checked<T>::checked()
   noexcept( std::is_nothrow_default_constructible<T>::value )
-  : m_storage( stl::in_place<T> ),
+  : m_storage( in_place_type<T> ),
     m_is_checked( false ),
     m_has_value( true )
 {
@@ -196,7 +196,7 @@ template<typename T>
 template<typename...Args>
 inline bit::stl::checked<T>::checked( in_place_t, Args&&...args )
   noexcept(std::is_nothrow_constructible<T,Args...>::value)
-  : m_storage( in_place<T>, std::forward<Args>(args)... ),
+  : m_storage( in_place_type<T>, std::forward<Args>(args)... ),
     m_is_checked( false ),
     m_has_value( true )
 {
@@ -208,7 +208,7 @@ template<typename U, typename...Args>
 inline bit::stl::checked<T>::
   checked( in_place_t, std::initializer_list<U> ilist, Args&&...args )
   noexcept(std::is_nothrow_constructible<T,std::initializer_list<U>,Args...>::value)
-  : m_storage( in_place<T>, ilist, std::forward<Args>(args)... ),
+  : m_storage( in_place_type<T>, ilist, std::forward<Args>(args)... ),
     m_is_checked( false ),
     m_has_value( true )
 {
@@ -221,7 +221,7 @@ template<typename T>
 template<typename U, std::enable_if_t<bit::stl::detail::checked_is_direct_initializable<T,U>::value && std::is_convertible<U&&, T>::value>*>
 inline bit::stl::checked<T>::checked( U&& value )
   noexcept(std::is_nothrow_constructible<T,U>::value)
-  : m_storage( in_place<T>, std::forward<U>(value) ),
+  : m_storage( in_place_type<T>, std::forward<U>(value) ),
     m_is_checked( false ),
     m_has_value( true )
 {
@@ -232,7 +232,7 @@ template<typename T>
 template<typename U, std::enable_if_t<bit::stl::detail::checked_is_direct_initializable<T,U>::value && !std::is_convertible<U&&, T>::value>*>
 inline bit::stl::checked<T>::checked( U&& value )
   noexcept(std::is_nothrow_constructible<T,U>::value)
-  : m_storage( in_place<T>, std::forward<U>(value) ),
+  : m_storage( in_place_type<T>, std::forward<U>(value) ),
     m_is_checked( false ),
     m_has_value( true )
 {
@@ -465,14 +465,14 @@ template<typename T, typename...Args>
 inline bit::stl::checked<T>
   bit::stl::make_checked( Args&&...args )
 {
-  return checked<T>( in_place<T>, std::forward<Args>(args)... );
+  return checked<T>( in_place_type<T>, std::forward<Args>(args)... );
 }
 
 template<typename T, typename U, typename...Args>
 inline bit::stl::checked<T>
   bit::stl::make_checked( std::initializer_list<U> ilist, Args&&...args )
 {
-  return checked<T>( in_place<T>, std::move(ilist), std::forward<Args>(args)... );
+  return checked<T>( in_place_type<T>, std::move(ilist), std::forward<Args>(args)... );
 }
 
 #endif /* BIT_STL_UTILITIES_DETAIL_CHECKED_INL */

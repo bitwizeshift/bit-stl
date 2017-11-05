@@ -29,7 +29,7 @@ namespace {
     try {
       throw std::logic_error("logic error");
     } catch (...) {
-      return bit::stl::expected<int>( bit::stl::in_place<std::exception_ptr> );
+      return bit::stl::expected<int>( bit::stl::in_place_type<std::exception_ptr> );
     }
     return 42; // this case never gets hit
   }
@@ -91,7 +91,7 @@ TEST_CASE("expected::expected( in_place_type<std::exception_ptr> )", "[ctor]")
 
 TEST_CASE("expected::expected( in_place_type<Exception>, Args&&... )", "[ctor]")
 {
-  auto expect = bit::stl::expected<std::string>( bit::stl::in_place<std::logic_error>, "test" );
+  auto expect = bit::stl::expected<std::string>( bit::stl::in_place_type<std::logic_error>, "test" );
 
   SECTION("Constructs an expected with an exception")
   {
