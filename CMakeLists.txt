@@ -71,6 +71,7 @@ set(headers
   include/bit/stl/traits/properties/index_of_type.hpp
   include/bit/stl/traits/properties/is_const_member_function_pointer.hpp
   include/bit/stl/traits/properties/is_cv_member_function_pointer.hpp
+  include/bit/stl/traits/properties/is_explicitly_convertible.hpp
   include/bit/stl/traits/properties/is_volatile_member_function_pointer.hpp
   include/bit/stl/traits/properties/nth_type.hpp
   include/bit/stl/traits/properties/pointer_rank.hpp
