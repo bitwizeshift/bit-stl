@@ -1,9 +1,9 @@
 #ifndef BIT_STL_CONTAINERS_DETAIL_SPAN_INL
 #define BIT_STL_CONTAINERS_DETAIL_SPAN_INL
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Constructors
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T, std::ptrdiff_t Extent>
 inline constexpr bit::stl::span<T,Extent>::span()
@@ -73,9 +73,9 @@ inline constexpr bit::stl::span<T,Extent>::span( ContiguousContainer& container 
 
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Capacity
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T, std::ptrdiff_t Extent>
 inline constexpr typename bit::stl::span<T,Extent>::size_type
@@ -125,9 +125,9 @@ inline constexpr bool bit::stl::span<T,Extent>::empty()
   return m_storage.size() == 0;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Element Access
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T, std::ptrdiff_t Extent>
 inline constexpr typename bit::stl::span<T,Extent>::pointer
@@ -145,7 +145,7 @@ inline constexpr typename bit::stl::span<T,Extent>::const_pointer
   return m_storage.data();
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T, std::ptrdiff_t Extent>
 inline constexpr typename bit::stl::span<T,Extent>::reference
@@ -163,7 +163,7 @@ inline constexpr typename bit::stl::span<T,Extent>::const_reference
   return m_storage.data()[pos];
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T, std::ptrdiff_t Extent>
 inline constexpr typename bit::stl::span<T,Extent>::reference
@@ -172,7 +172,7 @@ inline constexpr typename bit::stl::span<T,Extent>::reference
   BIT_ASSERT_OR_THROW(std::out_of_range, pos >= 0, "span::at: position out of range");
   BIT_ASSERT_OR_THROW(std::out_of_range, static_cast<size_type>(pos) < size(), "span::at: position out of range");
 
-  return *(data() + pos);
+  return *(m_storage.data() + pos);
 }
 
 template<typename T, std::ptrdiff_t Extent>
@@ -183,17 +183,17 @@ inline constexpr typename bit::stl::span<T,Extent>::const_reference
   BIT_ASSERT_OR_THROW(std::out_of_range, pos >= 0, "span::at: position out of range");
   BIT_ASSERT_OR_THROW(std::out_of_range, static_cast<size_type>(pos) < size(), "span::at: position out of range");
 
-  return *(data() + pos);
+  return *(m_storage.data() + pos);
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T, std::ptrdiff_t Extent>
 inline constexpr typename bit::stl::span<T,Extent>::reference
   bit::stl::span<T,Extent>::front()
   noexcept
 {
-  return *data();
+  return *m_storage.data();
 }
 
 template<typename T, std::ptrdiff_t Extent>
@@ -201,17 +201,17 @@ inline constexpr typename bit::stl::span<T,Extent>::const_reference
   bit::stl::span<T,Extent>::front()
   const noexcept
 {
-  return *data();
+  return *m_storage.data();
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T, std::ptrdiff_t Extent>
 inline constexpr typename bit::stl::span<T,Extent>::reference
   bit::stl::span<T,Extent>::back()
   noexcept
 {
-  return *(data() + (size() - 1));
+  return *(m_storage.data() + (size() - 1));
 }
 
 template<typename T, std::ptrdiff_t Extent>
@@ -219,12 +219,12 @@ inline constexpr typename bit::stl::span<T,Extent>::const_reference
   bit::stl::span<T,Extent>::back()
   const noexcept
 {
-  return *(data() + (size() - 1));
+  return *(m_storage.data() + (size() - 1));
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Modifiers
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T, std::ptrdiff_t Extent>
 inline void bit::stl::span<T,Extent>::swap( span& other )
@@ -235,9 +235,9 @@ inline void bit::stl::span<T,Extent>::swap( span& other )
   swap(m_storage,other.m_storage);
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Operations
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T, std::ptrdiff_t Extent>
 inline typename bit::stl::span<T,Extent>::size_type
@@ -249,7 +249,7 @@ inline typename bit::stl::span<T,Extent>::size_type
   BIT_ASSERT_OR_THROW(std::out_of_range, pos < size(), "span::copy: Index out of range");
 
   const size_type rcount = std::min(size() - pos,count+1);
-  std::copy( data() + pos, data() + pos + rcount, dest);
+  std::copy( m_storage.data() + pos, m_storage.data() + pos + rcount, dest);
   return rcount;
 }
 
@@ -285,16 +285,16 @@ inline constexpr bit::stl::span<T,bit::stl::dynamic_extent>
          : subspan( size() - n );
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Iterators
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T, std::ptrdiff_t Extent>
 inline constexpr typename bit::stl::span<T,Extent>::iterator
   bit::stl::span<T,Extent>::begin()
   const noexcept
 {
-  return iterator( data() ? data() : nullptr );
+  return iterator( m_storage.data() );
 }
 
 template<typename T, std::ptrdiff_t Extent>
@@ -302,7 +302,7 @@ inline constexpr typename bit::stl::span<T,Extent>::iterator
   bit::stl::span<T,Extent>::end()
   const noexcept
 {
-  return iterator( data() ? (data() + size()) : nullptr );
+  return iterator( m_storage.data() ) + size();
 }
 
 template<typename T, std::ptrdiff_t Extent>
@@ -310,7 +310,7 @@ inline constexpr typename bit::stl::span<T,Extent>::const_iterator
   bit::stl::span<T,Extent>::cbegin()
   const noexcept
 {
-  return const_iterator( data() ? data() : nullptr );
+  return const_iterator( m_storage.data() );
 }
 
 template<typename T, std::ptrdiff_t Extent>
@@ -318,17 +318,20 @@ inline constexpr typename bit::stl::span<T,Extent>::const_iterator
   bit::stl::span<T,Extent>::cend()
   const noexcept
 {
-  return const_iterator( data() ? data() + size() : nullptr );
+  return const_iterator( m_storage.data() ) + size();
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T, std::ptrdiff_t Extent>
 inline constexpr typename bit::stl::span<T,Extent>::reverse_iterator
   bit::stl::span<T,Extent>::rbegin()
   const noexcept
 {
-  return reverse_iterator( m_storage.data() ? (m_storage.data() + (m_storage.size() - 1)) : nullptr );
+  if( empty() ) {
+    return reverse_iterator( nullptr );
+  }
+  return reverse_iterator( m_storage.data() ) + (size() - 1);
 }
 
 template<typename T, std::ptrdiff_t Extent>
@@ -336,7 +339,10 @@ inline constexpr typename bit::stl::span<T,Extent>::reverse_iterator
   bit::stl::span<T,Extent>::rend()
   const noexcept
 {
-  return reverse_iterator( m_storage.data() ? (m_storage.data() - 1) : nullptr );
+  if( empty() ) {
+    return reverse_iterator( nullptr );
+  }
+  return reverse_iterator( m_storage.data() ) - 1;
 }
 
 template<typename T, std::ptrdiff_t Extent>
@@ -344,7 +350,10 @@ inline constexpr typename bit::stl::span<T,Extent>::const_reverse_iterator
   bit::stl::span<T,Extent>::crbegin()
   const noexcept
 {
-  return const_reverse_iteartor( m_storage.data() ? (m_storage.data() + (m_storage.size() - 1)) : nullptr );
+  if( empty() ) {
+    return const_reverse_iterator( nullptr );
+  }
+  return const_reverse_iterator( m_storage.data() ) + (size() - 1);
 }
 
 template<typename T, std::ptrdiff_t Extent>
@@ -352,7 +361,10 @@ inline constexpr typename bit::stl::span<T,Extent>::const_reverse_iterator
   bit::stl::span<T,Extent>::crend()
   const noexcept
 {
-  return const_reverse_iterator( m_storage.data() ? (m_storage.data() - 1) : nullptr );
+  if( empty() ) {
+    return const_reverse_iterator( nullptr );
+  }
+  return const_reverse_iterator( m_storage.data() ) - 1;
 }
 
 //----------------------------------------------------------------------------

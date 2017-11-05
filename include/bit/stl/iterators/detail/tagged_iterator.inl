@@ -179,8 +179,8 @@ inline constexpr bit::stl::tagged_iterator<Iterator,U>
 
 template<typename Iterator, typename U>
 inline constexpr bit::stl::tagged_iterator<Iterator,U>
-  bit::stl::operator+( typename tagged_iterator<Iterator,U>::difference_type rhs,
-                       const tagged_iterator<Iterator,U>& lhs )
+  bit::stl::operator+( typename tagged_iterator<Iterator,U>::difference_type lhs,
+                       const tagged_iterator<Iterator,U>& rhs )
   noexcept
 {
   return tagged_iterator<Iterator,U>(rhs) + lhs;

@@ -11,20 +11,23 @@
 #define BIT_STL_CONTAINERS_ARRAY_VIEW_HPP
 
 #include "../traits/bool_constant.hpp"
-#include "../concepts/ContiguousContainer.hpp"
-#include "../iterators/tagged_iterator.hpp" // tagged_iterator
 
-#include <stdexcept>
+#include "../concepts/ContiguousContainer.hpp"
+
+#include "../iterators/tagged_iterator.hpp"
+
+#include <stdexcept> // std::out_of_range
+#include <algorithm> // std::equal, std::lexicographical_compare
 
 namespace bit {
   namespace stl {
 
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     /// \brief An immutable wrapper around non-owned contiguous data.
     ///
     /// This type behaves like a const span, but is only constructible from
     /// contiguous data containers and raw arrays, not from pointer + size.
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     template<typename T>
     class array_view
     {
@@ -35,9 +38,9 @@ namespace bit {
        >{};
 
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Public Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       using value_type      = std::decay_t<T>;
@@ -54,16 +57,16 @@ namespace bit {
       using reverse_iterator       = std::reverse_iterator<iterator>;
       using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Public Static Members
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       static constexpr size_type npos = size_type(-1);
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Constructors
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Constructs an empty array_view
@@ -106,9 +109,9 @@ namespace bit {
 #endif
       constexpr array_view( const Container& container ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Assignment
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Copy-assigns this array_view with \p other
@@ -123,9 +126,9 @@ namespace bit {
       /// \return reference to \c (*this)
       array_view& operator = ( array_view&& other ) noexcept = default;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Capacity
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Returns the number of entries in the array_view
@@ -138,9 +141,9 @@ namespace bit {
       /// \return \c true if this array_view is empty, \c false otherwise
       constexpr bool empty() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Element Access
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Gets the data of the current array_view
@@ -174,9 +177,9 @@ namespace bit {
       /// \return reference to the entry of the array
       constexpr const_reference back() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Modifiers
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Moves the start of the view forward by n entries.
@@ -198,9 +201,9 @@ namespace bit {
       /// \param other the other view to swap with
       constexpr void swap( array_view<T>& other ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Operations
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Retrives a subarray of a given array_view
@@ -209,9 +212,9 @@ namespace bit {
       /// \param count  the length of the subarray
       constexpr array_view subarray( size_type offset = 0, size_type count = npos ) const;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Iterators
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Retrieves the begin iterator for this array_view
@@ -246,17 +249,17 @@ namespace bit {
       /// \copydoc array_view::rend()
       constexpr const_reverse_iterator crend() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Members
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       const T*  m_ptr;  ///< Pointer to the entry
       size_type m_size; ///< The size of the array
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Constructor
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       /// \brief Constructs an array_view from a given pointer and size
@@ -267,8 +270,24 @@ namespace bit {
 
     };
 
+    //=========================================================================
+    // Free Functions
+    //=========================================================================
+
+    //-------------------------------------------------------------------------
+    // Utilities
+    //-------------------------------------------------------------------------
+
+    /// \brief Swaps \p lhs with \p rhs
+    ///
+    /// \param lhs the left array view
+    /// \param rhs the right array view
     template<typename T>
-    void swap( array_view<T>& lhs, array_view<T>& rhs );
+    constexpr void swap( array_view<T>& lhs, array_view<T>& rhs ) noexcept;
+
+    //-------------------------------------------------------------------------
+    // Comparison
+    //-------------------------------------------------------------------------
 
     template<typename T>
     constexpr bool operator==(const array_view<T>& lhs, const array_view<T>& rhs);

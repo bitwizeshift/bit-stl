@@ -1,9 +1,9 @@
 #ifndef BIT_STL_CONTAINERS_DETAIL_ARRAY_VIEW_INL
 #define BIT_STL_CONTAINERS_DETAIL_ARRAY_VIEW_INL
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Constructor
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr bit::stl::array_view<T>::array_view()
@@ -14,7 +14,7 @@ inline constexpr bit::stl::array_view<T>::array_view()
 
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr bit::stl::array_view<T>::array_view( const array_view& other )
@@ -25,7 +25,7 @@ inline constexpr bit::stl::array_view<T>::array_view( const array_view& other )
 
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr bit::stl::array_view<T>::array_view( array_view&& other )
@@ -37,7 +37,7 @@ inline constexpr bit::stl::array_view<T>::array_view( array_view&& other )
   other.m_size = 0;
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 template<std::size_t N>
@@ -49,7 +49,7 @@ inline constexpr bit::stl::array_view<T>::array_view( value_type (&array)[N] )
 
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 template<std::size_t N>
@@ -72,8 +72,7 @@ inline constexpr bit::stl::array_view<T>::
 
 }
 
-
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 template<typename Container,typename>
@@ -86,9 +85,9 @@ inline constexpr bit::stl::array_view<T>::
 
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Capacity
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::size_type
@@ -98,7 +97,7 @@ inline constexpr typename bit::stl::array_view<T>::size_type
   return m_size;
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr bool bit::stl::array_view<T>::empty()
@@ -107,9 +106,9 @@ inline constexpr bool bit::stl::array_view<T>::empty()
   return m_size == 0;
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Element Access
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr const typename bit::stl::array_view<T>::value_type*
@@ -119,7 +118,7 @@ inline constexpr const typename bit::stl::array_view<T>::value_type*
   return m_ptr;
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_reference
@@ -129,7 +128,7 @@ inline constexpr typename bit::stl::array_view<T>::const_reference
   return m_ptr[n];
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_reference
@@ -142,7 +141,7 @@ inline constexpr typename bit::stl::array_view<T>::const_reference
   return m_ptr[n];
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_reference
@@ -152,7 +151,7 @@ inline constexpr typename bit::stl::array_view<T>::const_reference
   return m_ptr[0];
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_reference
@@ -162,9 +161,9 @@ inline constexpr typename bit::stl::array_view<T>::const_reference
   return m_ptr[m_size-1];
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Modifiers
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr void bit::stl::array_view<T>::remove_front( size_type n )
@@ -174,7 +173,7 @@ inline constexpr void bit::stl::array_view<T>::remove_front( size_type n )
   m_size -= n;
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr void bit::stl::array_view<T>::remove_back( size_type n )
@@ -183,7 +182,7 @@ inline constexpr void bit::stl::array_view<T>::remove_back( size_type n )
   m_size -= n;
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr void bit::stl::array_view<T>::swap( array_view<T>& rhs )
@@ -195,9 +194,9 @@ inline constexpr void bit::stl::array_view<T>::swap( array_view<T>& rhs )
   swap(m_ptr,rhs.m_ptr);
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Operations
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr bit::stl::array_view<T>
@@ -212,9 +211,9 @@ inline constexpr bit::stl::array_view<T>
   return array_view<T>( m_ptr + offset, count > max_length ? max_length : count );
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Iterators
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_iterator
@@ -224,7 +223,6 @@ inline constexpr typename bit::stl::array_view<T>::const_iterator
   return iterator(m_ptr);
 }
 
-//------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_iterator
@@ -234,7 +232,7 @@ inline constexpr typename bit::stl::array_view<T>::const_iterator
   return iterator(m_ptr + m_size);
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_iterator
@@ -244,7 +242,6 @@ inline constexpr typename bit::stl::array_view<T>::const_iterator
   return const_iterator(m_ptr);
 }
 
-//------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_iterator
@@ -254,7 +251,7 @@ inline constexpr typename bit::stl::array_view<T>::const_iterator
   return const_iterator(m_ptr + m_size);
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_reverse_iterator
@@ -264,7 +261,6 @@ inline constexpr typename bit::stl::array_view<T>::const_reverse_iterator
   return reverse_iterator(m_ptr + (m_size-1));
 }
 
-//------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_reverse_iterator
@@ -274,7 +270,7 @@ inline constexpr typename bit::stl::array_view<T>::const_reverse_iterator
   return reverse_iterator(m_ptr - 1);
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_reverse_iterator
@@ -284,7 +280,6 @@ inline constexpr typename bit::stl::array_view<T>::const_reverse_iterator
   return const_reverse_iterator(m_ptr + (m_size - 1));
 }
 
-//------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr typename bit::stl::array_view<T>::const_reverse_iterator
@@ -294,9 +289,9 @@ inline constexpr typename bit::stl::array_view<T>::const_reverse_iterator
   return const_reverse_iterator(m_ptr - 1);
 }
 
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Private Constructors
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline constexpr bit::stl::array_view<T>::
@@ -306,6 +301,67 @@ inline constexpr bit::stl::array_view<T>::
     m_size(size)
 {
 
+}
+
+//=============================================================================
+// Free Functions
+//=============================================================================
+
+//-----------------------------------------------------------------------------
+// Utilities
+//-----------------------------------------------------------------------------
+
+template<typename T>
+inline constexpr void bit::stl::swap( array_view<T>& lhs,
+                                      array_view<T>& rhs )
+  noexcept
+{
+  lhs.swap(rhs);
+}
+
+//-----------------------------------------------------------------------------
+// Comparison
+//-----------------------------------------------------------------------------
+
+template<typename T>
+inline constexpr bool bit::stl::operator==( const array_view<T>& lhs,
+                                            const array_view<T>& rhs )
+{
+  return std::equal(lhs.begin(),lhs.end(),rhs.begin(),rhs.end());
+}
+
+template<typename T>
+inline constexpr bool bit::stl::operator!=( const array_view<T>& lhs,
+                                            const array_view<T>& rhs )
+{
+  return !(lhs==rhs);
+}
+
+template<typename T>
+inline constexpr bool bit::stl::operator<( const array_view<T>& lhs,
+                                           const array_view<T>& rhs )
+{
+  return std::lexicographical_compare(lhs.begin(),lhs.end(),rhs.begin(),rhs.end());
+}
+
+template<typename T>
+inline constexpr bool bit::stl::operator>( const array_view<T>& lhs,
+                                           const array_view<T>& rhs )
+{
+  return (rhs < lhs);
+}
+
+template<typename T>
+inline constexpr bool bit::stl::operator<=( const array_view<T>& lhs,
+                                            const array_view<T>& rhs )
+{
+  return !(lhs > rhs);
+}
+
+template<typename T>
+constexpr bool bit::stl::operator>=(const array_view<T>& lhs, const array_view<T>& rhs)
+{
+  return !(lhs < rhs);
 }
 
 #endif /* BIT_STL_CONTAINERS_DETAIL_ARRAY_VIEW_INL */
