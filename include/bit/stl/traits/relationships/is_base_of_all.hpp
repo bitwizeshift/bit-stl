@@ -15,8 +15,11 @@
 namespace bit {
   namespace stl {
 
-    template<typename T, typename...Bases>
-    struct is_base_of_all : conjunction<std::is_base_of<Bases,T>...>{};
+    template<typename Base, typename...Derived>
+    struct is_base_of_all : conjunction<std::is_base_of<Base,Derived>...>{};
+
+    template<typename Base, typename...Derived>
+    constexpr bool is_base_of_all_v = is_base_of_all<Base,Derived...>::value;
 
   } // namespace stl
 } // namespace bit

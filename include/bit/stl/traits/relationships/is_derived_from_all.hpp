@@ -16,7 +16,10 @@ namespace bit {
   namespace stl {
 
     template<typename Derived, typename...Bases>
-    struct is_derived_from : conjunction<std::is_base_of<Bases,Derived>...>{};
+    struct is_derived_from_all : conjunction<std::is_base_of<Bases,Derived>...>{};
+
+    template<typename Derived, typename...Bases>
+    constexpr bool is_derived_from_all_v = is_derived_from_all<Derived,Bases...>::value;
 
   } // namespace stl
 } // namespace bit

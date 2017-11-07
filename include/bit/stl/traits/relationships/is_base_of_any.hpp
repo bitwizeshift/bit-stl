@@ -15,11 +15,11 @@
 namespace bit {
   namespace stl {
 
-    template<typename T, typename...Bases>
-    struct is_base_of_any : disjunction<std::is_base_of<Bases,T>...>{};
+    template<typename Base, typename...Derived>
+    struct is_base_of_any : disjunction<std::is_base_of<Base,Derived>...>{};
 
-    template<typename T, typename...Bases>
-    constexpr bool is_base_of_any_v = is_base_of_any<T,Bases...>::value;
+    template<typename Base, typename...Derived>
+    constexpr bool is_base_of_any_v = is_base_of_any<Base,Derived...>::value;
 
   } // namespace stl
 } // namespace bit
