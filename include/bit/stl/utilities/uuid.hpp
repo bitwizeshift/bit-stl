@@ -60,7 +60,7 @@ namespace bit {
       /// \brief Move-constructs a uuid from another uuid
       ///
       /// \param other the other uuid to move
-      constexpr uuid( uuid& other ) noexcept = default;
+      constexpr uuid( uuid&& other ) noexcept = default;
 
       //----------------------------------------------------------------------
       // Assignment
