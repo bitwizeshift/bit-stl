@@ -10,7 +10,7 @@
 #define BIT_STL_UTILITIES_STDDEF_HPP
 
 // std libraries
-#include <cstdlib>
+#include <cstddef> // std::size_t, std::ptrdiff_t, etc
 
 //! \def BIT_DEBUG
 //! \brief Debug build
