@@ -9,11 +9,6 @@
 #ifndef BIT_STL_UTILITIES_ASSERT_HPP
 #define BIT_STL_UTILITIES_ASSERT_HPP
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-# pragma once
-#endif
-
-// bit::stl local libraries
 #include "stddef.hpp"
 #include "source_location.hpp"
 
@@ -61,7 +56,6 @@ namespace bit {
 
       source_location m_location;
     };
-
   } // namespace stl
 } // namespace bit
 

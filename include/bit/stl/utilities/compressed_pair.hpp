@@ -9,6 +9,8 @@
 #ifndef BIT_STL_UTILITIES_COMPRESSED_PAIR_HPP
 #define BIT_STL_UTILITIES_COMPRESSED_PAIR_HPP
 
+#include "hash.hpp"
+
 #include "detail/tuple_size.hpp"
 #include "detail/tuple_element.hpp"
 
@@ -421,6 +423,11 @@ namespace bit {
     // Utilities
     //-------------------------------------------------------------------------
 
+    /// \brief Hashes a std::pair
+    ///
+    /// \param pair the pair to hash
+    template<typename T, typename U>
+    constexpr std::size_t hash_value( const compressed_pair<T,U>& pair );
 
     //-------------------------------------------------------------------------
 

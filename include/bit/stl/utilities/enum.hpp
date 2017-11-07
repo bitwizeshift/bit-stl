@@ -5,12 +5,14 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
 #ifndef BIT_STL_UTILITIES_ENUM_HPP
 #define BIT_STL_UTILITIES_ENUM_HPP
 
 #include "assert.hpp"
+
 #include "../containers/string_view.hpp"
+
+// TODO(bitwizeshift): Sever this dependency
 #include "../iterators/tagged_iterator.hpp"
 
 namespace bit {

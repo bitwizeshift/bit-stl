@@ -10,12 +10,17 @@
 #ifndef BIT_STL_UTILITIES_LAZY_HPP
 #define BIT_STL_UTILITIES_LAZY_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif
+
 #include "in_place.hpp"    // in_place_t
 
 #include "../traits/conjunction.hpp"
 #include "../traits/disjunction.hpp"
 #include "../traits/negation.hpp"
 
+// TODO(bitwizeshift): remove this dependency
 #include "../memory/uninitialized_storage.hpp" // uninitialized_construct_at
 
 #include <functional> // std::function

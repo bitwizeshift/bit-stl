@@ -1,7 +1,7 @@
 /**
  * \file final_act.hpp
  *
- * \brief TODO: Add description
+ * \brief This header contains the utility function and type, finally/final_act
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */

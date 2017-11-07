@@ -9,13 +9,8 @@
 #ifndef BIT_STL_UTILITIES_STDDEF_HPP
 #define BIT_STL_UTILITIES_STDDEF_HPP
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-# pragma once
-#endif
-
 // std libraries
 #include <cstdlib>
-
 
 //! \def BIT_DEBUG
 //! \brief Debug build
@@ -26,12 +21,6 @@
 # define BIT_DEBUG     1
 #endif
 
-//! \def BIT_NOOP()
-//! \brief Macro function indicating no operation will occur
-#ifndef BIT_NOOP
-# define BIT_NOOP() ((void)0)
-#endif
-
 //! \def BIT_UNUSED
 //!
 //! \brief Explicitly marks a variable \p var as being unused within a given function.
@@ -40,6 +29,12 @@
 //!
 //! \param var the variable to explicitly mark as unused
 #define BIT_UNUSED(var) (void)(var)
+
+//! \def BIT_NOOP()
+//! \brief Macro function indicating no operation will occur
+#ifndef BIT_NOOP
+# define BIT_NOOP() ((void)0)
+#endif
 
 /// \brief The parent namespace for all projects
 namespace bit {
@@ -83,8 +78,6 @@ namespace detail{} // namespace detail
 #include "detail/stddef/library_export.hpp"
 #include "detail/stddef/breakpoint.hpp"
 // IWYU pragma: end_exports
-
-#include "byte.hpp"
 
 namespace bit {
   namespace stl {

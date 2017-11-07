@@ -1,12 +1,17 @@
 /**
  * \file invoke.hpp
  *
- * \brief TODO: Add description
+ * \brief This header contains the definition for the INVOKE family of
+ *        utilities, including type-traits
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 #ifndef BIT_STL_UTILITIES_INVOKE_HPP
 #define BIT_STL_UTILITIES_INVOKE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif
 
 #include "detail/invoke.hpp"
 

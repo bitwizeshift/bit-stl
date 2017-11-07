@@ -19,8 +19,6 @@
 #include <type_traits> // std::is_empty, std::is_final, etc
 #include <utility>     // std::forward
 
-// TODO(bitwizeshift): Clean up this file, extract implementation to *.inl
-
 namespace bit {
   namespace stl {
     namespace detail {

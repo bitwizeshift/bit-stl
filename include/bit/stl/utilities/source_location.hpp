@@ -22,7 +22,7 @@ namespace bit {
     /// exceptions and assertions in order to easily runtime-query the exact
     /// location an exception was thrown.
     //////////////////////////////////////////////////////////////////////////
-    class source_location final
+    class source_location
     {
       //----------------------------------------------------------------------
       // Constructor

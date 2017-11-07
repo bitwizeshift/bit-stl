@@ -5,21 +5,14 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
 #ifndef BIT_STL_UTILITIES_CASTS_HPP
 #define BIT_STL_UTILITIES_CASTS_HPP
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-# pragma once
-#endif
-
-// bit::stl local libraries
 #include "stddef.hpp"
 #include "assert.hpp"
 
 #include "../traits/relationships/is_same_sign.hpp"
 
-// std libraries
 #include <cstring> // std::memcpy
 #include <limits>  // std::numeric_limits
 
@@ -119,10 +112,6 @@ namespace bit {
 
     } // inline namespace casts
   } // namespace stl
-
-  inline namespace casts {
-    using namespace stl::casts;
-  } // inline namespace casts
 } // namespace bit
 
 #include "detail/casts.inl"

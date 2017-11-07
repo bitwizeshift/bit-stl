@@ -2,10 +2,6 @@
 #define BIT_STL_UTILITIES_DETAIL_UTILITY_COMPRESSED_PAIR_INL
 
 //=============================================================================
-// detail::compressed_pair_impl
-//=============================================================================
-
-//=============================================================================
 // compressed_pair
 //=============================================================================
 
@@ -257,6 +253,16 @@ inline const T1&& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
 //-----------------------------------------------------------------------------
 // Free Functions
 //-----------------------------------------------------------------------------
+
+template<typename T, typename U>
+inline constexpr std::size_t
+  bit::stl::hash_value( const compressed_pair<T,U>& pair )
+{
+  auto seed = hash_value( pair.first );
+  hash_combine( seed, pair.second );
+
+  return seed;
+}
 
 template<typename T1, typename T2>
 inline void bit::stl::swap( compressed_pair<T1,T2>& lhs,

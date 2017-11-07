@@ -150,7 +150,6 @@ namespace bit {
       element_type m_instance; ///< The underlying instance
 
       template<typename> friend class pointer_wrapper;
-
     };
 
     //------------------------------------------------------------------------

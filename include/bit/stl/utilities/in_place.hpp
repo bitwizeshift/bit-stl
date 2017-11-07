@@ -1,7 +1,8 @@
 /**
  * \file in_place.hpp
  *
- * \brief TODO: Add description
+ * \brief This header contains the definitions for the utility type-tags,
+ *        in_place
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */

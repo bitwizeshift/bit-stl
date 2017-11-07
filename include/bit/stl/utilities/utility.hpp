@@ -8,15 +8,12 @@
 #ifndef BIT_STL_UTILITIES_UTILITY_HPP
 #define BIT_STL_UTILITIES_UTILITY_HPP
 
-// bit::stl libraries
-
 #include "../traits/identity.hpp"
 #include "../traits/void_t.hpp"
 
-// std libraries
-#include <type_traits> // for std::remove_reference
-#include <utility>     // for std::forward
-#include <stdexcept>   // for std::out_of_range
+#include <type_traits> // std::remove_reference
+#include <utility>     // std::forward
+#include <stdexcept>   // std::out_of_range
 
 namespace bit {
   namespace stl {

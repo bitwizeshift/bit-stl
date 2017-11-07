@@ -8,14 +8,9 @@
 #ifndef BIT_STL_UTILITIES_DELEGATE_HPP
 #define BIT_STL_UTILITIES_DELEGATE_HPP
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-# pragma once
-#endif
-
-// bit::stl local libraries
-#include "stddef.hpp" //
-#include "assert.hpp" // BIT_ASSERT
-#include "invoke.hpp" // is_invocable
+#include "stddef.hpp"
+#include "assert.hpp"
+#include "invoke.hpp"
 
 #include <type_traits> // std::enable_if
 #include <utility>     // std::forward, std::move

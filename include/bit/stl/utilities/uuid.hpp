@@ -9,9 +9,9 @@
 #ifndef BIT_STL_UTILITIES_UTILITIES_UUID_HPP
 #define BIT_STL_UTILITIES_UTILITIES_UUID_HPP
 
-#include "byte.hpp" // byte
+#include "byte.hpp"
 
-#include <algorithm>
+#include <algorithm> // std::equal, std::lexicographical_compare
 
 namespace bit {
   namespace stl {

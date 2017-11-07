@@ -6,8 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef INCLUDE_BIT_STL_TRAITS_SIZE_CONSTANT_HPP_
-#define INCLUDE_BIT_STL_TRAITS_SIZE_CONSTANT_HPP_
+#ifndef BIT_STL_TRAITS_SIZE_CONSTANT_HPP
+#define BIT_STL_TRAITS_SIZE_CONSTANT_HPP
 
 #include "integral_constant.hpp"
 #include "bool_constant.hpp"
@@ -46,4 +46,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* INCLUDE_BIT_STL_TRAITS_SIZE_CONSTANT_HPP_ */
+#endif /* BIT_STL_TRAITS_SIZE_CONSTANT_HPP */

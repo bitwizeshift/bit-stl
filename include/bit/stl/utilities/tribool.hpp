@@ -1,7 +1,7 @@
 /**
  * \file tribool.hpp
  *
- * \brief todo: fill in documentation
+ * \brief This header contains the definition of 'tribool', a tri-state type
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
