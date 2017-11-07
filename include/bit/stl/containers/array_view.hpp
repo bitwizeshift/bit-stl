@@ -10,7 +10,7 @@
 #ifndef BIT_STL_CONTAINERS_ARRAY_VIEW_HPP
 #define BIT_STL_CONTAINERS_ARRAY_VIEW_HPP
 
-#include "../traits/bool_constant.hpp"
+#include "../traits/composition/bool_constant.hpp"
 
 #include "../concepts/ContiguousContainer.hpp"
 

@@ -5,8 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_TRAITS_VOID_T_HPP
-#define BIT_STL_TRAITS_VOID_T_HPP
+#ifndef BIT_STL_TRAITS_COMPOSITION_VOID_T_HPP
+#define BIT_STL_TRAITS_COMPOSITION_VOID_T_HPP
 
 #include "identity.hpp"
 
@@ -28,4 +28,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_TRAITS_VOID_T_HPP */
+#endif /* BIT_STL_TRAITS_COMPOSITION_VOID_T_HPP */

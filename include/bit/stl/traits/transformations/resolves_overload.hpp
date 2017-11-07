@@ -9,8 +9,8 @@
 #ifndef BIT_STL_TRAITS_TRANSFORMATIONS_RESOLVES_OVERLOAD_HPP
 #define BIT_STL_TRAITS_TRANSFORMATIONS_RESOLVES_OVERLOAD_HPP
 
-#include "../size_constant.hpp"
-#include "../void_t.hpp"
+#include "../composition/size_constant.hpp"
+#include "../composition/void_t.hpp"
 #include "../properties/nth_type.hpp"
 
 #include <cstddef>     // std::size_t

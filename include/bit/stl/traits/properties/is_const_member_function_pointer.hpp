@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_CONST_MEMBER_FUNCTION_POINTER_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_CONST_MEMBER_FUNCTION_POINTER_HPP
 
-#include "../bool_constant.hpp"
+#include "../composition/bool_constant.hpp"
 
 namespace bit {
   namespace stl {

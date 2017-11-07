@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_TRANSFORMATIONS_BASE_TYPE_HPP
 #define BIT_STL_TRAITS_TRANSFORMATIONS_BASE_TYPE_HPP
 
-#include "../identity.hpp"
+#include "../composition/identity.hpp"
 
 #include <type_traits> // std::decay_t
 

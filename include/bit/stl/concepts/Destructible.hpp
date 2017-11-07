@@ -8,9 +8,9 @@
 #ifndef BIT_STL_CONCEPTS_DESTRUCTIBLE_HPP
 #define BIT_STL_CONCEPTS_DESTRUCTIBLE_HPP
 
-#include "../traits/void_t.hpp"
-#include "../traits/bool_constant.hpp"
-#include "../traits/conjunction.hpp"
+#include "../traits/composition/void_t.hpp"
+#include "../traits/composition/bool_constant.hpp"
+#include "../traits/composition/conjunction.hpp"
 
 #include <type_traits> // std::declval
 

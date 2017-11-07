@@ -8,9 +8,9 @@
 #ifndef BIT_STL_CONCEPTS_ASSOCIATIVECONTAINER_HPP
 #define BIT_STL_CONCEPTS_ASSOCIATIVECONTAINER_HPP
 
-#include "../traits/void_t.hpp"
-#include "../traits/conjunction.hpp"
-#include "../traits/bool_constant.hpp"
+#include "../traits/composition/void_t.hpp"
+#include "../traits/composition/conjunction.hpp"
+#include "../traits/composition/bool_constant.hpp"
 
 #include <type_traits>
 

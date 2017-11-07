@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_TRANSFORMATIONS_MATCH_REF_QUALIFIERS_HPP
 #define BIT_STL_TRAITS_TRANSFORMATIONS_MATCH_REF_QUALIFIERS_HPP
 
-#include "../identity.hpp"
+#include "../composition/identity.hpp"
 
 #include <type_traits> // std::is_lvalue_reference, std::is_rvalue_reference, etc
 

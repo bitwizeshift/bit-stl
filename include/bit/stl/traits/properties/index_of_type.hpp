@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_PROPERTIES_INDEX_OF_TYPE_HPP
 #define BIT_STL_TRAITS_PROPERTIES_INDEX_OF_TYPE_HPP
 
-#include "../size_constant.hpp"
+#include "../composition/size_constant.hpp"
 
 #include <cstddef>     // std::size_t
 

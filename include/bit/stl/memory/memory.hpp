@@ -8,14 +8,12 @@
 #ifndef BIT_STL_MEMORY_MEMORY_HPP
 #define BIT_STL_MEMORY_MEMORY_HPP
 
-// bit::stl local libraries
+#include "../traits/composition/conjunction.hpp"
+#include "../traits/composition/disjunction.hpp"
+#include "../traits/composition/negation.hpp"
+
 #include "../utilities/stddef.hpp"
 
-#include "../traits/conjunction.hpp"
-#include "../traits/disjunction.hpp"
-#include "../traits/negation.hpp"
-
-// std types
 #include <limits>
 #include <memory>
 

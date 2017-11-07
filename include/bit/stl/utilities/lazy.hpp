@@ -16,9 +16,9 @@
 
 #include "in_place.hpp"    // in_place_t
 
-#include "../traits/conjunction.hpp"
-#include "../traits/disjunction.hpp"
-#include "../traits/negation.hpp"
+#include "../traits/composition/conjunction.hpp"
+#include "../traits/composition/disjunction.hpp"
+#include "../traits/composition/negation.hpp"
 
 // TODO(bitwizeshift): remove this dependency
 #include "../memory/uninitialized_storage.hpp" // uninitialized_construct_at

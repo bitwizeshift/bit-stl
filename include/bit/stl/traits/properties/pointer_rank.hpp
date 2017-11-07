@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_PROPERTIES_POINTER_RANK_HPP
 #define BIT_STL_TRAITS_PROPERTIES_POINTER_RANK_HPP
 
-#include "../size_constant.hpp"
+#include "../composition/size_constant.hpp"
 
 #include <type_traits> // std::decay_t
 #include <cstddef>     // std::size_t

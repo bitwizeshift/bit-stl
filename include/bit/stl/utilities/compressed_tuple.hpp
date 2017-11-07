@@ -12,7 +12,7 @@
 #include "compressed_pair.hpp"
 #include "in_place.hpp"
 
-#include "../traits/size_constant.hpp"
+#include "../traits/composition/size_constant.hpp"
 #include "../traits/relationships/is_one_of.hpp"
 #include "../traits/properties/nth_type.hpp"
 

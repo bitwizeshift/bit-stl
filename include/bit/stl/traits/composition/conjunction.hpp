@@ -5,8 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_TRAITS_CONJUNCTION_HPP
-#define BIT_STL_TRAITS_CONJUNCTION_HPP
+#ifndef BIT_STL_TRAITS_COMPOSITION_CONJUNCTION_HPP
+#define BIT_STL_TRAITS_COMPOSITION_CONJUNCTION_HPP
 
 #include "bool_constant.hpp"
 
@@ -32,4 +32,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_TRAITS_CONJUNCTION_HPP */
+#endif /* BIT_STL_TRAITS_COMPOSITION_CONJUNCTION_HPP */

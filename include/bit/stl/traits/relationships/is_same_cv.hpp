@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_IS_SAME_CV_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_IS_SAME_CV_HPP
 
-#include "../bool_constant.hpp"
+#include "../composition/bool_constant.hpp"
 
 #include <type_traits> // std::is_const std::is_volatile
 

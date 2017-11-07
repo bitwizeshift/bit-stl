@@ -5,8 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_TRAITS_EMPTY_HPP
-#define BIT_STL_TRAITS_EMPTY_HPP
+#ifndef BIT_STL_TRAITS_COMPOSITION_EMPTY_HPP
+#define BIT_STL_TRAITS_COMPOSITION_EMPTY_HPP
 
 namespace bit {
   namespace stl {
@@ -19,4 +19,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_TRAITS_EMPTY_HPP */
+#endif /* BIT_STL_TRAITS_COMPOSITION_EMPTY_HPP */

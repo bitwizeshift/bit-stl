@@ -5,8 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_TRAITS_DETECTED_HPP
-#define BIT_STL_TRAITS_DETECTED_HPP
+#ifndef BIT_STL_TRAITS_COMPOSITION_DETECTED_HPP
+#define BIT_STL_TRAITS_COMPOSITION_DETECTED_HPP
 
 #include "nonesuch.hpp" // nonesuch
 #include "void_t.hpp"   // void_t
@@ -73,4 +73,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_TRAITS_DETECTED_HPP */
+#endif /* BIT_STL_TRAITS_COMPOSITION_DETECTED_HPP */

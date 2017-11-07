@@ -8,9 +8,9 @@
 #ifndef BIT_STL_CONCEPTS_ITERATOR_HPP
 #define BIT_STL_CONCEPTS_ITERATOR_HPP
 
-#include "../traits/bool_constant.hpp"
-#include "../traits/void_t.hpp"
-#include "../traits/conjunction.hpp"
+#include "../traits/composition/bool_constant.hpp"
+#include "../traits/composition/void_t.hpp"
+#include "../traits/composition/conjunction.hpp"
 
 #include <type_traits> // std::declval
 #include <iterator>    // std::iterator_traits

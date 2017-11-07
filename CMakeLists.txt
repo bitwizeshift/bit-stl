@@ -57,15 +57,18 @@ make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
 set(headers
 
   # Type Traits
-  include/bit/stl/traits/bool_constant.hpp
-  include/bit/stl/traits/conjunction.hpp
-  include/bit/stl/traits/detected.hpp
-  include/bit/stl/traits/disjunction.hpp
-  include/bit/stl/traits/empty.hpp
-  include/bit/stl/traits/identity.hpp
-  include/bit/stl/traits/integral_constant.hpp
-  include/bit/stl/traits/negation.hpp
-  include/bit/stl/traits/nonesuch.hpp
+  include/bit/stl/traits/composition/bool_constant.hpp
+  include/bit/stl/traits/composition/conjunction.hpp
+  include/bit/stl/traits/composition/detected.hpp
+  include/bit/stl/traits/composition/disjunction.hpp
+  include/bit/stl/traits/composition/empty.hpp
+  include/bit/stl/traits/composition/identity.hpp
+  include/bit/stl/traits/composition/integral_constant.hpp
+  include/bit/stl/traits/composition/negation.hpp
+  include/bit/stl/traits/composition/nonesuch.hpp
+  include/bit/stl/traits/composition/sfinae.hpp
+  include/bit/stl/traits/composition/size_constant.hpp
+  include/bit/stl/traits/composition/void_t.hpp
   include/bit/stl/traits/properties/arity.hpp
   include/bit/stl/traits/properties/function_argument.hpp
   include/bit/stl/traits/properties/index_of_type.hpp
@@ -86,8 +89,6 @@ set(headers
   include/bit/stl/traits/relationships/is_same_decay.hpp
   include/bit/stl/traits/relationships/is_same_sign.hpp
   include/bit/stl/traits/relationships/is_same_volatility.hpp
-  include/bit/stl/traits/sfinae.hpp
-  include/bit/stl/traits/size_constant.hpp
   include/bit/stl/traits/transformations/base_type.hpp
   include/bit/stl/traits/transformations/function_signature.hpp
   include/bit/stl/traits/transformations/match_cv_qualifiers.hpp
@@ -96,7 +97,6 @@ set(headers
   include/bit/stl/traits/transformations/normalize_char.hpp
   include/bit/stl/traits/transformations/remove_pointers.hpp
   include/bit/stl/traits/transformations/resolves_overload.hpp
-  include/bit/stl/traits/void_t.hpp
 
   # Concepts
   include/bit/stl/concepts/AssociativeContainer.hpp

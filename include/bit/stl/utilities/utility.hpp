@@ -8,8 +8,8 @@
 #ifndef BIT_STL_UTILITIES_UTILITY_HPP
 #define BIT_STL_UTILITIES_UTILITY_HPP
 
-#include "../traits/identity.hpp"
-#include "../traits/void_t.hpp"
+#include "../traits/composition/identity.hpp"
+#include "../traits/composition/void_t.hpp"
 
 #include <type_traits> // std::remove_reference
 #include <utility>     // std::forward

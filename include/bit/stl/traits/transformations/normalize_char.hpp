@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_TRANSFORMATIONS_NORMALIZE_CHAR_HPP
 #define BIT_STL_TRAITS_TRANSFORMATIONS_NORMALIZE_CHAR_HPP
 
-#include "../identity.hpp"
+#include "../composition/identity.hpp"
 
 namespace bit {
   namespace stl {

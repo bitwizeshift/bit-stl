@@ -8,7 +8,7 @@
 #ifndef BIT_STL_TRAITS_TRANSFORMATIONS_REMOVE_POINTERS_HPP
 #define BIT_STL_TRAITS_TRANSFORMATIONS_REMOVE_POINTERS_HPP
 
-#include "../identity.hpp"
+#include "../composition/identity.hpp"
 
 namespace bit {
   namespace stl {

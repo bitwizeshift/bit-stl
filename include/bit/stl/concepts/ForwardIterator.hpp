@@ -10,7 +10,7 @@
 
 #include "InputIterator.hpp"
 
-#include "../traits/conjunction.hpp"
+#include "../traits/composition/conjunction.hpp"
 
 namespace bit {
   namespace stl {

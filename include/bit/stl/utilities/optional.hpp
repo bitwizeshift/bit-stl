@@ -11,9 +11,9 @@
 #include "utility.hpp"
 #include "in_place.hpp" // in_place_t
 
-#include "../traits/conjunction.hpp"
-#include "../traits/disjunction.hpp"
-#include "../traits/negation.hpp"
+#include "../traits/composition/conjunction.hpp"
+#include "../traits/composition/disjunction.hpp"
+#include "../traits/composition/negation.hpp"
 
 #include <initializer_list>
 #include <type_traits>

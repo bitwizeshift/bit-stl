@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_VOLATILE_MEMBER_FUNCTION_POINTER_HPP_
 #define BIT_STL_TRAITS_PROPERTIES_IS_VOLATILE_MEMBER_FUNCTION_POINTER_HPP_
 
-#include "../bool_constant.hpp"
+#include "../composition/bool_constant.hpp"
 
 namespace bit {
   namespace stl {

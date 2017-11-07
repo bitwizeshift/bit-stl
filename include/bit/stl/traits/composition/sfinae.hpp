@@ -6,8 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_TRAITS_SFINAE_HPP
-#define BIT_STL_TRAITS_SFINAE_HPP
+#ifndef BIT_STL_TRAITS_COMPOSITION_SFINAE_HPP
+#define BIT_STL_TRAITS_COMPOSITION_SFINAE_HPP
 
 #include "identity.hpp"
 
@@ -85,4 +85,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_TRAITS_SFINAE_HPP */
+#endif /* BIT_STL_TRAITS_COMPOSITION_SFINAE_HPP */

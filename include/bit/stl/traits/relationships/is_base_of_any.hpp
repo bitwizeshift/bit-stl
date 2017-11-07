@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_IS_BASE_OF_ANY_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_IS_BASE_OF_ANY_HPP
 
-#include "../disjunction.hpp"
+#include "../composition/disjunction.hpp"
 
 #include <type_traits> // std::is_base_of
 

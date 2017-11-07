@@ -9,8 +9,8 @@
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_EXPLICITLY_CONVERTIBLE_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_EXPLICITLY_CONVERTIBLE_HPP
 
-#include "../negation.hpp"
-#include "../conjunction.hpp"
+#include "../composition/negation.hpp"
+#include "../composition/conjunction.hpp"
 
 #include <type_traits> // is_constructible, is_convertible
 

@@ -5,8 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_TRAITS_IDENTITY_HPP
-#define BIT_STL_TRAITS_IDENTITY_HPP
+#ifndef BIT_STL_TRAITS_COMPOSITION_IDENTITY_HPP
+#define BIT_STL_TRAITS_COMPOSITION_IDENTITY_HPP
 
 namespace bit {
   namespace stl {
@@ -27,4 +27,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_TRAITS_IDENTITY_HPP */
+#endif /* BIT_STL_TRAITS_COMPOSITION_IDENTITY_HPP */

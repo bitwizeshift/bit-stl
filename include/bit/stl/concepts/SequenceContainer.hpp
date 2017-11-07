@@ -11,8 +11,7 @@
 #include "Container.hpp"
 #include "BidirectionalIterator.hpp"
 
-#include "../traits/conjunction.hpp"
-#include "../traits/empty.hpp"
+#include "../traits/composition/conjunction.hpp"
 
 #include <type_traits>
 

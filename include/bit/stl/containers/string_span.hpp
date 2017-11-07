@@ -11,8 +11,8 @@
 
 #include "span.hpp"
 
-#include "../traits/negation.hpp"
-#include "../traits/conjunction.hpp"
+#include "../traits/composition/negation.hpp"
+#include "../traits/composition/conjunction.hpp"
 
 #include "../concepts/ContiguousContainer.hpp"
 

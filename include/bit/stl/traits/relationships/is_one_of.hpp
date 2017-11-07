@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_IS_ONE_OF_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_IS_ONE_OF_HPP
 
-#include "../bool_constant.hpp" // true_type, false_type
+#include "../composition/bool_constant.hpp" // true_type, false_type
 
 namespace bit {
   namespace stl {

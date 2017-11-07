@@ -6,8 +6,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_TRAITS_INTEGRAL_CONSTANT_HPP
-#define BIT_STL_TRAITS_INTEGRAL_CONSTANT_HPP
+#ifndef BIT_STL_TRAITS_COMPOSITION_INTEGRAL_CONSTANT_HPP
+#define BIT_STL_TRAITS_COMPOSITION_INTEGRAL_CONSTANT_HPP
 
 #include <type_traits>
 
@@ -26,4 +26,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_TRAITS_INTEGRAL_CONSTANT_HPP */
+#endif /* BIT_STL_TRAITS_COMPOSITION_INTEGRAL_CONSTANT_HPP */

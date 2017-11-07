@@ -11,7 +11,7 @@
 #define BIT_STL_CONTAINERS_SPAN_HPP
 
 // local bit libraries
-#include "../traits/bool_constant.hpp"
+#include "../traits/composition/bool_constant.hpp"
 #include "../traits/transformations/match_cv_qualifiers.hpp"
 #include "../traits/relationships/is_same_decay.hpp"
 

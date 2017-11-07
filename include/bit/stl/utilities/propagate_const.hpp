@@ -9,8 +9,8 @@
 #ifndef BIT_STL_UTILITIES_PROPAGATE_CONST_HPP
 #define BIT_STL_UTILITIES_PROPAGATE_CONST_HPP
 
+#include "../traits/composition/bool_constant.hpp"
 #include "../traits/properties/is_explicitly_convertible.hpp"
-#include "../traits/bool_constant.hpp"
 
 #include <type_traits> // std::remove_reference_t, etc
 #include <utility>     // std::forward, std::move

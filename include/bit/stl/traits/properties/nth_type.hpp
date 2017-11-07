@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_PROPERTIES_NTH_TYPE_HPP
 #define BIT_STL_TRAITS_PROPERTIES_NTH_TYPE_HPP
 
-#include "../identity.hpp"
+#include "../composition/identity.hpp"
 
 #include <cstddef>     // std::size_t
 

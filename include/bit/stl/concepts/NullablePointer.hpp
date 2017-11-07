@@ -11,9 +11,9 @@
 #include "EqualityComparable.hpp"
 #include "Destructible.hpp"
 
-#include "../traits/void_t.hpp"
-#include "../traits/conjunction.hpp"
-#include "../traits/bool_constant.hpp"
+#include "../traits/composition/void_t.hpp"
+#include "../traits/composition/conjunction.hpp"
+#include "../traits/composition/bool_constant.hpp"
 
 #include <type_traits> // std::declval, std::decay_t
 

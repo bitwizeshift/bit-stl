@@ -15,7 +15,7 @@
 
 #include "detail/invoke.hpp"
 
-#include "../traits/identity.hpp"
+#include "../traits/composition/identity.hpp"
 
 #include <utility>     // std::forward
 #include <type_traits> // std::declval

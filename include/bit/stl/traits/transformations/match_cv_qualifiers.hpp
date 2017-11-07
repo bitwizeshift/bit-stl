@@ -9,7 +9,7 @@
 #ifndef BIT_STL_TRAITS_TRANSFORMATIONS_MATCH_CV_QUALIFIERS_HPP
 #define BIT_STL_TRAITS_TRANSFORMATIONS_MATCH_CV_QUALIFIERS_HPP
 
-#include "../identity.hpp"
+#include "../composition/identity.hpp"
 
 #include <type_traits> // std::add_const, std::add_volatile, std::is_const, etc
 

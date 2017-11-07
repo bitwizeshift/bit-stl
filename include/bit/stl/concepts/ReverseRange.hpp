@@ -10,8 +10,8 @@
 
 #include "Iterator.hpp"
 
-#include "../traits/bool_constant.hpp"
-#include "../traits/conjunction.hpp"
+#include "../traits/composition/bool_constant.hpp"
+#include "../traits/composition/conjunction.hpp"
 
 namespace bit {
   namespace stl {
