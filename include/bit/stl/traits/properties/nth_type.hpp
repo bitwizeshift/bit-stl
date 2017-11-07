@@ -1,7 +1,8 @@
 /**
  * \file nth_type.hpp
  *
- * \brief TODO: Add description
+ * \brief This header defines a type-trait for extracting the \c nth type from
+ *        a variadic pack
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -15,6 +16,9 @@
 namespace bit {
   namespace stl {
 
+    /// \brief Type-trait for extracting the \c Ith type from a variadic pack
+    ///
+    /// The result is aliased as \c ::type
     template<std::size_t I, typename...Types>
     struct nth_type;
 
@@ -24,6 +28,7 @@ namespace bit {
     template<typename Type0, typename...Types>
     struct nth_type<0,Type0,Types...> : identity<Type0>{};
 
+    /// \brief Helper utility to extract nth_type::type
     template<std::size_t I, typename...Types>
     using nth_type_t = typename nth_type<I,Types...>::type;
 

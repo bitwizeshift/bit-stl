@@ -1,7 +1,8 @@
 /**
  * \file are_same.hpp
  *
- * \brief TODO: Add description
+ * \brief This header defines a type-trait for checking that all types are the
+ *        same
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -13,6 +14,9 @@
 namespace bit {
   namespace stl {
 
+    /// \brief Type-trait to determine that all types are the same type
+    ///
+    /// The result is aliased as \c ::value
     template<typename T, typename...Ts>
     struct are_same : false_type{};
 
@@ -22,6 +26,7 @@ namespace bit {
     template<typename T>
     struct are_same<T,T> : true_type{};
 
+    /// \brief Helper utility to extract are_same::value
     template<typename T, typename...Ts>
     constexpr bool are_same_v = are_same<T,Ts...>::value;
 

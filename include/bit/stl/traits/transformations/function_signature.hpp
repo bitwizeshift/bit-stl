@@ -16,6 +16,11 @@
 namespace bit {
   namespace stl {
 
+    /// \brief Metafunction to extract the signature of a given function type
+    ///
+    /// The result is aliased as \c ::type
+    ///
+    /// \tparam fn the function to check
     template<typename Fn>
     struct function_signature;
 
@@ -58,6 +63,7 @@ namespace bit {
     template<typename C, typename R, typename...ArgTypes>
     struct function_signature<R(C::*)(ArgTypes...) const volatile> : identity<R(ArgTypes...)>{};
 
+    /// \brief Helper utility to extract function_signature::type
     template<typename T>
     using function_signature_t = typename function_signature<T>::type;
 

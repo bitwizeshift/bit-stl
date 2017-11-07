@@ -1,7 +1,8 @@
 /**
  * \file is_one_of.hpp
  *
- * \brief TODO: Add description
+ * \brief This header defines a type-trait to determine if a given type is part
+ *        of a variadic set
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -13,6 +14,9 @@
 namespace bit {
   namespace stl {
 
+    /// \brief Type-trait to determine if \c T is one of \c Ts
+    ///
+    /// The result is aliased as \c ::value
     template<typename T, typename...Ts>
     struct is_one_of;
 
@@ -25,6 +29,7 @@ namespace bit {
     template<typename T>
     struct is_one_of<T> : false_type{};
 
+    /// \brief Helper utility to extract is_one_of::value
     template<typename T, typename...Ts>
     constexpr bool is_one_of_v = is_one_of<T,Ts...>::value;
 

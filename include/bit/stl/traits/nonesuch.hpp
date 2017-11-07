@@ -1,7 +1,7 @@
 /**
  * \file nonesuch.hpp
  *
- * \brief TODO: Add description
+ * \brief This header contains the utility type nonesuch
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -11,6 +11,7 @@
 namespace bit {
   namespace stl {
 
+    /// \brief A utility type for the detected_t idiom
     struct nonesuch {
         nonesuch() = delete;
         ~nonesuch() = delete;

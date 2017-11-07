@@ -1,7 +1,8 @@
 /**
  * \file is_same_constness.hpp
  *
- * \brief TODO: Add description
+ * \brief This header defines a type-trait for detecting if a type has the same
+ *        constness
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -15,11 +16,16 @@
 namespace bit {
   namespace stl {
 
+    /// \brief Type-trait to determine if \c T and \c U have the same const-
+    ///        qualification
+    ///
+    /// The result is aliased as \c ::value
     template<typename T, typename U>
     struct is_same_constness : bool_constant<
       (std::is_const<T>::value == std::is_const<U>::value)
     >{};
 
+    /// \brief Helper utility to extract is_same_constness::value
     template<typename T, typename U>
     constexpr bool is_same_constness_v = is_same_constness<T,U>::value;
 

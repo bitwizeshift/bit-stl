@@ -1,7 +1,8 @@
 /**
  * \file index_of_type.hpp
  *
- * \brief TODO: Add description
+ * \brief This header defines a type-trait to determine the index of a type in
+ *        a variadic pack
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -27,9 +28,14 @@ namespace bit {
 
     } // namespace detail
 
+    /// \brief Type trait to determine the index of \c T in the variadic pack
+    ///        \c Types
+    ///
+    /// The result is aliased as \c ::value
     template<typename T, typename...Types>
     struct index_of_type : detail::index_of_type_impl<0,T,Types...>{};
 
+    /// \brief Helper utility to extract index_of_type::value
     template<typename T, typename...Types>
     constexpr std::size_t index_of_type_v = index_of_type<T,Types...>::value;
 

@@ -1,7 +1,8 @@
 /**
  * \file is_explicitly_convertible.hpp
  *
- * \brief TODO: Add description
+ * \brief This header defines a type-trait for determining whether a type is
+ *        explicitly convertible to another type
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -16,13 +17,20 @@
 namespace bit {
   namespace stl {
 
-    template<typename T, typename U>
+    /// \brief Type-trait to determine if \c From is explicitly convertible to
+    ///        \c to
+    ///
+    /// The result is aliased as \c ::value
+    ///
+    /// \tparam From the type casting from
+    /// \tparam To the type casting to
+    template<typename From, typename To>
     struct is_explicitly_convertible :
-      conjunction<std::is_constructible<U,T>, negation<std::is_convertible<T,U>>>
-    {};
+      conjunction<std::is_constructible<To,From>, negation<std::is_convertible<From,To>>>{};
 
-    template<typename T, typename U>
-    constexpr bool is_explicitly_convertible_v = is_explicitly_convertible<T,U>::value;
+    /// \brief Helper utility to extract nth_type::type
+    template<typename From, typename To>
+    constexpr bool is_explicitly_convertible_v = is_explicitly_convertible<From,To>::value;
 
   } // namespace stl
 } // namespace bit

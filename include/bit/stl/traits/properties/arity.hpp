@@ -1,7 +1,7 @@
 /**
  * \file arity.hpp
  *
- * \brief TODO: Add description
+ * \brief This header defines a type-trait to determine the arity of a function
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -16,6 +16,9 @@
 namespace bit {
   namespace stl {
 
+    /// \brief Type-trait to determine the arity of a function
+    ///
+    /// The result is aliased as \c ::value
     template<typename Fn>
     struct arity;
 
@@ -60,6 +63,7 @@ namespace bit {
 
     //-------------------------------------------------------------------------
 
+    /// \brief Helper utility to extract arity::value
     template<typename Fn>
     constexpr std::size_t arity_v = arity<Fn>::value;
 

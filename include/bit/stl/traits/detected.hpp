@@ -29,7 +29,7 @@ namespace bit {
 
       template<typename Default,
                template<typename...> class Op,
-               typename... Args>
+               typename...Args>
       struct detector<Default, void_t<Op<Args...>>, Op, Args...> {
         using value_t = std::true_type;
         using type = Op<Args...>;
@@ -37,7 +37,7 @@ namespace bit {
 
     } // namespace detail
 
-    template<template<class...> class Op, typename... Args>
+    template<template<typename...> class Op, typename... Args>
     using is_detected = typename detail::detector<nonesuch, void, Op, Args...>::value_t;
 
     template<template<typename...> class Op, typename... Args >
@@ -46,7 +46,7 @@ namespace bit {
     template<template<typename...> class Op, typename... Args>
     using detected_t = typename detail::detector<nonesuch, void, Op, Args...>::type;
 
-    //---------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     template<typename Default, template<typename...> class Op, typename... Args>
     using detected_or = detail::detector<Default, void, Op, Args...>;
@@ -54,7 +54,7 @@ namespace bit {
     template<typename Default, template<typename...> class Op, typename... Args >
     using detected_or_t = typename detected_or<Default, Op, Args...>::type;
 
-    //---------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     template<typename Expected, template<typename...> class Op, typename... Args>
     using is_detected_exact = std::is_same<Expected, detected_t<Op, Args...>>;
@@ -62,7 +62,7 @@ namespace bit {
     template<typename Expected, template<typename...> class Op, typename... Args>
     constexpr bool is_detected_exact_v = is_detected_exact<Expected, Op, Args...>::value;
 
-    //---------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     template<typename To, template<typename...> class Op, typename... Args>
     using is_detected_convertible = std::is_convertible<detected_t<Op, Args...>, To>;

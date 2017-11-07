@@ -1,7 +1,8 @@
 /**
  * \file function_argument.hpp
  *
- * \brief TODO: Add description
+ * \brief This header defines a type-trait to access the nth argument type of
+ *        a given function
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -16,6 +17,9 @@
 namespace bit {
   namespace stl {
 
+    /// \brief Type-trait to access the \c Ith argument type of a given function
+    ///
+    /// The result is aliased as \c ::type
     template<std::size_t I, typename Fn>
     struct function_argument;
 
@@ -60,6 +64,7 @@ namespace bit {
 
     //-------------------------------------------------------------------------
 
+    /// \brief Helper utility to extract function_argument::type
     template<std::size_t I, typename Fn>
     using function_argument_t = typename function_argument<I,Fn>::type;
 

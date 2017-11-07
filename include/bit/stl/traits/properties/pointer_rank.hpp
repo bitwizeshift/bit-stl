@@ -1,7 +1,8 @@
 /**
  * \file pointer_rank.hpp
  *
- * \brief TODO: Add description
+ * \brief This header defines the type-trait for determining the level of
+ *        indirection
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
@@ -33,6 +34,7 @@ namespace bit {
     template<typename T>
     using pointer_rank = detail::pointer_rank<T,0>;
 
+    /// \brief Helper utility to extract pointer_rank::value
     template<typename T>
     constexpr std::size_t pointer_rank_v = pointer_rank< std::decay_t<T> >::value;
   } // namespace stl
