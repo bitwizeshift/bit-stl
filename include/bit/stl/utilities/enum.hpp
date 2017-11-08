@@ -10,21 +10,27 @@
 
 #include "assert.hpp"
 
+#include "../traits/composition/conjunction.hpp"
+
+// TODO(bitwizeshift): sever dependency to 'containers'
 #include "../containers/string_view.hpp"
 
-// TODO(bitwizeshift): Sever this dependency
-#include "../iterators/tagged_iterator.hpp"
+#include <type_traits> // std::enable_if
 
 namespace bit {
   namespace stl {
 
-    //////////////////////////////////////////////////////////////////////////
+    //=========================================================================
+    // X.Y.1, class bad_enum_cast
+    //=========================================================================
+
+    ///////////////////////////////////////////////////////////////////////////
     /// \brief An exception of this type is thrown when an enum_cast to a
     ///        string fails with an invalid serialization, or when an enum
     ///        value is outside of range of a string.
     ///
     /// The latter case can only occur for bitfields or manual static_casts
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     class bad_enum_cast : public std::runtime_error
     {
     public:
@@ -32,9 +38,9 @@ namespace bit {
       using std::runtime_error::runtime_error;
     };
 
-    /// Type used for iterating an enum_range
-    template<typename Enum>
-    using enum_iterator = tagged_iterator<const Enum*,Enum>;
+    //=========================================================================
+    // X.Y.2, struct enum_traits
+    //=========================================================================
 
     /// \brief Type-trait to determine whether a type is an enum_bitmask
     ///
@@ -55,14 +61,13 @@ namespace bit {
     template<typename Enum>
     struct enum_traits
     {
-
       /// \brief Is this enum a bitmask enum
       static constexpr bool is_bitmask = is_enum_bitmask<Enum>::value;
 
       /// \brief Converts the enum to a given string
       ///
       /// This function only asserts or throws without a specialization
-      static string_view to_string( Enum e );
+      static const char* to_string( Enum e );
 
       /// \brief Converts the string to an enum
       ///
@@ -80,35 +85,39 @@ namespace bit {
       static const Enum* end();
     };
 
-    //////////////////////////////////////////////////////////////////////////
+    //=========================================================================
+    // X.Y.3, class enum_range
+    //=========================================================================
+
+    ///////////////////////////////////////////////////////////////////////////
     /// \brief A range for enumerable values
     ///
     /// \tparam Enum The enum type for this range
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     template<typename Enum>
     class enum_range
     {
       static_assert( std::is_enum<Enum>::value, "Enum must be an enum type");
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Public Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
-      using iterator = enum_iterator<Enum>;
-      using sentinel = enum_iterator<Enum>;
+      using iterator = const Enum*;
+      using sentinel = const Enum*;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Constructors
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Default-constructs this \c enum_range
       constexpr enum_range() noexcept = default;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Iterators
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Accesses the begin iterator of this enum_range
@@ -122,15 +131,19 @@ namespace bit {
       constexpr sentinel end() const noexcept;
     };
 
+    //=========================================================================
+    // X.Y.4, Enum range factories
+    //=========================================================================
+
     /// \brief Makes an enum range from a given
     ///
     /// \return an enum range
     template<typename Enum>
     constexpr enum_range<Enum> make_enum_range();
 
-    //----------------------------------------------------------------------------
-    // Enum Casts
-    //----------------------------------------------------------------------------
+    //=========================================================================
+    // X.Y.5, Enum casts
+    //=========================================================================
 
     inline namespace casts {
 
@@ -142,6 +155,10 @@ namespace bit {
       To enum_cast( From from );
 
     } // inline namespace casts
+
+    //=========================================================================
+    // X.Y.6, Enum operators
+    //=========================================================================
 
     /// \brief This namespace introduces bitwise operations to any enums that
     ///        specialize \c is_enum_bitmask
@@ -155,49 +172,45 @@ namespace bit {
 
       namespace detail {
         template<typename T>
-        struct is_enum_and_bitmask : std::integral_constant<bool,std::is_enum<T>::value && is_enum_bitmask<T>::value>{};
+        struct is_enum_and_bitmask : conjunction<std::is_enum<T>,is_enum_bitmask<T>>{};
 
       } // namespace detail
 
-      //======================================================================
-      // Enum Operators
-      //======================================================================
-
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Unary Operators
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
-      constexpr Enum operator ~( Enum e ) noexcept;
+      constexpr Enum operator~( Enum e ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Binary Operators
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
-      constexpr Enum operator |( Enum lhs, Enum rhs ) noexcept;
+      constexpr Enum operator|( Enum lhs, Enum rhs ) noexcept;
 
       template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
-      constexpr Enum operator &( Enum lhs, Enum rhs ) noexcept;
+      constexpr Enum operator&( Enum lhs, Enum rhs ) noexcept;
 
       template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
-      constexpr Enum operator ^( Enum lhs, Enum rhs ) noexcept;
+      constexpr Enum operator^( Enum lhs, Enum rhs ) noexcept;
 
       template<typename Enum, typename Integer, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value && std::is_integral<Integer>::value>>
-      constexpr Enum operator <<( Enum lhs, Integer rhs ) noexcept;
+      constexpr Enum operator<<( Enum lhs, Integer rhs ) noexcept;
 
       template<typename Enum, typename Integer, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value && std::is_integral<Integer>::value>>
-      constexpr Enum operator >>( Enum lhs, Integer rhs ) noexcept;
+      constexpr Enum operator>>( Enum lhs, Integer rhs ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Compound Operators
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
-      Enum& operator |=( Enum& lhs, Enum rhs ) noexcept;
+      Enum& operator|=( Enum& lhs, Enum rhs ) noexcept;
 
       template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
-      Enum& operator &=( Enum& lhs, Enum rhs ) noexcept;
+      Enum& operator&=( Enum& lhs, Enum rhs ) noexcept;
 
       template<typename Enum, typename = std::enable_if_t<detail::is_enum_and_bitmask<Enum>::value>>
       Enum& operator^=( Enum& lhs, Enum rhs ) noexcept;
@@ -210,10 +223,6 @@ namespace bit {
 
     } // namespace enum_ops
   } // namespace stl
-
-  inline namespace casts {
-    using namespace stl::casts;
-  } // inline namespace casts
 } // namespace bit
 
 #include "detail/enum.inl"
