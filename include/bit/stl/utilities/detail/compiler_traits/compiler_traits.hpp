@@ -4,8 +4,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_TRAITS_HPP
-#define BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_TRAITS_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_TRAITS_HPP
+#define BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_TRAITS_HPP
 
 //-----------------------------------------------------------------------------
 // Clang detection mechanisms
@@ -115,6 +115,32 @@
 #  if(__cplusplus_cli >= 200406L)
 #    define BIT_STANDARD_CPP_CLI 1
 #  endif
+#endif
+
+//-----------------------------------------------------------------------------
+
+//! \def BIT_DEBUG
+//! \brief Debug build
+//!
+//! \def BIT_UNIT_TEST
+//! \brief Unit Test Build
+#if !defined(BIT_DEBUG) && !defined(NDEBUG)
+# define BIT_DEBUG 1
+#endif
+
+//! \def BIT_UNUSED
+//!
+//! \brief Explicitly marks a variable \p var as being unused within a given function.
+//!
+//! This is used to silence compiler warnings
+//!
+//! \param var the variable to explicitly mark as unused
+#define BIT_UNUSED(var) (void)(var)
+
+//! \def BIT_NOOP()
+//! \brief Macro function indicating no operation will occur
+#ifndef BIT_NOOP
+# define BIT_NOOP() ((void)0)
 #endif
 
 //-----------------------------------------------------------------------------
@@ -509,4 +535,4 @@
 # define BIT_DEPRECATED_MSG(msg)
 #endif
 
-#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_TRAITS_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_TRAITS_HPP */

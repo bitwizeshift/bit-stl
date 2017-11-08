@@ -7,8 +7,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_MSVC_HPP
-#define BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_MSVC_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_MSVC_HPP
+#define BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_MSVC_HPP
 
 //-----------------------------------------------------------------------------
 // Compiler Detection
@@ -162,4 +162,4 @@
 #define BIT_COMPILER_SYMBOL_VISIBLE
 #define BIT_COMPILER_SYMBOL_LOCAL
 
-#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_MSVC_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_MSVC_HPP */

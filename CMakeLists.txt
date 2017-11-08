@@ -122,6 +122,7 @@ set(headers
   include/bit/stl/utilities/casts.hpp
   include/bit/stl/utilities/compressed_pair.hpp
   include/bit/stl/utilities/compressed_tuple.hpp
+  include/bit/stl/utilities/compiler_traits.hpp
   include/bit/stl/utilities/delegate.hpp
   include/bit/stl/utilities/enum.hpp
   include/bit/stl/utilities/final_act.hpp
@@ -129,14 +130,15 @@ set(headers
   include/bit/stl/utilities/in_place.hpp
   include/bit/stl/utilities/invoke.hpp
   include/bit/stl/utilities/lazy.hpp
+  include/bit/stl/utilities/macros.hpp
   include/bit/stl/utilities/monostate.hpp
   include/bit/stl/utilities/optional.hpp
   include/bit/stl/utilities/pointer_wrapper.hpp
   include/bit/stl/utilities/propagate_const.hpp
   include/bit/stl/utilities/source_location.hpp
-  include/bit/stl/utilities/stddef.hpp
   include/bit/stl/utilities/tribool.hpp
   include/bit/stl/utilities/tuple.hpp
+  include/bit/stl/utilities/types.hpp
   include/bit/stl/utilities/utility.hpp
   include/bit/stl/utilities/uuid.hpp
 

@@ -8,7 +8,6 @@
 #ifndef BIT_STL_UTILITIES_CASTS_HPP
 #define BIT_STL_UTILITIES_CASTS_HPP
 
-#include "stddef.hpp"
 #include "assert.hpp"
 
 #include "../traits/relationships/is_same_sign.hpp"

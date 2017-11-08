@@ -12,10 +12,10 @@
 #include "../traits/composition/disjunction.hpp"
 #include "../traits/composition/negation.hpp"
 
-#include "../utilities/stddef.hpp"
-
-#include <limits>
-#include <memory>
+#include <cstddef>  // std::size_t
+#include <cstdint>  // std::uintptr_t
+#include <memory>   // std::addressof
+#include <iterator> // std::iterator_traits
 
 namespace bit {
   namespace stl {

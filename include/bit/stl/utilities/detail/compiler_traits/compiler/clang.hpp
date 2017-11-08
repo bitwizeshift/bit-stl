@@ -6,8 +6,8 @@
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_CLANG_HPP
-#define BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_CLANG_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_CLANG_HPP
+#define BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_CLANG_HPP
 
 //-----------------------------------------------------------------------------
 // Compiler Detection
@@ -202,4 +202,4 @@
 #define BIT_COMPILER_SYMBOL_VISIBLE __attribute__((visibility("default")))
 #define BIT_COMPILER_SYMBOL_LOCAL   __attribute__((visibility("hidden")))
 
-#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_CLANG_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_CLANG_HPP */

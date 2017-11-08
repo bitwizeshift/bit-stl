@@ -12,6 +12,9 @@
 // local bit::stl
 #include "detail/associative_vtables.hpp" // IWYU pragma: export
 
+#include <utility> // std::pair
+#include <cstddef> // std::size_t, std::ptrdiff_t
+
 namespace bit {
   namespace stl {
 

@@ -10,8 +10,8 @@
 #ifndef BIT_STL_CONTAINERS_DETAIL_ASSOCIATIVE_VTABLES_HPP
 #define BIT_STL_CONTAINERS_DETAIL_ASSOCIATIVE_VTABLES_HPP
 
-#include "../../utilities/stddef.hpp"
 #include <memory>
+#include <cstddef> // std::size_t
 
 namespace bit {
   namespace stl {

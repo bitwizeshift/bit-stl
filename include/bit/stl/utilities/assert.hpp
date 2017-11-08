@@ -9,7 +9,6 @@
 #ifndef BIT_STL_UTILITIES_ASSERT_HPP
 #define BIT_STL_UTILITIES_ASSERT_HPP
 
-#include "stddef.hpp"
 #include "source_location.hpp"
 
 #include <stdexcept> // std::runtime_error

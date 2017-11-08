@@ -8,12 +8,11 @@
 #ifndef BIT_STL_UTILITIES_DELEGATE_HPP
 #define BIT_STL_UTILITIES_DELEGATE_HPP
 
-#include "stddef.hpp"
 #include "assert.hpp"
 #include "invoke.hpp"
 
 #include <type_traits> // std::enable_if
-#include <utility>     // std::forward, std::move
+#include <utility>     // std::forward, std::move, std::pair
 #include <memory>      // std::addressof
 
 namespace bit {

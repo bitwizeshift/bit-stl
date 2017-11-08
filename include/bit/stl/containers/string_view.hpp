@@ -14,32 +14,34 @@
 #endif
 
 #include "string.hpp"
-#include "../utilities/stddef.hpp"
+
+#include "detail/string_hash.hpp"
+
 #include "../iterators/tagged_iterator.hpp" // tagged_iterator
 
 #include <algorithm>
 #include <string>
 #include <ostream>
-
-#include "detail/string_hash.hpp"
+#include <cstddef> // std::size_t, std::ptrdiff_t
+#include <type_traits> // std::add_pointer_t, std::add_lvalue_reference, etc
 
 namespace bit {
   namespace stl {
 
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     /// \brief A wrapper around non-owned strings.
     ///
     /// This is an implementation of the C++17 string_view proposal
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     template<
       typename CharT,
       typename Traits = std::char_traits<CharT>
     >
     class basic_string_view
     {
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Public Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       static_assert( std::is_same<CharT,typename Traits::char_type>::value, "CharT must be the same as Traits::char_type");
@@ -59,16 +61,16 @@ namespace bit {
       using const_reverse_iterator = std::reverse_iterator<const_iterator>;
       using reverse_iterator       = const_reverse_iterator;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Public Members
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       static constexpr size_type npos = size_type(-1);
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Constructors
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Default constructs a basic_string_view without any content
@@ -101,9 +103,9 @@ namespace bit {
       /// \param count the size of the string
       constexpr basic_string_view( const value_type* str, size_type count ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Assignment
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Assigns a basic_string_view from an ansi-string
@@ -112,9 +114,9 @@ namespace bit {
       /// \return reference to \c (*this)
       basic_string_view& operator=( const basic_string_view& view ) = default;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Capacity
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Returns the length of the string, in terms of bytes
@@ -136,9 +138,9 @@ namespace bit {
       /// \return whether the basic_string_view is empty
       constexpr bool empty() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Element Access
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Gets the data of the current basic_string_view
@@ -172,9 +174,9 @@ namespace bit {
       /// \return reference to the last character of the string
       constexpr const_reference back() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Modifiers
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Moves the start of the view forward by n characters.
@@ -196,9 +198,9 @@ namespace bit {
       /// \param v view to swap with
       constexpr void swap( basic_string_view& v ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Conversions
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Creates a basic_string with a copy of the content of the current view.
@@ -207,9 +209,9 @@ namespace bit {
       template<class Allocator>
       explicit operator std::basic_string<CharT, Traits, Allocator>() const;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Operations
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Copies the substring [pos, pos + rcount) to the character string pointed
@@ -229,7 +231,7 @@ namespace bit {
       /// \return the created substring
       constexpr basic_string_view substr( size_type pos = 0, size_type len = npos ) const;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Compares two character sequences
       ///
@@ -294,7 +296,7 @@ namespace bit {
       constexpr int compare( size_type pos, size_type count1, const value_type* s,
                              size_type count2 ) const;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
 
       /// \brief Finds the first substring equal to the given character sequence
@@ -339,7 +341,7 @@ namespace bit {
       ///         \c npos if no such substring is found
       constexpr size_type find( const value_type* s, size_type pos = 0 ) const;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Finds the last substring equal to the given character sequence
       ///
@@ -383,7 +385,7 @@ namespace bit {
       ///         \c npos if no such substring is found
       constexpr size_type rfind( const value_type* s, size_type pos = npos ) const;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Finds the first character equal to any of the characters in
       ///        the given character sequence
@@ -431,7 +433,7 @@ namespace bit {
       ///         or \c npos if no such character is found.
       constexpr size_type find_first_of( const value_type* s, size_type pos = 0 ) const;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Finds the last character equal to any of the characters in the
       ///        given character sequence
@@ -480,7 +482,7 @@ namespace bit {
       ///         or \c npos if no such character is found.
       constexpr size_type find_last_of( const value_type* s, size_type pos = npos ) const;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Finds the first character not equal to any of the characters in
       ///        the given character sequence
@@ -528,7 +530,7 @@ namespace bit {
       ///         in the given string, or npos if no such character is found
       constexpr size_type find_first_not_of( const value_type* s, size_type pos = 0 ) const;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Finds the last character not equal to any of the characters in
       ///        the given character sequence
@@ -576,9 +578,9 @@ namespace bit {
       ///         in the given string, or npos if no such character is found
       constexpr size_type find_last_not_of( const value_type* s, size_type pos = npos ) const;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Iterators
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Retrieves the begin iterator for this basic_string_view
@@ -613,9 +615,9 @@ namespace bit {
       /// \copydoc basic_string_view::rend()
       constexpr const_reverse_iterator crend() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Member
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       const value_type* m_str;  ///< The internal string type
@@ -623,25 +625,25 @@ namespace bit {
 
     };
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     /// \brief A wrapper around non-owned zero-terminated strings.
     ///
     /// This is an extension to the C++17 string_view
     ///
     /// This class is used to interop with C libraries that expect normal
     /// strings
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     template<
       typename CharT,
       typename Traits = std::char_traits<CharT>
     >
     class basic_zstring_view : public basic_string_view<CharT,Traits>
     {
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Public Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       static_assert( std::is_same<CharT,typename Traits::char_type>::value, "CharT must be the same as Traits::char_type");
@@ -661,9 +663,9 @@ namespace bit {
       using typename basic_string_view<CharT,Traits>::const_reverse_iterator;
       using typename basic_string_view<CharT,Traits>::reverse_iterator;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Constructors
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Default constructs a basic_string_view without any content
@@ -684,9 +686,9 @@ namespace bit {
       /// \param str the string to view
       constexpr basic_zstring_view( const value_type* str ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Assignment
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Assigns a basic_zstring_view from an ansi-string
@@ -695,9 +697,9 @@ namespace bit {
       /// \return reference to \c (*this)
       basic_zstring_view& operator=( const basic_zstring_view& view ) = default;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Modifiers
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Delete remove_prefix in zstring_view
@@ -718,9 +720,9 @@ namespace bit {
 
     };
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Type Aliases
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     using string_view    = basic_string_view<char>;
     using wstring_view   = basic_string_view<wchar_t>;
@@ -746,9 +748,9 @@ namespace bit {
 
     } // namespace ci
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Hash Functions
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     /// \brief Retrieves the hash from a given basic_string_view
     ///
@@ -758,9 +760,9 @@ namespace bit {
     constexpr std::size_t hash_value( const basic_string_view<CharT,Traits>& str )
       noexcept;
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Public Functions
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     /// \brief Overload for ostream output of basic_string_view
     ///
@@ -775,9 +777,9 @@ namespace bit {
     void swap( basic_string_view<CharT,Traits>& lhs,
                basic_string_view<CharT,Traits>& rhs ) noexcept;
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Literals
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     inline namespace literals {
       inline namespace string_view_literals {
@@ -790,9 +792,9 @@ namespace bit {
       } // inline namespace string_view_literals
     } // inline namespace literals
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Comparison Functions
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     /// \brief Compares equality between the two basic_string_views
     ///
@@ -827,7 +829,7 @@ namespace bit {
     bool operator == ( const basic_string_view<CharT,Traits>& lhs,
                        const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
 
-    //----------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     /// \brief Compares inequality between the two basic_string_views
     ///
@@ -863,7 +865,7 @@ namespace bit {
     bool operator != ( const basic_string_view<CharT,Traits>& lhs,
                        const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
 
-    //----------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     /// \brief Checks if the left string is less than the right substring
     ///
@@ -903,7 +905,7 @@ namespace bit {
     bool operator < ( const basic_string_view<CharT,Traits>& lhs,
                       const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
 
-    //----------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     ///
     /// \param lhs
@@ -941,7 +943,7 @@ namespace bit {
     bool operator > ( const basic_string_view<CharT,Traits>& lhs,
                       const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
 
-    //----------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     ///
     /// \param lhs
@@ -979,7 +981,7 @@ namespace bit {
     bool operator <= ( const basic_string_view<CharT,Traits>& lhs,
                        const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
 
-    //----------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     ///
     /// \param lhs
@@ -1017,9 +1019,9 @@ namespace bit {
     bool operator >= ( const basic_string_view<CharT,Traits>& lhs,
                        const std::basic_string<CharT,Traits,Allocator>& rhs ) noexcept;
 
-    //----------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // String Concatenation
-    //----------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     template<typename CharT, typename Traits, typename Allocator>
     std::basic_string<CharT,Traits,Allocator> operator + ( const std::basic_string<CharT,Traits,Allocator>& lhs,

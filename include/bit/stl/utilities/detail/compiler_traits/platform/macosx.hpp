@@ -17,8 +17,8 @@
  * BIT_PLATFORM_HAS_PTHREADS      : Defined if the platform supports pthreads
  * BIT_PLATFORM_HAS_POSIX_SOCKETS : Defined if the platform supports posix (bsd) sockets
  */
-#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_MACOSX_HPP
-#define BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_MACOSX_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_PLATFORM_MACOSX_HPP
+#define BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_PLATFORM_MACOSX_HPP
 
 //-----------------------------------------------------------------------------
 // Platform Detection
@@ -56,4 +56,4 @@
 # define BIT_USE_OGL_API 1
 #endif
 
-#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_PLATFORM_MACOSX_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_PLATFORM_MACOSX_HPP */

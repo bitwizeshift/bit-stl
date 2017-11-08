@@ -1,14 +1,14 @@
 /**
  * \file compiler.hpp
  *
- * This header detects the appropriate compiler configuration based on the
- * compiler's default defined macros
+ * \brief This header detects the appropriate compiler configuration based on
+ *        the compiler's default defined macros
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
  */
-#ifndef BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_HPP
-#define BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_HPP
+#ifndef BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_HPP
+#define BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_HPP
 
 //----------------------------------------------------------------------------
 // Compiler Detection
@@ -43,4 +43,4 @@
 
 #undef BIT_COMPILER_CONFIG_FILE
 
-#endif /* BIT_STL_UTILITIES_DETAIL_STDDEF_COMPILER_HPP */
+#endif /* BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_HPP */
