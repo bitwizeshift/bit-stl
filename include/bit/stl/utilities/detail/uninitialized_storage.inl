@@ -1,5 +1,5 @@
-#ifndef BIT_STL_MEMORY_DETAIL_UNINITIALIZED_STORAGE_INL
-#define BIT_STL_MEMORY_DETAIL_UNINITIALIZED_STORAGE_INL
+#ifndef BIT_STL_UTILITY_DETAIL_UNINITIALIZED_STORAGE_INL
+#define BIT_STL_UTILITY_DETAIL_UNINITIALIZED_STORAGE_INL
 
 //------------------------------------------------------------------------
 // Uninitialized Construction
@@ -136,4 +136,4 @@ inline void
   destroy_n( ptr, n );
 }
 
-#endif /* BIT_STL_MEMORY_DETAIL_UNINITIALIZED_STORAGE_INL */
+#endif /* BIT_STL_UTILITY_DETAIL_UNINITIALIZED_STORAGE_INL */

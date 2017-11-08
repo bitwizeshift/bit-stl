@@ -5,8 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_MEMORY_UNINITIALIZED_STORAGE_HPP
-#define BIT_STL_MEMORY_UNINITIALIZED_STORAGE_HPP
+#ifndef BIT_STL_UTILITY_UNINITIALIZED_STORAGE_HPP
+#define BIT_STL_UTILITY_UNINITIALIZED_STORAGE_HPP
 
 #include <iterator> // std::iterator_traits
 #include <new>      // placement new
@@ -121,4 +121,4 @@ namespace bit {
 
 #include "detail/uninitialized_storage.inl"
 
-#endif /* BIT_STL_MEMORY_UNINITIALIZED_STORAGE_HPP */
+#endif /* BIT_STL_UTILITY_UNINITIALIZED_STORAGE_HPP */

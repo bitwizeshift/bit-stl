@@ -141,6 +141,7 @@ set(headers
   include/bit/stl/utilities/tribool.hpp
   include/bit/stl/utilities/tuple.hpp
   include/bit/stl/utilities/types.hpp
+  include/bit/stl/utilities/uninitialized_storage.hpp
   include/bit/stl/utilities/utility.hpp
   include/bit/stl/utilities/uuid.hpp
 
@@ -181,7 +182,6 @@ set(headers
   include/bit/stl/memory/offset_ptr.hpp
   include/bit/stl/memory/owner.hpp
   include/bit/stl/memory/scoped_ptr.hpp
-  include/bit/stl/memory/uninitialized_storage.hpp
 
   # numeric
   include/bit/stl/numeric/numeric.hpp

@@ -15,13 +15,11 @@
 #endif
 
 #include "in_place.hpp"    // in_place_t
+#include "uninitialized_storage.hpp"
 
 #include "../traits/composition/conjunction.hpp"
 #include "../traits/composition/disjunction.hpp"
 #include "../traits/composition/negation.hpp"
-
-// TODO(bitwizeshift): remove this dependency
-#include "../memory/uninitialized_storage.hpp" // uninitialized_construct_at
 
 #include <functional> // std::function
 #include <type_traits> // std::is_constructible, std::is_convertible, etc
