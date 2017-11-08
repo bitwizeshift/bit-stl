@@ -118,6 +118,7 @@ set(headers
   # utilities
   include/bit/stl/utilities/detail/tuple_element.hpp
   include/bit/stl/utilities/detail/tuple_size.hpp
+  include/bit/stl/utilities/aligned_storage.hpp
   include/bit/stl/utilities/assert.hpp
   include/bit/stl/utilities/casts.hpp
   include/bit/stl/utilities/compressed_pair.hpp
