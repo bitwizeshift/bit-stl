@@ -9,6 +9,7 @@
 #define BIT_STL_UTILITIES_ENUM_HPP
 
 #include "assert.hpp"
+#include "compiler_traits.hpp"
 
 #include "../traits/composition/conjunction.hpp"
 

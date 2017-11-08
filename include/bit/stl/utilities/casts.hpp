@@ -9,6 +9,7 @@
 #define BIT_STL_UTILITIES_CASTS_HPP
 
 #include "assert.hpp"
+#include "compiler_traits.hpp"
 
 #include "../traits/relationships/is_same_sign.hpp"
 

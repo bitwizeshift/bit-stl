@@ -8,7 +8,11 @@
 template<typename Enum>
 inline const char* bit::stl::enum_traits<Enum>::to_string( Enum )
 {
-  BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: to_string functionality not implemented for given enum");
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  throw bad_enum_cast("bad_enum_cast: to_string functionality not implemented for given enum");
+#else
+  BIT_ALWAYS_ASSERT(false,"bad_enum_cast: to_string functionality not implemented for given enum");
+#endif
   return "";
 }
 
@@ -16,7 +20,11 @@ template<typename Enum>
 inline Enum
   bit::stl::enum_traits<Enum>::from_string( string_view )
 {
-  BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: from_string functionality not implemented for given enum");
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  throw bad_enum_cast("bad_enum_cast: to_from_string functionality not implemented for given enum");
+#else
+  BIT_ALWAYS_ASSERT(false,"bad_enum_cast: from_string functionality not implemented for given enum");
+#endif
   return Enum();
 }
 
@@ -24,8 +32,11 @@ template<typename Enum>
 inline const Enum*
   bit::stl::enum_traits<Enum>::begin()
 {
-  BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: begin functionality not implemented for given enum");
-
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  throw bad_enum_cast("bad_enum_cast: begin functionality not implemented for given enum");
+#else
+  BIT_ALWAYS_ASSERT(false,"bad_enum_cast: begin functionality not implemented for given enum");
+#endif
   return nullptr;
 }
 
@@ -33,8 +44,11 @@ template<typename Enum>
 inline const Enum*
   bit::stl::enum_traits<Enum>::end()
 {
-  BIT_ASSERT_OR_THROW(bad_enum_cast,false,"bad_enum_cast: end functionality not implemented for given enum");
-
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  throw bad_enum_cast("bad_enum_cast: end functionality not implemented for given enum");
+#else
+  BIT_ALWAYS_ASSERT(false,"bad_enum_cast: end functionality not implemented for given enum");
+#endif
   return nullptr;
 }
 

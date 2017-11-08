@@ -13,8 +13,13 @@ inline constexpr To bit::stl::casts::narrow_cast( From from ) noexcept
 
 #ifdef BIT_DEBUG
   To to = static_cast<To>(from);
-  BIT_ASSERT_OR_THROW(bad_narrow_cast, static_cast<From>(to) != from, "narrow_cast: unable to perform narrowing");
-  BIT_ASSERT_OR_THROW(bad_narrow_cast, (!is_same_sign<To, From>::value && ((to < To{}) != (from < From{}))), "narrow_cast: unable to perform narrowing");
+
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  if( static_cast<From>(to) != from ||
+     (!is_same_sign<To, From>::value && ((to < To{}) != (from < From{}))) ) {
+    throw bad_narrow_cast("narrow_cast: unable to perform narrowing");
+  }
+#endif
 
   return to;
 #else // If compiling in non-debug, then assume static cast
@@ -27,7 +32,11 @@ inline constexpr To bit::stl::casts::narrow_cast( From from ) noexcept
 template<typename To, typename From>
 inline To bit::stl::casts::pointer_cast( From ptr ) noexcept
 {
-  BIT_ASSERT_OR_THROW(bad_pointer_cast, static_cast<To>(ptr) == dynamic_cast<To>(ptr), "pointer_cast: destination type is not dynamically castable");
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  if( static_cast<To>(ptr) == dynamic_cast<To>(ptr) ) {
+    throw bad_pointer_cast("pointer_cast: destination type is not dynamically castable");
+  }
+#endif
 
   return static_cast<To>(ptr);
 }

@@ -17,8 +17,10 @@
 
 #include "../concepts/ContiguousContainer.hpp"
 
-#include "../iterators/tagged_iterator.hpp" // tagged_iterator
 #include "../utilities/assert.hpp"          // BIT_STL_CONTAINERS_ASSERT
+#include "../utilities/compiler_traits.hpp" // BIT_COMPILER_EXCEPTIONS_ENABLED
+
+#include "../iterators/tagged_iterator.hpp" // tagged_iterator
 
 #include <iterator>  //
 #include <limits>    //
