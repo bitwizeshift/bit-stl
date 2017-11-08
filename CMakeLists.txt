@@ -124,6 +124,8 @@ set(headers
   include/bit/stl/utilities/compressed_tuple.hpp
   include/bit/stl/utilities/compiler_traits.hpp
   include/bit/stl/utilities/delegate.hpp
+  include/bit/stl/utilities/dynamic_index_constant.hpp
+  include/bit/stl/utilities/dynamic_size_constant.hpp
   include/bit/stl/utilities/enum.hpp
   include/bit/stl/utilities/final_act.hpp
   include/bit/stl/utilities/hash.hpp
