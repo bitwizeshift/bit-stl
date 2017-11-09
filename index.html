@@ -65,11 +65,82 @@ $(function() {
 <div class="textblock"><p><a href="https://travis-ci.org/bitwizeshift/bit-stl"></a> <a href="https://ci.appveyor.com/project/bitwizeshift/bit-stl"></a> <a href="http://github.com/bitwizeshift/bit-stl/issues"></a> <a href="#tested-compilers"></a> <a href="http://bitwizeshift.github.io/bit-stl"></a> https://raw.githubusercontent.com/bitwizeshift/bit-stl/master/LICENSE.md "![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)" <a href="https://github.com/bitwizeshift/bit-stl/releases"></a></p>
 <h2>What is <code><a class="el" href="da/d7e/namespacebit_1_1stl.html" title="The standard namespace for this project. ">bit::stl</a></code>?</h2>
 <p>This is the standard template library for various personal projects of mine. It is both an extension to the C++ standard library, along with a custom implementation of future-proof components (such as c++17 features like std::string_view that is not available to a c++14 compiler).</p>
-<p>All functions and types are written to replicate the standard namespace's naming conventions for easy use and upgradeability to new c++ library features at is released.</p>
-<p><b>Pedantic Note</b>: The name <code>stl</code> is not meant as a mistaken reference to the c++ standard library, which is often wrongfully referred to as <code>stl</code>. It's named this since it truly is a <code>template</code>/<code>inline</code> library that is used in other projects.</p>
-<h2>Namespacing</h2>
+<h2>What does this library offer?</h2>
+<p>This is a core-library intended as an extension to the standard C++ library.</p>
+<p>It offers various lightweight/useful utilities that are otherwise missing from the standard library. For example:</p>
+<ul>
+<li>Extended type traits that support plural type comparison (<code>are_same</code>, <code>is_derived_from_all</code>, etc)</li>
+<li>GSL suggested types (<code>span</code>,<code>string_span</code>)</li>
+<li>Type-erased types (<code>array_view</code>,<code>map_view</code>,<code>set_view</code>)</li>
+<li>EBO generic storage types (<code>compressed_tuple</code>,<code>compressed_pair</code>)</li>
+<li>Dynamic constant types (<code>dynamic_size_constant</code>,<code>dynamic_index_constant</code>). These allow runtime <em>or</em> compile-time constant values</li>
+<li>Circular buffers (<code>circular_deque</code>,<code>circular_queue</code>,<code>circular_buffer</code>)</li>
+<li>Concepts! (More on this below)</li>
+<li>Many other useful utilities</li>
+</ul>
+<p><b>Note</b> This is <em>not</em> intended as a replacement for the C++ standard library; just a supplement.</p>
+<h3>Concepts</h3>
+<p>This library includes a series of type-traits that validate types for satisfying specific concepts.</p>
+<p>This is not a true C++ Concepts Light implementation, since it is unable to provide proper diagnostics for which requirements are missed. But it does offer type validation where necessary, allowing for better SFINAE on template types.</p>
+<p>For example, to test whether a type satisfies a <code>Container</code> concept, a trait called <code>is_container</code> can be used</p>
+<h3>Directory Structuring</h3>
+<p>Although this library does provide C++17 utilities, this primarily acts as a core library extension, and does not follow 1-1 with the standard. Some example differences are:</p>
+<ul>
+<li>Composite standard headers are decomposed into individual header files. For example, type trait types are all in individual header files under a <code>traits</code> subsystem (unlike the standard's <code>type_traits</code> header that contains everything)</li>
+<li>The various utility headers are in a <code>utility</code> subsystem; likewise, container additions (like <code>string_view</code>) are under a <code>container</code> subsystem.</li>
+</ul>
+<h3>Simple Namespacing</h3>
 <p>The namespace convention is simple; all components reside within <code>namespace <a class="el" href="da/d7e/namespacebit_1_1stl.html" title="The standard namespace for this project. ">bit::stl</a></code>.</p>
-<p>There are two common <code>inline namespace</code>s as well that can be brought in independently; <code>inline namespace casts</code> and <code>inline namespace literals</code>. The <code>casts</code> namespace can be used to bring things like <code>pointer_cast</code> or <code>narrow_cast</code> to the top-level without requiring polluting the entire global namespace, whereas the <code>literals</code> namespace, much like the standard library, brings in any <code>operator ""</code> literals. </p>
+<p>There are two common <code>inline namespace</code>s as well that can be brought in independently; <code>inline namespace casts</code> and <code>inline namespace literals</code>. The <code>casts</code> namespace can be used to bring things like <code>pointer_cast</code> or <code>narrow_cast</code> to the top-level without requiring polluting the entire global namespace, whereas the <code>literals</code> namespace, much like the standard library, brings in any <code>operator ""</code> literals.</p>
+<h2>Using this library</h2>
+<h3>Building &amp; Installing</h3>
+<p>Building <code><a class="el" href="da/d7e/namespacebit_1_1stl.html" title="The standard namespace for this project. ">bit::stl</a></code> is simple, and only requires a CMake version greater than 3.1, and a compatible compiler.</p>
+<p>Fist, make a directory to build the library in, then build with CMake</p>
+<div class="fragment"><div class="line">mkdir build</div><div class="line">cd build</div><div class="line"></div><div class="line">cmake . -DBIT_STL_BUILD_UNIT_TESTS=Off -DBIT_STL_BUILD_INDEPENDENCE_TESTS=Off  # ... any additional toolchain parameters ...</div><div class="line">cmake --build .</div></div><!-- fragment --><p>Omitting the <code>-DBIT_STL_BUILD_UNIT_TESTS=Off</code> will build unit tests; likewise <code>DBIT_STL_BUILD_INDEPENDENCE_TESTS=Off</code> will build header-independence checks (building each header independently to ensure there are no header-order based transitive dependencies).</p>
+<p>To install, run:</p>
+<div class="fragment"><div class="line">cmake --build . --target install</div></div><!-- fragment --><p>To change the output directory of the installation, you can export <code>BIT_HOME</code> to install to a specific directory</p>
+<div class="fragment"><div class="line">export BIT_HOME=/etc/bit</div><div class="line">cmake --build . --target install</div></div><!-- fragment --><p>will install into <code>/etc/bit/</code>.</p>
+<h3>Through a <code>cmake</code> subdirectory</h3>
+<p>Clone/copy/subtree the contents of this repository to a subdirectory, and <code>add_subdirectory</code> the directory containing <code><a class="el" href="da/d7e/namespacebit_1_1stl.html" title="The standard namespace for this project. ">bit::stl</a></code>.</p>
+<p>To add a dependency to the library, just add <code>target_link_libraries(&lt;your target&gt; [PUBLIC|INTERFACE|PRIVATE] <a class="el" href="da/d7e/namespacebit_1_1stl.html" title="The standard namespace for this project. ">bit::stl</a>)</code></p>
+<h2><a class="anchor" id="tested-compilers"></a>Tested Compilers</h2>
+<p>The following compilers are currently being tested through continuous integration with <a href="https://travis-ci.org/bitwizeshift/bit-stl">Travis</a> and <a href="https://ci.appveyor.com/project/bitwizeshift/bit-stl/">AppVeyor</a></p>
+<p>Note that <code>bit-stl</code> only works on compiler that provide proper conformance for c++14</p>
+<table class="doxtable">
+<tr>
+<th>Compiler </th><th>Operating System  </th></tr>
+<tr>
+<td>g++ 6.3.0 </td><td>Ubuntu 14.04.3 TLS </td></tr>
+<tr>
+<td>g++ 7.2.0 </td><td>Ubuntu 14.04.3 TLS </td></tr>
+<tr>
+<td>clang++ 3.9.0 </td><td>Ubuntu 14.04.3 TLS </td></tr>
+<tr>
+<td>clang++ 4.0.1 </td><td>Ubuntu 14.04.3 TLS </td></tr>
+<tr>
+<td>clang xcode 7.3 </td><td>Darwin Kernel 15.6.0 (OSX 10.11.6) </td></tr>
+<tr>
+<td>clang xcode 8.0 </td><td>Darwin Kernel 15.6.0 (OSX 10.11.6) </td></tr>
+<tr>
+<td>clang xcode 8.1 </td><td>Darwin Kernel 16.1.0 (OSX 10.12.1) </td></tr>
+<tr>
+<td>clang xcode 8.2 </td><td>Darwin Kernel 16.1.0 (OSX 10.12.1) </td></tr>
+<tr>
+<td>clang xcode 8.3 </td><td>Darwin Kernel 16.6.0 (OSX 10.12.5) </td></tr>
+<tr>
+<td>clang xcode 9.0 </td><td>Darwin Kernel 16.7.0 (OSX 10.12.6) </td></tr>
+<tr>
+<td>Visual Studio 2017 </td><td>Windows Server 2016 (x64) </td></tr>
+</table>
+<h2><a class="anchor" id="license"></a>License</h2>
+<div class="image">
+<img src="http://opensource.org/trademarks/opensource/OSI-Approved-License-100x137.png" align="right"/>
+</div>
+<p>The class is licensed under the <a href="http://opensource.org/licenses/MIT">MIT License</a>:</p>
+<p>Copyright &copy; 2017 Matthew Rodusek</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

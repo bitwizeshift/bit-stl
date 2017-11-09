@@ -114,17 +114,17 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = std:
 <tr class="memitem:a36cced53d3ce6257c4bac2aeb083cdf0"><td class="memItemLeft" align="right" valign="top"><a id="a36cced53d3ce6257c4bac2aeb083cdf0"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>index_type</b> = std::ptrdiff_t</td></tr>
 <tr class="separator:a36cced53d3ce6257c4bac2aeb083cdf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae3308e57214b9eec15eaf92e8e7c1cd"><td class="memItemLeft" align="right" valign="top"><a id="aae3308e57214b9eec15eaf92e8e7c1cd"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = pointer_iterator&lt; CharT *, <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">basic_string_span</a> &gt;</td></tr>
-<tr class="separator:aae3308e57214b9eec15eaf92e8e7c1cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a4be51a5b8cca4643daa3d718b1f78f"><td class="memItemLeft" align="right" valign="top"><a id="a5a4be51a5b8cca4643daa3d718b1f78f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = pointer_iterator&lt; const CharT *, <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">basic_string_span</a> &gt;</td></tr>
-<tr class="separator:a5a4be51a5b8cca4643daa3d718b1f78f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28054bbc78667cf5e13e6850dc032728"><td class="memItemLeft" align="right" valign="top"><a id="a28054bbc78667cf5e13e6850dc032728"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">tagged_iterator</a>&lt; CharT *, <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">basic_string_span</a> &gt;</td></tr>
+<tr class="separator:a28054bbc78667cf5e13e6850dc032728"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03dd492c213f013bfeb9f1bf9b3c6a9b"><td class="memItemLeft" align="right" valign="top"><a id="a03dd492c213f013bfeb9f1bf9b3c6a9b"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">tagged_iterator</a>&lt; const CharT *, <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">basic_string_span</a> &gt;</td></tr>
+<tr class="separator:a03dd492c213f013bfeb9f1bf9b3c6a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae6b538e1dc3dee60ade777100e879f9"><td class="memItemLeft" align="right" valign="top"><a id="aae6b538e1dc3dee60ade777100e879f9"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>reverse_iterator</b> = std::reverse_iterator&lt; iterator &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>reverse_iterator</b> = std::reverse_iterator&lt; <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">iterator</a> &gt;</td></tr>
 <tr class="separator:aae6b538e1dc3dee60ade777100e879f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af24f1e2592e9736a17a249f6c43d12e6"><td class="memItemLeft" align="right" valign="top"><a id="af24f1e2592e9736a17a249f6c43d12e6"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_iterator</b> = std::reverse_iterator&lt; const_iterator &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_iterator</b> = std::reverse_iterator&lt; <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a> &gt;</td></tr>
 <tr class="separator:af24f1e2592e9736a17a249f6c43d12e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -234,16 +234,16 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memitem:a0f3c4e2e97663803297a2cddcab9e62e"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">basic_string_span</a>&lt; CharT, Traits, <a class="el" href="../../da/d7e/namespacebit_1_1stl.html#a2ecff478de92d62272d16166405cc0c9">dynamic_extent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html#a0f3c4e2e97663803297a2cddcab9e62e">remove_suffix</a> (size_type n) const</td></tr>
 <tr class="memdesc:a0f3c4e2e97663803297a2cddcab9e62e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a subview consisting of the first <code>size</code> - <code>n</code> entries of the span.  <a href="#a0f3c4e2e97663803297a2cddcab9e62e">More...</a><br /></td></tr>
 <tr class="separator:a0f3c4e2e97663803297a2cddcab9e62e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97e65bf0fd68ae053fbcc8b4f6f3bb41"><td class="memItemLeft" align="right" valign="top">constexpr iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html#a97e65bf0fd68ae053fbcc8b4f6f3bb41">begin</a> () const noexcept</td></tr>
+<tr class="memitem:a97e65bf0fd68ae053fbcc8b4f6f3bb41"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html#a97e65bf0fd68ae053fbcc8b4f6f3bb41">begin</a> () const noexcept</td></tr>
 <tr class="memdesc:a97e65bf0fd68ae053fbcc8b4f6f3bb41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the begin iterator for this <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html" title="A light-weight non-owning wrapper around strings. ">basic_string_span</a>.  <a href="#a97e65bf0fd68ae053fbcc8b4f6f3bb41">More...</a><br /></td></tr>
 <tr class="separator:a97e65bf0fd68ae053fbcc8b4f6f3bb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6160cc829150a3414fa77da09f20713"><td class="memItemLeft" align="right" valign="top">constexpr iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html#ac6160cc829150a3414fa77da09f20713">end</a> () const noexcept</td></tr>
+<tr class="memitem:ac6160cc829150a3414fa77da09f20713"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html#ac6160cc829150a3414fa77da09f20713">end</a> () const noexcept</td></tr>
 <tr class="memdesc:ac6160cc829150a3414fa77da09f20713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the end iterator for this <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html" title="A light-weight non-owning wrapper around strings. ">basic_string_span</a>.  <a href="#ac6160cc829150a3414fa77da09f20713">More...</a><br /></td></tr>
 <tr class="separator:ac6160cc829150a3414fa77da09f20713"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cc0c38d114d5846cb62f67dab1d2f77"><td class="memItemLeft" align="right" valign="top">constexpr const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html#a9cc0c38d114d5846cb62f67dab1d2f77">cbegin</a> () const noexcept</td></tr>
+<tr class="memitem:a9cc0c38d114d5846cb62f67dab1d2f77"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html#a9cc0c38d114d5846cb62f67dab1d2f77">cbegin</a> () const noexcept</td></tr>
 <tr class="memdesc:a9cc0c38d114d5846cb62f67dab1d2f77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the begin iterator for this <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html" title="A light-weight non-owning wrapper around strings. ">basic_string_span</a>.  <a href="#a9cc0c38d114d5846cb62f67dab1d2f77">More...</a><br /></td></tr>
 <tr class="separator:a9cc0c38d114d5846cb62f67dab1d2f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8f605ea797fe8275887c0d53b05a225"><td class="memItemLeft" align="right" valign="top">constexpr const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html#aa8f605ea797fe8275887c0d53b05a225">cend</a> () const noexcept</td></tr>
+<tr class="memitem:aa8f605ea797fe8275887c0d53b05a225"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html#aa8f605ea797fe8275887c0d53b05a225">cend</a> () const noexcept</td></tr>
 <tr class="memdesc:aa8f605ea797fe8275887c0d53b05a225"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the end iterator for this <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html" title="A light-weight non-owning wrapper around strings. ">basic_string_span</a>.  <a href="#aa8f605ea797fe8275887c0d53b05a225">More...</a><br /></td></tr>
 <tr class="separator:aa8f605ea797fe8275887c0d53b05a225"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4454658158d883a7b7e092af3b19943"><td class="memItemLeft" align="right" valign="top">constexpr reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html#ad4454658158d883a7b7e092af3b19943">rbegin</a> () const noexcept</td></tr>
@@ -274,7 +274,7 @@ class bit::stl::basic_string_span&lt; CharT, Traits, Extent &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d14/string__span_8hpp_source.html#l00039">39</a> of file <a class="el" href="../../d9/d14/string__span_8hpp_source.html">string_span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d14/string__span_8hpp_source.html#l00044">44</a> of file <a class="el" href="../../d9/d14/string__span_8hpp_source.html">string_span.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a355451da4f168f665c331678ce40b891"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a355451da4f168f665c331678ce40b891">&#9670;&nbsp;</a></span>basic_string_span() <span class="overload">[1/10]</span></h2>
@@ -785,7 +785,7 @@ template&lt;typename CharT, typename Traits = std::char_traits&lt;CharT&gt;, std
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr iterator <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">bit::stl::basic_string_span</a>&lt; CharT, Traits, Extent &gt;::begin </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">iterator</a> <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">bit::stl::basic_string_span</a>&lt; CharT, Traits, Extent &gt;::begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -815,7 +815,7 @@ template&lt;typename CharT, typename Traits = std::char_traits&lt;CharT&gt;, std
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const_iterator <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">bit::stl::basic_string_span</a>&lt; CharT, Traits, Extent &gt;::cbegin </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a> <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">bit::stl::basic_string_span</a>&lt; CharT, Traits, Extent &gt;::cbegin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -845,7 +845,7 @@ template&lt;typename CharT, typename Traits = std::char_traits&lt;CharT&gt;, std
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const_iterator <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">bit::stl::basic_string_span</a>&lt; CharT, Traits, Extent &gt;::cend </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a> <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">bit::stl::basic_string_span</a>&lt; CharT, Traits, Extent &gt;::cend </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -965,7 +965,7 @@ template&lt;typename CharT, typename Traits = std::char_traits&lt;CharT&gt;, std
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr bool <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">bit::stl::basic_string_span</a>&lt; CharT, Traits, Extent &gt;::empty </td>
+          <td class="memname">constexpr bool <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">bit::stl::basic_string_span</a>&lt; CharT, Traits, Extent &gt;::<a class="el" href="../../da/d7e/namespacebit_1_1stl.html#db/d9b/structbit_1_1stl_1_1empty">empty</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -995,7 +995,7 @@ template&lt;typename CharT, typename Traits = std::char_traits&lt;CharT&gt;, std
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr iterator <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">bit::stl::basic_string_span</a>&lt; CharT, Traits, Extent &gt;::end </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">iterator</a> <a class="el" href="../../db/de7/classbit_1_1stl_1_1basic__string__span.html">bit::stl::basic_string_span</a>&lt; CharT, Traits, Extent &gt;::end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

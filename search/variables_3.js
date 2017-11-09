@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['is_5fbitmask',['is_bitmask',['../d9/d1b/structbit_1_1stl_1_1enum__traits.html#af20da571e1bfb570d96557f6b1dafa60',1,'bit::stl::enum_traits']]]
+  ['extent',['extent',['../d5/d30/classbit_1_1stl_1_1span.html#a074388eaba6da81ea3981822722de1e8',1,'bit::stl::span']]]
 ];

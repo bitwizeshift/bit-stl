@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>bit::stl: bit::stl::range&lt; I, S &gt; Class Template Reference</title>
+<title>bit::stl: bit::stl::range&lt; Iterator, Sentinel &gt; Class Template Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -67,72 +67,72 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="../../d3/ddd/classbit_1_1stl_1_1range-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">bit::stl::range&lt; I, S &gt; Class Template Reference</div>  </div>
+<div class="title">bit::stl::range&lt; Iterator, Sentinel &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Constructs a range from a given Container.  
  <a href="../../d9/d68/classbit_1_1stl_1_1range.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="../../d2/d53/range_8hpp_source.html">bit/stl/iterator.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="../../d2/dc2/ranges_2_range_8hpp_source.html">range.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a9fd9765644fbfbd172d481f0f7398068"><td class="memItemLeft" align="right" valign="top"><a id="a9fd9765644fbfbd172d481f0f7398068"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = I</td></tr>
-<tr class="separator:a9fd9765644fbfbd172d481f0f7398068"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a7514449b6b8d57772905341c498ad4"><td class="memItemLeft" align="right" valign="top"><a id="a4a7514449b6b8d57772905341c498ad4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>sentinel</b> = S</td></tr>
-<tr class="separator:a4a7514449b6b8d57772905341c498ad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4330591c37a5be99523395b6688f6c9"><td class="memItemLeft" align="right" valign="top"><a id="ad4330591c37a5be99523395b6688f6c9"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = Iterator</td></tr>
+<tr class="separator:ad4330591c37a5be99523395b6688f6c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58b2802a745274c945be5677e1a144c3"><td class="memItemLeft" align="right" valign="top"><a id="a58b2802a745274c945be5677e1a144c3"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>sentinel</b> = Sentinel</td></tr>
+<tr class="separator:a58b2802a745274c945be5677e1a144c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afed7e0fce0e1cd68b1152312a436d844"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html#afed7e0fce0e1cd68b1152312a436d844">range</a> (I iterator, S sentinel) noexcept</td></tr>
-<tr class="memdesc:afed7e0fce0e1cd68b1152312a436d844"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a range from a given iterator range.  <a href="#afed7e0fce0e1cd68b1152312a436d844">More...</a><br /></td></tr>
-<tr class="separator:afed7e0fce0e1cd68b1152312a436d844"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70ca020fa47c34947d72523dd400e2e9"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html#a70ca020fa47c34947d72523dd400e2e9">range</a> (const <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a> &amp;other)=default</td></tr>
-<tr class="memdesc:a70ca020fa47c34947d72523dd400e2e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a range by copying another range.  <a href="#a70ca020fa47c34947d72523dd400e2e9">More...</a><br /></td></tr>
-<tr class="separator:a70ca020fa47c34947d72523dd400e2e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44e68e6b99e7b0759c6aa2bf4e125e81"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html#a44e68e6b99e7b0759c6aa2bf4e125e81">range</a> (<a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a> &amp;&amp;other)=default</td></tr>
-<tr class="memdesc:a44e68e6b99e7b0759c6aa2bf4e125e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a range by moving another range.  <a href="#a44e68e6b99e7b0759c6aa2bf4e125e81">More...</a><br /></td></tr>
-<tr class="separator:a44e68e6b99e7b0759c6aa2bf4e125e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af55153ea8d105aaeff52b8a53c1130fb"><td class="memItemLeft" align="right" valign="top">constexpr iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html#af55153ea8d105aaeff52b8a53c1130fb">begin</a> ()</td></tr>
-<tr class="memdesc:af55153ea8d105aaeff52b8a53c1130fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the start iterator from the iterator range.  <a href="#af55153ea8d105aaeff52b8a53c1130fb">More...</a><br /></td></tr>
-<tr class="separator:af55153ea8d105aaeff52b8a53c1130fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04e3d98b401e328479ffb3e21531bfd5"><td class="memItemLeft" align="right" valign="top">constexpr sentinel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html#a04e3d98b401e328479ffb3e21531bfd5">end</a> ()</td></tr>
-<tr class="memdesc:a04e3d98b401e328479ffb3e21531bfd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the end iterator from the iterator range.  <a href="#a04e3d98b401e328479ffb3e21531bfd5">More...</a><br /></td></tr>
-<tr class="separator:a04e3d98b401e328479ffb3e21531bfd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9ec4e7daac45451fe56f047226d0a97"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html#af9ec4e7daac45451fe56f047226d0a97">range</a> (Iterator iterator, Sentinel sentinel) noexcept</td></tr>
+<tr class="memdesc:af9ec4e7daac45451fe56f047226d0a97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a range from a given iterator range.  <a href="#af9ec4e7daac45451fe56f047226d0a97">More...</a><br /></td></tr>
+<tr class="separator:af9ec4e7daac45451fe56f047226d0a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2511e521ea10832c02d19274660e37a2"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html#a2511e521ea10832c02d19274660e37a2">range</a> (const <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a> &amp;other)=default</td></tr>
+<tr class="memdesc:a2511e521ea10832c02d19274660e37a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a range by copying another range.  <a href="#a2511e521ea10832c02d19274660e37a2">More...</a><br /></td></tr>
+<tr class="separator:a2511e521ea10832c02d19274660e37a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6c558a7a6c7c9b00d53664a7a07f56b"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html#ae6c558a7a6c7c9b00d53664a7a07f56b">range</a> (<a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:ae6c558a7a6c7c9b00d53664a7a07f56b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a range by moving another range.  <a href="#ae6c558a7a6c7c9b00d53664a7a07f56b">More...</a><br /></td></tr>
+<tr class="separator:ae6c558a7a6c7c9b00d53664a7a07f56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf7e743a472fb141f3a05f9fdaaf0009"><td class="memItemLeft" align="right" valign="top">constexpr iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html#abf7e743a472fb141f3a05f9fdaaf0009">begin</a> ()</td></tr>
+<tr class="memdesc:abf7e743a472fb141f3a05f9fdaaf0009"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the start iterator from the iterator range.  <a href="#abf7e743a472fb141f3a05f9fdaaf0009">More...</a><br /></td></tr>
+<tr class="separator:abf7e743a472fb141f3a05f9fdaaf0009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4741e53e0bd45e63b23429234fbc08b3"><td class="memItemLeft" align="right" valign="top">constexpr sentinel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html#a4741e53e0bd45e63b23429234fbc08b3">end</a> ()</td></tr>
+<tr class="memdesc:a4741e53e0bd45e63b23429234fbc08b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the end iterator from the iterator range.  <a href="#a4741e53e0bd45e63b23429234fbc08b3">More...</a><br /></td></tr>
+<tr class="separator:a4741e53e0bd45e63b23429234fbc08b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename I, typename S&gt;<br />
-class bit::stl::range&lt; I, S &gt;</h3>
+<div class="textblock"><h3>template&lt;typename Iterator, typename Sentinel = Iterator&gt;<br />
+class bit::stl::range&lt; Iterator, Sentinel &gt;</h3>
 
 <p>Constructs a range from a given Container. </p>
 <p>A range is a contruct that wraps the iterator begin/end range in a single type </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d2/d53/range_8hpp_source.html#l00024">24</a> of file <a class="el" href="../../d2/d53/range_8hpp_source.html">range.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d2/dc2/ranges_2_range_8hpp_source.html#l00025">25</a> of file <a class="el" href="../../d2/dc2/ranges_2_range_8hpp_source.html">ranges/Range.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="afed7e0fce0e1cd68b1152312a436d844"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afed7e0fce0e1cd68b1152312a436d844">&#9670;&nbsp;</a></span>range() <span class="overload">[1/3]</span></h2>
+<a id="af9ec4e7daac45451fe56f047226d0a97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9ec4e7daac45451fe56f047226d0a97">&#9670;&nbsp;</a></span>range() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename I , typename S &gt; </div>
+template&lt;typename Iterator , typename Sentinel  = Iterator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">bit::stl::range</a>&lt; I, S &gt;::<a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a> </td>
+          <td class="memname">constexpr <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">bit::stl::range</a>&lt; Iterator, Sentinel &gt;::<a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a> </td>
           <td>(</td>
-          <td class="paramtype">I&#160;</td>
+          <td class="paramtype">Iterator&#160;</td>
           <td class="paramname"><em>iterator</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">S&#160;</td>
+          <td class="paramtype">Sentinel&#160;</td>
           <td class="paramname"><em>sentinel</em>&#160;</td>
         </tr>
         <tr>
@@ -159,21 +159,21 @@ template&lt;typename I , typename S &gt; </div>
 
 </div>
 </div>
-<a id="a70ca020fa47c34947d72523dd400e2e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70ca020fa47c34947d72523dd400e2e9">&#9670;&nbsp;</a></span>range() <span class="overload">[2/3]</span></h2>
+<a id="a2511e521ea10832c02d19274660e37a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2511e521ea10832c02d19274660e37a2">&#9670;&nbsp;</a></span>range() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename I , typename S &gt; </div>
+template&lt;typename Iterator , typename Sentinel  = Iterator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">bit::stl::range</a>&lt; I, S &gt;::<a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a> </td>
+          <td class="memname">constexpr <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">bit::stl::range</a>&lt; Iterator, Sentinel &gt;::<a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a>&lt; I, S &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a>&lt; Iterator, Sentinel &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -195,21 +195,21 @@ template&lt;typename I , typename S &gt; </div>
 
 </div>
 </div>
-<a id="a44e68e6b99e7b0759c6aa2bf4e125e81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44e68e6b99e7b0759c6aa2bf4e125e81">&#9670;&nbsp;</a></span>range() <span class="overload">[3/3]</span></h2>
+<a id="ae6c558a7a6c7c9b00d53664a7a07f56b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6c558a7a6c7c9b00d53664a7a07f56b">&#9670;&nbsp;</a></span>range() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename I , typename S &gt; </div>
+template&lt;typename Iterator , typename Sentinel  = Iterator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">bit::stl::range</a>&lt; I, S &gt;::<a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a> </td>
+          <td class="memname">constexpr <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">bit::stl::range</a>&lt; Iterator, Sentinel &gt;::<a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a>&lt; I, S &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">range</a>&lt; Iterator, Sentinel &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -232,16 +232,16 @@ template&lt;typename I , typename S &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af55153ea8d105aaeff52b8a53c1130fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af55153ea8d105aaeff52b8a53c1130fb">&#9670;&nbsp;</a></span>begin()</h2>
+<a id="abf7e743a472fb141f3a05f9fdaaf0009"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf7e743a472fb141f3a05f9fdaaf0009">&#9670;&nbsp;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename I , typename S &gt; </div>
+template&lt;typename Iterator , typename Sentinel  = Iterator&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">constexpr iterator <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">bit::stl::range</a>&lt; I, S &gt;::begin </td>
+          <td class="memname">constexpr iterator <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">bit::stl::range</a>&lt; Iterator, Sentinel &gt;::begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -259,16 +259,16 @@ template&lt;typename I , typename S &gt; </div>
 
 </div>
 </div>
-<a id="a04e3d98b401e328479ffb3e21531bfd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04e3d98b401e328479ffb3e21531bfd5">&#9670;&nbsp;</a></span>end()</h2>
+<a id="a4741e53e0bd45e63b23429234fbc08b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4741e53e0bd45e63b23429234fbc08b3">&#9670;&nbsp;</a></span>end()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename I , typename S &gt; </div>
+template&lt;typename Iterator , typename Sentinel  = Iterator&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">constexpr sentinel <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">bit::stl::range</a>&lt; I, S &gt;::end </td>
+          <td class="memname">constexpr sentinel <a class="el" href="../../d9/d68/classbit_1_1stl_1_1range.html">bit::stl::range</a>&lt; Iterator, Sentinel &gt;::end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -287,7 +287,7 @@ template&lt;typename I , typename S &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="../../d2/d53/range_8hpp_source.html">range.hpp</a></li>
+<li><a class="el" href="../../d2/dc2/ranges_2_range_8hpp_source.html">ranges/Range.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

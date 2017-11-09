@@ -1,19 +1,12 @@
 var searchData=
 [
-  ['set_5fview',['set_view',['../d0/d95/classbit_1_1stl_1_1set__view.html',1,'bit::stl']]],
-  ['source_5flocation',['source_location',['../d6/d2f/classbit_1_1stl_1_1source__location.html',1,'bit::stl']]],
-  ['span',['span',['../d5/d30/classbit_1_1stl_1_1span.html',1,'bit::stl']]],
-  ['span_3c_20chart_2c_20extent_20_3e',['span&lt; CharT, Extent &gt;',['../d5/d30/classbit_1_1stl_1_1span.html',1,'bit::stl']]],
-  ['static_5fdivisible_5fby_5frange',['static_divisible_by_range',['../d4/d61/structbit_1_1stl_1_1static__divisible__by__range.html',1,'bit::stl']]],
-  ['static_5fdivisible_5fby_5frange_3c_20p_2c_202_2c_20p_2f2_2bp_252_20_3e',['static_divisible_by_range&lt; p, 2, p/2+p%2 &gt;',['../d4/d61/structbit_1_1stl_1_1static__divisible__by__range.html',1,'bit::stl']]],
-  ['static_5fdivisible_5fby_5frange_3c_20v_2c_20b_2c_20b_20_3e',['static_divisible_by_range&lt; v, b, b &gt;',['../d2/ddd/structbit_1_1stl_1_1static__divisible__by__range_3_01v_00_01b_00_01b_01_4.html',1,'bit::stl']]],
-  ['static_5fgcd',['static_gcd',['../de/d49/structbit_1_1stl_1_1static__gcd.html',1,'bit::stl']]],
-  ['static_5fgcd_3c_200_2c_20b_20_3e',['static_gcd&lt; 0, b &gt;',['../d7/da4/structbit_1_1stl_1_1static__gcd_3_010_00_01b_01_4.html',1,'bit::stl']]],
-  ['static_5fis_5fprime',['static_is_prime',['../d8/d72/structbit_1_1stl_1_1static__is__prime.html',1,'bit::stl']]],
-  ['static_5fis_5fprime_3c_200_20_3e',['static_is_prime&lt; 0 &gt;',['../d7/db3/structbit_1_1stl_1_1static__is__prime_3_010_01_4.html',1,'bit::stl']]],
-  ['static_5fis_5fprime_3c_201_20_3e',['static_is_prime&lt; 1 &gt;',['../da/dce/structbit_1_1stl_1_1static__is__prime_3_011_01_4.html',1,'bit::stl']]],
-  ['static_5fis_5fprime_3c_202_20_3e',['static_is_prime&lt; 2 &gt;',['../d1/dc9/structbit_1_1stl_1_1static__is__prime_3_012_01_4.html',1,'bit::stl']]],
-  ['static_5flcm',['static_lcm',['../d6/d54/structbit_1_1stl_1_1static__lcm.html',1,'bit::stl']]],
-  ['static_5fsquare_5fsum_5fof_5frange',['static_square_sum_of_range',['../d8/de7/structbit_1_1stl_1_1static__square__sum__of__range.html',1,'bit::stl']]],
-  ['static_5fsum_5fof_5frange',['static_sum_of_range',['../dd/dde/structbit_1_1stl_1_1static__sum__of__range.html',1,'bit::stl']]]
+  ['range',['range',['../d9/d68/classbit_1_1stl_1_1range.html',1,'bit::stl']]],
+  ['rebind',['rebind',['../dc/da7/classbit_1_1stl_1_1expected.html#d5/d13/structbit_1_1stl_1_1expected_1_1rebind',1,'bit::stl::expected&lt; T, E &gt;::rebind&lt; U &gt;'],['../dd/d5a/classbit_1_1stl_1_1expected_3_01void_00_01_e_01_4.html#dc/d08/structbit_1_1stl_1_1expected_3_01void_00_01_e_01_4_1_1rebind',1,'bit::stl::expected&lt; void, E &gt;::rebind&lt; U &gt;']]],
+  ['remove_5fpointers',['remove_pointers',['../df/df3/structbit_1_1stl_1_1remove__pointers.html',1,'bit::stl']]],
+  ['remove_5fpointers_3c_20t_20_2a_20_3e',['remove_pointers&lt; T * &gt;',['../d1/d69/structbit_1_1stl_1_1remove__pointers_3_01_t_01_5_01_4.html',1,'bit::stl']]],
+  ['remove_5fpointers_3c_20t_20_2aconst_20_3e',['remove_pointers&lt; T *const &gt;',['../dd/d72/structbit_1_1stl_1_1remove__pointers_3_01_t_01_5const_01_4.html',1,'bit::stl']]],
+  ['remove_5fpointers_3c_20t_20_2aconst_20volatile_20_3e',['remove_pointers&lt; T *const volatile &gt;',['../df/d84/structbit_1_1stl_1_1remove__pointers_3_01_t_01_5const_01volatile_01_4.html',1,'bit::stl']]],
+  ['remove_5fpointers_3c_20t_20_2avolatile_20_3e',['remove_pointers&lt; T *volatile &gt;',['../d5/df8/structbit_1_1stl_1_1remove__pointers_3_01_t_01_5volatile_01_4.html',1,'bit::stl']]],
+  ['resolves_5foverload_5findex',['resolves_overload_index',['../dd/d33/structbit_1_1stl_1_1resolves__overload__index.html',1,'bit::stl']]],
+  ['resolves_5foverload_5ftype',['resolves_overload_type',['../d1/d53/structbit_1_1stl_1_1resolves__overload__type.html',1,'bit::stl']]]
 ];

@@ -1,4 +1,32 @@
 var searchData=
 [
-  ['final_5fact',['final_act',['../db/dc4/classbit_1_1stl_1_1final__act.html',1,'bit::stl']]]
+  ['fat_5fptr',['fat_ptr',['../d9/d6a/classbit_1_1stl_1_1fat__ptr.html',1,'bit::stl']]],
+  ['fat_5fptr_3c_20t_5b_5d_3e',['fat_ptr&lt; T[]&gt;',['../da/d1c/classbit_1_1stl_1_1fat__ptr_3_01_t[]_4.html',1,'bit::stl']]],
+  ['final_5fact',['final_act',['../db/dc4/classbit_1_1stl_1_1final__act.html',1,'bit::stl']]],
+  ['function_5fargument',['function_argument',['../da/d7e/namespacebit_1_1stl.html#d2/db4/structbit_1_1stl_1_1function__argument',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20fn_20_26_20_3e',['function_argument&lt; I, Fn &amp; &gt;',['../df/d37/structbit_1_1stl_1_1function__argument_3_01_i_00_01_fn_01_6_01_4.html',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20fn_20_26_26_20_3e',['function_argument&lt; I, Fn &amp;&amp; &gt;',['../d1/dc0/structbit_1_1stl_1_1function__argument_3_01_i_00_01_fn_01_6_6_01_4.html',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20r_28_2a_29_28types_2e_2e_2e_29_3e',['function_argument&lt; I, R(*)(Types...)&gt;',['../d5/d80/structbit_1_1stl_1_1function__argument_3_01_i_00_01_r_07_5_08_07_types_8_8_8_08_4.html',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20r_28c_3a_3a_2a_29_28types_2e_2e_2e_29_20const_20_3e',['function_argument&lt; I, R(C::*)(Types...) const &gt;',['../d6/d53/structbit_1_1stl_1_1function__argument_3_01_i_00_01_r_07_c_1_1_5_08_07_types_8_8_8_08_01const_01_4.html',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20r_28c_3a_3a_2a_29_28types_2e_2e_2e_29_20const_20volatile_20_3e',['function_argument&lt; I, R(C::*)(Types...) const volatile &gt;',['../db/d4d/structbit_1_1stl_1_1function__argument_3_01_i_00_01_r_07_c_1_1_5_08_07_types_8_8_8_08_01const_01volatile_01_4.html',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20r_28c_3a_3a_2a_29_28types_2e_2e_2e_29_20volatile_20_3e',['function_argument&lt; I, R(C::*)(Types...) volatile &gt;',['../d8/dc9/structbit_1_1stl_1_1function__argument_3_01_i_00_01_r_07_c_1_1_5_08_07_types_8_8_8_08_01volatile_01_4.html',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20r_28c_3a_3a_2a_29_28types_2e_2e_2e_29_3e',['function_argument&lt; I, R(C::*)(Types...)&gt;',['../d9/d8a/structbit_1_1stl_1_1function__argument_3_01_i_00_01_r_07_c_1_1_5_08_07_types_8_8_8_08_4.html',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20r_28types_2e_2e_2e_29_20const_20_3e',['function_argument&lt; I, R(Types...) const &gt;',['../d6/d3c/structbit_1_1stl_1_1function__argument_3_01_i_00_01_r_07_types_8_8_8_08_01const_01_4.html',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20r_28types_2e_2e_2e_29_20const_20volatile_20_3e',['function_argument&lt; I, R(Types...) const volatile &gt;',['../df/d64/structbit_1_1stl_1_1function__argument_3_01_i_00_01_r_07_types_8_8_8_08_01const_01volatile_01_4.html',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20r_28types_2e_2e_2e_29_20volatile_20_3e',['function_argument&lt; I, R(Types...) volatile &gt;',['../d0/dde/structbit_1_1stl_1_1function__argument_3_01_i_00_01_r_07_types_8_8_8_08_01volatile_01_4.html',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20r_28types_2e_2e_2e_29_3e',['function_argument&lt; I, R(Types...)&gt;',['../df/d5a/structbit_1_1stl_1_1function__argument_3_01_i_00_01_r_07_types_8_8_8_08_4.html',1,'bit::stl']]],
+  ['function_5fargument_3c_20i_2c_20std_3a_3adecay_5ft_3c_20fn_20_3e_20_3e',['function_argument&lt; I, std::decay_t&lt; Fn &gt; &gt;',['../da/d7e/namespacebit_1_1stl.html',1,'bit::stl']]],
+  ['function_5fsignature',['function_signature',['../da/d7e/namespacebit_1_1stl.html#df/d77/structbit_1_1stl_1_1function__signature',1,'bit::stl']]],
+  ['function_5fsignature_3c_20fn_20_26_20_3e',['function_signature&lt; Fn &amp; &gt;',['../d2/df7/structbit_1_1stl_1_1function__signature_3_01_fn_01_6_01_4.html',1,'bit::stl']]],
+  ['function_5fsignature_3c_20fn_20_26_26_20_3e',['function_signature&lt; Fn &amp;&amp; &gt;',['../d1/dcc/structbit_1_1stl_1_1function__signature_3_01_fn_01_6_6_01_4.html',1,'bit::stl']]],
+  ['function_5fsignature_3c_20fn_20_2a_20_3e',['function_signature&lt; Fn * &gt;',['../d4/d54/structbit_1_1stl_1_1function__signature_3_01_fn_01_5_01_4.html',1,'bit::stl']]],
+  ['function_5fsignature_3c_20r_28argtypes_2e_2e_2e_29_20const_20_3e',['function_signature&lt; R(ArgTypes...) const &gt;',['../d6/dc6/structbit_1_1stl_1_1function__signature_3_01_r_07_arg_types_8_8_8_08_01const_01_4.html',1,'bit::stl']]],
+  ['function_5fsignature_3c_20r_28argtypes_2e_2e_2e_29_20const_20volatile_20_3e',['function_signature&lt; R(ArgTypes...) const volatile &gt;',['../dc/d40/structbit_1_1stl_1_1function__signature_3_01_r_07_arg_types_8_8_8_08_01const_01volatile_01_4.html',1,'bit::stl']]],
+  ['function_5fsignature_3c_20r_28argtypes_2e_2e_2e_29_20volatile_20_3e',['function_signature&lt; R(ArgTypes...) volatile &gt;',['../d7/daf/structbit_1_1stl_1_1function__signature_3_01_r_07_arg_types_8_8_8_08_01volatile_01_4.html',1,'bit::stl']]],
+  ['function_5fsignature_3c_20r_28argtypes_2e_2e_2e_29_3e',['function_signature&lt; R(ArgTypes...)&gt;',['../d7/dcb/structbit_1_1stl_1_1function__signature_3_01_r_07_arg_types_8_8_8_08_4.html',1,'bit::stl']]],
+  ['function_5fsignature_3c_20r_28c_3a_3a_2a_29_28argtypes_2e_2e_2e_29_20const_20_3e',['function_signature&lt; R(C::*)(ArgTypes...) const &gt;',['../d9/d98/structbit_1_1stl_1_1function__signature_3_01_r_07_c_1_1_5_08_07_arg_types_8_8_8_08_01const_01_4.html',1,'bit::stl']]],
+  ['function_5fsignature_3c_20r_28c_3a_3a_2a_29_28argtypes_2e_2e_2e_29_20const_20volatile_20_3e',['function_signature&lt; R(C::*)(ArgTypes...) const volatile &gt;',['../db/de5/structbit_1_1stl_1_1function__signature_3_01_r_07_c_1_1_5_08_07_arg_types_8_8_8_08_01const_01volatile_01_4.html',1,'bit::stl']]],
+  ['function_5fsignature_3c_20r_28c_3a_3a_2a_29_28argtypes_2e_2e_2e_29_20volatile_20_3e',['function_signature&lt; R(C::*)(ArgTypes...) volatile &gt;',['../de/d7b/structbit_1_1stl_1_1function__signature_3_01_r_07_c_1_1_5_08_07_arg_types_8_8_8_08_01volatile_01_4.html',1,'bit::stl']]],
+  ['function_5fsignature_3c_20r_28c_3a_3a_2a_29_28argtypes_2e_2e_2e_29_3e',['function_signature&lt; R(C::*)(ArgTypes...)&gt;',['../de/de3/structbit_1_1stl_1_1function__signature_3_01_r_07_c_1_1_5_08_07_arg_types_8_8_8_08_4.html',1,'bit::stl']]],
+  ['function_5fsignature_3c_20std_3a_3adecay_5ft_3c_20fn_20_3e_20_3e',['function_signature&lt; std::decay_t&lt; Fn &gt; &gt;',['../da/d7e/namespacebit_1_1stl.html',1,'bit::stl']]]
 ];

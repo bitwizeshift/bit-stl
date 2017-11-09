@@ -67,7 +67,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="../../d8/d58/classbit_1_1stl_1_1observer__ptr-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">bit::stl::observer_ptr&lt; T &gt; Class Template Reference</div>  </div>
+<div class="title">bit::stl::observer_ptr&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="../../d1/dad/group___nullable_pointer.html">NullablePointer</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -79,10 +79,12 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a48c3ec43866c7efc2add166fa76b9897"><td class="memItemLeft" align="right" valign="top"><a id="a48c3ec43866c7efc2add166fa76b9897"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>pointer</b> = T *</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a48c3ec43866c7efc2add166fa76b9897">pointer</a> = T *</td></tr>
+<tr class="memdesc:a48c3ec43866c7efc2add166fa76b9897"><td class="mdescLeft">&#160;</td><td class="mdescRight">The underlying pointer type. <br /></td></tr>
 <tr class="separator:a48c3ec43866c7efc2add166fa76b9897"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71a0e735bbf0fa3c17dd544a398e0f0b"><td class="memItemLeft" align="right" valign="top"><a id="a71a0e735bbf0fa3c17dd544a398e0f0b"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>element_type</b> = T</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a71a0e735bbf0fa3c17dd544a398e0f0b">element_type</a> = T</td></tr>
+<tr class="memdesc:a71a0e735bbf0fa3c17dd544a398e0f0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The element type. <br /></td></tr>
 <tr class="separator:a71a0e735bbf0fa3c17dd544a398e0f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -95,7 +97,7 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a6b3649e4d42dddeba75e0e4d956690b6">observer_ptr</a> (std::nullptr_t) noexcept</td></tr>
 <tr class="memdesc:a6b3649e4d42dddeba75e0e4d956690b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a> pointing to <code>nullptr</code>. <br /></td></tr>
 <tr class="separator:a6b3649e4d42dddeba75e0e4d956690b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65eaa6896fbf10a215e6e707a6238f13"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a65eaa6896fbf10a215e6e707a6238f13">observer_ptr</a> (pointer ptr) noexcept</td></tr>
+<tr class="memitem:a65eaa6896fbf10a215e6e707a6238f13"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a65eaa6896fbf10a215e6e707a6238f13">observer_ptr</a> (<a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a48c3ec43866c7efc2add166fa76b9897">pointer</a> ptr) noexcept</td></tr>
 <tr class="memdesc:a65eaa6896fbf10a215e6e707a6238f13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a> that points to <code>ptr</code>.  <a href="#a65eaa6896fbf10a215e6e707a6238f13">More...</a><br /></td></tr>
 <tr class="separator:a65eaa6896fbf10a215e6e707a6238f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0444264407905360a86bdbe8a980814"><td class="memTemplParams" colspan="2">template&lt;typename U , std::enable_if&lt; std::is_convertible&lt; U *, T *&gt;::value &gt; *  = nullptr&gt; </td></tr>
@@ -109,19 +111,19 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memitem:a0c6ddac105c4b9e68913e4de1a3b09c5"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a0c6ddac105c4b9e68913e4de1a3b09c5">observer_ptr</a> (const <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> &amp;other) noexcept=default</td></tr>
 <tr class="memdesc:a0c6ddac105c4b9e68913e4de1a3b09c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-constructs an <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a> from another one.  <a href="#a0c6ddac105c4b9e68913e4de1a3b09c5">More...</a><br /></td></tr>
 <tr class="separator:a0c6ddac105c4b9e68913e4de1a3b09c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7f5d3c93a1e910f8fa5101f999a707c"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#ad7f5d3c93a1e910f8fa5101f999a707c">observer_ptr</a> (<a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> &amp;&amp;other) noexcept=default</td></tr>
-<tr class="memdesc:ad7f5d3c93a1e910f8fa5101f999a707c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-constructs an <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a> from another one.  <a href="#ad7f5d3c93a1e910f8fa5101f999a707c">More...</a><br /></td></tr>
-<tr class="separator:ad7f5d3c93a1e910f8fa5101f999a707c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2712d23d515591820a44dbe64e6b311"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#ab2712d23d515591820a44dbe64e6b311">observer_ptr</a> (<a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:ab2712d23d515591820a44dbe64e6b311"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-constructs an <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a> from another one.  <a href="#ab2712d23d515591820a44dbe64e6b311">More...</a><br /></td></tr>
+<tr class="separator:ab2712d23d515591820a44dbe64e6b311"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3025114e8263beac73902f008a775d00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a3025114e8263beac73902f008a775d00">operator=</a> (std::nullptr_t) noexcept</td></tr>
 <tr class="memdesc:a3025114e8263beac73902f008a775d00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns this <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a> to <code>nullptr</code>.  <a href="#a3025114e8263beac73902f008a775d00">More...</a><br /></td></tr>
 <tr class="separator:a3025114e8263beac73902f008a775d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e31c5b7b5fcd12bd7d87d0cea96872c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a0e31c5b7b5fcd12bd7d87d0cea96872c">operator=</a> (const <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> &amp;other) noexcept=default</td></tr>
 <tr class="memdesc:a0e31c5b7b5fcd12bd7d87d0cea96872c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns an <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a> from another one.  <a href="#a0e31c5b7b5fcd12bd7d87d0cea96872c">More...</a><br /></td></tr>
 <tr class="separator:a0e31c5b7b5fcd12bd7d87d0cea96872c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b9a69aec21fc4f71d025058ff68835c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a0b9a69aec21fc4f71d025058ff68835c">operator=</a> (<a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> &amp;&amp;other) noexcept=default</td></tr>
-<tr class="memdesc:a0b9a69aec21fc4f71d025058ff68835c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns an <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a> from another one.  <a href="#a0b9a69aec21fc4f71d025058ff68835c">More...</a><br /></td></tr>
-<tr class="separator:a0b9a69aec21fc4f71d025058ff68835c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07c8b56a2ece11b2a46c79bf5647dc2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a07c8b56a2ece11b2a46c79bf5647dc2b">reset</a> (pointer ptr=pointer()) noexcept</td></tr>
+<tr class="memitem:a1f4af1ea113188109daed2197bb2c146"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a1f4af1ea113188109daed2197bb2c146">operator=</a> (<a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a1f4af1ea113188109daed2197bb2c146"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns an <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a> from another one.  <a href="#a1f4af1ea113188109daed2197bb2c146">More...</a><br /></td></tr>
+<tr class="separator:a1f4af1ea113188109daed2197bb2c146"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07c8b56a2ece11b2a46c79bf5647dc2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a07c8b56a2ece11b2a46c79bf5647dc2b">reset</a> (<a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a48c3ec43866c7efc2add166fa76b9897">pointer</a> ptr=<a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a48c3ec43866c7efc2add166fa76b9897">pointer</a>()) noexcept</td></tr>
 <tr class="memdesc:a07c8b56a2ece11b2a46c79bf5647dc2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets this <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a> to point to <code>ptr</code>.  <a href="#a07c8b56a2ece11b2a46c79bf5647dc2b">More...</a><br /></td></tr>
 <tr class="separator:a07c8b56a2ece11b2a46c79bf5647dc2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d11fec450e219a8e7605811fd60eabf"><td class="memItemLeft" align="right" valign="top"><a id="a1d11fec450e219a8e7605811fd60eabf"></a>
@@ -131,14 +133,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <tr class="memitem:a98034808c32828b064c8ce03843f0781"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a98034808c32828b064c8ce03843f0781">swap</a> (<a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> &amp;other) noexcept</td></tr>
 <tr class="memdesc:a98034808c32828b064c8ce03843f0781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps this <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a> with another <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a>.  <a href="#a98034808c32828b064c8ce03843f0781">More...</a><br /></td></tr>
 <tr class="separator:a98034808c32828b064c8ce03843f0781"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6e75b494f9ba19669175d7faa72398f"><td class="memItemLeft" align="right" valign="top">constexpr pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#ae6e75b494f9ba19669175d7faa72398f">get</a> () const noexcept</td></tr>
+<tr class="memitem:ae6e75b494f9ba19669175d7faa72398f"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a48c3ec43866c7efc2add166fa76b9897">pointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#ae6e75b494f9ba19669175d7faa72398f">get</a> () const noexcept</td></tr>
 <tr class="memdesc:ae6e75b494f9ba19669175d7faa72398f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the underlying pointer.  <a href="#ae6e75b494f9ba19669175d7faa72398f">More...</a><br /></td></tr>
 <tr class="separator:ae6e75b494f9ba19669175d7faa72398f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae69fc179c5b05be45f1d1a1fc6966479"><td class="memItemLeft" align="right" valign="top"><a id="ae69fc179c5b05be45f1d1a1fc6966479"></a>
 constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#ae69fc179c5b05be45f1d1a1fc6966479">operator bool</a> () const noexcept</td></tr>
 <tr class="memdesc:ae69fc179c5b05be45f1d1a1fc6966479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicitly convertible to bool. This is <code>true</code> when the underlying pointer is non-null. <br /></td></tr>
 <tr class="separator:ae69fc179c5b05be45f1d1a1fc6966479"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7bbdde00ce90d1e0f90bc9042a687fd"><td class="memItemLeft" align="right" valign="top">constexpr pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#aa7bbdde00ce90d1e0f90bc9042a687fd">operator-&gt;</a> () const noexcept</td></tr>
+<tr class="memitem:aa7bbdde00ce90d1e0f90bc9042a687fd"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a48c3ec43866c7efc2add166fa76b9897">pointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#aa7bbdde00ce90d1e0f90bc9042a687fd">operator-&gt;</a> () const noexcept</td></tr>
 <tr class="memdesc:aa7bbdde00ce90d1e0f90bc9042a687fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dereferences the <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html" title="A lightweight wrapper around a pointer type. ">observer_ptr</a>.  <a href="#aa7bbdde00ce90d1e0f90bc9042a687fd">More...</a><br /></td></tr>
 <tr class="separator:aa7bbdde00ce90d1e0f90bc9042a687fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98c31506a7477bf043de6d200d35b9c9"><td class="memItemLeft" align="right" valign="top">constexpr std::add_lvalue_reference_t&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a98c31506a7477bf043de6d200d35b9c9">operator*</a> () const noexcept</td></tr>
@@ -154,14 +156,16 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 class bit::stl::observer_ptr&lt; T &gt;</h3>
 
 <p>A lightweight wrapper around a pointer type. </p>
+<p>This is essentially a 'dumb' smart pointer, in that it behaves identically to a raw pointer, but exposes a smart-pointer API with raw-pointer semantics.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">the</td><td>underlying pointer type </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section user"><dt>Satisfies</dt><dd><a class="el" href="../../d1/dad/group___nullable_pointer.html">NullablePointer</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d88/observer__ptr_8hpp_source.html#l00032">32</a> of file <a class="el" href="../../d9/d88/observer__ptr_8hpp_source.html">observer_ptr.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d88/observer__ptr_8hpp_source.html#l00048">48</a> of file <a class="el" href="../../d9/d88/observer__ptr_8hpp_source.html">observer_ptr.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a65eaa6896fbf10a215e6e707a6238f13"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a65eaa6896fbf10a215e6e707a6238f13">&#9670;&nbsp;</a></span>observer_ptr() <span class="overload">[1/5]</span></h2>
@@ -177,7 +181,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">constexpr <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">bit::stl::observer_ptr</a>&lt; T &gt;::<a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> </td>
           <td>(</td>
-          <td class="paramtype">pointer&#160;</td>
+          <td class="paramtype"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a48c3ec43866c7efc2add166fa76b9897">pointer</a>&#160;</td>
           <td class="paramname"><em>ptr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -311,8 +315,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ad7f5d3c93a1e910f8fa5101f999a707c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7f5d3c93a1e910f8fa5101f999a707c">&#9670;&nbsp;</a></span>observer_ptr() <span class="overload">[5/5]</span></h2>
+<a id="ab2712d23d515591820a44dbe64e6b311"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2712d23d515591820a44dbe64e6b311">&#9670;&nbsp;</a></span>observer_ptr() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -323,7 +327,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">bit::stl::observer_ptr</a>&lt; T &gt;::<a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> </td>
+          <td class="memname"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">bit::stl::observer_ptr</a>&lt; T &gt;::<a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">observer_ptr</a>&lt; T &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -332,7 +336,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -360,7 +364,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr pointer <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">bit::stl::observer_ptr</a>&lt; T &gt;::get </td>
+          <td class="memname">constexpr <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a48c3ec43866c7efc2add166fa76b9897">pointer</a> <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">bit::stl::observer_ptr</a>&lt; T &gt;::get </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -420,7 +424,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr pointer <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">bit::stl::observer_ptr</a>&lt; T &gt;::operator-&gt; </td>
+          <td class="memname">constexpr <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a48c3ec43866c7efc2add166fa76b9897">pointer</a> <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">bit::stl::observer_ptr</a>&lt; T &gt;::operator-&gt; </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -506,8 +510,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a0b9a69aec21fc4f71d025058ff68835c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b9a69aec21fc4f71d025058ff68835c">&#9670;&nbsp;</a></span>operator=() <span class="overload">[3/3]</span></h2>
+<a id="a1f4af1ea113188109daed2197bb2c146"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f4af1ea113188109daed2197bb2c146">&#9670;&nbsp;</a></span>operator=() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -527,7 +531,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -557,8 +561,8 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html">bit::stl::observer_ptr</a>&lt; T &gt;::reset </td>
           <td>(</td>
-          <td class="paramtype">pointer&#160;</td>
-          <td class="paramname"><em>ptr</em> = <code>pointer()</code></td><td>)</td>
+          <td class="paramtype"><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a48c3ec43866c7efc2add166fa76b9897">pointer</a>&#160;</td>
+          <td class="paramname"><em>ptr</em> = <code><a class="el" href="../../de/ddb/classbit_1_1stl_1_1observer__ptr.html#a48c3ec43866c7efc2add166fa76b9897">pointer</a>()</code></td><td>)</td>
           <td></td>
         </tr>
       </table>

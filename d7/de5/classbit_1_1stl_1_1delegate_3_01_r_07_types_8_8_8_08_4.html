@@ -106,11 +106,11 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/de5/classbit_1_1stl_1_1delegate_3_01_r_07_types_8_8_8_08_4.html#aca3fe2e687847af1382856864b96746f">operator bool</a> () const noexcept</td></tr>
 <tr class="memdesc:aca3fe2e687847af1382856864b96746f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this delegate is bound. <br /></td></tr>
 <tr class="separator:aca3fe2e687847af1382856864b96746f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeac3be886cd4a2453d6380a6a9ea6db2"><td class="memTemplParams" colspan="2">template&lt;typename... Args, typename  = std::enable_if_t&lt;std::is_convertible&lt;std::tuple&lt;Args...&gt;,std::tuple&lt;Types...&gt;&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:aeac3be886cd4a2453d6380a6a9ea6db2"><td class="memTemplParams" colspan="2">template&lt;typename... Args, typename  = std::enable_if_t&lt;is_invocable&lt;R(Types...),Args...&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:aeac3be886cd4a2453d6380a6a9ea6db2"><td class="memTemplItemLeft" align="right" valign="top">constexpr return_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d7/de5/classbit_1_1stl_1_1delegate_3_01_r_07_types_8_8_8_08_4.html#aeac3be886cd4a2453d6380a6a9ea6db2">invoke</a> (Args &amp;&amp;...args) const</td></tr>
 <tr class="memdesc:aeac3be886cd4a2453d6380a6a9ea6db2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes the bound function.  <a href="#aeac3be886cd4a2453d6380a6a9ea6db2">More...</a><br /></td></tr>
 <tr class="separator:aeac3be886cd4a2453d6380a6a9ea6db2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9763b90d0bebb91ae367f63d20873227"><td class="memTemplParams" colspan="2">template&lt;typename... Args, typename  = std::enable_if_t&lt;std::is_convertible&lt;std::tuple&lt;Args...&gt;,std::tuple&lt;Types...&gt;&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a9763b90d0bebb91ae367f63d20873227"><td class="memTemplParams" colspan="2">template&lt;typename... Args, typename  = std::enable_if_t&lt;is_invocable&lt;R(Types...),Args...&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a9763b90d0bebb91ae367f63d20873227"><td class="memTemplItemLeft" align="right" valign="top">constexpr return_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d7/de5/classbit_1_1stl_1_1delegate_3_01_r_07_types_8_8_8_08_4.html#a9763b90d0bebb91ae367f63d20873227">operator()</a> (Args &amp;&amp;...args) const</td></tr>
 <tr class="separator:a9763b90d0bebb91ae367f63d20873227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
@@ -156,7 +156,7 @@ template&lt;typename Fn &gt; </td></tr>
 class bit::stl::delegate&lt; R(Types...)&gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d68/delegate_8hpp_source.html#l00048">48</a> of file <a class="el" href="../../d0/d68/delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d68/delegate_8hpp_source.html#l00044">44</a> of file <a class="el" href="../../d0/d68/delegate_8hpp_source.html">delegate.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a731781e04fab38b6693a899e14309bef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a731781e04fab38b6693a899e14309bef">&#9670;&nbsp;</a></span>bind() <span class="overload">[1/5]</span></h2>
@@ -474,7 +474,7 @@ template&lt;class C , const_member_function_type&lt; C &gt; member_function&gt; 
 <div class="memtemplate">
 template&lt;typename R , typename... Types&gt; </div>
 <div class="memtemplate">
-template&lt;typename... Args, typename  = std::enable_if_t&lt;std::is_convertible&lt;std::tuple&lt;Args...&gt;,std::tuple&lt;Types...&gt;&gt;::value&gt;&gt; </div>
+template&lt;typename... Args, typename  = std::enable_if_t&lt;is_invocable&lt;R(Types...),Args...&gt;::value&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">constexpr return_type <a class="el" href="../../da/d7e/namespacebit_1_1stl.html#d6/d7e/classbit_1_1stl_1_1delegate">bit::stl::delegate</a>&lt; R(Types...)&gt;::invoke </td>
@@ -535,7 +535,7 @@ template&lt;typename R , typename... Types&gt; </div>
 <div class="memtemplate">
 template&lt;typename R , typename... Types&gt; </div>
 <div class="memtemplate">
-template&lt;typename... Args, typename  = std::enable_if_t&lt;std::is_convertible&lt;std::tuple&lt;Args...&gt;,std::tuple&lt;Types...&gt;&gt;::value&gt;&gt; </div>
+template&lt;typename... Args, typename  = std::enable_if_t&lt;is_invocable&lt;R(Types...),Args...&gt;::value&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">constexpr return_type <a class="el" href="../../da/d7e/namespacebit_1_1stl.html#d6/d7e/classbit_1_1stl_1_1delegate">bit::stl::delegate</a>&lt; R(Types...)&gt;::operator() </td>

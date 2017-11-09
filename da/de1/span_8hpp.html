@@ -58,7 +58,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="../../dir_911e2e3e6d3b64043b13d829b7a3782c.html">bit</a></li><li class="navelem"><a class="el" href="../../dir_74624cd51efe8f4596731f0853df1244.html">stl</a></li>  </ul>
+<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="../../dir_911e2e3e6d3b64043b13d829b7a3782c.html">bit</a></li><li class="navelem"><a class="el" href="../../dir_74624cd51efe8f4596731f0853df1244.html">stl</a></li><li class="navelem"><a class="el" href="../../dir_f39003ab9e1d98e497389d26dfaccd68.html">containers</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -74,11 +74,16 @@ $(function() {
 
 <p>This file contains a custom implementation of the gsl::span; a mutable view of contiguous data.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../dc/d54/type__traits_8hpp_source.html">type_traits.hpp</a>&quot;</code><br />
-<code>#include &quot;detail/iterator/pointer_iterator.hpp&quot;</code><br />
-<code>#include &quot;<a class="el" href="../../d2/d54/assert_8hpp_source.html">assert.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d6/dfd/bool__constant_8hpp_source.html">../traits/composition/bool_constant.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d7/da0/match__cv__qualifiers_8hpp_source.html">../traits/transformations/match_cv_qualifiers.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d6/dd3/is__same__decay_8hpp_source.html">../traits/relationships/is_same_decay.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../df/d99/_contiguous_container_8hpp_source.html">../concepts/ContiguousContainer.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d2/d54/assert_8hpp_source.html">../utilities/assert.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../dc/d4a/compiler__traits_8hpp_source.html">../utilities/compiler_traits.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d5/da6/tagged__iterator_8hpp_source.html">../iterators/tagged_iterator.hpp</a>&quot;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;limits&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 <code>#include &quot;detail/span.inl&quot;</code><br />
 </div>
 <p><a href="../../da/de1/span_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -89,7 +94,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A light-weight non-owning wrapper around contiguous memory.  <a href="../../d5/d30/classbit_1_1stl_1_1span.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dc9/structbit_1_1stl_1_1is__span.html">bit::stl::is_span&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the given type an span ?  <a href="../../d3/dc9/structbit_1_1stl_1_1is__span.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the given type a span ?  <a href="../../d3/dc9/structbit_1_1stl_1_1is__span.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d34/structbit_1_1stl_1_1is__span_3_01span_3_01_t_00_01_n_01_4_01_4.html">bit::stl::is_span&lt; span&lt; T, N &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,42 +145,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a4850b6a62191725450ad5a4c37dfdbcd"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html#a4850b6a62191725450ad5a4c37dfdbcd">bit::stl::operator&gt;=</a> (const span&lt; T, Extent &gt; &amp;lhs, const span&lt; T, Extent &gt; &amp;rhs) noexcept</td></tr>
 <tr class="memdesc:a4850b6a62191725450ad5a4c37dfdbcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lexographically compares all entries in the span.  <a href="../../da/d7e/namespacebit_1_1stl.html#a4850b6a62191725450ad5a4c37dfdbcd">More...</a><br /></td></tr>
 <tr class="separator:a4850b6a62191725450ad5a4c37dfdbcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d652d7405ef0f88ed756b4c2da41fa9"><td class="memTemplParams" colspan="2">template&lt;typename T , std::ptrdiff_t Extent&gt; </td></tr>
-<tr class="memitem:a5d652d7405ef0f88ed756b4c2da41fa9"><td class="memTemplItemLeft" align="right" valign="top">constexpr span&lt; byte &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#a5d652d7405ef0f88ed756b4c2da41fa9">bit::stl::casts::to_bytes</a> (span&lt; T, Extent &gt; span)</td></tr>
-<tr class="memdesc:a5d652d7405ef0f88ed756b4c2da41fa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a span viewing a non-const object into a byte view.  <a href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#a5d652d7405ef0f88ed756b4c2da41fa9">More...</a><br /></td></tr>
-<tr class="separator:a5d652d7405ef0f88ed756b4c2da41fa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b7ac5d1b6fe7b9e1546bba5c9f8cd07"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a9b7ac5d1b6fe7b9e1546bba5c9f8cd07"><td class="memTemplItemLeft" align="right" valign="top">constexpr span&lt; byte &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#a9b7ac5d1b6fe7b9e1546bba5c9f8cd07">bit::stl::casts::to_bytes</a> (span&lt; T &gt; span)</td></tr>
-<tr class="separator:a9b7ac5d1b6fe7b9e1546bba5c9f8cd07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b7b037ac816c60bafb0437612475701"><td class="memTemplParams" colspan="2">template&lt;typename T , std::ptrdiff_t Extent&gt; </td></tr>
-<tr class="memitem:a0b7b037ac816c60bafb0437612475701"><td class="memTemplItemLeft" align="right" valign="top">constexpr span&lt; const byte &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#a0b7b037ac816c60bafb0437612475701">bit::stl::casts::to_bytes</a> (span&lt; const T, Extent &gt; span)</td></tr>
-<tr class="memdesc:a0b7b037ac816c60bafb0437612475701"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a span viewing a const object into a const byte view.  <a href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#a0b7b037ac816c60bafb0437612475701">More...</a><br /></td></tr>
-<tr class="separator:a0b7b037ac816c60bafb0437612475701"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7043cf8213db4fbeeddbc5a874e7d10b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a7043cf8213db4fbeeddbc5a874e7d10b"><td class="memTemplItemLeft" align="right" valign="top">constexpr span&lt; const byte &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#a7043cf8213db4fbeeddbc5a874e7d10b">bit::stl::casts::to_bytes</a> (span&lt; const T &gt; span)</td></tr>
-<tr class="separator:a7043cf8213db4fbeeddbc5a874e7d10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc058b0c93fc4f62e666d301d2a8c857"><td class="memTemplParams" colspan="2"><a id="afc058b0c93fc4f62e666d301d2a8c857"></a>
-template&lt;typename Container , std::enable_if_t&lt; is_contiguous_container&lt; Container &gt;::value &gt; *  = nullptr&gt; </td></tr>
-<tr class="memitem:afc058b0c93fc4f62e666d301d2a8c857"><td class="memTemplItemLeft" align="right" valign="top">constexpr span&lt; match_cv_qualifiers_t&lt; typename Container::value_type, byte &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::casts::to_bytes</b> (Container &amp;container)</td></tr>
-<tr class="separator:afc058b0c93fc4f62e666d301d2a8c857"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a772274e55b464a1052ead987351e79c3"><td class="memTemplParams" colspan="2"><a id="a772274e55b464a1052ead987351e79c3"></a>
-template&lt;typename Container , std::enable_if_t&lt; is_contiguous_container&lt; Container &gt;::value &gt; *  = nullptr&gt; </td></tr>
-<tr class="memitem:a772274e55b464a1052ead987351e79c3"><td class="memTemplItemLeft" align="right" valign="top">constexpr span&lt; const byte &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::casts::to_bytes</b> (const Container &amp;container)</td></tr>
-<tr class="separator:a772274e55b464a1052ead987351e79c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abccfede7085abaf64563f893252df95b"><td class="memTemplParams" colspan="2">template&lt;typename T , std::ptrdiff_t Extent&gt; </td></tr>
-<tr class="memitem:abccfede7085abaf64563f893252df95b"><td class="memTemplItemLeft" align="right" valign="top">constexpr span&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#abccfede7085abaf64563f893252df95b">bit::stl::casts::from_bytes</a> (span&lt; byte, Extent &gt; span)</td></tr>
-<tr class="memdesc:abccfede7085abaf64563f893252df95b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a span viewing a non-const array of bytes to an object of T.  <a href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#abccfede7085abaf64563f893252df95b">More...</a><br /></td></tr>
-<tr class="separator:abccfede7085abaf64563f893252df95b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade17774c991d6ec71fded8b6df7a8f88"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ade17774c991d6ec71fded8b6df7a8f88"><td class="memTemplItemLeft" align="right" valign="top">constexpr span&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#ade17774c991d6ec71fded8b6df7a8f88">bit::stl::casts::from_bytes</a> (span&lt; byte &gt; span)</td></tr>
-<tr class="separator:ade17774c991d6ec71fded8b6df7a8f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc5d7c1ea511b3f61c2b0a7ed4efc67f"><td class="memTemplParams" colspan="2">template&lt;typename T , std::ptrdiff_t Extent&gt; </td></tr>
-<tr class="memitem:afc5d7c1ea511b3f61c2b0a7ed4efc67f"><td class="memTemplItemLeft" align="right" valign="top">constexpr span&lt; const T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#afc5d7c1ea511b3f61c2b0a7ed4efc67f">bit::stl::casts::from_bytes</a> (span&lt; const byte, Extent &gt; span)</td></tr>
-<tr class="memdesc:afc5d7c1ea511b3f61c2b0a7ed4efc67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a span viewing a const array of bytes to an object of T.  <a href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#afc5d7c1ea511b3f61c2b0a7ed4efc67f">More...</a><br /></td></tr>
-<tr class="separator:afc5d7c1ea511b3f61c2b0a7ed4efc67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ce72116724016abb1a01a07c49c17ad"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a4ce72116724016abb1a01a07c49c17ad"><td class="memTemplItemLeft" align="right" valign="top">constexpr span&lt; const T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/dc0/namespacebit_1_1stl_1_1casts.html#a4ce72116724016abb1a01a07c49c17ad">bit::stl::casts::from_bytes</a> (span&lt; const byte &gt; span)</td></tr>
-<tr class="separator:a4ce72116724016abb1a01a07c49c17ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>

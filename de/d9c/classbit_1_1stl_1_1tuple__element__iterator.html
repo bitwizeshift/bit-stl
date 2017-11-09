@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>bit::stl: bit::stl::tuple_element_iterator&lt; N, Iter &gt; Class Template Reference</title>
+<title>bit::stl: bit::stl::tuple_element_iterator&lt; N, Iterator &gt; Class Template Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -67,113 +67,113 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="../../d1/d3e/classbit_1_1stl_1_1tuple__element__iterator-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">bit::stl::tuple_element_iterator&lt; N, Iter &gt; Class Template Reference</div>  </div>
+<div class="title">bit::stl::tuple_element_iterator&lt; N, Iterator &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:afb44ea594871c4158ca6d5baebd25029"><td class="memItemLeft" align="right" valign="top"><a id="afb44ea594871c4158ca6d5baebd25029"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = std::tuple_element_t&lt; N, typename std::iterator_traits&lt; Iter &gt;::value_type &gt;</td></tr>
-<tr class="separator:afb44ea594871c4158ca6d5baebd25029"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a7f1e5a21d45f20e7b9ffa83a6eb30e"><td class="memItemLeft" align="right" valign="top"><a id="a2a7f1e5a21d45f20e7b9ffa83a6eb30e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> = typename std::iterator_traits&lt; Iter &gt;::difference_type</td></tr>
-<tr class="separator:a2a7f1e5a21d45f20e7b9ffa83a6eb30e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31becc35cc341c22b7f92f86b27c1783"><td class="memItemLeft" align="right" valign="top"><a id="a31becc35cc341c22b7f92f86b27c1783"></a>
+<tr class="memitem:a1b33a8c3d36dc91b5f52e16a2e8e49ad"><td class="memItemLeft" align="right" valign="top"><a id="a1b33a8c3d36dc91b5f52e16a2e8e49ad"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = std::tuple_element_t&lt; N, typename std::iterator_traits&lt; Iterator &gt;::value_type &gt;</td></tr>
+<tr class="separator:a1b33a8c3d36dc91b5f52e16a2e8e49ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bb489ffca7d1b7e816d83d8ce021bf8"><td class="memItemLeft" align="right" valign="top"><a id="a4bb489ffca7d1b7e816d83d8ce021bf8"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> = typename std::iterator_traits&lt; Iterator &gt;::difference_type</td></tr>
+<tr class="separator:a4bb489ffca7d1b7e816d83d8ce021bf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a893fb337c07d388029511427dcc8083f"><td class="memItemLeft" align="right" valign="top"><a id="a893fb337c07d388029511427dcc8083f"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>pointer</b> = value_type *</td></tr>
-<tr class="separator:a31becc35cc341c22b7f92f86b27c1783"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33148466782567b35a2ae3128f47e09e"><td class="memItemLeft" align="right" valign="top"><a id="a33148466782567b35a2ae3128f47e09e"></a>
+<tr class="separator:a893fb337c07d388029511427dcc8083f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a20c8ac33211e225d3466cab936991c"><td class="memItemLeft" align="right" valign="top"><a id="a8a20c8ac33211e225d3466cab936991c"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>reference</b> = value_type &amp;</td></tr>
-<tr class="separator:a33148466782567b35a2ae3128f47e09e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab733f4f74508ff84ea0d5c8c6eb389e7"><td class="memItemLeft" align="right" valign="top"><a id="ab733f4f74508ff84ea0d5c8c6eb389e7"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator_category</b> = typename std::iterator_traits&lt; Iter &gt;::iterator_category</td></tr>
-<tr class="separator:ab733f4f74508ff84ea0d5c8c6eb389e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a8a20c8ac33211e225d3466cab936991c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff69769f119b716cea03644295c96e05"><td class="memItemLeft" align="right" valign="top"><a id="aff69769f119b716cea03644295c96e05"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator_category</b> = typename std::iterator_traits&lt; Iterator &gt;::iterator_category</td></tr>
+<tr class="separator:aff69769f119b716cea03644295c96e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa5d65e88a574ae357c1413b9d54ca68a"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html#aa5d65e88a574ae357c1413b9d54ca68a">tuple_element_iterator</a> (Iter iter)</td></tr>
-<tr class="memdesc:aa5d65e88a574ae357c1413b9d54ca68a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> from an underlying iterator.  <a href="#aa5d65e88a574ae357c1413b9d54ca68a">More...</a><br /></td></tr>
-<tr class="separator:aa5d65e88a574ae357c1413b9d54ca68a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dee42e57e88a8aa63c95cfd7628c0a3"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html#a2dee42e57e88a8aa63c95cfd7628c0a3">tuple_element_iterator</a> (const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;other)=default</td></tr>
-<tr class="memdesc:a2dee42e57e88a8aa63c95cfd7628c0a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructs a <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> from another iterator.  <a href="#a2dee42e57e88a8aa63c95cfd7628c0a3">More...</a><br /></td></tr>
-<tr class="separator:a2dee42e57e88a8aa63c95cfd7628c0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6574818f68db0c31edd65802a5fdde10"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html#a6574818f68db0c31edd65802a5fdde10">tuple_element_iterator</a> (<a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&amp;other)=default</td></tr>
-<tr class="memdesc:a6574818f68db0c31edd65802a5fdde10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructs a <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> from another iterator.  <a href="#a6574818f68db0c31edd65802a5fdde10">More...</a><br /></td></tr>
-<tr class="separator:a6574818f68db0c31edd65802a5fdde10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e38d4742ac5e0c5264625d043df91e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html#a7e38d4742ac5e0c5264625d043df91e8">operator=</a> (const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;other)=default</td></tr>
-<tr class="memdesc:a7e38d4742ac5e0c5264625d043df91e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assigns a <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> from another iterator.  <a href="#a7e38d4742ac5e0c5264625d043df91e8">More...</a><br /></td></tr>
-<tr class="separator:a7e38d4742ac5e0c5264625d043df91e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee0838ff15d46d35059829682b6bb891"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html#aee0838ff15d46d35059829682b6bb891">operator=</a> (<a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&amp;other)=default</td></tr>
-<tr class="memdesc:aee0838ff15d46d35059829682b6bb891"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assigns a <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> from another iterator.  <a href="#aee0838ff15d46d35059829682b6bb891">More...</a><br /></td></tr>
-<tr class="separator:aee0838ff15d46d35059829682b6bb891"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a290d26bcf8c63c1177bcaaa47b63cc04"><td class="memItemLeft" align="right" valign="top"><a id="a290d26bcf8c63c1177bcaaa47b63cc04"></a>
+<tr class="memitem:a6a60fbbfedd6149494c2a2ad74a0c4e1"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html#a6a60fbbfedd6149494c2a2ad74a0c4e1">tuple_element_iterator</a> (Iterator iter)</td></tr>
+<tr class="memdesc:a6a60fbbfedd6149494c2a2ad74a0c4e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> from an underlying iterator.  <a href="#a6a60fbbfedd6149494c2a2ad74a0c4e1">More...</a><br /></td></tr>
+<tr class="separator:a6a60fbbfedd6149494c2a2ad74a0c4e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99ef83b26cf4617f4620fa3b2b9dda63"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html#a99ef83b26cf4617f4620fa3b2b9dda63">tuple_element_iterator</a> (const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;other)=default</td></tr>
+<tr class="memdesc:a99ef83b26cf4617f4620fa3b2b9dda63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructs a <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> from another iterator.  <a href="#a99ef83b26cf4617f4620fa3b2b9dda63">More...</a><br /></td></tr>
+<tr class="separator:a99ef83b26cf4617f4620fa3b2b9dda63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac47104fa91f34042b7e639579b24cc"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html#a1ac47104fa91f34042b7e639579b24cc">tuple_element_iterator</a> (<a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:a1ac47104fa91f34042b7e639579b24cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructs a <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> from another iterator.  <a href="#a1ac47104fa91f34042b7e639579b24cc">More...</a><br /></td></tr>
+<tr class="separator:a1ac47104fa91f34042b7e639579b24cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2437835891b9f956b7481be5e82e6bc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html#a2437835891b9f956b7481be5e82e6bc6">operator=</a> (const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;other)=default</td></tr>
+<tr class="memdesc:a2437835891b9f956b7481be5e82e6bc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assigns a <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> from another iterator.  <a href="#a2437835891b9f956b7481be5e82e6bc6">More...</a><br /></td></tr>
+<tr class="separator:a2437835891b9f956b7481be5e82e6bc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a945853750dd8f59ef2e5753a629901c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html#a945853750dd8f59ef2e5753a629901c1">operator=</a> (<a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:a945853750dd8f59ef2e5753a629901c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assigns a <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> from another iterator.  <a href="#a945853750dd8f59ef2e5753a629901c1">More...</a><br /></td></tr>
+<tr class="separator:a945853750dd8f59ef2e5753a629901c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeabb1bdc02b9f2e248ef8e38e61bc81a"><td class="memItemLeft" align="right" valign="top"><a id="aeabb1bdc02b9f2e248ef8e38e61bc81a"></a>
 constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator++</b> () noexcept</td></tr>
-<tr class="separator:a290d26bcf8c63c1177bcaaa47b63cc04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a201109c34cefa345a224469643963f38"><td class="memItemLeft" align="right" valign="top"><a id="a201109c34cefa345a224469643963f38"></a>
+<tr class="separator:aeabb1bdc02b9f2e248ef8e38e61bc81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee02e739d43450ce5d28e08271196b87"><td class="memItemLeft" align="right" valign="top"><a id="aee02e739d43450ce5d28e08271196b87"></a>
 constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator++</b> (int) noexcept</td></tr>
-<tr class="separator:a201109c34cefa345a224469643963f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a667e88b41450243f30f778d2a9dc3227"><td class="memItemLeft" align="right" valign="top"><a id="a667e88b41450243f30f778d2a9dc3227"></a>
+<tr class="separator:aee02e739d43450ce5d28e08271196b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad577b0544aff8d309a6c9a577f3d4e82"><td class="memItemLeft" align="right" valign="top"><a id="ad577b0544aff8d309a6c9a577f3d4e82"></a>
 constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator--</b> () noexcept</td></tr>
-<tr class="separator:a667e88b41450243f30f778d2a9dc3227"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af119b4bc1f9a45a3eef00f0b696c26e7"><td class="memItemLeft" align="right" valign="top"><a id="af119b4bc1f9a45a3eef00f0b696c26e7"></a>
+<tr class="separator:ad577b0544aff8d309a6c9a577f3d4e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adde675c52c58fb80f91e8d468214bfb1"><td class="memItemLeft" align="right" valign="top"><a id="adde675c52c58fb80f91e8d468214bfb1"></a>
 constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator--</b> (int) noexcept</td></tr>
-<tr class="separator:af119b4bc1f9a45a3eef00f0b696c26e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c60d2699123e957c011a72e1b62e1ef"><td class="memItemLeft" align="right" valign="top"><a id="a2c60d2699123e957c011a72e1b62e1ef"></a>
+<tr class="separator:adde675c52c58fb80f91e8d468214bfb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e80cf36f75e2b335eac88603e746bf4"><td class="memItemLeft" align="right" valign="top"><a id="a4e80cf36f75e2b335eac88603e746bf4"></a>
 constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator+=</b> (difference_type n) noexcept</td></tr>
-<tr class="separator:a2c60d2699123e957c011a72e1b62e1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af024eebb1e7dd94561a7c4f015321f76"><td class="memItemLeft" align="right" valign="top"><a id="af024eebb1e7dd94561a7c4f015321f76"></a>
+<tr class="separator:a4e80cf36f75e2b335eac88603e746bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad210e710785cf51084045e3013311af"><td class="memItemLeft" align="right" valign="top"><a id="aad210e710785cf51084045e3013311af"></a>
 constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator-=</b> (difference_type n) noexcept</td></tr>
-<tr class="separator:af024eebb1e7dd94561a7c4f015321f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a670ed73b0a8e91a18dd95c1ab7e44a54"><td class="memItemLeft" align="right" valign="top"><a id="a670ed73b0a8e91a18dd95c1ab7e44a54"></a>
+<tr class="separator:aad210e710785cf51084045e3013311af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec2f90ff26e3b00a846aa4497706552b"><td class="memItemLeft" align="right" valign="top"><a id="aec2f90ff26e3b00a846aa4497706552b"></a>
 constexpr difference_type&#160;</td><td class="memItemRight" valign="bottom"><b>operator-</b> (const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;rhs) const noexcept</td></tr>
-<tr class="separator:a670ed73b0a8e91a18dd95c1ab7e44a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1199b0ccbbdf0c7dd9bc84801d77dba"><td class="memItemLeft" align="right" valign="top"><a id="ae1199b0ccbbdf0c7dd9bc84801d77dba"></a>
+<tr class="separator:aec2f90ff26e3b00a846aa4497706552b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca338172c0407b41fd70f02d59c00841"><td class="memItemLeft" align="right" valign="top"><a id="aca338172c0407b41fd70f02d59c00841"></a>
 constexpr pointer&#160;</td><td class="memItemRight" valign="bottom"><b>operator-&gt;</b> () const noexcept</td></tr>
-<tr class="separator:ae1199b0ccbbdf0c7dd9bc84801d77dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b9e86fd6a61b4548fe7668698731687"><td class="memItemLeft" align="right" valign="top"><a id="a7b9e86fd6a61b4548fe7668698731687"></a>
+<tr class="separator:aca338172c0407b41fd70f02d59c00841"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46341ca53594ac39c7862464ef69fcfb"><td class="memItemLeft" align="right" valign="top"><a id="a46341ca53594ac39c7862464ef69fcfb"></a>
 constexpr reference&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> () const noexcept</td></tr>
-<tr class="separator:a7b9e86fd6a61b4548fe7668698731687"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a794dcb222ba8edaef55b13f11084bdd4"><td class="memItemLeft" align="right" valign="top"><a id="a794dcb222ba8edaef55b13f11084bdd4"></a>
+<tr class="separator:a46341ca53594ac39c7862464ef69fcfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7c878ac5614eb0be1a657f9aafd82de"><td class="memItemLeft" align="right" valign="top"><a id="ac7c878ac5614eb0be1a657f9aafd82de"></a>
 constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;rhs) const noexcept</td></tr>
-<tr class="separator:a794dcb222ba8edaef55b13f11084bdd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25f32d2c0efc742deaf370cbb12926f4"><td class="memItemLeft" align="right" valign="top"><a id="a25f32d2c0efc742deaf370cbb12926f4"></a>
+<tr class="separator:ac7c878ac5614eb0be1a657f9aafd82de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a806c25a69d7cb8796a7be6423d9935f9"><td class="memItemLeft" align="right" valign="top"><a id="a806c25a69d7cb8796a7be6423d9935f9"></a>
 constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;rhs) const noexcept</td></tr>
-<tr class="separator:a25f32d2c0efc742deaf370cbb12926f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16dfbe806b3ad20f05d348306f598026"><td class="memItemLeft" align="right" valign="top"><a id="a16dfbe806b3ad20f05d348306f598026"></a>
+<tr class="separator:a806c25a69d7cb8796a7be6423d9935f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0537dc6e9f83a1123d81cda4edac0f4"><td class="memItemLeft" align="right" valign="top"><a id="ab0537dc6e9f83a1123d81cda4edac0f4"></a>
 constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;rhs) const noexcept</td></tr>
-<tr class="separator:a16dfbe806b3ad20f05d348306f598026"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace66c4aef440f074cdfc499b7038e010"><td class="memItemLeft" align="right" valign="top"><a id="ace66c4aef440f074cdfc499b7038e010"></a>
+<tr class="separator:ab0537dc6e9f83a1123d81cda4edac0f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82aa3cd0dcb78e3cca516ff7c99e72e1"><td class="memItemLeft" align="right" valign="top"><a id="a82aa3cd0dcb78e3cca516ff7c99e72e1"></a>
 constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;rhs) const noexcept</td></tr>
-<tr class="separator:ace66c4aef440f074cdfc499b7038e010"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b33af331f8e926eec098d00b02b3ec3"><td class="memItemLeft" align="right" valign="top"><a id="a0b33af331f8e926eec098d00b02b3ec3"></a>
+<tr class="separator:a82aa3cd0dcb78e3cca516ff7c99e72e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a797b54b4bfa11545cc7636c8a98b86"><td class="memItemLeft" align="right" valign="top"><a id="a4a797b54b4bfa11545cc7636c8a98b86"></a>
 constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;</b> (const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;rhs) const noexcept</td></tr>
-<tr class="separator:a0b33af331f8e926eec098d00b02b3ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d09cb0b7b8d4a26a4cfe9da07ebc847"><td class="memItemLeft" align="right" valign="top"><a id="a9d09cb0b7b8d4a26a4cfe9da07ebc847"></a>
+<tr class="separator:a4a797b54b4bfa11545cc7636c8a98b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cdebf00fc096a376798db342d50e35d"><td class="memItemLeft" align="right" valign="top"><a id="a3cdebf00fc096a376798db342d50e35d"></a>
 constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> &amp;rhs) const noexcept</td></tr>
-<tr class="separator:a9d09cb0b7b8d4a26a4cfe9da07ebc847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a3cdebf00fc096a376798db342d50e35d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;std::size_t N, typename Iter&gt;<br />
-class bit::stl::tuple_element_iterator&lt; N, Iter &gt;</h3>
+<div class="textblock"><h3>template&lt;std::size_t N, typename Iterator&gt;<br />
+class bit::stl::tuple_element_iterator&lt; N, Iterator &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d31/tuple__element__iterator_8hpp_source.html#l00023">23</a> of file <a class="el" href="../../dc/d31/tuple__element__iterator_8hpp_source.html">tuple_element_iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d31/tuple__element__iterator_8hpp_source.html#l00026">26</a> of file <a class="el" href="../../dc/d31/tuple__element__iterator_8hpp_source.html">tuple_element_iterator.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa5d65e88a574ae357c1413b9d54ca68a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5d65e88a574ae357c1413b9d54ca68a">&#9670;&nbsp;</a></span>tuple_element_iterator() <span class="overload">[1/3]</span></h2>
+<a id="a6a60fbbfedd6149494c2a2ad74a0c4e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a60fbbfedd6149494c2a2ad74a0c4e1">&#9670;&nbsp;</a></span>tuple_element_iterator() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::size_t N, typename Iter &gt; </div>
+template&lt;std::size_t N, typename Iterator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator</a>&lt; N, Iter &gt;::<a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> </td>
+          <td class="memname">constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator</a>&lt; N, Iterator &gt;::<a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> </td>
           <td>(</td>
-          <td class="paramtype">Iter&#160;</td>
+          <td class="paramtype">Iterator&#160;</td>
           <td class="paramname"><em>iter</em></td><td>)</td>
           <td></td>
         </tr>
@@ -195,21 +195,21 @@ template&lt;std::size_t N, typename Iter &gt; </div>
 
 </div>
 </div>
-<a id="a2dee42e57e88a8aa63c95cfd7628c0a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dee42e57e88a8aa63c95cfd7628c0a3">&#9670;&nbsp;</a></span>tuple_element_iterator() <span class="overload">[2/3]</span></h2>
+<a id="a99ef83b26cf4617f4620fa3b2b9dda63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99ef83b26cf4617f4620fa3b2b9dda63">&#9670;&nbsp;</a></span>tuple_element_iterator() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::size_t N, typename Iter &gt; </div>
+template&lt;std::size_t N, typename Iterator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator</a>&lt; N, Iter &gt;::<a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> </td>
+          <td class="memname">constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator</a>&lt; N, Iterator &gt;::<a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&lt; N, Iter &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&lt; N, Iterator &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -231,21 +231,21 @@ template&lt;std::size_t N, typename Iter &gt; </div>
 
 </div>
 </div>
-<a id="a6574818f68db0c31edd65802a5fdde10"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6574818f68db0c31edd65802a5fdde10">&#9670;&nbsp;</a></span>tuple_element_iterator() <span class="overload">[3/3]</span></h2>
+<a id="a1ac47104fa91f34042b7e639579b24cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ac47104fa91f34042b7e639579b24cc">&#9670;&nbsp;</a></span>tuple_element_iterator() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::size_t N, typename Iter &gt; </div>
+template&lt;std::size_t N, typename Iterator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator</a>&lt; N, Iter &gt;::<a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> </td>
+          <td class="memname">constexpr <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator</a>&lt; N, Iterator &gt;::<a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&lt; N, Iter &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&lt; N, Iterator &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -268,21 +268,21 @@ template&lt;std::size_t N, typename Iter &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7e38d4742ac5e0c5264625d043df91e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e38d4742ac5e0c5264625d043df91e8">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a2437835891b9f956b7481be5e82e6bc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2437835891b9f956b7481be5e82e6bc6">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::size_t N, typename Iter &gt; </div>
+template&lt;std::size_t N, typename Iterator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&amp; <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator</a>&lt; N, Iter &gt;::operator= </td>
+          <td class="memname"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&amp; <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator</a>&lt; N, Iterator &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&lt; N, Iter &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&lt; N, Iterator &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -305,21 +305,21 @@ template&lt;std::size_t N, typename Iter &gt; </div>
 
 </div>
 </div>
-<a id="aee0838ff15d46d35059829682b6bb891"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee0838ff15d46d35059829682b6bb891">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a945853750dd8f59ef2e5753a629901c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a945853750dd8f59ef2e5753a629901c1">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::size_t N, typename Iter &gt; </div>
+template&lt;std::size_t N, typename Iterator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&amp; <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator</a>&lt; N, Iter &gt;::operator= </td>
+          <td class="memname"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&amp; <a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator</a>&lt; N, Iterator &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&lt; N, Iter &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">tuple_element_iterator</a>&lt; N, Iterator &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>

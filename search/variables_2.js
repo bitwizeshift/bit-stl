@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['extent',['extent',['../d5/d30/classbit_1_1stl_1_1span.html#a074388eaba6da81ea3981822722de1e8',1,'bit::stl::span']]]
+  ['dynamic_5fextent',['dynamic_extent',['../da/d7e/namespacebit_1_1stl.html#a2ecff478de92d62272d16166405cc0c9',1,'bit::stl']]]
 ];

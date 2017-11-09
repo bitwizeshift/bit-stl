@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dynamic_5fextent',['dynamic_extent',['../da/d7e/namespacebit_1_1stl.html#a2ecff478de92d62272d16166405cc0c9',1,'bit::stl']]]
+  ['bool_5fconstant_5fv',['bool_constant_v',['../da/d7e/namespacebit_1_1stl.html#ada43fd75f18beefb9ea467bf2cad47d4',1,'bit::stl']]]
 ];

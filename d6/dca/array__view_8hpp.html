@@ -58,7 +58,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="../../dir_911e2e3e6d3b64043b13d829b7a3782c.html">bit</a></li><li class="navelem"><a class="el" href="../../dir_74624cd51efe8f4596731f0853df1244.html">stl</a></li>  </ul>
+<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="../../dir_911e2e3e6d3b64043b13d829b7a3782c.html">bit</a></li><li class="navelem"><a class="el" href="../../dir_74624cd51efe8f4596731f0853df1244.html">stl</a></li><li class="navelem"><a class="el" href="../../dir_f39003ab9e1d98e497389d26dfaccd68.html">containers</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -73,9 +73,11 @@ $(function() {
 
 <p>This header contains a type-erased view of immutable contiguous data.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../dc/d54/type__traits_8hpp_source.html">type_traits.hpp</a>&quot;</code><br />
-<code>#include &quot;detail/iterator/pointer_iterator.hpp&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d6/dfd/bool__constant_8hpp_source.html">../traits/composition/bool_constant.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../df/d99/_contiguous_container_8hpp_source.html">../concepts/ContiguousContainer.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d5/da6/tagged__iterator_8hpp_source.html">../iterators/tagged_iterator.hpp</a>&quot;</code><br />
 <code>#include &lt;stdexcept&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 <code>#include &quot;detail/array_view.inl&quot;</code><br />
 </div>
 <p><a href="../../d6/dca/array__view_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -97,10 +99,10 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a22c93c46863e5fb3e03f4302e8067343"><td class="memTemplParams" colspan="2"><a id="a22c93c46863e5fb3e03f4302e8067343"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a22c93c46863e5fb3e03f4302e8067343"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::swap</b> (array_view&lt; T &gt; &amp;lhs, array_view&lt; T &gt; &amp;rhs)</td></tr>
-<tr class="separator:a22c93c46863e5fb3e03f4302e8067343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80c74ab0d9ab7114d1c9954fdec69491"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a80c74ab0d9ab7114d1c9954fdec69491"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html#a80c74ab0d9ab7114d1c9954fdec69491">bit::stl::swap</a> (array_view&lt; T &gt; &amp;lhs, array_view&lt; T &gt; &amp;rhs) noexcept</td></tr>
+<tr class="memdesc:a80c74ab0d9ab7114d1c9954fdec69491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps <code>lhs</code> with <code>rhs</code>.  <a href="../../da/d7e/namespacebit_1_1stl.html#a80c74ab0d9ab7114d1c9954fdec69491">More...</a><br /></td></tr>
+<tr class="separator:a80c74ab0d9ab7114d1c9954fdec69491"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad23e5de00eb12c35f7cf1036db07de54"><td class="memTemplParams" colspan="2"><a id="ad23e5de00eb12c35f7cf1036db07de54"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ad23e5de00eb12c35f7cf1036db07de54"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::operator==</b> (const array_view&lt; T &gt; &amp;lhs, const array_view&lt; T &gt; &amp;rhs)</td></tr>

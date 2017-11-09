@@ -58,13 +58,14 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="../../dir_911e2e3e6d3b64043b13d829b7a3782c.html">bit</a></li><li class="navelem"><a class="el" href="../../dir_74624cd51efe8f4596731f0853df1244.html">stl</a></li><li class="navelem"><a class="el" href="../../dir_223bf54f88e5f68f59faa538957b7467.html">detail</a></li><li class="navelem"><a class="el" href="../../dir_b22450148259b01e486117f2abd64866.html">iterator</a></li>  </ul>
+<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="../../dir_911e2e3e6d3b64043b13d829b7a3782c.html">bit</a></li><li class="navelem"><a class="el" href="../../dir_74624cd51efe8f4596731f0853df1244.html">stl</a></li><li class="navelem"><a class="el" href="../../dir_42975c9a33effee9b443b3908b8d1122.html">iterators</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">tuple_element_iterator.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -72,13 +73,17 @@ $(function() {
 
 <p>This header contains an implementation of the tuple_element_iterator, an adapter that wraps around iterators that iterate tuples to only return specific tuple elements.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;tuple_element_iterator.inl&quot;</code><br />
+<div class="textblock"><code>#include &lt;iterator&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
+<code>#include &lt;tuple&gt;</code><br />
+<code>#include &lt;cstddef&gt;</code><br />
+<code>#include &quot;detail/tuple_element_iterator.inl&quot;</code><br />
 </div>
 <p><a href="../../dc/d31/tuple__element__iterator_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator&lt; N, Iter &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d9c/classbit_1_1stl_1_1tuple__element__iterator.html">bit::stl::tuple_element_iterator&lt; N, Iterator &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -89,10 +94,25 @@ Namespaces</h2></td></tr>
 <tr class="memitem:da/d7e/namespacebit_1_1stl"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html">bit::stl</a></td></tr>
 <tr class="memdesc:da/d7e/namespacebit_1_1stl"><td class="mdescLeft">&#160;</td><td class="mdescRight">The standard namespace for this project. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a3858d10559ba8d9064205690c1e26ea3"><td class="memTemplParams" colspan="2">template&lt;std::size_t N, typename Iterator &gt; </td></tr>
+<tr class="memitem:a3858d10559ba8d9064205690c1e26ea3"><td class="memTemplItemLeft" align="right" valign="top">constexpr tuple_element_iterator&lt; N, Iterator &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html#a3858d10559ba8d9064205690c1e26ea3">bit::stl::make_tuple_element_iterator</a> (Iterator it)</td></tr>
+<tr class="memdesc:a3858d10559ba8d9064205690c1e26ea3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function to type-deduce and make an iterator for iterating specific tuple elements.  <a href="../../da/d7e/namespacebit_1_1stl.html#a3858d10559ba8d9064205690c1e26ea3">More...</a><br /></td></tr>
+<tr class="separator:a3858d10559ba8d9064205690c1e26ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa33bddf083a04210702a30106d991b3f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator &gt; </td></tr>
+<tr class="memitem:aa33bddf083a04210702a30106d991b3f"><td class="memTemplItemLeft" align="right" valign="top">constexpr tuple_element_iterator&lt; 0, Iterator &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html#aa33bddf083a04210702a30106d991b3f">bit::stl::make_key_iterator</a> (Iterator it)</td></tr>
+<tr class="memdesc:aa33bddf083a04210702a30106d991b3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function for making a tuple iterator that only iterates the first tuple element, which is the key in associative containers.  <a href="../../da/d7e/namespacebit_1_1stl.html#aa33bddf083a04210702a30106d991b3f">More...</a><br /></td></tr>
+<tr class="separator:aa33bddf083a04210702a30106d991b3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a643a6bd17072910d8f851d40eeababa7"><td class="memTemplParams" colspan="2">template&lt;typename Iterator &gt; </td></tr>
+<tr class="memitem:a643a6bd17072910d8f851d40eeababa7"><td class="memTemplItemLeft" align="right" valign="top">constexpr tuple_element_iterator&lt; 1, Iterator &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html#a643a6bd17072910d8f851d40eeababa7">bit::stl::make_value_iterator</a> (Iterator it)</td></tr>
+<tr class="memdesc:a643a6bd17072910d8f851d40eeababa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function for making a tuple iterator that only iterates the second tuple element, which is the value in associative containers.  <a href="../../da/d7e/namespacebit_1_1stl.html#a643a6bd17072910d8f851d40eeababa7">More...</a><br /></td></tr>
+<tr class="separator:a643a6bd17072910d8f851d40eeababa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This header contains an implementation of the tuple_element_iterator, an adapter that wraps around iterators that iterate tuples to only return specific tuple elements. </p>
-<dl class="section note"><dt>Note</dt><dd>This is an internal header file, included by other library headers. Do not attempt to use it directly. </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Matthew Rodusek (<a href="#" onclick="location.href='mai'+'lto:'+'mat'+'th'+'ew.'+'ro'+'dus'+'ek'+'@gm'+'ai'+'l.c'+'om'; return false;">matth<span style="display: none;">.nosp@m.</span>ew.r<span style="display: none;">.nosp@m.</span>oduse<span style="display: none;">.nosp@m.</span>k@gm<span style="display: none;">.nosp@m.</span>ail.c<span style="display: none;">.nosp@m.</span>om</a>) </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="../../dc/d31/tuple__element__iterator_8hpp_source.html">tuple_element_iterator.hpp</a>.</p>
 </div></div><!-- contents -->

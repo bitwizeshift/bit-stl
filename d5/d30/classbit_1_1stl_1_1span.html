@@ -67,9 +67,10 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="../../d6/dc6/classbit_1_1stl_1_1span-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">bit::stl::span&lt; T, Extent &gt; Class Template Reference<span class="mlabels"><span class="mlabel">final</span></span></div>  </div>
+<div class="title">bit::stl::span&lt; T, Extent &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -98,62 +99,75 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reference</b> 
 <tr class="memitem:aef11b42802d33a09ae420369187b4868"><td class="memItemLeft" align="right" valign="top"><a id="aef11b42802d33a09ae420369187b4868"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = std::ptrdiff_t</td></tr>
 <tr class="separator:aef11b42802d33a09ae420369187b4868"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61c00ef3bdd1503c6ad475807a02c7d9"><td class="memItemLeft" align="right" valign="top"><a id="a61c00ef3bdd1503c6ad475807a02c7d9"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> = std::ptrdiff_t</td></tr>
+<tr class="separator:a61c00ef3bdd1503c6ad475807a02c7d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8b36966a53ea77994940aa582884959"><td class="memItemLeft" align="right" valign="top"><a id="ab8b36966a53ea77994940aa582884959"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>index_type</b> = std::ptrdiff_t</td></tr>
 <tr class="separator:ab8b36966a53ea77994940aa582884959"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b5fadb3265bd086b1c2b90f420ef596"><td class="memItemLeft" align="right" valign="top"><a id="a0b5fadb3265bd086b1c2b90f420ef596"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = pointer_iterator&lt; T *, <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a>&lt; T, Extent &gt; &gt;</td></tr>
-<tr class="separator:a0b5fadb3265bd086b1c2b90f420ef596"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade75b07c6740447f4ee22af670ae3b52"><td class="memItemLeft" align="right" valign="top"><a id="ade75b07c6740447f4ee22af670ae3b52"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = pointer_iterator&lt; const T *, <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a>&lt; T, Extent &gt; &gt;</td></tr>
-<tr class="separator:ade75b07c6740447f4ee22af670ae3b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb76af4a111c2a26f00c3536016388af"><td class="memItemLeft" align="right" valign="top"><a id="afb76af4a111c2a26f00c3536016388af"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">tagged_iterator</a>&lt; T *, <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a>&lt; T, Extent &gt; &gt;</td></tr>
+<tr class="separator:afb76af4a111c2a26f00c3536016388af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a689f8f88a3d268cce5df03a766df7961"><td class="memItemLeft" align="right" valign="top"><a id="a689f8f88a3d268cce5df03a766df7961"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">tagged_iterator</a>&lt; const T *, <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a>&lt; T, Extent &gt; &gt;</td></tr>
+<tr class="separator:a689f8f88a3d268cce5df03a766df7961"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2195fd56390cf765333cf2cff4dfc27d"><td class="memItemLeft" align="right" valign="top"><a id="a2195fd56390cf765333cf2cff4dfc27d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>reverse_iterator</b> = std::reverse_iterator&lt; iterator &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>reverse_iterator</b> = std::reverse_iterator&lt; <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">iterator</a> &gt;</td></tr>
 <tr class="separator:a2195fd56390cf765333cf2cff4dfc27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70e59e771aec6159618f648e534af150"><td class="memItemLeft" align="right" valign="top"><a id="a70e59e771aec6159618f648e534af150"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_iterator</b> = std::reverse_iterator&lt; const_iterator &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_iterator</b> = std::reverse_iterator&lt; <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a> &gt;</td></tr>
 <tr class="separator:a70e59e771aec6159618f648e534af150"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cf49dc7e0e834326d89dab8560b0421"><td class="memTemplParams" colspan="2"><a id="a1cf49dc7e0e834326d89dab8560b0421"></a>
 template&lt;typename U , std::ptrdiff_t OtherExtent&gt; </td></tr>
 <tr class="memitem:a1cf49dc7e0e834326d89dab8560b0421"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>enable_if_allowed_t</b> = std::enable_if_t&lt; detail::is_allowed_extent_conversion&lt; OtherExtent, Extent &gt;::value &amp;&amp;detail::is_allowed_element_type_conversion&lt; U, value_type &gt;::value &gt;</td></tr>
 <tr class="separator:a1cf49dc7e0e834326d89dab8560b0421"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe25211f57db5ef9d1dba79492ea92ee"><td class="memTemplParams" colspan="2"><a id="abe25211f57db5ef9d1dba79492ea92ee"></a>
+template&lt;typename U &gt; </td></tr>
+<tr class="memitem:abe25211f57db5ef9d1dba79492ea92ee"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>enable_if_container_t</b> = std::enable_if_t&lt; <a class="el" href="../../dd/ddd/structbit_1_1stl_1_1is__contiguous__container.html">is_contiguous_container</a>&lt; std::decay_t&lt; U &gt; &gt;::value &amp;&amp;!<a class="el" href="../../da/d7e/namespacebit_1_1stl.html#ada876145f89a8518848ed41709737585">is_same_decay</a>&lt; std::decay_t&lt; U &gt;, <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a> &gt;::value &gt;</td></tr>
+<tr class="separator:abe25211f57db5ef9d1dba79492ea92ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afbfb622ca4a35b25c82208026b13bb07"><td class="memItemLeft" align="right" valign="top"><a id="afbfb622ca4a35b25c82208026b13bb07"></a>
 constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#afbfb622ca4a35b25c82208026b13bb07">span</a> () noexcept</td></tr>
-<tr class="memdesc:afbfb622ca4a35b25c82208026b13bb07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an span containing 0 entries. <br /></td></tr>
+<tr class="memdesc:afbfb622ca4a35b25c82208026b13bb07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a span containing 0 entries. <br /></td></tr>
 <tr class="separator:afbfb622ca4a35b25c82208026b13bb07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbd080534f7e0e952310846d2495d8b0"><td class="memItemLeft" align="right" valign="top"><a id="acbd080534f7e0e952310846d2495d8b0"></a>
 constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#acbd080534f7e0e952310846d2495d8b0">span</a> (std::nullptr_t) noexcept</td></tr>
-<tr class="memdesc:acbd080534f7e0e952310846d2495d8b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an span containing 0 entries. <br /></td></tr>
+<tr class="memdesc:acbd080534f7e0e952310846d2495d8b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a span containing 0 entries. <br /></td></tr>
 <tr class="separator:acbd080534f7e0e952310846d2495d8b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71d51b71503746dfd26ae3ed7428686d"><td class="memItemLeft" align="right" valign="top"><a id="a71d51b71503746dfd26ae3ed7428686d"></a>
 constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a71d51b71503746dfd26ae3ed7428686d">span</a> (pointer <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a30edafbccff6aa7aceb0ea81734977ec">first</a>, pointer <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a0fe09ecfef9e8e441d15de0162ba73c9">last</a>) noexcept</td></tr>
-<tr class="memdesc:a71d51b71503746dfd26ae3ed7428686d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an span. <br /></td></tr>
+<tr class="memdesc:a71d51b71503746dfd26ae3ed7428686d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a span. <br /></td></tr>
 <tr class="separator:a71d51b71503746dfd26ae3ed7428686d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae331fefc332dc7e9965689b9154a4d62"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ae331fefc332dc7e9965689b9154a4d62">span</a> (const <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a> &amp;other) noexcept=default</td></tr>
+<tr class="memdesc:ae331fefc332dc7e9965689b9154a4d62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a span by copying an existing one.  <a href="#ae331fefc332dc7e9965689b9154a4d62">More...</a><br /></td></tr>
+<tr class="separator:ae331fefc332dc7e9965689b9154a4d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05085fe06b06bf105552e7ddaf9d160a"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a05085fe06b06bf105552e7ddaf9d160a">span</a> (<a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a> &amp;&amp;other) noexcept=default</td></tr>
+<tr class="memdesc:a05085fe06b06bf105552e7ddaf9d160a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a span by moving an existing one.  <a href="#a05085fe06b06bf105552e7ddaf9d160a">More...</a><br /></td></tr>
+<tr class="separator:a05085fe06b06bf105552e7ddaf9d160a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a954c0e3a36a9fb0cfdd945d7920bc62c"><td class="memTemplParams" colspan="2">template&lt;typename U , std::ptrdiff_t OtherExtent&gt; </td></tr>
 <tr class="memitem:a954c0e3a36a9fb0cfdd945d7920bc62c"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a954c0e3a36a9fb0cfdd945d7920bc62c">span</a> (const <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a>&lt; U, OtherExtent &gt; &amp;other)</td></tr>
-<tr class="memdesc:a954c0e3a36a9fb0cfdd945d7920bc62c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an span by copying another span.  <a href="#a954c0e3a36a9fb0cfdd945d7920bc62c">More...</a><br /></td></tr>
+<tr class="memdesc:a954c0e3a36a9fb0cfdd945d7920bc62c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a span by copying another span.  <a href="#a954c0e3a36a9fb0cfdd945d7920bc62c">More...</a><br /></td></tr>
 <tr class="separator:a954c0e3a36a9fb0cfdd945d7920bc62c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88f1c8b715ebe54db55cf66cf4ee3430"><td class="memTemplParams" colspan="2">template&lt;typename U , std::ptrdiff_t OtherExtent&gt; </td></tr>
 <tr class="memitem:a88f1c8b715ebe54db55cf66cf4ee3430"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a88f1c8b715ebe54db55cf66cf4ee3430">span</a> (<a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a>&lt; U, OtherExtent &gt; &amp;&amp;other)</td></tr>
-<tr class="memdesc:a88f1c8b715ebe54db55cf66cf4ee3430"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an span by moving another span.  <a href="#a88f1c8b715ebe54db55cf66cf4ee3430">More...</a><br /></td></tr>
+<tr class="memdesc:a88f1c8b715ebe54db55cf66cf4ee3430"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a span by moving another span.  <a href="#a88f1c8b715ebe54db55cf66cf4ee3430">More...</a><br /></td></tr>
 <tr class="separator:a88f1c8b715ebe54db55cf66cf4ee3430"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c417dbbd326b677099544dad5b7571b"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
 <tr class="memitem:a6c417dbbd326b677099544dad5b7571b"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a6c417dbbd326b677099544dad5b7571b">span</a> (U *ptr, size_type count) noexcept</td></tr>
-<tr class="memdesc:a6c417dbbd326b677099544dad5b7571b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an span from the specified <code>ptr</code> with size <code>count</code>.  <a href="#a6c417dbbd326b677099544dad5b7571b">More...</a><br /></td></tr>
+<tr class="memdesc:a6c417dbbd326b677099544dad5b7571b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a span from the specified <code>ptr</code> with size <code>count</code>.  <a href="#a6c417dbbd326b677099544dad5b7571b">More...</a><br /></td></tr>
 <tr class="separator:a6c417dbbd326b677099544dad5b7571b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3859d042515929e8541fdc99f6e44c78"><td class="memTemplParams" colspan="2">template&lt;typename U , std::size_t N&gt; </td></tr>
 <tr class="memitem:a3859d042515929e8541fdc99f6e44c78"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a3859d042515929e8541fdc99f6e44c78">span</a> (U(&amp;array)[N]) noexcept</td></tr>
-<tr class="memdesc:a3859d042515929e8541fdc99f6e44c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an span from a given array reference.  <a href="#a3859d042515929e8541fdc99f6e44c78">More...</a><br /></td></tr>
+<tr class="memdesc:a3859d042515929e8541fdc99f6e44c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a span from a given array reference.  <a href="#a3859d042515929e8541fdc99f6e44c78">More...</a><br /></td></tr>
 <tr class="separator:a3859d042515929e8541fdc99f6e44c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad831bac0e5b8b62fbea6414e7c1053e6"><td class="memTemplParams" colspan="2">template&lt;typename Container &gt; </td></tr>
-<tr class="memitem:ad831bac0e5b8b62fbea6414e7c1053e6"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ad831bac0e5b8b62fbea6414e7c1053e6">span</a> (Container &amp;&amp;container) noexcept</td></tr>
-<tr class="memdesc:ad831bac0e5b8b62fbea6414e7c1053e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an span from a given contiguous container that contains a <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ace5aa9614a4996aa5b1c91c90d9fe1fc" title="Gets the data of the current span. ">data()</a> member function and a <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a353d6a867d416fab28716b2ba34fabee" title="Returns the size of the span. ">size()</a> member function.  <a href="#ad831bac0e5b8b62fbea6414e7c1053e6">More...</a><br /></td></tr>
-<tr class="separator:ad831bac0e5b8b62fbea6414e7c1053e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f7d58b188e774c78fa5e13c8aa2d37b"><td class="memTemplParams" colspan="2">template&lt;typename Container &gt; </td></tr>
+<tr class="memitem:a6f7d58b188e774c78fa5e13c8aa2d37b"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a6f7d58b188e774c78fa5e13c8aa2d37b">span</a> (ContiguousContainer &amp;container) noexcept</td></tr>
+<tr class="memdesc:a6f7d58b188e774c78fa5e13c8aa2d37b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a span from a given contiguous container that contains a <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ace5aa9614a4996aa5b1c91c90d9fe1fc" title="Gets the data of the current span. ">data()</a> member function and a <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a353d6a867d416fab28716b2ba34fabee" title="Returns the size of the span. ">size()</a> member function.  <a href="#a6f7d58b188e774c78fa5e13c8aa2d37b">More...</a><br /></td></tr>
+<tr class="separator:a6f7d58b188e774c78fa5e13c8aa2d37b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab33f705ad627eb732daa6fec9d044255"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ab33f705ad627eb732daa6fec9d044255">operator=</a> (const <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a> &amp;other) noexcept=default</td></tr>
-<tr class="memdesc:ab33f705ad627eb732daa6fec9d044255"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns an span.  <a href="#ab33f705ad627eb732daa6fec9d044255">More...</a><br /></td></tr>
+<tr class="memdesc:ab33f705ad627eb732daa6fec9d044255"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a span.  <a href="#ab33f705ad627eb732daa6fec9d044255">More...</a><br /></td></tr>
 <tr class="separator:ab33f705ad627eb732daa6fec9d044255"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac171e7cbcc72cf15a9838ecb21089fc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ac171e7cbcc72cf15a9838ecb21089fc8">operator=</a> (<a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a> &amp;&amp;other) noexcept=default</td></tr>
 <tr class="memdesc:ac171e7cbcc72cf15a9838ecb21089fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a span.  <a href="#ac171e7cbcc72cf15a9838ecb21089fc8">More...</a><br /></td></tr>
@@ -164,6 +178,9 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memitem:a353d6a867d416fab28716b2ba34fabee"><td class="memItemLeft" align="right" valign="top">constexpr size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a353d6a867d416fab28716b2ba34fabee">size</a> () const noexcept</td></tr>
 <tr class="memdesc:a353d6a867d416fab28716b2ba34fabee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size of the span.  <a href="#a353d6a867d416fab28716b2ba34fabee">More...</a><br /></td></tr>
 <tr class="separator:a353d6a867d416fab28716b2ba34fabee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab52a987948ed1fbeb3c1f2f1903d499a"><td class="memItemLeft" align="right" valign="top">constexpr size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ab52a987948ed1fbeb3c1f2f1903d499a">max_size</a> () const noexcept</td></tr>
+<tr class="memdesc:ab52a987948ed1fbeb3c1f2f1903d499a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the max size of this span.  <a href="#ab52a987948ed1fbeb3c1f2f1903d499a">More...</a><br /></td></tr>
+<tr class="separator:ab52a987948ed1fbeb3c1f2f1903d499a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac94b59806b1db307d5fcfe7c5d5fcb68"><td class="memItemLeft" align="right" valign="top">constexpr size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ac94b59806b1db307d5fcfe7c5d5fcb68">length_bytes</a> () const noexcept</td></tr>
 <tr class="memdesc:ac94b59806b1db307d5fcfe7c5d5fcb68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size of the span in bytes.  <a href="#ac94b59806b1db307d5fcfe7c5d5fcb68">More...</a><br /></td></tr>
 <tr class="separator:ac94b59806b1db307d5fcfe7c5d5fcb68"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -203,6 +220,9 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memitem:a31da9adef1296da766f741f57d0462bb"><td class="memItemLeft" align="right" valign="top">constexpr const_reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a31da9adef1296da766f741f57d0462bb">back</a> () const noexcept</td></tr>
 <tr class="memdesc:a31da9adef1296da766f741f57d0462bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">References the last entry of the span.  <a href="#a31da9adef1296da766f741f57d0462bb">More...</a><br /></td></tr>
 <tr class="separator:a31da9adef1296da766f741f57d0462bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba46ef9de245228075f73227b93c3011"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#aba46ef9de245228075f73227b93c3011">swap</a> (<a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:aba46ef9de245228075f73227b93c3011"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps this span with <code>other</code>.  <a href="#aba46ef9de245228075f73227b93c3011">More...</a><br /></td></tr>
+<tr class="separator:aba46ef9de245228075f73227b93c3011"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48b58ef206fd57a72874857161ee5fe9"><td class="memItemLeft" align="right" valign="top">size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a48b58ef206fd57a72874857161ee5fe9">copy</a> (value_type *dest, size_type count=<a class="el" href="../../da/d7e/namespacebit_1_1stl.html#a2ecff478de92d62272d16166405cc0c9">dynamic_extent</a>, size_type pos=0) const</td></tr>
 <tr class="memdesc:a48b58ef206fd57a72874857161ee5fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the sublist [pos, pos + rcount) to the data pointed to by dest, where rcount is the smaller of count and <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a353d6a867d416fab28716b2ba34fabee" title="Returns the size of the span. ">size()</a> - pos.  <a href="#a48b58ef206fd57a72874857161ee5fe9">More...</a><br /></td></tr>
 <tr class="separator:a48b58ef206fd57a72874857161ee5fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -215,16 +235,16 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memitem:a0fe09ecfef9e8e441d15de0162ba73c9"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a>&lt; T, <a class="el" href="../../da/d7e/namespacebit_1_1stl.html#a2ecff478de92d62272d16166405cc0c9">dynamic_extent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a0fe09ecfef9e8e441d15de0162ba73c9">last</a> (size_type n) const</td></tr>
 <tr class="memdesc:a0fe09ecfef9e8e441d15de0162ba73c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a subview consisting of the last <code>n</code> entries of the span.  <a href="#a0fe09ecfef9e8e441d15de0162ba73c9">More...</a><br /></td></tr>
 <tr class="separator:a0fe09ecfef9e8e441d15de0162ba73c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6e7bf44537a34ed5de35a417e323073"><td class="memItemLeft" align="right" valign="top">constexpr iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ac6e7bf44537a34ed5de35a417e323073">begin</a> () const noexcept</td></tr>
+<tr class="memitem:ac6e7bf44537a34ed5de35a417e323073"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ac6e7bf44537a34ed5de35a417e323073">begin</a> () const noexcept</td></tr>
 <tr class="memdesc:ac6e7bf44537a34ed5de35a417e323073"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the begin iterator for this span.  <a href="#ac6e7bf44537a34ed5de35a417e323073">More...</a><br /></td></tr>
 <tr class="separator:ac6e7bf44537a34ed5de35a417e323073"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74ec36756787ee446da8148d0eee727c"><td class="memItemLeft" align="right" valign="top">constexpr iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a74ec36756787ee446da8148d0eee727c">end</a> () const noexcept</td></tr>
+<tr class="memitem:a74ec36756787ee446da8148d0eee727c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a74ec36756787ee446da8148d0eee727c">end</a> () const noexcept</td></tr>
 <tr class="memdesc:a74ec36756787ee446da8148d0eee727c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the end iterator for this span.  <a href="#a74ec36756787ee446da8148d0eee727c">More...</a><br /></td></tr>
 <tr class="separator:a74ec36756787ee446da8148d0eee727c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4015d5bf211ef2767d82d9333c33d98b"><td class="memItemLeft" align="right" valign="top">constexpr const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a4015d5bf211ef2767d82d9333c33d98b">cbegin</a> () const noexcept</td></tr>
+<tr class="memitem:a4015d5bf211ef2767d82d9333c33d98b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a4015d5bf211ef2767d82d9333c33d98b">cbegin</a> () const noexcept</td></tr>
 <tr class="memdesc:a4015d5bf211ef2767d82d9333c33d98b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the begin iterator for this span.  <a href="#a4015d5bf211ef2767d82d9333c33d98b">More...</a><br /></td></tr>
 <tr class="separator:a4015d5bf211ef2767d82d9333c33d98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac9f37d42bede9275d795fcf8fc13d40"><td class="memItemLeft" align="right" valign="top">constexpr const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#aac9f37d42bede9275d795fcf8fc13d40">cend</a> () const noexcept</td></tr>
+<tr class="memitem:aac9f37d42bede9275d795fcf8fc13d40"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#aac9f37d42bede9275d795fcf8fc13d40">cend</a> () const noexcept</td></tr>
 <tr class="memdesc:aac9f37d42bede9275d795fcf8fc13d40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the end iterator for this span.  <a href="#aac9f37d42bede9275d795fcf8fc13d40">More...</a><br /></td></tr>
 <tr class="separator:aac9f37d42bede9275d795fcf8fc13d40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa99030af7b030ac3c481847c3226db4"><td class="memItemLeft" align="right" valign="top">constexpr reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#afa99030af7b030ac3c481847c3226db4">rbegin</a> () const noexcept</td></tr>
@@ -247,6 +267,13 @@ Static Public Attributes</h2></td></tr>
 static constexpr size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a074388eaba6da81ea3981822722de1e8">extent</a> = Extent</td></tr>
 <tr class="memdesc:a074388eaba6da81ea3981822722de1e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The extent of this view. <br /></td></tr>
 <tr class="separator:a074388eaba6da81ea3981822722de1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a5e4124afeb79a9690142c2a3f8b355f4"><td class="memTemplParams" colspan="2"><a id="a5e4124afeb79a9690142c2a3f8b355f4"></a>
+template&lt;typename , std::ptrdiff_t &gt; </td></tr>
+<tr class="memitem:a5e4124afeb79a9690142c2a3f8b355f4"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>span</b></td></tr>
+<tr class="separator:a5e4124afeb79a9690142c2a3f8b355f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt;<br />
@@ -264,10 +291,82 @@ class bit::stl::span&lt; T, Extent &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/de1/span_8hpp_source.html#l00179">179</a> of file <a class="el" href="../../da/de1/span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/de1/span_8hpp_source.html#l00187">187</a> of file <a class="el" href="../../da/de1/span_8hpp_source.html">span.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae331fefc332dc7e9965689b9154a4d62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae331fefc332dc7e9965689b9154a4d62">&#9670;&nbsp;</a></span>span() <span class="overload">[1/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::<a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a>&lt; T, Extent &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a span by copying an existing one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>the other span to copy </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a05085fe06b06bf105552e7ddaf9d160a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05085fe06b06bf105552e7ddaf9d160a">&#9670;&nbsp;</a></span>span() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::<a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a>&lt; T, Extent &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a span by moving an existing one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>the other span to move </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a954c0e3a36a9fb0cfdd945d7920bc62c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a954c0e3a36a9fb0cfdd945d7920bc62c">&#9670;&nbsp;</a></span>span() <span class="overload">[1/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a954c0e3a36a9fb0cfdd945d7920bc62c">&#9670;&nbsp;</a></span>span() <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -286,7 +385,7 @@ template&lt;typename U , std::ptrdiff_t OtherExtent&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs an span by copying another span. </p>
+<p>Constructs a span by copying another span. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">other</td><td>the other span </td></tr>
@@ -297,7 +396,7 @@ template&lt;typename U , std::ptrdiff_t OtherExtent&gt; </div>
 </div>
 </div>
 <a id="a88f1c8b715ebe54db55cf66cf4ee3430"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88f1c8b715ebe54db55cf66cf4ee3430">&#9670;&nbsp;</a></span>span() <span class="overload">[2/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a88f1c8b715ebe54db55cf66cf4ee3430">&#9670;&nbsp;</a></span>span() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -316,7 +415,7 @@ template&lt;typename U , std::ptrdiff_t OtherExtent&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs an span by moving another span. </p>
+<p>Constructs a span by moving another span. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">other</td><td>the other span </td></tr>
@@ -327,7 +426,7 @@ template&lt;typename U , std::ptrdiff_t OtherExtent&gt; </div>
 </div>
 </div>
 <a id="a6c417dbbd326b677099544dad5b7571b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c417dbbd326b677099544dad5b7571b">&#9670;&nbsp;</a></span>span() <span class="overload">[3/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c417dbbd326b677099544dad5b7571b">&#9670;&nbsp;</a></span>span() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -364,7 +463,7 @@ template&lt;typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs an span from the specified <code>ptr</code> with size <code>count</code>. </p>
+<p>Constructs a span from the specified <code>ptr</code> with size <code>count</code>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ptr</td><td>pointer to the data </td></tr>
@@ -376,7 +475,7 @@ template&lt;typename U &gt; </div>
 </div>
 </div>
 <a id="a3859d042515929e8541fdc99f6e44c78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3859d042515929e8541fdc99f6e44c78">&#9670;&nbsp;</a></span>span() <span class="overload">[4/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3859d042515929e8541fdc99f6e44c78">&#9670;&nbsp;</a></span>span() <span class="overload">[6/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -403,7 +502,7 @@ template&lt;typename U , std::size_t N&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs an span from a given array reference. </p>
+<p>Constructs a span from a given array reference. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">array</td><td>a reference to a const T array of size N </td></tr>
@@ -413,8 +512,8 @@ template&lt;typename U , std::size_t N&gt; </div>
 
 </div>
 </div>
-<a id="ad831bac0e5b8b62fbea6414e7c1053e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad831bac0e5b8b62fbea6414e7c1053e6">&#9670;&nbsp;</a></span>span() <span class="overload">[5/5]</span></h2>
+<a id="a6f7d58b188e774c78fa5e13c8aa2d37b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f7d58b188e774c78fa5e13c8aa2d37b">&#9670;&nbsp;</a></span>span() <span class="overload">[7/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -429,7 +528,7 @@ template&lt;typename Container &gt; </div>
         <tr>
           <td class="memname">constexpr <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::<a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a> </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&amp;&#160;</td>
+          <td class="paramtype">ContiguousContainer &amp;&#160;</td>
           <td class="paramname"><em>container</em></td><td>)</td>
           <td></td>
         </tr>
@@ -441,10 +540,10 @@ template&lt;typename Container &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs an span from a given contiguous container that contains a <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ace5aa9614a4996aa5b1c91c90d9fe1fc" title="Gets the data of the current span. ">data()</a> member function and a <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a353d6a867d416fab28716b2ba34fabee" title="Returns the size of the span. ">size()</a> member function. </p>
+<p>Constructs a span from a given contiguous container that contains a <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#ace5aa9614a4996aa5b1c91c90d9fe1fc" title="Gets the data of the current span. ">data()</a> member function and a <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html#a353d6a867d416fab28716b2ba34fabee" title="Returns the size of the span. ">size()</a> member function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">container</td><td>the container to construct an span out of </td></tr>
+    <tr><td class="paramname">container</td><td>the container to construct a span out of </td></tr>
   </table>
   </dd>
 </dl>
@@ -584,7 +683,7 @@ template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr iterator <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::begin </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">iterator</a> <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -614,7 +713,7 @@ template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const_iterator <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::cbegin </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a> <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::cbegin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -644,7 +743,7 @@ template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const_iterator <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::cend </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a> <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::cend </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -810,7 +909,7 @@ template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr bool <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::empty </td>
+          <td class="memname">constexpr bool <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::<a class="el" href="../../da/d7e/namespacebit_1_1stl.html#db/d9b/structbit_1_1stl_1_1empty">empty</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -840,7 +939,7 @@ template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr iterator <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::end </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">iterator</a> <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1038,6 +1137,36 @@ template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
 
 </div>
 </div>
+<a id="ab52a987948ed1fbeb3c1f2f1903d499a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab52a987948ed1fbeb3c1f2f1903d499a">&#9670;&nbsp;</a></span>max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_type <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::max_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the max size of this span. </p>
+<dl class="section return"><dt>Returns</dt><dd>the max size of this span </dd></dl>
+
+</div>
+</div>
 <a id="ab33f705ad627eb732daa6fec9d044255"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab33f705ad627eb732daa6fec9d044255">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
@@ -1064,7 +1193,7 @@ template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Assigns an span. </p>
+<p>Assigns a span. </p>
 <p>This will automatically resize the span to refer to at most N bytes of the supplied view</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -1344,6 +1473,42 @@ template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the created span subview </dd></dl>
+
+</div>
+</div>
+<a id="aba46ef9de245228075f73227b93c3011"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba46ef9de245228075f73227b93c3011">&#9670;&nbsp;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, std::ptrdiff_t Extent = dynamic_extent&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">bit::stl::span</a>&lt; T, Extent &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d5/d30/classbit_1_1stl_1_1span.html">span</a>&lt; T, Extent &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Swaps this span with <code>other</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>the other span to swap with </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

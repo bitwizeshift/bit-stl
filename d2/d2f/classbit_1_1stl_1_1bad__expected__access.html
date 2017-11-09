@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>bit::stl: bit::stl::bad_expected_access Class Reference</title>
+<title>bit::stl: bit::stl::bad_expected_access&lt; E &gt; Class Template Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -63,32 +63,54 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="../../d0/dea/classbit_1_1stl_1_1bad__expected__access-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">bit::stl::bad_expected_access Class Reference</div>  </div>
+<div class="title">bit::stl::bad_expected_access&lt; E &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>An exception indicating a bad access was attempted for an expected type.  
- <a href="../../d2/d2f/classbit_1_1stl_1_1bad__expected__access.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="../../d3/d77/expected_8hpp_source.html">expected.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for bit::stl::bad_expected_access:</div>
+Inheritance diagram for bit::stl::bad_expected_access&lt; E &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="../../d2/d2f/classbit_1_1stl_1_1bad__expected__access.png" usemap="#bit::stl::bad_5Fexpected_5Faccess_map" alt=""/>
-  <map id="bit::stl::bad_5Fexpected_5Faccess_map" name="bit::stl::bad_5Fexpected_5Faccess_map">
+  <img src="../../d2/d2f/classbit_1_1stl_1_1bad__expected__access.png" usemap="#bit::stl::bad_5Fexpected_5Faccess_3C_20E_20_3E_map" alt=""/>
+  <map id="bit::stl::bad_5Fexpected_5Faccess_3C_20E_20_3E_map" name="bit::stl::bad_5Fexpected_5Faccess_3C_20E_20_3E_map">
 </map>
  </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ac18c71ccabfb78c3e5a9254d51a671f1"><td class="memItemLeft" align="right" valign="top"><a id="ac18c71ccabfb78c3e5a9254d51a671f1"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>error_type</b> = E</td></tr>
+<tr class="separator:ac18c71ccabfb78c3e5a9254d51a671f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a3d1308a6eef5c697957d12520522065d"><td class="memItemLeft" align="right" valign="top"><a id="a3d1308a6eef5c697957d12520522065d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>bad_expected_access</b> (const E &amp;e)</td></tr>
+<tr class="separator:a3d1308a6eef5c697957d12520522065d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcb5e41026f3600d07df06471f7e6278"><td class="memItemLeft" align="right" valign="top"><a id="adcb5e41026f3600d07df06471f7e6278"></a>
+error_type &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>error</b> ()</td></tr>
+<tr class="separator:adcb5e41026f3600d07df06471f7e6278"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb4539c0fef3435e9ff319dc0e2bc519"><td class="memItemLeft" align="right" valign="top"><a id="abb4539c0fef3435e9ff319dc0e2bc519"></a>
+const error_type &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>error</b> () const</td></tr>
+<tr class="separator:abb4539c0fef3435e9ff319dc0e2bc519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An exception indicating a bad access was attempted for an expected type. </p>
-<p><a class="el" href="../../d2/d2f/classbit_1_1stl_1_1bad__expected__access.html" title="An exception indicating a bad access was attempted for an expected type. ">bit::stl::bad_expected_access</a> is the type of exception thrown in the following situations:</p><ul>
-<li><a class="el" href="../../dc/da7/classbit_1_1stl_1_1expected.html#a2ba92f23938fa91ba6abbf28676ca3c9" title="Returns the contained value. ">expected::value</a> is called on an expected with a null std::exception_ptr</li>
-<li><a class="el" href="../../dc/da7/classbit_1_1stl_1_1expected.html#a2ba92f23938fa91ba6abbf28676ca3c9" title="Returns the contained value. ">expected::value</a> is called on an expected that is valueless_by_exception </li>
-</ul>
+<div class="textblock"><h3>template&lt;typename E&gt;<br />
+class bit::stl::bad_expected_access&lt; E &gt;</h3>
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d77/expected_8hpp_source.html#l00034">34</a> of file <a class="el" href="../../d3/d77/expected_8hpp_source.html">expected.hpp</a>.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Error</td><td>the error type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d77/expected_8hpp_source.html#l00029">29</a> of file <a class="el" href="../../d3/d77/expected_8hpp_source.html">expected.hpp</a>.</p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="../../d3/d77/expected_8hpp_source.html">expected.hpp</a></li>
 </ul>

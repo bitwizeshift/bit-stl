@@ -70,25 +70,25 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This utility is used for creating composite classes for type-traits.  
+<p>This simple type is used to add '::type' to any transformation type-traits.  
  <a href="../../df/d46/structbit_1_1stl_1_1identity.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="../../db/d28/type__composite_8hpp_source.html">type_composite.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="../../d7/d0e/identity_8hpp_source.html">identity.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for bit::stl::identity&lt; T &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="../../df/d46/structbit_1_1stl_1_1identity.png" usemap="#bit::stl::identity_3C_20T_20_3E_map" alt=""/>
   <map id="bit::stl::identity_3C_20T_20_3E_map" name="bit::stl::identity_3C_20T_20_3E_map">
-<area href="../../d9/d75/structbit_1_1stl_1_1normalize__char.html" title="Normalizes character types T to non-signed/unsigned character types. " alt="bit::stl::normalize_char&lt; T &gt;" shape="rect" coords="0,56,318,80"/>
-<area href="../../db/d6e/structbit_1_1stl_1_1remove__all__pointers.html" title="Removes all pointers from a given type. " alt="bit::stl::remove_all_pointers&lt; T &gt;" shape="rect" coords="492,56,810,80"/>
-<area href="../../dc/d24/structbit_1_1stl_1_1remove__member__function__pointer__const.html" title="Removes the constness of a member function pointer. " alt="bit::stl::remove_member_function_pointer_const&lt; T &gt;" shape="rect" coords="820,56,1138,80"/>
-<area href="../../de/d7d/structbit_1_1stl_1_1remove__member__function__pointer__cv.html" title="Removes the cv-ness of a member function pointer. " alt="bit::stl::remove_member_function_pointer_cv&lt; T &gt;" shape="rect" coords="1148,56,1466,80"/>
-<area href="../../d0/d92/structbit_1_1stl_1_1remove__member__function__pointer__volatile.html" title="Removes volatility of a member function pointer. " alt="bit::stl::remove_member_function_pointer_volatile&lt; T &gt;" shape="rect" coords="1476,56,1794,80"/>
-<area href="../../d7/db9/structbit_1_1stl_1_1remove__all__pointers_3_01_t_01_5_01_4.html" alt="bit::stl::remove_all_pointers&lt; T * &gt;" shape="rect" coords="0,112,318,136"/>
-<area href="../../dd/ddb/structbit_1_1stl_1_1remove__all__pointers_3_01_t_01_5const_01_4.html" alt="bit::stl::remove_all_pointers&lt; T *const &gt;" shape="rect" coords="328,112,646,136"/>
-<area href="../../d7/d08/structbit_1_1stl_1_1remove__all__pointers_3_01_t_01_5const_01volatile_01_4.html" alt="bit::stl::remove_all_pointers&lt; T *const volatile &gt;" shape="rect" coords="656,112,974,136"/>
-<area href="../../dd/dc1/structbit_1_1stl_1_1remove__all__pointers_3_01_t_01_5volatile_01_4.html" alt="bit::stl::remove_all_pointers&lt; T *volatile &gt;" shape="rect" coords="984,112,1302,136"/>
+<area href="../../d0/d2e/structbit_1_1stl_1_1disable__if.html" alt="bit::stl::disable_if&lt; B, T &gt;" shape="rect" coords="0,56,311,80"/>
+<area href="../../dc/d20/structbit_1_1stl_1_1enable__if.html" alt="bit::stl::enable_if&lt; B, T &gt;" shape="rect" coords="321,56,632,80"/>
+<area href="../../df/d61/structbit_1_1stl_1_1enable__overload__if.html" title="Similar to enable_if, but doesn&#39;t sfinae-away a type; instead produces an uninstantiable unique type ..." alt="bit::stl::enable_overload_if&lt; b, T &gt;" shape="rect" coords="642,56,953,80"/>
+<area href="../../df/df3/structbit_1_1stl_1_1remove__pointers.html" title="Removes all pointers from a given type. " alt="bit::stl::remove_pointers&lt; T &gt;" shape="rect" coords="963,56,1274,80"/>
+<area href="../../df/d0e/structbit_1_1stl_1_1tuple__element_3_010_00_01compressed__pair_3_01_t_00_01_u_01_4_01_4.html" alt="bit::stl::tuple_element&lt; 0, compressed_pair&lt; T, U &gt; &gt;" shape="rect" coords="1284,56,1595,80"/>
+<area href="../../d1/d69/structbit_1_1stl_1_1remove__pointers_3_01_t_01_5_01_4.html" alt="bit::stl::remove_pointers&lt; T * &gt;" shape="rect" coords="481,112,792,136"/>
+<area href="../../dd/d72/structbit_1_1stl_1_1remove__pointers_3_01_t_01_5const_01_4.html" alt="bit::stl::remove_pointers&lt; T *const &gt;" shape="rect" coords="802,112,1113,136"/>
+<area href="../../df/d84/structbit_1_1stl_1_1remove__pointers_3_01_t_01_5const_01volatile_01_4.html" alt="bit::stl::remove_pointers&lt; T *const volatile &gt;" shape="rect" coords="1123,112,1434,136"/>
+<area href="../../d5/df8/structbit_1_1stl_1_1remove__pointers_3_01_t_01_5volatile_01_4.html" alt="bit::stl::remove_pointers&lt; T *volatile &gt;" shape="rect" coords="1444,112,1755,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -102,11 +102,12 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>type</b> = T</td></t
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
 struct bit::stl::identity&lt; T &gt;</h3>
 
-<p>This utility is used for creating composite classes for type-traits. </p>
+<p>This simple type is used to add '::type' to any transformation type-traits. </p>
+<p>The result is aliased as <code>::type</code> </p>
 
-<p class="definition">Definition at line <a class="el" href="../../db/d28/type__composite_8hpp_source.html#l00057">57</a> of file <a class="el" href="../../db/d28/type__composite_8hpp_source.html">type_composite.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d0e/identity_8hpp_source.html#l00019">19</a> of file <a class="el" href="../../d7/d0e/identity_8hpp_source.html">identity.hpp</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="../../db/d28/type__composite_8hpp_source.html">type_composite.hpp</a></li>
+<li><a class="el" href="../../d7/d0e/identity_8hpp_source.html">identity.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

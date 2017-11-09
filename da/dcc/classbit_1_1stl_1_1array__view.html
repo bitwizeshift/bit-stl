@@ -101,17 +101,17 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = std:
 <tr class="memitem:a7422136514d5558fa710408308e1ee16"><td class="memItemLeft" align="right" valign="top"><a id="a7422136514d5558fa710408308e1ee16"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> = std::ptrdiff_t</td></tr>
 <tr class="separator:a7422136514d5558fa710408308e1ee16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a598137b83bc1f76c38028c8f5e883c66"><td class="memItemLeft" align="right" valign="top"><a id="a598137b83bc1f76c38028c8f5e883c66"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = pointer_iterator&lt; T *, <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">array_view</a> &gt;</td></tr>
-<tr class="separator:a598137b83bc1f76c38028c8f5e883c66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab75da7950a7de24260908f04727f8c20"><td class="memItemLeft" align="right" valign="top"><a id="ab75da7950a7de24260908f04727f8c20"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = pointer_iterator&lt; T *, <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">array_view</a> &gt;</td></tr>
-<tr class="separator:ab75da7950a7de24260908f04727f8c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6c6e2be4d68da022758673280811f07"><td class="memItemLeft" align="right" valign="top"><a id="af6c6e2be4d68da022758673280811f07"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">tagged_iterator</a>&lt; const T *, <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">array_view</a> &gt;</td></tr>
+<tr class="separator:af6c6e2be4d68da022758673280811f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a644c1a636c83b98d68a00ccb16f1b734"><td class="memItemLeft" align="right" valign="top"><a id="a644c1a636c83b98d68a00ccb16f1b734"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">tagged_iterator</a>&lt; const T *, <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">array_view</a> &gt;</td></tr>
+<tr class="separator:a644c1a636c83b98d68a00ccb16f1b734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac841b45e78bef00deee2a074335ccb09"><td class="memItemLeft" align="right" valign="top"><a id="ac841b45e78bef00deee2a074335ccb09"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>reverse_iterator</b> = std::reverse_iterator&lt; iterator &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>reverse_iterator</b> = std::reverse_iterator&lt; <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">iterator</a> &gt;</td></tr>
 <tr class="separator:ac841b45e78bef00deee2a074335ccb09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2eef2e9be5673082d59788d0a1048891"><td class="memItemLeft" align="right" valign="top"><a id="a2eef2e9be5673082d59788d0a1048891"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_iterator</b> = std::reverse_iterator&lt; const_iterator &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_iterator</b> = std::reverse_iterator&lt; <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a> &gt;</td></tr>
 <tr class="separator:a2eef2e9be5673082d59788d0a1048891"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -150,6 +150,9 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memitem:aef062e8340f790191f35b5a076e12a7f"><td class="memItemLeft" align="right" valign="top">constexpr size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#aef062e8340f790191f35b5a076e12a7f">size</a> () const noexcept</td></tr>
 <tr class="memdesc:aef062e8340f790191f35b5a076e12a7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of entries in the <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html" title="An immutable wrapper around non-owned contiguous data. ">array_view</a>.  <a href="#aef062e8340f790191f35b5a076e12a7f">More...</a><br /></td></tr>
 <tr class="separator:aef062e8340f790191f35b5a076e12a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64fdf85d62a3bb57107c01035c4039ca"><td class="memItemLeft" align="right" valign="top">constexpr size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#a64fdf85d62a3bb57107c01035c4039ca">max_size</a> () const noexcept</td></tr>
+<tr class="memdesc:a64fdf85d62a3bb57107c01035c4039ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the max size of this <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html" title="An immutable wrapper around non-owned contiguous data. ">array_view</a>.  <a href="#a64fdf85d62a3bb57107c01035c4039ca">More...</a><br /></td></tr>
+<tr class="separator:a64fdf85d62a3bb57107c01035c4039ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b332e597edaf4fa96da725bdc2a7a3c"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#a8b332e597edaf4fa96da725bdc2a7a3c">empty</a> () const noexcept</td></tr>
 <tr class="memdesc:a8b332e597edaf4fa96da725bdc2a7a3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html" title="An immutable wrapper around non-owned contiguous data. ">array_view</a> is empty.  <a href="#a8b332e597edaf4fa96da725bdc2a7a3c">More...</a><br /></td></tr>
 <tr class="separator:a8b332e597edaf4fa96da725bdc2a7a3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,16 +183,16 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memitem:a61a388d6cab751955ad97d75f72d6d50"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">array_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#a61a388d6cab751955ad97d75f72d6d50">subarray</a> (size_type offset=0, size_type count=npos) const</td></tr>
 <tr class="memdesc:a61a388d6cab751955ad97d75f72d6d50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrives a subarray of a given <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html" title="An immutable wrapper around non-owned contiguous data. ">array_view</a>.  <a href="#a61a388d6cab751955ad97d75f72d6d50">More...</a><br /></td></tr>
 <tr class="separator:a61a388d6cab751955ad97d75f72d6d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c60020b65dd181f28b9dc13dfb15102"><td class="memItemLeft" align="right" valign="top">constexpr const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#a9c60020b65dd181f28b9dc13dfb15102">begin</a> () const noexcept</td></tr>
+<tr class="memitem:a9c60020b65dd181f28b9dc13dfb15102"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#a9c60020b65dd181f28b9dc13dfb15102">begin</a> () const noexcept</td></tr>
 <tr class="memdesc:a9c60020b65dd181f28b9dc13dfb15102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the begin iterator for this <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html" title="An immutable wrapper around non-owned contiguous data. ">array_view</a>.  <a href="#a9c60020b65dd181f28b9dc13dfb15102">More...</a><br /></td></tr>
 <tr class="separator:a9c60020b65dd181f28b9dc13dfb15102"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0888b21a03edd004d245e30ddd08d5fd"><td class="memItemLeft" align="right" valign="top">constexpr const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#a0888b21a03edd004d245e30ddd08d5fd">end</a> () const noexcept</td></tr>
+<tr class="memitem:a0888b21a03edd004d245e30ddd08d5fd"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#a0888b21a03edd004d245e30ddd08d5fd">end</a> () const noexcept</td></tr>
 <tr class="memdesc:a0888b21a03edd004d245e30ddd08d5fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the end iterator for this <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html" title="An immutable wrapper around non-owned contiguous data. ">array_view</a>.  <a href="#a0888b21a03edd004d245e30ddd08d5fd">More...</a><br /></td></tr>
 <tr class="separator:a0888b21a03edd004d245e30ddd08d5fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfd0ae058b80d7182197f08b37904f7a"><td class="memItemLeft" align="right" valign="top">constexpr const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#acfd0ae058b80d7182197f08b37904f7a">cbegin</a> () const noexcept</td></tr>
+<tr class="memitem:acfd0ae058b80d7182197f08b37904f7a"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#acfd0ae058b80d7182197f08b37904f7a">cbegin</a> () const noexcept</td></tr>
 <tr class="memdesc:acfd0ae058b80d7182197f08b37904f7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the begin iterator for this <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html" title="An immutable wrapper around non-owned contiguous data. ">array_view</a>.  <a href="#acfd0ae058b80d7182197f08b37904f7a">More...</a><br /></td></tr>
 <tr class="separator:acfd0ae058b80d7182197f08b37904f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9612b16311cc5d928315c42ee1c5f70"><td class="memItemLeft" align="right" valign="top">constexpr const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#af9612b16311cc5d928315c42ee1c5f70">cend</a> () const noexcept</td></tr>
+<tr class="memitem:af9612b16311cc5d928315c42ee1c5f70"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#af9612b16311cc5d928315c42ee1c5f70">cend</a> () const noexcept</td></tr>
 <tr class="memdesc:af9612b16311cc5d928315c42ee1c5f70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the end iterator for this <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html" title="An immutable wrapper around non-owned contiguous data. ">array_view</a>.  <a href="#af9612b16311cc5d928315c42ee1c5f70">More...</a><br /></td></tr>
 <tr class="separator:af9612b16311cc5d928315c42ee1c5f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a5f548dfa55b43aed4ea6b552f166e9"><td class="memItemLeft" align="right" valign="top">constexpr const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html#a6a5f548dfa55b43aed4ea6b552f166e9">rbegin</a> () const noexcept</td></tr>
@@ -216,9 +219,10 @@ static constexpr size_type&#160;</td><td class="memItemRight" valign="bottom"><b
 class bit::stl::array_view&lt; T &gt;</h3>
 
 <p>An immutable wrapper around non-owned contiguous data. </p>
-<p>This type behaves like a const span, but is only constructible from contiguous data containers and raw arrays, not from pointer + size. </p>
+<p>This type behaves like a const span, but is only constructible from contiguous data containers and raw arrays, not from pointer + size.</p>
+<dl class="section user"><dt>Satisfies</dt><dd>ContiguousContainer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dca/array__view_8hpp_source.html#l00028">28</a> of file <a class="el" href="../../d6/dca/array__view_8hpp_source.html">array_view.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dca/array__view_8hpp_source.html#l00034">34</a> of file <a class="el" href="../../d6/dca/array__view_8hpp_source.html">array_view.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3a3c7f6cf0470d88cac8622217aa4b50"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3a3c7f6cf0470d88cac8622217aa4b50">&#9670;&nbsp;</a></span>array_view() <span class="overload">[1/6]</span></h2>
@@ -515,7 +519,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const_iterator <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">bit::stl::array_view</a>&lt; T &gt;::begin </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a> <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">bit::stl::array_view</a>&lt; T &gt;::begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -545,7 +549,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const_iterator <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">bit::stl::array_view</a>&lt; T &gt;::cbegin </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a> <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">bit::stl::array_view</a>&lt; T &gt;::cbegin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -575,7 +579,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const_iterator <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">bit::stl::array_view</a>&lt; T &gt;::cend </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a> <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">bit::stl::array_view</a>&lt; T &gt;::cend </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -695,7 +699,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr bool <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">bit::stl::array_view</a>&lt; T &gt;::empty </td>
+          <td class="memname">constexpr bool <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">bit::stl::array_view</a>&lt; T &gt;::<a class="el" href="../../da/d7e/namespacebit_1_1stl.html#db/d9b/structbit_1_1stl_1_1empty">empty</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -725,7 +729,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const_iterator <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">bit::stl::array_view</a>&lt; T &gt;::end </td>
+          <td class="memname">constexpr <a class="el" href="../../dc/d83/classbit_1_1stl_1_1tagged__iterator.html">const_iterator</a> <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">bit::stl::array_view</a>&lt; T &gt;::end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -771,6 +775,36 @@ template&lt;typename T&gt; </div>
 <p>References the first entry of the array. </p>
 <dl class="section note"><dt>Note</dt><dd>Undefined behavior if <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html" title="An immutable wrapper around non-owned contiguous data. ">array_view</a> is empty</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>reference to the first entry of the array </dd></dl>
+
+</div>
+</div>
+<a id="a64fdf85d62a3bb57107c01035c4039ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64fdf85d62a3bb57107c01035c4039ca">&#9670;&nbsp;</a></span>max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_type <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html">bit::stl::array_view</a>&lt; T &gt;::max_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the max size of this <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html" title="An immutable wrapper around non-owned contiguous data. ">array_view</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>the max number of entries in this <a class="el" href="../../da/dcc/classbit_1_1stl_1_1array__view.html" title="An immutable wrapper around non-owned contiguous data. ">array_view</a> </dd></dl>
 
 </div>
 </div>

@@ -1,23 +1,4 @@
 var searchData=
 [
-  ['u16',['u16',['../da/d7e/namespacebit_1_1stl.html#acf0b4a5aaa932b171d8c854a74a34fec',1,'bit::stl']]],
-  ['u16f',['u16f',['../da/d7e/namespacebit_1_1stl.html#ad69b980ec32ab579ab32a3ebf61c35ea',1,'bit::stl']]],
-  ['u16l',['u16l',['../da/d7e/namespacebit_1_1stl.html#a1ba9752631222f9e7c2e5bf1414d92ef',1,'bit::stl']]],
-  ['u32',['u32',['../da/d7e/namespacebit_1_1stl.html#a200173ee77d867a810b95caa007dbcd6',1,'bit::stl']]],
-  ['u32f',['u32f',['../da/d7e/namespacebit_1_1stl.html#a65d5bcd3b23a4cc83475a03849bfc8d9',1,'bit::stl']]],
-  ['u32l',['u32l',['../da/d7e/namespacebit_1_1stl.html#a608a62713d94d9ff5f5f0f99843bd90d',1,'bit::stl']]],
-  ['u64',['u64',['../da/d7e/namespacebit_1_1stl.html#a4f9eb1c95dce539d717982534ca20cc0',1,'bit::stl']]],
-  ['u64f',['u64f',['../da/d7e/namespacebit_1_1stl.html#a98a773c354943ca336169387b0861d4c',1,'bit::stl']]],
-  ['u64l',['u64l',['../da/d7e/namespacebit_1_1stl.html#adc9c0a4791d8727ffd1660a1efe7316d',1,'bit::stl']]],
-  ['u8',['u8',['../da/d7e/namespacebit_1_1stl.html#a7e962a93773831edae6d63692bd7afb3',1,'bit::stl']]],
-  ['u8f',['u8f',['../da/d7e/namespacebit_1_1stl.html#a4ed6b81414274e0c8c2253c15ab695ca',1,'bit::stl']]],
-  ['u8l',['u8l',['../da/d7e/namespacebit_1_1stl.html#a3d6dd119ae284758fda0b6d018f47b24',1,'bit::stl']]],
-  ['uchar',['uchar',['../da/d7e/namespacebit_1_1stl.html#a609b8b83a65779bf425451da2c931bc3',1,'bit::stl']]],
-  ['uint',['uint',['../da/d7e/namespacebit_1_1stl.html#aa1960753c0b87695d90d1085df554a54',1,'bit::stl']]],
-  ['ulong',['ulong',['../da/d7e/namespacebit_1_1stl.html#a7213f0de5ec62553f34df797f4517aa9',1,'bit::stl']]],
-  ['umaxint',['umaxint',['../da/d7e/namespacebit_1_1stl.html#a8e3e32378d785689021f448f94fc2584',1,'bit::stl']]],
-  ['unqualified',['unqualified',['../da/d7e/namespacebit_1_1stl.html#ac2614b2e06533f6870076485405c1efe',1,'bit::stl']]],
-  ['unqualified_5ft',['unqualified_t',['../da/d7e/namespacebit_1_1stl.html#a62c9b206db68e0e389ed5330e57fad27',1,'bit::stl']]],
-  ['ushort',['ushort',['../da/d7e/namespacebit_1_1stl.html#ae0d16b03bce173a83cd4ac92ea2a0eeb',1,'bit::stl']]],
-  ['uword',['uword',['../da/d7e/namespacebit_1_1stl.html#adb3c962cbbe823654a217c9c7619557f',1,'bit::stl']]]
+  ['word',['word',['../da/d7e/namespacebit_1_1stl.html#a8390303a8a801dece9d6fede385cdec0',1,'bit::stl']]]
 ];

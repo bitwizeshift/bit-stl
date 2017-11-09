@@ -58,7 +58,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="../../dir_911e2e3e6d3b64043b13d829b7a3782c.html">bit</a></li><li class="navelem"><a class="el" href="../../dir_74624cd51efe8f4596731f0853df1244.html">stl</a></li>  </ul>
+<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="../../dir_911e2e3e6d3b64043b13d829b7a3782c.html">bit</a></li><li class="navelem"><a class="el" href="../../dir_74624cd51efe8f4596731f0853df1244.html">stl</a></li><li class="navelem"><a class="el" href="../../dir_744ef3be35b6a0f03d758c9685d07040.html">utilities</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -66,6 +66,7 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">assert.hpp File Reference</div>  </div>
@@ -74,8 +75,13 @@ $(function() {
 
 <p>This header contains the definitions for both static and runtime assertions.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../db/dd7/stddef_8hpp_source.html">stddef.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="../../df/dd4/source__location_8hpp_source.html">source_location.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="../../df/dd4/source__location_8hpp_source.html">source_location.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../dc/d4a/compiler__traits_8hpp_source.html">compiler_traits.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../db/dbe/macros_8hpp_source.html">macros.hpp</a>&quot;</code><br />
+<code>#include &lt;stdexcept&gt;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;atomic&gt;</code><br />
+<code>#include &quot;detail/assert.inl&quot;</code><br />
 </div>
 <p><a href="../../d2/d54/assert_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -93,29 +99,39 @@ Namespaces</h2></td></tr>
 <tr class="memitem:da/d7e/namespacebit_1_1stl"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html">bit::stl</a></td></tr>
 <tr class="memdesc:da/d7e/namespacebit_1_1stl"><td class="mdescLeft">&#160;</td><td class="mdescRight">The standard namespace for this project. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:d3/d66/namespacebit_1_1stl_1_1detail"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d66/namespacebit_1_1stl_1_1detail.html">bit::stl::detail</a></td></tr>
-<tr class="memdesc:d3/d66/namespacebit_1_1stl_1_1detail"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private namespace for managing implementation-details within headers. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:acfbac952669e3afdbde70fcb6bc0f9d0"><td class="memItemLeft" align="right" valign="top"><a id="acfbac952669e3afdbde70fcb6bc0f9d0"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>BIT_INTERNAL_ASSERT</b>(condition,  message)&#160;&#160;&#160;::bit::stl::detail::assert_internal(&quot;assertion failure: condition '&quot; condition &quot;' failed with message \&quot;&quot; message &quot;\&quot;&quot;, BIT_MAKE_SOURCE_LOCATION() );</td></tr>
-<tr class="separator:acfbac952669e3afdbde70fcb6bc0f9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25a5ecac017215eb2e8f61eabcb05285"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d54/assert_8hpp.html#a25a5ecac017215eb2e8f61eabcb05285">BIT_ASSERT</a>(condition,  message)</td></tr>
-<tr class="memdesc:a25a5ecac017215eb2e8f61eabcb05285"><td class="mdescLeft">&#160;</td><td class="mdescRight">A runtime assertion when <em>condition</em> fails, displaying <em>message</em> to the user.  <a href="#a25a5ecac017215eb2e8f61eabcb05285">More...</a><br /></td></tr>
-<tr class="separator:a25a5ecac017215eb2e8f61eabcb05285"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a859b1f2f68c00dfcfc34e4cca1ad3cb3"><td class="memItemLeft" align="right" valign="top"><a id="a859b1f2f68c00dfcfc34e4cca1ad3cb3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>BIT_ASSERT_OR_THROW</b>(exception,  condition,  message)&#160;&#160;&#160;<a class="el" href="../../d2/d54/assert_8hpp.html#a25a5ecac017215eb2e8f61eabcb05285">BIT_ASSERT</a>(condition,message)</td></tr>
-<tr class="separator:a859b1f2f68c00dfcfc34e4cca1ad3cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a9a644b545227d62d0384c0fd45f3ff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d54/assert_8hpp.html#a7a9a644b545227d62d0384c0fd45f3ff">BIT_SANITY_CHECK</a>(a,  b)</td></tr>
-<tr class="separator:a7a9a644b545227d62d0384c0fd45f3ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba5ab0b2b0f13f15c64a25b3033c6b1c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>BIT_INTERNAL_ASSERT</b>(condition,  message,  source)</td></tr>
+<tr class="separator:aba5ab0b2b0f13f15c64a25b3033c6b1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b7fedc9d61dc77687527083dd75149a"><td class="memItemLeft" align="right" valign="top"><a id="a1b7fedc9d61dc77687527083dd75149a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BIT_ALWAYS_ASSERT</b>(condition,  message)&#160;&#160;&#160;((BIT_LIKELY(condition)) ? ((void)0) : [](::<a class="el" href="../../d6/d2f/classbit_1_1stl_1_1source__location.html">bit::stl::source_location</a> source){ BIT_INTERNAL_ASSERT( <a class="el" href="../../db/dbe/macros_8hpp.html#a6d894c6d1d8b93b821d69c93402483da">BIT_STRINGIZE</a>(condition), message, source ); }(<a class="el" href="../../df/dd4/source__location_8hpp.html#aedc648504c88cac0c1e10943eb5477ec">BIT_MAKE_SOURCE_LOCATION</a>()) )</td></tr>
+<tr class="separator:a1b7fedc9d61dc77687527083dd75149a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a978c062200839b6911360be4879e2c5c"><td class="memItemLeft" align="right" valign="top"><a id="a978c062200839b6911360be4879e2c5c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d54/assert_8hpp.html#a978c062200839b6911360be4879e2c5c">BIT_ASSERT</a>(...)&#160;&#160;&#160;((void)0)</td></tr>
+<tr class="memdesc:a978c062200839b6911360be4879e2c5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A runtime assertion when <em>condition</em> fails, displaying <em>message</em> to the user. <br /></td></tr>
+<tr class="separator:a978c062200839b6911360be4879e2c5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a697802d1a66688c575ae1dbb00f1b510"><td class="memItemLeft" align="right" valign="top"><a id="a697802d1a66688c575ae1dbb00f1b510"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>bit::stl::assert_handler_t</b> = void(*)(const char *, source_location)</td></tr>
+<tr class="separator:a697802d1a66688c575ae1dbb00f1b510"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a824b8abf7fd4e328ef43f7079e981387"><td class="memItemLeft" align="right" valign="top"><a id="a824b8abf7fd4e328ef43f7079e981387"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>bit::stl::detail::assert_internal</b> (string_view message, source_location source)</td></tr>
-<tr class="separator:a824b8abf7fd4e328ef43f7079e981387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36e445241b494aa7aa950f4ca4ff2d5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html#a36e445241b494aa7aa950f4ca4ff2d5c">bit::stl::default_assert</a> (const char *message, source_location source)</td></tr>
+<tr class="memdesc:a36e445241b494aa7aa950f4ca4ff2d5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default assert handler. Prints a message, then triggers a breakpoint.  <a href="../../da/d7e/namespacebit_1_1stl.html#a36e445241b494aa7aa950f4ca4ff2d5c">More...</a><br /></td></tr>
+<tr class="separator:a36e445241b494aa7aa950f4ca4ff2d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af61f3c4de60623e376e8625aaeec2e8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html#af61f3c4de60623e376e8625aaeec2e8d">bit::stl::throwing_assert</a> (const char *message, source_location source)</td></tr>
+<tr class="memdesc:af61f3c4de60623e376e8625aaeec2e8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">An exception-throwing assert handler. Throws an <a class="el" href="../../d5/de8/classbit_1_1stl_1_1assertion__failure.html" title="An exception thrown from assertion failures when BIT_COMPILER_EXCEPTIONS_ENABLED is defined...">assertion_failure</a> exception.  <a href="../../da/d7e/namespacebit_1_1stl.html#af61f3c4de60623e376e8625aaeec2e8d">More...</a><br /></td></tr>
+<tr class="separator:af61f3c4de60623e376e8625aaeec2e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a422888e8bf759070c079f4ae2b699a3d"><td class="memItemLeft" align="right" valign="top">assert_handler_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html#a422888e8bf759070c079f4ae2b699a3d">bit::stl::set_assert_handler</a> (assert_handler_t f)</td></tr>
+<tr class="memdesc:a422888e8bf759070c079f4ae2b699a3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the assertion handler, returning the previous assertion handler.  <a href="../../da/d7e/namespacebit_1_1stl.html#a422888e8bf759070c079f4ae2b699a3d">More...</a><br /></td></tr>
+<tr class="separator:a422888e8bf759070c079f4ae2b699a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d4bce747381dc857bde640ed77ba843"><td class="memItemLeft" align="right" valign="top">assert_handler_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html#a1d4bce747381dc857bde640ed77ba843">bit::stl::get_assert_handler</a> ()</td></tr>
+<tr class="memdesc:a1d4bce747381dc857bde640ed77ba843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the currently active assertion handler.  <a href="../../da/d7e/namespacebit_1_1stl.html#a1d4bce747381dc857bde640ed77ba843">More...</a><br /></td></tr>
+<tr class="separator:a1d4bce747381dc857bde640ed77ba843"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This header contains the definitions for both static and runtime assertions. </p>
@@ -123,14 +139,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>bit::stl::detail::ass
 
 <p class="definition">Definition in file <a class="el" href="../../d2/d54/assert_8hpp_source.html">assert.hpp</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a25a5ecac017215eb2e8f61eabcb05285"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25a5ecac017215eb2e8f61eabcb05285">&#9670;&nbsp;</a></span>BIT_ASSERT</h2>
+<a id="aba5ab0b2b0f13f15c64a25b3033c6b1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba5ab0b2b0f13f15c64a25b3033c6b1c">&#9670;&nbsp;</a></span>BIT_INTERNAL_ASSERT</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BIT_ASSERT</td>
+          <td class="memname">#define BIT_INTERNAL_ASSERT</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">condition, </td>
@@ -139,39 +155,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>bit::stl::detail::ass
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">message&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {                                                          \</div><div class="line">      if(!(condition))                                            \</div><div class="line">      {                                                           \</div><div class="line">        BIT_INTERNAL_ASSERT( BIT_STRINGIZE(condition), message ); \</div><div class="line">      }                                                           \</div><div class="line">    } <span class="keywordflow">while</span>(0)</div></div><!-- fragment -->
-<p>A runtime assertion when <em>condition</em> fails, displaying <em>message</em> to the user. </p>
-
-<p class="definition">Definition at line <a class="el" href="../../d2/d54/assert_8hpp_source.html#l00133">133</a> of file <a class="el" href="../../d2/d54/assert_8hpp_source.html">assert.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a7a9a644b545227d62d0384c0fd45f3ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a9a644b545227d62d0384c0fd45f3ff">&#9670;&nbsp;</a></span>BIT_SANITY_CHECK</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define BIT_SANITY_CHECK</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">a, </td>
+          <td class="paramname">message, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">b&#160;</td>
+          <td class="paramname">source&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -180,11 +170,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>bit::stl::detail::ass
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><a class="code" href="../../d2/d54/assert_8hpp.html#a25a5ecac017215eb2e8f61eabcb05285">BIT_ASSERT</a>(                     \</div><div class="line">    !((a)&amp;&amp;(b)),                                                \</div><div class="line">    <span class="stringliteral">&quot;Sanity check failed: &quot;</span>                                     \</div><div class="line">    <span class="stringliteral">&quot;Conditions &quot;</span> #a <span class="stringliteral">&quot; and &quot;</span> #b <span class="stringliteral">&quot; cannot both be true.&quot;</span> )</div><div class="ttc" id="assert_8hpp_html_a25a5ecac017215eb2e8f61eabcb05285"><div class="ttname"><a href="../../d2/d54/assert_8hpp.html#a25a5ecac017215eb2e8f61eabcb05285">BIT_ASSERT</a></div><div class="ttdeci">#define BIT_ASSERT(condition, message)</div><div class="ttdoc">A runtime assertion when condition fails, displaying message to the user. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d54/assert_8hpp_source.html#l00133">assert.hpp:133</a></div></div>
-</div><!-- fragment --><p>Performs a sanity check on a condition. This is used as a way to assert that the condition will never be both simultaneously true and false</p>
-<dl class="section note"><dt>Note</dt><dd>this is primarily used as a utility to check user-built class operations, such as a class's "operator ==", to ensure that operator == and operator != don't always return the same value </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../d2/d54/assert_8hpp_source.html#l00165">165</a> of file <a class="el" href="../../d2/d54/assert_8hpp_source.html">assert.hpp</a>.</p>
+<b>Value:</b><div class="fragment"><div class="line">::bit::stl::detail::assert_internal(<span class="stringliteral">&quot;assertion failure: condition &#39;&quot;</span> \</div><div class="line">                                      condition <span class="stringliteral">&quot;&#39; failed with message \&quot;&quot;</span> \</div><div class="line">                                      message <span class="stringliteral">&quot;\&quot;&quot;</span>, source )</div></div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="../../d2/d54/assert_8hpp_source.html#l00102">102</a> of file <a class="el" href="../../d2/d54/assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>

@@ -58,14 +58,13 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="../../dir_911e2e3e6d3b64043b13d829b7a3782c.html">bit</a></li><li class="navelem"><a class="el" href="../../dir_74624cd51efe8f4596731f0853df1244.html">stl</a></li>  </ul>
+<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="../../dir_911e2e3e6d3b64043b13d829b7a3782c.html">bit</a></li><li class="navelem"><a class="el" href="../../dir_74624cd51efe8f4596731f0853df1244.html">stl</a></li><li class="navelem"><a class="el" href="../../dir_744ef3be35b6a0f03d758c9685d07040.html">utilities</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">enum.hpp File Reference</div>  </div>
@@ -74,10 +73,11 @@ $(function() {
 
 <p>This header contains various helpers for managing enum and enum class types.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../dc/d54/type__traits_8hpp_source.html">type_traits.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="../../da/db5/string__view_8hpp_source.html">string_view.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="../../d2/d54/assert_8hpp_source.html">assert.hpp</a>&quot;</code><br />
-<code>#include &quot;detail/iterator/pointer_iterator.hpp&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d2/d54/assert_8hpp_source.html">assert.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../dc/d4a/compiler__traits_8hpp_source.html">compiler_traits.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../df/d80/conjunction_8hpp_source.html">../traits/composition/conjunction.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../da/db5/string__view_8hpp_source.html">../containers/string_view.hpp</a>&quot;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
 <code>#include &quot;detail/enum.inl&quot;</code><br />
 </div>
 <p><a href="../../dd/d0a/enum_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -114,14 +114,6 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:d7/dd7/namespacebit_1_1stl_1_1enum__ops"><td class="mdescLeft">&#160;</td><td class="mdescRight">This namespace introduces bitwise operations to any enums that specialize <code><a class="el" href="../../d7/d4c/structbit_1_1stl_1_1is__enum__bitmask.html" title="Type-trait to determine whether a type is an enum_bitmask. ">is_enum_bitmask</a></code>. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a16c47b035ca6385a8da51928ceb06a80"><td class="memTemplParams" colspan="2"><a id="a16c47b035ca6385a8da51928ceb06a80"></a>
-template&lt;typename Enum &gt; </td></tr>
-<tr class="memitem:a16c47b035ca6385a8da51928ceb06a80"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/d7e/namespacebit_1_1stl.html#a16c47b035ca6385a8da51928ceb06a80">bit::stl::enum_iterator</a> = pointer_iterator&lt; const Enum *, Enum &gt;</td></tr>
-<tr class="memdesc:a16c47b035ca6385a8da51928ceb06a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type used for iterating an <a class="el" href="../../d5/d36/classbit_1_1stl_1_1enum__range.html" title="A range for enumerable values. ">enum_range</a>. <br /></td></tr>
-<tr class="separator:a16c47b035ca6385a8da51928ceb06a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a14e8cff3ee1637db01fb2e8c04a4a9a0"><td class="memTemplParams" colspan="2">template&lt;typename Enum &gt; </td></tr>
@@ -140,10 +132,10 @@ template&lt;typename Enum , typename  = std::enable_if_t&lt;detail::is_enum_and_
 template&lt;typename Enum , typename  = std::enable_if_t&lt;detail::is_enum_and_bitmask&lt;Enum&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a29afce923e025bb8b4e2a382865b711b"><td class="memTemplItemLeft" align="right" valign="top">constexpr Enum&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::enum_ops::operator|</b> (Enum lhs, Enum rhs) noexcept</td></tr>
 <tr class="separator:a29afce923e025bb8b4e2a382865b711b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a255ffebbec5e1930f1534046f6c644ee"><td class="memTemplParams" colspan="2"><a id="a255ffebbec5e1930f1534046f6c644ee"></a>
+<tr class="memitem:a1a92daa1d9be3c21bcee8ad3f96c8bf0"><td class="memTemplParams" colspan="2"><a id="a1a92daa1d9be3c21bcee8ad3f96c8bf0"></a>
 template&lt;typename Enum , typename  = std::enable_if_t&lt;detail::is_enum_and_bitmask&lt;Enum&gt;::value&gt;&gt; </td></tr>
-<tr class="memitem:a255ffebbec5e1930f1534046f6c644ee"><td class="memTemplItemLeft" align="right" valign="top">constexpr Enum&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::enum_ops::operator&amp;</b> (Enum lhs, Enum rhs) noexcept</td></tr>
-<tr class="separator:a255ffebbec5e1930f1534046f6c644ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a92daa1d9be3c21bcee8ad3f96c8bf0"><td class="memTemplItemLeft" align="right" valign="top">constexpr Enum&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::enum_ops::operator &amp;</b> (Enum lhs, Enum rhs) noexcept</td></tr>
+<tr class="separator:a1a92daa1d9be3c21bcee8ad3f96c8bf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ce55cbf3a842657bbb56d21ea0b727c"><td class="memTemplParams" colspan="2"><a id="a7ce55cbf3a842657bbb56d21ea0b727c"></a>
 template&lt;typename Enum , typename  = std::enable_if_t&lt;detail::is_enum_and_bitmask&lt;Enum&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a7ce55cbf3a842657bbb56d21ea0b727c"><td class="memTemplItemLeft" align="right" valign="top">constexpr Enum&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::enum_ops::operator^</b> (Enum lhs, Enum rhs) noexcept</td></tr>
@@ -160,10 +152,10 @@ template&lt;typename Enum , typename Integer , typename  = std::enable_if_t&lt;d
 template&lt;typename Enum , typename  = std::enable_if_t&lt;detail::is_enum_and_bitmask&lt;Enum&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:aa505248897551855f3f8f0507adf1873"><td class="memTemplItemLeft" align="right" valign="top">Enum &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::enum_ops::operator|=</b> (Enum &amp;lhs, Enum rhs) noexcept</td></tr>
 <tr class="separator:aa505248897551855f3f8f0507adf1873"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09d454a56ffcfc59a9793c8bdc7caf65"><td class="memTemplParams" colspan="2"><a id="a09d454a56ffcfc59a9793c8bdc7caf65"></a>
+<tr class="memitem:a4ca3472c9664c415448496ddc65da6fc"><td class="memTemplParams" colspan="2"><a id="a4ca3472c9664c415448496ddc65da6fc"></a>
 template&lt;typename Enum , typename  = std::enable_if_t&lt;detail::is_enum_and_bitmask&lt;Enum&gt;::value&gt;&gt; </td></tr>
-<tr class="memitem:a09d454a56ffcfc59a9793c8bdc7caf65"><td class="memTemplItemLeft" align="right" valign="top">Enum &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::enum_ops::operator&amp;=</b> (Enum &amp;lhs, Enum rhs) noexcept</td></tr>
-<tr class="separator:a09d454a56ffcfc59a9793c8bdc7caf65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ca3472c9664c415448496ddc65da6fc"><td class="memTemplItemLeft" align="right" valign="top">Enum &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::enum_ops::operator &amp;=</b> (Enum &amp;lhs, Enum rhs) noexcept</td></tr>
+<tr class="separator:a4ca3472c9664c415448496ddc65da6fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f8fd9e607a25649681f1aa14916cb09"><td class="memTemplParams" colspan="2"><a id="a6f8fd9e607a25649681f1aa14916cb09"></a>
 template&lt;typename Enum , typename  = std::enable_if_t&lt;detail::is_enum_and_bitmask&lt;Enum&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a6f8fd9e607a25649681f1aa14916cb09"><td class="memTemplItemLeft" align="right" valign="top">Enum &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bit::stl::enum_ops::operator^=</b> (Enum &amp;lhs, Enum rhs) noexcept</td></tr>
