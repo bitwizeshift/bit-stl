@@ -30,9 +30,9 @@ endif()
 # Version Info
 #-----------------------------------------------------------------------------
 
-set(BIT_STL_VERSION_MAJOR 1 CACHE STRING "major version of bit::stl" FORCE)
-set(BIT_STL_VERSION_MINOR 1 CACHE STRING "minor version of bit::stl" FORCE)
-set(BIT_STL_VERSION_PATCH 166 CACHE STRING "patch version of bit::stl" FORCE)
+set(BIT_STL_VERSION_MAJOR 2 CACHE STRING "major version of bit::stl" FORCE)
+set(BIT_STL_VERSION_MINOR 0 CACHE STRING "minor version of bit::stl" FORCE)
+set(BIT_STL_VERSION_PATCH 0 CACHE STRING "patch version of bit::stl" FORCE)
 
 set(BIT_STL_VERSION "${BIT_STL_VERSION_MAJOR}.${BIT_STL_VERSION_MINOR}.${BIT_STL_VERSION_PATCH}" CACHE STRING "version of bit::stl" FORCE)
 
@@ -43,7 +43,8 @@ message(STATUS "bit::stl ${BIT_STL_VERSION}")
 #-----------------------------------------------------------------------------
 
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED true)
+set(CMAKE_CXX_STANDARD_REQUIRED on)
+set(CMAKE_CXX_EXTENSIONS off)
 
 make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
   MAJOR ${BIT_STL_VERSION_MAJOR}
@@ -54,43 +55,140 @@ make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
 )
 
 set(headers
-  include/bit/stl/array.hpp
-  include/bit/stl/array_view.hpp
-  include/bit/stl/assert.hpp
-  include/bit/stl/casts.hpp
-  include/bit/stl/checked.hpp
-  include/bit/stl/circular_array.hpp
-  include/bit/stl/circular_buffer.hpp
-  include/bit/stl/circular_deque.hpp
-  include/bit/stl/circular_queue.hpp
-  include/bit/stl/data_watcher.hpp
-  include/bit/stl/delegate.hpp
-  include/bit/stl/enum.hpp
-  include/bit/stl/expected.hpp
-  include/bit/stl/functional.hpp
-  include/bit/stl/hashed_string.hpp
-  include/bit/stl/hashed_string_view.hpp
-  include/bit/stl/iterator.hpp
-  include/bit/stl/lazy.hpp
-  include/bit/stl/map_view.hpp
-  include/bit/stl/memory.hpp
-  include/bit/stl/numeric.hpp
-  include/bit/stl/optional.hpp
-  include/bit/stl/pointer_wrapper.hpp
-  include/bit/stl/range.hpp
-  include/bit/stl/set_view.hpp
-  include/bit/stl/source_location.hpp
-  include/bit/stl/span.hpp
-  include/bit/stl/stddef.hpp
-  include/bit/stl/string.hpp
-  include/bit/stl/string_span.hpp
+
+  # Type Traits
+  include/bit/stl/traits/composition/bool_constant.hpp
+  include/bit/stl/traits/composition/conjunction.hpp
+  include/bit/stl/traits/composition/detected.hpp
+  include/bit/stl/traits/composition/disjunction.hpp
+  include/bit/stl/traits/composition/empty.hpp
+  include/bit/stl/traits/composition/identity.hpp
+  include/bit/stl/traits/composition/integral_constant.hpp
+  include/bit/stl/traits/composition/negation.hpp
+  include/bit/stl/traits/composition/nonesuch.hpp
+  include/bit/stl/traits/composition/sfinae.hpp
+  include/bit/stl/traits/composition/size_constant.hpp
+  include/bit/stl/traits/composition/void_t.hpp
+  include/bit/stl/traits/properties/arity.hpp
+  include/bit/stl/traits/properties/function_argument.hpp
+  include/bit/stl/traits/properties/index_of_type.hpp
+  include/bit/stl/traits/properties/is_const_member_function_pointer.hpp
+  include/bit/stl/traits/properties/is_cv_member_function_pointer.hpp
+  include/bit/stl/traits/properties/is_explicitly_convertible.hpp
+  include/bit/stl/traits/properties/is_volatile_member_function_pointer.hpp
+  include/bit/stl/traits/properties/nth_type.hpp
+  include/bit/stl/traits/properties/pointer_rank.hpp
+  include/bit/stl/traits/relationships/are_same.hpp
+  include/bit/stl/traits/relationships/is_base_of_all.hpp
+  include/bit/stl/traits/relationships/is_base_of_any.hpp
+  include/bit/stl/traits/relationships/is_derived_from_all.hpp
+  include/bit/stl/traits/relationships/is_derived_from_any.hpp
+  include/bit/stl/traits/relationships/is_one_of.hpp
+  include/bit/stl/traits/relationships/is_same_constness.hpp
+  include/bit/stl/traits/relationships/is_same_cv.hpp
+  include/bit/stl/traits/relationships/is_same_decay.hpp
+  include/bit/stl/traits/relationships/is_same_sign.hpp
+  include/bit/stl/traits/relationships/is_same_volatility.hpp
+  include/bit/stl/traits/transformations/base_type.hpp
+  include/bit/stl/traits/transformations/function_signature.hpp
+  include/bit/stl/traits/transformations/match_cv_qualifiers.hpp
+  include/bit/stl/traits/transformations/match_ref_qualifiers.hpp
+  include/bit/stl/traits/transformations/match_sign_qualifiers.hpp
+  include/bit/stl/traits/transformations/normalize_char.hpp
+  include/bit/stl/traits/transformations/remove_pointers.hpp
+  include/bit/stl/traits/transformations/resolves_overload.hpp
+
+  # Concepts
+  include/bit/stl/concepts/AssociativeContainer.hpp
+  include/bit/stl/concepts/BidirectionalIterator.hpp
+  include/bit/stl/concepts/Container.hpp
+  include/bit/stl/concepts/ContiguousContainer.hpp
+  include/bit/stl/concepts/Destructible.hpp
+  include/bit/stl/concepts/EqualityComparable.hpp
+  include/bit/stl/concepts/ForwardIterator.hpp
+  include/bit/stl/concepts/InputIterator.hpp
+  include/bit/stl/concepts/Iterator.hpp
+  include/bit/stl/concepts/NullablePointer.hpp
+  include/bit/stl/concepts/RandomAccessIterator.hpp
+  include/bit/stl/concepts/Range.hpp
+  include/bit/stl/concepts/ReverseRange.hpp
+  include/bit/stl/concepts/ReversibleContainer.hpp
+  include/bit/stl/concepts/SequenceContainer.hpp
+
+  # utilities
+  include/bit/stl/utilities/detail/tuple_element.hpp
+  include/bit/stl/utilities/detail/tuple_size.hpp
+  include/bit/stl/utilities/aligned_storage.hpp
+  include/bit/stl/utilities/assert.hpp
+  include/bit/stl/utilities/casts.hpp
+  include/bit/stl/utilities/compressed_pair.hpp
+  include/bit/stl/utilities/compressed_tuple.hpp
+  include/bit/stl/utilities/compiler_traits.hpp
+  include/bit/stl/utilities/delegate.hpp
+  include/bit/stl/utilities/dynamic_index_constant.hpp
+  include/bit/stl/utilities/dynamic_size_constant.hpp
+  include/bit/stl/utilities/enum.hpp
+  include/bit/stl/utilities/final_act.hpp
+  include/bit/stl/utilities/hash.hpp
+  include/bit/stl/utilities/in_place.hpp
+  include/bit/stl/utilities/invoke.hpp
+  include/bit/stl/utilities/lazy.hpp
+  include/bit/stl/utilities/macros.hpp
+  include/bit/stl/utilities/monostate.hpp
+  include/bit/stl/utilities/optional.hpp
+  include/bit/stl/utilities/pointer_wrapper.hpp
+  include/bit/stl/utilities/propagate_const.hpp
+  include/bit/stl/utilities/source_location.hpp
+  include/bit/stl/utilities/tribool.hpp
+  include/bit/stl/utilities/tuple.hpp
+  include/bit/stl/utilities/types.hpp
+  include/bit/stl/utilities/uninitialized_storage.hpp
+  include/bit/stl/utilities/utility.hpp
+  include/bit/stl/utilities/uuid.hpp
+
+  # containers
+  include/bit/stl/containers/array.hpp
+  include/bit/stl/containers/array_view.hpp
+  include/bit/stl/containers/circular_array.hpp
+  include/bit/stl/containers/circular_buffer.hpp
+  include/bit/stl/containers/circular_deque.hpp
+  include/bit/stl/containers/circular_queue.hpp
+  include/bit/stl/containers/hashed_string.hpp
+  include/bit/stl/containers/hashed_string_view.hpp
+  include/bit/stl/containers/map_view.hpp
+  include/bit/stl/containers/set_view.hpp
+  include/bit/stl/containers/span.hpp
+  include/bit/stl/containers/string.hpp
+  include/bit/stl/containers/string_span.hpp
+  include/bit/stl/containers/string_view.hpp
+
+  # iterators
+  include/bit/stl/iterators/tagged_iterator.hpp
+  include/bit/stl/iterators/tuple_element_iterator.hpp
+  include/bit/stl/iterators/zip_iterator.hpp
+
+  # ranges
+  include/bit/stl/ranges/move_range.hpp
+  include/bit/stl/ranges/range.hpp
+  include/bit/stl/ranges/reverse_range.hpp
+  include/bit/stl/ranges/tuple_element_range.hpp
+  include/bit/stl/ranges/zip_range.hpp
+
+  # memory
+  include/bit/stl/memory/allocator_deleter.hpp
+  include/bit/stl/memory/clone_ptr.hpp
+  include/bit/stl/memory/fat_ptr.hpp
+  include/bit/stl/memory/memory.hpp
+  include/bit/stl/memory/observer_ptr.hpp
+  include/bit/stl/memory/offset_ptr.hpp
+  include/bit/stl/memory/owner.hpp
+  include/bit/stl/memory/scoped_ptr.hpp
+
+  # numeric
+  include/bit/stl/numeric/numeric.hpp
+
+  # not sure where this goes yet
   include/bit/stl/string_tokenizer.hpp
-  include/bit/stl/string_view.hpp
-  include/bit/stl/tribool.hpp
-  include/bit/stl/tuple.hpp
-  include/bit/stl/type_traits.hpp
-  include/bit/stl/utility.hpp
-  include/bit/stl/uuid.hpp
 )
 
 add_library(bit_stl INTERFACE)
@@ -121,9 +219,9 @@ if( BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS )
   )
 
   if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -pedantic)
+    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
   elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -pedantic)
+    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
   elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" )
     # TODO: Determine MSVC necessary compiler flags
   endif()
