@@ -99,7 +99,10 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-# define BIT_INTERNAL_ASSERT(condition,message,source) ::bit::stl::detail::assert_internal("assertion failure: condition '" condition "' failed with message \"" message "\"", source );
+# define BIT_INTERNAL_ASSERT(condition,message,source) \
+  ::bit::stl::detail::assert_internal("assertion failure: condition '" \
+                                      condition "' failed with message \"" \
+                                      message "\"", source )
 
 //=============================================================================
 // X.Y.3, Assertion Macros
@@ -110,7 +113,7 @@ namespace bit {
 //! \brief A runtime assertion when \a condition fails, displaying \a message
 //!        to the user.
 #define BIT_ALWAYS_ASSERT(condition,message) \
-  (BIT_LIKELY(condition) ? ((void)0) : [](auto const& source){ BIT_INTERNAL_ASSERT( BIT_STRINGIZE(condition), message, source ); }(BIT_MAKE_SOURCE_LOCATION()) )
+  ((BIT_LIKELY(condition)) ? ((void)0) : [](::bit::stl::source_location source){ BIT_INTERNAL_ASSERT( BIT_STRINGIZE(condition), message, source ); }(BIT_MAKE_SOURCE_LOCATION()) )
 
 //! \def BIT_ASSERT(condition, message, ...)
 //!

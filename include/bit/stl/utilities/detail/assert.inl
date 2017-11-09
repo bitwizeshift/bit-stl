@@ -34,7 +34,7 @@ inline bit::stl::source_location bit::stl::assertion_failure::source()
 inline void bit::stl::default_assert( const char* message,
                                       source_location source )
 {
-  std::fprintf(stderr, "[assertion] %s (%u)::%s\n"
+  std::fprintf(stderr, "[assertion] %s (%zu)::%s\n"
                        "            %s", source.file_name(),
                                          source.line(),
                                          source.function_name(),

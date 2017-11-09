@@ -170,10 +170,10 @@ inline constexpr typename bit::stl::span<T,Extent>::reference
   bit::stl::span<T,Extent>::at( index_type pos )
 {
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
-  if( pos >= 0 ) {
+  if( pos < 0 ) {
     throw std::out_of_range("span::at: position out of range");
   }
-  if( static_cast<size_type>(pos) < size() ) {
+  if( static_cast<size_type>(pos) >= size() ) {
     throw std::out_of_range("span::at: position out of range");
   }
 #else
@@ -190,10 +190,10 @@ inline constexpr typename bit::stl::span<T,Extent>::const_reference
   const
 {
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
-  if( pos >= 0 ) {
+  if( pos < 0 ) {
     throw std::out_of_range("span::at: position out of range");
   }
-  if( static_cast<size_type>(pos) < size() ) {
+  if( static_cast<size_type>(pos) >= size() ) {
     throw std::out_of_range("span::at: position out of range");
   }
 #else
@@ -265,7 +265,7 @@ inline typename bit::stl::span<T,Extent>::size_type
   const
 {
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
-  if( pos < size() ) {
+  if( pos >= size() ) {
     throw std::out_of_range("span::copy: Index out of range");
   }
 #else
@@ -284,11 +284,11 @@ inline constexpr bit::stl::span<T,bit::stl::dynamic_extent>
   const
 {
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
-  if( offset < size() ) {
+  if( offset >= size() ) {
     throw std::out_of_range("span::at: Index out of range");
   }
 #else
-  BIT_ALWAYS_ASSERT(pos < size(), "span::at: Index out of range");
+  BIT_ALWAYS_ASSERT(offset < size(), "span::at: Index out of range");
 #endif
 
   const size_type max_length = offset > size() ? 0 : size() - offset;
