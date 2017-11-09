@@ -43,9 +43,9 @@ namespace bit {
         constexpr compressed_pair_impl( U1&& u1, U2&& u2 ) : T1(std::forward<U1>(u1)), m_second(std::forward<U2>(u2)){}
 
         template<typename Tuple1, typename Tuple2, std::size_t...Idxs1, std::size_t...Idxs2>
-        constexpr compressed_pair_impl( Tuple1 tuple1, Tuple2 tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
-          : T1( std::get<Idxs1>(tuple1)... ),
-            m_second( std::get<Idxs2>(tuple2)... )
+        constexpr compressed_pair_impl( Tuple1&& tuple1, Tuple2&& tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
+          : T1( std::get<Idxs1>( std::forward<Tuple1>(tuple1) )... ),
+            m_second( std::get<Idxs2>( std::forward<Tuple2>(tuple2) )... )
         {
 
         }
@@ -69,9 +69,9 @@ namespace bit {
         constexpr compressed_pair_impl( U1&& u1, U2&& u2 ) : T1(std::forward<U1>(u1)), T2(std::forward<U2>(u2)){}
 
         template<typename Tuple1, typename Tuple2, std::size_t...Idxs1, std::size_t...Idxs2>
-        constexpr compressed_pair_impl( Tuple1 tuple1, Tuple2 tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
-          : T1( std::get<Idxs1>(tuple1)... ),
-            T2( std::get<Idxs2>(tuple2)... )
+        constexpr compressed_pair_impl( Tuple1&& tuple1, Tuple2&& tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
+          : T1( std::get<Idxs1>( std::forward<Tuple1>(tuple1) )... ),
+            T2( std::get<Idxs2>( std::forward<Tuple2>(tuple2) )... )
         {
 
         }
@@ -93,9 +93,9 @@ namespace bit {
         constexpr compressed_pair_impl( U1&& u1, U2&& u2 ) : T1(std::forward<U1>(u1)), m_second(std::forward<U2>(u2)){}
 
         template<typename Tuple1, typename Tuple2, std::size_t...Idxs1, std::size_t...Idxs2>
-        constexpr compressed_pair_impl( Tuple1 tuple1, Tuple2 tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
-          : T1( std::get<Idxs1>(tuple1)... ),
-            m_second( std::get<Idxs2>(tuple2)... )
+        constexpr compressed_pair_impl( Tuple1&& tuple1, Tuple2&& tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
+          : T1( std::get<Idxs1>( std::forward<Tuple1>(tuple1) )... ),
+            m_second( std::get<Idxs2>( std::forward<Tuple2>(tuple2) )... )
         {
 
         }
@@ -124,9 +124,9 @@ namespace bit {
         constexpr compressed_pair_impl( U1&& u1, U2&& u2 ) : T2(std::forward<U2>(u2)), m_first(std::forward<U1>(u1)){}
 
         template<typename Tuple1, typename Tuple2, std::size_t...Idxs1, std::size_t...Idxs2>
-        constexpr compressed_pair_impl( Tuple1 tuple1, Tuple2 tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
-          : T2( std::get<Idxs2>(tuple2)... ),
-            m_first( std::get<Idxs1>(tuple1)... )
+        constexpr compressed_pair_impl( Tuple1&& tuple1, Tuple2&& tuple2, std::index_sequence<Idxs1...>, std::index_sequence<Idxs2...> )
+          : T2( std::get<Idxs2>( std::forward<Tuple2>(tuple2) )... ),
+            m_first( std::get<Idxs1>( std::forward<Tuple1>(tuple1) )... )
         {
 
         }
@@ -134,7 +134,7 @@ namespace bit {
         constexpr T1& first(){ return m_first; }
         constexpr const T1& first() const{ return m_first; }
 
-        constexpr T2& second(){ return static_cast<T1&>(*this); }
+        constexpr T2& second(){ return static_cast<T2&>(*this); }
         constexpr const T2& second() const{ return static_cast<const T2&>(*this); }
 
         //---------------------------------------------------------------------
@@ -310,10 +310,10 @@ namespace bit {
       ///
       /// \param first_args a tuple containing args to forward to \c first
       /// \param second_args a tuple containing args to forward to \c second
-      template<typename...Args1, typename...Args2>
+      template<typename Tuple1, typename Tuple2>
       constexpr compressed_pair( std::piecewise_construct_t,
-                                 std::tuple<Args1...> first_args,
-                                 std::tuple<Args2...> second_args );
+                                 Tuple1&& first_args,
+                                 Tuple2&& second_args );
 
       // (7)
 

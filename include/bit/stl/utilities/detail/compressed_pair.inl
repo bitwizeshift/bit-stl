@@ -85,12 +85,15 @@ inline constexpr bit::stl::compressed_pair<T1,T2>
 // (6)
 
 template<typename T1, typename T2>
-template<typename...Args1, typename...Args2>
+template<typename Tuple1, typename Tuple2>
 inline constexpr bit::stl::compressed_pair<T1,T2>
   ::compressed_pair( std::piecewise_construct_t,
-                     std::tuple<Args1...> first_args,
-                     std::tuple<Args2...> second_args )
-  : base_type( std::move(first_args), std::move(second_args), std::make_index_sequence<sizeof...(Args1)>{}, std::make_index_sequence<sizeof...(Args2)>{})
+                     Tuple1&& first_args,
+                     Tuple2&& second_args )
+  : base_type( std::forward<Tuple1>(first_args),
+               std::forward<Tuple2>(second_args),
+               std::make_index_sequence<std::tuple_size<std::decay_t<Tuple1>>::value>{},
+               std::make_index_sequence<std::tuple_size<std::decay_t<Tuple2>>::value>{} )
 {}
 
 //----------------------------------------------------------------------------

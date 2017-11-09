@@ -28,9 +28,8 @@ bit::stl::circular_deque<T,Allocator>
   ::circular_deque( size_type count, const T& value, const Allocator& alloc )
   : circular_deque( count, alloc )
 {
-  while(!full())
-  {
-    m_storage.buffer.push_back(value);
+  while(!full()) {
+    m_storage.buffer().emplace_back(value);
   }
 }
 
@@ -47,8 +46,8 @@ bit::stl::circular_deque<T,Allocator>
   ::circular_deque( const circular_deque& other )
   : circular_deque( other.capacity(), other.get_allocator() )
 {
-  for(auto const& v : other.m_storage.buffer ) {
-    m_storage.buffer.push_back(v);
+  for( auto const& v : other.m_storage.buffer() ) {
+    m_storage.buffer().emplace_back(v);
   }
 }
 
@@ -58,8 +57,8 @@ bit::stl::circular_deque<T,Allocator>
   ::circular_deque( const circular_deque& other, const Allocator& alloc )
   : circular_deque( other.capacity(), alloc )
 {
-  for(auto const& v : other.m_storage.buffer ) {
-    m_storage.buffer.push_back(v);
+  for( auto const& v : other.m_storage.buffer() ) {
+    m_storage.buffer().emplace_back(v);
   }
 }
 
@@ -89,7 +88,7 @@ typename bit::stl::circular_deque<T,Allocator>::allocator_type
   bit::stl::circular_deque<T,Allocator>::get_allocator()
   const
 {
-  return m_storage;
+  return m_storage.get_allocator();
 }
 
 //----------------------------------------------------------------------------
@@ -99,7 +98,7 @@ typename bit::stl::circular_deque<T,Allocator>::reference
   bit::stl::circular_deque<T,Allocator>::front()
   noexcept
 {
-  return m_storage.buffer.front();
+  return m_storage.buffer().front();
 }
 
 template<typename T, typename Allocator>
@@ -107,7 +106,7 @@ typename bit::stl::circular_deque<T,Allocator>::const_reference
   bit::stl::circular_deque<T,Allocator>::front()
   const noexcept
 {
-  return m_storage.buffer.front();
+  return m_storage.buffer().front();
 }
 
 //----------------------------------------------------------------------------
@@ -117,7 +116,7 @@ typename bit::stl::circular_deque<T,Allocator>::reference
   bit::stl::circular_deque<T,Allocator>::back()
   noexcept
 {
-  return m_storage.buffer.back();
+  return m_storage.buffer().back();
 }
 
 template<typename T, typename Allocator>
@@ -125,25 +124,25 @@ typename bit::stl::circular_deque<T,Allocator>::const_reference
   bit::stl::circular_deque<T,Allocator>::back()
   const noexcept
 {
-  return m_storage.buffer.back();
+  return m_storage.buffer().back();
 }
 
 //----------------------------------------------------------------------------
-//
+// Capacity
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
 bool bit::stl::circular_deque<T,Allocator>::empty()
   const noexcept
 {
-  return m_storage.buffer.empty();
+  return m_storage.buffer().empty();
 }
 
 template<typename T, typename Allocator>
 bool bit::stl::circular_deque<T,Allocator>::full()
   const noexcept
 {
-  return m_storage.buffer.full();
+  return m_storage.buffer().full();
 }
 
 //----------------------------------------------------------------------------
@@ -153,7 +152,7 @@ typename bit::stl::circular_deque<T,Allocator>::size_type
   bit::stl::circular_deque<T,Allocator>::size()
   const noexcept
 {
-  return m_storage.buffer.size();
+  return m_storage.buffer().size();
 }
 
 template<typename T, typename Allocator>
@@ -161,7 +160,7 @@ typename bit::stl::circular_deque<T,Allocator>::size_type
   bit::stl::circular_deque<T,Allocator>::max_size()
   const noexcept
 {
-  return m_storage.buffer.max_size();
+  return m_storage.buffer().max_size();
 }
 
 template<typename T, typename Allocator>
@@ -169,7 +168,7 @@ typename bit::stl::circular_deque<T,Allocator>::size_type
   bit::stl::circular_deque<T,Allocator>::capacity()
   const noexcept
 {
-  return m_storage.buffer.capacity();
+  return m_storage.buffer().capacity();
 }
 
 //----------------------------------------------------------------------------
@@ -181,7 +180,7 @@ template<typename...Args>
 typename bit::stl::circular_deque<T,Allocator>::reference
   bit::stl::circular_deque<T,Allocator>::emplace_back( Args&&...args )
 {
-  return m_storage.buffer.emplace_back( std::forward<Args>(args)... );
+  return m_storage.buffer().emplace_back( std::forward<Args>(args)... );
 }
 
 template<typename T, typename Allocator>
@@ -189,7 +188,7 @@ template<typename...Args>
 typename bit::stl::circular_deque<T,Allocator>::reference
   bit::stl::circular_deque<T,Allocator>::emplace_front( Args&&...args )
 {
-  return m_storage.buffer.emplace_front( std::forward<Args>(args)... );
+  return m_storage.buffer().emplace_front( std::forward<Args>(args)... );
 }
 
 //----------------------------------------------------------------------------
@@ -197,13 +196,13 @@ typename bit::stl::circular_deque<T,Allocator>::reference
 template<typename T, typename Allocator>
 void bit::stl::circular_deque<T,Allocator>::push_back( const value_type& value )
 {
-  m_storage.buffer.push_back(value);
+  m_storage.buffer().push_back(value);
 }
 
 template<typename T, typename Allocator>
 void bit::stl::circular_deque<T,Allocator>::push_back( value_type&& value )
 {
-  m_storage.buffer.push_back( std::move(value) );
+  m_storage.buffer().push_back( std::move(value) );
 }
 
 //----------------------------------------------------------------------------
@@ -211,13 +210,13 @@ void bit::stl::circular_deque<T,Allocator>::push_back( value_type&& value )
 template<typename T, typename Allocator>
 void bit::stl::circular_deque<T,Allocator>::push_front( const value_type& value )
 {
-  m_storage.buffer.push_front(value);
+  m_storage.buffer().push_front(value);
 }
 
 template<typename T, typename Allocator>
 void bit::stl::circular_deque<T,Allocator>::push_front( value_type&& value )
 {
-  m_storage.buffer.push_front( std::move(value) );
+  m_storage.buffer().push_front( std::move(value) );
 }
 
 //----------------------------------------------------------------------------
@@ -225,13 +224,13 @@ void bit::stl::circular_deque<T,Allocator>::push_front( value_type&& value )
 template<typename T, typename Allocator>
 void bit::stl::circular_deque<T,Allocator>::pop_front()
 {
-  m_storage.buffer.pop_front();
+  m_storage.buffer().pop_front();
 }
 
 template<typename T, typename Allocator>
 void bit::stl::circular_deque<T,Allocator>::pop_back()
 {
-  m_storage.buffer.pop_front();
+  m_storage.buffer().pop_front();
 }
 
 //----------------------------------------------------------------------------
@@ -254,7 +253,7 @@ typename bit::stl::circular_deque<T,Allocator>::iterator
   bit::stl::circular_deque<T,Allocator>::begin()
   noexcept
 {
-  return m_storage.buffer.begin();
+  return m_storage.buffer().begin();
 }
 
 template<typename T, typename Allocator>
@@ -262,7 +261,7 @@ typename bit::stl::circular_deque<T,Allocator>::const_iterator
   bit::stl::circular_deque<T,Allocator>::begin()
   const noexcept
 {
-  return m_storage.buffer.begin();
+  return m_storage.buffer().begin();
 }
 
 template<typename T, typename Allocator>
@@ -270,7 +269,7 @@ typename bit::stl::circular_deque<T,Allocator>::const_iterator
   bit::stl::circular_deque<T,Allocator>::cbegin()
   const noexcept
 {
-  return m_storage.buffer.cbegin();
+  return m_storage.buffer().cbegin();
 }
 
 //----------------------------------------------------------------------------
@@ -281,7 +280,7 @@ typename bit::stl::circular_deque<T,Allocator>::iterator
   bit::stl::circular_deque<T,Allocator>::end()
   noexcept
 {
-  return m_storage.buffer.end();
+  return m_storage.buffer().end();
 }
 
 template<typename T, typename Allocator>
@@ -289,7 +288,7 @@ typename bit::stl::circular_deque<T,Allocator>::const_iterator
   bit::stl::circular_deque<T,Allocator>::end()
   const noexcept
 {
-  return m_storage.buffer.end();
+  return m_storage.buffer().end();
 }
 
 template<typename T, typename Allocator>
@@ -297,7 +296,7 @@ typename bit::stl::circular_deque<T,Allocator>::const_iterator
   bit::stl::circular_deque<T,Allocator>::cend()
   const noexcept
 {
-  return m_storage.buffer.cend();
+  return m_storage.buffer().cend();
 }
 
 //----------------------------------------------------------------------------
@@ -307,7 +306,7 @@ typename bit::stl::circular_deque<T,Allocator>::reverse_iterator
   bit::stl::circular_deque<T,Allocator>::rbegin()
   noexcept
 {
-  return m_storage.buffer.rbegin();
+  return m_storage.buffer().rbegin();
 }
 
 template<typename T, typename Allocator>
@@ -315,7 +314,7 @@ typename bit::stl::circular_deque<T,Allocator>::const_reverse_iterator
   bit::stl::circular_deque<T,Allocator>::rbegin()
   const noexcept
 {
-  return m_storage.buffer.rbegin();
+  return m_storage.buffer().rbegin();
 }
 
 template<typename T, typename Allocator>
@@ -323,7 +322,7 @@ typename bit::stl::circular_deque<T,Allocator>::const_reverse_iterator
   bit::stl::circular_deque<T,Allocator>::crbegin()
   const noexcept
 {
-  return m_storage.buffer.crbegin();
+  return m_storage.buffer().crbegin();
 }
 
 //----------------------------------------------------------------------------
@@ -333,7 +332,7 @@ typename bit::stl::circular_deque<T,Allocator>::reverse_iterator
   bit::stl::circular_deque<T,Allocator>::rend()
   noexcept
 {
-  return m_storage.buffer.rend();
+  return m_storage.buffer().rend();
 }
 
 template<typename T, typename Allocator>
@@ -341,7 +340,7 @@ typename bit::stl::circular_deque<T,Allocator>::const_reverse_iterator
   bit::stl::circular_deque<T,Allocator>::rend()
   const noexcept
 {
-  return m_storage.buffer.rend();
+  return m_storage.buffer().rend();
 }
 
 template<typename T, typename Allocator>
@@ -349,7 +348,7 @@ typename bit::stl::circular_deque<T,Allocator>::const_reverse_iterator
   bit::stl::circular_deque<T,Allocator>::crend()
   const noexcept
 {
-  return m_storage.buffer.crend();
+  return m_storage.buffer().crend();
 }
 
 #endif /* BIT_STL_CONTAINERS_DETAIL_CIRCULAR_DEQUE_INL */

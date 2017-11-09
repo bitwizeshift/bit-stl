@@ -181,6 +181,8 @@ bit::stl::circular_buffer<T>&
   // Only set the size and buffer so that it's in a destructible state
   other.m_size = 0;
   other.m_buffer = nullptr;
+
+  return (*this);
 }
 
 //----------------------------------------------------------------------------
@@ -193,17 +195,17 @@ inline typename bit::stl::circular_buffer<T>::reference
   bit::stl::circular_buffer<T>::emplace_back( Args&&...args )
 {
   if(full()) {
-    stl::destroy_at( m_begin );
+    destroy_at( m_begin );
     increment( m_begin );
   } else {
     ++m_size;
   }
 
-#ifdef BIT_COMPILER_EXCEPTIONS_ENABLED
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
   try {
 #endif
-    new (m_end) T( std::forward<Args>(args)... );
-#ifdef BIT_COMPILER_EXCEPTIONS_ENABLED
+    uninitialized_construct_at<T>(m_end, std::forward<Args>(args)... );
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
   } catch (...) {
     --m_size;
     throw;
@@ -222,17 +224,17 @@ inline typename bit::stl::circular_buffer<T>::reference
 {
   if(full()) {
     decrement( m_end );
-    stl::destroy_at( m_end );
+    destroy_at( m_end );
   } else {
     ++m_size;
   }
   decrement( m_begin );
 
-#ifdef BIT_COMPILER_EXCEPTIONS_ENABLED
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
   try {
 #endif
-    new (m_begin) T( std::forward<Args>(args)... );
-#ifdef BIT_COMPILER_EXCEPTIONS_ENABLED
+    uninitialized_construct_at<T>(m_begin, std::forward<Args>(args)... );
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
   } catch (...) {
     increment( m_begin );
     --m_size;
@@ -547,7 +549,8 @@ inline T*& bit::stl::circular_buffer<T>::decrement( T*& iter )
 //----------------------------------------------------------------------------
 
 template<typename T>
-void bit::stl::swap( circular_buffer<T>& lhs, circular_buffer<T>& rhs ) noexcept
+void bit::stl::swap( circular_buffer<T>& lhs, circular_buffer<T>& rhs )
+  noexcept
 {
   lhs.swap(rhs);
 }

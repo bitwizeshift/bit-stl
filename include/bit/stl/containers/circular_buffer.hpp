@@ -10,9 +10,12 @@
 #define BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP
 
 #include "../utilities/uninitialized_storage.hpp" // destroy_at
+#include "../utilities/compiler_traits.hpp" // BIT_COMPILER_EXCEPTIONS_ENABLED
 
-#include <iterator> // std::bidirectional_iterator_tag, std::reverse_iterator
-#include <algorithm> // std::equal, std::lexicographical_compare
+#include <iterator>    // std::bidirectional_iterator_tag, std::reverse_iterator
+#include <algorithm>   // std::equal, std::lexicographical_compare
+#include <cstddef>     // std::size_t
+#include <type_traits> // std::add_pointer_t, etc
 
 namespace bit {
   namespace stl {

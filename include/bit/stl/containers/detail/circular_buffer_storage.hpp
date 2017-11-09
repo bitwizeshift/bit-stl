@@ -9,44 +9,88 @@
 #ifndef BIT_STL_CONTAINERS_DETAIL_CIRCULAR_BUFFER_STORAGE_HPP
 #define BIT_STL_CONTAINERS_DETAIL_CIRCULAR_BUFFER_STORAGE_HPP
 
+#include "../../utilities/compressed_pair.hpp"
+
+#include <tuple>
+#include <utility>
+
 namespace bit {
   namespace stl {
+    namespace detail {
 
-  namespace detail {
-
-    template<typename T, typename Allocator>
-    struct circular_storage_type : Allocator
-    {
-      circular_storage_type( circular_storage_type&& other ) noexcept
-        : Allocator( std::move(other) ),
-          buffer( std::move(other.buffer) )
+      template<typename T, typename Allocator>
+      class circular_storage_type
       {
+        //---------------------------------------------------------------------
+        // Constructors
+        //---------------------------------------------------------------------
+      public:
 
-      }
+        circular_storage_type( circular_storage_type&& other )
+          : storage( std::move(other.storage) )
+        {
 
-      circular_storage_type( circular_storage_type&& other, const Allocator& alloc ) noexcept
-        : Allocator( alloc ),
-          buffer( std::move(other.buffer) )
-      {
+        }
 
-      }
+        circular_storage_type( circular_storage_type&& other, const Allocator& alloc )
+          : storage( std::piecewise_construct,
+                     std::forward_as_tuple(std::move(other.storage.first())),
+                     std::forward_as_tuple(alloc) )
+        {
 
-      circular_storage_type( std::size_t n, const Allocator& alloc )
-        : Allocator(alloc),
-          buffer( std::allocator_traits<Allocator>::allocate( (*this), n ), n )
-      {
-      }
+        }
 
-      ~circular_storage_type()
-      {
-        buffer.clear();
-        std::allocator_traits<Allocator>::deallocate( (*this), buffer.data(), buffer.capacity() );
-      }
+        circular_storage_type( std::size_t n, const Allocator& alloc )
+          : storage( std::piecewise_construct,
+                     std::forward_as_tuple(),
+                     std::forward_as_tuple(alloc) )
+        {
+          using traits_type = std::allocator_traits<Allocator>;
+          auto p = traits_type::allocate( storage.second(), n );
+          // No RAII needed; allocate is the only thing that can throw at this point
 
-      circular_buffer<T> buffer;
-    };
+          storage.first() = circular_buffer<T>( p, n );
+        }
 
-  } // namespace detail
+        ~circular_storage_type()
+        {
+          auto& buffer    = storage.first();
+          auto& allocator = storage.second();
+          buffer.clear();
+          std::allocator_traits<Allocator>::deallocate( allocator, buffer.data(), buffer.capacity() );
+        }
+
+        circular_buffer<T>& buffer() noexcept
+        {
+          return storage.first();
+        }
+
+        circular_buffer<T>& buffer() const noexcept
+        {
+          return storage.first();
+        }
+
+        const Allocator& get_allocator() const noexcept
+        {
+          return storage.second();
+        }
+
+        //---------------------------------------------------------------------
+        // Private Member Types
+        //---------------------------------------------------------------------
+      private:
+
+        using storage_type = compressed_pair<circular_buffer<T>,Allocator>;
+
+        //---------------------------------------------------------------------
+        // Private Members
+        //---------------------------------------------------------------------
+      private:
+
+        storage_type storage;
+      };
+
+    } // namespace detail
 
   } // namespace stl
 } // namespace bit
