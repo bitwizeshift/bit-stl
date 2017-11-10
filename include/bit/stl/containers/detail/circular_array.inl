@@ -23,7 +23,7 @@ bit::stl::circular_array<T,N>::circular_array( T(&&array)[N] )
   : m_buffer( &m_storage, N )
 {
   for(auto&& v : array ) {
-    m_buffer.push_back( std::move(v) );
+    m_buffer.emplace_back( std::move(v) );
   }
 }
 
@@ -33,7 +33,7 @@ bit::stl::circular_array<T,N>::circular_array( const circular_array& other )
   : m_buffer( &m_storage, N )
 {
   for(auto const& v : other.m_buffer ) {
-    m_buffer.push_back( v );
+    m_buffer.emplace_back( v );
   }
 }
 
@@ -44,9 +44,21 @@ bit::stl::circular_array<T,N>::circular_array( circular_array&& other )
    : m_buffer( &m_storage, N )
 {
   for(auto&& v : other.m_buffer) {
-    m_buffer.push_back( std::move(v) );
+    m_buffer.emplace_back( std::move(v) );
   }
   other.m_buffer.clear();
+}
+
+//----------------------------------------------------------------------------
+
+template<typename T, std::size_t N>
+bit::stl::circular_array<T,N>&
+  bit::stl::circular_array<T,N>::operator=( circular_array other )
+  noexcept
+{
+  swap(*this,other);
+
+  return (*this);
 }
 
 //----------------------------------------------------------------------------
@@ -310,6 +322,37 @@ typename bit::stl::circular_array<T,N>::const_reverse_iterator
   const noexcept
 {
   return m_buffer.crend();
+}
+
+//-----------------------------------------------------------------------------
+// Utilities
+//-----------------------------------------------------------------------------
+
+template<typename T, std::size_t N>
+inline void bit::stl::swap( circular_array<T,N>& lhs, circular_array<T,N>& rhs )
+  noexcept
+{
+  lhs.swap(rhs);
+}
+
+//-----------------------------------------------------------------------------
+// Equality
+//-----------------------------------------------------------------------------
+
+template<typename T, std::size_t N>
+inline bool bit::stl::operator==( const circular_array<T,N>& lhs,
+                                  const circular_array<T,N>& rhs )
+  noexcept
+{
+  return std::equal( lhs.begin(), lhs.end(), rhs.begin(), rhs.end() );
+}
+
+template<typename T, std::size_t N>
+inline bool bit::stl::operator!=( const circular_array<T,N>& lhs,
+                                  const circular_array<T,N>& rhs )
+  noexcept
+{
+  return !(lhs==rhs);
 }
 
 #endif /* BIT_STL_CONTAINERS_DETAIL_CIRCULAR_ARRAY_INL */

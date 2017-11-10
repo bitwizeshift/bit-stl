@@ -11,7 +11,10 @@
 
 #include "circular_buffer.hpp"
 
-#include <type_traits>
+#include "../utilities/compiler_traits.hpp" // BIT_COMPILER_EXCEPTIONS_ENABLED
+
+#include <cstddef>     // std::size_t, std::ptrdiff_t
+#include <type_traits> // std::add_pointer, etc
 
 namespace bit {
   namespace stl {
@@ -25,9 +28,9 @@ namespace bit {
     template<typename T, std::size_t N>
     class circular_array
     {
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Public Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       using value_type      = T;
@@ -44,33 +47,43 @@ namespace bit {
       using reverse_iterator       = typename circular_buffer<T>::reverse_iterator;
       using const_reverse_iterator = typename circular_buffer<T>::const_reverse_iterator;
 
-      //----------------------------------------------------------------------
-      // Constructors
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
+      // Constructors / Assignment
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Default constructs a circular_array with no entries
       circular_array() noexcept;
 
       /// \brief Constructs a circular_array with up to \p N default values
+      ///
+      /// \param array the array to move
       circular_array( T(&&array)[N] )
         noexcept(std::is_nothrow_move_constructible<T>::value);
 
+      /// \brief Copy-constructs a circular_array from an existing one
+      ///
+      /// \param other the other circular_array to copy
       circular_array( const circular_array& other )
         noexcept(std::is_nothrow_copy_constructible<T>::value);
 
+      /// \brief Move-constructs a circular_array from an existing one
+      ///
+      /// \param other the other circular_array to move
       circular_array( circular_array&& other )
         noexcept(std::is_nothrow_move_constructible<T>::value);
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
-      circular_array& operator=(const circular_array& other);
+      /// \brief Assigns a circular_array from an existing one
+      ///
+      /// \param other the other circular_array
+      /// \return reference to \c (*this)
+      circular_array& operator=( circular_array other ) noexcept;
 
-      circular_array& operator=(circular_array&& other);
-
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Modifiers
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Invokes \p T's constructor with the given \p args, storing
@@ -93,7 +106,7 @@ namespace bit {
       template<typename...Args>
       reference emplace_front( Args&&...args );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Constructs a \p T object by calling the copy-constructor, and
       ///        storing the result at the end of the buffer
@@ -113,7 +126,7 @@ namespace bit {
       /// \param value the value to move
       void push_back( T&& value );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Constructs a \p T object by calling the copy-constructor, and
       ///        storing the result at the front of the buffer
@@ -133,7 +146,7 @@ namespace bit {
       /// \param value the value to copy
       void push_front( T&& value );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Pops the entry at the front of the circular_array
       void pop_front();
@@ -141,7 +154,7 @@ namespace bit {
       /// \brief Pops the entry at the back of the circular_array
       void pop_back();
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Clears all entries from this circular_array
       void clear();
@@ -151,9 +164,9 @@ namespace bit {
       /// \param other the other buffer to swap with
       void swap( circular_array& other ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Capacity
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Returns whether this buffer is empty
@@ -182,9 +195,9 @@ namespace bit {
       /// \return the capacity of this circular_array
       size_type capacity() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Element Access
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Returns a reference to the front element of this
@@ -205,9 +218,9 @@ namespace bit {
       /// \copydoc back()
       const_reference back() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Iterators
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Gets the iterator to the beginning of this range
@@ -232,7 +245,7 @@ namespace bit {
       /// \copydoc end
       const_iterator cend() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Gets the iterator to the beginning of the reverse range
       ///
@@ -256,21 +269,44 @@ namespace bit {
       /// \copydoc rend()
       const_reverse_iterator crend() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       using storage_type = std::aligned_storage_t<sizeof(T[N]),alignof(T[N])>;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Members
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       circular_buffer<T> m_buffer;  ///< The circular buffer
       storage_type       m_storage; ///< The storage
     };
+
+    //-------------------------------------------------------------------------
+    // Utilities
+    //-------------------------------------------------------------------------
+
+    /// \brief Swaps two circular arrays
+    ///
+    /// \param lhs the left array
+    /// \param rhs the right array
+    template<typename T, std::size_t N>
+    void swap( circular_array<T,N>& lhs, circular_array<T,N>& rhs ) noexcept;
+
+    //-------------------------------------------------------------------------
+    // Equality
+    //-------------------------------------------------------------------------
+
+    template<typename T, std::size_t N>
+    bool operator==( const circular_array<T,N>& lhs,
+                     const circular_array<T,N>& rhs ) noexcept;
+    template<typename T, std::size_t N>
+    bool operator!=( const circular_array<T,N>& lhs,
+                     const circular_array<T,N>& rhs ) noexcept;
+
   } // namespace stl
 } // namespace bit
 

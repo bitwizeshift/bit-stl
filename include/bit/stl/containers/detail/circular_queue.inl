@@ -80,6 +80,17 @@ bit::stl::circular_queue<T,Allocator>
 }
 
 //----------------------------------------------------------------------------
+
+template<typename T, typename Allocator>
+bit::stl::circular_queue<T,Allocator>&
+  bit::stl::circular_queue<T,Allocator>::operator=( circular_queue other )
+{
+ swap(*this,other);
+
+  return (*this);
+}
+
+//----------------------------------------------------------------------------
 // Element Access
 //----------------------------------------------------------------------------
 
@@ -315,6 +326,38 @@ typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
   const noexcept
 {
   return m_storage.buffer().crend();
+}
+
+//-----------------------------------------------------------------------------
+// Utilities
+//-----------------------------------------------------------------------------
+
+template<typename T, typename Allocator>
+inline void bit::stl::swap( circular_queue<T,Allocator>& lhs,
+                            circular_queue<T,Allocator>& rhs )
+  noexcept
+{
+  lhs.swap(rhs);
+}
+
+//-----------------------------------------------------------------------------
+// Equality
+//-----------------------------------------------------------------------------
+
+template<typename T, typename Allocator>
+inline bool bit::stl::operator==( const circular_queue<T,Allocator>& lhs,
+                                  const circular_queue<T,Allocator>& rhs )
+  noexcept
+{
+  return std::equal(lhs.begin(),lhs.end(),rhs.begin(),rhs.end());
+}
+
+template<typename T, typename Allocator>
+inline bool bit::stl::operator!=( const circular_queue<T,Allocator>& lhs,
+                                  const circular_queue<T,Allocator>& rhs )
+  noexcept
+{
+  return !(lhs==rhs);
 }
 
 #endif /* BIT_STL_CONTAINERS_DETAIL_CIRCULAR_QUEUE_INL */
