@@ -1,13 +1,13 @@
 #ifndef BIT_STL_CONTAINERS_DETAIL_CIRCULAR_BUFFER_INL
 #define BIT_STL_CONTAINERS_DETAIL_CIRCULAR_BUFFER_INL
 
-//============================================================================
+//=============================================================================
 // circular_buffer_iterator
-//============================================================================
+//=============================================================================
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Constructor
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename C, typename T>
 inline bit::stl::detail::circular_buffer_iterator<C,T>
@@ -19,9 +19,9 @@ inline bit::stl::detail::circular_buffer_iterator<C,T>
 
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Iteration
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename C, typename T>
 inline bit::stl::detail::circular_buffer_iterator<C,T>&
@@ -44,7 +44,7 @@ inline bit::stl::detail::circular_buffer_iterator<C,T>
   return iter;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename C, typename T>
 inline bit::stl::detail::circular_buffer_iterator<C,T>&
@@ -67,9 +67,9 @@ inline bit::stl::detail::circular_buffer_iterator<C,T>
   return iter;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Observers
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename C, typename T>
 inline typename bit::stl::detail::circular_buffer_iterator<C,T>::reference
@@ -87,9 +87,9 @@ inline typename bit::stl::detail::circular_buffer_iterator<C,T>::pointer
   return m_ptr;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Comparisons
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename C, typename T>
 inline bool
@@ -109,13 +109,13 @@ inline bool
   return !(lhs==rhs);
 }
 
-//============================================================================
+//=============================================================================
 // circular_buffer
-//============================================================================
+//=============================================================================
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Constructor
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline bit::stl::circular_buffer<T>::circular_buffer()
@@ -160,34 +160,29 @@ inline bit::stl::circular_buffer<T>
   other.m_buffer = nullptr;
 }
 
+//-----------------------------------------------------------------------------
+
 template<typename T>
 inline bit::stl::circular_buffer<T>::~circular_buffer()
 {
   clear();
 }
 
+//-----------------------------------------------------------------------------
+
 template<typename T>
 bit::stl::circular_buffer<T>&
-  bit::stl::circular_buffer<T>::operator=(circular_buffer&& other )
+  bit::stl::circular_buffer<T>::operator=( circular_buffer other )
   noexcept
 {
-  clear();
-  m_buffer   = other.m_buffer;
-  m_begin    = other.m_begin;
-  m_end      = other.m_end;
-  m_capacity = other.m_capacity;
-  m_size     = other.m_size;
-
-  // Only set the size and buffer so that it's in a destructible state
-  other.m_size = 0;
-  other.m_buffer = nullptr;
+  other.swap(*this);
 
   return (*this);
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Modifiers
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 template<typename...Args>
@@ -313,9 +308,9 @@ inline void bit::stl::circular_buffer<T>::swap( circular_buffer& other )
   swap(m_size, other.m_size);
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Capacity
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline bool bit::stl::circular_buffer<T>::empty()
@@ -331,7 +326,7 @@ inline bool bit::stl::circular_buffer<T>::full()
   return m_size == m_capacity;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline typename bit::stl::circular_buffer<T>::size_type
@@ -357,9 +352,9 @@ inline typename bit::stl::circular_buffer<T>::size_type
   return m_capacity;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Element Access
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline typename bit::stl::circular_buffer<T>::reference
@@ -377,7 +372,7 @@ inline typename bit::stl::circular_buffer<T>::const_reference
   return *m_begin;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline typename bit::stl::circular_buffer<T>::reference
@@ -397,7 +392,7 @@ inline typename bit::stl::circular_buffer<T>::const_reference
   return *decrement( ptr );
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline typename bit::stl::circular_buffer<T>::pointer
@@ -415,9 +410,9 @@ inline typename bit::stl::circular_buffer<T>::const_pointer
   return m_buffer;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Iteration
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline typename bit::stl::circular_buffer<T>::iterator
@@ -443,7 +438,7 @@ inline typename bit::stl::circular_buffer<T>::const_iterator
   return const_iterator{ (*this), m_begin, full() };
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline typename bit::stl::circular_buffer<T>::iterator
@@ -469,7 +464,7 @@ inline typename bit::stl::circular_buffer<T>::const_iterator
   return const_iterator{ (*this), m_end, 0 };
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline typename bit::stl::circular_buffer<T>::reverse_iterator
@@ -495,7 +490,7 @@ inline typename bit::stl::circular_buffer<T>::const_reverse_iterator
   return const_reverse_iterator{ const_iterator{(*this), m_end, full()} };
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline typename bit::stl::circular_buffer<T>::reverse_iterator
@@ -520,9 +515,9 @@ inline typename bit::stl::circular_buffer<T>::const_reverse_iterator
 {
   return const_reverse_iterator{ const_iterator{(*this), m_begin, 0} };
 }
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Private Members
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline T*& bit::stl::circular_buffer<T>::increment( T*& iter )
@@ -544,9 +539,9 @@ inline T*& bit::stl::circular_buffer<T>::decrement( T*& iter )
   return --iter;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Free-functions
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 void bit::stl::swap( circular_buffer<T>& lhs, circular_buffer<T>& rhs )
@@ -555,9 +550,9 @@ void bit::stl::swap( circular_buffer<T>& lhs, circular_buffer<T>& rhs )
   lhs.swap(rhs);
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Comparisons
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename T>
 bool bit::stl::operator==( const circular_buffer<T>& lhs,

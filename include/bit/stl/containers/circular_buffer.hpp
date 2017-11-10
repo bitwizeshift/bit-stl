@@ -1,11 +1,11 @@
 /**
  * \file circular_buffer.hpp
  *
- * \brief
+ * \brief This header contains the implementation for a circular buffer into
+ *        non-owned memory
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
 #ifndef BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP
 #define BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP
 
@@ -22,6 +22,7 @@ namespace bit {
     namespace detail {
 
       //////////////////////////////////////////////////////////////////////////
+      /// \brief An iterator for iterating the circular buffer
       ///
       /// \tparam T the underlying type
       //////////////////////////////////////////////////////////////////////////
@@ -170,10 +171,7 @@ namespace bit {
       ///
       /// \param other the other circular_buffer to move
       /// \return a reference to \c (*this)
-      circular_buffer& operator=(circular_buffer&& other ) noexcept;
-
-      // Deleted copy assignment
-      circular_buffer& operator=( const circular_buffer& ) = delete;
+      circular_buffer& operator=( circular_buffer other ) noexcept;
 
       //-----------------------------------------------------------------------
       // Modifiers
