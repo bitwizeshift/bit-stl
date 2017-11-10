@@ -186,9 +186,6 @@ set(headers
 
   # numeric
   include/bit/stl/numeric/numeric.hpp
-
-  # not sure where this goes yet
-  include/bit/stl/string_tokenizer.hpp
 )
 
 add_library(bit_stl INTERFACE)

@@ -16,9 +16,6 @@ set(sources
       bit/stl/containers/span.test.cpp
       bit/stl/containers/string_view.test.cpp
 
-      # Not sure where this goes yet...
-      bit/stl/string_tokenizer.test.cpp
-
       main.test.cpp
 )
 
