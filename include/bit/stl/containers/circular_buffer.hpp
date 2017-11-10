@@ -1,11 +1,11 @@
 /**
  * \file circular_buffer.hpp
  *
- * \brief
+ * \brief This header contains the implementation for a circular buffer into
+ *        non-owned memory
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
 #ifndef BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP
 #define BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP
 
@@ -22,6 +22,7 @@ namespace bit {
     namespace detail {
 
       //////////////////////////////////////////////////////////////////////////
+      /// \brief An iterator for iterating the circular buffer
       ///
       /// \tparam T the underlying type
       //////////////////////////////////////////////////////////////////////////
@@ -101,7 +102,7 @@ namespace bit {
 
     } // namespace detail
 
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     /// \brief This class is an implementation of a non-owning circular
     ///        buffer
     ///
@@ -110,13 +111,13 @@ namespace bit {
     /// function is invoked prior to construction of the newly added item.
     ///
     /// \tparam T the underlying type of this buffer
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     template<typename T>
     class circular_buffer
     {
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Public Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       using value_type      = T;
@@ -133,9 +134,9 @@ namespace bit {
       using reverse_iterator       = std::reverse_iterator<iterator>;
       using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Constructor
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Constructs a null circular_buffer
@@ -156,22 +157,25 @@ namespace bit {
       /// \param other the other circular_buffer to move
       circular_buffer( circular_buffer&& other ) noexcept;
 
-      //----------------------------------------------------------------------
+      // Deleted copy constructor
+      circular_buffer(const circular_buffer& ) = delete;
+
+      //-----------------------------------------------------------------------
 
       /// \brief Destructs this circular_buffer, destructing all instances
       ~circular_buffer();
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Move-assigns a circular_buffer from another one
       ///
       /// \param other the other circular_buffer to move
       /// \return a reference to \c (*this)
-      circular_buffer& operator=(circular_buffer&& other ) noexcept;
+      circular_buffer& operator=( circular_buffer other ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Modifiers
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Invokes \p T's constructor with the given \p args, storing
@@ -194,7 +198,7 @@ namespace bit {
       template<typename...Args>
       reference emplace_front( Args&&...args );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Constructs a \p T object by calling the copy-constructor, and
       ///        storing the result at the end of the buffer
@@ -214,7 +218,7 @@ namespace bit {
       /// \param value the value to move
       void push_back( T&& value );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Constructs a \p T object by calling the copy-constructor, and
       ///        storing the result at the front of the buffer
@@ -234,7 +238,7 @@ namespace bit {
       /// \param value the value to copy
       void push_front( T&& value );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Pops the entry at the front of the circular_buffer
       void pop_front();
@@ -242,7 +246,7 @@ namespace bit {
       /// \brief Pops the entry at the back of the circular_buffer
       void pop_back();
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Clears all entries from this circular_buffer
       void clear();
@@ -252,9 +256,9 @@ namespace bit {
       /// \param other the other buffer to swap with
       void swap( circular_buffer& other ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Capacity
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Returns whether this buffer is empty
@@ -283,9 +287,9 @@ namespace bit {
       /// \return the capacity of this circular_buffer
       size_type capacity() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Element Access
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Returns a reference to the front element of this
@@ -297,7 +301,7 @@ namespace bit {
       /// \copydoc front()
       const_reference front() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Returns a reference to the back element of this
       ///        circular_buffer
@@ -308,7 +312,7 @@ namespace bit {
       /// \copydoc back()
       const_reference back() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Gets a pointer to the underlying buffer
       ///
@@ -318,9 +322,9 @@ namespace bit {
       /// \copydoc data()
       const_pointer data() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Iterators
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Gets the iterator to the beginning of this range
@@ -345,7 +349,7 @@ namespace bit {
       /// \copydoc end
       const_iterator cend() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Gets the iterator to the beginning of the reverse range
       ///
@@ -369,9 +373,9 @@ namespace bit {
       /// \copydoc rend()
       const_reverse_iterator crend() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Members
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       T* m_buffer; ///< Pointer to the underlying buffer
@@ -382,25 +386,25 @@ namespace bit {
 
       template<typename,typename> friend class detail::circular_buffer_iterator;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Member Functions
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       T*& increment( T*& iter ) noexcept;
       T*& decrement( T*& iter ) noexcept;
     };
 
-    //------------------------------------------------------------------------
-    // Free-functions
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
+    // Utilities
+    //-------------------------------------------------------------------------
 
     template<typename T>
     void swap( circular_buffer<T>& lhs, circular_buffer<T>& rhs ) noexcept;
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Comparison
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     template<typename T>
     bool operator==( const circular_buffer<T>& lhs,

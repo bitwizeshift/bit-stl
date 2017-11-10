@@ -14,7 +14,8 @@
 
 #include "detail/circular_buffer_storage.hpp"
 
-#include <memory>
+#include <memory>    // std::allocator
+#include <algorithm> // std::equal
 
 namespace bit {
   namespace stl {
@@ -51,9 +52,9 @@ namespace bit {
       using reverse_iterator = typename circular_buffer<T>::reverse_iterator;
       using const_reverse_iterator = typename circular_buffer<T>::const_reverse_iterator;
 
-      //----------------------------------------------------------------------
-      // Constructors
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
+      // Constructors / Assignment
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Default-constructs a circular_queue
@@ -104,15 +105,17 @@ namespace bit {
       /// \param alloc the allocator
       circular_queue( circular_queue&& other, const Allocator& alloc );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
-      circular_queue& operator=( const circular_queue& other ) = default;
+      /// \brief Assigns another circular_queue to this bufer
+      ///
+      /// \param other the other circular_queue
+      /// \return reference to \c (*this)
+      circular_queue& operator=( circular_queue other );
 
-      circular_queue& operator=( circular_queue&& other ) = default;
-
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Element Access
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Gets the underlying allocator
@@ -138,9 +141,9 @@ namespace bit {
       /// \copydoc back()
       const_reference back() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Capacity
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Returns whether this buffer is empty
@@ -169,9 +172,9 @@ namespace bit {
       /// \return the capacity of this circular_buffer
       size_type capacity() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Modifiers
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Constructs a \p T object by calling the copy-constructor, and
@@ -210,9 +213,9 @@ namespace bit {
       /// \param other the other queue to swap with
       void swap( circular_queue& other ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Iterators
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Gets the iterator to the beginning of this range
@@ -237,7 +240,7 @@ namespace bit {
       /// \copydoc end
       const_iterator cend() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Gets the iterator to the beginning of the reverse range
       ///
@@ -261,22 +264,45 @@ namespace bit {
       /// \copydoc rend()
       const_reverse_iterator crend() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       using rebound_allocator_type = typename std::allocator_traits<Allocator>::template rebind_alloc<T>;
 
       using storage_type = detail::circular_storage_type<T,rebound_allocator_type>;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Members
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       storage_type m_storage; ///< The underlying storage
     };
+    //-------------------------------------------------------------------------
+    // Utilities
+    //-------------------------------------------------------------------------
+
+    /// \brief Swaps two circular_deques
+    ///
+    /// \param lhs the left deque
+    /// \param rhs the right deque
+    template<typename T, typename Allocator>
+    void swap( circular_queue<T,Allocator>& lhs,
+               circular_queue<T,Allocator>& rhs ) noexcept;
+
+    //-------------------------------------------------------------------------
+    // Equality
+    //-------------------------------------------------------------------------
+
+    template<typename T, typename Allocator>
+    bool operator==( const circular_queue<T,Allocator>& lhs,
+                     const circular_queue<T,Allocator>& rhs ) noexcept;
+    template<typename T, typename Allocator>
+    bool operator!=( const circular_queue<T,Allocator>& lhs,
+                     const circular_queue<T,Allocator>& rhs ) noexcept;
+
   } // namespace stl
 } // namespace bit
 

@@ -14,25 +14,26 @@
 
 #include "detail/circular_buffer_storage.hpp"
 
-#include <memory>
+#include <memory>    // std::allocator
+#include <algorithm> // std::equal
 
 namespace bit {
   namespace stl {
 
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     /// \brief A circular buffer with a deque API
     ///
     /// Memory is allocated up-front from the specified allocator
     ///
     /// \tparam T the underlying type
     /// \tparam Allocator the allocator type
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     template<typename T, typename Allocator=std::allocator<T>>
     class circular_deque
     {
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Public Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       using value_type      = typename circular_buffer<T>::value_type;
@@ -51,9 +52,9 @@ namespace bit {
       using reverse_iterator = typename circular_buffer<T>::reverse_iterator;
       using const_reverse_iterator = typename circular_buffer<T>::const_reverse_iterator;
 
-      //----------------------------------------------------------------------
-      // Constructors
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
+      // Constructors / Assignment
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Default-constructs a circular_deque
@@ -104,15 +105,17 @@ namespace bit {
       /// \param alloc the allocator
       circular_deque( circular_deque&& other, const Allocator& alloc );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
-      circular_deque& operator=( const circular_deque& other ) = default;
+      /// \brief Assigns another circular_deque to this bufer
+      ///
+      /// \param other the other circular_deque
+      /// \return reference to \c (*this)
+      circular_deque& operator=( circular_deque other );
 
-      circular_deque& operator=( circular_deque&& other ) = default;
-
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Element Access
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Gets the underlying allocator
@@ -138,9 +141,9 @@ namespace bit {
       /// \copydoc back()
       const_reference back() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Capacity
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Returns whether this buffer is empty
@@ -169,9 +172,9 @@ namespace bit {
       /// \return the capacity of this circular_buffer
       size_type capacity() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Modifiers
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Invokes \p T's constructor with the given \p args, storing
@@ -194,7 +197,7 @@ namespace bit {
       template<typename...Args>
       reference emplace_front( Args&&...args );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Constructs a \p T object by calling the copy-constructor, and
       ///        storing the result at the end of the buffer
@@ -214,7 +217,7 @@ namespace bit {
       /// \param value the value to move
       void push_back( value_type&& value );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Constructs a \p T object by calling the copy-constructor, and
       ///        storing the result at the front of the buffer
@@ -234,7 +237,7 @@ namespace bit {
       /// \param value the value to copy
       void push_front( value_type&& value );
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Pops the entry at the front of the circular_buffer
       void pop_front();
@@ -242,7 +245,7 @@ namespace bit {
       /// \brief Pops the entry at the back of the circular_buffer
       void pop_back();
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Clears all entries from this circular_buffer
       void clear();
@@ -252,9 +255,9 @@ namespace bit {
       /// \param other the other buffer to swap with
       void swap( circular_deque& other ) noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Iterators
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Gets the iterator to the beginning of this range
@@ -279,7 +282,7 @@ namespace bit {
       /// \copydoc end
       const_iterator cend() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
       /// \brief Gets the iterator to the beginning of the reverse range
       ///
@@ -303,22 +306,46 @@ namespace bit {
       /// \copydoc rend()
       const_reverse_iterator crend() const noexcept;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       using rebound_allocator_type = typename std::allocator_traits<Allocator>::template rebind_alloc<T>;
 
       using storage_type = detail::circular_storage_type<T,rebound_allocator_type>;
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Members
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       storage_type m_storage; ///< The underlying storage
     };
+
+    //-------------------------------------------------------------------------
+    // Utilities
+    //-------------------------------------------------------------------------
+
+    /// \brief Swaps two circular_deques
+    ///
+    /// \param lhs the left deque
+    /// \param rhs the right deque
+    template<typename T, typename Allocator>
+    void swap( circular_deque<T,Allocator>& lhs,
+               circular_deque<T,Allocator>& rhs ) noexcept;
+
+    //-------------------------------------------------------------------------
+    // Equality
+    //-------------------------------------------------------------------------
+
+    template<typename T, typename Allocator>
+    bool operator==( const circular_deque<T,Allocator>& lhs,
+                     const circular_deque<T,Allocator>& rhs ) noexcept;
+    template<typename T, typename Allocator>
+    bool operator!=( const circular_deque<T,Allocator>& lhs,
+                     const circular_deque<T,Allocator>& rhs ) noexcept;
+
   } // namespace stl
 } // namespace bit
 
