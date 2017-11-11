@@ -14,8 +14,9 @@
 
 #include "detail/circular_buffer_storage.hpp"
 
-#include <memory>    // std::allocator
-#include <algorithm> // std::equal
+#include <algorithm>   // std::equal
+#include <memory>      // std::allocator
+#include <type_traits> // std::is_nothrow_copy_constructible
 
 namespace bit {
   namespace stl {
@@ -177,6 +178,11 @@ namespace bit {
       //-----------------------------------------------------------------------
     public:
 
+      /// \brief Resizes the size of this circular queue to be at least \p n
+      ///
+      /// \param n the size to reallocate to
+      void resize( size_type n );
+
       /// \brief Invokes \p T's constructor with the given \p args, storing
       ///        the result at the end of the buffer
       ///
@@ -321,6 +327,9 @@ namespace bit {
     private:
 
       storage_type m_storage; ///< The underlying storage
+
+      void resize( std::true_type, size_type n );
+      void resize( std::false_type, size_type n );
     };
 
     //-------------------------------------------------------------------------

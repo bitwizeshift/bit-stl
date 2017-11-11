@@ -10,21 +10,22 @@
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-bit::stl::circular_queue<T,Allocator>::circular_queue()
+inline bit::stl::circular_queue<T,Allocator>::circular_queue()
   : circular_queue( Allocator() )
 {
 
 }
 
 template<typename T, typename Allocator>
-bit::stl::circular_queue<T,Allocator>::circular_queue( const Allocator& alloc )
+inline bit::stl::circular_queue<T,Allocator>
+  ::circular_queue( const Allocator& alloc )
   : circular_queue( 0, alloc )
 {
 
 }
 
 template<typename T, typename Allocator>
-bit::stl::circular_queue<T,Allocator>
+inline bit::stl::circular_queue<T,Allocator>
   ::circular_queue( size_type count, const T& value, const Allocator& alloc )
   : circular_queue( count, alloc )
 {
@@ -34,7 +35,7 @@ bit::stl::circular_queue<T,Allocator>
 }
 
 template<typename T, typename Allocator>
-bit::stl::circular_queue<T,Allocator>
+inline bit::stl::circular_queue<T,Allocator>
   ::circular_queue( size_type count, const Allocator& alloc )
   : m_storage( count, alloc )
 {
@@ -42,29 +43,29 @@ bit::stl::circular_queue<T,Allocator>
 }
 
 template<typename T, typename Allocator>
-bit::stl::circular_queue<T,Allocator>
+inline bit::stl::circular_queue<T,Allocator>
   ::circular_queue( const circular_queue& other )
   : circular_queue( other.capacity(), other.get_allocator() )
 {
-  for(auto const& v : other.m_storage.buffer ) {
+  for(auto const& v : other.m_storage.buffer() ) {
     m_storage.buffer().emplace_back(v);
   }
 }
 
 
 template<typename T, typename Allocator>
-bit::stl::circular_queue<T,Allocator>
+inline bit::stl::circular_queue<T,Allocator>
   ::circular_queue( const circular_queue& other, const Allocator& alloc )
   : circular_queue( other.capacity(), alloc )
 {
-  for(auto const& v : other.m_storage.buffer ) {
+  for(auto const& v : other.m_storage.buffer() ) {
     m_storage.buffer().emplace_back(v);
   }
 }
 
 
 template<typename T, typename Allocator>
-bit::stl::circular_queue<T,Allocator>
+inline bit::stl::circular_queue<T,Allocator>
   ::circular_queue( circular_queue&& other )
   : circular_queue( std::move(other), other.get_allocator() )
 {
@@ -72,7 +73,7 @@ bit::stl::circular_queue<T,Allocator>
 }
 
 template<typename T, typename Allocator>
-bit::stl::circular_queue<T,Allocator>
+inline bit::stl::circular_queue<T,Allocator>
   ::circular_queue( circular_queue&& other, const Allocator& alloc )
   : m_storage( std::move(other.m_storage), alloc )
 {
@@ -82,10 +83,11 @@ bit::stl::circular_queue<T,Allocator>
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-bit::stl::circular_queue<T,Allocator>&
+inline bit::stl::circular_queue<T,Allocator>&
   bit::stl::circular_queue<T,Allocator>::operator=( circular_queue other )
+  noexcept
 {
- swap(*this,other);
+  swap(*this,other);
 
   return (*this);
 }
@@ -95,7 +97,7 @@ bit::stl::circular_queue<T,Allocator>&
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::allocator_type
+inline typename bit::stl::circular_queue<T,Allocator>::allocator_type
   bit::stl::circular_queue<T,Allocator>::get_allocator()
   const
 {
@@ -105,7 +107,7 @@ typename bit::stl::circular_queue<T,Allocator>::allocator_type
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::reference
+inline typename bit::stl::circular_queue<T,Allocator>::reference
   bit::stl::circular_queue<T,Allocator>::front()
   noexcept
 {
@@ -113,7 +115,7 @@ typename bit::stl::circular_queue<T,Allocator>::reference
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::const_reference
+inline typename bit::stl::circular_queue<T,Allocator>::const_reference
   bit::stl::circular_queue<T,Allocator>::front()
   const noexcept
 {
@@ -123,7 +125,7 @@ typename bit::stl::circular_queue<T,Allocator>::const_reference
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::reference
+inline typename bit::stl::circular_queue<T,Allocator>::reference
   bit::stl::circular_queue<T,Allocator>::back()
   noexcept
 {
@@ -131,7 +133,7 @@ typename bit::stl::circular_queue<T,Allocator>::reference
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::const_reference
+inline typename bit::stl::circular_queue<T,Allocator>::const_reference
   bit::stl::circular_queue<T,Allocator>::back()
   const noexcept
 {
@@ -139,18 +141,18 @@ typename bit::stl::circular_queue<T,Allocator>::const_reference
 }
 
 //----------------------------------------------------------------------------
-//
+// Capacity
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-bool bit::stl::circular_queue<T,Allocator>::empty()
+inline bool bit::stl::circular_queue<T,Allocator>::empty()
   const noexcept
 {
   return m_storage.buffer().empty();
 }
 
 template<typename T, typename Allocator>
-bool bit::stl::circular_queue<T,Allocator>::full()
+inline bool bit::stl::circular_queue<T,Allocator>::full()
   const noexcept
 {
   return m_storage.buffer().full();
@@ -159,7 +161,7 @@ bool bit::stl::circular_queue<T,Allocator>::full()
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::size_type
+inline typename bit::stl::circular_queue<T,Allocator>::size_type
   bit::stl::circular_queue<T,Allocator>::size()
   const noexcept
 {
@@ -167,7 +169,7 @@ typename bit::stl::circular_queue<T,Allocator>::size_type
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::size_type
+inline typename bit::stl::circular_queue<T,Allocator>::size_type
   bit::stl::circular_queue<T,Allocator>::max_size()
   const noexcept
 {
@@ -175,7 +177,7 @@ typename bit::stl::circular_queue<T,Allocator>::size_type
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::size_type
+inline typename bit::stl::circular_queue<T,Allocator>::size_type
   bit::stl::circular_queue<T,Allocator>::capacity()
   const noexcept
 {
@@ -187,38 +189,49 @@ typename bit::stl::circular_queue<T,Allocator>::size_type
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-void bit::stl::circular_queue<T,Allocator>::push( const value_type& value )
+inline void bit::stl::circular_queue<T,Allocator>::resize( size_type n )
+{
+  if( m_storage.buffer().capacity() > n ) {
+    return;
+  }
+
+  resize( std::is_nothrow_move_constructible<T>{}, n );
+}
+
+template<typename T, typename Allocator>
+template<typename,typename>
+inline void bit::stl::circular_queue<T,Allocator>
+  ::push( const value_type& value )
 {
   m_storage.buffer().push_back(value);
 }
 
 template<typename T, typename Allocator>
-void bit::stl::circular_queue<T,Allocator>::push( value_type&& value )
+template<typename,typename>
+inline void bit::stl::circular_queue<T,Allocator>::push( value_type&& value )
 {
   m_storage.buffer().push_back( std::move(value) );
 }
 
 template<typename T, typename Allocator>
-template<typename...Args>
-typename bit::stl::circular_queue<T,Allocator>::reference
+template<typename...Args, typename>
+inline typename bit::stl::circular_queue<T,Allocator>::reference
   bit::stl::circular_queue<T,Allocator>::emplace( Args&&...args )
 {
   return m_storage.buffer().emplace_back( std::forward<Args>(args)... );
 }
 
 template<typename T, typename Allocator>
-void bit::stl::circular_queue<T,Allocator>::pop()
+inline void bit::stl::circular_queue<T,Allocator>::pop()
 {
   m_storage.buffer().pop_front();
 }
 
 template<typename T, typename Allocator>
-void bit::stl::circular_queue<T,Allocator>::swap( circular_queue& other )
+inline void bit::stl::circular_queue<T,Allocator>::swap( circular_queue& other )
   noexcept
 {
-  using std::swap;
-
-  swap( m_storage, other.m_storage );
+  m_storage.swap(other.m_storage);
 }
 
 //----------------------------------------------------------------------------
@@ -226,7 +239,7 @@ void bit::stl::circular_queue<T,Allocator>::swap( circular_queue& other )
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::iterator
+inline typename bit::stl::circular_queue<T,Allocator>::iterator
   bit::stl::circular_queue<T,Allocator>::begin()
   noexcept
 {
@@ -234,7 +247,7 @@ typename bit::stl::circular_queue<T,Allocator>::iterator
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::const_iterator
+inline typename bit::stl::circular_queue<T,Allocator>::const_iterator
   bit::stl::circular_queue<T,Allocator>::begin()
   const noexcept
 {
@@ -242,7 +255,7 @@ typename bit::stl::circular_queue<T,Allocator>::const_iterator
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::const_iterator
+inline typename bit::stl::circular_queue<T,Allocator>::const_iterator
   bit::stl::circular_queue<T,Allocator>::cbegin()
   const noexcept
 {
@@ -253,7 +266,7 @@ typename bit::stl::circular_queue<T,Allocator>::const_iterator
 
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::iterator
+inline typename bit::stl::circular_queue<T,Allocator>::iterator
   bit::stl::circular_queue<T,Allocator>::end()
   noexcept
 {
@@ -261,7 +274,7 @@ typename bit::stl::circular_queue<T,Allocator>::iterator
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::const_iterator
+inline typename bit::stl::circular_queue<T,Allocator>::const_iterator
   bit::stl::circular_queue<T,Allocator>::end()
   const noexcept
 {
@@ -269,7 +282,7 @@ typename bit::stl::circular_queue<T,Allocator>::const_iterator
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::const_iterator
+inline typename bit::stl::circular_queue<T,Allocator>::const_iterator
   bit::stl::circular_queue<T,Allocator>::cend()
   const noexcept
 {
@@ -279,7 +292,7 @@ typename bit::stl::circular_queue<T,Allocator>::const_iterator
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::reverse_iterator
+inline typename bit::stl::circular_queue<T,Allocator>::reverse_iterator
   bit::stl::circular_queue<T,Allocator>::rbegin()
   noexcept
 {
@@ -287,7 +300,7 @@ typename bit::stl::circular_queue<T,Allocator>::reverse_iterator
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
+inline typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
   bit::stl::circular_queue<T,Allocator>::rbegin()
   const noexcept
 {
@@ -295,7 +308,7 @@ typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
+inline typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
   bit::stl::circular_queue<T,Allocator>::crbegin()
   const noexcept
 {
@@ -305,7 +318,7 @@ typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
 //----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::reverse_iterator
+inline typename bit::stl::circular_queue<T,Allocator>::reverse_iterator
   bit::stl::circular_queue<T,Allocator>::rend()
   noexcept
 {
@@ -313,7 +326,7 @@ typename bit::stl::circular_queue<T,Allocator>::reverse_iterator
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
+inline typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
   bit::stl::circular_queue<T,Allocator>::rend()
   const noexcept
 {
@@ -321,11 +334,43 @@ typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
 }
 
 template<typename T, typename Allocator>
-typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
+inline typename bit::stl::circular_queue<T,Allocator>::const_reverse_iterator
   bit::stl::circular_queue<T,Allocator>::crend()
   const noexcept
 {
   return m_storage.buffer().crend();
+}
+
+//-----------------------------------------------------------------------------
+// Private Modifiers
+//-----------------------------------------------------------------------------
+
+template<typename T, typename Allocator>
+inline void bit::stl::circular_queue<T,Allocator>::resize( std::true_type,
+                                                           size_type n )
+{
+  auto storage = storage_type{ n, m_storage.get_allocator() };
+
+  for( auto&& v : m_storage.buffer() ) {
+    storage.buffer().emplace_back( std::move(v) );
+  }
+
+  // Swap the active storage
+  m_storage.buffer().swap(storage.buffer());
+}
+
+template<typename T, typename Allocator>
+inline void bit::stl::circular_queue<T,Allocator>::resize( std::false_type,
+                                                           size_type n )
+{
+  auto storage = storage_type{ n, m_storage.get_allocator() };
+
+  for( const auto& v : m_storage.buffer() ) {
+    storage.buffer().emplace_back( v );
+  }
+
+  // Swap the active storage
+  m_storage.buffer().swap(storage.buffer());
 }
 
 //-----------------------------------------------------------------------------

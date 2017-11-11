@@ -27,52 +27,67 @@ namespace bit {
       public:
 
         circular_storage_type( circular_storage_type&& other )
-          : storage( std::move(other.storage) )
+          : m_storage( std::move(other.m_storage) )
         {
 
         }
 
         circular_storage_type( circular_storage_type&& other, const Allocator& alloc )
-          : storage( std::piecewise_construct,
-                     std::forward_as_tuple(std::move(other.storage.first())),
+          : m_storage( std::piecewise_construct,
+                     std::forward_as_tuple(std::move(other.m_storage.first())),
                      std::forward_as_tuple(alloc) )
         {
 
         }
 
         circular_storage_type( std::size_t n, const Allocator& alloc )
-          : storage( std::piecewise_construct,
+          : m_storage( std::piecewise_construct,
                      std::forward_as_tuple(),
                      std::forward_as_tuple(alloc) )
         {
+          if( n == 0 ) return;
+
           using traits_type = std::allocator_traits<Allocator>;
-          auto p = traits_type::allocate( storage.second(), n );
+
+          auto p = traits_type::allocate( m_storage.second(), n );
           // No RAII needed; allocate is the only thing that can throw at this point
 
-          storage.first() = circular_buffer<T>( p, n );
+          m_storage.first() = circular_buffer<T>( p, n );
         }
 
         ~circular_storage_type()
         {
-          auto& buffer    = storage.first();
-          auto& allocator = storage.second();
-          buffer.clear();
-          std::allocator_traits<Allocator>::deallocate( allocator, buffer.data(), buffer.capacity() );
+          using traits_type = std::allocator_traits<Allocator>;
+          auto& buffer    = m_storage.first();
+          auto& allocator = m_storage.second();
+
+          // Deconstruct all entries, then deallocate the memory
+          if( buffer.data() != nullptr ) {
+            buffer.clear();
+            traits_type::deallocate( allocator, buffer.data(), buffer.capacity() );
+          }
         }
 
         circular_buffer<T>& buffer() noexcept
         {
-          return storage.first();
+          return m_storage.first();
         }
 
-        circular_buffer<T>& buffer() const noexcept
+        const circular_buffer<T>& buffer() const noexcept
         {
-          return storage.first();
+          return m_storage.first();
         }
 
         const Allocator& get_allocator() const noexcept
         {
-          return storage.second();
+          return m_storage.second();
+        }
+
+        void swap( circular_storage_type& other )
+        {
+          using std::swap;
+
+          m_storage.swap(other.m_storage);
         }
 
         //---------------------------------------------------------------------
@@ -87,7 +102,7 @@ namespace bit {
         //---------------------------------------------------------------------
       private:
 
-        storage_type storage;
+        storage_type m_storage;
       };
 
     } // namespace detail
