@@ -189,7 +189,7 @@ typename bit::stl::circular_deque<T,Allocator>::size_type
 template<typename T, typename Allocator>
 inline void bit::stl::circular_deque<T,Allocator>::resize( size_type n )
 {
-  if( m_storage.buffer().capacity() <= n ) {
+  if( m_storage.buffer().capacity() > n ) {
     return;
   }
 
@@ -197,7 +197,7 @@ inline void bit::stl::circular_deque<T,Allocator>::resize( size_type n )
 }
 
 template<typename T, typename Allocator>
-template<typename...Args>
+template<typename...Args,typename>
 typename bit::stl::circular_deque<T,Allocator>::reference
   bit::stl::circular_deque<T,Allocator>::emplace_back( Args&&...args )
 {
@@ -205,7 +205,7 @@ typename bit::stl::circular_deque<T,Allocator>::reference
 }
 
 template<typename T, typename Allocator>
-template<typename...Args>
+template<typename...Args,typename>
 typename bit::stl::circular_deque<T,Allocator>::reference
   bit::stl::circular_deque<T,Allocator>::emplace_front( Args&&...args )
 {
@@ -215,12 +215,14 @@ typename bit::stl::circular_deque<T,Allocator>::reference
 //-----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
+template<typename, typename>
 void bit::stl::circular_deque<T,Allocator>::push_back( const value_type& value )
 {
   m_storage.buffer().push_back(value);
 }
 
 template<typename T, typename Allocator>
+template<typename, typename>
 void bit::stl::circular_deque<T,Allocator>::push_back( value_type&& value )
 {
   m_storage.buffer().push_back( std::move(value) );
@@ -229,12 +231,14 @@ void bit::stl::circular_deque<T,Allocator>::push_back( value_type&& value )
 //-----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
+template<typename, typename>
 void bit::stl::circular_deque<T,Allocator>::push_front( const value_type& value )
 {
   m_storage.buffer().push_front(value);
 }
 
 template<typename T, typename Allocator>
+template<typename, typename>
 void bit::stl::circular_deque<T,Allocator>::push_front( value_type&& value )
 {
   m_storage.buffer().push_front( std::move(value) );
@@ -251,7 +255,7 @@ void bit::stl::circular_deque<T,Allocator>::pop_front()
 template<typename T, typename Allocator>
 void bit::stl::circular_deque<T,Allocator>::pop_back()
 {
-  m_storage.buffer().pop_front();
+  m_storage.buffer().pop_back();
 }
 
 //-----------------------------------------------------------------------------
@@ -260,9 +264,7 @@ template<typename T, typename Allocator>
 void bit::stl::circular_deque<T,Allocator>::swap( circular_deque& other )
   noexcept
 {
-  using std::swap;
-
-  swap( m_storage, other.m_storage );
+  m_storage.swap( other.m_storage );
 }
 
 //-----------------------------------------------------------------------------
@@ -401,7 +403,7 @@ inline void bit::stl::circular_deque<T,Allocator>::resize( std::false_type,
   }
 
   // Swap the active storage
-  swap( m_storage.buffer(), storage.buffer() );
+  m_storage.buffer().swap( storage.buffer() );
 }
 
 //-----------------------------------------------------------------------------

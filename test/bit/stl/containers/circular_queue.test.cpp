@@ -9,6 +9,7 @@
 #include <bit/stl/containers/circular_queue.hpp>
 
 #include <algorithm> // std::equal
+#include <utility>   // std::move
 
 #include <catch.hpp>
 
@@ -438,6 +439,8 @@ TEST_CASE("circular_queue::push( T&& )","[modifier]")
   }
 }
 
+//-----------------------------------------------------------------------------
+
 TEST_CASE("circular_queue::emplace( Args&&... )", "[modifier]")
 {
   const auto size = 5;
@@ -523,6 +526,8 @@ TEST_CASE("circular_queue::emplace( Args&&... )", "[modifier]")
   }
 }
 
+//-----------------------------------------------------------------------------
+
 TEST_CASE("circular_queue::pop()","[modifier]")
 {
   const auto size = 5;
@@ -550,6 +555,8 @@ TEST_CASE("circular_queue::pop()","[modifier]")
     REQUIRE( old_value != new_value );
   }
 }
+
+//-----------------------------------------------------------------------------
 
 TEST_CASE("circular_queue::swap( circular_queue& )","[modifier]")
 {
@@ -605,7 +612,6 @@ TEST_CASE("circular_queue::swap( circular_queue& )","[modifier]")
       REQUIRE( right.size() == copy_left.size() );
     }
   }
-
 }
 
 //-----------------------------------------------------------------------------
