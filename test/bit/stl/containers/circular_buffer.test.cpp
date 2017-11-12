@@ -128,7 +128,8 @@ TEST_CASE("circular_buffer::circular_buffer( void*, size_type )", "[ctor]")
 
   const auto size = 5u;
   auto storage = storage_type{};
-  auto buffer = bit::stl::circular_buffer<int>(&storage,size);
+  auto data = reinterpret_cast<char*>(&storage);
+  auto buffer = bit::stl::circular_buffer<int>(data,size);
 
   SECTION("Data points to original storage")
   {
@@ -156,7 +157,8 @@ TEST_CASE("circular_buffer::push_back( const T& )","[modifier]")
   const copyable entry{42};
 
   auto storage = storage_type{};
-  auto buffer = bit::stl::circular_buffer<copyable>(&storage,size);
+  auto data = reinterpret_cast<char*>(&storage);
+  auto buffer = bit::stl::circular_buffer<copyable>(data,size);
 
   SECTION("Buffer is empty")
   {
@@ -245,7 +247,8 @@ TEST_CASE("circular_buffer::push_back( T&& )","[modifier]")
   moveable entry{42};
 
   auto storage = storage_type{};
-  auto buffer = bit::stl::circular_buffer<moveable>(&storage,size);
+  auto data = reinterpret_cast<char*>(&storage);
+  auto buffer = bit::stl::circular_buffer<moveable>(data,size);
 
   SECTION("Buffer is empty")
   {
@@ -340,7 +343,8 @@ TEST_CASE("circular_buffer::push_front( const T& )","[modifier]")
   const copyable entry{42};
 
   auto storage = storage_type{};
-  auto buffer = bit::stl::circular_buffer<copyable>(&storage,size);
+  auto data = reinterpret_cast<char*>(&storage);
+  auto buffer = bit::stl::circular_buffer<copyable>(data,size);
 
   SECTION("Buffer is empty")
   {
@@ -423,13 +427,14 @@ TEST_CASE("circular_buffer::push_front( const T& )","[modifier]")
 
 TEST_CASE("circular_buffer::push_front( T&& )","[modifier]")
 {
-  using storage_type = bit::stl::aligned_storage_for<int[5]>;
+  using storage_type = bit::stl::aligned_storage_for<moveable[5]>;
 
   const auto size = 5u;
   moveable entry{42};
 
   auto storage = storage_type{};
-  auto buffer = bit::stl::circular_buffer<moveable>(&storage,size);
+  auto data = reinterpret_cast<char*>(&storage);
+  auto buffer = bit::stl::circular_buffer<moveable>(data,size);
 
   SECTION("Buffer is empty")
   {
@@ -524,7 +529,8 @@ TEST_CASE("circular_buffer::emplace_back( Args&&... )", "[modifier]")
   const auto value = 42;
 
   auto storage = storage_type{};
-  auto buffer = bit::stl::circular_buffer<copyable>(&storage,size);
+  auto data = reinterpret_cast<char*>(&storage);
+  auto buffer = bit::stl::circular_buffer<copyable>(data,size);
 
 
   SECTION("Buffer is empty")
@@ -614,7 +620,8 @@ TEST_CASE("circular_buffer::emplace_front( Args&&... )", "[modifier]")
   const auto value = 42;
 
   auto storage = storage_type{};
-  auto buffer = bit::stl::circular_buffer<copyable>(&storage,size);
+  auto data = reinterpret_cast<char*>(&storage);
+  auto buffer = bit::stl::circular_buffer<copyable>(data,size);
 
   SECTION("Buffer is empty")
   {
@@ -704,7 +711,8 @@ TEST_CASE("circular_buffer::pop_back()","[modifier]")
   const auto size = 5u;
 
   auto storage = storage_type{};
-  auto buffer = bit::stl::circular_buffer<int>(&storage,size);
+  auto data = reinterpret_cast<char*>(&storage);
+  auto buffer = bit::stl::circular_buffer<int>(data,size);
 
   for( auto i = 0; i < size; ++i ) {
     buffer.emplace_front(i);
@@ -736,7 +744,8 @@ TEST_CASE("circular_buffer::pop_front()","[modifier]")
   const auto size = 5u;
 
   auto storage = storage_type{};
-  auto buffer = bit::stl::circular_buffer<int>(&storage,size);
+  auto data = reinterpret_cast<char*>(&storage);
+  auto buffer = bit::stl::circular_buffer<int>(data,size);
 
   for( auto i = 0; i < size; ++i ) {
     buffer.emplace_back(i);
