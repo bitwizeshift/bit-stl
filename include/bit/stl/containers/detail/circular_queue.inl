@@ -199,7 +199,7 @@ inline void bit::stl::circular_queue<T,Allocator>::resize( size_type n )
 }
 
 template<typename T, typename Allocator>
-template<typename,typename>
+template<typename U, typename>
 inline void bit::stl::circular_queue<T,Allocator>
   ::push( const value_type& value )
 {
@@ -207,7 +207,7 @@ inline void bit::stl::circular_queue<T,Allocator>
 }
 
 template<typename T, typename Allocator>
-template<typename,typename>
+template<typename U,typename>
 inline void bit::stl::circular_queue<T,Allocator>::push( value_type&& value )
 {
   m_storage.buffer().push_back( std::move(value) );

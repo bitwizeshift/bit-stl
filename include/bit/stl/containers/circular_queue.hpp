@@ -194,7 +194,7 @@ namespace bit {
       ///       at the \c front of the buffer before construction
       ///
       /// \param value the value to copy
-      template<typename U=T,typename = std::enable_if_t<std::is_copy_constructible<U>::value>>
+      template<typename U=T, typename = std::enable_if_t<std::is_copy_constructible<U>::value>>
       void push( const value_type& value );
 
       /// \brief Constructs a \p T object by calling the move-constructor, and

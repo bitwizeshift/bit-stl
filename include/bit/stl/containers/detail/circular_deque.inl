@@ -215,14 +215,14 @@ typename bit::stl::circular_deque<T,Allocator>::reference
 //-----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-template<typename, typename>
+template<typename U, typename>
 void bit::stl::circular_deque<T,Allocator>::push_back( const value_type& value )
 {
   m_storage.buffer().push_back(value);
 }
 
 template<typename T, typename Allocator>
-template<typename, typename>
+template<typename U, typename>
 void bit::stl::circular_deque<T,Allocator>::push_back( value_type&& value )
 {
   m_storage.buffer().push_back( std::move(value) );
@@ -231,14 +231,14 @@ void bit::stl::circular_deque<T,Allocator>::push_back( value_type&& value )
 //-----------------------------------------------------------------------------
 
 template<typename T, typename Allocator>
-template<typename, typename>
+template<typename U, typename>
 void bit::stl::circular_deque<T,Allocator>::push_front( const value_type& value )
 {
   m_storage.buffer().push_front(value);
 }
 
 template<typename T, typename Allocator>
-template<typename, typename>
+template<typename U, typename>
 void bit::stl::circular_deque<T,Allocator>::push_front( value_type&& value )
 {
   m_storage.buffer().push_front( std::move(value) );

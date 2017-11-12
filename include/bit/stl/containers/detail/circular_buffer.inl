@@ -243,14 +243,14 @@ inline typename bit::stl::circular_buffer<T>::reference
 //----------------------------------------------------------------------
 
 template<typename T>
-template<typename,typename>
+template<typename U,typename>
 inline void bit::stl::circular_buffer<T>::push_back( const T& value )
 {
   emplace_back( value );
 }
 
 template<typename T>
-template<typename,typename>
+template<typename U,typename>
 inline void bit::stl::circular_buffer<T>::push_back( T&& value )
 {
   emplace_back( std::move(value) );
@@ -259,14 +259,14 @@ inline void bit::stl::circular_buffer<T>::push_back( T&& value )
 //----------------------------------------------------------------------
 
 template<typename T>
-template<typename,typename>
+template<typename U,typename>
 inline void bit::stl::circular_buffer<T>::push_front( const T& value )
 {
   emplace_front( value );
 }
 
 template<typename T>
-template<typename,typename>
+template<typename U,typename>
 inline void bit::stl::circular_buffer<T>::push_front( T&& value )
 {
   emplace_front( std::move(value) );
