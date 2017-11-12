@@ -706,7 +706,7 @@ TEST_CASE("circular_buffer::emplace_front( Args&&... )", "[modifier]")
 
 TEST_CASE("circular_buffer::pop_back()","[modifier]")
 {
-  using storage_type = bit::stl::aligned_storage_for<int>;
+  using storage_type = bit::stl::aligned_storage_for<int[5]>;
 
   const auto size = 5u;
 
@@ -739,7 +739,7 @@ TEST_CASE("circular_buffer::pop_back()","[modifier]")
 
 TEST_CASE("circular_buffer::pop_front()","[modifier]")
 {
-  using storage_type = bit::stl::aligned_storage_for<int>;
+  using storage_type = bit::stl::aligned_storage_for<int[5]>;
 
   const auto size = 5u;
 
