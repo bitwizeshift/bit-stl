@@ -154,7 +154,7 @@ namespace bit {
       ///
       /// \param buffer a pointer to the buffer
       /// \param size the size of the buffer
-      circular_buffer( void* buffer, std::size_t size ) noexcept;
+      circular_buffer( void* buffer, size_type size ) noexcept;
 
       /// \brief Move-constructs a circular buffer from another buffer
       ///

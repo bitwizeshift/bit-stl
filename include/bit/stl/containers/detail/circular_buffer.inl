@@ -135,7 +135,7 @@ inline bit::stl::circular_buffer<T>::circular_buffer( std::nullptr_t )
 
 template<typename T>
 inline bit::stl::circular_buffer<T>::circular_buffer( void* buffer,
-                                                      std::size_t size )
+                                                      size_type size )
   noexcept
   : m_buffer(static_cast<T*>(buffer)),
     m_begin(m_buffer),

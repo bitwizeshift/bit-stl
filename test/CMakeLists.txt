@@ -17,6 +17,7 @@ set(sources
       bit/stl/containers/string_view.test.cpp
       bit/stl/containers/circular_queue.test.cpp
       bit/stl/containers/circular_deque.test.cpp
+      bit/stl/containers/circular_buffer.test.cpp
 
       main.test.cpp
 )
