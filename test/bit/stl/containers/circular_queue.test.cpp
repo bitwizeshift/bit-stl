@@ -267,7 +267,7 @@ TEST_CASE("circular_queue::operator=( circular_queue )", "[assignment]")
 
 TEST_CASE("circular_queue::push( const T& )","[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   const copyable entry{42};
   auto queue = bit::stl::circular_queue<copyable>{size};
 
@@ -352,7 +352,7 @@ TEST_CASE("circular_queue::push( const T& )","[modifier]")
 
 TEST_CASE("circular_queue::push( T&& )","[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   moveable entry{42};
   auto queue = bit::stl::circular_queue<moveable>{size};
 
@@ -443,7 +443,7 @@ TEST_CASE("circular_queue::push( T&& )","[modifier]")
 
 TEST_CASE("circular_queue::emplace( Args&&... )", "[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   auto queue = bit::stl::circular_queue<copyable>{size};
   const auto value = 42;
 
@@ -530,7 +530,7 @@ TEST_CASE("circular_queue::emplace( Args&&... )", "[modifier]")
 
 TEST_CASE("circular_queue::pop()","[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   auto queue = bit::stl::circular_queue<int>{size};
 
   for( auto i = 0; i < size; ++i ) {
@@ -560,7 +560,7 @@ TEST_CASE("circular_queue::pop()","[modifier]")
 
 TEST_CASE("circular_queue::swap( circular_queue& )","[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   auto right = bit::stl::circular_queue<moveable>{};
   auto left = bit::stl::circular_queue<moveable>{size};
 
@@ -622,8 +622,8 @@ TEST_CASE("circular_queue::resize( size_type )", "[modifier]")
   {
     SECTION("New size smaller than current capacity")
     {
-      static constexpr auto size = 10;
-      static constexpr auto new_size = 5;
+      static constexpr auto size = 10u;
+      static constexpr auto new_size = 5u;
       auto queue = bit::stl::circular_queue<int>{size};
 
       queue.resize(new_size);
@@ -640,7 +640,7 @@ TEST_CASE("circular_queue::resize( size_type )", "[modifier]")
 
     SECTION("New size bigger than current capacity")
     {
-      static constexpr auto new_size = 10;
+      static constexpr auto new_size = 10u;
       auto queue = bit::stl::circular_queue<int>{};
 
       queue.resize(new_size);
@@ -663,8 +663,8 @@ TEST_CASE("circular_queue::resize( size_type )", "[modifier]")
     {
       SECTION("T is nothrow move constructible")
       {
-        static constexpr auto size = 5;
-        static constexpr auto new_size = 10;
+        static constexpr auto size = 5u;
+        static constexpr auto new_size = 10u;
 
         auto queue = bit::stl::circular_queue<nothrow_moveable>{size};
 
@@ -698,8 +698,8 @@ TEST_CASE("circular_queue::resize( size_type )", "[modifier]")
 
       SECTION("T is not nothrow move constructible")
       {
-        static constexpr auto size = 5;
-        static constexpr auto new_size = 10;
+        static constexpr auto size = 5u;
+        static constexpr auto new_size = 10u;
 
         auto queue = bit::stl::circular_queue<moveable>{size};
 

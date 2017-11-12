@@ -267,7 +267,7 @@ TEST_CASE("circular_deque::operator=( circular_deque )", "[assignment]")
 
 TEST_CASE("circular_deque::push_back( const T& )","[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   const copyable entry{42};
   auto deque = bit::stl::circular_deque<copyable>{size};
 
@@ -352,7 +352,7 @@ TEST_CASE("circular_deque::push_back( const T& )","[modifier]")
 
 TEST_CASE("circular_deque::push_back( T&& )","[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   moveable entry{42};
   auto deque = bit::stl::circular_deque<moveable>{size};
 
@@ -443,7 +443,7 @@ TEST_CASE("circular_deque::push_back( T&& )","[modifier]")
 
 TEST_CASE("circular_deque::push_front( const T& )","[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   const copyable entry{42};
   auto deque = bit::stl::circular_deque<copyable>{size};
 
@@ -528,7 +528,7 @@ TEST_CASE("circular_deque::push_front( const T& )","[modifier]")
 
 TEST_CASE("circular_deque::push_front( T&& )","[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   moveable entry{42};
   auto deque = bit::stl::circular_deque<moveable>{size};
 
@@ -619,7 +619,7 @@ TEST_CASE("circular_deque::push_front( T&& )","[modifier]")
 
 TEST_CASE("circular_deque::emplace_back( Args&&... )", "[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   auto deque = bit::stl::circular_deque<copyable>{size};
   const auto value = 42;
 
@@ -704,7 +704,7 @@ TEST_CASE("circular_deque::emplace_back( Args&&... )", "[modifier]")
 
 TEST_CASE("circular_deque::emplace_front( Args&&... )", "[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   auto deque = bit::stl::circular_deque<copyable>{size};
   const auto value = 42;
 
@@ -791,7 +791,7 @@ TEST_CASE("circular_deque::emplace_front( Args&&... )", "[modifier]")
 
 TEST_CASE("circular_deque::pop_back()","[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   auto deque = bit::stl::circular_deque<int>{size};
 
   for( auto i = 0; i < size; ++i ) {
@@ -819,7 +819,7 @@ TEST_CASE("circular_deque::pop_back()","[modifier]")
 
 TEST_CASE("circular_deque::pop_front()","[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   auto deque = bit::stl::circular_deque<int>{size};
 
   for( auto i = 0; i < size; ++i ) {
@@ -849,7 +849,7 @@ TEST_CASE("circular_deque::pop_front()","[modifier]")
 
 TEST_CASE("circular_deque::swap( circular_deque& )","[modifier]")
 {
-  const auto size = 5;
+  const auto size = 5u;
   auto right = bit::stl::circular_deque<moveable>{};
   auto left = bit::stl::circular_deque<moveable>{size};
 
@@ -912,8 +912,8 @@ TEST_CASE("circular_deque::resize( size_type )", "[modifier]")
   {
     SECTION("New size smaller than current capacity")
     {
-      static constexpr auto size = 10;
-      static constexpr auto new_size = 5;
+      static constexpr auto size = 10u;
+      static constexpr auto new_size = 5u;
       auto deque = bit::stl::circular_deque<int>{size};
 
       deque.resize(new_size);
@@ -930,7 +930,7 @@ TEST_CASE("circular_deque::resize( size_type )", "[modifier]")
 
     SECTION("New size bigger than current capacity")
     {
-      static constexpr auto new_size = 10;
+      static constexpr auto new_size = 10u;
       auto deque = bit::stl::circular_deque<int>{};
 
       deque.resize(new_size);
@@ -953,8 +953,8 @@ TEST_CASE("circular_deque::resize( size_type )", "[modifier]")
     {
       SECTION("T is nothrow move constructible")
       {
-        static constexpr auto size = 5;
-        static constexpr auto new_size = 10;
+        static constexpr auto size = 5u;
+        static constexpr auto new_size = 10u;
 
         auto deque = bit::stl::circular_deque<nothrow_moveable>{size};
 
@@ -988,8 +988,8 @@ TEST_CASE("circular_deque::resize( size_type )", "[modifier]")
 
       SECTION("T is not nothrow move constructible")
       {
-        static constexpr auto size = 5;
-        static constexpr auto new_size = 10;
+        static constexpr auto size = 5u;
+        static constexpr auto new_size = 10u;
 
         auto deque = bit::stl::circular_deque<moveable>{size};
 

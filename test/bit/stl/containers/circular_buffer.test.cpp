@@ -126,7 +126,7 @@ TEST_CASE("circular_buffer::circular_buffer( void*, size_type )", "[ctor]")
 {
   using storage_type = bit::stl::aligned_storage_for<int[5]>;
 
-  const auto size = 5;
+  const auto size = 5u;
   auto storage = storage_type{};
   auto buffer = bit::stl::circular_buffer<int>(&storage,size);
 
@@ -152,7 +152,7 @@ TEST_CASE("circular_buffer::push_back( const T& )","[modifier]")
 {
   using storage_type = bit::stl::aligned_storage_for<copyable[5]>;
 
-  const auto size = 5;
+  const auto size = 5u;
   const copyable entry{42};
 
   auto storage = storage_type{};
@@ -241,7 +241,7 @@ TEST_CASE("circular_buffer::push_back( T&& )","[modifier]")
 {
   using storage_type = bit::stl::aligned_storage_for<moveable[5]>;
 
-  const auto size = 5;
+  const auto size = 5u;
   moveable entry{42};
 
   auto storage = storage_type{};
@@ -336,7 +336,7 @@ TEST_CASE("circular_buffer::push_front( const T& )","[modifier]")
 {
   using storage_type = bit::stl::aligned_storage_for<copyable[5]>;
 
-  const auto size = 5;
+  const auto size = 5u;
   const copyable entry{42};
 
   auto storage = storage_type{};
@@ -425,7 +425,7 @@ TEST_CASE("circular_buffer::push_front( T&& )","[modifier]")
 {
   using storage_type = bit::stl::aligned_storage_for<int[5]>;
 
-  const auto size = 5;
+  const auto size = 5u;
   moveable entry{42};
 
   auto storage = storage_type{};
@@ -520,7 +520,7 @@ TEST_CASE("circular_buffer::emplace_back( Args&&... )", "[modifier]")
 {
   using storage_type = bit::stl::aligned_storage_for<copyable[5]>;
 
-  const auto size = 5;
+  const auto size = 5u;
   const auto value = 42;
 
   auto storage = storage_type{};
@@ -610,7 +610,7 @@ TEST_CASE("circular_buffer::emplace_front( Args&&... )", "[modifier]")
 {
   using storage_type = bit::stl::aligned_storage_for<copyable[5]>;
 
-  const auto size = 5;
+  const auto size = 5u;
   const auto value = 42;
 
   auto storage = storage_type{};
@@ -701,7 +701,7 @@ TEST_CASE("circular_buffer::pop_back()","[modifier]")
 {
   using storage_type = bit::stl::aligned_storage_for<int>;
 
-  const auto size = 5;
+  const auto size = 5u;
 
   auto storage = storage_type{};
   auto buffer = bit::stl::circular_buffer<int>(&storage,size);
@@ -733,7 +733,7 @@ TEST_CASE("circular_buffer::pop_front()","[modifier]")
 {
   using storage_type = bit::stl::aligned_storage_for<int>;
 
-  const auto size = 5;
+  const auto size = 5u;
 
   auto storage = storage_type{};
   auto buffer = bit::stl::circular_buffer<int>(&storage,size);
