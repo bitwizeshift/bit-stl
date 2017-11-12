@@ -24,6 +24,8 @@ namespace bit {
       //////////////////////////////////////////////////////////////////////////
       /// \brief An iterator for iterating the circular buffer
       ///
+      /// \tparam Container type that will always be 'circular_buffer' (to break
+      ///                   cyclic dependency that requires forward-declaration)
       /// \tparam T the underlying type
       //////////////////////////////////////////////////////////////////////////
       template<typename Container, typename T>
@@ -46,7 +48,9 @@ namespace bit {
         //----------------------------------------------------------------------
       public:
 
-        explicit circular_buffer_iterator( Container& container, T* ptr, bool is_full );
+        circular_buffer_iterator( Container& container,
+                                  T* ptr,
+                                  bool compare_twice );
 
         circular_buffer_iterator( const circular_buffer_iterator& other ) noexcept = default;
 
@@ -84,7 +88,7 @@ namespace bit {
 
         value_type* m_ptr;       ///< Pointer to the location in the buffer
         Container*  m_container; ///< The underlying container
-        bool        m_is_full;   ///< Is this buffer full
+        bool m_compare_twice; ///< Will this iterator be compared twice? (full buffer)
 
         template<typename C, typename U>
         friend bool operator==( const circular_buffer_iterator<C,U>& lhs,
@@ -130,7 +134,7 @@ namespace bit {
       using difference_type = std::ptrdiff_t;
 
       using iterator       = detail::circular_buffer_iterator<circular_buffer,T>;
-      using const_iterator = detail::circular_buffer_iterator<circular_buffer,const T>;
+      using const_iterator = detail::circular_buffer_iterator<const circular_buffer,const T>;
       using reverse_iterator       = std::reverse_iterator<iterator>;
       using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
@@ -150,7 +154,7 @@ namespace bit {
       ///
       /// \param buffer a pointer to the buffer
       /// \param size the size of the buffer
-      circular_buffer( void* buffer, std::size_t size ) noexcept;
+      circular_buffer( void* buffer, size_type size ) noexcept;
 
       /// \brief Move-constructs a circular buffer from another buffer
       ///
@@ -185,7 +189,7 @@ namespace bit {
       ///       at the \c front of the buffer before construction
       ///
       /// \param args the arguments to forward to T
-      template<typename...Args>
+      template<typename...Args, typename = std::enable_if_t<std::is_constructible<T,Args...>::value>>
       reference emplace_back( Args&&...args );
 
       /// \brief Invokes \p T's constructor with the given \p args, storing
@@ -195,7 +199,7 @@ namespace bit {
       ///       at the \c end of the buffer before construction
       ///
       /// \param args the arguments to forward to T
-      template<typename...Args>
+      template<typename...Args, typename = std::enable_if_t<std::is_constructible<T,Args...>::value>>
       reference emplace_front( Args&&...args );
 
       //-----------------------------------------------------------------------
@@ -207,6 +211,7 @@ namespace bit {
       ///       at the \c front of the buffer before construction
       ///
       /// \param value the value to copy
+      template<typename U=T,typename = std::enable_if_t<std::is_copy_constructible<U>::value>>
       void push_back( const T& value );
 
       /// \brief Constructs a \p T object by calling the move-constructor, and
@@ -216,6 +221,7 @@ namespace bit {
       ///       at the \c front of the buffer before construction
       ///
       /// \param value the value to move
+      template<typename U=T,typename = std::enable_if_t<std::is_move_constructible<U>::value>>
       void push_back( T&& value );
 
       //-----------------------------------------------------------------------
@@ -227,6 +233,7 @@ namespace bit {
       ///       at the \c back of the buffer before construction
       ///
       /// \param value the value to copy
+      template<typename U=T,typename = std::enable_if_t<std::is_copy_constructible<U>::value>>
       void push_front( const T& value );
 
       /// \brief Constructs a \p T object by calling the move-constructor, and
@@ -236,6 +243,7 @@ namespace bit {
       ///       at the \c back of the buffer before construction
       ///
       /// \param value the value to copy
+      template<typename U=T,typename = std::enable_if_t<std::is_move_constructible<U>::value>>
       void push_front( T&& value );
 
       //-----------------------------------------------------------------------
@@ -249,7 +257,7 @@ namespace bit {
       //-----------------------------------------------------------------------
 
       /// \brief Clears all entries from this circular_buffer
-      void clear();
+      void clear() noexcept;
 
       /// \brief Swaps this circular_buffer with another one
       ///
@@ -392,7 +400,9 @@ namespace bit {
     private:
 
       T*& increment( T*& iter ) noexcept;
+      const T*& increment( const T*& iter ) const noexcept;
       T*& decrement( T*& iter ) noexcept;
+      const T*& decrement( const T*& iter ) const noexcept;
     };
 
     //-------------------------------------------------------------------------

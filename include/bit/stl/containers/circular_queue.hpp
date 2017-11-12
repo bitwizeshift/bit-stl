@@ -6,7 +6,6 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-
 #ifndef BIT_STL_CONTAINERS_CIRCULAR_QUEUE_HPP
 #define BIT_STL_CONTAINERS_CIRCULAR_QUEUE_HPP
 
@@ -14,26 +13,32 @@
 
 #include "detail/circular_buffer_storage.hpp"
 
-#include <memory>    // std::allocator
-#include <algorithm> // std::equal
+#include <algorithm>   // std::equal
+#include <memory>      // std::allocator
+#include <type_traits> // std::is_nothrow_copy_constructible, std::is_same, etc
 
 namespace bit {
   namespace stl {
 
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     /// \brief A circular buffer with a queue API
     ///
     /// Memory is allocated up-front from the specified allocator
     ///
     /// \tparam T the underlying type
     /// \tparam Allocator the allocator type
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     template<typename T, typename Allocator=std::allocator<T>>
     class circular_queue
     {
-      //----------------------------------------------------------------------
+      using traits_type = std::allocator_traits<Allocator>;
+
+      static_assert( std::is_same<T,typename traits_type::value_type>::value,
+                     "value_type must be the same as type 'T'" );
+
+      //-----------------------------------------------------------------------
       // Public Member Types
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       using value_type      = typename circular_buffer<T>::value_type;
@@ -66,7 +71,7 @@ namespace bit {
       explicit circular_queue( const Allocator& alloc );
 
 
-      /// \brief Constructs a circular_queue with \p count default-constructed
+      /// \brief Constructs a circular_queue with \p count copy-constructed
       ///        entries
       ///
       /// \param count the number of elements this circular_queue should contain
@@ -111,7 +116,7 @@ namespace bit {
       ///
       /// \param other the other circular_queue
       /// \return reference to \c (*this)
-      circular_queue& operator=( circular_queue other );
+      circular_queue& operator=( circular_queue other ) noexcept;
 
       //-----------------------------------------------------------------------
       // Element Access
@@ -177,6 +182,11 @@ namespace bit {
       //-----------------------------------------------------------------------
     public:
 
+      /// \brief Resizes the size of this circular queue to be at least \p n
+      ///
+      /// \param n the size to reallocate to
+      void resize( size_type n );
+
       /// \brief Constructs a \p T object by calling the copy-constructor, and
       ///        storing the result at the end of the buffer
       ///
@@ -184,6 +194,7 @@ namespace bit {
       ///       at the \c front of the buffer before construction
       ///
       /// \param value the value to copy
+      template<typename U=T, typename = std::enable_if_t<std::is_copy_constructible<U>::value>>
       void push( const value_type& value );
 
       /// \brief Constructs a \p T object by calling the move-constructor, and
@@ -193,6 +204,7 @@ namespace bit {
       ///       at the \c front of the buffer before construction
       ///
       /// \param value the value to copy
+      template<typename U=T,typename = std::enable_if_t<std::is_move_constructible<U>::value>>
       void push( value_type&& value );
 
       /// \brief Invokes \p T's constructor with the given \p args, storing
@@ -202,7 +214,7 @@ namespace bit {
       ///       at the \c front of the buffer before construction
       ///
       /// \param args the arguments to forward to T
-      template<typename...Args>
+      template<typename...Args, typename = std::enable_if_t<std::is_constructible<T,Args...>::value>>
       reference emplace( Args&&...args );
 
       /// \brief Pops the entry at the front of the circular_queue
@@ -269,9 +281,7 @@ namespace bit {
       //-----------------------------------------------------------------------
     private:
 
-      using rebound_allocator_type = typename std::allocator_traits<Allocator>::template rebind_alloc<T>;
-
-      using storage_type = detail::circular_storage_type<T,rebound_allocator_type>;
+      using storage_type = detail::circular_storage_type<T,Allocator>;
 
       //-----------------------------------------------------------------------
       // Private Members
@@ -279,7 +289,11 @@ namespace bit {
     private:
 
       storage_type m_storage; ///< The underlying storage
+
+      void resize( std::true_type, size_type n );
+      void resize( std::false_type, size_type n );
     };
+
     //-------------------------------------------------------------------------
     // Utilities
     //-------------------------------------------------------------------------

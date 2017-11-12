@@ -14,8 +14,9 @@
 
 #include "detail/circular_buffer_storage.hpp"
 
-#include <memory>    // std::allocator
-#include <algorithm> // std::equal
+#include <algorithm>   // std::equal
+#include <memory>      // std::allocator
+#include <type_traits> // std::is_nothrow_copy_constructible
 
 namespace bit {
   namespace stl {
@@ -177,6 +178,11 @@ namespace bit {
       //-----------------------------------------------------------------------
     public:
 
+      /// \brief Resizes the size of this circular queue to be at least \p n
+      ///
+      /// \param n the size to reallocate to
+      void resize( size_type n );
+
       /// \brief Invokes \p T's constructor with the given \p args, storing
       ///        the result at the end of the buffer
       ///
@@ -184,7 +190,7 @@ namespace bit {
       ///       at the \c front of the buffer before construction
       ///
       /// \param args the arguments to forward to T
-      template<typename...Args>
+      template<typename...Args, typename = std::enable_if_t<std::is_constructible<T,Args...>::value>>
       reference emplace_back( Args&&...args );
 
       /// \brief Invokes \p T's constructor with the given \p args, storing
@@ -194,7 +200,7 @@ namespace bit {
       ///       at the \c end of the buffer before construction
       ///
       /// \param args the arguments to forward to T
-      template<typename...Args>
+      template<typename...Args, typename = std::enable_if_t<std::is_constructible<T,Args...>::value>>
       reference emplace_front( Args&&...args );
 
       //-----------------------------------------------------------------------
@@ -206,6 +212,7 @@ namespace bit {
       ///       at the \c front of the buffer before construction
       ///
       /// \param value the value to copy
+      template<typename U=T,typename = std::enable_if_t<std::is_copy_constructible<U>::value>>
       void push_back( const value_type& value );
 
       /// \brief Constructs a \p T object by calling the move-constructor, and
@@ -215,6 +222,7 @@ namespace bit {
       ///       at the \c front of the buffer before construction
       ///
       /// \param value the value to move
+      template<typename U=T,typename = std::enable_if_t<std::is_move_constructible<U>::value>>
       void push_back( value_type&& value );
 
       //-----------------------------------------------------------------------
@@ -226,6 +234,7 @@ namespace bit {
       ///       at the \c back of the buffer before construction
       ///
       /// \param value the value to copy
+      template<typename U=T,typename = std::enable_if_t<std::is_copy_constructible<U>::value>>
       void push_front( const value_type& value );
 
       /// \brief Constructs a \p T object by calling the move-constructor, and
@@ -235,6 +244,7 @@ namespace bit {
       ///       at the \c back of the buffer before construction
       ///
       /// \param value the value to copy
+      template<typename U=T,typename = std::enable_if_t<std::is_move_constructible<U>::value>>
       void push_front( value_type&& value );
 
       //-----------------------------------------------------------------------
@@ -311,9 +321,7 @@ namespace bit {
       //-----------------------------------------------------------------------
     private:
 
-      using rebound_allocator_type = typename std::allocator_traits<Allocator>::template rebind_alloc<T>;
-
-      using storage_type = detail::circular_storage_type<T,rebound_allocator_type>;
+      using storage_type = detail::circular_storage_type<T,Allocator>;
 
       //-----------------------------------------------------------------------
       // Private Members
@@ -321,6 +329,9 @@ namespace bit {
     private:
 
       storage_type m_storage; ///< The underlying storage
+
+      void resize( std::true_type, size_type n );
+      void resize( std::false_type, size_type n );
     };
 
     //-------------------------------------------------------------------------

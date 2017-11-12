@@ -11,10 +11,10 @@
 
 template<typename C, typename T>
 inline bit::stl::detail::circular_buffer_iterator<C,T>
-  ::circular_buffer_iterator( C& container, T* ptr, bool is_full )
+  ::circular_buffer_iterator( C& container, T* ptr, bool compare_twice )
   : m_ptr(ptr),
     m_container(&container),
-    m_is_full(is_full)
+    m_compare_twice(compare_twice)
 {
 
 }
@@ -28,7 +28,7 @@ inline bit::stl::detail::circular_buffer_iterator<C,T>&
   bit::stl::detail::circular_buffer_iterator<C,T>::operator++()
   noexcept
 {
-  m_is_full = false;
+  m_compare_twice = false;
   m_container->increment( m_ptr );
   return (*this);
 }
@@ -39,7 +39,7 @@ inline bit::stl::detail::circular_buffer_iterator<C,T>
   noexcept
 {
   auto iter = (*this);
-  m_is_full = false;
+  m_compare_twice = false;
   m_container->increment( m_ptr );
   return iter;
 }
@@ -51,7 +51,7 @@ inline bit::stl::detail::circular_buffer_iterator<C,T>&
   bit::stl::detail::circular_buffer_iterator<C,T>::operator--()
   noexcept
 {
-  m_is_full = false;
+  m_compare_twice = false;
   m_container->decrement( m_ptr );
   return (*this);
 }
@@ -62,7 +62,7 @@ inline bit::stl::detail::circular_buffer_iterator<C,T>
   noexcept
 {
   auto iter = (*this);
-  m_is_full = false;
+  m_compare_twice = false;
   m_container->decrement( m_ptr );
   return iter;
 }
@@ -97,7 +97,7 @@ inline bool
                                 const circular_buffer_iterator<C,T>& rhs )
   noexcept
 {
-  return lhs.m_is_full == rhs.m_is_full && lhs.m_ptr == rhs.m_ptr;
+  return lhs.m_compare_twice == rhs.m_compare_twice && lhs.m_ptr == rhs.m_ptr;
 }
 
 template<typename C, typename T>
@@ -135,7 +135,7 @@ inline bit::stl::circular_buffer<T>::circular_buffer( std::nullptr_t )
 
 template<typename T>
 inline bit::stl::circular_buffer<T>::circular_buffer( void* buffer,
-                                                      std::size_t size )
+                                                      size_type size )
   noexcept
   : m_buffer(static_cast<T*>(buffer)),
     m_begin(m_buffer),
@@ -156,8 +156,9 @@ inline bit::stl::circular_buffer<T>
     m_capacity( other.m_capacity ),
     m_size( other.m_size )
 {
-  other.m_size   = 0;
-  other.m_buffer = nullptr;
+  other.m_size     = 0;
+  other.m_capacity = 0;
+  other.m_buffer   = nullptr;
 }
 
 //-----------------------------------------------------------------------------
@@ -185,7 +186,7 @@ bit::stl::circular_buffer<T>&
 //-----------------------------------------------------------------------------
 
 template<typename T>
-template<typename...Args>
+template<typename...Args,typename>
 inline typename bit::stl::circular_buffer<T>::reference
   bit::stl::circular_buffer<T>::emplace_back( Args&&...args )
 {
@@ -213,7 +214,7 @@ inline typename bit::stl::circular_buffer<T>::reference
 }
 
 template<typename T>
-template<typename...Args>
+template<typename...Args,typename>
 inline typename bit::stl::circular_buffer<T>::reference
   bit::stl::circular_buffer<T>::emplace_front( Args&&...args )
 {
@@ -242,12 +243,14 @@ inline typename bit::stl::circular_buffer<T>::reference
 //----------------------------------------------------------------------
 
 template<typename T>
+template<typename U,typename>
 inline void bit::stl::circular_buffer<T>::push_back( const T& value )
 {
   emplace_back( value );
 }
 
 template<typename T>
+template<typename U,typename>
 inline void bit::stl::circular_buffer<T>::push_back( T&& value )
 {
   emplace_back( std::move(value) );
@@ -256,12 +259,14 @@ inline void bit::stl::circular_buffer<T>::push_back( T&& value )
 //----------------------------------------------------------------------
 
 template<typename T>
+template<typename U,typename>
 inline void bit::stl::circular_buffer<T>::push_front( const T& value )
 {
   emplace_front( value );
 }
 
 template<typename T>
+template<typename U,typename>
 inline void bit::stl::circular_buffer<T>::push_front( T&& value )
 {
   emplace_front( std::move(value) );
@@ -272,7 +277,7 @@ inline void bit::stl::circular_buffer<T>::push_front( T&& value )
 template<typename T>
 inline void bit::stl::circular_buffer<T>::pop_front()
 {
-  stl::destroy_at( m_begin );
+  destroy_at( m_begin );
   increment( m_begin );
   --m_size;
 }
@@ -280,7 +285,7 @@ inline void bit::stl::circular_buffer<T>::pop_front()
 template<typename T>
 inline void bit::stl::circular_buffer<T>::pop_back()
 {
-  stl::destroy_at( m_end );
+  destroy_at( m_end );
   decrement( m_end );
   --m_size;
 }
@@ -289,6 +294,7 @@ inline void bit::stl::circular_buffer<T>::pop_back()
 
 template<typename T>
 inline void bit::stl::circular_buffer<T>::clear()
+  noexcept
 {
   while( !empty() ) {
     pop_back();
@@ -419,7 +425,7 @@ inline typename bit::stl::circular_buffer<T>::iterator
   bit::stl::circular_buffer<T>::begin()
   noexcept
 {
-  return iterator{ (*this), m_begin, full() };
+  return iterator{ (*this), m_begin, (capacity()) > 0 && full() };
 }
 
 template<typename T>
@@ -427,7 +433,7 @@ inline typename bit::stl::circular_buffer<T>::const_iterator
   bit::stl::circular_buffer<T>::begin()
   const noexcept
 {
-  return const_iterator{ (*this), m_begin, full() };
+  return const_iterator{ (*this), m_begin, (capacity()) > 0 && full() };
 }
 
 template<typename T>
@@ -435,7 +441,7 @@ inline typename bit::stl::circular_buffer<T>::const_iterator
   bit::stl::circular_buffer<T>::cbegin()
   const noexcept
 {
-  return const_iterator{ (*this), m_begin, full() };
+  return const_iterator{ (*this), m_begin, (capacity()) > 0 && full() };
 }
 
 //-----------------------------------------------------------------------------
@@ -445,7 +451,7 @@ inline typename bit::stl::circular_buffer<T>::iterator
   bit::stl::circular_buffer<T>::end()
   noexcept
 {
-  return iterator{ (*this), m_end, 0 };
+  return iterator{ (*this), m_end, false };
 }
 
 template<typename T>
@@ -453,7 +459,7 @@ inline typename bit::stl::circular_buffer<T>::const_iterator
   bit::stl::circular_buffer<T>::end()
   const noexcept
 {
-  return const_iterator{ (*this), m_end, 0 };
+  return const_iterator{ (*this), m_end, false };
 }
 
 template<typename T>
@@ -461,7 +467,7 @@ inline typename bit::stl::circular_buffer<T>::const_iterator
   bit::stl::circular_buffer<T>::cend()
   const noexcept
 {
-  return const_iterator{ (*this), m_end, 0 };
+  return const_iterator{ (*this), m_end, false };
 }
 
 //-----------------------------------------------------------------------------
@@ -471,7 +477,7 @@ inline typename bit::stl::circular_buffer<T>::reverse_iterator
   bit::stl::circular_buffer<T>::rbegin()
   noexcept
 {
-  return reverse_iterator{ iterator{(*this), m_end, full()} };
+  return reverse_iterator{ iterator{(*this), m_end, (capacity()) > 0 && full()} };
 }
 
 template<typename T>
@@ -479,7 +485,7 @@ inline typename bit::stl::circular_buffer<T>::const_reverse_iterator
   bit::stl::circular_buffer<T>::rbegin()
   const noexcept
 {
-  return const_reverse_iterator{ const_iterator{(*this), m_end, full()} };
+  return const_reverse_iterator{ const_iterator{(*this), m_end, (capacity()) > 0 && full()} };
 }
 
 template<typename T>
@@ -487,7 +493,7 @@ inline typename bit::stl::circular_buffer<T>::const_reverse_iterator
   bit::stl::circular_buffer<T>::crbegin()
   const noexcept
 {
-  return const_reverse_iterator{ const_iterator{(*this), m_end, full()} };
+  return const_reverse_iterator{ const_iterator{(*this), m_end, (capacity()) > 0 && full()} };
 }
 
 //-----------------------------------------------------------------------------
@@ -497,7 +503,7 @@ inline typename bit::stl::circular_buffer<T>::reverse_iterator
   bit::stl::circular_buffer<T>::rend()
   noexcept
 {
-  return reverse_iterator{ iterator{(*this), m_begin, 0} };
+  return reverse_iterator{ iterator{(*this), m_begin, false} };
 }
 
 template<typename T>
@@ -505,7 +511,7 @@ inline typename bit::stl::circular_buffer<T>::const_reverse_iterator
   bit::stl::circular_buffer<T>::rend()
   const noexcept
 {
-  return const_reverse_iterator{ const_iterator{(*this), m_begin, 0} };
+  return const_reverse_iterator{ const_iterator{(*this), m_begin, false} };
 }
 
 template<typename T>
@@ -513,7 +519,7 @@ inline typename bit::stl::circular_buffer<T>::const_reverse_iterator
   bit::stl::circular_buffer<T>::crend()
   const noexcept
 {
-  return const_reverse_iterator{ const_iterator{(*this), m_begin, 0} };
+  return const_reverse_iterator{ const_iterator{(*this), m_begin, false} };
 }
 //-----------------------------------------------------------------------------
 // Private Members
@@ -530,8 +536,30 @@ inline T*& bit::stl::circular_buffer<T>::increment( T*& iter )
 }
 
 template<typename T>
+inline const T*& bit::stl::circular_buffer<T>::increment( const T*& iter )
+  const noexcept
+{
+  if( iter == &m_buffer[m_capacity-1] ) {
+    return (iter = &m_buffer[0]);
+  }
+  return ++iter;
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename T>
 inline T*& bit::stl::circular_buffer<T>::decrement( T*& iter )
   noexcept
+{
+  if( iter == &m_buffer[0] ) {
+    return (iter = &m_buffer[m_capacity-1]);
+  }
+  return --iter;
+}
+
+template<typename T>
+inline const T*& bit::stl::circular_buffer<T>::decrement( const T*& iter )
+  const noexcept
 {
   if( iter == &m_buffer[0] ) {
     return (iter = &m_buffer[m_capacity-1]);
