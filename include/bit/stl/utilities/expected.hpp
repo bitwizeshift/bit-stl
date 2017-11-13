@@ -319,7 +319,7 @@ namespace bit {
         union storage_type
         {
           constexpr storage_type()
-            : empty{}
+            : dummy{}
           {
 
           }
@@ -338,7 +338,7 @@ namespace bit {
 
           }
 
-          empty<void>        empty;
+          empty<void>        dummy;
           T                  value;
           unexpected_type<E> error;
         };
@@ -426,7 +426,7 @@ namespace bit {
         union storage_type
         {
           constexpr storage_type()
-            : empty{}
+            : dummy{}
           {
 
           }
@@ -447,7 +447,7 @@ namespace bit {
 
           ~storage_type(){}
 
-          empty<void>        empty;
+          empty<void>        dummy;
           T                  value;
           unexpected_type<E> error;
         };
