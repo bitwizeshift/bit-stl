@@ -1130,4 +1130,262 @@ inline constexpr const bit::stl::unexpected_type<E>&&
   return std::move(base_type::get_unexpected());
 }
 
+//=============================================================================
+// X.Z.8, Expected relational operators
+//=============================================================================
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator==( const expected<T,E>& lhs, const expected<T,E>& rhs )
+{
+  return lhs.has_value() != rhs.has_value() ? false :
+         lhs.has_error() ? lhs.get_unexpected() == rhs.get_unexpected() :
+         lhs.has_value() ? *lhs == *rhs : true;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator!=( const expected<T,E>& lhs, const expected<T,E>& rhs )
+{
+  return lhs.has_value() != rhs.has_value() ? true :
+         lhs.has_error() ? lhs.get_unexpected() != rhs.get_unexpected() :
+         lhs.has_value() ? *lhs != *rhs : false;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator<( const expected<T,E>& lhs, const expected<T,E>& rhs )
+{
+  return lhs.has_value() && rhs.has_value() ? *lhs < *rhs :
+         lhs.has_error() && rhs.has_error() ? lhs.get_unexpected() < rhs.get_unexpected() :
+         lhs.has_value() && !rhs.has_value() ? true :
+        !lhs.has_value() && rhs.has_value() ? false :
+         lhs.valueless_by_exception() && rhs.valueless_by_exception() ? false :
+         false;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator>( const expected<T,E>& lhs, const expected<T,E>& rhs )
+{
+  return lhs.has_value() && rhs.has_value() ? *lhs > *rhs :
+         lhs.has_error() && rhs.has_error() ? lhs.get_unexpected() > rhs.get_unexpected() :
+         lhs.has_value() && !rhs.has_value() ? false :
+        !lhs.has_value() && rhs.has_value() ? true :
+         lhs.valueless_by_exception() && rhs.valueless_by_exception() ? false :
+         false;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator<=( const expected<T,E>& lhs, const expected<T,E>& rhs )
+{
+  return lhs.has_value() && rhs.has_value() ? *lhs <= *rhs :
+         lhs.has_error() && rhs.has_error() ? lhs.get_unexpected() <= rhs.get_unexpected() :
+         lhs.has_value() && !rhs.has_value() ? true :
+        !lhs.has_value() && rhs.has_value() ? false :
+         lhs.valueless_by_exception() && rhs.valueless_by_exception() ? true :
+         false;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator>=( const expected<T,E>& lhs, const expected<T,E>& rhs )
+{
+  return lhs.has_value() && rhs.has_value() ? *lhs >= *rhs :
+         lhs.has_error() && rhs.has_error() ? lhs.get_unexpected() >= rhs.get_unexpected() :
+         lhs.has_value() && !rhs.has_value() ? false :
+        !lhs.has_value() && rhs.has_value() ? true :
+         lhs.valueless_by_exception() && rhs.valueless_by_exception() ? true :
+         false;
+
+}
+
+//=============================================================================
+// X.Z.9, Comparison with T
+//=============================================================================
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator==( const expected<T,E>& x, const T& v )
+{
+  return static_cast<bool>(x) ? *x == v : false;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator==( const T& v, const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? v == *x : false;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator!=( const expected<T,E>& x, const T& v )
+{
+  return static_cast<bool>(x) ? *x != v : true;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator!=( const T& v, const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? v != *x : true;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator<( const expected<T,E>& x, const T& v )
+{
+  return static_cast<bool>(x) ? *x < v : false;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator<( const T& v, const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? v < *x : true;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator<=( const expected<T,E>& x, const T& v )
+{
+  return static_cast<bool>(x) ? *x <= v : false;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator<=( const T& v, const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? v <= *x : true;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator>( const expected<T,E>& x, const T& v )
+{
+  return static_cast<bool>(x) ? *x > v : true;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator>( const T& v, const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? v > *x : false;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator>=( const expected<T,E>& x, const T& v )
+{
+  return static_cast<bool>(x) ? *x >= v : true;
+}
+
+template<typename T, typename E>
+inline constexpr bool
+  bit::stl::operator>=( const T& v, const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? v >= *x : false;
+}
+
+//=============================================================================
+// X.Z.10, Comparison with unexpected_type<E>
+//=============================================================================
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator==( const expected<T,E>& x,
+                                            const unexpected_type<E>& e )
+{
+  return static_cast<bool>(x) ? true : x.get_unexpected() == e;
+}
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator==( const unexpected_type<E>& e,
+                                            const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? true : e== x.get_unexpected();
+}
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator!=( const expected<T,E>& x,
+                                            const unexpected_type<E>& e)
+{
+  return static_cast<bool>(x) ? false : x.get_unexpected() != e;
+}
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator!=( const unexpected_type<E>& e,
+                                            const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? false : e != x.get_unexpected();
+}
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator<( const expected<T,E>& x,
+                                           const unexpected_type<E>& e )
+{
+  return static_cast<bool>(x) ? true : x.get_unexpected() < e;
+}
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator<( const unexpected_type<E>& e,
+                                           const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? false : e < x.get_unexpected();
+}
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator<=( const expected<T,E>& x,
+                                            const unexpected_type<E>& e )
+{
+  return static_cast<bool>(x) ? true : x.get_unexpected() <= e;
+}
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator<=( const unexpected_type<E>& e,
+                                            const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? false : e <= x.get_unexpected();
+}
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator>( const expected<T,E>& x,
+                                           const unexpected_type<E>& e )
+{
+  return static_cast<bool>(x) ? false : x.get_unexpected() > e;
+}
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator>( const unexpected_type<E>& e,
+                                           const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? true : e > x.get_unexpected();
+}
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator>=( const expected<T,E>& x,
+                                            const unexpected_type<E>& e )
+{
+  return static_cast<bool>(x) ? false : x.get_unexpected() >= e;
+}
+
+template<typename T, typename E>
+inline constexpr bool bit::stl::operator>=( const unexpected_type<E>& e,
+                                            const expected<T,E>& x )
+{
+  return static_cast<bool>(x) ? true : e >= x.get_unexpected();
+}
+
+//-----------------------------------------------------------------------------
+
+// X.Z.11, Specialized algorithms
+
+template<typename T, typename E>
+inline void bit::stl::swap( expected<T,E>& lhs, expected<T,E>& rhs )
+{
+  lhs.swap(rhs);
+}
+
+
 #endif /* BIT_STL_UTILITIES_DETAIL_EXPECTED_INL */

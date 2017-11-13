@@ -32,7 +32,7 @@ namespace bit {
     /// \brief The exception type thrown when accessing a non-active expected
     ///        member
     ///
-    /// \tparam Error the error type
+    /// \tparam E the error type
     ///////////////////////////////////////////////////////////////////////////
     template<typename E>
     class bad_expected_access : public std::logic_error
@@ -868,98 +868,98 @@ namespace bit {
     // X.Z.8, Expected relational operators
     //=========================================================================
 
-    template<typename T, typename Error>
-    constexpr bool operator==( const expected<T,Error>& lhs,
-                               const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator!=( const expected<T,Error>& lhs,
-                               const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator<( const expected<T,Error>& lhs,
-                              const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator>( const expected<T,Error>& lhs,
-                              const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator<=( const expected<T,Error>& lhs,
-                               const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator>=( const expected<T,Error>& lhs,
-                               const expected<T,Error>& rhs );
+    template<typename T, typename E>
+    constexpr bool operator==( const expected<T,E>& lhs,
+                               const expected<T,E>& rhs );
+    template<typename T, typename E>
+    constexpr bool operator!=( const expected<T,E>& lhs,
+                               const expected<T,E>& rhs );
+    template<typename T, typename E>
+    constexpr bool operator<( const expected<T,E>& lhs,
+                              const expected<T,E>& rhs );
+    template<typename T, typename E>
+    constexpr bool operator>( const expected<T,E>& lhs,
+                              const expected<T,E>& rhs );
+    template<typename T, typename E>
+    constexpr bool operator<=( const expected<T,E>& lhs,
+                               const expected<T,E>& rhs );
+    template<typename T, typename E>
+    constexpr bool operator>=( const expected<T,E>& lhs,
+                               const expected<T,E>& rhs );
 
     //=========================================================================
     // X.Z.9, Comparison with T
     //=========================================================================
 
-    template<typename T, typename Error>
-    constexpr bool operator==( const expected<T,Error>& lhs, const T& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator==( const T& lhs, const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator!=( const expected<T,Error>& lhs, const T& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator!=( const T& lhs, const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator<( const expected<T,Error>& lhs, const T& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator<( const T& lhs, const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator<=( const expected<T,Error>& lhs, const T& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator<=( const T& lhs, const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator>( const expected<T,Error>& lhs, const T& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator>( const T& lhs, const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator>=( const expected<T,Error>& lhs, const T& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator>=( const T& lhs, const expected<T,Error>& rhs );
+    template<typename T, typename E>
+    constexpr bool operator==( const expected<T,E>& x, const T& v );
+    template<typename T, typename E>
+    constexpr bool operator==( const T& v, const expected<T,E>& x );
+    template<typename T, typename E>
+    constexpr bool operator!=( const expected<T,E>& x, const T& v );
+    template<typename T, typename E>
+    constexpr bool operator!=( const T& v, const expected<T,E>& x );
+    template<typename T, typename E>
+    constexpr bool operator<( const expected<T,E>& x, const T& v );
+    template<typename T, typename E>
+    constexpr bool operator<( const T& v, const expected<T,E>& x );
+    template<typename T, typename E>
+    constexpr bool operator<=( const expected<T,E>& x, const T& v );
+    template<typename T, typename E>
+    constexpr bool operator<=( const T& v, const expected<T,E>& x );
+    template<typename T, typename E>
+    constexpr bool operator>( const expected<T,E>& x, const T& v );
+    template<typename T, typename E>
+    constexpr bool operator>( const T& v, const expected<T,E>& x );
+    template<typename T, typename E>
+    constexpr bool operator>=( const expected<T,E>& x, const T& v );
+    template<typename T, typename E>
+    constexpr bool operator>=( const T& v, const expected<T,E>& x );
 
     //=========================================================================
     // X.Z.10, Comparison with unexpected_type<E>
     //=========================================================================
 
-    template<typename T, typename Error>
-    constexpr bool operator==( const expected<T,Error>& lhs,
-                               const unexpected_type<Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator==( const unexpected_type<Error>& lhs,
-                               const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator!=( const expected<T,Error>& lhs,
-                               const unexpected_type<Error>& rhs);
-    template<typename T, typename Error>
-    constexpr bool operator!=( const unexpected_type<Error>& lhs,
-                               const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator<( const expected<T,Error>& lhs,
-                              const unexpected_type<Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator<( const unexpected_type<Error>& lhs,
-                              const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator<=( const expected<T,Error>& lhs,
-                               const unexpected_type<Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator<=( const unexpected_type<Error>& lhs,
-                               const expected<T,Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator>( const expected<T,Error>& lhs,
-                              const unexpected_type<Error>& rhs);
-    template<typename T, typename Error>
-    constexpr bool operator>( const unexpected_type<Error>& lhs,
-                              const expected<T,Error>& rhs ) ;
-    template<typename T, typename Error>
-    constexpr bool operator>=( const expected<T,Error>& lhs,
-                               const unexpected_type<Error>& rhs );
-    template<typename T, typename Error>
-    constexpr bool operator>=( const unexpected_type<Error>& lhs,
-                               const expected<T,Error>& rhs );
+    template<typename T, typename E>
+    constexpr bool operator==( const expected<T,E>& x,
+                               const unexpected_type<E>& e );
+    template<typename T, typename E>
+    constexpr bool operator==( const unexpected_type<E>& e,
+                               const expected<T,E>& x );
+    template<typename T, typename E>
+    constexpr bool operator!=( const expected<T,E>& x,
+                               const unexpected_type<E>& e );
+    template<typename T, typename E>
+    constexpr bool operator!=( const unexpected_type<E>& e,
+                               const expected<T,E>& x );
+    template<typename T, typename E>
+    constexpr bool operator<( const expected<T,E>& x,
+                              const unexpected_type<E>& e );
+    template<typename T, typename E>
+    constexpr bool operator<( const unexpected_type<E>& e,
+                              const expected<T,E>& x );
+    template<typename T, typename E>
+    constexpr bool operator<=( const expected<T,E>& x,
+                               const unexpected_type<E>& e );
+    template<typename T, typename E>
+    constexpr bool operator<=( const unexpected_type<E>& e,
+                               const expected<T,E>& x );
+    template<typename T, typename E>
+    constexpr bool operator>( const expected<T,E>& x,
+                              const unexpected_type<E>& e );
+    template<typename T, typename E>
+    constexpr bool operator>( const unexpected_type<E>& e,
+                              const expected<T,E>& x ) ;
+    template<typename T, typename E>
+    constexpr bool operator>=( const expected<T,E>& x,
+                               const unexpected_type<E>& e );
+    template<typename T, typename E>
+    constexpr bool operator>=( const unexpected_type<E>& e,
+                               const expected<T,E>& x );
 
     // X.Z.11, Specialized algorithms
-    template<typename T, typename Error>
-    void swap( expected<T,Error>& lhs, expected<T,Error>& rhs );
+    template<typename T, typename E>
+    void swap( expected<T,E>& lhs, expected<T,E>& rhs );
 
     // X.Z.12, Factories
 
