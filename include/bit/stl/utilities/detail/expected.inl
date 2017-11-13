@@ -1053,7 +1053,7 @@ template<typename U>
 inline constexpr E bit::stl::expected<T,E>::error_or( U&& default_value )
   const &
 {
-  return !bool(*this) ? base_type::get_unexpected().value() : default_value;
+  return !bool(*this) ? base_type::get_unexpected().value() : std::forward<U>(default_value);
 }
 
 template<typename T, typename E>
@@ -1061,7 +1061,7 @@ template<typename U>
 inline constexpr E bit::stl::expected<T,E>::error_or( U&& default_value )
   &&
 {
-  return !bool(*this) ? base_type::get_unexpected().value() : default_value;
+  return !bool(*this) ? base_type::get_unexpected().value() : std::forward<U>(default_value);
 }
 
 //-----------------------------------------------------------------------------
@@ -1117,6 +1117,340 @@ inline constexpr const bit::stl::unexpected_type<E>&
 template<typename T, typename E>
 inline constexpr const bit::stl::unexpected_type<E>&&
   bit::stl::expected<T,E>::get_unexpected()
+  const &&
+{
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  if( !has_error() ) {
+    throw bad_expected_access<void>();
+  }
+#else
+  BIT_ALWAYS_ASSERT( has_error(), "expected must have error" );
+#endif
+
+  return std::move(base_type::get_unexpected());
+}
+
+//=============================================================================
+// expected<void,E>
+//=============================================================================
+
+template<typename E>
+inline constexpr bit::stl::expected<void,E>::expected()
+  noexcept
+  : base_type( in_place )
+{
+
+}
+
+
+//-----------------------------------------------------------------------------
+
+template<typename E>
+inline bit::stl::expected<void,E>
+  ::expected( enable_overload_if<std::is_copy_constructible<E>::value,
+                                 const expected&> other )
+  : base_type()
+{
+  if ( other.has_error() ) {
+    base_type::emplace_error( other.get_unexpected() );
+  }
+}
+
+template<typename E>
+inline bit::stl::expected<void,E>
+  ::expected( enable_overload_if<std::is_move_constructible<E>::value,
+                                 expected&&> other )
+  : base_type()
+{
+  if ( other.has_error() ) {
+    base_type::emplace_error( std::move(other.get_unexpected()) );
+  }
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename E>
+template<typename G, typename>
+inline bit::stl::expected<void,E>::expected( const expected<void,G>& other )
+  : base_type()
+{
+  if ( other.has_error() ) {
+    base_type::emplace_error( other.get_unexpected() );
+  }
+}
+
+template<typename E>
+template<typename G, typename>
+inline bit::stl::expected<void,E>::expected( expected<void,G>&& other )
+  : base_type()
+{
+  if ( other.has_error() ) {
+    base_type::emplace_error( std::move(other.get_unexpected()) );
+  }
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename E>
+inline constexpr bit::stl::expected<void,E>::expected( in_place_t )
+  : base_type( in_place )
+{
+
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename E>
+template<typename UError, typename>
+inline constexpr bit::stl::expected<void,E>
+  ::expected( unexpected_type<E> const& unexpected )
+  : base_type( unexpect, unexpected )
+{
+
+}
+
+template<typename E>
+template<typename Err, typename>
+inline constexpr bit::stl::expected<void,E>
+  ::expected( unexpected_type<Err> const& unexpected )
+  : base_type( unexpect, std::move(unexpected) )
+{
+
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename E>
+template<typename...Args, typename>
+inline constexpr bit::stl::expected<void,E>
+  ::expected( unexpect_t, Args&&...args )
+  : base_type( unexpect, std::forward<Args>(args)... )
+{
+
+}
+
+template<typename E>
+template<typename U, typename...Args, typename>
+inline constexpr bit::stl::expected<void,E>
+  ::expected( unexpect_t, std::initializer_list<U> ilist, Args&&...args )
+  : base_type( unexpect, std::forward<Args>(args)... )
+{
+
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename E>
+inline bit::stl::expected<void,E>&
+  bit::stl::expected<void,E>::operator=( const expected& other )
+{
+
+  if( other.has_value() ) {
+    emplace();
+  } else if( other.has_error() ) {
+    base_type::assign_error( other.get_unexpected() );
+  }
+
+  return (*this);
+}
+
+template<typename E>
+inline bit::stl::expected<void,E>&
+  bit::stl::expected<void,E>::operator=( expected&& other )
+{
+  if( other.has_value() ) {
+    emplace();
+  } else if( other.has_error() ) {
+    base_type::assign_error( std::move(other.get_unexpected()) );
+  }
+
+  return (*this);
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename E>
+inline bit::stl::expected<void,E>&
+  bit::stl::expected<void,E>::operator=( const unexpected_type<E>& unexpected )
+{
+  base_type::assign_error( unexpected );
+
+  return (*this);
+}
+
+template<typename E>
+inline bit::stl::expected<void,E>&
+  bit::stl::expected<void,E>::operator=( unexpected_type<E>&& unexpected )
+{
+  base_type::assign_error( std::move(unexpected) );
+
+  return (*this);
+}
+
+//-----------------------------------------------------------------------------
+// Modifiers
+//-----------------------------------------------------------------------------
+
+template<typename E>
+inline void bit::stl::expected<void,E>::emplace()
+{
+  base_type::emplace_value();
+}
+
+template<typename E>
+inline void bit::stl::expected<void,E>::swap( expected& other )
+{
+
+}
+
+//-----------------------------------------------------------------------------
+// Observers
+//-----------------------------------------------------------------------------
+
+template<typename E>
+inline constexpr bool bit::stl::expected<void,E>::has_value()
+  const noexcept
+{
+  return base_type::has_value();
+}
+
+template<typename E>
+inline constexpr bool bit::stl::expected<void,E>::has_error()
+  const noexcept
+{
+  return base_type::has_error();
+}
+
+template<typename E>
+inline constexpr bool bit::stl::expected<void,E>::valueless_by_exception()
+  const noexcept
+{
+  return base_type::valueless_by_exception();
+}
+
+template<typename E>
+inline constexpr bit::stl::expected<void,E>::operator bool()
+  const noexcept
+{
+  return has_value();
+}
+
+//-----------------------------------------------------------------------
+
+template<typename E>
+inline void bit::stl::expected<void,E>::value()
+  const
+{
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  if( has_error() ) {
+    throw bad_expected_access<E>( base_type::get_unexpected().value() );
+  } else if ( valueless_by_exception() ) {
+    throw bad_expected_access<void>();
+  }
+#endif
+}
+
+//-----------------------------------------------------------------------
+
+template<typename E>
+inline constexpr E& bit::stl::expected<void,E>::error()
+  &
+{
+  return get_unexpected().value();
+}
+
+template<typename E>
+inline constexpr E&& bit::stl::expected<void,E>::error()
+  &&
+{
+  return std::move(get_unexpected().value());
+}
+
+template<typename E>
+inline constexpr const E& bit::stl::expected<void,E>::error()
+  const &
+{
+  return get_unexpected().value();
+}
+
+template<typename E>
+inline constexpr const E&& bit::stl::expected<void,E>::error()
+  const &&
+{
+  return std::move(get_unexpected().value());
+}
+
+//-----------------------------------------------------------------------
+
+template<typename E>
+template<typename U>
+inline constexpr E bit::stl::expected<void,E>::error_or( U&& default_value )
+  const &
+{
+  return !bool(*this) ? base_type::get_unexpected().value() : std::forward<U>(default_value);
+}
+
+template<typename E>
+template<typename U>
+inline constexpr E bit::stl::expected<void,E>::error_or( U&& default_value )
+  &&
+{
+  return !bool(*this) ? base_type::get_unexpected().value() : std::forward<U>(default_value);
+}
+
+//-----------------------------------------------------------------------
+
+template<typename E>
+inline constexpr bit::stl::unexpected_type<E>&
+  bit::stl::expected<void,E>::get_unexpected()
+  &
+{
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  if( !has_error() ) {
+    throw bad_expected_access<void>();
+  }
+#else
+  BIT_ALWAYS_ASSERT( has_error(), "expected must have error" );
+#endif
+
+  return base_type::get_unexpected();
+}
+
+template<typename E>
+inline constexpr bit::stl::unexpected_type<E>&&
+  bit::stl::expected<void,E>::get_unexpected()
+  &&
+{
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  if( !has_error() ) {
+    throw bad_expected_access<void>();
+  }
+#else
+  BIT_ALWAYS_ASSERT( has_error(), "expected must have error" );
+#endif
+
+  return std::move(base_type::get_unexpected());
+}
+
+template<typename E>
+inline constexpr const bit::stl::unexpected_type<E>&
+  bit::stl::expected<void,E>::get_unexpected()
+  const &
+{
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  if( !has_error() ) {
+    throw bad_expected_access<void>();
+  }
+#else
+  BIT_ALWAYS_ASSERT( has_error(), "expected must have error" );
+#endif
+
+  return base_type::get_unexpected();
+}
+
+template<typename E>
+inline constexpr const bit::stl::unexpected_type<E>&&
+  bit::stl::expected<void,E>::get_unexpected()
   const &&
 {
 #if BIT_COMPILER_EXCEPTIONS_ENABLED

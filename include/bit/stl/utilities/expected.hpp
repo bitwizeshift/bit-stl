@@ -317,8 +317,6 @@ namespace bit {
 
         union storage_type
         {
-          using value_type = std::conditional_t<std::is_void<T>::value,empty<void>,T>;
-
           constexpr storage_type()
             : empty{}
           {
@@ -340,7 +338,7 @@ namespace bit {
           }
 
           empty<void>        empty;
-          value_type         value;
+          T                  value;
           unexpected_type<E> error;
         };
 
@@ -426,8 +424,6 @@ namespace bit {
 
         union storage_type
         {
-          using value_type = std::conditional_t<std::is_void<T>::value,empty<void>,T>;
-
           constexpr storage_type()
             : empty{}
           {
@@ -451,7 +447,7 @@ namespace bit {
           ~storage_type(){}
 
           empty<void>        empty;
-          value_type         value;
+          T                  value;
           unexpected_type<E> error;
         };
 
@@ -691,8 +687,6 @@ namespace bit {
       //-----------------------------------------------------------------------
     public:
 
-      // X.Z.4.5, observers
-
       /// \brief Queries whether the expected has a value
       ///
       /// \return \c true if the expected has a value
@@ -787,11 +781,11 @@ namespace bit {
     //=========================================================================
 
     template<typename E>
-    class expected<void, E>;
-
-    template<typename E>
     class expected<void, E>
+      : detail::expected_base<std::is_trivially_destructible<E>::value,empty<void>,E>
     {
+      using base_type = detail::expected_base<std::is_trivially_destructible<E>::value,empty<void>,E>;
+
       //-----------------------------------------------------------------------
       // Public Member Types
       //-----------------------------------------------------------------------
@@ -811,57 +805,182 @@ namespace bit {
       //-----------------------------------------------------------------------
     public:
 
+      /// \brief Default constructs this expected type with no error
       constexpr expected() noexcept;
 
-      expected(const expected&);
+      //-----------------------------------------------------------------------
 
-      expected(expected&&)
-        noexcept(std::is_nothrow_move_constructible<E>::value);
-
-      constexpr explicit expected(in_place_t);
-
-      constexpr expected(unexpected_type<E> const&);
-
-      template<typename Err>
-      constexpr expected(unexpected_type<Err> const&);
+      /// \brief Copy-constructs an expected from an existing expected
+      ///
+      /// \param other the other expected
+      expected( enable_overload_if<std::is_copy_constructible<E>::value,
+                                   const expected&> other );
+      expected( disable_overload_if<std::is_copy_constructible<E>::value,
+                                    const expected&> other ) = delete;
 
       //-----------------------------------------------------------------------
 
-      expected& operator=(const expected&);
+      /// \brief Move-constructs an expected from an existing expected
+      ///
+      /// \param other the other expected
+      expected( enable_overload_if<std::is_move_constructible<E>::value,
+                                   expected&&> other );
+      expected( disable_overload_if<std::is_move_constructible<E>::value,
+                                    expected&&> other ) = delete;
 
-      expected& operator=(expected&&)
-        noexcept(std::is_nothrow_move_assignable<E>::value);
+      //-----------------------------------------------------------------------
 
+      /// \brief Copy-converts this expected type from an existing expected
+      ///
+      /// \param other the other expected to copy
+      template<typename G, typename = std::enable_if_t<std::is_constructible<E,const G&>::value>>
+      expected( const expected<void,G>& other );
+
+      /// \brief Move-converts this expected type from an existing expected
+      ///
+      /// \param other the other expected to move
+      template<typename G, typename = std::enable_if_t<std::is_constructible<E,G&&>::value>>
+      expected( expected<void,G>&& other );
+
+      //-----------------------------------------------------------------------
+
+      /// \brief Constructs this expected type with no error
+      constexpr explicit expected( in_place_t );
+
+      //-----------------------------------------------------------------------
+
+      /// \brief Constructs the underlying error from a given unexpected type
+      ///
+      /// \param unexpected the unexpected type
+      template<typename UError=E, typename = std::enable_if_t<std::is_copy_constructible<UError>::value>>
+      constexpr expected( unexpected_type<E> const& unexpected );
+
+      /// \brief Constructs the underlying error from a given unexpected type
+      ///
+      /// \param unexpected the unexpected type
+      template<typename Err, typename = std::enable_if_t<std::is_convertible<Err,E>::value>>
+      constexpr expected( unexpected_type<Err> const& unexpected );
+
+      //-----------------------------------------------------------------------
+
+      /// \brief Constructs the underlying error of the expected by
+      ///        constructing the value in place
+      ///
+      /// \param args the arguments to forward
+      template<typename...Args, typename = std::enable_if_t<std::is_constructible<E, Args...>::value>>
+      constexpr explicit expected( unexpect_t,
+                                   Args&&...args );
+
+      /// \brief Constructs the underlying error of the expected by
+      ///        constructing the value in place
+      ///
+      /// \param ilist an initializer list to forward
+      /// \param args the arguments to forward
+      template<typename U, typename...Args, typename = std::enable_if_t<std::is_constructible<E,std::initializer_list<U>,Args...>::value>>
+      constexpr explicit expected( unexpect_t,
+                                   std::initializer_list<U> ilist,
+                                   Args&&...args );
+
+      //-----------------------------------------------------------------------
+
+      /// \brief Copy-assigns an expected from an existing expected
+      ///
+      /// \param other the other expected
+      /// \return reference to \c (*this)
+      expected& operator=( const expected& other );
+
+      /// \brief Move-assigns an expected from an existing expected
+      ///
+      /// \param other the other expected
+      /// \return reference to \c (*this)
+      expected& operator=( expected&& other );
+
+      //-----------------------------------------------------------------------
+
+      expected& operator=( const unexpected_type<E>& unexpected );
+
+      expected& operator=( unexpected_type<E>&& unexpected );
+
+      //-----------------------------------------------------------------------
+      // Modifiers
+      //-----------------------------------------------------------------------
+    public:
+
+      /// \brief Constructs this expected without an error state
       void emplace();
 
-      // ??, swap
-      void swap( expected& );
+      /// \brief Swaps this expected with \p other
+      ///
+      /// \param other the other expected to swap
+      void swap( expected& other );
 
-      // ??, observers
-      constexpr explicit operator bool() const noexcept;
+      //-----------------------------------------------------------------------
+      // Observers
+      //-----------------------------------------------------------------------
+    public:
+
+      /// \brief Queries whether the expected has a value
+      ///
+      /// \return \c true if the expected has a value
       constexpr bool has_value() const noexcept;
 
+      /// \brief Queries whether the expected has an error
+      ///
+      /// \return \c true if the expected has an error
+      constexpr bool has_error() const noexcept;
+
+      /// \brief Queries whether the expected is valueless_by_exception
+      ///
+      /// \return \c true if the expected is valueless-by-exception
+      constexpr bool valueless_by_exception() const noexcept;
+
+      /// \brief Explicitly convertible to \c bool
+      ///
+      /// \return \c true if the expected has a value
+      constexpr explicit operator bool() const noexcept;
+
+      //-----------------------------------------------------------------------
+
+      /// \brief Throws the error, if there is a stored error
       void value() const;
 
+      //-----------------------------------------------------------------------
+
+      /// \{
+      /// \brief Gets the underlying error
+      ///
+      /// \throw bad_expected_access<void> if not currently in an error state
+      /// \return reference to the underlying error
       constexpr E& error() &;
       constexpr E&& error() &&;
-      constexpr const E& error() const&;
-      constexpr const E&& error() const&&;
+      constexpr const E& error() const &;
+      constexpr const E&& error() const &&;
+      /// \}
 
-      constexpr unexpected_type<E> get_unexpected() const;
+      /// \{
+      /// \brief Gets the underlying error if there is an error, otherwise
+      ///        returns \p default_value
+      ///
+      /// \param default_value the default value to use
+      /// \return the error
+      template<typename U>
+      constexpr E error_or( U&& default_value ) const &;
+      template<typename U>
+      constexpr E error_or( U&& default_value ) &&;
+      /// \}
 
       //-----------------------------------------------------------------------
-      // Private Members
-      //-----------------------------------------------------------------------
-    private:
 
-      union storage_type
-      {
-        empty<void> empty;
-        error_type  error;
-      };
-      storage_type m_storage;
-      bool         m_has_value; // exposition only
+      /// \{
+      /// \brief Gets the underlying expected type
+      ///
+      /// \throw bad_expected_access<void> if not currently in an error state
+      /// \return reference to the unexpected_type
+      constexpr unexpected_type<E>& get_unexpected() &;
+      constexpr unexpected_type<E>&& get_unexpected() &&;
+      constexpr const unexpected_type<E>& get_unexpected() const &;
+      constexpr const unexpected_type<E>&& get_unexpected() const &&;
+      /// \}
     };
 
     //=========================================================================
@@ -960,13 +1079,6 @@ namespace bit {
     // X.Z.11, Specialized algorithms
     template<typename T, typename E>
     void swap( expected<T,E>& lhs, expected<T,E>& rhs );
-
-    // X.Z.12, Factories
-
-    template<typename T>
-    constexpr expected<std::decay_t<T>> make_expected( T&& v );
-
-    expected<void> make_expected();
 
   } // namespace stl
 } // namespace bit
