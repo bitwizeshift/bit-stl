@@ -15,6 +15,7 @@
 #include "in_place.hpp"
 #include "tribool.hpp"
 #include "compiler_traits.hpp" // BIT_COMPILER_EXCEPTIONS_ENABLED
+#include "assert.hpp"          // BIT_ALWAYS_ASSERT
 
 #include <initializer_list> // std::initializer_list
 #include <stdexcept>        // std::logic_error
