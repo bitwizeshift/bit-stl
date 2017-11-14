@@ -233,7 +233,7 @@ inline constexpr bit::stl::detail::expected_base<true,T,E>::expected_base()
 
 template<typename T, typename E>
 template<typename...Args>
-  inline constexpr bit::stl::detail::expected_base<true,T,E>
+inline constexpr bit::stl::detail::expected_base<true,T,E>
   ::expected_base( in_place_t, Args&&...args )
   : m_storage( in_place, std::forward<Args>(args)... ),
     m_has_value(true)
@@ -360,6 +360,7 @@ inline void bit::stl::detail::expected_base<true,T,E>
   try {
 #endif // BIT_COMPILER_EXCEPTIONS_ENABLED
     new (&m_storage.value) T( std::forward<Args>(args)... );
+    m_has_value = true;
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
   } catch( ... ) {
     m_has_value = indeterminate;
@@ -376,7 +377,8 @@ inline void bit::stl::detail::expected_base<true,T,E>
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
   try {
 #endif // BIT_COMPILER_EXCEPTIONS_ENABLED
-    new (&m_storage.value) unexpected_type<T>{ std::forward<Args>(args)... };
+    new (&m_storage.error) unexpected_type<E>( std::forward<Args>(args)... );
+    m_has_value = false;
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
   } catch( ... ) {
     m_has_value = indeterminate;
@@ -448,8 +450,7 @@ inline constexpr bit::stl::detail::expected_base<false,T,E>
 //-----------------------------------------------------------------------------
 
 template<typename T, typename E>
-inline bit::stl::detail::expected_base<false,T,E>
-  ::~expected_base()
+inline bit::stl::detail::expected_base<false,T,E>::~expected_base()
 {
   destruct();
 }
@@ -574,6 +575,7 @@ inline void bit::stl::detail::expected_base<false,T,E>
   try {
 #endif // BIT_COMPILER_EXCEPTIONS_ENABLED
     new (&m_storage.value) T{ std::forward<Args>(args)... };
+    m_has_value = true;
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
   } catch( ... ) {
     m_has_value = indeterminate;
@@ -591,7 +593,8 @@ void bit::stl::detail::expected_base<false,T,E>
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
   try {
 #endif // BIT_COMPILER_EXCEPTIONS_ENABLED
-    new (&m_storage.value) unexpected_type<T>{ std::forward<Args>(args)... };
+    new (&m_storage.error) unexpected_type<E>( std::forward<Args>(args)... );
+    m_has_value = false;
 #if BIT_COMPILER_EXCEPTIONS_ENABLED
   } catch( ... ) {
     m_has_value = indeterminate;
