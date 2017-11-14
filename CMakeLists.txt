@@ -204,6 +204,7 @@ set(headers
   include/bit/stl/utilities/uninitialized_storage.hpp
   include/bit/stl/utilities/utility.hpp
   include/bit/stl/utilities/uuid.hpp
+  include/bit/stl/utilities/variant.hpp
 
   # containers
   include/bit/stl/containers/array.hpp

@@ -177,13 +177,15 @@ public:
   void swap(variant&) noexcept(see below );
 };
 */
+#ifndef BIT_STL_UTILITIES_VARIANT_HPP
+#define BIT_STL_UTILITIES_VARIANT_HPP
 
-#ifndef BIT_STL_VARIANT_HPP
-#define BIT_STL_VARIANT_HPP
-
-#include "stdlib.h"
+#include "in_place.hpp"
+#include "monostate.hpp"
 #include "utility.hpp"
-#include "type_traits.hpp" // block_if
+
+#include "../traits/composition/sfinae.hpp"      // enable_overload_if
+#include "../traits/composition/conjunction.hpp"
 
 #include <initializer_list> // std::initializer_list
 #include <memory>           // std::uses_allocator
@@ -192,7 +194,10 @@ public:
 namespace bit {
   namespace stl {
 
+    //=========================================================================
     // 23.7.3, class template variant
+    //=========================================================================
+
     template <typename... Types>
     class variant;
 
@@ -200,18 +205,18 @@ namespace bit {
 
       struct variant_empty{};
 
-      ////////////////////////////////////////////////////////////////////////
-      ///
-      ///
-      ////////////////////////////////////////////////////////////////////////
+      //=======================================================================
+      // variant_union
+      //=======================================================================
+
       template<bool IsTrivial, typename...Types>
       union variant_union;
 
-      template<typename Type0, typename Type1, typename...Types>
-      union variant_union<true,Type0,Type1,Types...>
+      template<typename Type0, typename...Types>
+      union variant_union<true,Type0,Types...>
       {
         using current_type = Type0;
-        using next_type    = variant_union<true,Type1,Types...>;
+        using next_type    = variant_union<true,Types...>;
 
         variant_empty empty;
         current_type  current;
@@ -228,17 +233,17 @@ namespace bit {
 
         template<std::size_t N, typename...Args>
         constexpr variant_union( in_place_index_t<N>, Args&&...args )
-          : next( in_place<N-1>, std::forward<Args>(args)... )
+          : next( in_place_index<N-1>, std::forward<Args>(args)... )
         {
 
         }
       };
 
-      template<typename Type0, typename Type1, typename...Types>
-      union variant_union<false,Type0,Type1,Types...>
+      template<typename Type0, typename...Types>
+      union variant_union<false,Type0,Types...>
       {
         using current_type = Type0;
-        using next_type    = variant_union<false,Type1,Types...>;
+        using next_type    = variant_union<false,Types...>;
 
         variant_empty empty;
         current_type  current;
@@ -255,7 +260,7 @@ namespace bit {
 
         template<std::size_t N, typename...Args>
         constexpr variant_union( in_place_index_t<N>, Args&&...args )
-          : next( in_place<N-1>, std::forward<Args>(args)... )
+          : next( in_place_index<N-1>, std::forward<Args>(args)... )
         {
 
         }
@@ -263,44 +268,30 @@ namespace bit {
         ~variant_union(){}
       };
 
-      template<typename Type0>
-      union variant_union<true,Type0>
+      template<bool B>
+      union variant_union<B>
       {
-        using current_type = Type0;
 
         variant_empty empty;
-        current_type current;
 
         constexpr variant_union() : empty(){}
 
         template<typename...Args>
-        constexpr variant_union( in_place_index_t<0>, Args&&...args )
-          : current( std::forward<Args>(args)... )
+        constexpr variant_union( in_place_index_t<0> )
+          : empty()
         {
 
         }
-
       };
 
-      template<typename Type0>
-      union variant_union<false,Type0>
+      template<bool B, typename T0, typename Fn>
+      constexpr bool compare( std::size_t index,
+                              const variant_union<B,T0>& lhs,
+                              const variant_union<B,T0>& rhs,
+                              Fn&& comp )
       {
-        using current_type = Type0;
-
-        variant_empty empty;
-        current_type current;
-
-        constexpr variant_union() : empty(){}
-
-        template<typename...Args>
-        constexpr variant_union( in_place_index_t<0>, Args&&...args )
-          : current( std::forward<Args>(args)... )
-        {
-
-        }
-
-        ~variant_union(){}
-      };
+        return std::forward<Fn>(comp)(lhs.current, rhs.current);
+      }
 
       template<bool B, typename T0, typename T1, typename...Ts, typename Fn>
       constexpr bool compare( std::size_t index,
@@ -309,25 +300,15 @@ namespace bit {
                               Fn&& comp)
       {
         if( index == 0 ) {
-          return comp(lhs.current, rhs.current);
+          return std::forward<Fn>(comp)(lhs.current, rhs.current);
         }
         return compare( index-1, lhs.next, rhs.next, std::forward<Fn>(comp) );
       }
 
-      template<bool B, typename T0, typename Fn>
-      constexpr bool compare( std::size_t index,
-                              const variant_union<B,T0>& lhs,
-                              const variant_union<B,T0>& rhs,
-                              Fn&& comp )
-      {
-        return comp(lhs.current, rhs.current);
-      }
+      //=======================================================================
+      // variant_base
+      //=======================================================================
 
-
-      ////////////////////////////////////////////////////////////////////////
-      ///
-      ///
-      ////////////////////////////////////////////////////////////////////////
       template<bool IsTrivial, typename...Types>
       class variant_base;
 
@@ -345,7 +326,7 @@ namespace bit {
 
         template<std::size_t N, typename...Args>
         constexpr variant_base( in_place_index_t<N>, Args&&...args )
-          : m_union( in_place<N>, std::forward<Args>(args)... ),
+          : m_union( in_place_index<N>, std::forward<Args>(args)... ),
             m_index( N )
         {
 
@@ -384,7 +365,7 @@ namespace bit {
 
         template<std::size_t N, typename...Args>
         constexpr variant_base( in_place_index_t<N>, Args&&...args )
-          : m_union( in_place<N>, std::forward<Args>(args)... ),
+          : m_union( in_place_index<N>, std::forward<Args>(args)... ),
             m_index( N )
         {
 
@@ -612,21 +593,6 @@ namespace bit {
 
     // 23.7.8, class monostate
 
-    //////////////////////////////////////////////////////////////////////////
-    ///
-    ///
-    //////////////////////////////////////////////////////////////////////////
-    struct monostate {};
-
-    // 23.7.9, monostate relational operators
-
-    constexpr bool operator<(monostate, monostate) noexcept { return false; }
-    constexpr bool operator>(monostate, monostate) noexcept { return false; }
-    constexpr bool operator<=(monostate, monostate) noexcept { return true; }
-    constexpr bool operator>=(monostate, monostate) noexcept { return true; }
-    constexpr bool operator==(monostate, monostate) noexcept { return true; }
-    constexpr bool operator!=(monostate, monostate) noexcept { return false; }
-
     // 23.7.11, class bad_variant_access
 
     //////////////////////////////////////////////////////////////////////////
@@ -659,7 +625,7 @@ namespace bit {
       const char* what() const noexcept override{ return "bad_variant_access"; }
     };
 
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     /// \brief The class template std::variant represents a type-safe union.
     ///
     /// An instance of std::variant at any given time either holds a value of
@@ -685,7 +651,7 @@ namespace bit {
     ///
     /// \tparam Types the types that may be stored in this variant. All types
     ///         must be (possibly cv-qualified) non-array object types
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     template<typename...Types>
     class variant : detail::variant_base<conjunction<std::is_trivially_destructible<Types>...>::value,Types...>
     {
@@ -764,7 +730,7 @@ namespace bit {
       /// \note This overload only participates in overload resolution if
       ///       std::is_default_constructible_v<T_0> is true.
 #ifndef BIT_DOXYGEN_BUILD
-      constexpr variant( block_unless_t<is_default_constructible,variant_ctor> = {} );
+      constexpr variant( enable_overload_if_t<is_default_constructible,variant_ctor> = {} );
 #else
       constexpr variant();
 #endif
@@ -784,8 +750,8 @@ namespace bit {
       ///
       /// \param other the other variant to copy
 #ifndef BIT_DOXYGEN_BUILD
-      variant( block_unless_t<is_copy_constructible,const variant&> other );
-      variant( block_if_t<is_copy_constructible,const variant&> other ) = delete;
+      variant( enable_overload_if_t<is_copy_constructible,const variant&> other );
+      variant( disable_overload_if_t<is_copy_constructible,const variant&> other ) = delete;
 #else
       variant( const variant& other );
 #endif
@@ -804,8 +770,8 @@ namespace bit {
       ///
       /// \param other the other variant to move
 #ifndef BIT_DOXYGEN_BUILD
-      variant( block_unless_t<is_move_constructible,variant&&> other );
-      variant( block_if_t<is_move_constructible,variant&&> other ) = delete;
+      variant( enable_overload_if_t<is_move_constructible,variant&&> other );
+      variant( disable_overload_if_t<is_move_constructible,variant&&> other ) = delete;
 #else
       variant( variant&& other );
 #endif
@@ -938,15 +904,15 @@ namespace bit {
       //----------------------------------------------------------------------
 
 #ifndef BIT_DOXYGEN_BUILD
-      variant& operator=( block_unless_t<is_copy_assignable,const variant&> rhs);
-      variant& operator=( block_if_t<is_copy_assignable,const variant&> rhs) = delete;
+      variant& operator=( enable_overload_if_t<is_copy_assignable,const variant&> rhs);
+      variant& operator=( disable_overload_if_t<is_copy_assignable,const variant&> rhs) = delete;
 #else
       variant& operator=( const variant& other );
 #endif
 
 #ifndef BIT_DOXYGEN_BUILD
-      variant& operator=( block_unless_t<is_move_assignable,variant&&> rhs);
-      variant& operator=( block_if_t<is_move_assignable,variant&&> rhs) = delete;
+      variant& operator=( enable_overload_if_t<is_move_assignable,variant&&> rhs);
+      variant& operator=( disable_overload_if_t<is_move_assignable,variant&&> rhs) = delete;
 #else
       variant& operator=( variant&& other );
 #endif
@@ -1220,8 +1186,6 @@ namespace bit {
     // Utilities
     //------------------------------------------------------------------------
 
-    std::size_t hash_value( monostate const& x ) noexcept;
-
     template<typename...Types>
     std::size_t hash_value( variant<Types...> const& v ) noexcept;
 
@@ -1233,4 +1197,4 @@ struct std::uses_allocator<bit::stl::variant<Types...>,Alloc> : std::true_type{}
 
 #include "detail/variant.inl"
 
-#endif /* BIT_STL_VARIANT_HPP */
+#endif /* BIT_STL_UTILITIES_VARIANT_HPP */

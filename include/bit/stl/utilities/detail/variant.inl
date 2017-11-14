@@ -1,5 +1,5 @@
-#ifndef BIT_STL_DETAIL_VARIANT_INL
-#define BIT_STL_DETAIL_VARIANT_INL
+#ifndef BIT_STL_UTILITIES_DETAIL_VARIANT_INL
+#define BIT_STL_UTILITIES_DETAIL_VARIANT_INL
 
 //----------------------------------------------------------------------------
 // Constructors / Assignment
@@ -7,20 +7,20 @@
 
 template<typename...Types>
 constexpr bit::stl::variant<Types...>
-  ::variant( block_unless_t<is_default_constructible,variant_ctor> )
-  : base_type( in_place<0> )
+  ::variant( enable_overload_if_t<is_default_constructible,variant_ctor> )
+  : base_type( in_place_index<0> )
 {
 
 }
 
 template<typename...Types>
-bit::stl::variant<Types...>::variant( block_unless_t<is_copy_constructible,const variant&> other )
+bit::stl::variant<Types...>::variant( enable_overload_if_t<is_copy_constructible,const variant&> other )
 {
   runtime_emplace( other.index(), other.m_union );
 }
 
 template<typename...Types>
-bit::stl::variant<Types...>::variant( block_unless_t<is_move_constructible,variant&&> other )
+bit::stl::variant<Types...>::variant( enable_overload_if_t<is_move_constructible,variant&&> other )
 {
   runtime_emplace( other.index(), std::move(other.m_union) );
 }
@@ -28,7 +28,7 @@ bit::stl::variant<Types...>::variant( block_unless_t<is_move_constructible,varia
 template<typename...Types>
 template<typename T>
 constexpr bit::stl::variant<Types...>::variant( T&& t, std::enable_if_t<is_convertible<T>>* )
-  : base_type( in_place<detail::conversion_index_v<T,variant>>, std::forward<T>(t) )
+  : base_type( in_place_index<detail::conversion_index_v<T,variant>>, std::forward<T>(t) )
 {
 
 }
@@ -36,7 +36,7 @@ constexpr bit::stl::variant<Types...>::variant( T&& t, std::enable_if_t<is_conve
 template<typename...Types>
 template<typename T, typename...Args, std::enable_if_t<std::is_constructible<T,Args...>::value>*>
 constexpr bit::stl::variant<Types...>::variant( in_place_type_t<T>, Args&&... args )
-  : base_type( in_place<detail::index_from<T>::value>, std::forward<Args>(args)... )
+  : base_type( in_place_index<detail::index_from<T>::value>, std::forward<Args>(args)... )
 {
 
 }
@@ -45,7 +45,7 @@ template<typename...Types>
 template<typename T, typename U, typename...Args, std::enable_if_t<std::is_constructible<T,std::initializer_list<U>,Args...>::value>*>
 constexpr bit::stl::variant<Types...>::variant( in_place_type_t<T>,
                                                 std::initializer_list<U> il, Args&&... args )
-  : base_type( in_place<detail::index_from<T>::value>, il, std::forward<Args>(args)... )
+  : base_type( in_place_index<detail::index_from<T>::value>, il, std::forward<Args>(args)... )
 {
 
 }
@@ -53,7 +53,7 @@ constexpr bit::stl::variant<Types...>::variant( in_place_type_t<T>,
 template<typename...Types>
 template<std::size_t I, typename...Args, std::enable_if_t<(I<sizeof...(Types)) && std::is_constructible<bit::stl::variant_alternative_t<I,bit::stl::variant<Types...>>,Args...>::value>*>
 constexpr bit::stl::variant<Types...>::variant( in_place_index_t<I>, Args&&... args )
-  : base_type( in_place<I>, std::forward<Args>(args)... )
+  : base_type( in_place_index<I>, std::forward<Args>(args)... )
 {
 
 }
@@ -63,7 +63,7 @@ template<std::size_t I, typename U, typename... Args, std::enable_if_t<(I<sizeof
 constexpr bit::stl::variant<Types...>::variant( in_place_index_t<I>,
                                                 std::initializer_list<U> il,
                                                 Args&&... args )
-  : base_type( in_place<I>, il, std::forward<Args>(args)... )
+  : base_type( in_place_index<I>, il, std::forward<Args>(args)... )
 {
 
 }
@@ -72,7 +72,7 @@ constexpr bit::stl::variant<Types...>::variant( in_place_index_t<I>,
 
 template<typename...Types>
 bit::stl::variant<Types...>&
-  bit::stl::variant<Types...>::operator=( block_unless_t<is_copy_assignable,const variant&> rhs)
+  bit::stl::variant<Types...>::operator=( enable_overload_if_t<is_copy_assignable,const variant&> rhs)
 {
   if( rhs.index() == variant_npos ) {
     base_type::destruct();
@@ -88,7 +88,7 @@ bit::stl::variant<Types...>&
 
 template<typename...Types>
 bit::stl::variant<Types...>&
-  bit::stl::variant<Types...>::operator=( block_unless_t<is_move_assignable,variant&&> rhs)
+  bit::stl::variant<Types...>::operator=( enable_overload_if_t<is_move_assignable,variant&&> rhs)
 {
   if( rhs.index() == variant_npos ) {
     base_type::destruct();
@@ -171,7 +171,7 @@ bit::stl::variant_alternative_t<I, bit::stl::variant<Types...>>&
   static_assert(I<sizeof...(Types), "");
 
   base_type::destruct();
-  auto& result = static_emplace<I>( in_place<I>, base_type::m_union, std::forward<Args>(args)... );
+  auto& result = static_emplace<I>( in_place_index<I>, base_type::m_union, std::forward<Args>(args)... );
   base_type::m_index = I;
 
   return result;
@@ -186,7 +186,7 @@ bit::stl::variant_alternative_t<I, bit::stl::variant<Types...>>&
   static_assert(I<sizeof...(Types), "");
 
   base_type::destruct();
-  auto& result = static_emplace<I>( in_place<I>, base_type::m_union, std::forward<Args>(args)... );
+  auto& result = static_emplace<I>( in_place_index<I>, base_type::m_union, std::forward<Args>(args)... );
   base_type::m_index = I;
 
   return result;
@@ -268,7 +268,7 @@ template<typename...Types>
 template<std::size_t I, typename T>
 void bit::stl::variant<Types...>::static_assign( T&& value )
 {
-  static_assign( in_place<I>, base_type::m_union, std::forward<T>(value) );
+  static_assign( in_place_index<I>, base_type::m_union, std::forward<T>(value) );
 }
 
 template<typename...Types>
@@ -285,7 +285,7 @@ void bit::stl::variant<Types...>::static_assign( in_place_index_t<I>,
                                                  VariantUnion& dest,
                                                  T&& value )
 {
-  static_assign( in_place<I-1>, dest.next, std::forward<T>(value) );
+  static_assign( in_place_index<I-1>, dest.next, std::forward<T>(value) );
 }
 
 template<typename...Types>
@@ -377,7 +377,7 @@ bit::stl::variant_alternative_t<I, bit::stl::variant<Types...>>&
                                                union_type<Ts...>& storage,
                                                Args&&...args )
 {
-  return static_emplace( in_place<N-1>,
+  return static_emplace( in_place_index<N-1>,
                          storage.next, std::forward<Args>(args)... );
 }
 
@@ -500,4 +500,4 @@ constexpr std::add_pointer_t<const T> bit::stl::get_if( const variant<Types...>*
   return get_if<detail::index_from<T,Types...>::value>( pv );
 }
 
-#endif /* BIT_STL_DETAIL_VARIANT_INL */
+#endif /* BIT_STL_UTILITIES_DETAIL_VARIANT_INL */
