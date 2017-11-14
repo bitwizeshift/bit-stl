@@ -147,12 +147,10 @@ namespace bit {
     /// \param rhs the right entry
     /// \return \c true if \p lhs has the same state as \p rhs
     constexpr bool operator==( const tribool& lhs, const tribool& rhs ) noexcept;
-
-    /// \copydoc operator==( const tribool&, const tribool& )
     constexpr bool operator==( indeterminate_t, const tribool& rhs ) noexcept;
-
-    /// \copydoc operator==( const tribool&, const tribool& )
     constexpr bool operator==( const tribool& lhs, indeterminate_t ) noexcept;
+    constexpr bool operator==( const tribool& lhs, bool rhs ) noexcept;
+    constexpr bool operator==( bool lhs, const tribool& rhs ) noexcept;
 
     /// \brief Equality comparison between two tribooleans
     ///
@@ -160,12 +158,10 @@ namespace bit {
     /// \param rhs the right entry
     /// \return \c true if \p lhs has the same state as \p rhs
     constexpr bool operator!=( const tribool& lhs, const tribool& rhs ) noexcept;
-
-    /// \copydoc operator!=( const tribool&, const tribool& )
     constexpr bool operator!=( indeterminate_t, const tribool& rhs ) noexcept;
-
-    /// \copydoc operator!=( const tribool&, const tribool& )
     constexpr bool operator!=( const tribool& lhs, indeterminate_t ) noexcept;
+    constexpr bool operator!=( const tribool& lhs, bool rhs ) noexcept;
+    constexpr bool operator!=( bool lhs, const tribool& rhs ) noexcept;
 
     constexpr tribool operator && ( const tribool& lhs, const tribool& rhs) noexcept;
     constexpr tribool operator || ( const tribool& lhs, const tribool& rhs) noexcept;

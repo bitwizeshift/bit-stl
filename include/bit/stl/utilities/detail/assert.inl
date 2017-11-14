@@ -35,10 +35,10 @@ inline void bit::stl::default_assert( const char* message,
                                       source_location source )
 {
   std::fprintf(stderr, "[assertion] %s (%zu)::%s\n"
-                       "            %s", source.file_name(),
-                                         source.line(),
-                                         source.function_name(),
-                                         message );
+                       "            %s\n", source.file_name(),
+                                           source.line(),
+                                           source.function_name(),
+                                           message );
 
   BIT_BREAKPOINT();
 }

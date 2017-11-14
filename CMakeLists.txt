@@ -128,6 +128,7 @@ set(headers
   include/bit/stl/utilities/dynamic_index_constant.hpp
   include/bit/stl/utilities/dynamic_size_constant.hpp
   include/bit/stl/utilities/enum.hpp
+  include/bit/stl/utilities/expected.hpp
   include/bit/stl/utilities/final_act.hpp
   include/bit/stl/utilities/hash.hpp
   include/bit/stl/utilities/in_place.hpp

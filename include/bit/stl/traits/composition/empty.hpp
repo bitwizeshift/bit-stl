@@ -13,7 +13,7 @@ namespace bit {
 
     /// \brief Utility metafunction that always expands into an empty struct
     ///        with no members or type members
-    template<typename T>
+    template<typename T = void>
     struct empty{};
 
   } // namespace stl
