@@ -83,6 +83,20 @@ inline constexpr bool
   return lhs == tribool(indeterminate);
 }
 
+inline constexpr bool bit::stl::operator==( const tribool& lhs, bool rhs )
+  noexcept
+{
+  return lhs == tribool(rhs);
+}
+
+inline constexpr bool bit::stl::operator==( bool lhs, const tribool& rhs )
+  noexcept
+{
+  return tribool(lhs) == rhs;
+}
+
+//----------------------------------------------------------------------------
+
 inline constexpr bool
   bit::stl::operator!=( const tribool& lhs, const tribool& rhs )
   noexcept
@@ -102,6 +116,18 @@ inline constexpr bool
   noexcept
 {
   return lhs != tribool(indeterminate);
+}
+
+inline constexpr bool bit::stl::operator!=( const tribool& lhs, bool rhs )
+  noexcept
+{
+  return lhs != tribool(rhs);
+}
+
+inline constexpr bool bit::stl::operator!=( bool lhs, const tribool& rhs )
+  noexcept
+{
+  return tribool(lhs) != rhs;
 }
 
 //----------------------------------------------------------------------------
