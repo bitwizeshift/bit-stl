@@ -68,13 +68,17 @@ set(headers
   include/bit/stl/traits/composition/nonesuch.hpp
   include/bit/stl/traits/composition/sfinae.hpp
   include/bit/stl/traits/composition/size_constant.hpp
+  include/bit/stl/traits/composition/type_list.hpp
   include/bit/stl/traits/composition/void_t.hpp
   include/bit/stl/traits/properties/arity.hpp
   include/bit/stl/traits/properties/function_argument.hpp
   include/bit/stl/traits/properties/index_of_type.hpp
   include/bit/stl/traits/properties/is_const_member_function_pointer.hpp
   include/bit/stl/traits/properties/is_cv_member_function_pointer.hpp
+  include/bit/stl/traits/properties/is_explicitly_constructible.hpp
   include/bit/stl/traits/properties/is_explicitly_convertible.hpp
+  include/bit/stl/traits/properties/is_implicitly_constructible.hpp
+  include/bit/stl/traits/properties/is_implicitly_convertible.hpp
   include/bit/stl/traits/properties/is_volatile_member_function_pointer.hpp
   include/bit/stl/traits/properties/nth_type.hpp
   include/bit/stl/traits/properties/pointer_rank.hpp

@@ -9,26 +9,56 @@
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_EXPLICITLY_CONVERTIBLE_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_EXPLICITLY_CONVERTIBLE_HPP
 
-#include "../composition/negation.hpp"
-#include "../composition/conjunction.hpp"
+#include "../composition/bool_constant.hpp"
+#include "../composition/void_t.hpp"
 
-#include <type_traits> // is_constructible, is_convertible
+#include "is_explicitly_constructible.hpp"
+
+#include <type_traits> // std::declval
 
 namespace bit {
   namespace stl {
+    namespace detail {
 
-    /// \brief Type-trait to determine if \c From is explicitly convertible to
-    ///        \c to
+      template<typename T>
+      struct is_explicitly_convertible_dummy
+      {
+        static void test( T );
+      };
+
+      template<typename From, typename To, typename = void>
+      struct is_explicitly_convertible_impl : is_explicitly_constructible<To,From>{};
+
+      template<typename From, typename To>
+      struct is_explicitly_convertible_impl<From,To,void_t<
+        decltype( is_explicitly_convertible_dummy<To>::test( static_cast<To>(std::declval<From>()) ) )
+      >> : true_type{};
+    } // namespace detail
+
+    /// \brief Type trait to determine if From is explicitly convertible to
+    ///        To
+    ///
+    /// A type is considered explicitly convertible if one of the following
+    /// expressions is well-formed:
+    ///
+    /// \code
+    /// To test(){ return static_cast<To>(std::declval<From>()); }
+    /// \endcode
+    ///
+    /// or
+    /// \code
+    /// To test(){ return To(std::declval<From>()) }
+    /// \endcode
+    ///
+    /// For the purpose of the above illustrations, std::declval is not
+    /// considered ODR-used.
     ///
     /// The result is aliased as \c ::value
-    ///
-    /// \tparam From the type casting from
-    /// \tparam To the type casting to
     template<typename From, typename To>
-    struct is_explicitly_convertible :
-      conjunction<std::is_constructible<To,From>, negation<std::is_convertible<From,To>>>{};
+    struct is_explicitly_convertible
+      : detail::is_explicitly_convertible_impl<From,To>{};
 
-    /// \brief Helper utility to extract nth_type::type
+    /// \brief Helper utility to extract is_explicitly_convertible::type
     template<typename From, typename To>
     constexpr bool is_explicitly_convertible_v = is_explicitly_convertible<From,To>::value;
 
