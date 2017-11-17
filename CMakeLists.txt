@@ -75,6 +75,7 @@ set(headers
   include/bit/stl/traits/properties/index_of_type.hpp
   include/bit/stl/traits/properties/is_assignable.hpp
   include/bit/stl/traits/properties/is_const_member_function_pointer.hpp
+  include/bit/stl/traits/properties/is_copy_assignable.hpp
   include/bit/stl/traits/properties/is_copy_constructible.hpp
   include/bit/stl/traits/properties/is_cv_member_function_pointer.hpp
   include/bit/stl/traits/properties/is_default_constructible.hpp
