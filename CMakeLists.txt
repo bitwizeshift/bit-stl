@@ -102,12 +102,12 @@ set(headers
   include/bit/stl/traits/properties/is_volatile_member_function_pointer.hpp
   include/bit/stl/traits/properties/nth_type.hpp
   include/bit/stl/traits/properties/pointer_rank.hpp
-  include/bit/stl/traits/relationships/are_same.hpp
   include/bit/stl/traits/relationships/is_base_of_all.hpp
   include/bit/stl/traits/relationships/is_base_of_any.hpp
   include/bit/stl/traits/relationships/is_derived_from_all.hpp
   include/bit/stl/traits/relationships/is_derived_from_any.hpp
   include/bit/stl/traits/relationships/is_one_of.hpp
+  include/bit/stl/traits/relationships/is_same.hpp
   include/bit/stl/traits/relationships/is_same_constness.hpp
   include/bit/stl/traits/relationships/is_same_cv.hpp
   include/bit/stl/traits/relationships/is_same_decay.hpp
