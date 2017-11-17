@@ -70,29 +70,51 @@ set(headers
   include/bit/stl/traits/composition/size_constant.hpp
   include/bit/stl/traits/composition/type_list.hpp
   include/bit/stl/traits/composition/void_t.hpp
-  include/bit/stl/traits/properties/arity.hpp
-  include/bit/stl/traits/properties/function_argument.hpp
-  include/bit/stl/traits/properties/index_of_type.hpp
+  include/bit/stl/traits/properties/is_assignable.hpp
   include/bit/stl/traits/properties/is_const_member_function_pointer.hpp
+  include/bit/stl/traits/properties/is_copy_assignable.hpp
+  include/bit/stl/traits/properties/is_copy_constructible.hpp
   include/bit/stl/traits/properties/is_cv_member_function_pointer.hpp
+  include/bit/stl/traits/properties/is_default_constructible.hpp
+  include/bit/stl/traits/properties/is_destructible.hpp
   include/bit/stl/traits/properties/is_explicitly_constructible.hpp
   include/bit/stl/traits/properties/is_explicitly_convertible.hpp
   include/bit/stl/traits/properties/is_implicitly_constructible.hpp
   include/bit/stl/traits/properties/is_implicitly_convertible.hpp
+  include/bit/stl/traits/properties/is_move_assignable.hpp
+  include/bit/stl/traits/properties/is_move_constructible.hpp
+  include/bit/stl/traits/properties/is_nothrow_assignable.hpp
+  include/bit/stl/traits/properties/is_nothrow_copy_assignable.hpp
+  include/bit/stl/traits/properties/is_nothrow_copy_constructible.hpp
+  include/bit/stl/traits/properties/is_nothrow_default_constructible.hpp
+  include/bit/stl/traits/properties/is_nothrow_destructible.hpp
+  include/bit/stl/traits/properties/is_nothrow_move_assignable.hpp
+  include/bit/stl/traits/properties/is_nothrow_move_constructible.hpp
+  include/bit/stl/traits/properties/is_trivially_copy_assignable.hpp
+  include/bit/stl/traits/properties/is_trivially_copy_constructible.hpp
+  include/bit/stl/traits/properties/is_trivially_default_constructible.hpp
+  include/bit/stl/traits/properties/is_trivially_move_assignable.hpp
+  include/bit/stl/traits/properties/is_trivially_move_constructible.hpp
+  include/bit/stl/traits/properties/is_trivially_destructible.hpp
   include/bit/stl/traits/properties/is_volatile_member_function_pointer.hpp
-  include/bit/stl/traits/properties/nth_type.hpp
-  include/bit/stl/traits/properties/pointer_rank.hpp
-  include/bit/stl/traits/relationships/are_same.hpp
+  include/bit/stl/traits/relationships/arity.hpp
+  include/bit/stl/traits/relationships/function_argument.hpp
+  include/bit/stl/traits/relationships/index_of_type.hpp
   include/bit/stl/traits/relationships/is_base_of_all.hpp
   include/bit/stl/traits/relationships/is_base_of_any.hpp
   include/bit/stl/traits/relationships/is_derived_from_all.hpp
   include/bit/stl/traits/relationships/is_derived_from_any.hpp
+  include/bit/stl/traits/relationships/is_different.hpp
   include/bit/stl/traits/relationships/is_one_of.hpp
+  include/bit/stl/traits/relationships/is_same.hpp
   include/bit/stl/traits/relationships/is_same_constness.hpp
   include/bit/stl/traits/relationships/is_same_cv.hpp
   include/bit/stl/traits/relationships/is_same_decay.hpp
   include/bit/stl/traits/relationships/is_same_sign.hpp
   include/bit/stl/traits/relationships/is_same_volatility.hpp
+  include/bit/stl/traits/relationships/nth_type.hpp
+  include/bit/stl/traits/relationships/resolves_overload.hpp
+  include/bit/stl/traits/relationships/pointer_rank.hpp
   include/bit/stl/traits/transformations/base_type.hpp
   include/bit/stl/traits/transformations/function_signature.hpp
   include/bit/stl/traits/transformations/match_cv_qualifiers.hpp
@@ -100,7 +122,6 @@ set(headers
   include/bit/stl/traits/transformations/match_sign_qualifiers.hpp
   include/bit/stl/traits/transformations/normalize_char.hpp
   include/bit/stl/traits/transformations/remove_pointers.hpp
-  include/bit/stl/traits/transformations/resolves_overload.hpp
 
   # Concepts
   include/bit/stl/concepts/AssociativeContainer.hpp
