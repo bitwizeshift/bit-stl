@@ -90,6 +90,7 @@ set(headers
   include/bit/stl/traits/properties/is_nothrow_copy_constructible.hpp
   include/bit/stl/traits/properties/is_nothrow_default_constructible.hpp
   include/bit/stl/traits/properties/is_nothrow_destructible.hpp
+  include/bit/stl/traits/properties/is_nothrow_move_assignable.hpp
   include/bit/stl/traits/properties/is_nothrow_move_constructible.hpp
   include/bit/stl/traits/properties/is_trivially_copy_assignable.hpp
   include/bit/stl/traits/properties/is_trivially_copy_constructible.hpp
