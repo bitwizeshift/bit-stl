@@ -14,7 +14,7 @@
 
 #include "../traits/composition/size_constant.hpp"
 #include "../traits/relationships/is_one_of.hpp"
-#include "../traits/properties/nth_type.hpp"
+#include "../traits/relationships/nth_type.hpp"
 
 #include <type_traits> // std::is_empty, std::is_final, etc
 #include <utility>     // std::forward

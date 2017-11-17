@@ -6,12 +6,13 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_TRAITS_TRANSFORMATIONS_RESOLVES_OVERLOAD_HPP
-#define BIT_STL_TRAITS_TRANSFORMATIONS_RESOLVES_OVERLOAD_HPP
+#ifndef BIT_STL_TRAITS_RELATIONSHIPS_RESOLVES_OVERLOAD_HPP
+#define BIT_STL_TRAITS_RELATIONSHIPS_RESOLVES_OVERLOAD_HPP
+
+#include "nth_type.hpp"
 
 #include "../composition/size_constant.hpp"
 #include "../composition/void_t.hpp"
-#include "../properties/nth_type.hpp"
 
 #include <cstddef>     // std::size_t
 #include <type_traits> // std::declval
@@ -85,4 +86,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_TRAITS_TRANSFORMATIONS_RESOLVES_OVERLOAD_HPP */
+#endif /* BIT_STL_TRAITS_RELATIONSHIPS_RESOLVES_OVERLOAD_HPP */

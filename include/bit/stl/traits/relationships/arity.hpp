@@ -5,8 +5,8 @@
  *
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
-#ifndef BIT_STL_TRAITS_PROPERTIES_ARITY_HPP
-#define BIT_STL_TRAITS_PROPERTIES_ARITY_HPP
+#ifndef BIT_STL_TRAITS_RELATIONSHIPS_ARITY_HPP
+#define BIT_STL_TRAITS_RELATIONSHIPS_ARITY_HPP
 
 #include "../composition/size_constant.hpp"
 
@@ -70,4 +70,4 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-#endif /* BIT_STL_TRAITS_PROPERTIES_ARITY_HPP */
+#endif /* BIT_STL_TRAITS_RELATIONSHIPS_ARITY_HPP */
