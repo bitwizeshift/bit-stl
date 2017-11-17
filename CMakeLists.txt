@@ -95,6 +95,7 @@ set(headers
   include/bit/stl/traits/properties/is_trivially_copy_assignable.hpp
   include/bit/stl/traits/properties/is_trivially_copy_constructible.hpp
   include/bit/stl/traits/properties/is_trivially_default_constructible.hpp
+  include/bit/stl/traits/properties/is_trivially_move_assignable.hpp
   include/bit/stl/traits/properties/is_trivially_move_constructible.hpp
   include/bit/stl/traits/properties/is_trivially_destructible.hpp
   include/bit/stl/traits/properties/is_volatile_member_function_pointer.hpp
