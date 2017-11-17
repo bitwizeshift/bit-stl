@@ -84,6 +84,7 @@ set(headers
   include/bit/stl/traits/properties/is_implicitly_constructible.hpp
   include/bit/stl/traits/properties/is_implicitly_convertible.hpp
   include/bit/stl/traits/properties/is_move_constructible.hpp
+  include/bit/stl/traits/properties/is_nothrow_assignable.hpp
   include/bit/stl/traits/properties/is_nothrow_copy_constructible.hpp
   include/bit/stl/traits/properties/is_nothrow_default_constructible.hpp
   include/bit/stl/traits/properties/is_nothrow_destructible.hpp
