@@ -106,6 +106,7 @@ set(headers
   include/bit/stl/traits/relationships/is_base_of_any.hpp
   include/bit/stl/traits/relationships/is_derived_from_all.hpp
   include/bit/stl/traits/relationships/is_derived_from_any.hpp
+  include/bit/stl/traits/relationships/is_different.hpp
   include/bit/stl/traits/relationships/is_one_of.hpp
   include/bit/stl/traits/relationships/is_same.hpp
   include/bit/stl/traits/relationships/is_same_constness.hpp
