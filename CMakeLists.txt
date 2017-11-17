@@ -80,6 +80,7 @@ set(headers
   include/bit/stl/traits/properties/is_explicitly_convertible.hpp
   include/bit/stl/traits/properties/is_implicitly_constructible.hpp
   include/bit/stl/traits/properties/is_implicitly_convertible.hpp
+  include/bit/stl/traits/properties/is_nothrow_default_constructible.hpp
   include/bit/stl/traits/properties/is_trivially_default_constructible.hpp
   include/bit/stl/traits/properties/is_volatile_member_function_pointer.hpp
   include/bit/stl/traits/properties/nth_type.hpp
