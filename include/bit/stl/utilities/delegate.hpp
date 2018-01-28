@@ -18,9 +18,9 @@
 namespace bit {
   namespace stl {
 
-    ////////////////////////////////////////////////////////////////////////////
-    /// \brief This class is for a lightweight way of managing function callbacks
-    ///        without requiring heap allocations.
+    ///////////////////////////////////////////////////////////////////////////
+    /// \brief This class is for a lightweight way of managing function
+    ///        callbacks without requiring heap allocations.
     ///
     /// The syntax is a little off as a result, requiring a call to
     /// Delegate::bind.
@@ -37,15 +37,15 @@ namespace bit {
     /// \endcode
     ///
     /// \tparam Function signature and return type
-    ////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     template<typename Fn> class delegate;
 
     template<typename R, typename...Types>
     class delegate<R(Types...)> final
     {
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Public Member Types
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       using return_type        = R;
@@ -57,17 +57,17 @@ namespace bit {
       template<class C>
       using const_member_function_type = return_type (C::*)(Types...) const;
 
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Constructor / Destructor
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Constructs an unbound delegate
       constexpr delegate() noexcept;
 
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Function Binding
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Binds a free function to this delegate
@@ -84,9 +84,6 @@ namespace bit {
       /// \tparam member_function The pointer to member function to bind
       /// \param instance the instance to call the member function on
       template <class C, member_function_type<C> member_function>
-      constexpr void bind( C* instance ) noexcept;
-
-      template <class C, member_function_type<C> member_function>
       constexpr void bind( C& instance ) noexcept;
       /// \}
 
@@ -97,21 +94,15 @@ namespace bit {
       /// \tparam member_function The pointer to member function to bind
       /// \param instance the instance to call the member function on
       template <class C, const_member_function_type<C> member_function>
-      constexpr void bind( const C* instance ) noexcept;
-
-      template <class C, const_member_function_type<C> member_function>
       constexpr void bind( const C& instance ) noexcept;
-
-      template <class C, const_member_function_type<C> member_function>
-      constexpr void cbind( const C* instance ) noexcept;
 
       template <class C, const_member_function_type<C> member_function>
       constexpr void cbind( const C& instance ) noexcept;
       /// \}
 
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Queries
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Is this Delegate bound?
@@ -122,9 +113,9 @@ namespace bit {
       /// \brief Returns true if this delegate is bound
       constexpr explicit operator bool() const noexcept;
 
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Invocation
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     public:
 
       /// \brief Invokes the bound function
@@ -138,17 +129,17 @@ namespace bit {
       template<typename...Args, typename = std::enable_if_t<is_invocable<R(Types...),Args...>::value>>
       constexpr return_type operator()( Args&&...args ) const;
 
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Member Types
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       using internal_function_type = return_type(*)(void*, Types...);
       using stub_type              = std::pair<void*, internal_function_type>;
 
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
       // Private Members
-      //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------
     private:
 
       stub_type m_delegate_stub; ///< The internal stub for this delegate
@@ -172,19 +163,6 @@ namespace bit {
     bool operator<=(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
     template<typename Fn>
     bool operator>=(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
-
-    //------------------------------------------------------------------------
-    // Make Utilities
-    //------------------------------------------------------------------------
-//
-//    template<typename Sig, function_t<Sig> function>
-//    delegate<Sig> make_delegate() noexcept;
-//
-//    template<typename T, typename Sig, member_function_t<T,Sig> member_function>
-//    delegate<Sig> make_delegate( T& instance ) noexcept;
-//
-//    template<typename T, typename Sig, member_function_t<T,Sig> member_function>
-//    delegate<Sig> make_delegate( T* instance ) noexcept;
 
 #if __cplusplus >= 201703L
 

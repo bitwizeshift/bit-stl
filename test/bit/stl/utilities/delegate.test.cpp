@@ -66,14 +66,14 @@ TEST_CASE("delegate::bind()", "[member function]")
   }
 }
 
-TEST_CASE("delegate::bind( T* )", "[member function]")
+TEST_CASE("delegate::bind( T& )", "[member function]")
 {
   SECTION("Binds non-const member function")
   {
     bit::stl::delegate<int(int)> delegate;
     DummyClass              dummy(10);
 
-    delegate.bind<DummyClass,&DummyClass::non_const_function>(&dummy);
+    delegate.bind<DummyClass,&DummyClass::non_const_function>(dummy);
     REQUIRE( delegate.is_bound() );
   }
 
@@ -82,7 +82,7 @@ TEST_CASE("delegate::bind( T* )", "[member function]")
     bit::stl::delegate<int(int)> delegate;
     const DummyClass        dummy(10);
 
-    delegate.bind<DummyClass,&DummyClass::const_function>(&dummy);
+    delegate.bind<DummyClass,&DummyClass::const_function>(dummy);
     REQUIRE( delegate.is_bound() );
   }
 }
@@ -145,7 +145,7 @@ TEST_CASE("delegate::invoke(Args&&...)", "[member function]")
     bit::stl::delegate<int(int)> delegate;
     DummyClass              dummy(10);
 
-    delegate.bind<DummyClass,&DummyClass::non_const_function>(&dummy);
+    delegate.bind<DummyClass,&DummyClass::non_const_function>(dummy);
 
     REQUIRE( delegate.invoke(5) == 15 );
   }
@@ -155,7 +155,7 @@ TEST_CASE("delegate::invoke(Args&&...)", "[member function]")
     bit::stl::delegate<int(int)> delegate;
     const DummyClass        dummy(10);
 
-    delegate.bind<DummyClass,&DummyClass::const_function>(&dummy);
+    delegate.bind<DummyClass,&DummyClass::const_function>(dummy);
 
     REQUIRE( delegate.invoke(5) == 15 );
   }
