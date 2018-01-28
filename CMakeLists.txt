@@ -214,16 +214,16 @@ set(headers
   include/bit/stl/numeric/numeric.hpp
 )
 
-add_library(bit_stl INTERFACE)
-add_library(bit::stl ALIAS bit_stl)
+add_library(stl INTERFACE)
+add_library(bit::stl ALIAS stl)
 
-target_include_directories(bit_stl INTERFACE
+target_include_directories(stl INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
 )
-target_compile_definitions(bit_stl INTERFACE
+target_compile_definitions(stl INTERFACE
   $<$<CONFIG:DEBUG>:DEBUG>
-  $<$<CONFIG:RELEASE>:DEBUG RELEASE>
+  $<$<CONFIG:RELEASE>:NDEBUG RELEASE>
 )
 
 #-----------------------------------------------------------------------------
@@ -233,18 +233,18 @@ target_compile_definitions(bit_stl INTERFACE
 if( BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS )
 
   # Add containment test and alias as 'bit::stl::header_self_containment_test'
-  add_header_self_containment_test(bit_stl_header_self_containment_test ${headers})
-  add_library(bit::stl::header_self_containment_test ALIAS bit_stl_header_self_containment_test)
+  add_header_self_containment_test(stl_header_self_containment_test ${headers})
+  add_library(bit::stl::header_self_containment_test ALIAS stl_header_self_containment_test)
 
-  target_compile_definitions(bit_stl_header_self_containment_test PRIVATE
+  target_compile_definitions(stl_header_self_containment_test PRIVATE
     $<$<CONFIG:DEBUG>:DEBUG>
     $<$<CONFIG:RELEASE>:NDEBUG RELEASE>
   )
 
   if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
+    target_compile_options(stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
   elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-    target_compile_options(bit_stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
+    target_compile_options(stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
   elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" )
     # TODO: Determine MSVC necessary compiler flags
   endif()
@@ -277,7 +277,7 @@ if( EXISTS "$ENV{BIT_HOME}" )
   set(CMAKE_INSTALL_PREFIX "$ENV{BIT_HOME}")
 endif()
 
-export_library( TARGETS bit_stl
+export_library( TARGETS stl
                 PACKAGE Stl
                 VERSION ${BIT_STL_VERSION}
                 MAJOR_VERSION ${BIT_STL_VERSION_MAJOR}
