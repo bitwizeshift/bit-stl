@@ -202,6 +202,7 @@ set(headers
 
   # memory
   include/bit/stl/memory/allocator_deleter.hpp
+  include/bit/stl/memory/exclusive_ptr.hpp
   include/bit/stl/memory/clone_ptr.hpp
   include/bit/stl/memory/fat_ptr.hpp
   include/bit/stl/memory/memory.hpp
