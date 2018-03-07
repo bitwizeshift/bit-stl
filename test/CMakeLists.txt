@@ -20,6 +20,9 @@ set(sources
       bit/stl/containers/circular_deque.test.cpp
       bit/stl/containers/circular_buffer.test.cpp
 
+      # memory
+      bit/stl/memory/exclusive_ptr.test.cpp
+
       main.test.cpp
 )
 
