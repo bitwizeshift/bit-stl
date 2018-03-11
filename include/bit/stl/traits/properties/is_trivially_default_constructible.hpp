@@ -1,4 +1,4 @@
-v/**
+/**
  * \file is_trivially_default_constructible.hpp
  *
  * \brief This header defines a type trait for checking trivial default
