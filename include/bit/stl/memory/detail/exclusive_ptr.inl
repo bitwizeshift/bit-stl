@@ -285,9 +285,8 @@ inline bit::stl::exclusive_ptr<T>::exclusive_ptr( Y* ptr, Deleter deleter )
 template<typename T>
 template<typename Deleter>
 inline bit::stl::exclusive_ptr<T>::exclusive_ptr( std::nullptr_t,
-                                                  Deleter )
-  noexcept
-  : exclusive_ptr( nullptr )
+                                                  Deleter deleter )
+  : exclusive_ptr( static_cast<T*>(nullptr), deleter )
 {
 
 }
@@ -304,10 +303,9 @@ inline bit::stl::exclusive_ptr<T>::exclusive_ptr( Y* ptr,
 template<typename T>
 template<typename Deleter, typename Allocator>
 inline bit::stl::exclusive_ptr<T>::exclusive_ptr( std::nullptr_t,
-                                                  Deleter,
-                                                  Allocator )
-  noexcept
-  : exclusive_ptr( nullptr )
+                                                  Deleter deleter,
+                                                  Allocator alloc )
+  : exclusive_ptr( static_cast<T*>(nullptr), deleter, alloc )
 {
 
 }
@@ -393,7 +391,7 @@ inline void bit::stl::exclusive_ptr<T>::reset()
   if( m_control_block ) {
     m_control_block->destroy();
     m_control_block = nullptr;
-    m_ptr      = nullptr;
+    m_ptr           = nullptr;
   }
 }
 

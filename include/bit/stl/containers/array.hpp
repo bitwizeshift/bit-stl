@@ -65,7 +65,7 @@ namespace bit {
     /// \brief Make utility for creating a std::array
     ///
     /// If the return type is explicitly specified, no deduction take place;
-    /// if the type is ommitted, the return type is the common type of all
+    /// if the type is omitted, the return type is the common type of all
     /// inputs.
     ///
     /// \tparam T the return type of the array.
