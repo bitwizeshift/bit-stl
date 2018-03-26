@@ -46,7 +46,7 @@ namespace bit {
     ///
     /// The value is aliased as \c ::value
     template<bool B>
-    using bool_constant = integral_constant<bool,B>;
+    struct bool_constant : integral_constant<bool,B>{};
 
     /// \brief Convenience template variable to extract bool_constant::value
     ///
