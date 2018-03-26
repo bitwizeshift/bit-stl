@@ -171,7 +171,7 @@ namespace bit {
     /// \note member_t is unable to deduce it's template parameters if
     ///       used in a deduction context.
     template<typename T, typename R>
-    using member_t = R T::*;
+    using member_pointer = R T::*;
 
     /// \brief A type alias for member function pointers to make it more
     ///        readable.
@@ -179,14 +179,14 @@ namespace bit {
     /// \note member_function_t is unable to deduce it's template parameters
     ///       if used in a deduction context.
     template<typename T, typename Fn>
-    using member_function_t = typename detail::member_function_t<T,Fn>::type;
+    using member_function_pointer = typename detail::member_function_t<T,Fn>::type;
 
     /// \brief A type alias for function pointers to make it more readable
     ///
     /// \note That function_t is unable to deduce it's template parameters
     ///       if used in a deduction context.
     template<typename Fn>
-    using function_t = typename detail::function_t<Fn>::type;
+    using function_pointer = typename detail::function_t<Fn>::type;
 
   } // namespace stl
 } // namespace bit
