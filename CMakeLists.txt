@@ -81,6 +81,9 @@ set(headers
   include/bit/stl/traits/properties/is_explicitly_convertible.hpp
   include/bit/stl/traits/properties/is_implicitly_constructible.hpp
   include/bit/stl/traits/properties/is_implicitly_convertible.hpp
+  include/bit/stl/traits/properties/is_member_function_pointer.hpp
+  include/bit/stl/traits/properties/is_member_object_pointer.hpp
+  include/bit/stl/traits/properties/is_member_pointer.hpp
   include/bit/stl/traits/properties/is_move_assignable.hpp
   include/bit/stl/traits/properties/is_move_constructible.hpp
   include/bit/stl/traits/properties/is_nothrow_assignable.hpp
