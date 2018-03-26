@@ -126,6 +126,32 @@ set(headers
   include/bit/stl/traits/transformations/normalize_char.hpp
   include/bit/stl/traits/transformations/remove_pointers.hpp
 
+  # Functional
+  include/bit/stl/functional/arithmetic/divides.hpp
+  include/bit/stl/functional/arithmetic/minus.hpp
+  include/bit/stl/functional/arithmetic/modulus.hpp
+  include/bit/stl/functional/arithmetic/multiplies.hpp
+  include/bit/stl/functional/arithmetic/negate.hpp
+  include/bit/stl/functional/arithmetic/plus.hpp
+  include/bit/stl/functional/bitwise/bit_and.hpp
+  include/bit/stl/functional/bitwise/bit_not.hpp
+  include/bit/stl/functional/bitwise/bit_or.hpp
+  include/bit/stl/functional/bitwise/bit_xor.hpp
+  include/bit/stl/functional/comparison/equal_to.hpp
+  include/bit/stl/functional/comparison/equivalent_to.hpp
+  include/bit/stl/functional/comparison/greater.hpp
+  include/bit/stl/functional/comparison/greater_equal.hpp
+  include/bit/stl/functional/comparison/less.hpp
+  include/bit/stl/functional/comparison/less_equal.hpp
+  include/bit/stl/functional/comparison/not_equal_to.hpp
+  include/bit/stl/functional/extraction/use_first.hpp
+  include/bit/stl/functional/extraction/use_nth_element.hpp
+  include/bit/stl/functional/extraction/use_second.hpp
+  include/bit/stl/functional/extraction/use_self.hpp
+  include/bit/stl/functional/logical/logical_and.hpp
+  include/bit/stl/functional/logical/logical_not.hpp
+  include/bit/stl/functional/logical/logical_or.hpp
+
   # Concepts
   include/bit/stl/concepts/AssociativeContainer.hpp
   include/bit/stl/concepts/BidirectionalIterator.hpp
