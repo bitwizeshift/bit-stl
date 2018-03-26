@@ -27,6 +27,7 @@ template<typename Allocator>
 void bit::stl::allocator_deleter<Allocator>::operator()( pointer p )
   noexcept
 {
+  alloc_traits::destroy( m_allocator, p );
   alloc_traits::deallocate( m_allocator, p, m_size );
 }
 

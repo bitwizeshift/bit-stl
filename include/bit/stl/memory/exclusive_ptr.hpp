@@ -145,8 +145,10 @@ namespace bit {
       /// \brief Constructs an exclusive_ptr that points to nullptr
       ///
       /// \post \c get() returns \c nullptr
+      ///
+      /// \param deleter the deleter to use to deleter \p ptr
       template<typename Deleter>
-      exclusive_ptr( std::nullptr_t, Deleter ) noexcept;
+      exclusive_ptr( std::nullptr_t, Deleter deleter );
 
       /// \brief Constructs an exclusive_ptr that points to \p ptr,
       ///        uses \p deleter to delete the allocated memory, and
@@ -167,8 +169,11 @@ namespace bit {
       /// \brief Constructs an exclusive_ptr that points to nullptr
       ///
       /// \post \c get() returns \c nullptr
+      ///
+      /// \param deleter the deleter to use to deleter \p ptr
+      /// \param alloc the allocator to allocate the node
       template<typename Deleter, typename Allocator>
-      exclusive_ptr( std::nullptr_t, Deleter, Allocator ) noexcept;
+      exclusive_ptr( std::nullptr_t, Deleter deleter, Allocator alloc );
 
       /// \brief Move-constructs this exclusive_ptr from an existing one
       ///
@@ -178,6 +183,9 @@ namespace bit {
       ///
       /// \param other the other exclusive_ptr to move
       exclusive_ptr( exclusive_ptr&& other ) noexcept;
+
+      // Deleted copy constructor
+      exclusive_ptr( const exclusive_ptr& other ) = delete;
 
       /// \brief Move-converts this exclusive_ptr from an existing one
       ///
@@ -192,6 +200,11 @@ namespace bit {
       template<typename Y,
                typename=std::enable_if_t<std::is_convertible<Y*,T*>::value>>
       exclusive_ptr( exclusive_ptr<Y>&& other ) noexcept;
+
+      // Deleted copy converting constructor
+      template<typename Y,
+               typename=std::enable_if_t<std::is_convertible<Y*,T*>::value>>
+      exclusive_ptr( const exclusive_ptr<Y>& other ) = delete;
 
       //-----------------------------------------------------------------------
 

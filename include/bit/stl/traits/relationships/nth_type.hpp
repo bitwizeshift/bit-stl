@@ -52,6 +52,9 @@ namespace bit {
     template<std::size_t I, typename Type0, typename...Types>
     struct nth_type<I,Type0, Types...> : nth_type<I-1,Types...>{};
 
+    template<>
+    struct nth_type<0>{}; // SFINAE-disable type
+
     template<typename Type0, typename...Types>
     struct nth_type<0,Type0,Types...> : identity<Type0>{};
 

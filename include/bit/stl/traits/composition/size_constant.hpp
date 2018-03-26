@@ -49,7 +49,7 @@ namespace bit {
     ///
     /// The value is aliased as \c ::value
     template<std::size_t Size>
-    using size_constant = std::integral_constant<std::size_t,Size>;
+    struct size_constant : std::integral_constant<std::size_t,Size>{};
 
     /// \brief Convenience template variable to extract size_constant::value
     ///

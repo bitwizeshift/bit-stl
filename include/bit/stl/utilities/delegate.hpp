@@ -36,7 +36,8 @@
 #define BIT_STL_UTILITIES_DELEGATE_HPP
 
 #include "assert.hpp"
-#include "invoke.hpp"
+#include "types.hpp"  // function_t, member_function_t
+#include "invoke.hpp" // is_invocable
 
 #include <type_traits> // std::enable_if
 #include <utility>     // std::forward, std::move, std::pair
@@ -49,8 +50,15 @@ namespace bit {
     /// \brief This class is for a lightweight way of managing function
     ///        callbacks without requiring heap allocations.
     ///
-    /// The syntax is a little off as a result, requiring a call to
-    /// Delegate::bind.
+    /// The syntax for binding functions requires statically specifying the
+    /// function address and, in the case of member functions, the type of the
+    /// class. This is due to a limitation in the (pre-c++14) deduction system.
+    ///
+    /// \note Since delegates deal with statically typed member function
+    ///       pointers, they cannot be used with lambdas. The
+    ///       pointer-to-function must be able to be retrieved statically
+    ///       (e.g. at constexpr time), which is something not possible until
+    ///       C++17 with constexpr lambdas.
     ///
     /// Example
     /// \code
@@ -58,7 +66,8 @@ namespace bit {
     /// T       t;
     /// const T ct;
     ///
-    /// delegate.bind<&foo>();           // bind free function
+    /// delegate.bind<&foo>();           // bind function
+    /// delegate.bind<&T::static_foo>(); // bind static member function
     /// delegate.bind<T,&T::foo>( &t );  // bind member functions
     /// delegate.bind<T,&T::foo>( &ct ); // bind const member function
     /// \endcode
@@ -75,64 +84,81 @@ namespace bit {
       //-----------------------------------------------------------------------
     public:
 
-      using return_type        = R;
-      using free_function_type = return_type (*)(Types...);
-
-      template<class C>
-      using member_function_type = return_type (C::*)(Types...);
-
-      template<class C>
-      using const_member_function_type = return_type (C::*)(Types...) const;
+      using return_type = R;
 
       //-----------------------------------------------------------------------
-      // Constructor / Destructor
+      // Constructor / Assignment
       //-----------------------------------------------------------------------
     public:
 
       /// \brief Constructs an unbound delegate
       constexpr delegate() noexcept;
 
+      /// \brief Move-constructs a delegate from an existing delegate
+      ///
+      /// \param other the other delegate to move
+      constexpr delegate( delegate&& other ) noexcept = default;
+
+      /// \brief Copy-constructs a delegate from an existing delegate
+      ///
+      /// \param other the other delegate to copy
+      constexpr delegate( const delegate& other ) noexcept = default;
+
+      //-----------------------------------------------------------------------
+
+      /// \brief Move-assigns a delegate from an existing delegate
+      ///
+      /// \param other the other delegate to move
+      /// \return reference to \c (*this)
+      delegate& operator=( delegate&& other ) noexcept = default;
+
+      /// \brief Copy-assigns a delgate from an existing delegate
+      ///
+      /// \param other the other delegate to move
+      /// \return reference to \c (*this)
+      delegate& operator=( const delegate& other ) = default;
+
       //-----------------------------------------------------------------------
       // Function Binding
       //-----------------------------------------------------------------------
     public:
 
-      /// \brief Binds a free function to this delegate
+      /// \brief Binds a function pointer to this delegate
       ///
       /// \tparam function the free-function type to bind
       /// \tparam function the function pointer for the delegate
-      template<free_function_type function>
+      template<function_pointer<R(Types...)> Function>
       constexpr void bind() noexcept;
 
       /// \{
-      /// \brief Binds a member function to this delegate
+      /// \brief Binds a member function pointer to this delegate
       ///
       /// \tparam C The type of instance to bind
-      /// \tparam member_function The pointer to member function to bind
+      /// \tparam MemberFunction The pointer to member function to bind
       /// \param instance the instance to call the member function on
-      template <class C, member_function_type<C> member_function>
+      template <class C, member_function_pointer<C,R(Types...)> MemberFunction>
       constexpr void bind( C& instance ) noexcept;
+      template <class C, member_function_pointer<const C,R(Types...)> MemberFunction>
+      constexpr void bind( const C& instance ) noexcept;
       /// \}
 
-      /// \{
-      /// \brief Binds a const member function to this delegate
+      /// \brief Binds a const member function pointer to this delegate
+      ///
+      /// This overload exists to disambiguate 'bind' without specifying the
+      /// CV qualifiers.
       ///
       /// \tparam C the type of instance to bind
-      /// \tparam member_function The pointer to member function to bind
+      /// \tparam MemberFunction The pointer to member function to bind
       /// \param instance the instance to call the member function on
-      template <class C, const_member_function_type<C> member_function>
-      constexpr void bind( const C& instance ) noexcept;
-
-      template <class C, const_member_function_type<C> member_function>
+      template <class C, member_function_pointer<const C,R(Types...)> MemberFunction>
       constexpr void cbind( const C& instance ) noexcept;
-      /// \}
 
       //-----------------------------------------------------------------------
       // Queries
       //-----------------------------------------------------------------------
     public:
 
-      /// \brief Is this Delegate bound?
+      /// \brief Is this delegate bound?
       ///
       /// \return \c true if the delegate is bound
       constexpr bool is_bound() const noexcept;
@@ -147,13 +173,13 @@ namespace bit {
 
       /// \brief Invokes the bound function
       ///
+      /// \note It is undefined behavior to invoke this function without
+      ///       binding the delegate first
+      ///
       /// \param args the arguments for the invokation
       /// \return the return value for the invoked delegate
-      template<typename...Args, typename = std::enable_if_t<is_invocable<R(Types...),Args...>::value>>
-      constexpr return_type invoke( Args&&...args ) const;
-
       /// \copydoc delegate::invoke( Args&&... )
-      template<typename...Args, typename = std::enable_if_t<is_invocable<R(Types...),Args...>::value>>
+      template<typename...Args, typename = std::enable_if_t<is_invocable<R(*)(Types...),Args...>::value>>
       constexpr return_type operator()( Args&&...args ) const;
 
       //-----------------------------------------------------------------------
@@ -193,11 +219,14 @@ namespace bit {
 
 #if __cplusplus >= 201703L
 
-      template<auto Fn>
-      auto make_delegate();
+    template<auto FreeFunction>
+    auto make_delegate();
 
-      template<auto Fn, typename T>
-      auto make_delegate( T* );
+    template<auto MemberFunction, typename T>
+    auto make_delegate( T& );
+
+    template<auto MemberFunction, typename T>
+    auto make_delegate( const T& );
 
 #endif
 
