@@ -35,7 +35,7 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
-#endif
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "string.hpp"
 

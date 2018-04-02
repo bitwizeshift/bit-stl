@@ -32,6 +32,10 @@
 #ifndef BIT_STL_CONTAINERS_HASHED_STRING_HPP
 #define BIT_STL_CONTAINERS_HASHED_STRING_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "string.hpp"             // bit::stl::hash_value
 #include "hashed_string_view.hpp" // bit::stl::hashed_string_view
 

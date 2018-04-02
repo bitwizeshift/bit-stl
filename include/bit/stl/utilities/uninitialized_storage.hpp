@@ -32,6 +32,10 @@
 #ifndef BIT_STL_UTILITY_UNINITIALIZED_STORAGE_HPP
 #define BIT_STL_UTILITY_UNINITIALIZED_STORAGE_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include <iterator> // std::iterator_traits
 #include <new>      // placement new
 #include <memory>   // std::addressof

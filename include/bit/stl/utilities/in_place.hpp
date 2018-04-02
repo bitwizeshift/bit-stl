@@ -33,6 +33,10 @@
 #ifndef BIT_STL_UTILITIES_IN_PLACE_HPP
 #define BIT_STL_UTILITIES_IN_PLACE_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include <type_traits> // std::true_type, std::false_type
 
 namespace bit {

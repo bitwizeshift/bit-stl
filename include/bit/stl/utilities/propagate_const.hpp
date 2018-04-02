@@ -33,6 +33,10 @@
 #ifndef BIT_STL_UTILITIES_PROPAGATE_CONST_HPP
 #define BIT_STL_UTILITIES_PROPAGATE_CONST_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "../traits/composition/bool_constant.hpp"
 #include "../traits/properties/is_explicitly_convertible.hpp"
 

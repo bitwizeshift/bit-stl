@@ -33,6 +33,10 @@
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_IS_SAME_CV_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_IS_SAME_CV_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "../composition/bool_constant.hpp"
 
 #include <type_traits> // std::is_const std::is_volatile

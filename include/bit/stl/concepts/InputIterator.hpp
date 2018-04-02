@@ -32,6 +32,10 @@
 #ifndef BIT_STL_CONCEPTS_INPUT_ITERATOR_HPP
 #define BIT_STL_CONCEPTS_INPUT_ITERATOR_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "Iterator.hpp"
 
 #include "../traits/composition/void_t.hpp"

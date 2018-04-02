@@ -32,6 +32,10 @@
 #ifndef BIT_STL_FUNCTIONAL_EXTRACTION_USE_SECOND_HPP
 #define BIT_STL_FUNCTIONAL_EXTRACTION_USE_SECOND_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include <type_traits> // std::declval, std::enable_if_t
 #include <utility>     // std::forward, get
 

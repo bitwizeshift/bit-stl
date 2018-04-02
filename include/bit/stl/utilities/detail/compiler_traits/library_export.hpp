@@ -36,6 +36,10 @@
 #ifndef BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_LIBRARY_EXPORT_HPP
 #define BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_LIBRARY_EXPORT_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 //! \def BIT_API_EXPORT
 //! \brief Expands to compiler/platform specific symbol export statement
 //!

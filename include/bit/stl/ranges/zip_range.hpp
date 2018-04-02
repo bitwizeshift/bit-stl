@@ -32,6 +32,10 @@
 #ifndef BIT_STL_RANGES_ZIP_RANGE_HPP
 #define BIT_STL_RANGES_ZIP_RANGE_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "range.hpp" // range
 
 #include "../iterators/zip_iterator.hpp" // zip_iterator

@@ -36,6 +36,10 @@
 #ifndef BIT_STL_MEMORY_FAT_PTR_HPP
 #define BIT_STL_MEMORY_FAT_PTR_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include <cstddef>     // std::size_t
 #include <utility>     // std::swap
 #include <type_traits> // std::is_void, std::is_abstract

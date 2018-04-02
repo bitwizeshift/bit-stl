@@ -33,6 +33,10 @@
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_TRIVIALLY_COPY_ASSIGNABLE_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_TRIVIALLY_COPY_ASSIGNABLE_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "../composition/conjunction.hpp"
 
 #include <type_traits> // std::is_trivially_copy_assignable

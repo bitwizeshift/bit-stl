@@ -33,6 +33,10 @@
 #ifndef BIT_STL_CONTAINERS_SPAN_HPP
 #define BIT_STL_CONTAINERS_SPAN_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 // local bit libraries
 #include "../traits/composition/bool_constant.hpp"
 #include "../traits/transformations/match_cv_qualifiers.hpp"

@@ -33,6 +33,10 @@
 #ifndef BIT_STL_FUNCTIONAL_BITWISE_BIT_AND_HPP
 #define BIT_STL_FUNCTIONAL_BITWISE_BIT_AND_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include <utility> // std::forward
 
 namespace bit {

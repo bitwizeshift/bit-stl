@@ -32,6 +32,10 @@
 #ifndef BIT_STL_UTILITIES_ALIGNED_STORAGE_HPP
 #define BIT_STL_UTILITIES_ALIGNED_STORAGE_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "../traits/composition/conjunction.hpp"
 #include "../traits/composition/size_constant.hpp"
 

@@ -33,6 +33,10 @@
 #ifndef BIT_STL_UTILITIES_POINTER_WRAPPER_HPP
 #define BIT_STL_UTILITIES_POINTER_WRAPPER_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "in_place.hpp" // in_place_t
 
 #include <type_traits> // std::remove_extent_t, std::enable_if_t, etc

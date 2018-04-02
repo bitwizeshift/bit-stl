@@ -32,6 +32,10 @@
 #ifndef BIT_STL_CONTAINERS_STRING_HPP
 #define BIT_STL_CONTAINERS_STRING_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "detail/string_hash.hpp"
 
 #include <string> // std::char_traits

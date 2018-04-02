@@ -33,6 +33,10 @@
 #ifndef BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP
 #define BIT_STL_CONTAINERS_CIRCULAR_BUFFER_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "../utilities/uninitialized_storage.hpp" // destroy_at
 #include "../utilities/compiler_traits.hpp" // BIT_COMPILER_EXCEPTIONS_ENABLED
 

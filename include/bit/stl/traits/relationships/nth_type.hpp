@@ -33,6 +33,10 @@
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_NTH_TYPE_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_NTH_TYPE_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "../composition/identity.hpp"
 
 #include <cstddef>     // std::size_t

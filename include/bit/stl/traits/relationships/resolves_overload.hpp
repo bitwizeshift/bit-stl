@@ -33,6 +33,10 @@
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_RESOLVES_OVERLOAD_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_RESOLVES_OVERLOAD_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "nth_type.hpp"
 
 #include "../composition/size_constant.hpp"

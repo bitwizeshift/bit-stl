@@ -33,6 +33,10 @@
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_IMPLICITLY_CONSTRUCTIBLE_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_IMPLICITLY_CONSTRUCTIBLE_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "../composition/bool_constant.hpp"
 #include "../composition/type_list.hpp"
 #include "../composition/void_t.hpp"

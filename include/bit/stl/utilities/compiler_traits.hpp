@@ -33,6 +33,10 @@
 #ifndef BIT_STL_UTILITIES_COMPILER_TRAITS_HPP
 #define BIT_STL_UTILITIES_COMPILER_TRAITS_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 // IWYU pragma: begin_exports
 #include "detail/compiler_traits/platform.hpp"
 #include "detail/compiler_traits/compiler.hpp"

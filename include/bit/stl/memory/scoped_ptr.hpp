@@ -32,6 +32,10 @@
 #ifndef BIT_STL_MEMORY_SCOPED_PTR_HPP
 #define BIT_STL_MEMORY_SCOPED_PTR_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include <memory>      // std::default_delete
 #include <cstddef>     // std::size_t
 #include <type_traits> // std::decay_t, etc

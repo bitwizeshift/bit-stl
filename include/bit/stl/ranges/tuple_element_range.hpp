@@ -32,6 +32,10 @@
 #ifndef BIT_STL_RANGES_TUPLE_ELEMENT_RANGE_HPP
 #define BIT_STL_RANGES_TUPLE_ELEMENT_RANGE_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "range.hpp" // range
 
 #include "../iterators/tuple_element_iterator.hpp" // tuple_element_iterator

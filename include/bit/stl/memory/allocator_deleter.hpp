@@ -32,6 +32,10 @@
 #ifndef BIT_STL_MEMORY_ALLOCATOR_DESTRUCTOR_HPP
 #define BIT_STL_MEMORY_ALLOCATOR_DESTRUCTOR_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include <memory> // std::allocator_traits
 
 namespace bit {

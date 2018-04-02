@@ -33,6 +33,10 @@
 #ifndef BIT_STL_TRAITS_COMPOSITION_INTEGRAL_CONSTANT_HPP
 #define BIT_STL_TRAITS_COMPOSITION_INTEGRAL_CONSTANT_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include <type_traits>
 
 namespace bit {

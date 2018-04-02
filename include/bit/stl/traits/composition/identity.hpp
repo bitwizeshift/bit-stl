@@ -32,6 +32,10 @@
 #ifndef BIT_STL_TRAITS_COMPOSITION_IDENTITY_HPP
 #define BIT_STL_TRAITS_COMPOSITION_IDENTITY_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 namespace bit {
   namespace stl {
 

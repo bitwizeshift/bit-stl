@@ -34,6 +34,10 @@
 #ifndef BIT_STL_ITERATORS_DETAIL_TAGGED_ITERATOR_HPP
 #define BIT_STL_ITERATORS_DETAIL_TAGGED_ITERATOR_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include <memory> // std::pointer_traits
 #include <iterator> // std::random_access_iterator_tag
 

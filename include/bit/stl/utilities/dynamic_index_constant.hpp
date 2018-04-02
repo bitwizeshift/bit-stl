@@ -33,6 +33,10 @@
 #ifndef BIT_STL_UTILITIES_DYNAMIC_INDEX_CONSTANT_HPP
 #define BIT_STL_UTILITIES_DYNAMIC_INDEX_CONSTANT_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include <cstddef> // std::size_t, std::ptrdiff_t
 #include <limits>  // std::numeric_limits
 

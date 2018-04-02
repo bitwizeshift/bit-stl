@@ -5,6 +5,10 @@
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_MEMBER_OBJECT_POINTER_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_MEMBER_OBJECT_POINTER_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "../composition/conjunction.hpp"
 #include "../composition/bool_constant.hpp" // true_type, false_type
 

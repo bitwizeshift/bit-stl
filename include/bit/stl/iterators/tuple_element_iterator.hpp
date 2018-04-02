@@ -34,6 +34,10 @@
 #ifndef BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_HPP
 #define BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include <iterator>    // std::iterator_traits, std::iterator
 #include <type_traits> // std::common_type
 #include <tuple>       // std::tuple

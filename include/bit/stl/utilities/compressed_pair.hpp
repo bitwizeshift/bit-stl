@@ -33,6 +33,10 @@
 #ifndef BIT_STL_UTILITIES_COMPRESSED_PAIR_HPP
 #define BIT_STL_UTILITIES_COMPRESSED_PAIR_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "hash.hpp"
 
 #include "detail/tuple_size.hpp"
