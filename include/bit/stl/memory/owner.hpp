@@ -1,10 +1,7 @@
-/**
- * \file owner.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief TODO: Add description
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -38,7 +35,7 @@
 namespace bit {
   namespace stl {
 
-    /// \brief A pointer that represents ownership
+    /// \brief A wrapper type that represents ownership
     template<typename T>
     using owner = T;
 

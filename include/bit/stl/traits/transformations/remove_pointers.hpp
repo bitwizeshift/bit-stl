@@ -1,10 +1,7 @@
-/**
- * \file remove_pointers.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a utility metafunction for removing all pointers
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

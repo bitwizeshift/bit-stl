@@ -1,10 +1,7 @@
-/**
- * \file monostate.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines the type 'monotype'
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

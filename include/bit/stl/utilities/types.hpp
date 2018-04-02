@@ -1,10 +1,7 @@
-/**
- * \file types.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains aliases for fundamental types
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

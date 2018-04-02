@@ -1,14 +1,11 @@
-/**
- * \file fat_ptr.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition of a pointer that contains
  *        knowledge about both its size and pointer.
  *
  * Its primary use is for allocators to preserve size-information without
  * requiring heap-based record-keeping
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

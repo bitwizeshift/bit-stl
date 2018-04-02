@@ -1,10 +1,8 @@
-/**
- * \file expected.hpp
- *
- * \brief TODO: Add description
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+/*****************************************************************************
+ * \file
+ * \brief This header contains the 'expected' monadic type for indicating
+ *        possible error conditions
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

@@ -1,11 +1,8 @@
-/**
- * \file match_sign_qualifiers.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a utility metafunction for matching
  *        sign-qualifiers of a given qualified type
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

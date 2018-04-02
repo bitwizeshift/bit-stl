@@ -1,10 +1,7 @@
-/**
- * \file Destructible.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines the concept for Desructible
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

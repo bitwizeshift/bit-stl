@@ -1,11 +1,8 @@
-/**
- * \file byte.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header is mostly taken from Microsoft's implementation of
  *        the GSL byte-type.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

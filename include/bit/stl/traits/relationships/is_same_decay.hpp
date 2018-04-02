@@ -1,11 +1,8 @@
-/**
- * \file is_same_decay.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for detecting if two types are the
  *        same after being decayed
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

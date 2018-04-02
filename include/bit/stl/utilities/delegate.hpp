@@ -1,10 +1,7 @@
-/**
- * \file delegate.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This file contains the definition for delegates
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

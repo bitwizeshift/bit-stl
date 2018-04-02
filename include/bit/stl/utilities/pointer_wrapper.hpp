@@ -1,11 +1,8 @@
-/**
- * \file pointer_wrapper.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a wrapper that makes a value type act like
  *        a pointer type.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

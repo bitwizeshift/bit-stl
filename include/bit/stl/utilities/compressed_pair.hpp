@@ -1,11 +1,8 @@
-/**
- * \file compressed_pair.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a utility for compressing pairs that leverages
  *        EBO
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

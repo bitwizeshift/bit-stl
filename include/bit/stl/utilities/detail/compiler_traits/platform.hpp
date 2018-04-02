@@ -1,12 +1,11 @@
-/**
- * \file platform.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header detects the appropriate platform configuration based on
  *        the compiling operating system
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

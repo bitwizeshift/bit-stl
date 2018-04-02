@@ -1,10 +1,7 @@
-/**
- * \file string_view.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief Unit tests for bit::stl::basic_string_view
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/containers/string_view.hpp>
 #include <bit/stl/containers/array_view.hpp>

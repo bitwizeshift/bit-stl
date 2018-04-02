@@ -1,10 +1,7 @@
-/**
- * \file nonesuch.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the utility type nonesuch
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

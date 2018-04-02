@@ -1,11 +1,8 @@
-/**
- * \file tuple.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains utility extensions to the standard utility
  *        header
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

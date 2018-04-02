@@ -1,10 +1,7 @@
-/**
- * \file string_span.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief Thie file contains a mutable view of a string
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

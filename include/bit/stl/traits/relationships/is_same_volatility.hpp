@@ -1,11 +1,8 @@
-/**
- * \file is_same_volatility.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for detecting if a type has the same
  *        volatile qualifications
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

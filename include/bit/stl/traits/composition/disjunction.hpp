@@ -1,10 +1,7 @@
-/**
- * \file disjunction.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the disjunction utility metafunction
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

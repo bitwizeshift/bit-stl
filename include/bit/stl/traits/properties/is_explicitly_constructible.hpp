@@ -1,11 +1,8 @@
-/**
- * \file is_explicitly_constructible.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definitions for a type-trait that determines
  *        explicit constructibility
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

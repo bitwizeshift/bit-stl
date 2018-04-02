@@ -1,11 +1,8 @@
-/**
- * \file in_place.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definitions for the utility type-tags,
  *        in_place
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

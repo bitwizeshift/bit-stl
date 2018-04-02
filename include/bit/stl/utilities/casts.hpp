@@ -1,10 +1,7 @@
-/**
- * \file casts.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a collection of utilities for casts.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -117,6 +114,8 @@ namespace bit {
       /// \note Bytes are truncated to fit into type \p To. If the size of
       ///       \p From is smaller than \p To, the remaining bytes are left
       ///       untouched (and thus may be UB to access)
+      ///
+      /// \note Both types \p To and \p From must satisfy \c TriviallyCopyable
       ///
       /// \param from the value to convert
       /// \return the converted value

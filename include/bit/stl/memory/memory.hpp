@@ -1,10 +1,7 @@
-/**
- * \file memory.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains custom and c++17 extensions to the memory library
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

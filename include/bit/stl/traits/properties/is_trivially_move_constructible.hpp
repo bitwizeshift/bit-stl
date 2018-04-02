@@ -1,11 +1,8 @@
-/**
- * \file is_trivially_move_constructible.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type trait for checking trivial
  *        move-constructibilty
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

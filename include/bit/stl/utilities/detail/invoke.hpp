@@ -1,11 +1,10 @@
-/**
- * \file invoke.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This provides the definition for the standards meta-function INVOKE
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
- */
+ *****************************************************************************/
 #ifndef BIT_STL_UTILITIES_DETAIL_INVOKE_HPP
 #define BIT_STL_UTILITIES_DETAIL_INVOKE_HPP
 

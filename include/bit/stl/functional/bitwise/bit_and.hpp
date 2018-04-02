@@ -1,11 +1,8 @@
-/**
- * \file bit_and.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a functor for performing the bitwise 'and'
  *        between two types.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

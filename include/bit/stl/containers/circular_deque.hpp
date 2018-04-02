@@ -1,11 +1,8 @@
-/**
- * \file circular_deque.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the implementation for a circular-buffer with
  *        a deque API
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

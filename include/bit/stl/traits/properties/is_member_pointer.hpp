@@ -1,10 +1,7 @@
-/**
- * \file is_member_pointer.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief TODO: Add description
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_MEMBER_POINTER_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_MEMBER_POINTER_HPP
 

@@ -1,10 +1,7 @@
-/**
- * \file is_trivially_assignable.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type trait for checking trivially-assignability
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

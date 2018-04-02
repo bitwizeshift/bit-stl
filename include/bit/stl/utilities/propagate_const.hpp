@@ -1,11 +1,8 @@
-/**
- * \file propagate_const.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a utility for propagating const to pointer
  *        types
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

@@ -1,11 +1,8 @@
-/**
- * \file circular_buffer.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the implementation for a circular buffer into
  *        non-owned memory
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

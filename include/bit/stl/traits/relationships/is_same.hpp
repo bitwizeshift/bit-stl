@@ -1,11 +1,8 @@
-/**
- * \file is_same.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the relationship type-trait for determining if
  *        types are the same
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

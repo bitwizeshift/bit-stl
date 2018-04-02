@@ -1,11 +1,8 @@
-/**
- * \file nth_type.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for extracting the \c nth type from
  *        a variadic pack
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

@@ -1,11 +1,8 @@
-/**
- * \file is_same_constness.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for detecting if a type has the same
  *        constness
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

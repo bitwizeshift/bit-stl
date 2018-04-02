@@ -1,11 +1,8 @@
-/**
- * \file is_explicitly_convertible.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for determining whether a type is
  *        explicitly convertible to another type
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

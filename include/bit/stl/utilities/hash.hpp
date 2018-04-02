@@ -1,10 +1,7 @@
-/**
- * \file hash.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains various hashing utilities
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

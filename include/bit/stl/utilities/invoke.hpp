@@ -1,11 +1,8 @@
-/**
- * \file invoke.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition for the INVOKE family of
  *        utilities, including type-traits
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

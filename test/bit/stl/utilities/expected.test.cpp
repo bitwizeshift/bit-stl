@@ -1,10 +1,7 @@
-/**
- * \file expected.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief TODO: Add description
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 #include <bit/stl/utilities/expected.hpp>
 
 #include <catch.hpp>

@@ -1,10 +1,7 @@
-/**
- * \file macros.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines useful macros for the rest of the library
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

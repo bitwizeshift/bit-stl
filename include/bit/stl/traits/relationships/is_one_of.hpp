@@ -1,11 +1,8 @@
-/**
- * \file is_one_of.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait to determine if a given type is part
  *        of a variadic set
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

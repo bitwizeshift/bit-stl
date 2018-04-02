@@ -1,12 +1,9 @@
-/**
- * \file tuple_element_iterator.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of the tuple_element_iterator,
  *        an adapter that wraps around iterators that iterate tuples to only
  *        return specific tuple elements.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

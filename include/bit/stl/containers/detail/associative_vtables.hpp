@@ -1,6 +1,5 @@
-/**
- * \file associative_vtables.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains associative-type vtables used in set_view.hpp
  *        and map_view.hpp
  *

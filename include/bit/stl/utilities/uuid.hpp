@@ -1,11 +1,8 @@
-/**
- * \file uuid.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of a universal identifier
  *        structure
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

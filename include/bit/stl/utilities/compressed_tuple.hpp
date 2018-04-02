@@ -1,11 +1,8 @@
-/**
- * \file compressed_tuple.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a utility for compressing tuples to leverage
  *        EBO
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

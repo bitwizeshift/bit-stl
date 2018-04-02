@@ -1,11 +1,8 @@
-/**
- * \file span.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This file contains a custom implementation of the gsl::span;
  *        a mutable view of contiguous data.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

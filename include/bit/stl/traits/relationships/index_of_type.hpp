@@ -1,11 +1,8 @@
-/**
- * \file index_of_type.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait to determine the index of a type in
  *        a variadic pack
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

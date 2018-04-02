@@ -1,10 +1,7 @@
-/**
- * \file tuple_size.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief TODO: Add description
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 #ifndef BIT_STL_UTILITIES_DETAIL_TUPLE_SIZE_HPP
 #define BIT_STL_UTILITIES_DETAIL_TUPLE_SIZE_HPP
 

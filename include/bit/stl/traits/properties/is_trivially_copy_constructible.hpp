@@ -1,11 +1,8 @@
-/**
- * \file is_trivially_copy_constructible.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type trait for checking trivial
  *        copy-constructibilty
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

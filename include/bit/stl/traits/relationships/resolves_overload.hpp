@@ -1,11 +1,8 @@
-/**
- * \file resolves_overload.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type trait for determining which type would
  *        be resolved when presented with parallel overloads
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

@@ -1,11 +1,8 @@
-/**
- * \file circular_queue.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the implementation of a circular buffer using a
  *        queue API
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

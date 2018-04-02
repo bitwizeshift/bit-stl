@@ -1,6 +1,5 @@
-/**
- * \file string_hash.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the implementation for string hashing
  *
  * \note This is an internal header file, included by other library headers.

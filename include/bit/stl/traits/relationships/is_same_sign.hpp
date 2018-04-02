@@ -1,11 +1,8 @@
-/**
- * \file is_same_sign.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for detecting if a type is the same
  *        sign
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

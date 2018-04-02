@@ -1,10 +1,7 @@
-/**
- * \file conjunction.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the conjunction utility metafunction
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

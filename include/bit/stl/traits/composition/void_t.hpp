@@ -1,10 +1,7 @@
-/**
- * \file void_t.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines utilities for the void_t idiom
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

@@ -1,10 +1,7 @@
-/**
- * \file array_view.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief todo: fill in documentation
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/containers/array_view.hpp>
 

@@ -1,11 +1,8 @@
-/**
- * \file assert.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definitions for both static and
  *        runtime assertions.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

@@ -1,11 +1,8 @@
-/**
- * \file normalize_char.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains utility metafunctions for normalizing characters
  *        to just the 'char' type
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

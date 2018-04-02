@@ -1,11 +1,8 @@
-/**
- * \file is_trivially_copy_assignable.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type trait for checking trivially copy
  *        assignability
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

@@ -1,12 +1,11 @@
-/**
- * \file compiler/generic.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header attempts to detect a feature set from a generic
  *        (non-detected) c++ compiler.
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

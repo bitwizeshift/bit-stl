@@ -1,11 +1,8 @@
-/**
- * \file lazy.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of a lazy-initializing
  *        wrapper class
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

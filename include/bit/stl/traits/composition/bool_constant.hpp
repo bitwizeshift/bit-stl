@@ -1,11 +1,8 @@
-/**
- * \file bool_constant.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition to the utility metafunction
  *        bool_constant
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

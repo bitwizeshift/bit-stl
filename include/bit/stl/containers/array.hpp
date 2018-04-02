@@ -1,11 +1,8 @@
-/**
- * \file array.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a utility for constructing arbitrary sized
  *        std::array types, with optional type-deduction
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

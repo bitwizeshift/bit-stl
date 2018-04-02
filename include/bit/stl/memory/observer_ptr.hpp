@@ -1,11 +1,8 @@
-/**
- * \file observer_ptr.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a dummy smart-pointer, whose sole purpose
  *        is to behave like a well-defined raw-pointer.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

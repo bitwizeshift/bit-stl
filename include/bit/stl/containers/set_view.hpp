@@ -1,10 +1,7 @@
-/**
- * \file set_view.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of a type-erased set
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

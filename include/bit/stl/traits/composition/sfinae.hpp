@@ -1,11 +1,8 @@
-/**
- * \file sfinae.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains useful SFINAE utilities for selectively enabling
  *        or disabling functionality
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

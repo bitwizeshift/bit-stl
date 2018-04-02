@@ -1,10 +1,7 @@
-/**
- * \file memory.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief Tests cases for the memory module
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/memory/memory.hpp>
 

@@ -1,11 +1,8 @@
-/**
- * \file type_list.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a generic metaprogramming utility for storing a
  *        sequence of types in a single type.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

@@ -1,10 +1,7 @@
-/**
- * \file is_move_constructible.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type trait for checking move constructibilty
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

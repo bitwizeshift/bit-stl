@@ -1,10 +1,7 @@
-/**
- * \file tribool.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition of 'tribool', a tri-state type
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

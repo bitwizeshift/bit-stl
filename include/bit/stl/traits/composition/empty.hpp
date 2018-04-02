@@ -1,10 +1,7 @@
-/**
- * \file empty.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines an alias for an always empty type
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

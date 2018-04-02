@@ -1,10 +1,7 @@
-/**
- * \file NullablePointer.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines the concept NullablePointer
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

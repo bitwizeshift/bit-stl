@@ -1,11 +1,8 @@
-/**
- * \file enum.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains various helpers for managing enum and enum class
  *        types
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

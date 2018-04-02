@@ -1,10 +1,7 @@
-/**
- * \file delegate.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief Unit tests for #bit::stl::delegate
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/utilities/delegate.hpp>
 

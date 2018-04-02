@@ -1,10 +1,7 @@
-/**
- * \file is_assignable.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type trait for checking assignability
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

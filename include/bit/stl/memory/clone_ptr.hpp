@@ -1,12 +1,11 @@
-/**
- * \file clone_ptr.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of a smart pointers that
  *        clones pointers on copy.
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

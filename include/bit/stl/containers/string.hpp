@@ -1,10 +1,7 @@
-/**
- * \file string.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains extension to the standard C++ char_traits
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

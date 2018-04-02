@@ -1,11 +1,8 @@
-/**
- * \file size_constant.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition to the utility metafunction
  *        size_constant
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

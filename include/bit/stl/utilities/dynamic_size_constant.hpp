@@ -1,11 +1,8 @@
-/**
- * \file dynamic_constant.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition for a constant type that can be
  *        specified either at runtime or compile time
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

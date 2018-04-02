@@ -1,11 +1,8 @@
-/**
- * \file hashed_string_view.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of a compile-time hashed
  *        string view
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

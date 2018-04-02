@@ -1,11 +1,8 @@
-/**
- * \file base_type.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition of a metafunction for extracting
  *        the base of a type without any qualifiers
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

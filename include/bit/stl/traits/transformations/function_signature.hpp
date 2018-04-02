@@ -1,11 +1,8 @@
-/**
- * \file function_signature.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a type trait that determines a function
  *        signature from a function type
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

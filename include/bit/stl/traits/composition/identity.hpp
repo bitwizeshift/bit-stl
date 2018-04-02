@@ -1,10 +1,7 @@
-/**
- * \file identity.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the trait helper for identity types
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

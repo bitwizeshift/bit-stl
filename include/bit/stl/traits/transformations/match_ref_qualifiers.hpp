@@ -1,11 +1,8 @@
-/**
- * \file match_ref_qualifiers.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a utility metafunction for matching
  *        ref-qualifiers of a given qualified type
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

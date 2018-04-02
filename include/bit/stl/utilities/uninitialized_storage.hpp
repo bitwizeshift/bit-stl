@@ -1,10 +1,7 @@
-/**
- * \file uninitialized_storage.hpp
- *
- * \brief TODO: Add description
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+/*****************************************************************************
+ * \file
+ * \brief This header contains utilities for managing uninitialized storage
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

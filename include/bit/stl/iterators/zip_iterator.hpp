@@ -1,10 +1,7 @@
-/**
- * \file zip_iterator.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the internal implementation of a zip iterator
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

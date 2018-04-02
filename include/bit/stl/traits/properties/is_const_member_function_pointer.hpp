@@ -1,11 +1,8 @@
-/**
- * \file is_const_member_function_pointer.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for determining const-qualified
  *        member function pointers
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

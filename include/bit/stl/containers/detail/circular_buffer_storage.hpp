@@ -1,10 +1,7 @@
-/**
- * \file circular_buffer_storage.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief todo: fill in documentation
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

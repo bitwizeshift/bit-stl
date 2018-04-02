@@ -1,11 +1,8 @@
-/**
- * \file is_base_of_all.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for determing if a base is the base
  *        of all derived types
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

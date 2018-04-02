@@ -1,10 +1,7 @@
-/**
- * \file aligned_storage.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a utility type for aligned storage
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

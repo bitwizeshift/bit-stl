@@ -1,10 +1,7 @@
-/**
- * \file detected.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines type traits for the detected_t idiom
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

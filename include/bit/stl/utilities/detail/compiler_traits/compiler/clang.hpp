@@ -1,11 +1,10 @@
-/**
- * \file compiler/clang.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header detects compiler-specific features for Clang c++
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

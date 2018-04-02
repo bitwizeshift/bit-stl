@@ -1,11 +1,8 @@
-/**
- * \file is_derived_from_all.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for determining if a given type is
  *        derived from all bases
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

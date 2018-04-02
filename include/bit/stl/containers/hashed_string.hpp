@@ -1,10 +1,7 @@
-/**
- * \file hashed_string.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition for a hashed_string data type
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

@@ -1,11 +1,8 @@
-/**
- * \file pointer_rank.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines the type-trait for determining the level of
  *        indirection
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

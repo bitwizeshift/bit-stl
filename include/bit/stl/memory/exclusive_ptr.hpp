@@ -1,10 +1,7 @@
-/**
- * \file exclusive_ptr.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a type-erased version of the unique_ptr
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

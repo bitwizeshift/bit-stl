@@ -1,11 +1,8 @@
-/**
- * \file compiler_traits.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines various useful macros that abstracts compiler-
  *        specific intrinsics
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

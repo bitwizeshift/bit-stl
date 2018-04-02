@@ -1,11 +1,8 @@
-/**
- * \file integral_constant.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition for a metaprogramming utility
  *        that couples a value with a type
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

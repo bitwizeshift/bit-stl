@@ -1,11 +1,8 @@
-/**
- * \file source_location.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This file contains source_location, a type used to contain
  *        information regarding source details from exceptions
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

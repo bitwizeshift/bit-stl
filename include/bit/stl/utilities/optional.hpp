@@ -1,10 +1,7 @@
-/**
- * \file optional.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of c++17's \c std::optional
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
