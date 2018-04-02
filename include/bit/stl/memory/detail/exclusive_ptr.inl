@@ -652,6 +652,10 @@ inline bool bit::stl::operator>=( std::nullptr_t,
   return rhs.get() == nullptr;
 }
 
+//=============================================================================
+// X.Y.2 : exclusive_ptr utilities
+//=============================================================================
+
 //-----------------------------------------------------------------------------
 // Utilities
 //-----------------------------------------------------------------------------
@@ -663,7 +667,16 @@ inline void bit::stl::swap( exclusive_ptr<T>& lhs, exclusive_ptr<T>& rhs )
   lhs.swap(rhs);
 }
 
-//-------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+template<typename T>
+inline std::size_t bit::stl::hash_value( const exclusive_ptr<T>& val )
+  noexcept
+{
+  return static_cast<std::size_t>( reinterpret_cast<std::uintptr_t>( val.get() ) );
+}
+
+//-----------------------------------------------------------------------------
 
 template<typename Deleter, typename T>
 inline Deleter* bit::stl::get_deleter( const exclusive_ptr<T>& ptr )

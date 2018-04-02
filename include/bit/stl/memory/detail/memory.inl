@@ -52,7 +52,7 @@ inline std::size_t
   bit::stl::hash_value( const std::unique_ptr<T,Deleter>& val )
   noexcept
 {
-  return reinterpret_cast<std::size_t>( val.get() );
+  return static_cast<std::size_t>( reinterpret_cast<std::uintptr_t>( val.get() ) );
 }
 
 template<typename T>
@@ -60,7 +60,7 @@ inline std::size_t
   bit::stl::hash_value( const std::shared_ptr<T>& val )
   noexcept
 {
-  return reinterpret_cast<std::size_t>( val.get() );
+  return static_cast<std::size_t>( reinterpret_cast<std::uintptr_t>( val.get() ) );
 }
 
 template<typename T, typename U>

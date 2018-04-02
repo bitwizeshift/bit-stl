@@ -367,6 +367,7 @@ template<typename T>
 template<typename U, typename Deleter, typename Allocator, typename>
 void bit::stl::clone_ptr<T>::reset( U* ptr, Deleter deleter, Allocator alloc )
 {
+  reset();
   if(ptr) {
     using control_block = detail::clone_ptr_pointer<T,Deleter,Allocator>;
     using alloc_traits  = typename std::allocator_traits<Allocator>::template rebind_traits<control_block>;

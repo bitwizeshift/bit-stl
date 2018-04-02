@@ -39,10 +39,11 @@
 #include "../utilities/compressed_tuple.hpp"
 #include "allocator_deleter.hpp"
 
-#include <utility>     // std::piecewise_construct, std::move, std::forward
-#include <tuple>       // std::forward_as_tuple
+#include <cstdint>     // std::uintptr_t
 #include <memory>      // std::default_delete
+#include <tuple>       // std::forward_as_tuple
 #include <type_traits> // std::add_lvalue_reference_t
+#include <utility>     // std::piecewise_construct, std::move, std::forward
 
 namespace bit {
   namespace stl {
@@ -425,6 +426,10 @@ namespace bit {
     template<typename T>
     bool operator>=( std::nullptr_t, const exclusive_ptr<T>& rhs ) noexcept;
 
+    //=========================================================================
+    // X.Y.2 : exclusive_ptr utilities
+    //=========================================================================
+
     //-------------------------------------------------------------------------
     // Utilities
     //-------------------------------------------------------------------------
@@ -441,6 +446,15 @@ namespace bit {
 
     //-------------------------------------------------------------------------
 
+    /// \brief Hashes this exclusive_ptr
+    ///
+    /// \param val the value to hash
+    /// \return the hash of the underlying pointer
+    template<typename T>
+    std::size_t hash_value( const exclusive_ptr<T>& val ) noexcept;
+
+    //-------------------------------------------------------------------------
+
     /// \brief Gets the deleter from \p ptr
     ///
     /// \tparam Deleter the type of the deleter to retrieve
@@ -454,11 +468,17 @@ namespace bit {
     /// \brief Makes an exclusive_ptr from the given \p args
     ///
     /// \tparam T the type of the exclusive_ptr
-    /// \param args
-    /// \return
+    /// \param args the arguments to forward for the underlying constructor
+    /// \return an allocated exclusive_ptr
     template<typename T, typename...Args>
     exclusive_ptr<T> make_exclusive( Args&&...args );
 
+    /// \brief Allocates an exclusive_ptr, forwarding \p args to the underyling
+    ///        constructor
+    ///
+    /// \param allocator the allocator to allocate the exclusive_ptr
+    /// \param args the arguments to forward for the underlying constructor
+    /// \return an allocated exclusive_ptr
     template<typename T, typename Allocator, typename...Args>
     exclusive_ptr<T> allocate_exclusive( const Allocator& allocator, Args&&...args );
 
@@ -466,8 +486,7 @@ namespace bit {
     // Casts
     //-------------------------------------------------------------------------
 
-    inline namespace casts
-    {
+    inline namespace casts {
       /// \brief Statically casts an exclusive_ptr of type \c U to type \c T
       ///
       /// \tparam T the type to cast to
@@ -502,7 +521,7 @@ namespace bit {
       /// \return the reinterpret casted exclusive_ptr
       template<typename T, typename U>
       exclusive_ptr<T> reinterpret_pointer_cast( exclusive_ptr<U>&& other );
-    }
+    } // inline namespace casts
   } // namespace stl
 } // namespace bit
 
