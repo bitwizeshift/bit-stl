@@ -1,10 +1,7 @@
-/**
- * \file hashed_string_view.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief todo: fill in documentation
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/containers/hashed_string_view.hpp>
 

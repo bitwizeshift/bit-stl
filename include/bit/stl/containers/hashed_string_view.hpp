@@ -1,11 +1,8 @@
-/**
- * \file hashed_string_view.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of a compile-time hashed
  *        string view
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_CONTAINERS_HASHED_STRING_VIEW_HPP
 #define BIT_STL_CONTAINERS_HASHED_STRING_VIEW_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "string.hpp"
 #include "string_view.hpp"

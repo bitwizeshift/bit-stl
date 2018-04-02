@@ -1,10 +1,7 @@
-/**
- * \file circular_buffer.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief Unit tests for circular_buffer
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/containers/circular_buffer.hpp>
 

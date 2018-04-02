@@ -1,12 +1,9 @@
-/**
- * \file tagged_iterator.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a type used for creating unique iterators out
  *        of other iteraotrs. This allows for iterators that are incompatible to
  *        pointers, but are as lightweight as a normal ponter.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -36,6 +33,10 @@
 */
 #ifndef BIT_STL_ITERATORS_DETAIL_TAGGED_ITERATOR_HPP
 #define BIT_STL_ITERATORS_DETAIL_TAGGED_ITERATOR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <memory> // std::pointer_traits
 #include <iterator> // std::random_access_iterator_tag

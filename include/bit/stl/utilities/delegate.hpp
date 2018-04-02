@@ -1,10 +1,7 @@
-/**
- * \file delegate.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This file contains the definition for delegates
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +31,10 @@
 */
 #ifndef BIT_STL_UTILITIES_DELEGATE_HPP
 #define BIT_STL_UTILITIES_DELEGATE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "assert.hpp"
 #include "types.hpp"  // function_t, member_function_t

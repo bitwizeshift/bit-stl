@@ -1,10 +1,7 @@
-/**
- * \file circular_deque.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief Unit tests for the circular_deque
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/containers/circular_deque.hpp>
 

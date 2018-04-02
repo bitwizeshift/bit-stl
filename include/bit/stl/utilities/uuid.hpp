@@ -1,11 +1,8 @@
-/**
- * \file uuid.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of a universal identifier
  *        structure
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_UTILITIES_UTILITIES_UUID_HPP
 #define BIT_STL_UTILITIES_UTILITIES_UUID_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "byte.hpp"
 

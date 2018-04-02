@@ -1,10 +1,7 @@
-/**
- * \file remove_pointers.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a utility metafunction for removing all pointers
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +31,10 @@
 */
 #ifndef BIT_STL_TRAITS_TRANSFORMATIONS_REMOVE_POINTERS_HPP
 #define BIT_STL_TRAITS_TRANSFORMATIONS_REMOVE_POINTERS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/identity.hpp"
 

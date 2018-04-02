@@ -1,11 +1,8 @@
-/**
- * \file string_view.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header includes a custom implementation of the
  *        C++17 standard's basic_string_view
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -38,7 +35,7 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
-#endif
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "string.hpp"
 

@@ -1,10 +1,7 @@
-/**
- * \file tribool.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief todo: fill in documentation
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/utilities/tribool.hpp>
 

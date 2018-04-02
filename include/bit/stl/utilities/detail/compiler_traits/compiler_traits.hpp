@@ -1,9 +1,8 @@
-/**
- * \file compiler_traits.hpp
- *
+/*****************************************************************************
+ * \file
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -33,6 +32,10 @@
 */
 #ifndef BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_TRAITS_HPP
 #define BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_TRAITS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 //-----------------------------------------------------------------------------
 // Clang detection mechanisms
@@ -172,6 +175,38 @@
 
 //-----------------------------------------------------------------------------
 
+//! \def BIT_DEPRECATED
+//!
+//! \brief A utility macro for marking symbols as deprecated
+//!
+//! Example usage:
+//! \code
+//! BIT_DEPRECATED void foo(); // foo is deprecated
+//! \endcode
+//!
+//!
+//! \def BIT_DEPRECATED_MSG(msg)
+//! \brief A utility macro for displaying a deprecated message
+//!
+//!
+//! Example usage:
+//! \code
+//! BIT_DEPRECATED_MSG("use bar instead!") void foo(); // foo is deprecate, use bar instead!
+//! \endcode
+#if BIT_COMPILER_HAS_CPP14_DEPRECATED
+# define BIT_DEPRECATED [[deprecated]]
+# define BIT_DEPRECATED_MSG(msg) [[deprecated(msg)]]
+#elif defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5))
+# define BIT_DEPRECATED   __attribute__((deprecated))
+# define BIT_DEPRECATED_MSG(msg) __attribute__((deprecated(msg)))
+#elif _MSC_FULL_VER > 140050320
+# define BIT_DEPRECATED   __declspec(deprecated)
+# define BIT_DEPRECATED_MSG(msg) __declspec(deprecated(msg))
+#else
+# define BIT_DEPRECATED
+# define BIT_DEPRECATED_MSG(msg)
+#endif
+
 //! \def BIT_DEPRECATED_FOR(f)
 //!
 //! \brief A utility macro for displaying a deprecated message, informing the user
@@ -183,29 +218,17 @@
 //! \endcode
 //!
 //!
-//! \def BIT_UNAVAILABLE(maj,min)
+//! \def BIT_UNAVAILABLE_BEFORE(maj,min)
 //! \brief A utility macro fro displaying a deprecated message, with specifications
 //!        for before a certain version number of the system
 //!
 //!
 //! Example usage:
 //! \code
-//! BIT_UNAVAILABLE(1,3) void foo(); // Function foo is not available for version 1.3 of this engine
+//! BIT_UNAVAILABLE_BEFORE(1,3) void foo(); // Function foo is not available for version 1.3 of this engine
 //! \endcode
-#if BIT_COMPILER_HAS_CPP14_DEPRECATED
-# define BIT_DEPRECATED_FOR(f)    [[deprecated("Use '" f "' instead")]]
-# define BIT_UNAVAILABLE(maj,min) [[deprecated("Not available before " #maj "." #min)]]
-#elif defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5))
-# define BIT_DEPRECATED_FOR(f)    __attribute__((deprecated("Use '" f "' instead")))
-# define BIT_UNAVAILABLE(maj,min) __attribute__((deprecated("Not available before " #maj "." #min)))
-#elif _MSC_FULL_VER > 140050320
-# define BIT_DEPRECATED_FOR(f)    __declspec(deprecated("is deprecated. Use '" f "' instead"))
-# define BIT_UNAVAILABLE(maj,min) __declspec(deprecated("is not available before " #maj "." #min))
-#else
-# define BIT_DEPRECATED_FOR(f)    BIT_DEPRECATED
-# define BIT_UNAVAILABLE(maj,min) BIT_DEPRECATED
-#endif
-
+#define BIT_DEPRECATED_FOR(f)           BIT_DEPRECATED_MSG("Use '" f "' instead")
+#define BIT_UNAVAILABLE_BEFORE(maj,min) BIT_DEPRECATED_MSG("Not available before " #maj "." #min)
 
 //!
 //! \def BIT_NO_RETURN
@@ -536,30 +559,6 @@
 #  else
 #    define BIT_UNALIGNED
 #  endif
-#endif
-
-
-//! \def BIT_DEPRECATED
-//!
-//! \brief Creates a compiler message when a function marked as deprecated is called
-#ifdef BIT_COMPILER_HAS_CPP14_DEPRECATED
-# define BIT_DEPRECATED [[deprecated]]
-#elif defined(__GNUC__) && (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
-# define BIT_DEPRECATED   __attribute__((deprecated))
-#elif defined(_MSC_VER) && (_MSC_VER >= 1300)
-# define BIT_DEPRECATED   __declspec(deprecated)
-#else
-# define BIT_DEPRECATED
-#endif
-
-#ifdef BIT_COMPILER_HAS_CPP14_DEPRECATED
-# define BIT_DEPRECATED_MSG(msg) [[deprecated(msg)]]
-#elif defined(__GNUC__) && (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
-# define BIT_DEPRECATED_MSG(msg) __attribute__((deprecated(msg)))
-#elif defined(_MSC_VER) && (_MSC_VER >= 1300)
-# define BIT_DEPRECATED_MSG(msg) __declspec(deprecated(msg))
-#else
-# define BIT_DEPRECATED_MSG(msg)
 #endif
 
 #endif /* BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_COMPILER_TRAITS_HPP */

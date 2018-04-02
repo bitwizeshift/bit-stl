@@ -1,12 +1,11 @@
-/**
- * \file platform.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header detects the appropriate platform configuration based on
  *        the compiling operating system
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -36,6 +35,10 @@
 */
 #ifndef BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_PLATFORM_HPP
 #define BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_PLATFORM_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 //! \def BIT_PLATFORM_CONFIG_FILE
 //!

@@ -1,11 +1,8 @@
-/**
- * \file is_same_constness.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for detecting if a type has the same
  *        constness
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_IS_SAME_CONSTNESS_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_IS_SAME_CONSTNESS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/bool_constant.hpp"
 

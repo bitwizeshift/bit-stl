@@ -1,11 +1,10 @@
-/**
- * \file platform/macosx.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header detects features for Mac OSX Platform
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +34,10 @@
 */
 #ifndef BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_PLATFORM_MACOSX_HPP
 #define BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_PLATFORM_MACOSX_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 //-----------------------------------------------------------------------------
 // Platform Detection

@@ -1,11 +1,10 @@
-/**
- * \file platform/win32.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header detects features for Windows platforms
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +34,10 @@
 */
 #ifndef BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_PLATFORM_WIN32_HPP
 #define BIT_STL_UTILITIES_DETAIL_COMPILER_TRAITS_PLATFORM_WIN32_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 //-----------------------------------------------------------------------------
 // Platform Detection

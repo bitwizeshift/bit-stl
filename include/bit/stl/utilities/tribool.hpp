@@ -1,10 +1,7 @@
-/**
- * \file tribool.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition of 'tribool', a tri-state type
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +31,10 @@
 */
 #ifndef BIT_STL_UTILITIES_TRIBOOL_HPP
 #define BIT_STL_UTILITIES_TRIBOOL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <cstddef> // std::size_t
 

@@ -1,11 +1,8 @@
-/**
- * \file source_location.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This file contains source_location, a type used to contain
  *        information regarding source details from exceptions
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_UTILITIES_SOURCE_LOCATION_HPP
 #define BIT_STL_UTILITIES_SOURCE_LOCATION_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <cstddef> // std::size_t
 

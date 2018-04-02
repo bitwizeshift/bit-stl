@@ -4,27 +4,28 @@ enable_testing()
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 
-include(AddHeaderSelfContainmentTest)
-include(MakeVersionHeader)
-include(EnableCCache)
-
 #-----------------------------------------------------------------------------
 # Project Setup
 #-----------------------------------------------------------------------------
 
+# default to debug when building CMake
+if( NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES )
+  set(CMAKE_BUILD_TYPE DEBUG)
+endif()
+
+include(EnableCCache)
+
 # enable cacche to speed up compilations
 enable_ccache()
+
+include(CMakeDependentOption)
 
 option(BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS "Include each header independently in a .cpp file to determine header self-containment" off)
 option(BIT_STL_COMPILE_UNIT_TESTS "Compile and run the unit tests for this library" off)
 option(BIT_STL_GENERATE_DOCUMENTATION "Generates doxygen documentation" off)
+option(BIT_STL_VERBOSE_CONFIGURE "Verbosely configures this library project" off)
 
 project("BitStl")
-
-if( CMAKE_BUILD_TYPE STREQUAL "" )
-  message(STATUS "CMAKE_BUILD_TYPE not set; defaulting to 'Debug'")
-  set(CMAKE_BUILD_TYPE DEBUG)
-endif()
 
 #-----------------------------------------------------------------------------
 # Version Info
@@ -36,7 +37,9 @@ set(BIT_STL_VERSION_PATCH 0 CACHE STRING "patch version of bit::stl" FORCE)
 
 set(BIT_STL_VERSION "${BIT_STL_VERSION_MAJOR}.${BIT_STL_VERSION_MINOR}.${BIT_STL_VERSION_PATCH}" CACHE STRING "version of bit::stl" FORCE)
 
-message(STATUS "bit::stl ${BIT_STL_VERSION}")
+if( BIT_STL_VERBOSE_CONFIGURE )
+  message(STATUS "bit::stl ${BIT_STL_VERSION}")
+endif()
 
 #-----------------------------------------------------------------------------
 # bit::stl
@@ -45,6 +48,8 @@ message(STATUS "bit::stl ${BIT_STL_VERSION}")
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED on)
 set(CMAKE_CXX_EXTENSIONS off)
+
+include(MakeVersionHeader)
 
 make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
   MAJOR ${BIT_STL_VERSION_MAJOR}
@@ -170,8 +175,6 @@ set(headers
   include/bit/stl/concepts/SequenceContainer.hpp
 
   # utilities
-  include/bit/stl/utilities/detail/tuple_element.hpp
-  include/bit/stl/utilities/detail/tuple_size.hpp
   include/bit/stl/utilities/aligned_storage.hpp
   include/bit/stl/utilities/assert.hpp
   include/bit/stl/utilities/casts.hpp
@@ -196,6 +199,7 @@ set(headers
   include/bit/stl/utilities/source_location.hpp
   include/bit/stl/utilities/tribool.hpp
   include/bit/stl/utilities/tuple.hpp
+  include/bit/stl/utilities/tuple_utilities.hpp
   include/bit/stl/utilities/types.hpp
   include/bit/stl/utilities/uninitialized_storage.hpp
   include/bit/stl/utilities/utility.hpp
@@ -251,25 +255,18 @@ target_include_directories(stl INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
 )
-target_compile_definitions(stl INTERFACE
-  $<$<CONFIG:DEBUG>:DEBUG>
-  $<$<CONFIG:RELEASE>:NDEBUG RELEASE>
-)
 
 #-----------------------------------------------------------------------------
 # bit::stl : Independence Tests
 #-----------------------------------------------------------------------------
+
+include(AddHeaderSelfContainmentTest)
 
 if( BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS )
 
   # Add containment test and alias as 'bit::stl::header_self_containment_test'
   add_header_self_containment_test(stl_header_self_containment_test ${headers})
   add_library(bit::stl::header_self_containment_test ALIAS stl_header_self_containment_test)
-
-  target_compile_definitions(stl_header_self_containment_test PRIVATE
-    $<$<CONFIG:DEBUG>:DEBUG>
-    $<$<CONFIG:RELEASE>:NDEBUG RELEASE>
-  )
 
   if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     target_compile_options(stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)

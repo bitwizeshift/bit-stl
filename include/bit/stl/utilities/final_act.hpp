@@ -1,10 +1,7 @@
-/**
- * \file final_act.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the utility function and type, finally/final_act
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +31,10 @@
 */
 #ifndef BIT_STL_UTILITIES_FINAL_ACT_HPP
 #define BIT_STL_UTILITIES_FINAL_ACT_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <utility> // std::forward
 

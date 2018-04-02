@@ -1,11 +1,8 @@
-/**
- * \file span.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This file contains a custom implementation of the gsl::span;
  *        a mutable view of contiguous data.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_CONTAINERS_SPAN_HPP
 #define BIT_STL_CONTAINERS_SPAN_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 // local bit libraries
 #include "../traits/composition/bool_constant.hpp"

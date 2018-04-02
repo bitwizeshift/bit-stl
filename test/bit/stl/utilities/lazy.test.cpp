@@ -1,10 +1,7 @@
-/**
- * \file lazy.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief Test cases for bit::stl::lazy
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/utilities/lazy.hpp>
 

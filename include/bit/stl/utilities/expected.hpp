@@ -1,10 +1,8 @@
-/**
- * \file expected.hpp
- *
- * \brief TODO: Add description
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+/*****************************************************************************
+ * \file
+ * \brief This header contains the 'expected' monadic type for indicating
+ *        possible error conditions
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +32,10 @@
 */
 #ifndef BIT_STL_UTILITIES_EXPECTED_HPP
 #define BIT_STL_UTILITIES_EXPECTED_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../traits/composition/bool_constant.hpp"
 #include "../traits/composition/empty.hpp"

@@ -1,12 +1,9 @@
-/**
- * \file tuple_element_iterator.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of the tuple_element_iterator,
  *        an adapter that wraps around iterators that iterate tuples to only
  *        return specific tuple elements.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -36,6 +33,10 @@
 */
 #ifndef BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_HPP
 #define BIT_STL_ITERATORS_DETAIL_TUPLE_ELEMENT_ITERATOR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <iterator>    // std::iterator_traits, std::iterator
 #include <type_traits> // std::common_type

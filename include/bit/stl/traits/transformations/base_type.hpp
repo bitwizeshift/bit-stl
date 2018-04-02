@@ -1,11 +1,8 @@
-/**
- * \file base_type.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition of a metafunction for extracting
  *        the base of a type without any qualifiers
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_TRAITS_TRANSFORMATIONS_BASE_TYPE_HPP
 #define BIT_STL_TRAITS_TRANSFORMATIONS_BASE_TYPE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/identity.hpp"
 

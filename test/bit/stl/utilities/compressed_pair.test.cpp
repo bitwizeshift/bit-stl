@@ -1,10 +1,7 @@
-/**
- * \file utility.compressed_pair.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief This file unit tests the compressed_pair from utility.hpp
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/utilities/compressed_pair.hpp>
 

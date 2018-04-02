@@ -1,11 +1,8 @@
-/**
- * \file is_one_of.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait to determine if a given type is part
  *        of a variadic set
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_IS_ONE_OF_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_IS_ONE_OF_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/bool_constant.hpp" // true_type, false_type
 

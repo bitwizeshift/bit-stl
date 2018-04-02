@@ -1,11 +1,8 @@
-/**
- * \file is_volatile_member_function_pointer.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for determining volatile-qualified
  *        member function pointers
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)

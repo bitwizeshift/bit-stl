@@ -1,10 +1,7 @@
-/**
- * \file offset_ptr.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief todo: fill in documentation
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +31,10 @@
 */
 #ifndef BIT_STL_MEMORY_OFFSET_PTR_HPP
 #define BIT_STL_MEMORY_OFFSET_PTR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <cstdlib>     // std::ptrdiff_t
 #include <cstdint>     // std::uintptr_t

@@ -1,11 +1,8 @@
-/**
- * \file tuple.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains utility extensions to the standard utility
  *        header
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -36,33 +33,34 @@
 #ifndef BIT_STL_UTILITIES_TUPLE_HPP
 #define BIT_STL_UTILITIES_TUPLE_HPP
 
-#include <cstddef> // for std::size_t
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
+#include "types.hpp"
+#include "tuple_utilities.hpp"
+#include "../traits/composition/size_constant.hpp"
+#include "../traits/relationships/nth_type.hpp"
+
 #include <tuple>   // for std::tuple
-#include <utility> // for std::forward
 
 namespace bit {
   namespace stl {
 
-  /// \brief Invoke the Callable object \p function with a \p tuple of
-  ///        arguments
-  ///
-  /// \param function Callable object to be invoked
-  /// \param tuple    tuple whose elements to be used as arguments to \p function
-  /// \return the value returned from \p function
-  template<typename Func, typename Tuple>
-  constexpr decltype(auto) apply( Func&& function, Tuple&& tuple );
+    using ::std::tuple;
+    using ::std::get;
 
-  /// \brief Construct an object of type \t T, using the elements of the
-  ///        tuple t as the arguments to the constructor
-  ///
-  /// \param tuple tuple whose elements to be used as arguments to the constructor of T
-  /// \return The constructed T object
-  template<typename T, typename Tuple>
-  constexpr T make_from_tuple( Tuple&& tuple );
+    using ::std::tuple_cat;
+    using ::std::make_tuple;
+    using ::std::forward_as_tuple;
+
+    template<typename...Ts>
+    struct tuple_size<tuple<Ts...>> : size_constant<sizeof...(Ts)>{};
+
+    template<size_t Idx, typename...Ts>
+    struct tuple_element<Idx,tuple<Ts...>> : nth_type<Idx,Ts...>{};
 
   } // namespace stl
 } // namespace bit
-
-#include "detail/tuple.inl"
 
 #endif /* BIT_STL_UTILITIES_TUPLE_HPP */

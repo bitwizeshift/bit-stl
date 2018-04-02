@@ -1,12 +1,13 @@
-/**
- * \file is_member_pointer.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief TODO: Add description
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_MEMBER_POINTER_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_MEMBER_POINTER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/disjunction.hpp"
 #include "../composition/conjunction.hpp"

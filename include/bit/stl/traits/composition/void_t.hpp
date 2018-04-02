@@ -1,10 +1,7 @@
-/**
- * \file void_t.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines utilities for the void_t idiom
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +31,10 @@
 */
 #ifndef BIT_STL_TRAITS_COMPOSITION_VOID_T_HPP
 #define BIT_STL_TRAITS_COMPOSITION_VOID_T_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "identity.hpp"
 

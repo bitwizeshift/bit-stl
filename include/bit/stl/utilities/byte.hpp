@@ -1,11 +1,8 @@
-/**
- * \file byte.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header is mostly taken from Microsoft's implementation of
  *        the GSL byte-type.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_UTILITIES_BYTE_HPP
 #define BIT_STL_UTILITIES_BYTE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <type_traits> // std::is_integral, std::enable_if_t, etc
 

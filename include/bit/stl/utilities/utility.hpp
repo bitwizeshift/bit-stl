@@ -1,10 +1,7 @@
-/**
- * \file utility.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains extensions to the standard 'utility' header
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 #ifndef BIT_STL_UTILITIES_UTILITY_HPP
 #define BIT_STL_UTILITIES_UTILITY_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "../traits/composition/identity.hpp"
 #include "../traits/composition/void_t.hpp"
 
@@ -44,13 +45,6 @@
 
 namespace bit {
   namespace stl {
-
-    /// \brief A wrapper around std::forward that removes the need for
-    ///        specifying the type T.
-    ///
-    /// \param x the value to forward
-    template<typename T>
-    constexpr decltype(auto) fwd(T&& x) noexcept;
 
     //--------------------------------------------------------------------------
     // Indexing
@@ -89,27 +83,6 @@ namespace bit {
     template<typename Container, typename Key>
 #endif
     constexpr decltype(auto) at( Container& container, Key&& key );
-
-    //--------------------------------------------------------------------------
-    // Tuple Applications
-    //--------------------------------------------------------------------------
-
-    /// \brief Construct an object of type T, using the elements of the tuple t as
-    ///        the arguments to the constructor
-    ///
-    /// \tparam T the type to construct
-    /// \param t tuple whose elements to be used as arguments to the constructor of T
-    /// \return The constructed T object
-    template <typename T, typename Tuple>
-    constexpr T make_from_tuple( Tuple&& t );
-
-    /// \brief Invoke the Callable object f with a tuple of arguments
-    ///
-    /// \param f Callable object to be invoked
-    /// \param t tuple whose elements to be used as arguments to \p f
-    /// \return The value returned from invoking \p f with \p t's elements
-    template <typename F, typename Tuple>
-    constexpr decltype(auto) apply( F&& f, Tuple&& t );
 
     //------------------------------------------------------------------------
     //

@@ -1,10 +1,7 @@
-/**
- * \file span.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief Unit tests for the span
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/containers/span.hpp>
 #include <bit/stl/containers/string_view.hpp>

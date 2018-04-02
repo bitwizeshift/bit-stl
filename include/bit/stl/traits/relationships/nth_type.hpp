@@ -1,11 +1,8 @@
-/**
- * \file nth_type.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for extracting the \c nth type from
  *        a variadic pack
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_NTH_TYPE_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_NTH_TYPE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/identity.hpp"
 

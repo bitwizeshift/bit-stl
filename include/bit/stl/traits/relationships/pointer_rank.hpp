@@ -1,11 +1,8 @@
-/**
- * \file pointer_rank.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines the type-trait for determining the level of
  *        indirection
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_POINTER_RANK_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_POINTER_RANK_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/size_constant.hpp"
 

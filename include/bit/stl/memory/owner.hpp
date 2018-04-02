@@ -1,10 +1,7 @@
-/**
- * \file owner.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief TODO: Add description
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,10 +32,14 @@
 #ifndef BIT_STL_MEMORY_OWNER_HPP
 #define BIT_STL_MEMORY_OWNER_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 namespace bit {
   namespace stl {
 
-    /// \brief A pointer that represents ownership
+    /// \brief A wrapper type that represents ownership
     template<typename T>
     using owner = T;
 

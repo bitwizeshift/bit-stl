@@ -1,11 +1,8 @@
-/**
- * \file function_argument.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait to access the nth argument type of
  *        a given function
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_FUNCTION_ARGUMENT_TYPE_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_FUNCTION_ARGUMENT_TYPE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "nth_type.hpp"
 

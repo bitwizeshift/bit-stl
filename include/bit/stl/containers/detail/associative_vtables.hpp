@@ -1,6 +1,5 @@
-/**
- * \file associative_vtables.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains associative-type vtables used in set_view.hpp
  *        and map_view.hpp
  *
@@ -9,6 +8,10 @@
  */
 #ifndef BIT_STL_CONTAINERS_DETAIL_ASSOCIATIVE_VTABLES_HPP
 #define BIT_STL_CONTAINERS_DETAIL_ASSOCIATIVE_VTABLES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <memory>
 #include <cstddef> // std::size_t

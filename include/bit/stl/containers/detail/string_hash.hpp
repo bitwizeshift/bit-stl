@@ -1,6 +1,5 @@
-/**
- * \file string_hash.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the implementation for string hashing
  *
  * \note This is an internal header file, included by other library headers.
@@ -35,6 +34,10 @@
 */
 #ifndef BIT_STL_CONTAINERS_DETAIL_STRING_HASH_HPP
 #define BIT_STL_CONTAINERS_DETAIL_STRING_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <cstdlib> // std::size_t
 

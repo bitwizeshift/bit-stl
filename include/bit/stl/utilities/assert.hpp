@@ -1,11 +1,8 @@
-/**
- * \file assert.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definitions for both static and
  *        runtime assertions.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_UTILITIES_ASSERT_HPP
 #define BIT_STL_UTILITIES_ASSERT_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "source_location.hpp"
 #include "compiler_traits.hpp"

@@ -1,11 +1,8 @@
-/**
- * \file is_nothrow_move_assignable.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type trait for checking nothrow move
  *        assignability
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_NOTHROW_MOVE_ASSIGNABLE_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_NOTHROW_MOVE_ASSIGNABLE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/conjunction.hpp"
 

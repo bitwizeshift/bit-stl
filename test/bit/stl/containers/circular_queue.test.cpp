@@ -1,10 +1,7 @@
-/**
- * \file circular_queue.test.cpp
- *
+/*****************************************************************************
+ * \file
  * \brief Unit tests for the circular_queue
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 #include <bit/stl/containers/circular_queue.hpp>
 

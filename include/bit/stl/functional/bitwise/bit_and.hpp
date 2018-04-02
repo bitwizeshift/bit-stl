@@ -1,11 +1,8 @@
-/**
- * \file bit_and.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a functor for performing the bitwise 'and'
  *        between two types.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_FUNCTIONAL_BITWISE_BIT_AND_HPP
 #define BIT_STL_FUNCTIONAL_BITWISE_BIT_AND_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <utility> // std::forward
 

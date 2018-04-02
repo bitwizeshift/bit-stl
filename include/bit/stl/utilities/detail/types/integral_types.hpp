@@ -1,11 +1,10 @@
-/**
- * \file integral_types.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This internal header declares fixed size integral types
  *
  * \note This is an internal header file, included by other library headers.
  *       Do not attempt to use it directly.
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +34,10 @@
 */
 #ifndef BIT_STL_UTILITIES_DETAIL_TYPES_INTEGRAL_TYPES_HPP
 #define BIT_STL_UTILITIES_DETAIL_TYPES_INTEGRAL_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <cstdint> // std::int8_t, std::int16_t, etc
 

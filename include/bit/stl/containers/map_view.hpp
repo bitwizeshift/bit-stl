@@ -1,10 +1,7 @@
-/**
- * \file map_view.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a type-erased view of a map
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +31,10 @@
 */
 #ifndef BIT_STL_CONTAINERS_MAP_VIEW_HPP
 #define BIT_STL_CONTAINERS_MAP_VIEW_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 // local bit::stl
 #include "detail/associative_vtables.hpp" // IWYU pragma: export

@@ -1,11 +1,8 @@
-/**
- * \file is_base_of_all.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for determing if a base is the base
  *        of all derived types
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_IS_BASE_OF_ALL_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_IS_BASE_OF_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/conjunction.hpp"
 

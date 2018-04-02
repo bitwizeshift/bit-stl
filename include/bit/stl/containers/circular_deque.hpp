@@ -1,11 +1,8 @@
-/**
- * \file circular_deque.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the implementation for a circular-buffer with
  *        a deque API
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_CONTAINERS_CIRCULAR_DEQUE_HPP
 #define BIT_STL_CONTAINERS_CIRCULAR_DEQUE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "circular_buffer.hpp"
 

@@ -1,13 +1,14 @@
-/**
- * \file is_member_function_pointer.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a type trait for determining if a type is
  *        a member function pointer
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_MEMBER_FUNCTION_POINTER_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_MEMBER_FUNCTION_POINTER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/conjunction.hpp"
 #include "../composition/bool_constant.hpp" // true_type, false_type

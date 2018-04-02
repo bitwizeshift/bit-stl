@@ -1,11 +1,8 @@
-/**
- * \file match_sign_qualifiers.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a utility metafunction for matching
  *        sign-qualifiers of a given qualified type
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_TRAITS_TRANSFORMATIONS_MATCH_SIGN_QUALIFIERS_HPP
 #define BIT_STL_TRAITS_TRANSFORMATIONS_MATCH_SIGN_QUALIFIERS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/identity.hpp"
 

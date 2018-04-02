@@ -1,10 +1,7 @@
-/**
- * \file arity.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait to determine the arity of a function
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +31,10 @@
 */
 #ifndef BIT_STL_TRAITS_RELATIONSHIPS_ARITY_HPP
 #define BIT_STL_TRAITS_RELATIONSHIPS_ARITY_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/size_constant.hpp"
 

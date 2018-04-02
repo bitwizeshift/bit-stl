@@ -1,11 +1,8 @@
-/**
- * \file pointer_wrapper.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains a wrapper that makes a value type act like
  *        a pointer type.
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_UTILITIES_POINTER_WRAPPER_HPP
 #define BIT_STL_UTILITIES_POINTER_WRAPPER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "in_place.hpp" // in_place_t
 

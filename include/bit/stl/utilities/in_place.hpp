@@ -1,11 +1,8 @@
-/**
- * \file in_place.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definitions for the utility type-tags,
  *        in_place
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_UTILITIES_IN_PLACE_HPP
 #define BIT_STL_UTILITIES_IN_PLACE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <type_traits> // std::true_type, std::false_type
 

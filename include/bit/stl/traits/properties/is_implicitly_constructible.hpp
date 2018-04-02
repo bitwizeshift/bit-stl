@@ -1,11 +1,8 @@
-/**
- * \file is_implicitly_constructible.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definitions for a type-trait that determines
  *        implicit constructibility
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_IMPLICITLY_CONSTRUCTIBLE_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_IMPLICITLY_CONSTRUCTIBLE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/bool_constant.hpp"
 #include "../composition/type_list.hpp"

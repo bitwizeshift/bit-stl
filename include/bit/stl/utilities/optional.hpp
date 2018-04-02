@@ -1,10 +1,7 @@
-/**
- * \file optional.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of c++17's \c std::optional
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +31,10 @@
 */
 #ifndef BIT_STL_UTILITIES_OPTIONAL_HPP
 #define BIT_STL_UTILITIES_OPTIONAL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "utility.hpp"
 #include "in_place.hpp" // in_place_t

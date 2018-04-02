@@ -1,10 +1,7 @@
-/**
- * \file allocator_destructor.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains the definition of a deleter for allocators
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +31,10 @@
 */
 #ifndef BIT_STL_MEMORY_ALLOCATOR_DESTRUCTOR_HPP
 #define BIT_STL_MEMORY_ALLOCATOR_DESTRUCTOR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include <memory> // std::allocator_traits
 

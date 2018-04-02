@@ -226,28 +226,28 @@ inline const T1&& bit::stl::compressed_pair<T1,T2>::get( size_constant<0> )
 //-----------------------------------------------------------------------------
 
 template<typename T1, typename T2>
-inline T1& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
+inline T2& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
   &
 {
   return second();
 }
 
 template<typename T1, typename T2>
-inline const T1& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
+inline const T2& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
   const &
 {
   return second();
 }
 
 template<typename T1, typename T2>
-inline T1&& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
+inline T2&& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
   &&
 {
   return std::move(second());
 }
 
 template<typename T1, typename T2>
-inline const T1&& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
+inline const T2&& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
   const &&
 {
   return std::move(second());

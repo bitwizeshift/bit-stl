@@ -1,11 +1,8 @@
-/**
- * \file is_const_member_function_pointer.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header defines a type-trait for determining const-qualified
  *        member function pointers
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -35,6 +32,10 @@
 */
 #ifndef BIT_STL_TRAITS_PROPERTIES_IS_CONST_MEMBER_FUNCTION_POINTER_HPP
 #define BIT_STL_TRAITS_PROPERTIES_IS_CONST_MEMBER_FUNCTION_POINTER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../composition/bool_constant.hpp"
 

@@ -1,10 +1,7 @@
-/**
- * \file memory.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains custom and c++17 extensions to the memory library
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
 /*
   The MIT License (MIT)
@@ -34,6 +31,10 @@
 */
 #ifndef BIT_STL_MEMORY_MEMORY_HPP
 #define BIT_STL_MEMORY_MEMORY_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../traits/composition/conjunction.hpp"
 #include "../traits/composition/disjunction.hpp"
