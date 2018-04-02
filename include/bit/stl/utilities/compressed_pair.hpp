@@ -38,15 +38,14 @@
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "hash.hpp"
-
-#include "detail/tuple_size.hpp"
-#include "detail/tuple_element.hpp"
+#include "tuple_utilities.hpp"
 
 #include "../traits/composition/identity.hpp"
 #include "../traits/composition/conjunction.hpp"
 #include "../traits/composition/disjunction.hpp"
 #include "../traits/composition/negation.hpp"
 #include "../traits/composition/size_constant.hpp"
+#include "../traits/relationships/nth_type.hpp"
 
 #include <type_traits> // std::is_constructible, std::decay_t, etc...
 #include <tuple>       // std::get
@@ -419,10 +418,10 @@ namespace bit {
       const T1& get( size_constant<0> ) const &;
       T1&& get( size_constant<0> ) &&;
       const T1&& get( size_constant<0> ) const &&;
-      T1& get( size_constant<1> ) &;
-      const T1& get( size_constant<1> ) const &;
-      T1&& get( size_constant<1> ) &&;
-      const T1&& get( size_constant<1> ) const &&;
+      T2& get( size_constant<1> ) &;
+      const T2& get( size_constant<1> ) const &;
+      T2&& get( size_constant<1> ) &&;
+      const T2&& get( size_constant<1> ) const &&;
       /// \}
 
       //-----------------------------------------------------------------------
@@ -521,6 +520,12 @@ namespace bit {
     template<typename T1, typename T2>
     constexpr bool operator>=( const compressed_pair<T1,T2>& lhs,
                                const compressed_pair<T1,T2>& rhs );
+
+    template<typename...Ts>
+    struct tuple_size<compressed_pair<Ts...>> : size_constant<sizeof...(Ts)>{};
+
+    template<size_t Idx, typename...Ts>
+    struct tuple_element<Idx,compressed_pair<Ts...>> : nth_type<Idx,Ts...>{};
 
   } // namespace stl
 } // namespace bit

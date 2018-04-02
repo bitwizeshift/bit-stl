@@ -39,6 +39,7 @@
 
 #include "compressed_pair.hpp"
 #include "in_place.hpp"
+#include "tuple_utilities.hpp"
 
 #include "../traits/composition/size_constant.hpp"
 #include "../traits/relationships/is_one_of.hpp"
@@ -261,17 +262,6 @@ namespace bit {
 
       };
     } // namespace detail
-
-    template<typename...Types>
-    class compressed_tuple;
-
-    template<std::size_t I, typename...Types>
-    struct tuple_element<I,compressed_tuple<Types...>>
-      : nth_type<I,Types...>{};
-
-    template<typename...Types>
-    struct tuple_size<compressed_tuple<Types...>>
-      : size_constant<sizeof...(Types)>{};
 
     ///////////////////////////////////////////////////////////////////////////
     /// \brief A tuple that leverages EBO to compress types
@@ -528,6 +518,12 @@ namespace bit {
     template<typename...Types>
     constexpr bool operator>=( const compressed_tuple<Types...>& lhs,
                                const compressed_tuple<Types...>& rhs ) noexcept;
+
+    template<typename...Ts>
+    struct tuple_size<compressed_tuple<Ts...>> : size_constant<sizeof...(Ts)>{};
+
+    template<size_t Idx, typename...Ts>
+    struct tuple_element<Idx,compressed_tuple<Ts...>> : nth_type<Idx,Ts...>{};
 
   } // namespace stl
 } // namespace bit

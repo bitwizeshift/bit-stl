@@ -175,8 +175,6 @@ set(headers
   include/bit/stl/concepts/SequenceContainer.hpp
 
   # utilities
-  include/bit/stl/utilities/detail/tuple_element.hpp
-  include/bit/stl/utilities/detail/tuple_size.hpp
   include/bit/stl/utilities/aligned_storage.hpp
   include/bit/stl/utilities/assert.hpp
   include/bit/stl/utilities/casts.hpp
@@ -201,6 +199,7 @@ set(headers
   include/bit/stl/utilities/source_location.hpp
   include/bit/stl/utilities/tribool.hpp
   include/bit/stl/utilities/tuple.hpp
+  include/bit/stl/utilities/tuple_utilities.hpp
   include/bit/stl/utilities/types.hpp
   include/bit/stl/utilities/uninitialized_storage.hpp
   include/bit/stl/utilities/utility.hpp
