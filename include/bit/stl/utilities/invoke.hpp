@@ -37,10 +37,6 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-# pragma once
-#endif
-
 #include "../traits/composition/identity.hpp"
 
 #include <type_traits> // for std::is_base_of

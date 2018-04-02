@@ -33,6 +33,10 @@
 #ifndef BIT_STL_UTILITIES_ASSERT_HPP
 #define BIT_STL_UTILITIES_ASSERT_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "source_location.hpp"
 #include "compiler_traits.hpp"
 #include "macros.hpp"           // BIT_STRINGIZE

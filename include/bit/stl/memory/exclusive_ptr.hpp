@@ -32,6 +32,10 @@
 #ifndef BIT_STL_MEMORY_EXCLUSIVE_PTR_HPP
 #define BIT_STL_MEMORY_EXCLUSIVE_PTR_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "../utilities/compressed_tuple.hpp"
 #include "allocator_deleter.hpp"
 

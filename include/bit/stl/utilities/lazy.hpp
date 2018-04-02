@@ -37,10 +37,6 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-# pragma once
-#endif
-
 #include "in_place.hpp"    // in_place_t
 #include "uninitialized_storage.hpp"
 
