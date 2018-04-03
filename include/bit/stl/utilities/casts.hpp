@@ -43,6 +43,8 @@
 
 #include <cstring> // std::memcpy
 #include <limits>  // std::numeric_limits
+#include <type_traits> // std::is_integral
+#include <stdexcept>   // std::runtime_error
 
 namespace bit {
   namespace stl {
