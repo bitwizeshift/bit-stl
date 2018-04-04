@@ -8,7 +8,7 @@
 template<typename T, std::size_t N>
 constexpr T& bit::stl::at( T (&array)[N], std::size_t n )
 {
-  if(n >= N) throw std::out_of_range("at: index out of range");
+  BIT_ASSERT_OR_THROW( n < N, std::out_of_range, "at: index out of range" );
   return array[n];
 }
 

@@ -41,18 +41,13 @@
 #include "../traits/composition/bool_constant.hpp"
 #include "../traits/transformations/match_cv_qualifiers.hpp"
 #include "../traits/relationships/is_same_decay.hpp"
-
 #include "../concepts/ContiguousContainer.hpp"
-
-#include "../utilities/assert.hpp"          // BIT_STL_CONTAINERS_ASSERT
-#include "../utilities/compiler_traits.hpp" // BIT_COMPILER_EXCEPTIONS_ENABLED
-
+#include "../utilities/assert.hpp"          // BIT_ASSERT_OR_THROW
 #include "../iterators/tagged_iterator.hpp" // tagged_iterator
 
-#include <iterator>  //
-#include <limits>    //
+#include <iterator>  // std::reverse_iterator
 #include <algorithm> // std::min, std::max
-
+#include <stdexcept> // std::out_of_range
 
 namespace bit {
   namespace stl {

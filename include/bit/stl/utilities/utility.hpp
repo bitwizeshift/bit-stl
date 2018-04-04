@@ -39,6 +39,8 @@
 #include "../traits/composition/identity.hpp"
 #include "../traits/composition/void_t.hpp"
 
+#include "assert.hpp" // BIT_ASSERT_OR_THROW
+
 #include <type_traits> // std::remove_reference
 #include <utility>     // std::forward
 #include <stdexcept>   // std::out_of_range

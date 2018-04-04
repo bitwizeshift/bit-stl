@@ -37,120 +37,88 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
-#include "source_location.hpp"
-#include "compiler_traits.hpp"
-#include "macros.hpp"           // BIT_STRINGIZE
+#include "source_location.hpp" // source_location
+#include "compiler_traits.hpp" // BIT_DEBUG, BIT_COMPILER_EXCEPTIONS_ENABLED
+#include "macros.hpp"          // BIT_STRINGIZE
 
-#include <stdexcept> // std::runtime_error
 #include <cstdio>    // std::printf, stderr
-#include <atomic>    // std::atomic
-
-namespace bit {
-  namespace stl {
-
-    //=========================================================================
-    // X.Y.1, assertion_failure
-    //=========================================================================
-
-    ///////////////////////////////////////////////////////////////////////////
-    /// \brief An exception thrown from assertion failures when
-    ///        BIT_COMPILER_EXCEPTIONS_ENABLED is defined
-    ///////////////////////////////////////////////////////////////////////////
-    class assertion_failure final : public std::runtime_error
-    {
-      //-----------------------------------------------------------------------
-      // Constructors
-      //-----------------------------------------------------------------------
-    public:
-
-      /// \brief Constructs an assertion_failure exception from a message
-      ///        and a source location
-      ///
-      /// \param message the message to display when calling .what()
-      /// \param source  the source location of this assertion failure
-      assertion_failure( const char* message, source_location source );
-
-      //-----------------------------------------------------------------------
-      // Accessors
-      //-----------------------------------------------------------------------
-    public:
-
-      /// \brief Retrieves the source of this assertion
-      ///
-      /// \return the location where this assertion was hit
-      source_location source() const noexcept;
-
-      //-----------------------------------------------------------------------
-      // Private Members
-      //-----------------------------------------------------------------------
-    private:
-
-      source_location m_location;
-    };
-
-    //=========================================================================
-    // X.Y.2, Assertion handlers
-    //=========================================================================
-
-    using assert_handler_t = void(*)( const char*, source_location );
-
-    //-------------------------------------------------------------------------
-
-    /// \brief The default assert handler. Prints a message, then triggers a
-    ///        breakpoint
-    ///
-    /// \param message the message to print
-    /// \param source the source of the assertion
-    void default_assert( const char* message, source_location source );
-
-    /// \brief An exception-throwing assert handler. Throws an
-    ///        assertion_failure exception
-    ///
-    /// \param message the message for the assertion
-    /// \param source the source of the assertion
-    void throwing_assert( const char* message, source_location source );
-
-    //-------------------------------------------------------------------------
-
-    /// \brief Sets the assertion handler, returning the previous assertion
-    ///        handler
-    ///
-    /// \param f the function to handle
-    /// \return the old handler
-    assert_handler_t set_assert_handler( assert_handler_t f );
-
-    /// \brief Gets the currently active assertion handler
-    ///
-    /// \return the handler
-    assert_handler_t get_assert_handler();
-
-  } // namespace stl
-} // namespace bit
-
-# define BIT_INTERNAL_ASSERT(condition,message,source) \
-  ::bit::stl::detail::assert_internal("assertion failure: condition '" \
-                                      condition "' failed with message \"" \
-                                      message "\"", source )
+#include <exception> // std::terminate
 
 //=============================================================================
-// X.Y.3, Assertion Macros
+// X.Y.1 : Assertion Macros
 //=============================================================================
 
-//! \def BIT_ASSERT(condition, message, ...)
+// Assertions default to enabled in debug mode unless otherwise specified
+#ifndef BIT_STL_ASSERTIONS_ENABLED
+# ifdef BIT_DEBUG
+#   define BIT_STL_ASSERTIONS_ENABLED 1
+# endif
+#endif
+
+#ifdef BIT_ALWAYS_ASSERT
+# error duplicate definition of BIT_ALWAYS_ASSERT
+#endif
+
+#ifdef BIT_ASSERT
+# error duplicate definition of BIT_ASSERT
+#endif
+
+#ifdef BIT_INTERNAL_ALWAYS_ASSERT
+# error duplicate definition of BIT_INTERNAL_ALWAYS_ASSERT
+#endif
+
+#define BIT_INTERNAL_ALWAYS_ASSERT(condition,message,source) \
+  ::bit::stl::detail::assert_internal( "assertion failure: condition '" \
+                                       condition "' failed with message \"" \
+                                       message "\"", source )
+
+//! \def BIT_ASSERT(condition, message)
 //!
 //! \brief A runtime assertion when \a condition fails, displaying \a message
 //!        to the user.
+//!
+//! An assertion will report the error, the source location of the error,
+//! and trigger a breakpoint (if the debugger is open). After the breakpoint
+//! trigger, it invokes std::terminate.
+//!
+//! \note This assertion is always enabled, regardless of the state of
+//!       BIT_STL_ASSERTIONS_ENABLED
+//!
+//! \param condition the condition that, when false, triggers an assertion
+//! \param message   the message for the failure
 #define BIT_ALWAYS_ASSERT(condition,message) \
-  ((BIT_LIKELY(condition)) ? ((void)0) : [](::bit::stl::source_location source){ BIT_INTERNAL_ASSERT( BIT_STRINGIZE(condition), message, source ); }(BIT_MAKE_SOURCE_LOCATION()) )
+  ((BIT_LIKELY(condition)) ? ((void)0) : [](::bit::stl::source_location source){ BIT_INTERNAL_ALWAYS_ASSERT( BIT_STRINGIZE(condition), message, source ); }(BIT_MAKE_SOURCE_LOCATION()) )
 
 //! \def BIT_ASSERT(condition, message, ...)
 //!
 //! \brief A runtime assertion when \a condition fails, displaying \a message
 //!        to the user.
-#if BIT_DEBUG
+//!
+//! This simply calls 'BIT_ALWAYS_ASSERT' when assertions are enabled
+//!
+//! \param condition the condition that, when false, triggers an assertion
+//! \param message   the message for the failure
+#if BIT_STL_ASSERTIONS_ENABLED
 # define BIT_ASSERT(condition,message) BIT_ALWAYS_ASSERT(condition,message)
 #else
 # define BIT_ASSERT(...) ((void)0)
+#endif
+
+//! \def BIT_ASSERT_OR_THROW(condition, exception, message)
+//!
+//! \brief An assertion that either throws the given exception, if exceptions
+//!        are enabled, or calls the default assert
+//!
+//! \param condition the condition that, when false, triggers either an
+//!                  assertion or throws an exception
+//! \param exception the exception to throw
+//! \param message   the message for the failure
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+# define BIT_ASSERT_OR_THROW(condition,exception,message) \
+  ((BIT_LIKELY(condition)) ? ((void)0) : []{ throw exception{ message }; }())
+#else
+# define BIT_ASSERT_OR_THROW(condition,exception,message) \
+  BIT_ASSERT(condition,message)
 #endif
 
 #include "detail/assert.inl"
