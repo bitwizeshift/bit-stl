@@ -41,7 +41,8 @@
 #include "compiler_traits.hpp" // BIT_DEBUG, BIT_COMPILER_EXCEPTIONS_ENABLED
 #include "macros.hpp"          // BIT_STRINGIZE
 
-#include <cstdio> // std::printf, stderr
+#include <cstdio>    // std::printf, stderr
+#include <exception> // std::terminate
 
 //=============================================================================
 // X.Y.1 : Assertion Macros
@@ -62,19 +63,26 @@
 # error duplicate definition of BIT_ASSERT
 #endif
 
-#ifdef BIT_ALWAYS_ASSERT_
-# error duplicate definition of BIT_ALWAYS_ASSERT_
+#ifdef BIT_INTERNAL_ALWAYS_ASSERT
+# error duplicate definition of BIT_INTERNAL_ALWAYS_ASSERT
 #endif
 
 #define BIT_INTERNAL_ALWAYS_ASSERT(condition,message,source) \
-  ::bit::stl::detail::assert_internal("assertion failure: condition '" \
-                                      condition "' failed with message \"" \
-                                      message "\"", source )
+  ::bit::stl::detail::assert_internal( "assertion failure: condition '" \
+                                       condition "' failed with message \"" \
+                                       message "\"", source )
 
 //! \def BIT_ASSERT(condition, message)
 //!
 //! \brief A runtime assertion when \a condition fails, displaying \a message
 //!        to the user.
+//!
+//! An assertion will report the error, the source location of the error,
+//! and trigger a breakpoint (if the debugger is open). After the breakpoint
+//! trigger, it invokes std::terminate.
+//!
+//! \note This assertion is always enabled, regardless of the state of
+//!       BIT_STL_ASSERTIONS_ENABLED
 //!
 //! \param condition the condition that, when false, triggers an assertion
 //! \param message   the message for the failure
@@ -85,6 +93,8 @@
 //!
 //! \brief A runtime assertion when \a condition fails, displaying \a message
 //!        to the user.
+//!
+//! This simply calls 'BIT_ALWAYS_ASSERT' when assertions are enabled
 //!
 //! \param condition the condition that, when false, triggers an assertion
 //! \param message   the message for the failure
