@@ -45,10 +45,9 @@
 #include "../utilities/assert.hpp"          // BIT_ASSERT_OR_THROW
 #include "../iterators/tagged_iterator.hpp" // tagged_iterator
 
-#include <iterator>  //
-#include <limits>    //
+#include <iterator>  // std::reverse_iterator
 #include <algorithm> // std::min, std::max
-
+#include <stdexcept> // std::out_of_range
 
 namespace bit {
   namespace stl {
