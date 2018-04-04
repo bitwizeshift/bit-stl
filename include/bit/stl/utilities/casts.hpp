@@ -40,50 +40,20 @@
 #include "compiler_traits.hpp"
 
 #include "../traits/relationships/is_same_sign.hpp"
+#include "../traits/properties/is_implicitly_convertible.hpp"
 
-#include <cstring> // std::memcpy
-#include <limits>  // std::numeric_limits
-#include <type_traits> // std::is_integral
-#include <stdexcept>   // std::runtime_error
+#include <cstring>     // std::memcpy
+#include <type_traits> // std::is_integral, std::enable_if
+#include <utility>     // std::forward
 
 namespace bit {
   namespace stl {
 
-    //////////////////////////////////////////////////////////////////////////
-    /// \brief An exception for failed narrow_casts.
-    ///
-    /// This exception is thrown if a narrow_cast fails
-    //////////////////////////////////////////////////////////////////////////
-    struct bad_narrow_cast : public std::runtime_error
-    {
-      //----------------------------------------------------------------------
-      // Constructors
-      //----------------------------------------------------------------------
-    public:
-
-      using std::runtime_error::runtime_error;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    /// \brief An exception for failed pointer cast.
-    ///
-    /// This exception is thrown if a pointer_cast fails
-    //////////////////////////////////////////////////////////////////////////
-    struct bad_pointer_cast : public std::runtime_error
-    {
-      //-----------------------------------------------------------------------
-      // Constructors
-      //-----------------------------------------------------------------------
-    public:
-
-      using std::runtime_error::runtime_error;
-    };
+    //=========================================================================
+    // X.Y.1 : casts
+    //=========================================================================
 
     inline namespace casts {
-
-      //-----------------------------------------------------------------------
-      // Casts
-      //-----------------------------------------------------------------------
 
       /// \brief Performs a bounded casting safely between numeric types.
       ///
@@ -91,25 +61,34 @@ namespace bit {
       /// fit into the value being converted to.
       /// Calling this method has the same form as calling static_cast
       ///
-      /// \tparam To the value type to cast to
-      /// \tparam From the value type to cast from. This should always be
-      ///         inferred
+      /// \note This cast does not participate in overload resolution unless
+      ///       \c is_integral<To>::value and \c is_integral<From>::value are
+      ///       both \c true.
       ///
+      /// \tparam To the type to cast to
       /// \param from the value to cast
       /// \return the casted value
-      template<typename To, typename From>
+      template<typename To, typename From,
+               typename=std::enable_if_t<std::is_integral<To>::value && std::is_integral<From>::value>>
       constexpr To narrow_cast( From from ) noexcept;
 
-      //---------------------------------------------------------------------=-
+      //-----------------------------------------------------------------------
 
       /// \brief Statically casts a pointer if the pointer is dynamically
       ///        castable to that type, asserting otherwise.
       ///
       /// \note This will only assert in debug builds
       ///
+      /// \note This cast does not participate in overload resolution unless
+      ///       \c is_pointer<To>::value and \c is_pointer<From>::value are both
+      ///       \c true
+      ///
+      /// \tparam To the type to cast to
       /// \param ptr the pointer to cast
       /// \return the statically casted pointer
-      template<typename To, typename From>
+      template<typename To, typename From,
+               typename=std::enable_if_t<std::is_pointer<To>::value &&
+                                         std::is_pointer<From>::value>>
       To pointer_cast( From ptr ) noexcept;
 
       //-----------------------------------------------------------------------
@@ -121,11 +100,16 @@ namespace bit {
       ///       \p From is smaller than \p To, the remaining bytes are left
       ///       untouched (and thus may be UB to access)
       ///
-      /// \note Both types \p To and \p From must satisfy \c TriviallyCopyable
+      /// \note This cast does not participate in overload resolution unless
+      ///       \c is_trivially_copyable<To>::value and
+      ///       \c is_trivially_copyable<From>::value are both \c true
       ///
+      /// \tparam To the type to cast to
       /// \param from the value to convert
       /// \return the converted value
-      template<typename To, typename From>
+      template<typename To, typename From,
+               typename=std::enable_if_t<std::is_trivially_copyable<To>::value &&
+                                         std::is_trivially_copyable<From>::value>>
       To copy_cast( const From& from ) noexcept;
 
       //-----------------------------------------------------------------------
@@ -137,9 +121,13 @@ namespace bit {
       /// This can be used to signal cases that would otherwise produce
       /// warnings when type promotions are performed.
       ///
+      /// \note This cast does not participate in overload resolution unless
+      ///       \c is_implicitly_convertible<From,To>::value is \c true
+      ///
       /// \tparam To the type to convert to
       /// \param from the type being converted
-      template<typename To, typename From>
+      template<typename To, typename From,
+               typename=std::enable_if_t<is_implicitly_convertible<From,To>::value>>
       To implicit_cast( From&& from );
 
     } // inline namespace casts
