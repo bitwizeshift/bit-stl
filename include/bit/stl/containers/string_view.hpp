@@ -38,9 +38,8 @@
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "string.hpp"
-
 #include "detail/string_hash.hpp"
-
+#include "../utilities/compiler_traits.hpp"
 #include "../iterators/tagged_iterator.hpp" // tagged_iterator
 
 #include <algorithm>
