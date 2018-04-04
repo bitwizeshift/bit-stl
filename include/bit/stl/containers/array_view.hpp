@@ -38,9 +38,8 @@
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../traits/composition/bool_constant.hpp"
-
 #include "../concepts/ContiguousContainer.hpp"
-
+#include "../utilities/assert.hpp"
 #include "../iterators/tagged_iterator.hpp"
 
 #include <stdexcept> // std::out_of_range

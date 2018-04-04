@@ -143,9 +143,7 @@ inline constexpr typename bit::stl::array_view<T>::const_reference
   bit::stl::array_view<T>::at( std::size_t n )
   const
 {
-#if BIT_COMPILER_EXCEPTIONS_ENABLED
-  if( n >= m_size) throw std::out_of_range("array_view::at: input out of range");
-#endif
+  BIT_ASSERT_OR_THROW( n < m_size, std::out_of_range, "array_view::at: index out of range" );
   return m_ptr[n];
 }
 
@@ -213,9 +211,8 @@ inline constexpr bit::stl::array_view<T>
 {
   const size_type max_length = offset > m_size ? 0 : m_size - offset;
 
-#if BIT_COMPILER_EXCEPTIONS_ENABLED
-  if( offset >= m_size ) throw std::out_of_range("array_view::subarray: index out of range");
-#endif
+  BIT_ASSERT_OR_THROW( offset < m_size, std::out_of_range, "array_view::subarray: offset out of range" );
+
   return array_view<T>( m_ptr + offset, count > max_length ? max_length : count );
 }
 
