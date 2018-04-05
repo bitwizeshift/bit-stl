@@ -268,9 +268,8 @@ if( BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS )
   add_header_self_containment_test(stl_header_self_containment_test ${headers})
   add_library(bit::stl::header_self_containment_test ALIAS stl_header_self_containment_test)
 
-  if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    target_compile_options(stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
-  elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
+  if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR
+      "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
     target_compile_options(stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
   elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" )
     # TODO: Determine MSVC necessary compiler flags

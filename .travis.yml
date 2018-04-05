@@ -17,7 +17,6 @@ branches:
     - prototype/.*
     - gh-pages
 
-
 ################
 # build matrix #
 ################
@@ -28,85 +27,259 @@ matrix:
     # Linux gcc #
     #############
 
+    # Linux gcc-6 Unit Tests
     - os: linux
       compiler: gcc
-      env: COMPILER=g++-6 CONFIGURATION=Release
+      env:
+        - COMPILER=g++-6
+        - CONFIGURATION=Release
+        - TEST="g++-6 Unit Tests"
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
           packages: ['g++-6']
+      script:
+        - $CMAKE .. $CMAKE_ARGS
+        - $CMAKE --build . --config $CONFIGURATION
+        - $CMAKE --build . --target test --config $CONFIGURATION
 
+    # Linux gcc-7 Unit Tests
     - os: linux
       compiler: gcc
-      env: COMPILER=g++-7 CONFIGURATION=Release
+      env:
+        - COMPILER=g++-7
+        - CONFIGURATION=Release
+        - TEST="g++-7 Unit Tests"
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
           packages: ['g++-7']
+      script:
+        - $CMAKE .. $CMAKE_ARGS
+        - $CMAKE --build . --config $CONFIGURATION
+        - $CMAKE --build . --target test --config $CONFIGURATION
+
+    ########################
+    # Linux gcc sanitizers #
+    ########################
+
+    # gcc-7 address sanitizer
+    - os: linux
+      compiler: gcc
+      env:
+        - COMPILER=g++-7
+        - CONFIGURATION=Debug
+        - TEST="g++-7 Address Sanitizer"
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-7']
+      script:
+        - $CMAKE .. $CMAKE_ARGS -DBIT_STL_COMPILE_ASAN=On
+        - $CMAKE --build . --config $CONFIGURATION
+        - ./test/bit_stl_asan
+
+    # gcc-7 undefined behavior sanitizer
+    - os: linux
+      env:
+        - COMPILER=g++-7
+        - CONFIGURATION=Debug
+        - TEST="g++-7 Undefined Behavior Sanitizer"
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-7']
+      script:
+        - $CMAKE .. $CMAKE_ARGS -DBIT_STL_COMPILE_USAN=On
+        - $CMAKE --build . --config $CONFIGURATION
+        - ./test/bit_stl_usan
+
+    # gcc-7 thread sanitizer
+    - os: linux
+      env:
+        - COMPILER=g++-7
+        - CONFIGURATION=Debug
+        - TEST="g++-7 Thread Sanitizer"
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-7']
+      script:
+        - $CMAKE .. $CMAKE_ARGS -DBIT_STL_COMPILE_TSAN=On
+        - $CMAKE --build . --config $CONFIGURATION
+        - ./test/bit_stl_tsan
 
     ###############
     # Linux clang #
     ###############
 
+    # Linux clang-3.9 Unit Tests
     - os: linux
       compiler: clang
-      env: COMPILER=clang++-3.9 CONFIGURATION=Release
+      env:
+        - COMPILER=clang++-3.9
+        - CONFIGURATION=Release
+        - TEST="clang++-3.9 Unit Tests"
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-6', 'clang-3.9']
+          packages: ['clang-3.9']
 
+    # Linux clang-4.0 Unit Tests
     - os: linux
       compiler: clang
-      env: COMPILER=clang++-4.0 CONFIGURATION=Release
+      env:
+        - COMPILER=clang++-4.0
+        - CONFIGURATION=Release
+        - TEST="clang++-4.0 Unit Tests"
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-          packages: ['g++-6', 'clang-4.0']
+          packages: ['clang-4.0']
 
-    # clang++-5.0 is commented out since travis is failing to acquire llvm-5.0 packages
+    # Linux clang-5.0 Unit Tests
+    - os: linux
+      compiler: clang
+      env:
+        - COMPILER=clang++-5.0
+        - CONFIGURATION=Release
+        - TEST="clang++-5.0 Unit Tests"
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-5.0']
+          packages: ['clang-5.0']
 
-    # - os: linux
-    #   compiler: clang
-    #   env: COMPILER=clang++-5.0 CONFIGURATION=Release
-    #   addons:
-    #     apt:
-    #       sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-5.0']
-    #       packages: ['g++-6', 'clang-5.0']
+    ##########################
+    # Linux clang sanitizers #
+    ##########################
+
+    # clang-5.0 address sanitizer
+    - os: linux
+      compiler: clang
+      env:
+        - COMPILER=g++-7
+        - CONFIGURATION=Debug
+        - TEST="g++-7 Address Sanitizer"
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-7']
+      script:
+        - $CMAKE .. $CMAKE_ARGS -DBIT_STL_COMPILE_ASAN=On
+        - $CMAKE --build . --config $CONFIGURATION
+        - ./test/bit_stl_asan
+
+    # clang-5.0 undefined behavior sanitizer
+    - os: linux
+      env:
+        - COMPILER=g++-7
+        - CONFIGURATION=Debug
+        - TEST="g++-7 Undefined Behavior Sanitizer"
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-7']
+      script:
+        - $CMAKE .. $CMAKE_ARGS -DBIT_STL_COMPILE_USAN=On
+        - $CMAKE --build . --config $CONFIGURATION
+        - ./test/bit_stl_usan
+
+    # clang-5.0 thread sanitizer
+    - os: linux
+      env:
+        - COMPILER=g++-7
+        - CONFIGURATION=Debug
+        - TEST="g++-7 Thread Sanitizer"
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-7']
+      script:
+        - $CMAKE .. $CMAKE_ARGS -DBIT_STL_COMPILE_TSAN=On
+        - $CMAKE --build . --config $CONFIGURATION
+        - ./test/bit_stl_tsan
 
     #############
     # OSX clang #
     #############
 
+    # xcode7.3 clang unit test
     - os: osx
       osx_image: xcode7.3
       compiler: clang
-      env: COMPILER=clang++ CONFIGURATION=Release
+      env:
+        - COMPILER=clang++
+        - CONFIGURATION=Release
+        - TEST="xcode7.3 Unit Tests"
+      script:
+        - $CMAKE .. $CMAKE_ARGS
+        - $CMAKE --build . --config $CONFIGURATION
+        - $CMAKE --build . --target test --config $CONFIGURATION
 
+    # xcode8 clang unit test
     - os: osx
       osx_image: xcode8
       compiler: clang
-      env: COMPILER=clang++ CONFIGURATION=Release
+      env:
+        - COMPILER=clang++
+        - CONFIGURATION=Release
+        - TEST="xcode8 Unit Tests"
+      script:
+        - $CMAKE .. $CMAKE_ARGS
+        - $CMAKE --build . --config $CONFIGURATION
+        - $CMAKE --build . --target test --config $CONFIGURATION
 
+    # xcode8.1 clang unit test
     - os: osx
       osx_image: xcode8.1
       compiler: clang
-      env: COMPILER=clang++ CONFIGURATION=Release
+      env:
+        - COMPILER=clang++
+        - CONFIGURATION=Release
+        - TEST="xcode8.1 Unit Tests"
+      script:
+        - $CMAKE .. $CMAKE_ARGS
+        - $CMAKE --build . --config $CONFIGURATION
+        - $CMAKE --build . --target test --config $CONFIGURATION
 
+    # xcode8.2 clang unit test
     - os: osx
       osx_image: xcode8.2
       compiler: clang
-      env: COMPILER=clang++ CONFIGURATION=Release
+      env:
+        - COMPILER=clang++
+        - CONFIGURATION=Release
+        - TEST="xcode8.2 Unit Tests"
+      script:
+        - $CMAKE .. $CMAKE_ARGS
+        - $CMAKE --build . --config $CONFIGURATION
+        - $CMAKE --build . --target test --config $CONFIGURATION
 
+    # xcode8.3 clang unit test
     - os: osx
       osx_image: xcode8.3
       compiler: clang
-      env: COMPILER=clang++ CONFIGURATION=Release
+      env:
+        - COMPILER=clang++
+        - CONFIGURATION=Release
+        - TEST="xcode8.3 Unit Tests"
+      script:
+        - $CMAKE .. $CMAKE_ARGS
+        - $CMAKE --build . --config $CONFIGURATION
+        - $CMAKE --build . --target test --config $CONFIGURATION
 
+    # xcode9 clang unit test
     - os: osx
       osx_image: xcode9
       compiler: clang
-      env: COMPILER=clang++ CONFIGURATION=Release
+      env:
+        - COMPILER=clang++
+        - CONFIGURATION=Release
+        - TEST="xcode9 Unit Tests"
+      script:
+        - $CMAKE .. $CMAKE_ARGS
+        - $CMAKE --build . --config $CONFIGURATION
+        - $CMAKE --build . --target test --config $CONFIGURATION
 
 ######################
 # Installation Steps #
@@ -129,16 +302,17 @@ install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then tar -xzf cmake-3.9.4-Darwin-x86_64.tar.gz && ls && ls cmake-3.9.4-Darwin-x86_64; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CMAKE=$TRAVIS_BUILD_DIR/../cmake-3.9.4-Darwin-x86_64/CMake.app/Contents/bin/cmake; fi
 
+  - cd bit-stl/
+
+##################
+# Pre-build step #
+##################
+before_script:
   # make sure CXX is correctly set
   - if [[ "${COMPILER}" != "" ]]; then export CXX=${COMPILER}; fi
 
-  - cd bit-stl/
-
-##############
-# Build Step #
-##############
-script:
-  # show OS/compiler/cmake version
+  # Output information
+  - echo $TEST
   - uname -a
   - $CXX --version
   - $CMAKE --version
@@ -146,7 +320,19 @@ script:
   # Build
   - mkdir build/ && cd build/
   - export CTEST_OUTPUT_ON_FAILURE=1
-  - $CMAKE .. -DCMAKE_BUILD_TYPE=$CONFIGURATION  -DCMAKE_INCLUDE_PATH=$CATCH_DIR -DBIT_STL_COMPILE_UNIT_TESTS=On -DBIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS=On
+
+  # CMake arguments
+  - CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_BUILD_TYPE=$CONFIGURATION"
+  - CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_INCLUDE_PATH=$CATCH_DIR"
+  - CMAKE_ARGS="$CMAKE_ARGS -DBIT_STL_COMPILE_UNIT_TESTS=On"
+  - CMAKE_ARGS="$CMAKE_ARGS -DBIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS=On"
+
+######################
+# Default Build Step #
+######################
+script:
+
+  - $CMAKE .. $CMAKE_ARGS
   - $CMAKE --build . --config $CONFIGURATION
 
   # Run
