@@ -186,7 +186,6 @@ set(headers
   include/bit/stl/utilities/dynamic_size_constant.hpp
   include/bit/stl/utilities/enum.hpp
   include/bit/stl/utilities/expected.hpp
-  include/bit/stl/utilities/final_act.hpp
   include/bit/stl/utilities/hash.hpp
   include/bit/stl/utilities/in_place.hpp
   include/bit/stl/utilities/invoke.hpp
@@ -196,6 +195,7 @@ set(headers
   include/bit/stl/utilities/optional.hpp
   include/bit/stl/utilities/pointer_wrapper.hpp
   include/bit/stl/utilities/propagate_const.hpp
+  include/bit/stl/utilities/scope_guard.hpp
   include/bit/stl/utilities/source_location.hpp
   include/bit/stl/utilities/tribool.hpp
   include/bit/stl/utilities/tuple.hpp
