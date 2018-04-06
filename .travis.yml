@@ -293,7 +293,7 @@ before_script:
 
   # Use ld.gold on non-OSX builds
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_SHARED_LINKER_FLAGS=\"-fuse-ld=gold\""; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_EXE_LINKER_FLAGS=\"-fuse-ld=gold\"""; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_EXE_LINKER_FLAGS=\"-fuse-ld=gold\""; fi
 
 
 ######################
