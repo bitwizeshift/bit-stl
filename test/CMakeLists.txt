@@ -64,20 +64,17 @@ if( BIT_STL_COMPILE_ASAN )
     message(FATAL_ERROR "ASAN only available for LLVM Clang compilers")
   endif()
 
-  add_executable(bit_stl_asan ${sources})
-  target_link_libraries(bit_stl_asan PRIVATE "bit::stl"
-                                             "philsquared::Catch"
-                                             -fsanitize=address
+  target_link_libraries(bit_stl_test PRIVATE -fsanitize=address
                                              -fsanitize=leak
                                              -fuse-ld=gold)
 
-  target_compile_options(bit_stl_asan PRIVATE
+  target_compile_options(bit_stl_test PRIVATE
     -g
     -O1
-    -fuse-ld=gold
     -fno-omit-frame-pointer
     -fsanitize=address
     -fsanitize=leak
+    -fuse-ld=gold
   )
 
 endif()
@@ -92,12 +89,8 @@ if( BIT_STL_COMPILE_USAN )
     message(FATAL_ERROR "USAN only available for LLVM Clang compilers")
   endif()
 
-  add_executable(bit_stl_usan ${sources})
-  target_compile_options(bit_stl_usan PRIVATE -fsanitize=undefined -fuse-ld=gold)
-  target_link_libraries(bit_stl_usan PRIVATE "bit::stl"
-                                             "philsquared::Catch"
-                                             -fsanitize=undefined
-                                             -fuse-ld=gold)
+  target_compile_options(bit_stl_test PRIVATE -fsanitize=undefined -fuse-ld=gold)
+  target_link_libraries(bit_stl_test PRIVATE -fsanitize=undefined -fuse-ld=gold)
 
 endif()
 
@@ -111,12 +104,8 @@ if( BIT_STL_COMPILE_TSAN )
     message(FATAL_ERROR "TSAN only available for LLVM Clang compilers")
   endif()
 
-  add_executable(bit_stl_tsan ${sources})
-  target_compile_options(bit_stl_tsan PRIVATE -fsanitize=thread -fuse-ld=gold)
-  target_link_libraries(bit_stl_tsan PRIVATE "bit::stl"
-                                             "philsquared::Catch"
-                                             -fsanitize=thread
-                                             -fuse-ld=gold)
+  target_compile_options(bit_stl_test PRIVATE -fsanitize=thread -fuse-ld=gold)
+  target_link_libraries(bit_stl_test PRIVATE -fsanitize=thread -fuse-ld=gold)
 
 endif()
 
@@ -130,16 +119,12 @@ if( BIT_STL_COMPILE_COVERAGE )
     message(FATAL_ERROR "Coverage only available for LLVM Clang compilers")
   endif()
 
-  add_executable(bit_stl_coverage ${sources})
-  target_link_libraries(bit_stl_coverage PRIVATE "bit::stl"
-                                                 "philsquared::Catch")
-
-  target_compile_options(bit_stl_coverage PRIVATE
+  target_link_libraries(bit_stl_test PRIVATE --coverage)
+  target_compile_options(bit_stl_test PRIVATE
     -g
     -O0
     -fprofile-arcs
     -ftest-coverage
   )
-  target_link_libraries(bit_stl_coverage PRIVATE --coverage)
 
 endif()
