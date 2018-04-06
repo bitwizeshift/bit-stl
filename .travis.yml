@@ -73,6 +73,7 @@ matrix:
 
     # gcc-7 undefined behavior sanitizer
     - os: linux
+      compiler: gcc
       env:
         - COMPILER=g++-7
         - CONFIGURATION=Debug
@@ -88,6 +89,7 @@ matrix:
 
     # gcc-7 thread sanitizer
     - os: linux
+      compiler: gcc
       env:
         - COMPILER=g++-7
         - CONFIGURATION=Debug
@@ -163,6 +165,7 @@ matrix:
 
     # clang-5.0 undefined behavior sanitizer
     - os: linux
+      compiler: clang
       env:
         - COMPILER=g++-7
         - CONFIGURATION=Debug
@@ -178,6 +181,7 @@ matrix:
 
     # clang-5.0 thread sanitizer
     - os: linux
+      compiler: clang
       env:
         - COMPILER=g++-7
         - CONFIGURATION=Debug
