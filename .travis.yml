@@ -23,9 +23,9 @@ branches:
 matrix:
   include:
 
-    #############
-    # Linux gcc #
-    #############
+    ########################
+    # Linux gcc unit tests #
+    ########################
 
     # Linux gcc-6 Unit Tests
     - os: linux
@@ -38,10 +38,6 @@ matrix:
         apt:
           sources: ['ubuntu-toolchain-r-test']
           packages: ['g++-6']
-      script:
-        - $CMAKE .. $CMAKE_ARGS
-        - $CMAKE --build . --config $CONFIGURATION
-        - $CMAKE --build . --target test --config $CONFIGURATION
 
     # Linux gcc-7 Unit Tests
     - os: linux
@@ -54,10 +50,6 @@ matrix:
         apt:
           sources: ['ubuntu-toolchain-r-test']
           packages: ['g++-7']
-      script:
-        - $CMAKE .. $CMAKE_ARGS
-        - $CMAKE --build . --config $CONFIGURATION
-        - $CMAKE --build . --target test --config $CONFIGURATION
 
     ########################
     # Linux gcc sanitizers #
@@ -123,7 +115,7 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['clang-3.9']
+          packages: ['g++-7', 'clang-3.9']
 
     # Linux clang-4.0 Unit Tests
     - os: linux
@@ -135,7 +127,7 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-          packages: ['clang-4.0']
+          packages: ['g++-7', 'clang-4.0']
 
     # Linux clang-5.0 Unit Tests
     - os: linux
@@ -147,7 +139,7 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-5.0']
-          packages: ['clang-5.0']
+          packages: ['g++-7', 'clang-5.0']
 
     ##########################
     # Linux clang sanitizers #
@@ -211,10 +203,6 @@ matrix:
         - COMPILER=clang++
         - CONFIGURATION=Release
         - TEST="xcode7.3 Unit Tests"
-      script:
-        - $CMAKE .. $CMAKE_ARGS
-        - $CMAKE --build . --config $CONFIGURATION
-        - $CMAKE --build . --target test --config $CONFIGURATION
 
     # xcode8 clang unit test
     - os: osx
@@ -224,10 +212,6 @@ matrix:
         - COMPILER=clang++
         - CONFIGURATION=Release
         - TEST="xcode8 Unit Tests"
-      script:
-        - $CMAKE .. $CMAKE_ARGS
-        - $CMAKE --build . --config $CONFIGURATION
-        - $CMAKE --build . --target test --config $CONFIGURATION
 
     # xcode8.1 clang unit test
     - os: osx
@@ -237,10 +221,6 @@ matrix:
         - COMPILER=clang++
         - CONFIGURATION=Release
         - TEST="xcode8.1 Unit Tests"
-      script:
-        - $CMAKE .. $CMAKE_ARGS
-        - $CMAKE --build . --config $CONFIGURATION
-        - $CMAKE --build . --target test --config $CONFIGURATION
 
     # xcode8.2 clang unit test
     - os: osx
@@ -250,10 +230,6 @@ matrix:
         - COMPILER=clang++
         - CONFIGURATION=Release
         - TEST="xcode8.2 Unit Tests"
-      script:
-        - $CMAKE .. $CMAKE_ARGS
-        - $CMAKE --build . --config $CONFIGURATION
-        - $CMAKE --build . --target test --config $CONFIGURATION
 
     # xcode8.3 clang unit test
     - os: osx
@@ -263,10 +239,6 @@ matrix:
         - COMPILER=clang++
         - CONFIGURATION=Release
         - TEST="xcode8.3 Unit Tests"
-      script:
-        - $CMAKE .. $CMAKE_ARGS
-        - $CMAKE --build . --config $CONFIGURATION
-        - $CMAKE --build . --target test --config $CONFIGURATION
 
     # xcode9 clang unit test
     - os: osx
@@ -276,10 +248,6 @@ matrix:
         - COMPILER=clang++
         - CONFIGURATION=Release
         - TEST="xcode9 Unit Tests"
-      script:
-        - $CMAKE .. $CMAKE_ARGS
-        - $CMAKE --build . --config $CONFIGURATION
-        - $CMAKE --build . --target test --config $CONFIGURATION
 
 ######################
 # Installation Steps #
@@ -324,16 +292,12 @@ before_script:
   # CMake arguments
   - CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_BUILD_TYPE=$CONFIGURATION"
   - CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_INCLUDE_PATH=$CATCH_DIR"
-  - CMAKE_ARGS="$CMAKE_ARGS -DBIT_STL_COMPILE_UNIT_TESTS=On"
-  - CMAKE_ARGS="$CMAKE_ARGS -DBIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS=On"
 
 ######################
 # Default Build Step #
 ######################
 script:
 
-  - $CMAKE .. $CMAKE_ARGS
+  - $CMAKE .. $CMAKE_ARGS -DBIT_STL_COMPILE_UNIT_TESTS=On -DBIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS=On
   - $CMAKE --build . --config $CONFIGURATION
-
-  # Run
   - $CMAKE --build . --target test --config $CONFIGURATION
