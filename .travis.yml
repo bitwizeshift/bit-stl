@@ -77,7 +77,7 @@ matrix:
         - TEST="g++-7 Undefined Behavior Sanitizer"
         - COMPILER=g++-7
         - CONFIGURATION=Debug
-        - CMAKE_ARGS="-DBIT_STL_COMPILE_USAN=On"
+        - CMAKE_ARGS="-DBIT_STL_COMPILE_UBSAN=On"
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
@@ -163,7 +163,7 @@ matrix:
         - TEST="clang++-5.0 Undefined Behavior Sanitizer"
         - COMPILER=clang++-5.0
         - CONFIGURATION=Debug
-        - CMAKE_ARGS="-DBIT_STL_COMPILE_USAN=On"
+        - CMAKE_ARGS="-DBIT_STL_COMPILE_UBSAN=On"
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-5.0']
@@ -250,6 +250,7 @@ matrix:
 # Installation Steps #
 ######################
 install:
+  - old_dir=$(pwd)
   - cd ../
 
   # Get dependency 'catch'
@@ -267,7 +268,7 @@ install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then tar -xzf cmake-3.9.4-Darwin-x86_64.tar.gz && ls && ls cmake-3.9.4-Darwin-x86_64; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CMAKE=$TRAVIS_BUILD_DIR/../cmake-3.9.4-Darwin-x86_64/CMake.app/Contents/bin/cmake; fi
 
-  - cd bit-stl/
+  - cd $old_dir
 
 ##################
 # Pre-build step #
@@ -289,6 +290,11 @@ before_script:
   - CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_INCLUDE_PATH=$CATCH_DIR"
   - CMAKE_ARGS="$CMAKE_ARGS -DBIT_STL_COMPILE_UNIT_TESTS=On"
   - CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_CXX_COMPILER=$COMPILER"
+
+  # Use ld.gold on non-OSX builds
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_SHARED_LINKER_FLAGS=\"-fuse-ld=gold\""; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_EXE_LINKER_FLAGS=\"-fuse-ld=gold\"""; fi
+
 
 ######################
 # Default Build Step #
