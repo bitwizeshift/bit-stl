@@ -68,7 +68,8 @@ if( BIT_STL_COMPILE_ASAN )
   target_link_libraries(bit_stl_asan PRIVATE "bit::stl"
                                              "philsquared::Catch"
                                              -fsanitize=address
-                                             -fsanitize=leak)
+                                             -fsanitize=leak
+                                             -fuse-ld=gold)
 
   target_compile_options(bit_stl_asan PRIVATE
     -g
@@ -95,7 +96,8 @@ if( BIT_STL_COMPILE_USAN )
   target_compile_options(bit_stl_usan PRIVATE -fsanitize=undefined -fuse-ld=gold)
   target_link_libraries(bit_stl_usan PRIVATE "bit::stl"
                                              "philsquared::Catch"
-                                             -fsanitize=undefined)
+                                             -fsanitize=undefined
+                                             -fuse-ld=gold)
 
 endif()
 
@@ -113,7 +115,8 @@ if( BIT_STL_COMPILE_TSAN )
   target_compile_options(bit_stl_tsan PRIVATE -fsanitize=thread -fuse-ld=gold)
   target_link_libraries(bit_stl_tsan PRIVATE "bit::stl"
                                              "philsquared::Catch"
-                                             -fsanitize=thread)
+                                             -fsanitize=thread
+                                             -fuse-ld=gold)
 
 endif()
 
