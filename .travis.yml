@@ -151,13 +151,13 @@ matrix:
     - os: linux
       compiler: clang
       env:
-        - COMPILER=g++-7
+        - COMPILER=clang++-5.0
         - CONFIGURATION=Debug
-        - TEST="g++-7 Address Sanitizer"
+        - TEST="clang++-5.0 Address Sanitizer"
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-7']
+          packages: ['g++-7', 'clang-5.0']
       script:
         - $CMAKE .. $CMAKE_ARGS -DBIT_STL_COMPILE_ASAN=On
         - $CMAKE --build . --config $CONFIGURATION
@@ -167,13 +167,13 @@ matrix:
     - os: linux
       compiler: clang
       env:
-        - COMPILER=g++-7
+        - COMPILER=clang++-5.0
         - CONFIGURATION=Debug
-        - TEST="g++-7 Undefined Behavior Sanitizer"
+        - TEST="clang++-5.0 Undefined Behavior Sanitizer"
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-7']
+          packages: ['g++-7', 'clang-5.0']
       script:
         - $CMAKE .. $CMAKE_ARGS -DBIT_STL_COMPILE_USAN=On
         - $CMAKE --build . --config $CONFIGURATION
@@ -183,13 +183,13 @@ matrix:
     - os: linux
       compiler: clang
       env:
-        - COMPILER=g++-7
+        - COMPILER=clang++-5.0
         - CONFIGURATION=Debug
-        - TEST="g++-7 Thread Sanitizer"
+        - TEST="clang++-5.0 Thread Sanitizer"
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-7']
+          packages: ['g++-7', 'clang-5.0']
       script:
         - $CMAKE .. $CMAKE_ARGS -DBIT_STL_COMPILE_TSAN=On
         - $CMAKE --build . --config $CONFIGURATION
