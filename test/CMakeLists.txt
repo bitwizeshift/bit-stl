@@ -110,7 +110,7 @@ if( BIT_STL_COMPILE_TSAN )
   endif()
 
   add_executable(bit_stl_tsan ${sources})
-  target_compile_options(bit_stl_usan PRIVATE -fsanitize=thread -fuse-ld=gold)
+  target_compile_options(bit_stl_tsan PRIVATE -fsanitize=thread -fuse-ld=gold)
   target_link_libraries(bit_stl_tsan PRIVATE "bit::stl"
                                              "philsquared::Catch"
                                              -fsanitize=thread)
