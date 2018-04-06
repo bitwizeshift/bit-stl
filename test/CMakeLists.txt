@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.1)
 #-----------------------------------------------------------------------------
 
 option(BIT_STL_COMPILE_ASAN "Compile and run the address sanetizer" off)
-option(BIT_STL_COMPILE_USAN "Compile and run the undefined behavior sanitizer" off)
+option(BIT_STL_COMPILE_UBSAN "Compile and run the undefined behavior sanitizer" off)
 option(BIT_STL_COMPILE_TSAN "Compile and run the thread sanitizer" off)
 option(BIT_STL_COMPILE_COVERAGE "Compile and run code coverage" off)
 
@@ -54,28 +54,29 @@ add_test( NAME "bit_stl_test_all"
           WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
           COMMAND "$<TARGET_FILE:bit_stl_test>" "*" )
 
+if( BIT_STL_COMPILE_TSAN AND BIT_STL_COMPILE_UBSAN OR
+    BIT_STL_COMPILE_UBSAN AND BIT_STL_COMPILE_ASAN OR
+    BIT_STL_COMPILE_ASAN AND BIT_STL_COMPILE_TSAN )
+  message(FATAL_ERROR "TSAN, UBSAN, and ASAN can only be enabled independently")
+endif()
+
 #-----------------------------------------------------------------------------
 # Address Sanitizer
 #-----------------------------------------------------------------------------
 
 if( BIT_STL_COMPILE_ASAN )
 
-  if( NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-    message(FATAL_ERROR "ASAN only available for LLVM Clang compilers")
+  if( NOT UNIX )
+    message(FATAL_ERROR "UBSAN only available posix platforms")
   endif()
 
   target_link_libraries(bit_stl_test PRIVATE -fsanitize=address
-                                             -fsanitize=leak
-                                             -fuse-ld=gold)
-
-  target_compile_options(bit_stl_test PRIVATE
-    -g
-    -O1
-    -fno-omit-frame-pointer
-    -fsanitize=address
-    -fsanitize=leak
-    -fuse-ld=gold
-  )
+                                             -fsanitize=leak)
+  target_compile_options(bit_stl_test PRIVATE -fsanitize=address
+                                              -fsanitize=leak
+                                              -g
+                                              -O1
+                                              -fno-omit-frame-pointer)
 
 endif()
 
@@ -83,14 +84,14 @@ endif()
 # Undefined Behavior Sanitizer
 #-----------------------------------------------------------------------------
 
-if( BIT_STL_COMPILE_USAN )
+if( BIT_STL_COMPILE_UBSAN )
 
-  if( NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-    message(FATAL_ERROR "USAN only available for LLVM Clang compilers")
+  if( NOT UNIX )
+    message(FATAL_ERROR "UBSAN only available posix platforms")
   endif()
 
-  target_compile_options(bit_stl_test PRIVATE -fsanitize=undefined -fuse-ld=gold)
-  target_link_libraries(bit_stl_test PRIVATE -fsanitize=undefined -fuse-ld=gold)
+  target_compile_options(bit_stl_test PRIVATE -fsanitize=undefined)
+  target_link_libraries(bit_stl_test PRIVATE -fsanitize=undefined)
 
 endif()
 
@@ -100,12 +101,12 @@ endif()
 
 if( BIT_STL_COMPILE_TSAN )
 
-  if( NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-    message(FATAL_ERROR "TSAN only available for LLVM Clang compilers")
+  if( NOT UNIX )
+    message(FATAL_ERROR "UBSAN only available posix platforms")
   endif()
 
-  target_compile_options(bit_stl_test PRIVATE -fsanitize=thread -fuse-ld=gold)
-  target_link_libraries(bit_stl_test PRIVATE -fsanitize=thread -fuse-ld=gold)
+  target_compile_options(bit_stl_test PRIVATE -fsanitize=thread)
+  target_link_libraries(bit_stl_test PRIVATE -fsanitize=thread)
 
 endif()
 
@@ -115,8 +116,9 @@ endif()
 
 if( BIT_STL_COMPILE_COVERAGE )
 
-  if( NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-    message(FATAL_ERROR "Coverage only available for LLVM Clang compilers")
+  if( NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND
+      NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
+    message(FATAL_ERROR "Coverage only available for GNUC compilers")
   endif()
 
   target_link_libraries(bit_stl_test PRIVATE --coverage)
