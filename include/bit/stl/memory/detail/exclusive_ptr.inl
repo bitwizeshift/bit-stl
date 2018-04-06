@@ -346,11 +346,13 @@ bit::stl::exclusive_ptr<T>&
   bit::stl::exclusive_ptr<T>::operator=( exclusive_ptr&& other )
   noexcept
 {
+  if( m_control_block ) m_control_block->destroy();
+
   m_control_block = other.m_control_block;
-  m_ptr      = other.m_ptr;
+  m_ptr           = other.m_ptr;
 
   other.m_control_block = nullptr;
-  other.m_ptr      = nullptr;
+  other.m_ptr           = nullptr;
 
   return (*this);
 }
@@ -361,11 +363,13 @@ bit::stl::exclusive_ptr<T>&
   bit::stl::exclusive_ptr<T>::operator=( exclusive_ptr<Y>&& other )
   noexcept
 {
+  if( m_control_block ) m_control_block->destroy();
+
   m_control_block = other.m_control_block;
-  m_ptr      = other.m_ptr;
+  m_ptr           = other.m_ptr;
 
   other.m_control_block = nullptr;
-  other.m_ptr      = nullptr;
+  other.m_ptr           = nullptr;
 
   return (*this);
 }
