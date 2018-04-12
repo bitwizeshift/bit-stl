@@ -60,10 +60,6 @@ add_test( NAME "bit_stl_test_all"
 
 if( BIT_STL_COMPILE_ASAN )
 
-  if( NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-    message(FATAL_ERROR "ASAN only available for LLVM Clang compilers")
-  endif()
-
   target_link_libraries(bit_stl_test PRIVATE -fsanitize=address
                                              -fsanitize=leak
                                              -fuse-ld=gold)
@@ -83,11 +79,7 @@ endif()
 # Undefined Behavior Sanitizer
 #-----------------------------------------------------------------------------
 
-if( BIT_STL_COMPILE_USAN )
-
-  if( NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-    message(FATAL_ERROR "USAN only available for LLVM Clang compilers")
-  endif()
+if( BIT_STL_COMPILE_UBSAN )
 
   target_compile_options(bit_stl_test PRIVATE -fsanitize=undefined -fuse-ld=gold)
   target_link_libraries(bit_stl_test PRIVATE -fsanitize=undefined -fuse-ld=gold)
@@ -99,10 +91,6 @@ endif()
 #-----------------------------------------------------------------------------
 
 if( BIT_STL_COMPILE_TSAN )
-
-  if( NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-    message(FATAL_ERROR "TSAN only available for LLVM Clang compilers")
-  endif()
 
   target_compile_options(bit_stl_test PRIVATE -fsanitize=thread -fuse-ld=gold)
   target_link_libraries(bit_stl_test PRIVATE -fsanitize=thread -fuse-ld=gold)
