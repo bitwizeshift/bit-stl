@@ -188,6 +188,7 @@ set(headers
   include/bit/stl/utilities/expected.hpp
   include/bit/stl/utilities/hash.hpp
   include/bit/stl/utilities/in_place.hpp
+  include/bit/stl/utilities/integral_type.hpp
   include/bit/stl/utilities/invoke.hpp
   include/bit/stl/utilities/lazy.hpp
   include/bit/stl/utilities/macros.hpp
@@ -261,6 +262,7 @@ set(inline_headers
   include/bit/stl/utilities/detail/expected.inl
   include/bit/stl/utilities/detail/hash.inl
   include/bit/stl/utilities/detail/invoke.inl
+  include/bit/stl/utilities/detail/integral_type.inl
   include/bit/stl/utilities/detail/lazy.inl
   include/bit/stl/utilities/detail/monostate.inl
   include/bit/stl/utilities/detail/optional.inl
