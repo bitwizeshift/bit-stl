@@ -281,8 +281,7 @@ inline constexpr bit::stl::integral_type<T,Tag>
   return integral_type<T,Tag>(lhs.value() ^ rhs.value());
 }
 
-template<typename T, typename Tag, typename U,
-         typename=std::enable_if_t<std::is_integral<U>::value>>
+template<typename T, typename Tag, typename U, typename>
 inline constexpr bit::stl::integral_type<T,Tag>
   bit::stl::operator<<( const integral_type<T,Tag>& lhs, U rhs )
   noexcept
@@ -290,8 +289,7 @@ inline constexpr bit::stl::integral_type<T,Tag>
   return integral_type<T,Tag>(lhs.value() << rhs);
 }
 
-template<typename T, typename Tag, typename U,
-         typename=std::enable_if_t<std::is_integral<U>::value>>
+template<typename T, typename Tag, typename U, typename>
 inline constexpr bit::stl::integral_type<T,Tag>
   bit::stl::operator>>( const integral_type<T,Tag>& lhs, U rhs )
   noexcept
