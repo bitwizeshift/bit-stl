@@ -1,181 +1,34 @@
-/**
- * \file variant.hpp
- *
+/*****************************************************************************
+ * \file
  * \brief This header contains an implementation of std::variant that
  *        satisfies the
- *
- * \author Matthew Rodusek (matthew.rodusek@gmail.com)
- */
+ *****************************************************************************/
 
-/* Header <variant> synopsis
+/*
+  The MIT License (MIT)
 
-// 23.7.3, class template variant
-template <class... Types>
-class variant;
+  Bit Standard Template Library.
+  https://github.com/bitwizeshift/bit-stl
 
-// 23.7.4, variant helper classes
-template <class T> struct variant_size; // not defined
-template <class T> struct variant_size<const T>;
-template <class T> struct variant_size<volatile T>;
-template <class T> struct variant_size<const volatile T>;
+  Copyright (c) 2018 Matthew Rodusek
 
-template <class T>
-inline constexpr size_t variant_size_v = variant_size<T>::value;
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
 
-template <class... Types>
-struct variant_size<variant<Types...>>;
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
 
-template <size_t I, class T> struct variant_alternative; // not defined
-template <size_t I, class T> struct variant_alternative<I, const T>;
-template <size_t I, class T> struct variant_alternative<I, volatile T>;
-template <size_t I, class T> struct variant_alternative<I, const volatile T>;
-
-template <size_t I, class T>
-using variant_alternative_t = typename variant_alternative<I, T>::type;
-
-template <size_t I, class... Types>
-struct variant_alternative<I, variant<Types...>>;
-
-inline constexpr size_t variant_npos = -1;
-
-// 23.7.5, value access
-template <class T, class... Types>
-constexpr bool holds_alternative(const variant<Types...>&) noexcept;
-
-template <size_t I, class... Types>
-constexpr variant_alternative_t<I, variant<Types...>>& get(variant<Types...>&);
-
-template <size_t I, class... Types>
-constexpr variant_alternative_t<I, variant<Types...>>&& get(variant<Types...>&&);
-
-template <size_t I, class... Types>
-constexpr const variant_alternative_t<I, variant<Types...>>& get(const variant<Types...>&);
-
-template <size_t I, class... Types>
-constexpr const variant_alternative_t<I, variant<Types...>>&& get(const variant<Types...>&&);
-
-template <class T, class... Types>
-constexpr T& get(variant<Types...>&);
-
-template <class T, class... Types>
-constexpr T&& get(variant<Types...>&&);
-
-template <class T, class... Types>
-constexpr const T& get(const variant<Types...>&);
-
-template <class T, class... Types>
-constexpr const T&& get(const variant<Types...>&&);
-
-template <size_t I, class... Types>
-constexpr add_pointer_t<variant_alternative_t<I, variant<Types...>>> get_if(variant<Types...>*) noexcept;
-
-template <size_t I, class... Types>
-constexpr add_pointer_t<const variant_alternative_t<I, variant<Types...>>> get_if(const variant<Types...>*) noexcept;
-
-template <class T, class... Types>
-constexpr add_pointer_t<T> get_if(variant<Types...>*) noexcept;
-
-template <class T, class... Types>
-constexpr add_pointer_t<const T> get_if(const variant<Types...>*) noexcept;
-
-// 23.7.6, relational operators
-template <class... Types>
-constexpr bool operator==(const variant<Types...>&, const variant<Types...>&);
-template <class... Types>
-constexpr bool operator!=(const variant<Types...>&, const variant<Types...>&);
-template <class... Types>
-constexpr bool operator<(const variant<Types...>&, const variant<Types...>&);
-template <class... Types>
-constexpr bool operator>(const variant<Types...>&, const variant<Types...>&);
-template <class... Types>
-constexpr bool operator<=(const variant<Types...>&, const variant<Types...>&);
-template <class... Types>
-constexpr bool operator>=(const variant<Types...>&, const variant<Types...>&);
-
-// 23.7.7, visitation
-template <class Visitor, class... Variants>
-constexpr see below visit(Visitor&&, Variants&&...);
-
-// 23.7.8, class monostate
-struct monostate;
-
-// 23.7.9, monostate relational operators
-constexpr bool operator<(monostate, monostate) noexcept;
-constexpr bool operator>(monostate, monostate) noexcept;
-constexpr bool operator<=(monostate, monostate) noexcept;
-constexpr bool operator>=(monostate, monostate) noexcept;
-constexpr bool operator==(monostate, monostate) noexcept;
-constexpr bool operator!=(monostate, monostate) noexcept;
-
-// 23.7.10, specialized algorithms
-template <class... Types>
-void swap(variant<Types...>&, variant<Types...>&) noexcept(see below );
-
-// 23.7.11, class bad_variant_access
-class bad_variant_access;
-
-// 23.7.12, hash support
-template <class T> struct hash;
-template <class... Types> struct hash<variant<Types...>>;
-template <> struct hash<monostate>;
-
-// 23.7.13, allocator-related traits
-template <class T, class Alloc> struct uses_allocator;
-template <class... Types, class Alloc> struct uses_allocator<variant<Types...>, Alloc>;
-
-template <class... Types>
-class variant {
-public:
-
-  // 23.7.3.1, constructors
-  constexpr variant() noexcept(see below );
-  variant(const variant&);
-
-  variant(variant&&) noexcept(see below );
-
-  template <class T>
-  constexpr variant(T&&) noexcept(see below );
-
-  template <class T, class... Args>
-  constexpr explicit variant(in_place_type_t<T>, Args&&...);
-
-  template <class T, class U, class... Args>
-  constexpr explicit variant(in_place_type_t<T>, initializer_list<U>, Args&&...);
-
-  template <size_t I, class... Args>
-  constexpr explicit variant(in_place_index_t<I>, Args&&...);
-
-  template <size_t I, class U, class... Args>
-  constexpr explicit variant(in_place_index_t<I>, initializer_list<U>, Args&&...);
-
-  // 23.7.3.2, destructor
-  ~variant();
-
-  // 23.7.3.3, assignment
-  variant& operator=(const variant&);
-  variant& operator=(variant&&) noexcept(see below );
-  template <class T> variant& operator=(T&&) noexcept(see below );
-
-  // 23.7.3.4, modifiers
-  template <class T, class... Args>
-  T& emplace(Args&&...);
-
-  template <class T, class U, class... Args>
-  T& emplace(initializer_list<U>, Args&&...);
-
-  template <size_t I, class... Args>
-  variant_alternative_t<I, variant<Types...>>& emplace(Args&&...);
-
-  template <size_t I, class U, class... Args>
-  variant_alternative_t<I, variant<Types...>>& emplace(initializer_list<U>, Args&&...);
-
-  // 23.7.3.5, value status
-  constexpr bool valueless_by_exception() const noexcept;
-  constexpr size_t index() const noexcept;
-
-  // 23.7.3.6, swap
-  void swap(variant&) noexcept(see below );
-};
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
 */
 #ifndef BIT_STL_UTILITIES_VARIANT_HPP
 #define BIT_STL_UTILITIES_VARIANT_HPP
@@ -185,7 +38,8 @@ public:
 #include "utility.hpp"
 
 #include "../traits/composition/sfinae.hpp"      // enable_overload_if
-#include "../traits/composition/conjunction.hpp"
+#include "../traits/composition/conjunction.hpp" // conjunction
+#include "../traits/relationships/nth_type.hpp"  // nth_type
 
 #include <initializer_list> // std::initializer_list
 #include <memory>           // std::uses_allocator
@@ -195,10 +49,10 @@ namespace bit {
   namespace stl {
 
     //=========================================================================
-    // 23.7.3, class template variant
+    // 23.7.3 : class template variant
     //=========================================================================
 
-    template <typename... Types>
+    template<typename...Types>
     class variant;
 
     namespace detail {
@@ -222,6 +76,10 @@ namespace bit {
         current_type  current;
         next_type     next;
 
+        //---------------------------------------------------------------------
+        // Constructors
+        //---------------------------------------------------------------------
+
         constexpr variant_union() : empty(){}
 
         template<typename...Args>
@@ -237,6 +95,31 @@ namespace bit {
         {
 
         }
+
+        //---------------------------------------------------------------------
+        // Observers
+        //---------------------------------------------------------------------
+
+        constexpr current_type& get( in_place_index_t<0> )
+        {
+          return current;
+        }
+        constexpr const current_type& get( in_place_index_t<0> ) const
+        {
+          return current;
+        }
+
+        template<std::size_t N>
+        constexpr auto& get( in_place_index_t<N> )
+        {
+          return next.get( in_place_index<N-1> );
+        }
+        template<std::size_t N>
+        constexpr const auto& get( in_place_index_t<N> ) const
+        {
+          return next.get( in_place_index<N-1> );
+        }
+
       };
 
       template<typename Type0, typename...Types>
@@ -266,6 +149,27 @@ namespace bit {
         }
 
         ~variant_union(){}
+
+        constexpr current_type& get( in_place_index_t<0> )
+        {
+          return current;
+        }
+        constexpr const current_type& get( in_place_index_t<0> ) const
+        {
+          return current;
+        }
+
+        template<std::size_t N>
+        constexpr auto& get( in_place_index_t<N> )
+        {
+          return next.get( in_place_index<N-1> );
+        }
+        template<std::size_t N>
+        constexpr const auto& get( in_place_index_t<N> ) const
+        {
+          return next.get( in_place_index<N-1> );
+        }
+
       };
 
       template<bool B>
@@ -283,27 +187,6 @@ namespace bit {
 
         }
       };
-
-      template<bool B, typename T0, typename Fn>
-      constexpr bool compare( std::size_t index,
-                              const variant_union<B,T0>& lhs,
-                              const variant_union<B,T0>& rhs,
-                              Fn&& comp )
-      {
-        return std::forward<Fn>(comp)(lhs.current, rhs.current);
-      }
-
-      template<bool B, typename T0, typename T1, typename...Ts, typename Fn>
-      constexpr bool compare( std::size_t index,
-                              const variant_union<B,T0,T1,Ts...>& lhs,
-                              const variant_union<B,T0,T1,Ts...>& rhs,
-                              Fn&& comp)
-      {
-        if( index == 0 ) {
-          return std::forward<Fn>(comp)(lhs.current, rhs.current);
-        }
-        return compare( index-1, lhs.next, rhs.next, std::forward<Fn>(comp) );
-      }
 
       //=======================================================================
       // variant_base
@@ -332,23 +215,38 @@ namespace bit {
 
         }
 
-        //--------------------------------------------------------------------
+        //---------------------------------------------------------------------
         // Protected Members
-        //--------------------------------------------------------------------
+        //---------------------------------------------------------------------
       protected:
 
         variant_union<true,Types...> m_union;
         std::size_t                  m_index;
 
-        //--------------------------------------------------------------------
+        //---------------------------------------------------------------------
         // Protected Member Functions
-        //--------------------------------------------------------------------
+        //---------------------------------------------------------------------
       protected:
 
         void destruct()
         {
           m_index = std::size_t(-1);
         }
+
+        template<std::size_t I>
+        constexpr nth_type_t<I,Types...>& get( in_place_index_t<I> )
+          noexcept
+        {
+          return m_union.get( in_place_index<I> );
+        }
+
+        template<std::size_t I>
+        constexpr const nth_type_t<I,Types...>& get( in_place_index_t<I> )
+          const noexcept
+        {
+          return m_union.get( in_place_index<I> );
+        }
+
       };
 
       template<typename...Types>
@@ -376,72 +274,111 @@ namespace bit {
           destruct();
         }
 
-        //--------------------------------------------------------------------
+        //---------------------------------------------------------------------
         // Protected Members
-        //--------------------------------------------------------------------
+        //---------------------------------------------------------------------
       protected:
 
         variant_union<false,Types...> m_union;
         std::size_t                   m_index;
 
-        //--------------------------------------------------------------------
+        //---------------------------------------------------------------------
         // Protected Member Functions
-        //--------------------------------------------------------------------
+        //---------------------------------------------------------------------
       protected:
 
         void destruct()
         {
           if( m_index == std::size_t(-1) ) return;
 
-          destroy( m_index, m_union );
+          destroy_impl( m_index, m_union );
           m_index = std::size_t(-1);
         }
 
-        //--------------------------------------------------------------------
+        template<std::size_t I>
+        constexpr nth_type_t<I,Types...>& get( in_place_index_t<I> )
+          noexcept
+        {
+          return m_union.get( in_place_index<I> );
+        }
+
+        template<std::size_t I>
+        constexpr const nth_type_t<I,Types...>& get( in_place_index_t<I> )
+          const noexcept
+        {
+          return m_union.get( in_place_index<I> );
+        }
+
+        void swap( variant_base& other )
+        {
+          swap_impl( 0, m_index, m_union, other.m_union );
+        }
+
+        //---------------------------------------------------------------------
         // Private Static Member Functions
-        //--------------------------------------------------------------------
+        //---------------------------------------------------------------------
       private:
 
+        template<bool B, typename T0, typename T1, typename...Ts>
+        static void swap_impl( std::size_t current,
+                               std::size_t index,
+                               variant_union<B,T0,T1,Ts...>& lhs,
+                               variant_union<B,T0,T1,Ts...>& rhs )
+        {
+          using std::swap;
+
+          if( current == index ) {
+            swap( lhs.current, rhs.current );
+          } else {
+            swap_impl( current+1, index, lhs.next, rhs.next );
+          }
+        }
+
+        template<bool B, typename T0>
+        static void swap_impl( std::size_t,
+                               std::size_t,
+                               variant_union<B,T0>& lhs,
+                               variant_union<B,T0>& rhs )
+        {
+          using std::swap;
+
+          swap( lhs.current, rhs.current );
+        }
+
         template<typename T0>
-        static void destroy( std::size_t n, variant_union<false,T0>& storage )
+        static void destroy_impl( std::size_t n, variant_union<false,T0>& storage )
         {
           storage.current.~T0();
         }
 
         template<typename T0, typename T1, typename...Ts>
-        static void destroy( std::size_t n, variant_union<false,T0,T1,Ts...>& storage )
+        static void destroy_impl( std::size_t n, variant_union<false,T0,T1,Ts...>& storage )
         {
           if( n == 0 ) {
             storage.current.~T0();
           } else {
-            destroy( n-1, storage.next );
+            destroy_impl( n-1, storage.next );
           }
         }
 
       };
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
-      ///
-      ///
-      ///
-      template <std::size_t I, typename T, typename T0, typename...Ts>
-      struct index_from_impl : index_from_impl<I+1,T,Ts...>{};
+      template<std::size_t I, typename T, typename...Ts>
+      struct index_from_impl;
+
+      template<std::size_t I, typename T, typename T0, typename...Ts>
+      struct index_from_impl<I,T,T0,Ts...> : index_from_impl<I+1,T,Ts...>{};
 
       template <std::size_t I, typename T, typename...Ts>
       struct index_from_impl<I,T,T,Ts...> : std::integral_constant<std::size_t,I>{};
 
-      ///
-      ///
-      ///
       template <typename T, typename...Ts>
       struct index_from : index_from_impl<0,T,Ts...>{};
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
-      ///
-      ///
-      ///
       template <std::size_t I, typename T, typename...Ts>
       struct index_from_constructible_impl;
 
@@ -456,18 +393,11 @@ namespace bit {
           std::integral_constant<std::size_t,I>,
           index_from_constructible_impl<I+1,T,Ts...>>{};
 
-      ///
-      ///
-      ///
-      ///
       template <typename T, typename...Ts>
       struct index_from_constructible : index_from_constructible_impl<0,T,Ts...>{};
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
-      ///
-      ///
-      ///
       template <typename T>
       struct is_not_in_place : std::true_type{};
 
@@ -480,11 +410,8 @@ namespace bit {
       template<>
       struct is_not_in_place<in_place_t> : std::false_type{};
 
-      //----------------------------------------------------------------------
+      //-----------------------------------------------------------------------
 
-      ///
-      ///
-      ///
       template<std::size_t I, typename...Types>
       struct variant_f_impl;
 
@@ -501,19 +428,12 @@ namespace bit {
         std::integral_constant<std::size_t,I> operator()( T0 );
       };
 
-      ///
-      ///
-      ///
-      ///
       template<typename...Types>
       struct variant_f : variant_f_impl<0,Types...>
       {
 
       };
 
-      ///
-      ///
-      ///
       template<typename T, typename Variant, typename = void>
       struct conversion_index : std::integral_constant<std::size_t,std::size_t(-1)>{};
 
@@ -536,6 +456,8 @@ namespace bit {
       template<typename T, typename Variant>
       using conversion_type_or_void_t = typename conversion_type_or_void_impl<conversion_index_v<T,Variant>,Variant>::type;
 
+      //-----------------------------------------------------------------------
+
       template<typename T>
       struct variant_union_has_next;
 
@@ -547,24 +469,29 @@ namespace bit {
 
     } // namespace detail
 
-    // 23.7.4, variant helper classes
 
+    //=========================================================================
+    // 23.7.4 : variant helper classes
+    //=========================================================================
+
+    /// \{
+    /// \brief Provides access to the number of alternatives in a possibly
+    ///        cv-qualified variant as a compile-time constant expression.
     ///
-    ///
-    ///
+    /// The result is accessible as \c ::value
     template<typename T> struct variant_size; // not defined
     template<typename T> struct variant_size<const T> : variant_size<T>{};
     template<typename T> struct variant_size<volatile T> : variant_size<T>{};
     template<typename T> struct variant_size<const volatile T> : variant_size<T>{};
-
-    template<typename... Types>
+    template<typename...Types>
     struct variant_size<variant<Types...>> : std::integral_constant<std::size_t,sizeof...(Types)>{};
+    /// \}
 
-    ///
-    ///
-    ///
+    /// \brief Helper variable template for extracting \c variant_size<T>::value
     template<typename T>
     constexpr size_t variant_size_v = variant_size<T>::value;
+
+    //-------------------------------------------------------------------------
 
     ///
     ///
@@ -586,14 +513,16 @@ namespace bit {
     template<std::size_t I, typename T>
     using variant_alternative_t = typename variant_alternative<I, T>::type;
 
-    ///
-    ///
-    ///
-    constexpr size_t variant_npos = -1;
+    //-------------------------------------------------------------------------
 
-    // 23.7.8, class monostate
+    /// \brief  This is a special value equal to the largest value
+    ///         representable by the type std::size_t, used as the return type
+    ///         of index() when valueless_by_exception() is true
+    constexpr auto variant_npos = std::size_t(-1);
 
-    // 23.7.11, class bad_variant_access
+    //=========================================================================
+    // 23.7.11 : class bad_variant_access
+    //=========================================================================
 
     //////////////////////////////////////////////////////////////////////////
     /// \brief Exception thrown by variant
@@ -625,12 +554,16 @@ namespace bit {
       const char* what() const noexcept override{ return "bad_variant_access"; }
     };
 
+    //=========================================================================
+    // 23.7.3 : class template variant
+    //=========================================================================
+
     ///////////////////////////////////////////////////////////////////////////
-    /// \brief The class template std::variant represents a type-safe union.
+    /// \brief The class template variant represents a type-safe union.
     ///
-    /// An instance of std::variant at any given time either holds a value of
+    /// An instance of variant at any given time either holds a value of
     /// one of its alternative types, or it holds no value (this state is hard
-    /// to achieve, see valueless_by_exception).
+    /// to achieve, \see valueless_by_exception ).
     ///
     /// As with unions, if a variant holds a value of some object type T, the
     /// object representation of T is allocated directly within the object
@@ -655,6 +588,9 @@ namespace bit {
     template<typename...Types>
     class variant : detail::variant_base<conjunction<std::is_trivially_destructible<Types>...>::value,Types...>
     {
+      static_assert( sizeof...(Types) > 0,
+                     "A variant of 0 types is ill-formed. Use variant<monostate> instead." );
+
       using T0 = std::tuple_element_t<0,std::tuple<Types...>>;
       using base_type = detail::variant_base<conjunction<std::is_trivially_destructible<Types>...>::value,Types...>;
 
@@ -684,13 +620,13 @@ namespace bit {
         std::is_constructible<detail::conversion_type_or_void_t<U,variant>,U>::value;
 
       static constexpr bool is_copy_assignable = conjunction<
-          std::is_copy_constructible<Types>...,
-          std::is_copy_assignable<Types>...
+        std::is_copy_constructible<Types>...,
+        std::is_copy_assignable<Types>...
       >::value;
 
       static constexpr bool is_move_assignable = conjunction<
-          std::is_move_constructible<Types>...,
-          std::is_move_assignable<Types>...
+        std::is_move_constructible<Types>...,
+        std::is_move_assignable<Types>...
       >::value;
 
       template<typename U>
@@ -700,16 +636,10 @@ namespace bit {
         std::is_constructible<detail::conversion_type_or_void_t<U,variant>,U>::value &&
         std::is_assignable<detail::conversion_type_or_void_t<U,variant>,U>::value;
 
-      static_assert(sizeof...(Types) > 0, "A variant with 0 types is ill-formed");
+      template<typename U>
+      using T_j = nth_type_t<detail::conversion_index<U,variant>::value,Types...>;
 
       struct variant_ctor{};
-
-      //----------------------------------------------------------------------
-      // Public Member Types
-      //----------------------------------------------------------------------
-    public:
-
-      static constexpr auto variant_npos = std::size_t(-1);
 
       //----------------------------------------------------------------------
       // Constructors
@@ -730,11 +660,12 @@ namespace bit {
       /// \note This overload only participates in overload resolution if
       ///       std::is_default_constructible_v<T_0> is true.
 #ifndef BIT_DOXYGEN_BUILD
-      constexpr variant( enable_overload_if_t<is_default_constructible,variant_ctor> = {} );
+      constexpr variant( enable_overload_if_t<is_default_constructible,variant_ctor> = {} )
+        noexcept(std::is_nothrow_default_constructible<T0>::value);
 #else
-      constexpr variant();
+      constexpr variant()
+        noexcept(std::is_nothrow_default_constructible<T0>::value);
 #endif
-//        noexcept(std::is_nothrow_default_constructible<T0>::value);
 
       // (2)
 
@@ -750,7 +681,8 @@ namespace bit {
       ///
       /// \param other the other variant to copy
 #ifndef BIT_DOXYGEN_BUILD
-      variant( enable_overload_if_t<is_copy_constructible,const variant&> other );
+      variant( enable_overload_if_t<is_copy_constructible,const variant&> other )
+        noexcept( conjunction<std::is_nothrow_copy_constructible<Types>...>::value );
       variant( disable_overload_if_t<is_copy_constructible,const variant&> other ) = delete;
 #else
       variant( const variant& other );
@@ -770,12 +702,13 @@ namespace bit {
       ///
       /// \param other the other variant to move
 #ifndef BIT_DOXYGEN_BUILD
-      variant( enable_overload_if_t<is_move_constructible,variant&&> other );
+      variant( enable_overload_if_t<is_move_constructible,variant&&> other )
+        noexcept( conjunction<std::is_nothrow_move_constructible<Types>...>::value );
       variant( disable_overload_if_t<is_move_constructible,variant&&> other ) = delete;
 #else
-      variant( variant&& other );
+      variant( variant&& other )
+        noexcept( conjunction<std::is_nothrow_move_constructible<Types>...>::value );
 #endif
-//        noexcept( conjunction<std::is_nothrow_move_constructible<Types>...>::value );
 
       // (4)
 
@@ -803,11 +736,13 @@ namespace bit {
       ///
       /// \param t the value to direct-initialize
 #ifndef BIT_DOXYGEN_BUILD
-      template<typename T>
-      constexpr variant( T&& t, std::enable_if_t<is_convertible<T>>* = nullptr );
+      template<typename T, typename=std::enable_if_t<is_convertible<T>>>
+      constexpr variant( T&& t )
+        noexcept( std::is_nothrow_constructible<T_j<T>,T>::value );
 #else
       template<typename T>
-      constexpr variant( T&& t );
+      constexpr variant( T&& t )
+        noexcept( std::is_nothrow_constructible<T_j<T>>::value );
 #endif
 //        noexcept( ... );
 
@@ -826,7 +761,8 @@ namespace bit {
       ///
       /// \param args the arguments to forward to \p T's constructor
 #ifndef BIT_DOXYGEN_BUILD
-      template<typename T, typename... Args, std::enable_if_t<std::is_constructible<T,Args...>::value>* = 0>
+      template<typename T, typename... Args,
+               typename = std::enable_if_t<std::is_constructible<T,Args...>::value>>
       constexpr explicit variant( in_place_type_t<T>, Args&&... args );
 #else
       template<typename T, typename...Args>
@@ -849,7 +785,8 @@ namespace bit {
       /// \param il initializer list of type \p U
       /// \param args the arguments to forward to \p T's constructor
 #ifndef BIT_DOXYGEN_BUILD
-      template<typename T, typename U, typename... Args, std::enable_if_t<std::is_constructible<T,std::initializer_list<U>,Args...>::value>* = 0>
+      template<typename T, typename U, typename... Args,
+               typename = std::enable_if_t<std::is_constructible<T,std::initializer_list<U>,Args...>::value>>
 #else
       template<typename T, typename U, typename... Args>
 #endif
@@ -871,7 +808,8 @@ namespace bit {
       ///
       /// \param args the arguments to forward to \p T_i's constructor
 #ifndef BIT_DOXYGEN_BUILD
-      template<std::size_t I, typename... Args, std::enable_if_t<(I<sizeof...(Types)) && std::is_constructible<variant_alternative_t<I,variant>,Args...>::value>* = 0>
+      template<std::size_t I, typename... Args,
+               typename = std::enable_if_t<(I<sizeof...(Types)) && std::is_constructible<variant_alternative_t<I,variant>,Args...>::value>>
 #else
       template<std::size_t I, typename... Args>
 #endif
@@ -894,7 +832,8 @@ namespace bit {
       /// \param il initializer list of type \p U
       /// \param args the arguments to forward to \p T_i 's constructor
 #ifndef BIT_DOXYGEN_BUILD
-      template<std::size_t I, typename U, typename... Args, std::enable_if_t<(I<sizeof...(Types)) && std::is_constructible<variant_alternative_t<I,variant>,std::initializer_list<U>,Args...>::value>* = 0>
+      template<std::size_t I, typename U, typename... Args,
+               typename = std::enable_if_t<(I<sizeof...(Types)) && std::is_constructible<variant_alternative_t<I,variant>,std::initializer_list<U>,Args...>::value>>
 #else
       template<std::size_t I, typename U, typename... Args>
 #endif
@@ -904,27 +843,32 @@ namespace bit {
       //----------------------------------------------------------------------
 
 #ifndef BIT_DOXYGEN_BUILD
-      variant& operator=( enable_overload_if_t<is_copy_assignable,const variant&> rhs);
-      variant& operator=( disable_overload_if_t<is_copy_assignable,const variant&> rhs) = delete;
+      /// \brief Copy assignment
+      ///
+      /// \param other
+      variant& operator=( enable_overload_if_t<is_copy_assignable,const variant&> other );
+      variant& operator=( disable_overload_if_t<is_copy_assignable,const variant&> other ) = delete;
 #else
       variant& operator=( const variant& other );
 #endif
 
 #ifndef BIT_DOXYGEN_BUILD
-      variant& operator=( enable_overload_if_t<is_move_assignable,variant&&> rhs);
-      variant& operator=( disable_overload_if_t<is_move_assignable,variant&&> rhs) = delete;
+      variant& operator=( enable_overload_if_t<is_move_assignable,variant&&> other )
+        noexcept( conjunction<std::is_nothrow_move_constructible<Types>...,
+                              std::is_nothrow_move_assignable<Types>...>::value);
+      variant& operator=( disable_overload_if_t<is_move_assignable,variant&&> other ) = delete;
 #else
       variant& operator=( variant&& other );
 #endif
-//        noexcept( ... )
 
 #ifndef BIT_DOXYGEN_BUILD
       template<typename T, typename = std::enable_if_t<is_convert_assignable<T>>>
 #else
       template<typename T>
 #endif
-      variant& operator=(T&& t);
-//        noexcept( ... )
+      variant& operator=(T&& t)
+        noexcept( std::is_nothrow_assignable<T_j<T>,T>::value &&
+                  std::is_nothrow_constructible<T_j<T>,T>::value );
 
       //----------------------------------------------------------------------
       // Observers
@@ -949,16 +893,81 @@ namespace bit {
       //----------------------------------------------------------------------
     public:
 
-      template<typename T, typename...Args>
+      /// \brief Creates a new value in-place
+      ///
+      /// Equivalent to emplace<I>(std::forward<Args>(args)...), where I is the
+      /// zero-based index of T in Types....
+      ///
+      /// \note This overload only participates in overload resolution if
+      ///       \c std::is_constructible_v<T, Args...> is \c true, and \c T
+      ///       occurs exactly once in \c Types...
+      ///
+      /// \tparam T the type to construct
+      /// \param args the arguments to forward to \p T's constructor
+      /// \return reference to constructed element
+      template<typename T, typename...Args,
+               typename=std::enable_if_t<std::is_constructible<T,Args...>::value>>
       T& emplace( Args&&... args );
 
-      template<typename T, typename U, typename...Args>
+      /// \brief Creates a new value in-place
+      ///
+      /// Equivalent to emplace<I>(il, std::forward<Args>(args)...), where I is
+      /// the zero-based index of T in Types....
+      ///
+      /// \note This overload only participates in overload resolution if
+      ///       \c std::is_constructible_v<T, std::initializer_list<U>, Args...>
+      ///       is \c true, and \p T occurs exactly once in Types...
+      ///
+      /// \tparam T the type to construct
+      /// \param il an initializer list of entries
+      /// \param args the arguments to forward to \p T's constructor
+      /// \return reference to constructed element
+      template<typename T, typename U, typename...Args,
+               typename=std::enable_if_t<std::is_constructible<T,std::initializer_list<U>&,Args...>::value>>
       T& emplace( std::initializer_list<U> il, Args&&... args );
 
-      template<std::size_t I, typename... Args>
+      /// \brief Creates a new value in-place
+      ///
+      /// First, destroys the currently contained value (if any).
+      /// Then direct-initializes the contained value as if constructing a
+      /// value of type \c T_I with the arguments \c std::forward<Args>(args)...
+      ///
+      /// If an exception is thrown, \c *this may become
+      /// \c valueless_by_exception.
+      ///
+      /// \note This overload only participates in overload resolution if
+      ///       \c std::is_constructible_v<T_I, Args...> is \c true.
+      ///
+      /// The behavior is undefined if I is not less than sizeof...(Types).
+      ///
+      /// \tparam I the index of the variant alternative to construct
+      /// \param args the arguments to forward to \p T's constructor
+      /// \return reference to constructed element
+      template<std::size_t I, typename... Args,
+               typename=std::enable_if_t<std::is_constructible<nth_type_t<I,Types...>,Args...>::value>>
       variant_alternative_t<I, variant>& emplace( Args&&... args );
 
-      template<std::size_t I, typename U, typename... Args>
+      /// \brief Creates a new value in-place
+      ///
+      /// First, destroys the currently contained value (if any).
+      /// Then direct-initializes the contained value as if constructing a
+      /// value of type \c T_I with the arguments
+      /// \c il,std::forward<Args>(args)...
+      ///
+      /// If an exception is thrown, \c *this may become
+      /// \c valueless_by_exception.
+      ///
+      /// \note This overload only participates in overload resolution if
+      ///       \c std::is_constructible_v<T_I, std::initializer_list<U> Args...>
+      ///       is \c true.
+      ///
+      /// The behavior is undefined if I is not less than sizeof...(Types).
+      ///
+      /// \tparam I the index of the variant alternative to construct
+      /// \param args the arguments to forward to \p T's constructor
+      /// \return reference to constructed element
+      template<std::size_t I, typename U, typename... Args,
+               typename=std::enable_if_t<std::is_constructible<nth_type_t<I,Types...>,std::initializer_list<U>&,Args...>::value>>
       variant_alternative_t<I, variant>& emplace( std::initializer_list<U> il, Args&&... args );
 
       void swap( variant& rhs );
@@ -985,15 +994,20 @@ namespace bit {
     private:
 
       template<std::size_t I>
-      constexpr variant_alternative_t<I,variant>& get();
+      constexpr variant_alternative_t<I,variant>&
+        get( in_place_index_t<I> ) noexcept;
 
-      template<std::size_t I, std::size_t J, typename VariantUnion>
-      static constexpr variant_alternative_t<I,variant>&
-        get( in_place_index_t<J>, VariantUnion&& storage );
+      template<std::size_t I>
+      constexpr const variant_alternative_t<I,variant>&
+        get( in_place_index_t<I> ) const noexcept;
 
-      template<std::size_t I, typename VariantUnion>
-      static constexpr variant_alternative_t<I,variant>&
-        get( in_place_index_t<0>, VariantUnion&& storage );
+      template<std::size_t I, typename...UTypes>
+      friend constexpr variant_alternative_t<I, variant<UTypes...>>&
+        get( variant<UTypes...>& v );
+      template<std::size_t I, typename...UTypes>
+      friend constexpr const variant_alternative_t<I, variant<UTypes...>>&
+        get( const variant<UTypes...>& v );
+
 
       //----------------------------------------------------------------------
       // Private Member Functions
@@ -1099,35 +1113,32 @@ namespace bit {
       /// \}
     };
 
+    //-------------------------------------------------------------------------
+    // Comparison
+    //-------------------------------------------------------------------------
+
     template<typename...Types>
     constexpr bool operator==( const variant<Types...>& lhs,
-                               const variant<Types...>& rhs );
-
+                               const variant<Types...>& rhs ) noexcept;
     template<typename...Types>
     constexpr bool operator!=( const variant<Types...>& lhs,
-                               const variant<Types...>& rhs );
-
+                               const variant<Types...>& rhs ) noexcept;
     template<typename...Types>
     constexpr bool operator<( const variant<Types...>& lhs,
-                              const variant<Types...>& rhs );
-
+                              const variant<Types...>& rhs ) noexcept;
     template<typename...Types>
     constexpr bool operator>( const variant<Types...>& lhs,
-                              const variant<Types...>& rhs );
-
+                              const variant<Types...>& rhs ) noexcept;
     template<typename...Types>
     constexpr bool operator<=( const variant<Types...>& lhs,
-                               const variant<Types...>& rhs );
-
+                               const variant<Types...>& rhs ) noexcept;
     template<typename...Types>
     constexpr bool operator>=( const variant<Types...>& lhs,
-                               const variant<Types...>& rhs );
+                               const variant<Types...>& rhs ) noexcept;
 
-
-    template<typename...Types>
-    constexpr std::size_t variant<Types...>::variant_npos;
-
-    // 23.7.5, value access
+    //=========================================================================
+    // 23.7.5 : value access
+    //=========================================================================
 
     /// \brief Checks if the variant v holds the alternative T.
     ///
@@ -1138,56 +1149,94 @@ namespace bit {
     template<typename T, typename...Types>
     constexpr bool holds_alternative( const variant<Types...>& v ) noexcept;
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
+    /// \{
     template<std::size_t I, typename...Types>
-    constexpr variant_alternative_t<I, variant<Types...>>& get( variant<Types...>& );
-
+    constexpr variant_alternative_t<I, variant<Types...>>&
+      get( variant<Types...>& v );
     template<std::size_t I, typename...Types>
-    constexpr variant_alternative_t<I, variant<Types...>>&& get( variant<Types...>&& );
-
+    constexpr variant_alternative_t<I, variant<Types...>>&&
+      get( variant<Types...>&& v );
     template<std::size_t I, typename...Types>
-    constexpr const variant_alternative_t<I, variant<Types...>>& get( const variant<Types...>& );
-
+    constexpr const variant_alternative_t<I, variant<Types...>>&
+      get( const variant<Types...>& v );
     template<std::size_t I, typename...Types>
-    constexpr const variant_alternative_t<I, variant<Types...>>&& get( const variant<Types...>&& );
+    constexpr const variant_alternative_t<I, variant<Types...>>&&
+      get( const variant<Types...>&& v );
+    /// \}
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
+    /// \{
+    /// \brief Gets the
+    ///
+    /// \throws bad_variant_access if \c T is not the active alternative
+    ///
+    /// \tparam T the type of the alternative to retrieve
+    /// \param v the variant to extract the entry from
+    /// \return the alternative
     template<typename T, typename...Types>
-    constexpr T& get( variant<Types...>& );
-
+    constexpr T& get( variant<Types...>& v );
     template<typename T, typename...Types>
-    constexpr T&& get( variant<Types...>&& );
-
+    constexpr T&& get( variant<Types...>&& v );
     template<typename T, typename...Types>
-    constexpr const T& get( const variant<Types...>& );
-
+    constexpr const T& get( const variant<Types...>& v );
     template<typename T, typename...Types>
-    constexpr const T&& get( const variant<Types...>&& );
+    constexpr const T&& get( const variant<Types...>&& v );
+    /// \}
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
+    /// \{
+    /// \brief Index-based non-throwing accessor
+    ///
+    /// If \p pv is not a null pointer and \c pv->index() == I, returns a
+    /// pointer to the value stored in the variant pointed to by pv.
+    /// Otherwise, returns a null pointer value.
+    ///
+    /// The call is ill-formed if I is not a valid index in the variant
+    ///
+    /// \tparam I the index of the alternative to extract
+    /// \param pv the pointer to the variant to extract the value from
+    /// \return pointer to the variant alternative when successful
     template<std::size_t I, typename...Types>
     constexpr std::add_pointer_t<variant_alternative_t<I, variant<Types...>>>
-      get_if(variant<Types...>*) noexcept;
-
+      get_if( variant<Types...>* pv ) noexcept;
     template<std::size_t I, typename...Types>
     constexpr std::add_pointer_t<const variant_alternative_t<I, variant<Types...>>>
-      get_if(const variant<Types...>*) noexcept;
+      get_if( const variant<Types...>* pv ) noexcept;
+    /// \}
 
+    /// \{
+    /// \brief Type-based non-throwing accessor
+    ///
+    /// Equivalent to the index-based \c get_if with \c I being the zero-based
+    /// index of \p T in \c Types....
+    ///
+    /// The call is ill-formed if T is not a unique element of Types.
+    ///
+    /// \tparam T the alternative type to retrieve
+    /// \param pv the pointer to the variant to extract the value from
+    /// \return pointer to the variant alternative when successful
     template<typename T, typename...Types>
-    constexpr std::add_pointer_t<T> get_if(variant<Types...>*) noexcept;
-
+    constexpr std::add_pointer_t<T> get_if( variant<Types...>* pv ) noexcept;
     template<typename T, typename...Types>
-    constexpr std::add_pointer_t<const T> get_if(const variant<Types...>*) noexcept;
+    constexpr std::add_pointer_t<const T> get_if( const variant<Types...>* pv ) noexcept;
+    /// \}
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Utilities
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
+    /// \brief Computes the hash of this variant
+    ///
+    /// The computed hash is the hash of the active variant alternative.
+    ///
+    /// \param val the variant to hash
+    /// \return the hash of the underlying value
     template<typename...Types>
-    std::size_t hash_value( variant<Types...> const& v ) noexcept;
+    constexpr hash_t hash_value( const variant<Types...>& val ) noexcept;
 
   } // namespace stl
 } // namespace bit
