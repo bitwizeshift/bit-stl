@@ -1241,9 +1241,6 @@ namespace bit {
   } // namespace stl
 } // namespace bit
 
-template<typename...Types,typename Alloc>
-struct std::uses_allocator<bit::stl::variant<Types...>,Alloc> : std::true_type{};
-
 #include "detail/variant.inl"
 
 #endif /* BIT_STL_UTILITIES_VARIANT_HPP */
