@@ -36,6 +36,8 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
+#include "hash.hpp" // hash_t
+
 #include <cstddef> // std::size_t
 
 namespace bit {
@@ -163,7 +165,7 @@ namespace bit {
     constexpr bool indeterminate( const tribool& t ) noexcept;
 #endif
 
-    constexpr std::size_t hash_value( tribool t ) noexcept;
+    constexpr hash_t hash_value( tribool t ) noexcept;
 
     //------------------------------------------------------------------------
     // Equality Comparisons

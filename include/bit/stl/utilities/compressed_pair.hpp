@@ -37,7 +37,7 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
-#include "hash.hpp"
+#include "hash.hpp" // hash_t
 #include "tuple_utilities.hpp"
 
 #include "../traits/composition/identity.hpp"
@@ -454,7 +454,7 @@ namespace bit {
     ///
     /// \param pair the pair to hash
     template<typename T, typename U>
-    constexpr std::size_t hash_value( const compressed_pair<T,U>& pair );
+    constexpr hash_t hash_value( const compressed_pair<T,U>& pair );
 
     //-------------------------------------------------------------------------
 

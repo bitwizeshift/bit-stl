@@ -50,12 +50,12 @@ inline constexpr bool
   return t.m_state == tribool::state::e_indeterminate;
 }
 
-inline constexpr std::size_t bit::stl::hash_value( tribool t )
+inline constexpr bit::stl::hash_t bit::stl::hash_value( tribool t )
   noexcept
 {
-  if( t ) return 1;
-  else if( !t ) return 2;
-  return 0;
+  if( t ) return static_cast<hash_t>(1);
+  else if( !t ) return static_cast<hash_t>(2);
+  return static_cast<hash_t>(0);
 }
 
 //----------------------------------------------------------------------------

@@ -1,250 +1,442 @@
 #ifndef BIT_STL_UTILITIES_DETAIL_HASH_INL
 #define BIT_STL_UTILITIES_DETAIL_HASH_INL
 
+//=============================================================================
+// hash_t
+//=============================================================================
+
 //-----------------------------------------------------------------------------
-// Hashing Calculations
+// Compound Operators
 //-----------------------------------------------------------------------------
+
+inline bit::stl::hash_t& bit::stl::operator+=( hash_t& lhs, hash_t rhs )
+  noexcept
+{
+  return lhs = static_cast<hash_t>(static_cast<std::size_t>(lhs) + static_cast<std::size_t>(rhs));
+}
+
+inline bit::stl::hash_t& bit::stl::operator-=( hash_t& lhs, hash_t rhs )
+  noexcept
+{
+  return lhs = static_cast<hash_t>(static_cast<std::size_t>(lhs) - static_cast<std::size_t>(rhs));
+}
+
+inline bit::stl::hash_t& bit::stl::operator*=( hash_t& lhs, hash_t rhs )
+  noexcept
+{
+  return lhs = static_cast<hash_t>(static_cast<std::size_t>(lhs) * static_cast<std::size_t>(rhs));
+}
+
+inline bit::stl::hash_t& bit::stl::operator/=( hash_t& lhs, hash_t rhs )
+  noexcept
+{
+  return lhs = static_cast<hash_t>(static_cast<std::size_t>(lhs) / static_cast<std::size_t>(rhs));
+}
+
+inline bit::stl::hash_t& bit::stl::operator%=( hash_t& lhs, hash_t rhs )
+  noexcept
+{
+  return lhs = static_cast<hash_t>(static_cast<std::size_t>(lhs) % static_cast<std::size_t>(rhs));
+}
+
+//-----------------------------------------------------------------------------
+
+inline bit::stl::hash_t& bit::stl::operator&=( hash_t& lhs, hash_t rhs )
+  noexcept
+{
+  return lhs = static_cast<hash_t>(static_cast<std::size_t>(lhs) & static_cast<std::size_t>(rhs));
+}
+
+inline bit::stl::hash_t& bit::stl::operator|=( hash_t& lhs, hash_t rhs )
+  noexcept
+{
+  return lhs = static_cast<hash_t>(static_cast<std::size_t>(lhs) | static_cast<std::size_t>(rhs));
+}
+
+inline bit::stl::hash_t& bit::stl::operator^=( hash_t& lhs, hash_t rhs )
+  noexcept
+{
+  return lhs = static_cast<hash_t>(static_cast<std::size_t>(lhs) ^ static_cast<std::size_t>(rhs));
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename IntT,
+         typename = std::enable_if_t<std::is_integral<IntT>::value>>
+inline bit::stl::hash_t& bit::stl::operator<<=( hash_t& lhs, IntT rhs )
+  noexcept
+{
+  return lhs = static_cast<hash_t>( static_cast<std::size_t>(lhs) << rhs );
+}
+
+template<typename IntT,
+         typename = std::enable_if_t<std::is_integral<IntT>::value>>
+inline bit::stl::hash_t& bit::stl::operator>>=( hash_t& lhs, IntT rhs )
+  noexcept
+{
+  return lhs = static_cast<hash_t>( static_cast<std::size_t>(lhs) >> rhs );
+}
+
+//-----------------------------------------------------------------------------
+// Binary Operators
+//-----------------------------------------------------------------------------
+
+inline constexpr bit::stl::hash_t bit::stl::operator+( hash_t lhs, hash_t rhs )
+  noexcept
+{
+  return static_cast<hash_t>( static_cast<std::size_t>(lhs) + static_cast<std::size_t>(rhs) );
+}
+
+inline constexpr bit::stl::hash_t bit::stl::operator-( hash_t lhs, hash_t rhs )
+  noexcept
+{
+  return static_cast<hash_t>( static_cast<std::size_t>(lhs) - static_cast<std::size_t>(rhs) );
+}
+
+inline constexpr bit::stl::hash_t bit::stl::operator*( hash_t lhs, hash_t rhs )
+  noexcept
+{
+  return static_cast<hash_t>( static_cast<std::size_t>(lhs) * static_cast<std::size_t>(rhs) );
+}
+
+inline constexpr bit::stl::hash_t bit::stl::operator/( hash_t lhs, hash_t rhs )
+  noexcept
+{
+  return static_cast<hash_t>( static_cast<std::size_t>(lhs) / static_cast<std::size_t>(rhs) );
+}
+
+inline constexpr bit::stl::hash_t bit::stl::operator%( hash_t lhs, hash_t rhs )
+  noexcept
+{
+  return static_cast<hash_t>( static_cast<std::size_t>(lhs) % static_cast<std::size_t>(rhs) );
+}
+
+//-----------------------------------------------------------------------------
+
+inline constexpr bit::stl::hash_t bit::stl::operator&( hash_t lhs, hash_t rhs )
+  noexcept
+{
+  return static_cast<hash_t>( static_cast<std::size_t>(lhs) & static_cast<std::size_t>(rhs) );
+}
+
+inline constexpr bit::stl::hash_t bit::stl::operator|( hash_t lhs, hash_t rhs )
+  noexcept
+{
+  return static_cast<hash_t>( static_cast<std::size_t>(lhs) | static_cast<std::size_t>(rhs) );
+}
+
+inline constexpr bit::stl::hash_t bit::stl::operator^( hash_t lhs, hash_t rhs )
+  noexcept
+{
+  return static_cast<hash_t>( static_cast<std::size_t>(lhs) ^ static_cast<std::size_t>(rhs) );
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename IntT,
+         typename = std::enable_if_t<std::is_integral<IntT>::value>>
+inline constexpr bit::stl::hash_t bit::stl::operator<<( hash_t lhs, IntT rhs )
+  noexcept
+{
+  return static_cast<hash_t>( static_cast<std::size_t>(lhs) << rhs );
+}
+
+template<typename IntT,
+         typename = std::enable_if_t<std::is_integral<IntT>::value>>
+inline constexpr bit::stl::hash_t bit::stl::operator>>( hash_t lhs, IntT rhs )
+  noexcept
+{
+  return static_cast<hash_t>( static_cast<std::size_t>(lhs) >> rhs );
+}
+
+//-----------------------------------------------------------------------------
+// Hashing Functions
+//-----------------------------------------------------------------------------
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( std::nullptr_t )
+  noexcept
+{
+  return static_cast<hash_t>(0);
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( bool val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( char val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( signed char val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( unsigned char val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( wchar_t val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( char16_t val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( char32_t val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( short val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( unsigned short val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( int val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( unsigned int val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( long val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( unsigned long val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( long long val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline constexpr bit::stl::hash_t bit::stl::hash_value( unsigned long long val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline bit::stl::hash_t bit::stl::hash_value( float val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline bit::stl::hash_t bit::stl::hash_value( double val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
+
+inline bit::stl::hash_t bit::stl::hash_value( long double val )
+  noexcept
+{
+  return static_cast<hash_t>(static_cast<std::size_t>(val));
+}
 
 template<typename T>
-inline constexpr void
-  bit::stl::hash_combine( std::size_t& seed, const T& v )
-{
-  seed ^= hash_value(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-template<typename InputIterator>
-inline constexpr std::size_t
-  bit::stl::hash_range( InputIterator first, InputIterator last )
-{
-  auto hash = std::size_t{0};
-  hash_range( hash, first, last );
-  return hash;
-}
-
-template<typename InputIterator>
-inline constexpr void
-  bit::stl::hash_range( std::size_t& seed,
-                        InputIterator first,
-                        InputIterator last )
-{
-  if(first==last) return;
-
-  for(; first != last; ++first )
-  {
-    hash_combine(seed,*first);
-  }
-}
-
-//-----------------------------------------------------------------------------
-
-inline constexpr std::size_t  bit::stl::hash_value( std::nullptr_t )
+inline bit::stl::hash_t bit::stl::hash_value( T* val )
   noexcept
 {
-  return std::size_t{0};
+  return static_cast<hash_t>(reinterpret_cast<std::size_t>(val));
 }
 
-inline constexpr std::size_t bit::stl::hash_value( bool val )
+template<typename R, typename...Args>
+inline bit::stl::hash_t bit::stl::hash_value( R(*val)(Args...) )
   noexcept
 {
-  return static_cast<std::size_t>(val);
+  return hash_raw( val );
 }
 
-inline constexpr std::size_t bit::stl::hash_value( char val )
+template<typename R, typename C, typename...Args>
+bit::stl::hash_t bit::stl::hash_value( R(C::*val)(Args...) )
   noexcept
 {
-  return static_cast<std::size_t>(val);
+  return hash_raw( val );
 }
 
-inline constexpr std::size_t bit::stl::hash_value( signed char val )
+template<typename R, typename C, typename...Args>
+bit::stl::hash_t bit::stl::hash_value( R(C::*val)(Args...) const )
   noexcept
 {
-  return static_cast<std::size_t>(val);
+  return hash_raw( val );
 }
 
-inline constexpr std::size_t bit::stl::hash_value( unsigned char val )
+template<typename R, typename C>
+inline bit::stl::hash_t bit::stl::hash_value( R C::* val )
   noexcept
 {
-  return static_cast<std::size_t>(val);
+  return hash_raw( val );
 }
 
-inline constexpr std::size_t bit::stl::hash_value( wchar_t val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline constexpr std::size_t bit::stl::hash_value( char16_t val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline constexpr std::size_t bit::stl::hash_value( char32_t val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline constexpr std::size_t bit::stl::hash_value( short val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline constexpr std::size_t bit::stl::hash_value( unsigned short val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline constexpr std::size_t bit::stl::hash_value( int val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline constexpr std::size_t bit::stl::hash_value( unsigned int val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline constexpr std::size_t bit::stl::hash_value( long val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline constexpr std::size_t bit::stl::hash_value( unsigned long val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline constexpr std::size_t bit::stl::hash_value( long long val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline constexpr std::size_t bit::stl::hash_value( unsigned long long val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline std::size_t bit::stl::hash_value( float val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline std::size_t bit::stl::hash_value( double val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-inline std::size_t bit::stl::hash_value( long double val )
-  noexcept
-{
-  return static_cast<std::size_t>(val);
-}
-
-template<typename T>
-inline std::size_t bit::stl::hash_value( T* const& val )
-  noexcept
-{
-  return reinterpret_cast<std::size_t>(val);
-}
-
-template<typename T, unsigned N>
-inline constexpr std::size_t bit::stl::hash_value( T (&val)[N] )
+template<typename T, std::size_t N>
+inline constexpr bit::stl::hash_t bit::stl::hash_value( T (&val)[N] )
 {
   return hash_range( std::begin(val), std::end(val) );
 }
 
-template<typename T, unsigned N>
-inline constexpr std::size_t bit::stl::hash_value( const T (&val)[N] )
+template<typename T, std::size_t N>
+inline constexpr bit::stl::hash_t bit::stl::hash_value( const T (&val)[N] )
 {
   return hash_range( std::begin(val), std::end(val) );
 }
 
 template<typename Enum, typename>
-inline constexpr std::size_t bit::stl::hash_value( Enum val )
+inline constexpr bit::stl::hash_t bit::stl::hash_value( Enum val )
   noexcept
 {
   return hash_value( static_cast<std::underlying_type_t<Enum>>(val) );
 }
 
-template<typename Container, typename>
-inline constexpr std::size_t
-  bit::stl::hash_value( const Container& container )
+//-----------------------------------------------------------------------------
+// Composite Hashing Functions
+//-----------------------------------------------------------------------------
+
+inline constexpr bit::stl::hash_t bit::stl::hash_combine( hash_t seed,
+                                                          hash_t hash )
   noexcept
 {
-  return hash_range( container.begin(), container.end() );
+  return (seed ^ hash) + static_cast<hash_t>(0x9e3779b9) + (seed << 6) + (seed >> 2);
 }
 
-template<typename T, typename U>
-inline constexpr std::size_t
-  bit::stl::hash_value( const std::pair<T,U>& pair )
+template<typename...Hashes, typename>
+inline constexpr bit::stl::hash_t bit::stl::hash_combine( hash_t seed,
+                                                          hash_t hash0,
+                                                          Hashes...hashes )
+  noexcept
 {
-  auto seed = hash_value( pair.first );
-  hash_combine( seed, pair.second );
-
-  return seed;
-}
-
-namespace bit { namespace stl { namespace detail {
-
-  template<typename...Args, std::size_t...Idxs>
-  inline constexpr void hash_tuple_combine( std::size_t& seed,
-                                            const std::tuple<Args...>& tuple,
-                                            std::index_sequence<Idxs...> )
-  {
-    hash_tuple_combine( seed, std::get<Idxs>(tuple)... );
-  }
-
-  template<typename Arg0, typename...Args>
-  inline constexpr void hash_tuple_combine( std::size_t& seed,
-                                            const Arg0& arg0,
-                                            const Args&...args )
-  {
-    hash_combine( seed, arg0 );
-    hash_tuple_combine( seed, args... );
-  }
-
-  template<typename Arg0>
-  inline constexpr void hash_tuple_combine( std::size_t& seed,
-                                            const Arg0& arg0 )
-  {
-    hash_combine( seed, arg0 );
-  }
-
-} } } // namespace bit::stl::detail
-
-
-template<typename...Args>
-inline constexpr std::size_t
-  bit::stl::hash_value( const std::tuple<Args...>& tuple )
-{
-  auto seed = std::size_t{0};
-  detail::hash_tuple_combine( seed, tuple, std::index_sequence_for<Args...>() );
-
-  return seed;
-}
-
-template<typename T>
-inline constexpr std::size_t
-  bit::stl::hash_value( const std::initializer_list<T>& il )
-{
-  return hash_range( il.begin(), il.end() );
+  return hash_combine( hash_combine(seed,hash0), hashes... );
 }
 
 //-----------------------------------------------------------------------------
 
+template<typename InputIterator>
+inline constexpr bit::stl::hash_t bit::stl::hash_range( InputIterator first,
+                                                        InputIterator last )
+  noexcept( bit::stl::is_nothrow_hashable<std::decay_t<decltype(std::declval<InputIterator>())>>::value )
+{
+  auto seed = static_cast<hash_t>(0);
+  for(; first != last; ++first ) {
+    seed = hash_combine( seed, hash_value(*first) );
+  }
+  return seed;
+}
+
+//-----------------------------------------------------------------------------
+
+namespace bit { namespace stl { namespace detail {
+
+  template<typename Arg0, typename Arg1, typename...Args>
+  ::bit::stl::hash_t hash_values_impl( Arg0&& arg0, Arg1&& arg1, Args&&...args )
+  {
+    using ::bit::stl::hash_value;
+
+    return hash_combine( hash_value( std::forward<Arg0>(arg0) ),
+                         hash_value( std::forward<Arg1>(arg1) ),
+                         hash_value( std::forward<Args>(args) )... );
+  }
+
+  template<typename Arg0>
+  ::bit::stl::hash_t hash_values_impl( Arg0&& arg0 )
+  {
+    using ::bit::stl::hash_value;
+
+    return hash_value( std::forward<Arg0>(arg0) );
+  }
+
+} } } // namespace bit::stl::detail
+
+template<typename...Args>
+inline constexpr bit::stl::hash_t bit::stl::hash_values( Args&&...args )
+{
+  return detail::hash_values_impl( std::forward<Args>(args)... );
+}
+
+//-----------------------------------------------------------------------------
+
+namespace bit { namespace stl { namespace detail {
+
+      template<std::size_t> constexpr std::size_t fnv1_prime();
+      template<std::size_t> constexpr std::size_t fnv1_offset();
+
+      template<> constexpr std::size_t fnv1_prime<4>(){ return 16777619ul; }
+      template<> constexpr std::size_t fnv1_prime<8>(){ return 1099511628211ull; }
+
+      template<> constexpr std::size_t fnv1_offset<4>(){ return 2166136261ul; }
+      template<> constexpr std::size_t fnv1_offset<8>(){ return 14695981039346656037ull; }
+
+      template<typename CharT>
+      constexpr hash_t string_hash( const CharT* str, std::size_t count ) noexcept;
+
+} } } // namespace bit::stl::detail
+
+template<typename CharT>
+inline constexpr bit::stl::hash_t
+  bit::stl::hash_string_segment( const CharT* str, std::size_t count )
+  noexcept
+{
+  constexpr auto offset = detail::fnv1_offset<sizeof(std::size_t)>();
+  constexpr auto prime  = detail::fnv1_prime<sizeof(std::size_t)>();
+
+  auto result = offset;
+
+  while (count--) {
+    result ^= static_cast<std::size_t>(*(str++));
+    result *= prime;
+  }
+
+  return static_cast<hash_t>(result);
+}
+
+template<typename T>
+inline bit::stl::hash_t bit::stl::hash_raw( const T& data )
+  noexcept
+{
+  using byte_t = unsigned char;
+  auto ptr = reinterpret_cast<const byte_t*>(data);
+
+  return hash_string_segment( ptr, sizeof(T) );
+}
+
+//=============================================================================
+// class hash
+//=============================================================================
+
 template<typename Key>
-inline constexpr std::size_t
+inline constexpr bit::stl::hash_t
   bit::stl::hash<Key>::operator()( const Key& val )
 {
   return hash_value( val );

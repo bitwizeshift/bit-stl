@@ -37,6 +37,8 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
+#include "hash.hpp" // hash_t
+
 #include <type_traits>
 
 namespace bit {
@@ -254,6 +256,17 @@ namespace bit {
              typename=std::enable_if_t<std::is_integral<U>::value>>
     constexpr integral_type<T,Tag>
       operator>>( const integral_type<T,Tag>& lhs, U rhs ) noexcept;
+
+    //-------------------------------------------------------------------------
+    // Utilities
+    //-------------------------------------------------------------------------
+
+    /// \brief Hashes this integral value
+    ///
+    /// \param val the value to hash
+    /// \return the hashed value
+    template<typename T, typename Tag>
+    hash_t hash_value( const integral_type<T,Tag>& val ) noexcept;
 
   } // namespace stl
 } // namespace bit

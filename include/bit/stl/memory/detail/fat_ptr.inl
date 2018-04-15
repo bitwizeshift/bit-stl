@@ -217,13 +217,10 @@ void bit::stl::swap( fat_ptr<T>& lhs, fat_ptr<T>& rhs )
 }
 
 template<typename T>
-inline std::size_t bit::stl::hash_value( const fat_ptr<T>& val )
+inline bit::stl::hash_t bit::stl::hash_value( const fat_ptr<T>& val )
   noexcept
 {
-  auto hash = hash_value( val.get() );
-  hash_combine( hash,val.size() );
-
-  return hash;
+  return hash_combine( hash_value( val.get() ), val.size() );
 }
 
 //----------------------------------------------------------------------------
