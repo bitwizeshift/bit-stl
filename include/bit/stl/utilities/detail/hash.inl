@@ -342,7 +342,7 @@ inline constexpr bit::stl::hash_t bit::stl::hash_combine( hash_t seed,
 template<typename InputIterator>
 inline constexpr bit::stl::hash_t bit::stl::hash_range( InputIterator first,
                                                         InputIterator last )
-  noexcept( bit::stl::is_nothrow_hashable<std::decay_t<decltype(std::declval<InputIterator>())>>::value )
+  noexcept( is_nothrow_hashable<typename std::iterator_traits<InputIterator>::value_type>::value )
 {
   auto seed = static_cast<hash_t>(0);
   for(; first != last; ++first ) {

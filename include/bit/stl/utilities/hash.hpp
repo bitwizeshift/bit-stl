@@ -41,8 +41,9 @@
 #include "../traits/composition/conjunction.hpp"
 
 #include <cstddef>     // std::size_t
-#include <utility>     // std::forward
+#include <iterator>    // std::iterator_traits
 #include <type_traits> // std::underlying_type_t, std::enable_if, etc
+#include <utility>     // std::forward
 
 namespace bit {
   namespace stl {
@@ -368,7 +369,7 @@ namespace bit {
     /// \return the hashed value
     template<typename InputIterator>
     constexpr hash_t hash_range( InputIterator first, InputIterator last )
-      noexcept( is_nothrow_hashable<std::decay_t<decltype(std::declval<InputIterator>())>>::value );
+      noexcept( is_nothrow_hashable<typename std::iterator_traits<InputIterator>::value_type>::value );
 
     //-------------------------------------------------------------------------
 

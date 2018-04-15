@@ -677,7 +677,7 @@ template<typename T>
 inline bit::stl::hash_t bit::stl::hash_value( const exclusive_ptr<T>& val )
   noexcept
 {
-  return bit::stl::hash_t{ reinterpret_cast<std::uintptr_t>( val.get() ) };
+  return static_cast<hash_t>(reinterpret_cast<std::uintptr_t>( val.get() ));
 }
 
 //-----------------------------------------------------------------------------
