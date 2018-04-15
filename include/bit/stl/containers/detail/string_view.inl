@@ -700,11 +700,11 @@ constexpr const typename bit::stl::basic_zstring_view<CharT,Traits>::value_type*
 //----------------------------------------------------------------------------
 
 template<typename CharT, typename Traits>
-inline constexpr std::size_t
+inline constexpr bit::stl::hash_t
   bit::stl::hash_value( const basic_string_view<CharT,Traits>& str )
   noexcept
 {
-  return detail::string_hash( str.data(), str.size() );
+  return hash_string_segment( str.data(), str.size() );
 }
 
 //----------------------------------------------------------------------------

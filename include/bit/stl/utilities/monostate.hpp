@@ -36,6 +36,8 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
+#include "hash.hpp" // hash_t
+
 #include <cstddef> // std::size_t
 
 namespace bit {
@@ -68,8 +70,8 @@ namespace bit {
 
     /// \brief Hashes the monostate
     ///
-    /// \return 9
-    constexpr std::size_t hash_value( const monostate& );
+    /// \return 0
+    constexpr hash_t hash_value( const monostate& );
 
   } // namespace stl
 } // namespace bit

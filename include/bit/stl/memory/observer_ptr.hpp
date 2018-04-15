@@ -37,6 +37,8 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
+#include "../utilities/hash.hpp" // hash_value, hash_t
+
 #include <cstddef>     // std::nullptr_t, std::size_t
 #include <type_traits> // std::true_type, std::declval
 
@@ -346,7 +348,7 @@ namespace bit {
     /// \param val the value to hash
     /// \return the hash of the underlying pointer
     template<typename T>
-    std::size_t hash_value( const observer_ptr<T>& val ) noexcept;
+    hash_t hash_value( const observer_ptr<T>& val ) noexcept;
 
     //------------------------------------------------------------------------
 
@@ -384,11 +386,12 @@ namespace bit {
              typename = std::enable_if_t<detail::is_ptr_observable<Pointer>::value>>
     constexpr observer_ptr<T> make_observer( const Pointer& ptr ) noexcept;
 
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Casts
-    //------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     inline namespace casts {
+
       /// \brief Creates a new instance of observer_ptr whose stored pointer
       ///        is the result of a static_cast
       ///

@@ -40,6 +40,8 @@
 #include "string.hpp"
 #include "string_view.hpp"
 
+#include "../utilities/hash.hpp" // hash_t
+
 namespace bit {
   namespace stl {
 
@@ -69,7 +71,7 @@ namespace bit {
       using char_type   = CharT;
       using traits_type = Traits;
       using size_type   = std::size_t;
-      using hash_type   = std::size_t;
+      using hash_type   = hash_t;
 
       struct const_char_wrapper
       {
@@ -207,7 +209,7 @@ namespace bit {
     /// \param str the basic_hashed_string_view to retrieve the hash from
     /// \return the hash of the string
     template<typename CharT, typename Traits>
-    constexpr std::size_t hash_value( const basic_hashed_string_view<CharT,Traits>& str )
+    constexpr hash_t hash_value( const basic_hashed_string_view<CharT,Traits>& str )
       noexcept;
 
     //------------------------------------------------------------------------

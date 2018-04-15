@@ -297,4 +297,12 @@ inline constexpr bit::stl::integral_type<T,Tag>
   return integral_type<T,Tag>(lhs.value() >> rhs);
 }
 
+template<typename T, typename Tag>
+inline bit::stl::hash_t bit::stl::hash_value( const integral_type<T,Tag>& val )
+  noexcept
+{
+  return hash_value( val.value() );
+}
+
+
 #endif /* BIT_STL_UTILITIES_DETAIL_INTEGRAL_TYPE_INL */

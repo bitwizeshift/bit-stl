@@ -36,7 +36,7 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
-#include "detail/string_hash.hpp"
+#include "../utilities/hash.hpp"
 
 #include <string> // std::char_traits
 #include <locale> // std::toupper<CharT>
@@ -77,7 +77,7 @@ namespace bit {
     /// \param str the string to hash
     /// \return the hash
     template<typename CharT, typename Traits, typename Allocator>
-    std::size_t hash_value( const std::basic_string<CharT,Traits,Allocator>& str ) noexcept;
+    hash_t hash_value( const std::basic_string<CharT,Traits,Allocator>& str ) noexcept;
 
   } // namespace stl
 } // namespace bit

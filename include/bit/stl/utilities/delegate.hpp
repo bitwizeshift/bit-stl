@@ -37,8 +37,9 @@
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "assert.hpp"
-#include "types.hpp"  // function_t, member_function_t
+#include "hash.hpp"   // hash_t
 #include "invoke.hpp" // is_invocable
+#include "types.hpp"  // function_t, member_function_t
 
 #include <type_traits> // std::enable_if
 #include <utility>     // std::forward, std::move, std::pair
@@ -199,24 +200,42 @@ namespace bit {
       stub_type m_delegate_stub; ///< The internal stub for this delegate
 
       template<typename Fn>
-      friend bool operator==(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+      friend bool operator==(const delegate<Fn>& lhs, const delegate<Fn>& rhs) noexcept;
 
       template<typename Fn>
-      friend bool operator<(const delegate& lhs, const delegate& rhs);
+      friend bool operator<(const delegate& lhs, const delegate& rhs) noexcept;
+
+      template<typename Fn>
+      friend hash_t hash_value( const delegate<Fn>& val ) noexcept;
     };
 
+    //-------------------------------------------------------------------------
+    // Comparison
+    //-------------------------------------------------------------------------
+
     template<typename Fn>
-    bool operator==(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+    bool operator==(const delegate<Fn>& lhs, const delegate<Fn>& rhs) noexcept;
     template<typename Fn>
-    bool operator!=(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+    bool operator!=(const delegate<Fn>& lhs, const delegate<Fn>& rhs) noexcept;
     template<typename Fn>
-    bool operator<(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+    bool operator<(const delegate<Fn>& lhs, const delegate<Fn>& rhs) noexcept;
     template<typename Fn>
-    bool operator>(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+    bool operator>(const delegate<Fn>& lhs, const delegate<Fn>& rhs) noexcept;
     template<typename Fn>
-    bool operator<=(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+    bool operator<=(const delegate<Fn>& lhs, const delegate<Fn>& rhs) noexcept;
     template<typename Fn>
-    bool operator>=(const delegate<Fn>& lhs, const delegate<Fn>& rhs);
+    bool operator>=(const delegate<Fn>& lhs, const delegate<Fn>& rhs) noexcept;
+
+    //-------------------------------------------------------------------------
+    // Utilities
+    //-------------------------------------------------------------------------
+
+    /// \brief Hashes the delegate \p fn
+    ///
+    /// \param fn the delegate to hash
+    /// \return the hash result
+    template<typename Fn>
+    hash_t hash_value( const delegate<Fn>& fn ) noexcept;
 
 #if __cplusplus >= 201703L
 

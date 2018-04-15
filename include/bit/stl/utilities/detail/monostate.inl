@@ -45,9 +45,9 @@ inline constexpr bool bit::stl::operator!=(monostate, monostate)
 // Utilities
 //-----------------------------------------------------------------------------
 
-inline constexpr std::size_t bit::stl::hash_value( const monostate& )
+inline constexpr bit::stl::hash_t bit::stl::hash_value( const monostate& )
 {
-  return 0;
+  return static_cast<hash_t>(0);
 }
 
 #endif /* BIT_STL_UTILITIES_DETAIL_MONOSTATE_INL */

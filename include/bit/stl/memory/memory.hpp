@@ -88,24 +88,6 @@ namespace bit {
     void* from_address( std::uintptr_t address ) noexcept;
 
     //------------------------------------------------------------------------
-    // Hashing
-    //------------------------------------------------------------------------
-
-    /// \brief Hashes a unique_ptr
-    ///
-    /// \param val the ptr to hash
-    /// \return the hash of the unique_ptr
-    template<typename T, typename Deleter>
-    std::size_t hash_value( const std::unique_ptr<T,Deleter>& val ) noexcept;
-
-    /// \brief Hashes a shared_ptr
-    ///
-    /// \param val the ptr to hash
-    /// \return the hash of the unique_ptr
-    template<typename T>
-    std::size_t hash_value( const std::shared_ptr<T>& val ) noexcept;
-
-    //------------------------------------------------------------------------
     // Comparisons
     //------------------------------------------------------------------------
 

@@ -674,10 +674,10 @@ inline void bit::stl::swap( exclusive_ptr<T>& lhs, exclusive_ptr<T>& rhs )
 //-----------------------------------------------------------------------------
 
 template<typename T>
-inline std::size_t bit::stl::hash_value( const exclusive_ptr<T>& val )
+inline bit::stl::hash_t bit::stl::hash_value( const exclusive_ptr<T>& val )
   noexcept
 {
-  return static_cast<std::size_t>( reinterpret_cast<std::uintptr_t>( val.get() ) );
+  return static_cast<hash_t>(reinterpret_cast<std::uintptr_t>( val.get() ));
 }
 
 //-----------------------------------------------------------------------------

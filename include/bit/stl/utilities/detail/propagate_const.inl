@@ -177,7 +177,7 @@ inline constexpr void bit::stl::swap( propagate_const<T>& lhs,
 }
 
 template<typename T>
-inline constexpr std::size_t bit::stl::hash_value( const propagate_const<T>& v )
+inline constexpr bit::stl::hash_t bit::stl::hash_value( const propagate_const<T>& v )
   noexcept
 {
   return hash_value( v.m_pointer );

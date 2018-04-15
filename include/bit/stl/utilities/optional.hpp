@@ -36,8 +36,9 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
-#include "utility.hpp"
+#include "hash.hpp"     // hash_t
 #include "in_place.hpp" // in_place_t
+#include "utility.hpp"
 
 #include "../traits/composition/conjunction.hpp"
 #include "../traits/composition/disjunction.hpp"
@@ -654,7 +655,7 @@ namespace bit {
     /// \param str the optional to retrieve the hash from
     /// \return the hash of the string
     template<typename T>
-    constexpr std::size_t hash_value( const optional<T>& s ) noexcept;
+    constexpr hash_t hash_value( const optional<T>& s ) noexcept;
   } // namespace stl
 } // namespace bit
 
