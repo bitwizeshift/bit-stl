@@ -61,16 +61,14 @@ inline bit::stl::hash_t& bit::stl::operator^=( hash_t& lhs, hash_t rhs )
 
 //-----------------------------------------------------------------------------
 
-template<typename IntT,
-         typename = std::enable_if_t<std::is_integral<IntT>::value>>
+template<typename IntT, typename>
 inline bit::stl::hash_t& bit::stl::operator<<=( hash_t& lhs, IntT rhs )
   noexcept
 {
   return lhs = static_cast<hash_t>( static_cast<std::size_t>(lhs) << rhs );
 }
 
-template<typename IntT,
-         typename = std::enable_if_t<std::is_integral<IntT>::value>>
+template<typename IntT, typename>
 inline bit::stl::hash_t& bit::stl::operator>>=( hash_t& lhs, IntT rhs )
   noexcept
 {
@@ -133,16 +131,14 @@ inline constexpr bit::stl::hash_t bit::stl::operator^( hash_t lhs, hash_t rhs )
 
 //-----------------------------------------------------------------------------
 
-template<typename IntT,
-         typename = std::enable_if_t<std::is_integral<IntT>::value>>
+template<typename IntT, typename>
 inline constexpr bit::stl::hash_t bit::stl::operator<<( hash_t lhs, IntT rhs )
   noexcept
 {
   return static_cast<hash_t>( static_cast<std::size_t>(lhs) << rhs );
 }
 
-template<typename IntT,
-         typename = std::enable_if_t<std::is_integral<IntT>::value>>
+template<typename IntT, typename>
 inline constexpr bit::stl::hash_t bit::stl::operator>>( hash_t lhs, IntT rhs )
   noexcept
 {
