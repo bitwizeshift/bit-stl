@@ -37,6 +37,8 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
+#include "hash.hpp" // hash_t
+
 #include "../traits/composition/bool_constant.hpp"
 #include "../traits/properties/is_explicitly_convertible.hpp"
 
@@ -249,7 +251,7 @@ namespace bit {
       T m_pointer;
 
       template<typename U>
-      friend constexpr std::size_t hash_value( const propagate_const<U>& v ) noexcept;
+      friend constexpr hash_t hash_value( const propagate_const<U>& v ) noexcept;
     };
 
     //=========================================================================
@@ -273,7 +275,7 @@ namespace bit {
     /// \param v the value to hash
     /// \return the hashed value
     template<typename T>
-    constexpr std::size_t hash_value( const propagate_const<T>& v ) noexcept;
+    constexpr hash_t hash_value( const propagate_const<T>& v ) noexcept;
   } // namespace stl
 } // namespace bit
 

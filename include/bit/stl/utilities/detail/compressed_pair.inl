@@ -258,13 +258,10 @@ inline const T2&& bit::stl::compressed_pair<T1,T2>::get( size_constant<1> )
 //-----------------------------------------------------------------------------
 
 template<typename T, typename U>
-inline constexpr std::size_t
+inline constexpr bit::stl::hash_t
   bit::stl::hash_value( const compressed_pair<T,U>& pair )
 {
-  auto seed = hash_value( pair.first );
-  hash_combine( seed, pair.second );
-
-  return seed;
+  return hash_values( pair.first, pair.second );
 }
 
 template<typename T1, typename T2>

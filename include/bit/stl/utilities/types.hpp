@@ -91,7 +91,6 @@ namespace bit {
     using size_t  = std::size_t;    ///< Type representing size of objects
     using align_t = std::size_t;    ///< Type representing alignment of an object
     using index_t = std::ptrdiff_t; ///< Type representing index of objects
-    using hash_t  = std::size_t;    ///< Type used for hashes
 
     /// \brief An alias for lvalue-references to an array of N entries
     template<typename T, std::size_t N>

@@ -43,26 +43,6 @@ inline void* bit::stl::from_address( std::uintptr_t address )
   return reinterpret_cast<void*>(address);
 }
 
-//------------------------------------------------------------------------
-// Hashing
-//------------------------------------------------------------------------
-
-template<typename T, typename Deleter>
-inline std::size_t
-  bit::stl::hash_value( const std::unique_ptr<T,Deleter>& val )
-  noexcept
-{
-  return static_cast<std::size_t>( reinterpret_cast<std::uintptr_t>( val.get() ) );
-}
-
-template<typename T>
-inline std::size_t
-  bit::stl::hash_value( const std::shared_ptr<T>& val )
-  noexcept
-{
-  return static_cast<std::size_t>( reinterpret_cast<std::uintptr_t>( val.get() ) );
-}
-
 template<typename T, typename U>
 inline constexpr bool bit::stl::deep_compare( const T& lhs, const U& rhs )
   noexcept
@@ -71,20 +51,20 @@ inline constexpr bool bit::stl::deep_compare( const T& lhs, const U& rhs )
 }
 
 template<typename T>
-inline constexpr bool deep_compare( std::nullptr_t, const T& rhs )
+inline constexpr bool bit::stl::deep_compare( std::nullptr_t, const T& rhs )
   noexcept
 {
   return nullptr == rhs;
 }
 
 template<typename T>
-inline constexpr bool deep_compare( const T& lhs, std::nullptr_t )
+inline constexpr bool bit::stl::deep_compare( const T& lhs, std::nullptr_t )
   noexcept
 {
   return lhs == nullptr;
 }
 
-inline constexpr bool deep_compare( std::nullptr_t, std::nullptr_t )
+inline constexpr bool bit::stl::deep_compare( std::nullptr_t, std::nullptr_t )
   noexcept
 {
   return true;

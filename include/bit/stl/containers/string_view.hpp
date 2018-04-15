@@ -38,8 +38,8 @@
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "string.hpp"
-#include "detail/string_hash.hpp"
 #include "../utilities/compiler_traits.hpp"
+#include "../utilities/hash.hpp"            // hash_t
 #include "../iterators/tagged_iterator.hpp" // tagged_iterator
 
 #include <algorithm>
@@ -780,7 +780,7 @@ namespace bit {
     /// \param str the basic_ string_view to retrieve the hash from
     /// \return the hash of the string
     template<typename CharT, typename Traits>
-    constexpr std::size_t hash_value( const basic_string_view<CharT,Traits>& str )
+    constexpr hash_t hash_value( const basic_string_view<CharT,Traits>& str )
       noexcept;
 
     //-------------------------------------------------------------------------

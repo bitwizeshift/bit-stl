@@ -346,11 +346,13 @@ bit::stl::exclusive_ptr<T>&
   bit::stl::exclusive_ptr<T>::operator=( exclusive_ptr&& other )
   noexcept
 {
+  if( m_control_block ) m_control_block->destroy();
+
   m_control_block = other.m_control_block;
-  m_ptr      = other.m_ptr;
+  m_ptr           = other.m_ptr;
 
   other.m_control_block = nullptr;
-  other.m_ptr      = nullptr;
+  other.m_ptr           = nullptr;
 
   return (*this);
 }
@@ -361,11 +363,13 @@ bit::stl::exclusive_ptr<T>&
   bit::stl::exclusive_ptr<T>::operator=( exclusive_ptr<Y>&& other )
   noexcept
 {
+  if( m_control_block ) m_control_block->destroy();
+
   m_control_block = other.m_control_block;
-  m_ptr      = other.m_ptr;
+  m_ptr           = other.m_ptr;
 
   other.m_control_block = nullptr;
-  other.m_ptr      = nullptr;
+  other.m_ptr           = nullptr;
 
   return (*this);
 }
@@ -670,10 +674,10 @@ inline void bit::stl::swap( exclusive_ptr<T>& lhs, exclusive_ptr<T>& rhs )
 //-----------------------------------------------------------------------------
 
 template<typename T>
-inline std::size_t bit::stl::hash_value( const exclusive_ptr<T>& val )
+inline bit::stl::hash_t bit::stl::hash_value( const exclusive_ptr<T>& val )
   noexcept
 {
-  return static_cast<std::size_t>( reinterpret_cast<std::uintptr_t>( val.get() ) );
+  return static_cast<hash_t>(reinterpret_cast<std::uintptr_t>( val.get() ));
 }
 
 //-----------------------------------------------------------------------------

@@ -70,10 +70,11 @@ inline constexpr const CharT*
 //----------------------------------------------------------------------------
 
 template<typename CharT, typename Traits, typename Allocator>
-std::size_t bit::stl::hash_value( const std::basic_string<CharT,Traits,Allocator>& str )
+bit::stl::hash_t
+  bit::stl::hash_value( const std::basic_string<CharT,Traits,Allocator>& str )
   noexcept
 {
-  return detail::string_hash( str.data(), str.size() );
+  return hash_string_segment( str.data(), str.size() );
 }
 
 #endif /* BIT_STL_CONTAINERS_DETAIL_STRING_INL */

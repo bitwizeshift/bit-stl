@@ -188,6 +188,7 @@ set(headers
   include/bit/stl/utilities/expected.hpp
   include/bit/stl/utilities/hash.hpp
   include/bit/stl/utilities/in_place.hpp
+  include/bit/stl/utilities/integral_type.hpp
   include/bit/stl/utilities/invoke.hpp
   include/bit/stl/utilities/lazy.hpp
   include/bit/stl/utilities/macros.hpp
@@ -205,6 +206,9 @@ set(headers
   include/bit/stl/utilities/utility.hpp
   include/bit/stl/utilities/uuid.hpp
   include/bit/stl/utilities/variant.hpp
+
+  # numeric
+  include/bit/stl/numeric/numeric.hpp
 
   # containers
   include/bit/stl/containers/array.hpp
@@ -244,9 +248,73 @@ set(headers
   include/bit/stl/memory/offset_ptr.hpp
   include/bit/stl/memory/owner.hpp
   include/bit/stl/memory/scoped_ptr.hpp
+)
 
-  # numeric
-  include/bit/stl/numeric/numeric.hpp
+set(inline_headers
+  # utilities
+  include/bit/stl/utilities/detail/assert.inl
+  include/bit/stl/utilities/detail/casts.inl
+  include/bit/stl/utilities/detail/compressed_pair.inl
+  include/bit/stl/utilities/detail/compressed_tuple.inl
+  include/bit/stl/utilities/detail/delegate.inl
+  include/bit/stl/utilities/detail/dynamic_index_constant.inl
+  include/bit/stl/utilities/detail/dynamic_size_constant.inl
+  include/bit/stl/utilities/detail/enum.inl
+  include/bit/stl/utilities/detail/expected.inl
+  include/bit/stl/utilities/detail/hash.inl
+  include/bit/stl/utilities/detail/invoke.inl
+  include/bit/stl/utilities/detail/integral_type.inl
+  include/bit/stl/utilities/detail/lazy.inl
+  include/bit/stl/utilities/detail/monostate.inl
+  include/bit/stl/utilities/detail/optional.inl
+  include/bit/stl/utilities/detail/pointer_wrapper.inl
+  include/bit/stl/utilities/detail/propagate_const.inl
+  include/bit/stl/utilities/detail/scope_guard.inl
+  include/bit/stl/utilities/detail/source_location.inl
+  include/bit/stl/utilities/detail/tribool.inl
+  include/bit/stl/utilities/detail/tuple_utilities.inl
+  include/bit/stl/utilities/detail/uninitialized_storage.inl
+  include/bit/stl/utilities/detail/utility.inl
+  include/bit/stl/utilities/detail/uuid.inl
+
+  # containers
+  include/bit/stl/containers/detail/array.inl
+  include/bit/stl/containers/detail/array_view.inl
+  include/bit/stl/containers/detail/circular_array.inl
+  include/bit/stl/containers/detail/circular_buffer.inl
+  include/bit/stl/containers/detail/circular_deque.inl
+  include/bit/stl/containers/detail/circular_queue.inl
+  include/bit/stl/containers/detail/hashed_string.inl
+  include/bit/stl/containers/detail/hashed_string_view.inl
+  include/bit/stl/containers/detail/map_view.inl
+  include/bit/stl/containers/detail/set_view.inl
+  include/bit/stl/containers/detail/span.inl
+  include/bit/stl/containers/detail/string.inl
+  include/bit/stl/containers/detail/string_span.inl
+  include/bit/stl/containers/detail/string_view.inl
+
+  # iterators
+  include/bit/stl/iterators/detail/tagged_iterator.inl
+  include/bit/stl/iterators/detail/tuple_element_iterator.inl
+  include/bit/stl/iterators/detail/zip_iterator.inl
+
+  # ranges
+  include/bit/stl/ranges/detail/move_range.inl
+  include/bit/stl/ranges/detail/range.inl
+  include/bit/stl/ranges/detail/reverse_range.inl
+  include/bit/stl/ranges/detail/tuple_element_range.inl
+  include/bit/stl/ranges/detail/zip_range.inl
+
+  # memory
+  include/bit/stl/memory/detail/allocator_deleter.inl
+  include/bit/stl/memory/detail/clone_ptr.inl
+  include/bit/stl/memory/detail/exclusive_ptr.inl
+  include/bit/stl/memory/detail/fat_ptr.inl
+  include/bit/stl/memory/detail/memory.inl
+  include/bit/stl/memory/detail/observer_ptr.inl
+  include/bit/stl/memory/detail/offset_ptr.inl
+  include/bit/stl/memory/detail/scoped_ptr.inl
+  include/bit/stl/numeric/detail/numeric.inl
 )
 
 add_library(stl INTERFACE)
@@ -267,11 +335,11 @@ if( BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS )
 
   # Add containment test and alias as 'bit::stl::header_self_containment_test'
   add_header_self_containment_test(stl_header_self_containment_test ${headers})
+  target_sources(stl_header_self_containment_test PRIVATE ${inline_headers})
   add_library(bit::stl::header_self_containment_test ALIAS stl_header_self_containment_test)
 
-  if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    target_compile_options(stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
-  elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
+  if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR
+      "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
     target_compile_options(stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
   elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" )
     # TODO: Determine MSVC necessary compiler flags

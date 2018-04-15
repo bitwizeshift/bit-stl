@@ -40,6 +40,8 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
+#include "../utilities/hash.hpp"
+
 #include <cstddef>     // std::size_t
 #include <utility>     // std::swap
 #include <type_traits> // std::is_void, std::is_abstract
@@ -321,7 +323,7 @@ namespace bit {
     /// \param val the value to hash
     /// \return the hash of the fat_ptr
     template<typename T>
-    std::size_t hash_value( const fat_ptr<T>& val ) noexcept;
+    hash_t hash_value( const fat_ptr<T>& val ) noexcept;
 
     inline namespace casts {
 

@@ -624,15 +624,13 @@ inline void bit::stl::swap( optional<T>& lhs, optional<T>& rhs )
 //----------------------------------------------------------------------------
 
 template<typename T>
-inline constexpr std::size_t
-  bit::stl::hash_value( const optional<T>& s )
+inline constexpr bit::stl::hash_t bit::stl::hash_value( const optional<T>& s )
   noexcept
 {
-  if( s )
-  {
+  if( s ) {
     return hash_value( s.value() );
   }
-  return 0;
+  return static_cast<hash_t>(0);
 }
 
 #endif /* BIT_STL_UTILITIES_DETAIL_OPTIONAL_INL */

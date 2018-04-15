@@ -419,7 +419,7 @@ inline void bit::stl::swap( observer_ptr<T>& lhs, observer_ptr<T>& rhs )
 //-----------------------------------------------------------------------------
 
 template<typename T>
-inline std::size_t bit::stl::hash_value( const observer_ptr<T>& other )
+inline bit::stl::hash_t bit::stl::hash_value( const observer_ptr<T>& other )
   noexcept
 {
   return hash_value( other.get() );

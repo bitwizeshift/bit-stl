@@ -63,8 +63,8 @@ inline constexpr bit::stl::basic_hashed_string_view<CharT,Traits>::
 
 template<typename CharT, typename Traits>
 inline constexpr typename bit::stl::basic_hashed_string_view<CharT,Traits>::hash_type
-  bit::stl::basic_hashed_string_view<CharT,Traits>::
-  hash() const noexcept
+  bit::stl::basic_hashed_string_view<CharT,Traits>::hash()
+  const noexcept
 {
   return m_hash;
 }
@@ -122,7 +122,7 @@ inline void
 //----------------------------------------------------------------------------
 
 template<typename CharT, typename Traits>
-inline constexpr std::size_t
+inline constexpr bit::stl::hash_t
   bit::stl::hash_value( const basic_hashed_string_view<CharT,Traits>& str )
   noexcept
 {

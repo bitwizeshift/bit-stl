@@ -37,6 +37,7 @@
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../utilities/compressed_tuple.hpp"
+#include "../utilities/hash.hpp"
 #include "allocator_deleter.hpp"
 
 #include <cstdint>     // std::uintptr_t
@@ -451,7 +452,7 @@ namespace bit {
     /// \param val the value to hash
     /// \return the hash of the underlying pointer
     template<typename T>
-    std::size_t hash_value( const exclusive_ptr<T>& val ) noexcept;
+    hash_t hash_value( const exclusive_ptr<T>& val ) noexcept;
 
     //-------------------------------------------------------------------------
 

@@ -109,38 +109,56 @@ inline constexpr typename bit::stl::delegate<R(Types...)>::return_type
 
 template<typename Fn>
 inline bool bit::stl::operator==(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+  noexcept
 {
   return lhs.m_delegate_stub == rhs.m_delegate_stub;
 }
 
 template<typename Fn>
 inline bool bit::stl::operator!=(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+  noexcept
 {
   return !(lhs==rhs);
 }
 
 template<typename Fn>
 inline bool bit::stl::operator<(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+  noexcept
 {
   return lhs.m_delegate_stub < rhs.m_delegate_stub;
 }
 
 template<typename Fn>
 inline bool bit::stl::operator>(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+  noexcept
 {
   return (rhs < lhs);
 }
 
 template<typename Fn>
 inline bool bit::stl::operator<=(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+  noexcept
 {
   return !(rhs < lhs);
 }
 
 template<typename Fn>
 inline bool bit::stl::operator>=(const delegate<Fn>& lhs, const delegate<Fn>& rhs)
+  noexcept
 {
   return !(lhs < rhs);
 }
+
+//-----------------------------------------------------------------------------
+// Utilities
+//-----------------------------------------------------------------------------
+
+template<typename Fn>
+inline bit::stl::hash_t bit::stl::hash_value( const delegate<Fn>& fn )
+  noexcept
+{
+  return hash_values( fn.m_delegate_stub.first, fn.m_delegate_stub.second );
+}
+
 
 #endif /* BIT_STL_UTILITIES_DETAIL_DELEGATE_INL */
