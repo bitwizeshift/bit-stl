@@ -33,6 +33,10 @@
 #ifndef BIT_STL_UTILITIES_VARIANT_HPP
 #define BIT_STL_UTILITIES_VARIANT_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "in_place.hpp"
 #include "monostate.hpp"
 #include "utility.hpp"
