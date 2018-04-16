@@ -683,7 +683,7 @@ namespace bit {
       /// \param other the other variant to copy
 #ifndef BIT_DOXYGEN_BUILD
       variant( enable_overload_if_t<is_copy_constructible,const variant&> other )
-        noexcept( conjunction<std::is_nothrow_copy_constructible<Types>...>::value );
+        noexcept( bit::stl::conjunction<std::is_nothrow_copy_constructible<Types>...>::value );
       variant( disable_overload_if_t<is_copy_constructible,const variant&> other ) = delete;
 #else
       variant( const variant& other );
@@ -704,7 +704,7 @@ namespace bit {
       /// \param other the other variant to move
 #ifndef BIT_DOXYGEN_BUILD
       variant( enable_overload_if_t<is_move_constructible,variant&&> other )
-        noexcept( conjunction<std::is_nothrow_move_constructible<Types>...>::value );
+        noexcept( bit::stl::conjunction<std::is_nothrow_move_constructible<Types>...>::value );
       variant( disable_overload_if_t<is_move_constructible,variant&&> other ) = delete;
 #else
       variant( variant&& other )
@@ -739,7 +739,7 @@ namespace bit {
 #ifndef BIT_DOXYGEN_BUILD
       template<typename T, typename=std::enable_if_t<is_convertible<T>>>
       constexpr variant( T&& t )
-        noexcept( std::is_nothrow_constructible<T_j<T>,T>::value );
+        noexcept( std::is_nothrow_constructible<typename bit::stl::variant<Types...>::template T_j<T>,T>::value );
 #else
       template<typename T>
       constexpr variant( T&& t )
@@ -855,8 +855,8 @@ namespace bit {
 
 #ifndef BIT_DOXYGEN_BUILD
       variant& operator=( enable_overload_if_t<is_move_assignable,variant&&> other )
-        noexcept( conjunction<std::is_nothrow_move_constructible<Types>...,
-                              std::is_nothrow_move_assignable<Types>...>::value);
+        noexcept( bit::stl::conjunction<std::is_nothrow_move_constructible<Types>...,
+                                        std::is_nothrow_move_assignable<Types>...>::value);
       variant& operator=( disable_overload_if_t<is_move_assignable,variant&&> other ) = delete;
 #else
       variant& operator=( variant&& other );
@@ -868,8 +868,8 @@ namespace bit {
       template<typename T>
 #endif
       variant& operator=(T&& t)
-        noexcept( std::is_nothrow_assignable<T_j<T>,T>::value &&
-                  std::is_nothrow_constructible<T_j<T>,T>::value );
+        noexcept( std::is_nothrow_assignable<typename bit::stl::variant<Types...>::template T_j<T>,T>::value &&
+                  std::is_nothrow_constructible<typename bit::stl::variant<Types...>::template T_j<T>,T>::value );
 
       //----------------------------------------------------------------------
       // Observers
