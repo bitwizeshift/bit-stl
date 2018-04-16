@@ -364,7 +364,7 @@ TEST_CASE("variant::operator=( variant&& )", "[assignment]")
   SECTION("Becomes valueless by exception if move throws")
   {
     try {
-      const ::throw_on_move value;
+      const ::throw_on_move value{};
       variant = variant_type{value};
     } catch (...) {
       // ignore
