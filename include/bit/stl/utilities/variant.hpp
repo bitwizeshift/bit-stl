@@ -44,6 +44,7 @@
 #include <initializer_list> // std::initializer_list
 #include <memory>           // std::uses_allocator
 #include <exception>        // std::exception
+#include <functional>       // std::less, std::greater, std::equal_t, etc
 
 namespace bit {
   namespace stl {
