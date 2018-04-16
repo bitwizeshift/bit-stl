@@ -23,6 +23,7 @@ set(sources
       bit/stl/utilities/tribool.test.cpp
       bit/stl/utilities/expected.test.cpp
       bit/stl/utilities/scope_guard.test.cpp
+      bit/stl/utilities/variant.test.cpp
 
       # containers
       bit/stl/containers/array_view.test.cpp
