@@ -1099,7 +1099,8 @@ namespace bit {
       ///
       /// \param storage
       /// \param args
-      template<std::size_t I, std::size_t N, typename...Ts, typename...Args>
+      template<std::size_t I, std::size_t N, typename...Ts, typename...Args,
+               typename=std::enable_if_t<N!=0>>
       static variant_alternative_t<I, variant>&
         static_emplace( in_place_index_t<N>,
                         union_type<Ts...>& storage,

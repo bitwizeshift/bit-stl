@@ -413,7 +413,7 @@ inline void bit::stl::variant<Types...>
 //----------------------------------------------------------------------------
 
 template<typename...Types>
-template<std::size_t I, std::size_t N, typename...Ts, typename...Args>
+template<std::size_t I, std::size_t N, typename...Ts, typename...Args,typename>
 inline bit::stl::variant_alternative_t<I, bit::stl::variant<Types...>>&
   bit::stl::variant<Types...>::static_emplace( in_place_index_t<N>,
                                                union_type<Ts...>& storage,
