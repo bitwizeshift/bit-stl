@@ -11,7 +11,9 @@ inline constexpr bit::stl::tuple_element_range<N,Iterator,Sentinel>
 
 template<std::size_t N, typename Range>
 inline constexpr auto bit::stl::make_tuple_element_range( Range&& r )
+#ifndef _MSC_VER
   -> decltype(::bit::stl::make_tuple_element_range<N>( r.begin(), r.end()))
+#endif // _MSC_VER
 {
   return make_tuple_element_range<N>( std::forward<Range>(r).begin(),
                                       std::forward<Range>(r).end() );
@@ -28,7 +30,9 @@ inline constexpr bit::stl::tuple_element_range<0,Iterator,Sentinel>
 
 template<typename Range>
 inline constexpr auto bit::stl::make_key_range( Range&& r )
+#ifndef _MSC_VER
   -> decltype(::bit::stl::make_key_range( r.begin(), r.end()))
+#endif // _MSC_VER
 {
   return make_key_range<0>( std::forward<Range>(r).begin(),
                             std::forward<Range>(r).end() );
@@ -45,7 +49,9 @@ inline constexpr bit::stl::tuple_element_range<1,Iterator,Sentinel>
 
 template<typename Range>
 inline constexpr auto bit::stl::make_value_range( Range&& r )
+#ifndef _MSC_VER
   -> decltype(::bit::stl::make_value_range( r.begin(), r.end()))
+#endif // _MSC_VER
 {
   return make_value_range<1>( std::forward<Range>(r).begin(),
                               std::forward<Range>(r).end() );
