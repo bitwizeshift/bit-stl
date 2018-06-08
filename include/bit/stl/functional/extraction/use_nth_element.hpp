@@ -36,8 +36,10 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
+#include "../../utilities/tuple_utilities.hpp" // adl::get
+
 #include <cstddef> // std::size_t
-#include <utility> // std::forward, std::get
+#include <utility> // std::forward
 
 namespace bit {
   namespace stl {
@@ -58,7 +60,7 @@ inline constexpr decltype(auto) bit::stl::use_nth_element<N>
   ::operator()( Tuple&& tuple )
 {
   // ADL-lookup 'get<N>'
-  using std::get;
+  using ::bit::stl::adl::get;
 
   return get<N>( std::forward<Tuple>(tuple) );
 }

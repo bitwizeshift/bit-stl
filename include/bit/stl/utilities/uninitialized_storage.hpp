@@ -36,6 +36,8 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
+#include "tuple_utilities.hpp"
+
 #include <iterator> // std::iterator_traits
 #include <new>      // placement new
 #include <memory>   // std::addressof

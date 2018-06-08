@@ -40,7 +40,9 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
+#include "invoke.hpp"  // invoke
 #include "types.hpp"   // size_t
+
 #include <type_traits> // std::decay
 #include <utility>     // std::forward, std::index_sequence
 
@@ -72,22 +74,21 @@ namespace bit {
     // This exists so that ADL-lookup can be done with 'get' from different
     // namespaces, if they are so provided for types. This allows std::get to
     // function independently from bit::stl::get
-    template<size_t I, typename Tuple>
-    tuple_element_t<I,std::decay_t<Tuple>>& get( Tuple& t );
-    template<size_t I, typename Tuple>
-    const tuple_element_t<I,std::decay_t<Tuple>>& get( const Tuple& t );
-    template<size_t I, typename Tuple>
-    tuple_element_t<I,std::decay_t<Tuple>>&& get( Tuple&& t );
-    template<size_t I, typename Tuple>
-    const tuple_element_t<I,std::decay_t<Tuple>>&& get( const Tuple&& t );
+    namespace adl {
+
+      template<typename T, typename Tuple>
+      void get( Tuple&& );
+
+      template<std::size_t, typename Tuple>
+      void get( Tuple&& );
+
+    } // namespace adl
+
+    template<std::size_t Idx, typename Tuple>
+    decltype(auto) adl_get( Tuple&& tuple );
+
     template<typename T, typename Tuple>
-    T& get( Tuple& t );
-    template<typename T, typename Tuple>
-    const T& get( const Tuple& t );
-    template<typename T, typename Tuple>
-    T&& get( Tuple&& t );
-    template<typename T, typename Tuple>
-    const T&& get( const Tuple&& t );
+    decltype(auto) adl_get( Tuple&& tuple );
 
     //-------------------------------------------------------------------------
 
