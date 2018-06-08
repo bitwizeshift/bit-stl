@@ -65,6 +65,28 @@ namespace bit {
     /// \c operator"" overloads in this namespace
     inline namespace literals{} // namespace literals
 
+    /// \brief Namespace for managing functions template for forward
+    ///        declarations
+    ///
+    /// This contains function templates that don't contain definitions
+    /// that can be used with a using statement/directive to allow for
+    /// determining ADL functions unqualified
+    ///
+    /// An example use of this is below:
+    ///
+    /// \code
+    /// template<typename T, typename Tuple,std::size_t...Idxs>
+    /// T make_from_tuple( Tuple&& tuple )
+    /// {
+    ///   using namespace bit::stl::adl;
+    ///   // or using bit::stl::adl::get
+    ///
+    ///   // adl-picks 'get<I> for appropriate 'Tuple' type
+    ///   return T( get<Idxs>( std::forward<Tuple>(tuple) )... );
+    /// }
+    /// \endcode
+    namespace adl{};
+
     /// \brief Private namespace for managing implementation-details within
     ///        headers
     ///
