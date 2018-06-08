@@ -85,7 +85,7 @@ namespace bit {
     ///   return T( get<Idxs>( std::forward<Tuple>(tuple) )... );
     /// }
     /// \endcode
-    namespace adl{};
+    namespace adl{}
 
     /// \brief Private namespace for managing implementation-details within
     ///        headers
