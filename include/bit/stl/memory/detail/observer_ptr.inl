@@ -446,7 +446,7 @@ inline constexpr bit::stl::observer_ptr<T>
 
 template<typename Pointer>
 inline constexpr auto bit::stl::make_observer( const Pointer& ptr )
-  noexcept -> decltype( make_observer( ptr.get() ) )
+  noexcept -> decltype( ::bit::stl::make_observer( ptr.get() ) )
 {
   return make_observer( ptr.get() );
 }

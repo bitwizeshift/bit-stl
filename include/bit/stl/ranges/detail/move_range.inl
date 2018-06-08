@@ -12,7 +12,7 @@ inline constexpr bit::stl::move_range<Iterator,Sentinel>
 template<typename Range>
 inline constexpr auto
   bit::stl::make_move_range( Range&& r )
-  -> decltype(make_move_range( r.begin(), r.end() ))
+  -> decltype(::bit::stl::make_move_range( r.begin(), r.end() ))
 {
   return make_move_range( std::forward<Range>(r).begin(),
                           std::forward<Range>(r).end() );

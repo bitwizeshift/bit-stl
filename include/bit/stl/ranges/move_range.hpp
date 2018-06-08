@@ -63,7 +63,7 @@ namespace bit {
     /// \return the type-deduced range
     template<typename Range>
     constexpr auto make_move_range( Range&& r )
-      -> decltype(make_move_range( r.begin(), r.end() ));
+      -> decltype(::bit::stl::make_move_range( r.begin(), r.end() ));
 
   } // namespace stl
 } // namespace bit
