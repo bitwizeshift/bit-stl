@@ -1133,6 +1133,41 @@ inline constexpr const bit::stl::unexpected_type<E>&&
   return std::move(base_type::get_unexpected());
 }
 
+
+//-----------------------------------------------------------------------------
+// Monadic Functions
+//-----------------------------------------------------------------------------
+
+template<typename T, typename E>
+template<typename Fn, typename>
+bit::stl::invoke_result_t<Fn,const T&>
+  bit::stl::expected<T,E>::flat_map( Fn&& fn )
+  const
+{
+  if( has_value() ) return std::forward<Fn>(fn);
+  else if( has_error() ) return { get_unexpected() };
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  throw bad_expected_access<void>{};
+#else
+  BIT_ALWAYS_ASSERT( has_error(), "expected must have error" );
+#endif
+}
+
+template<typename T, typename E>
+template<typename Fn, typename>
+bit::stl::expected<bit::stl::invoke_result_t<Fn,const T&>,E>
+  bit::stl::expected<T,E>::map( Fn&& fn )
+  const
+{
+  if( has_value() ) return { std::forward<Fn>(fn) };
+  else if( has_error() ) return { get_unexpected() };
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  throw bad_expected_access<void>{};
+#else
+  BIT_ALWAYS_ASSERT( has_error(), "expected must have error" );
+#endif
+}
+
 //=============================================================================
 // expected<void,E>
 //=============================================================================
@@ -1189,6 +1224,7 @@ inline bit::stl::expected<void,E>::expected( expected<void,G>&& other )
 {
   if ( other.has_error() ) {
     base_type::emplace_error( std::move(other.get_unexpected()) );
+
   }
 }
 
@@ -1465,6 +1501,40 @@ inline constexpr const bit::stl::unexpected_type<E>&&
 #endif
 
   return std::move(base_type::get_unexpected());
+}
+
+//-----------------------------------------------------------------------------
+// Monadic Functions
+//-----------------------------------------------------------------------------
+
+template<typename E>
+template<typename Fn, typename>
+bit::stl::invoke_result_t<Fn>
+  bit::stl::expected<void,E>::flat_map( Fn&& fn )
+  const
+{
+  if( has_value() ) return std::forward<Fn>(fn);
+  else if( has_error() ) return { get_unexpected() };
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  throw bad_expected_access<void>{};
+#else
+  BIT_ALWAYS_ASSERT( has_error(), "expected must have error" );
+#endif
+}
+
+template<typename E>
+template<typename Fn, typename>
+bit::stl::expected<bit::stl::invoke_result_t<Fn>,E>
+  bit::stl::expected<void,E>::map( Fn&& fn )
+  const
+{
+  if( has_value() ) return { std::forward<Fn>(fn) };
+  else if( has_error() ) return { get_unexpected() };
+#if BIT_COMPILER_EXCEPTIONS_ENABLED
+  throw bad_expected_access<void>{};
+#else
+  BIT_ALWAYS_ASSERT( has_error(), "expected must have error" );
+#endif
 }
 
 //=============================================================================
