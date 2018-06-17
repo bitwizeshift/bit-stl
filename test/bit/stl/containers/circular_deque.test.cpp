@@ -322,8 +322,8 @@ TEST_CASE("circular_deque::push_back( const T& )","[modifier]")
 
   SECTION("Deque is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      deque.push_back( copyable{i} );
+    for( auto i = 0u; i < size; ++i ) {
+      deque.push_back( copyable{ static_cast<int>(i) } );
     }
     const auto old_size = deque.size();
 
@@ -410,8 +410,8 @@ TEST_CASE("circular_deque::push_back( T&& )","[modifier]")
 
   SECTION("Deque is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      deque.push_back( moveable{i} );
+    for( auto i = 0u; i < size; ++i ) {
+      deque.push_back( moveable{ static_cast<int>(i) } );
     }
     const auto old_size = deque.size();
     const auto value = entry;
@@ -498,8 +498,8 @@ TEST_CASE("circular_deque::push_front( const T& )","[modifier]")
 
   SECTION("Deque is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      deque.push_front( copyable{i} );
+    for( auto i = 0u; i < size; ++i ) {
+      deque.push_front( copyable{ static_cast<int>(i) } );
     }
     const auto old_size = deque.size();
 
@@ -586,8 +586,8 @@ TEST_CASE("circular_deque::push_front( T&& )","[modifier]")
 
   SECTION("Deque is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      deque.push_front( moveable{i} );
+    for( auto i = 0u; i < size; ++i ) {
+      deque.push_front( moveable{ static_cast<int>(i) } );
     }
     const auto old_size = deque.size();
     const auto value = entry;
@@ -674,8 +674,8 @@ TEST_CASE("circular_deque::emplace_back( Args&&... )", "[modifier]")
 
   SECTION("Deque is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      deque.push_back( copyable{i} );
+    for( auto i = 0u; i < size; ++i ) {
+      deque.push_back( copyable{ static_cast<int>(i) } );
     }
     const auto old_size = deque.size();
 
@@ -759,8 +759,8 @@ TEST_CASE("circular_deque::emplace_front( Args&&... )", "[modifier]")
 
   SECTION("Deque is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      deque.push_back( copyable{i} );
+    for( auto i = 0u; i < size; ++i ) {
+      deque.push_back( copyable{ static_cast<int>(i) } );
     }
     const auto old_size = deque.size();
 
@@ -791,8 +791,8 @@ TEST_CASE("circular_deque::pop_back()","[modifier]")
   const auto size = 5u;
   auto deque = bit::stl::circular_deque<int>{size};
 
-  for( auto i = 0; i < size; ++i ) {
-    deque.emplace_front(i);
+  for( auto i = 0u; i < size; ++i ) {
+    deque.emplace_front( static_cast<int>(i) );
   }
 
   SECTION("Reduces size by 1")
@@ -819,8 +819,8 @@ TEST_CASE("circular_deque::pop_front()","[modifier]")
   const auto size = 5u;
   auto deque = bit::stl::circular_deque<int>{size};
 
-  for( auto i = 0; i < size; ++i ) {
-    deque.emplace_back(i);
+  for( auto i = 0u; i < size; ++i ) {
+    deque.emplace_back( static_cast<int>(i) );
   }
 
   SECTION("Reduces size by 1")
@@ -850,8 +850,8 @@ TEST_CASE("circular_deque::swap( circular_deque& )","[modifier]")
   auto right = bit::stl::circular_deque<moveable>{};
   auto left = bit::stl::circular_deque<moveable>{size};
 
-  for( auto i = 0; i < size; ++i ) {
-    left.emplace_back(i);
+  for( auto i = 0u; i < size; ++i ) {
+    left.emplace_back( static_cast<int>(i) );
   }
 
   const auto copy_right = right;
@@ -955,8 +955,8 @@ TEST_CASE("circular_deque::resize( size_type )", "[modifier]")
 
         auto deque = bit::stl::circular_deque<nothrow_moveable>{size};
 
-        for( auto i = 0; i < size; ++i ) {
-          deque.emplace_back(i);
+        for( auto i = 0u; i < size; ++i ) {
+          deque.emplace_back( static_cast<int>(i) );
         }
         auto old = deque;
 
@@ -990,8 +990,8 @@ TEST_CASE("circular_deque::resize( size_type )", "[modifier]")
 
         auto deque = bit::stl::circular_deque<moveable>{size};
 
-        for( auto i = 0; i < size; ++i ) {
-          deque.emplace_back(i);
+        for( auto i = 0u; i < size; ++i ) {
+          deque.emplace_back( static_cast<int>(i) );
         }
         auto old = deque;
 

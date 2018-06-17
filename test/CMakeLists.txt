@@ -45,6 +45,13 @@ add_executable(bit_stl_test ${sources})
 
 target_link_libraries(bit_stl_test PRIVATE "bit::stl" "philsquared::Catch")
 
+if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR
+    "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
+  target_compile_options(bit_stl_test PRIVATE -Wall -Werror -pedantic)
+elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" )
+#  target_compile_options(bit_stl_test PRIVATE /Wall /WX)
+endif()
+
 #-----------------------------------------------------------------------------
 
 add_test( NAME "bit_stl_test_default"

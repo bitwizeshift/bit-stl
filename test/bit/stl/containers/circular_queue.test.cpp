@@ -322,8 +322,8 @@ TEST_CASE("circular_queue::push( const T& )","[modifier]")
 
   SECTION("Queue is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      queue.push( copyable{i} );
+    for( auto i = 0u; i < size; ++i ) {
+      queue.push( copyable{ static_cast<int>(i) } );
     }
     const auto old_size = queue.size();
 
@@ -410,8 +410,8 @@ TEST_CASE("circular_queue::push( T&& )","[modifier]")
 
   SECTION("Queue is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      queue.push( moveable{i} );
+    for( auto i = 0u; i < size; ++i ) {
+      queue.push( moveable{ static_cast<int>(i) } );
     }
     const auto old_size = queue.size();
     const auto value = entry;
@@ -498,8 +498,8 @@ TEST_CASE("circular_queue::emplace( Args&&... )", "[modifier]")
 
   SECTION("Queue is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      queue.push( copyable{i} );
+    for( auto i = 0u; i < size; ++i ) {
+      queue.push( copyable{ static_cast<int>(i) } );
     }
     const auto old_size = queue.size();
 
@@ -530,7 +530,7 @@ TEST_CASE("circular_queue::pop()","[modifier]")
   const auto size = 5u;
   auto queue = bit::stl::circular_queue<int>{size};
 
-  for( auto i = 0; i < size; ++i ) {
+  for( auto i = 0u; i < size; ++i ) {
     queue.emplace(i);
   }
 
@@ -561,7 +561,7 @@ TEST_CASE("circular_queue::swap( circular_queue& )","[modifier]")
   auto right = bit::stl::circular_queue<moveable>{};
   auto left = bit::stl::circular_queue<moveable>{size};
 
-  for( auto i = 0; i < size; ++i ) {
+  for( auto i = 0u; i < size; ++i ) {
     left.emplace(i);
   }
 
@@ -665,7 +665,7 @@ TEST_CASE("circular_queue::resize( size_type )", "[modifier]")
 
         auto queue = bit::stl::circular_queue<nothrow_moveable>{size};
 
-        for( auto i = 0; i < size; ++i ) {
+        for( auto i = 0u; i < size; ++i ) {
           queue.emplace(i);
         }
         auto old = queue;
@@ -700,7 +700,7 @@ TEST_CASE("circular_queue::resize( size_type )", "[modifier]")
 
         auto queue = bit::stl::circular_queue<moveable>{size};
 
-        for( auto i = 0; i < size; ++i ) {
+        for( auto i = 0u; i < size; ++i ) {
           queue.emplace(i);
         }
         auto old = queue;

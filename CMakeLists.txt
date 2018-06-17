@@ -25,7 +25,7 @@ option(BIT_STL_COMPILE_UNIT_TESTS "Compile and run the unit tests for this libra
 option(BIT_STL_GENERATE_DOCUMENTATION "Generates doxygen documentation" off)
 option(BIT_STL_VERBOSE_CONFIGURE "Verbosely configures this library project" off)
 
-project("BitStl")
+project("BitStl" LANGUAGES CXX)
 
 #-----------------------------------------------------------------------------
 # Version Info
@@ -342,7 +342,7 @@ if( BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS )
       "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
     target_compile_options(stl_header_self_containment_test PRIVATE -Wall -Werror -pedantic)
   elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" )
-    # TODO: Determine MSVC necessary compiler flags
+
   endif()
 
 endif()

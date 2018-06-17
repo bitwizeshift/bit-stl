@@ -211,8 +211,8 @@ TEST_CASE("circular_buffer::push_back( const T& )","[modifier]")
 
   SECTION("Buffer is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      buffer.push_back( copyable{i} );
+    for( auto i =0u; i < size; ++i ) {
+      buffer.push_back( copyable{ static_cast<int>(i) } );
     }
     const auto old_size = buffer.size();
 
@@ -304,8 +304,8 @@ TEST_CASE("circular_buffer::push_back( T&& )","[modifier]")
 
   SECTION("Buffer is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      buffer.push_back( moveable{i} );
+    for( auto i =0u; i < size; ++i ) {
+      buffer.push_back( moveable{ static_cast<int>(i) } );
     }
     const auto old_size = buffer.size();
     const auto value = entry;
@@ -397,8 +397,8 @@ TEST_CASE("circular_buffer::push_front( const T& )","[modifier]")
 
   SECTION("Buffer is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      buffer.push_front( copyable{i} );
+    for( auto i =0u; i < size; ++i ) {
+      buffer.push_front( copyable{ static_cast<int>(i) } );
     }
     const auto old_size = buffer.size();
 
@@ -490,8 +490,8 @@ TEST_CASE("circular_buffer::push_front( T&& )","[modifier]")
 
   SECTION("Buffer is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      buffer.push_front( moveable{i} );
+    for( auto i =0u; i < size; ++i ) {
+      buffer.push_front( moveable{ static_cast<int>(i) } );
     }
     const auto old_size = buffer.size();
     const auto value = entry;
@@ -584,8 +584,8 @@ TEST_CASE("circular_buffer::emplace_back( Args&&... )", "[modifier]")
 
   SECTION("Buffer is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      buffer.push_back( copyable{i} );
+    for( auto i =0u; i < size; ++i ) {
+      buffer.push_back( copyable{ static_cast<int>(i) } );
     }
     const auto old_size = buffer.size();
 
@@ -674,8 +674,8 @@ TEST_CASE("circular_buffer::emplace_front( Args&&... )", "[modifier]")
 
   SECTION("Buffer is full")
   {
-    for( auto i = 0; i < size; ++i ) {
-      buffer.push_back( copyable{i} );
+    for( auto i =0u; i < size; ++i ) {
+      buffer.push_back( copyable{ static_cast<int>(i) } );
     }
     const auto old_size = buffer.size();
 
@@ -711,8 +711,8 @@ TEST_CASE("circular_buffer::pop_back()","[modifier]")
   auto data = reinterpret_cast<char*>(&storage);
   auto buffer = bit::stl::circular_buffer<int>(data,size);
 
-  for( auto i = 0; i < size; ++i ) {
-    buffer.emplace_front(i);
+  for( auto i =0u; i < size; ++i ) {
+    buffer.emplace_front( static_cast<int>(i) );
   }
 
   SECTION("Reduces size by 1")
@@ -744,8 +744,8 @@ TEST_CASE("circular_buffer::pop_front()","[modifier]")
   auto data = reinterpret_cast<char*>(&storage);
   auto buffer = bit::stl::circular_buffer<int>(data,size);
 
-  for( auto i = 0; i < size; ++i ) {
-    buffer.emplace_back(i);
+  for( auto i =0u; i < size; ++i ) {
+    buffer.emplace_back( static_cast<int>(i) );
   }
 
   SECTION("Reduces size by 1")
