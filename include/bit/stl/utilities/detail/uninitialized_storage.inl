@@ -38,7 +38,9 @@ namespace bit { namespace stl { namespace detail {
 template <typename T, typename Tuple, std::size_t... I>
 inline T* uninitialized_tuple_construct_at_impl( void* ptr, Tuple&& t, std::index_sequence<I...> )
 {
-  new (ptr) T(std::get<I>(std::forward<Tuple>(t))...);
+  using ::bit::stl::adl::get;
+
+  new (ptr) T(get<I>(std::forward<Tuple>(t))...);
   return static_cast<T*>(ptr);
 }
 

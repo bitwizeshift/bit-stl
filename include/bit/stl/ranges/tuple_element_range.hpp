@@ -67,7 +67,10 @@ namespace bit {
     /// \return the type-deduced tuple_element range
     template<std::size_t N, typename Range>
     constexpr auto make_tuple_element_range( Range&& r )
-      -> decltype(make_tuple_element_range<N>( r.begin(), r.end()));
+#ifndef _MSC_VER
+      -> decltype(::bit::stl::make_tuple_element_range<N>( r.begin(), r.end()))
+#endif // _MSC_VER
+    ;
 
 
     //-------------------------------------------------------------------------
@@ -88,7 +91,10 @@ namespace bit {
     /// \return a key range
     template<typename Range>
     constexpr auto make_key_range( Range&& r )
-      -> decltype(make_key_range( r.begin(), r.end()));
+#ifndef _MSC_VER
+      -> decltype(::bit::stl::make_key_range( r.begin(), r.end()))
+#endif // _MSC_VER
+    ;
 
     //-------------------------------------------------------------------------
 
@@ -108,8 +114,10 @@ namespace bit {
     /// \return a value range
     template<typename Range>
     constexpr auto make_value_range( Range&& r )
-      -> decltype(make_value_range( r.begin(), r.end()));
-
+#ifndef _MSC_VER
+      -> decltype(::bit::stl::make_value_range(r.begin(), r.end()))
+#endif // _MSC_VER
+    ;
   } // namespace stl
 } // namespace bit
 

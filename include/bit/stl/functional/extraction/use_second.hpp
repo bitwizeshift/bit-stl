@@ -36,6 +36,8 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
+#include "../../utilities/tuple_utilities.hpp" // adl::get
+
 #include <type_traits> // std::declval, std::enable_if_t
 #include <utility>     // std::forward, get
 
@@ -44,19 +46,19 @@ namespace bit {
 
     struct use_second
     {
-      template<typename Pair>
-      constexpr decltype(auto) operator()( Pair&& pair );
+      template<typename Tuple>
+      constexpr decltype(auto) operator()( Tuple&& tuple );
     };
 
   } // namespace stl
 } // namespace bit
 
-template<typename Pair>
-inline constexpr decltype(auto) bit::stl::use_second::operator()( Pair&& pair )
+template<typename Tuple>
+inline constexpr decltype(auto) bit::stl::use_second::operator()( Tuple&& tuple )
 {
-  using std::get;
+  using ::bit::stl::adl::get;
 
-  return get<1>(pair);
+  return get<1>(tuple);
 }
 
 #endif /* BIT_STL_FUNCTIONAL_EXTRACTION_USE_SECOND_HPP */

@@ -39,6 +39,8 @@
 #include "../../traits/composition/bool_constant.hpp"
 #include "../../traits/composition/void_t.hpp"
 
+#include "../../utilities/tuple_utilities.hpp" // adl::get
+
 #include <type_traits> // std::declval, std::enable_if_t
 #include <utility>     // std::forward
 
@@ -47,18 +49,19 @@ namespace bit {
 
     struct use_first
     {
-      template<typename Pair>
-      constexpr decltype(auto) operator()( Pair&& pair );
+      template<typename Tuple>
+      constexpr decltype(auto) operator()( Tuple&& tuple );
     };
 
   } // namespace stl
 } // namespace bit
 
-template<typename Pair>
-inline constexpr decltype(auto) bit::stl::use_first::operator()( Pair&& pair )
+template<typename Tuple>
+inline constexpr decltype(auto) bit::stl::use_first::operator()( Tuple&& tuple )
 {
-  using std::get;
-  return get<0>(pair);
+  using ::bit::stl::adl::get;
+
+  return get<0>( std::forward<Tuple>(tuple) );
 }
 
 #endif /* BIT_STL_FUNCTIONAL_EXTRACTION_USE_FIRST_HPP */

@@ -374,9 +374,9 @@ namespace bit {
     /// \param ptr the pointer
     /// \return an observer_ptr
     template<typename Pointer>
-    constexpr auto make_observer( const Pointer& ptr ) noexcept
-      -> decltype( make_observer( ptr.get() ) );
-
+    constexpr observer_ptr<std::remove_pointer_t<decltype(std::declval<const Pointer&>().get())>> 
+      make_observer( const Pointer& ptr ) noexcept;
+      
     /// \brief Makes an observer_ptr from a smart pointer
     ///
     /// \tparam T explicit type of the pointer
