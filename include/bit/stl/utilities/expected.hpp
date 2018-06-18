@@ -38,11 +38,13 @@
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "../traits/composition/bool_constant.hpp"
+#include "../traits/composition/conjunction.hpp"
 #include "../traits/composition/empty.hpp"
 #include "../traits/composition/sfinae.hpp"
 
-#include "in_place.hpp"
-#include "tribool.hpp"
+#include "invoke.hpp"          // invoke, invoke_result_t
+#include "in_place.hpp"        // in_place
+#include "tribool.hpp"         // tribools
 #include "compiler_traits.hpp" // BIT_COMPILER_EXCEPTIONS_ENABLED
 #include "assert.hpp"          // BIT_ALWAYS_ASSERT
 
@@ -54,8 +56,24 @@
 namespace bit {
   namespace stl {
 
+    template<typename T, typename E>
+    class expected;
+
     //=========================================================================
-    // X.Z.7, class bad_expected_access
+    // trait : is_expected
+    //=========================================================================
+
+    template<typename T>
+    struct is_expected : std::false_type{};
+
+    template<typename T, typename E>
+    struct is_expected<expected<T,E>> : std::true_type{};
+
+    template<typename T>
+    constexpr bool is_expected_v = is_expected<T>::value;
+
+    //=========================================================================
+    // class : bad_expected_access
     //=========================================================================
 
     ///////////////////////////////////////////////////////////////////////////
@@ -123,7 +141,7 @@ namespace bit {
     };
 
     //=========================================================================
-    // X.Y.3, unexpected_type
+    // class : unexpected_type
     //=========================================================================
 
     ///////////////////////////////////////////////////////////////////////////
@@ -226,7 +244,20 @@ namespace bit {
     };
 
     //=========================================================================
-    // X.Y.4, Unexpected factories
+    // trait : is_unexpected
+    //=========================================================================
+
+    template<typename T>
+    struct is_unexpected_type : std::false_type{};
+
+    template<typename T>
+    struct is_unexpected_type<unexpected_type<T>> : std::true_type{};
+
+    template<typename T>
+    constexpr bool is_unexpected_type_v = is_unexpected_type<T>::value;
+
+    //=========================================================================
+    // utilities : class unexpected
     //=========================================================================
 
     /// \brief Makes an unexpected type \c E
@@ -238,7 +269,7 @@ namespace bit {
     constexpr unexpected_type<E> make_unexpected( Args&&...args );
 
     //=========================================================================
-    // X.Y.5, unexpected_type relational operators
+    // relational operators : class unexpected_type
     //=========================================================================
 
     template<typename E>
@@ -261,7 +292,7 @@ namespace bit {
                                const unexpected_type<E>& rhs );
 
     //=========================================================================
-    // X.Z.6, unexpect tag
+    // class : unexpect tag
     //=========================================================================
 
     /// \brief A tag type used for tag-dispatch
@@ -270,6 +301,8 @@ namespace bit {
       unexpect_t() = delete;
       constexpr unexpect_t(int){}
     };
+
+    //-------------------------------------------------------------------------
 
     constexpr unexpect_t unexpect{0};
 
@@ -804,6 +837,33 @@ namespace bit {
       constexpr const unexpected_type<E>&& get_unexpected() const &&;
       /// \}
 
+      //------------------------------------------------------------------------
+      // Monadic Functionality
+      //------------------------------------------------------------------------
+    public:
+
+      /// \brief Invokes the function \p fn with this expected as the argument
+      ///
+      /// If this expected contains an error, the result also contains an error
+      /// \param fn the function to invoke with this
+      /// \return The result of the function being called
+      template<typename Fn,
+               typename=std::enable_if_t<conjunction<is_invocable<Fn, const T&>,
+                                                     is_expected<invoke_result_t<Fn, const T&>>>::value>>
+      invoke_result_t<Fn,const T&> flat_map( Fn&& fn ) const;
+
+      /// \brief Invokes this function \p fn with this expected as the argument
+      ///
+      /// If this expected contains an error, the result of this function
+      /// will contain that error.
+      /// Otherwise this function wraps the result and returns it as an expected
+      ///
+      /// \param fn the function to invoke with this
+      /// \return The expected result of the function invoked
+      template<typename Fn,
+               typename=std::enable_if_t<is_invocable<Fn, const T&>::value>>
+      expected<invoke_result_t<Fn,const T&>,E> map( Fn&& fn ) const;
+
     };
 
     //=========================================================================
@@ -1011,6 +1071,34 @@ namespace bit {
       constexpr const unexpected_type<E>& get_unexpected() const &;
       constexpr const unexpected_type<E>&& get_unexpected() const &&;
       /// \}
+
+      //------------------------------------------------------------------------
+      // Monadic Functionality
+      //------------------------------------------------------------------------
+    public:
+
+      /// \brief Invokes the function \p fn with this expected as the argument
+      ///
+      /// If this expected contains an error, the result also contains an error
+      /// \param fn the function to invoke with this
+      /// \return The result of the function being called
+      template<typename Fn,
+               typename=std::enable_if_t<conjunction<is_invocable<Fn>,
+                                                     is_expected<invoke_result_t<Fn>>>::value>>
+      invoke_result_t<Fn> flat_map( Fn&& fn ) const;
+
+      /// \brief Invokes this function \p fn with this expected as the argument
+      ///
+      /// If this expected contains an error, the result of this function
+      /// will contain that error.
+      /// Otherwise this function wraps the result and returns it as an expected
+      ///
+      /// \param fn the function to invoke with this
+      /// \return The expected result of the function invoked
+      template<typename Fn,
+               typename=std::enable_if_t<is_invocable<Fn>::value>>
+      expected<invoke_result_t<Fn>,E> map( Fn&& fn ) const;
+
     };
 
     //=========================================================================

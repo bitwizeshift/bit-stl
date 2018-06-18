@@ -272,8 +272,52 @@ inline constexpr typename bit::stl::optional<T>::value_type
 }
 
 //----------------------------------------------------------------------------
-// Modifiers
+// Monadic Functionality
 //----------------------------------------------------------------------------
+
+
+template<typename T>
+template<typename Fn,typename>
+bit::stl::invoke_result_t<Fn,const T&> bit::stl::optional<T>::flat_map( Fn&& fn )
+  const
+{
+  if( has_value() ) return invoke( std::forward<Fn>(fn), **this );
+  return nullopt;
+}
+
+template<typename T>
+template<typename Fn,typename>
+bit::stl::optional<bit::stl::invoke_result_t<Fn,const T&>>
+  bit::stl::optional<T>::map( Fn&& fn )
+  const
+{
+  if( has_value() ) return make_optional(invoke( std::forward<Fn>(fn), **this ));
+  return nullopt;
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename T>
+template<typename U>
+bit::stl::optional<std::decay_t<U>> bit::stl::optional<T>::and_then( U&& u )
+  const
+{
+  if( has_value() ) return make_optional( std::forward<U>(u) );
+  return nullopt;
+}
+
+template<typename T>
+template<typename U>
+bit::stl::optional<std::decay_t<U>> bit::stl::optional<T>::or_else( U&& u )
+  const
+{
+  if( has_value() ) return make_optional( std::forward<U>(u) );
+  return nullopt;
+}
+
+//-----------------------------------------------------------------------------
+// Modifiers
+//-----------------------------------------------------------------------------
 
 template<typename T>
 inline void bit::stl::optional<T>::swap( optional<T>& other )

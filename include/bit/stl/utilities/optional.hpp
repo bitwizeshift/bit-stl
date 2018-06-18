@@ -38,20 +38,36 @@
 
 #include "hash.hpp"     // hash_t
 #include "in_place.hpp" // in_place_t
-#include "utility.hpp"
+#include "invoke.hpp"   // invoke_result_t, invoke
+#include "utility.hpp"  //
 
 #include "../traits/composition/conjunction.hpp"
 #include "../traits/composition/disjunction.hpp"
 #include "../traits/composition/negation.hpp"
 
-#include <initializer_list>
-#include <type_traits>
+#include <initializer_list> // std::initializer_list
+#include <type_traits>      // std::enable_if_t
 #include <memory>
+#include <utility>          // std::forward, std::move
 
 namespace bit {
   namespace stl {
 
     template<typename> class optional;
+
+
+    //=========================================================================
+    // trait : is_optional
+    //=========================================================================
+
+    template<typename T>
+    struct is_optional : std::false_type{};
+
+    template<typename T>
+    struct is_optional<optional<T>> : std::true_type{};
+
+    template<typename T>
+    constexpr bool is_optional_v = is_optional<T>::value;
 
     //------------------------------------------------------------------------
     // Optional SFINAE type traits
@@ -140,16 +156,24 @@ namespace bit {
 
     } // namespace detail
 
-    ////////////////////////////////////////////////////////////////////////////
+    //=========================================================================
+    // class : bad_optional_access
+    //=========================================================================
+
+    ///////////////////////////////////////////////////////////////////////////
     /// \brief An exception thrown when an optional is attempted to be accessed
     ///        while not containing a value
-    ////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     class bad_optional_access : public std::logic_error
     {
     public:
       bad_optional_access() : std::logic_error("bad_optional_access"){}
 
     };
+
+    //=========================================================================
+    // struct : nullopt_t
+    //=========================================================================
 
     /// \brief This type represents null optional value
     struct nullopt_t
@@ -158,8 +182,14 @@ namespace bit {
       constexpr nullopt_t(int){}
     };
 
+    //-------------------------------------------------------------------------
+
     /// \brief Instance of a nullopt type
     constexpr nullopt_t nullopt = nullopt_t(0);
+
+    //=========================================================================
+    // class : optional
+    //=========================================================================
 
     ////////////////////////////////////////////////////////////////////////////
     /// \brief The class template optional manages an optional contained value,
@@ -310,7 +340,6 @@ namespace bit {
 
       ~optional();
 
-
       //------------------------------------------------------------------------
       // Assignment
       //------------------------------------------------------------------------
@@ -402,6 +431,51 @@ namespace bit {
       /// \copydoc value_or( U&& )
       template<typename U>
       constexpr value_type value_or( U&& default_value ) &&;
+
+      //------------------------------------------------------------------------
+      // Monadic Functionality
+      //------------------------------------------------------------------------
+    public:
+
+      /// \brief Invokes the function \p fn with this optional as the argument
+      ///
+      /// If this optional is nullopt, this function returns nullopt
+      /// \param fn the function to invoke with this
+      /// \return The result of the function being called
+      template<typename Fn,
+               typename=std::enable_if_t<conjunction<is_invocable<Fn,const T&>,
+                                                     is_optional<invoke_result_t<Fn,const T&>>>::value>>
+      invoke_result_t<Fn,const T&> flat_map( Fn&& fn ) const;
+
+      /// \brief Invokes this function \p fn with this optional as the argument
+      ///
+      /// If this optional is nullopt, the result of this function is nullopt.
+      /// Otherwise this function wraps the result and returns it as an optional
+      ///
+      /// \param fn the function to invoke with this
+      /// \return The optional result of the function invoked
+      template<typename Fn,
+               typename=std::enable_if_t<is_invocable<Fn,const T&>::value>>
+      optional<invoke_result_t<Fn,const T&>> map( Fn&& fn ) const;
+
+      //------------------------------------------------------------------------
+
+      /// \brief Returns \p u if this optional contains a value, nullopt
+      ///        otherwise.
+      ///
+      /// \param U optional
+      /// \param u the value to return as an optional
+      /// \return an optional of \p u if this contains a value
+      template<typename U>
+      optional<std::decay_t<U>> and_then( U&& u ) const;
+
+      /// \brief Returns \p u if this optional does not contain a value, nullopt
+      ///        otherwise.
+      ///
+      /// \param u the value to return as an optional
+      /// \return an optional of \p u if this does not contains a value
+      template<typename U>
+      optional<std::decay_t<U>> or_else( U&& u ) const;
 
       //------------------------------------------------------------------------
       // Modifiers
