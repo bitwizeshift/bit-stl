@@ -42,6 +42,10 @@
 namespace bit {
   namespace stl {
 
+    //=========================================================================
+    // enum class : byte
+    //=========================================================================
+
     /// \brief Unsigned byte type
     ///
     /// \note Due to a restriction in pre-C++-17, a conversion to a pointer of
@@ -49,8 +53,12 @@ namespace bit {
     ///       strict-aliasing.
     enum class byte : unsigned char{};
 
+    //=========================================================================
+    // non-member operators : enum class : byte
+    //=========================================================================
+
     //-------------------------------------------------------------------------
-    // Byte Operators
+    // Operators
     //-------------------------------------------------------------------------
 
 #ifndef BIT_DOXYGEN_BUILD
@@ -58,87 +66,45 @@ namespace bit {
 #else
     template<typename IntT>
 #endif
-    inline constexpr byte& operator<<=(byte& lhs, IntT shift)
-      noexcept
-    {
-        return lhs = byte(static_cast<unsigned char>(lhs) << shift);
-    }
+    constexpr byte operator<<( byte lhs, IntT shift ) noexcept;
 
 #ifndef BIT_DOXYGEN_BUILD
     template<typename IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
 #else
     template<typename IntT>
 #endif
-    inline constexpr byte operator<<(byte lhs, IntT shift)
-      noexcept
-    {
-        return byte(static_cast<unsigned char>(lhs) << shift);
-    }
+    constexpr byte operator>>( byte lhs, IntT shift ) noexcept;
+
+    constexpr byte operator|( byte lhs, byte rhs ) noexcept;
+    constexpr byte operator&( byte lhs, byte rhs ) noexcept;
+    constexpr byte operator^( byte lhs, byte rhs ) noexcept;
+    constexpr byte operator~( byte lhs ) noexcept;
+
+    //-------------------------------------------------------------------------
+    // Compound Assignment Operators
+    //-------------------------------------------------------------------------
 
 #ifndef BIT_DOXYGEN_BUILD
     template<typename IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
 #else
     template<typename IntT>
 #endif
-    inline constexpr byte& operator>>=(byte& lhs, IntT shift)
-      noexcept
-    {
-        return lhs = byte(static_cast<unsigned char>(lhs) >> shift);
-    }
+    constexpr byte& operator<<=( byte& lhs, IntT shift ) noexcept;
 
 #ifndef BIT_DOXYGEN_BUILD
     template<typename IntT, typename = std::enable_if_t<std::is_integral<IntT>::value>>
 #else
     template<typename IntT>
 #endif
-    inline constexpr byte operator>>(byte lhs, IntT shift)
-      noexcept
-    {
-        return byte(static_cast<unsigned char>(lhs) >> shift);
-    }
+    constexpr byte& operator>>=( byte& lhs, IntT shift ) noexcept;
 
-    inline byte& operator|=(byte& lhs, byte rhs)
-      noexcept
-    {
-        return lhs = byte(static_cast<unsigned char>(lhs) | static_cast<unsigned char>(rhs));
-    }
 
-    inline constexpr byte operator|(byte lhs, byte rhs)
-      noexcept
-    {
-        return byte(static_cast<unsigned char>(lhs) | static_cast<unsigned char>(rhs));
-    }
-
-    inline byte& operator&=(byte& lhs, byte rhs)
-      noexcept
-    {
-        return lhs = byte(static_cast<unsigned char>(lhs) & static_cast<unsigned char>(rhs));
-    }
-
-    inline constexpr byte operator&(byte lhs, byte rhs)
-      noexcept
-    {
-        return byte(static_cast<unsigned char>(lhs) & static_cast<unsigned char>(rhs));
-    }
-
-    inline byte& operator^=(byte& lhs, byte rhs)
-      noexcept
-    {
-        return lhs = byte(static_cast<unsigned char>(lhs) ^ static_cast<unsigned char>(rhs));
-    }
-
-    inline constexpr byte operator^(byte lhs, byte rhs)
-      noexcept
-    {
-        return byte(static_cast<unsigned char>(lhs) ^ static_cast<unsigned char>(rhs));
-    }
-
-    inline constexpr byte operator~(byte lhs)
-      noexcept
-    {
-      return byte(~static_cast<unsigned char>(lhs));
-    }
+    byte& operator|=( byte& lhs, byte rhs ) noexcept;
+    byte& operator^=( byte& lhs, byte rhs ) noexcept;
+    byte& operator&=( byte& lhs, byte rhs ) noexcept;
   } // namespace stl
 } // namespace bit
+
+#include "detail/byte.inl"
 
 #endif /* BIT_STL_UTILITIES_BYTE_HPP */
