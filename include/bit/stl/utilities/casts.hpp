@@ -130,6 +130,44 @@ namespace bit {
                typename=std::enable_if_t<is_implicitly_convertible<From,To>::value>>
       To implicit_cast( From&& from );
 
+      //-----------------------------------------------------------------------
+
+      /// \{
+      /// \brief Performs an explicit cast to the signed variant of the input.
+      ///
+      /// If the input is an enum, it is first converted to the underlying
+      /// integral type first before being converted.
+      /// If the type is already signed, no conversion occurs
+      ///
+      /// \param from the integral type being converted
+      /// \return a signed integral
+      template<typename Integral,
+               typename=std::enable_if_t<std::is_integral<Integral>::value>>
+      constexpr std::make_signed_t<Integral> as_signed( Integral from ) noexcept;
+      template<typename Enum,
+               typename=std::enable_if_t<std::is_enum<Enum>::value>>
+      constexpr std::make_signed_t<std::underlying_type_t<Enum>> as_signed( Enum from ) noexcept;
+      /// \}
+
+      //-----------------------------------------------------------------------
+
+      /// \{
+      /// \brief Performs an explicit cast to the unsigned variant of the input.
+      ///
+      /// If the input is an enum, it is first converted to the underlying
+      /// integral type first before being converted.
+      /// If the type is already unsigned, no conversion occurs
+      ///
+      /// \param from the integral type being converted
+      /// \return an unsigned integral
+      template<typename Integral,
+               typename=std::enable_if_t<std::is_integral<Integral>::value>>
+      constexpr std::make_unsigned_t<Integral> as_unsigned( Integral from ) noexcept;
+      template<typename Enum,
+               typename=std::enable_if_t<std::is_enum<Enum>::value>>
+      constexpr std::make_unsigned_t<std::underlying_type_t<Enum>> as_unsigned( Enum from ) noexcept;
+      /// \}
+
     } // inline namespace casts
   } // namespace stl
 } // namespace bit
