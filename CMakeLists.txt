@@ -25,7 +25,7 @@ option(BIT_STL_COMPILE_UNIT_TESTS "Compile and run the unit tests for this libra
 option(BIT_STL_GENERATE_DOCUMENTATION "Generates doxygen documentation" off)
 option(BIT_STL_VERBOSE_CONFIGURE "Verbosely configures this library project" off)
 
-project("BitStl")
+project("BitStl" LANGUAGES CXX)
 
 #-----------------------------------------------------------------------------
 # Version Info
@@ -177,6 +177,7 @@ set(headers
   # utilities
   include/bit/stl/utilities/aligned_storage.hpp
   include/bit/stl/utilities/assert.hpp
+  include/bit/stl/utilities/byte.hpp
   include/bit/stl/utilities/casts.hpp
   include/bit/stl/utilities/compressed_pair.hpp
   include/bit/stl/utilities/compressed_tuple.hpp

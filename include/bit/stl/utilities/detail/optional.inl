@@ -311,7 +311,7 @@ template<typename U>
 bit::stl::optional<std::decay_t<U>> bit::stl::optional<T>::or_else( U&& u )
   const
 {
-  if( has_value() ) return make_optional( std::forward<U>(u) );
+  if( !has_value() ) return make_optional( std::forward<U>(u) );
   return nullopt;
 }
 
