@@ -54,4 +54,51 @@ inline To bit::stl::casts::implicit_cast( From&& from )
   return std::forward<From>(from);
 }
 
+//-----------------------------------------------------------------------------
+
+template<typename Integral, typename>
+inline constexpr std::make_signed_t<Integral>
+  bit::stl::casts::as_signed( Integral from )
+  noexcept
+{
+  using signed_type = std::make_signed_t<Integral>;
+
+  return static_cast<signed_type>(from);
+}
+
+template<typename Enum, typename>
+inline constexpr std::make_signed_t<std::underlying_type_t<Enum>>
+  bit::stl::casts::as_signed( Enum from )
+  noexcept
+{
+  using integral_type = std::underlying_type_t<Enum>;
+  using signed_type = std::make_signed_t<integral_type>;
+
+  return static_cast<signed_type>(from);
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename Integral, typename>
+inline constexpr std::make_unsigned_t<Integral>
+  bit::stl::casts::as_unsigned( Integral from )
+  noexcept
+{
+  using unsigned_type = std::make_unsigned_t<Integral>;
+
+  return static_cast<unsigned_type>(from);
+}
+
+template<typename Enum, typename>
+inline constexpr std::make_unsigned_t<std::underlying_type_t<Enum>>
+  bit::stl::casts::as_unsigned( Enum from )
+  noexcept
+{
+  using integral_type = std::underlying_type_t<Enum>;
+  using unsigned_type = std::make_unsigned_t<integral_type>;
+
+  return static_cast<unsigned_type>(from);
+}
+
+
 #endif /* BIT_STL_UTILITIES_DETAIL_CASTS_INL */
