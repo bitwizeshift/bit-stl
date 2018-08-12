@@ -2,7 +2,11 @@ cmake_minimum_required(VERSION 3.1)
 
 enable_testing()
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
+set(BIT_STL_CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake/Modules")
+set(BIT_STL_CMAKE_FIND_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake/FindModules")
+set(BIT_STL_CMAKE_TEMPLATE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake/Templates")
+
+set(CMAKE_MODULE_PATH "${BIT_STL_CMAKE_MODULE_PATH}")
 
 #-----------------------------------------------------------------------------
 # Project Setup
@@ -43,7 +47,7 @@ if( EXISTS "${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo.cmake" )
   conan_basic_setup(TARGETS)
 else()
   # Setup backup path if Conan is not used
-  set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake/FindModules" "${CMAKE_MODULE_PATH}")
+  set(CMAKE_MODULE_PATH "${BIT_STL_CMAKE_FIND_MODULE_PATH}" "${CMAKE_MODULE_PATH}")
 endif()
 
 if( BIT_STL_VERBOSE_CONFIGURE )
@@ -56,16 +60,10 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-include(MakeVersionHeader)
-
-make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
-  MAJOR "${BIT_STL_VERSION_MAJOR}"
-  MINOR "${BIT_STL_VERSION_MINOR}"
-  PATCH "${BIT_STL_VERSION_PATCH}"
-  PREFIX BIT_STL
-  SUFFIX "a"
-  INCLUDE_GUARD "BIT_STL_VERSION_HPP"
-)
+# Create the version header
+configure_file( "${BIT_STL_CMAKE_TEMPLATE_PATH}/version.hpp.in"
+                "${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
+                @ONLY )
 
 set(headers
 
@@ -382,11 +380,11 @@ set(PACKAGE_VERSION "${BIT_STL_VERSION}")
 set(PACKAGE_VERSION_MAJOR "${BIT_STL_VERSION_MAJOR}")
 set(PACKAGE_VERSION_MINOR "${BIT_STL_VERSION_MINOR}")
 
-configure_file( "${CMAKE_CURRENT_LIST_DIR}/CMake/Templates/PackageConfig.cmake.in"
+configure_file( "${BIT_STL_CMAKE_TEMPLATE_PATH}/PackageConfig.cmake.in"
                 "${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}Config.cmake"
                 @ONLY )
 
-configure_file( "${CMAKE_CURRENT_LIST_DIR}/CMake/Templates/PackageConfigVersion.cmake.in"
+configure_file( "${BIT_STL_CMAKE_TEMPLATE_PATH}/PackageConfigVersion.cmake.in"
                 "${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}ConfigVersion.cmake"
                 @ONLY )
 
