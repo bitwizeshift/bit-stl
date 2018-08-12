@@ -16,6 +16,7 @@ include(CMakeParseArguments)
 #                          PATCH <patch>
 #                          BUILD <build>
 #                          PREFIX <prefix>
+#                         [INCLUDE_GUARD <guard>]
 #                         [SUFFIX <suffix>]
 #                         [TAG <tag>] )
 #
@@ -31,7 +32,7 @@ include(CMakeParseArguments)
 #
 macro(make_version_header output_path )
 
-  set(__single_args MAJOR MINOR PATCH BUILD PREFIX SUFFIX TAG)
+  set(__single_args MAJOR MINOR PATCH BUILD PREFIX SUFFIX TAG INCLUDE_GUARD)
   cmake_parse_arguments("VERSION" "" "${__single_args}" "" "${ARGN}")
 
   ############################ Default Arguments #############################
@@ -45,6 +46,7 @@ macro(make_version_header output_path )
   set(VERSION_SUFFIX "${VERSION_SUFFIX}")
   set(VERSION_STRING "")
   set(FULL_VERSION_STRING "")
+  set(INCLUDE_GUARD ${VERSION_INCLUDE_GUARD})
 
 
   ######################## Validate Required Arguments #######################
@@ -65,51 +67,77 @@ macro(make_version_header output_path )
     message(FATAL_ERROR "make_version_header: Incorrect build number. Expected numeric entry, received '${BUILD_NUMBER}'")
   endif()
 
+  if( NOT INCLUDE_GUARD )
+    set( INCLUDE_GUARD "${PREFIX}_VERSION_HEADER" )
+  endif()
+
   ############################ Template Generation ###########################
 
   set(template_file "${CMAKE_BINARY_DIR}/MakeVersionHeader/version.in")
   if( NOT EXISTS "${template_file}" )
     file(WRITE "${template_file}"
 "
-/// Major version of this library
-#ifndef @PREFIX@VERSION_MAJOR
-# define @PREFIX@VERSION_MAJOR        @MAJOR_VERSION@
+/*****************************************************************************
+* \\file
+* \\brief This header defines the general library version information through
+*        macros to allow conditional compilation and library checks.
+*****************************************************************************/
+#ifndef @INCLUDE_GUARD@
+#define @INCLUDE_GUARD@
+
+#ifdef @PREFIX@_VERSION_MAJOR
+# error "@PREFIX@_VERSION_MAJOR defined before inclusion of the version header"
 #endif
+
+#ifndef @PREFIX@_VERSION_MINOR
+# error "@PREFIX@_VERSION_MINOR defined before inclusion of the version header"
+#endif
+
+#ifndef @PREFIX@_VERSION_PATCH
+# error "@PREFIX@_VERSION_PATCH defined before inclusion of the version header"
+#endif
+
+#ifndef @PREFIX@_VERSION_SUFFIX
+# error "@PREFIX@_VERSION_SUFFIX defined before inclusion of the version header"
+#endif
+
+#ifndef @PREFIX@_VERSION_TAG
+# error "@PREFIX@_VERSION_TAG defined before inclusion of the version header"
+#endif
+
+#ifndef @PREFIX@_VERSION_STRING
+# error "@PREFIX@_VERSION_STRING defined before inclusion of the version header"
+#endif
+
+#ifndef @PREFIX@_VERSION_STRING_FULL
+# error "@PREFIX@_VERSION_STRING_FULL defined before inclusion of the version header"
+#endif
+
+/// Major version of this library
+#define @PREFIX@_VERSION_MAJOR @MAJOR_VERSION@
 
 /// Minor version of this library
-#ifndef @PREFIX@VERSION_MINOR
-# define @PREFIX@VERSION_MINOR        @MINOR_VERSION@
-#endif
+#define @PREFIX@_VERSION_MINOR @MINOR_VERSION@
 
 /// Patch version of this library
-#ifndef @PREFIX@VERSION_PATCH
-# define @PREFIX@VERSION_PATCH        @PATCH_VERSION@
-#endif
+#define @PREFIX@_VERSION_PATCH @PATCH_VERSION@
 
 /// The version suffix
-#ifndef @PREFIX@VERSION_SUFFIX
-# define @PREFIX@VERSION_SUFFIX       @VERSION_SUFFIX@
-#endif
+#define @PREFIX@_VERSION_SUFFIX @VERSION_SUFFIX@
 
 /// The current build number
-#ifndef @PREFIX@BUILD_NUMBER
-# define @PREFIX@BUILD_NUMBER         @BUILD_NUMBER@
-#endif
+#define @PREFIX@_BUILD_NUMBER @BUILD_NUMBER@
 
 /// The tag name for this (normally a branch name)
-#ifndef @PREFIX@VERSION_TAG
-# define @PREFIX@VERSION_TAG          \"@TAG_VERSION@\"
-#endif
+#define @PREFIX@_VERSION_TAG          \"@TAG_VERSION@\"
 
 /// The version string (major.minor.patch)
-#ifndef @PREFIX@VERSION_STRING
-# define @PREFIX@VERSION_STRING       \"@VERSION_STRING@\"
-#endif
+#define @PREFIX@_VERSION_STRING       \"@VERSION_STRING@\"
 
 /// The full version string (major.minor.patch (tag build))
-#ifndef @PREFIX@VERSION_STRING_FULL
-# define @PREFIX@VERSION_STRING_FULL  \"@FULL_VERSION_STRING@\"
-#endif
+#define @PREFIX@_VERSION_STRING_FULL  \"@FULL_VERSION_STRING@\"
+
+#endif // @INCLUDE_GUARD@
 ")
   endif()
 

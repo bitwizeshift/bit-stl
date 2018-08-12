@@ -64,6 +64,7 @@ make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
   PATCH "${BIT_STL_VERSION_PATCH}"
   PREFIX BIT_STL
   SUFFIX "a"
+  INCLUDE_GUARD "BIT_STL_VERSION_HPP"
 )
 
 set(headers
