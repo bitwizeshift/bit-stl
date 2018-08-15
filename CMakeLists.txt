@@ -6,7 +6,7 @@ set(BIT_STL_CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake/Modules")
 set(BIT_STL_CMAKE_FIND_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake/FindModules")
 set(BIT_STL_CMAKE_TEMPLATE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake/Templates")
 
-set(CMAKE_MODULE_PATH "${BIT_STL_CMAKE_MODULE_PATH}")
+set(CMAKE_MODULE_PATH "${BIT_STL_CMAKE_MODULE_PATH}" "${CMAKE_MODULE_PATH}")
 
 ##############################################################################
 # Project Options
