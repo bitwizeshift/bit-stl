@@ -266,3 +266,15 @@ Temporary Items
 #-----------------------------------------------------------------------------
 
 secring.*
+
+#-----------------------------------------------------------------------------
+# Conan
+#-----------------------------------------------------------------------------
+
+conanbuildinfo.cmake
+conanbuildinfo.txt
+conanbuildinfo.*
+conaninfo.txt
+
+# Conan commonly uses just a 'build' directory
+build/

@@ -37,8 +37,8 @@
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "EqualityComparable.hpp"
-#include "Destructible.hpp"
 
+#include "../traits/properties/is_destructible.hpp"
 #include "../traits/composition/void_t.hpp"
 #include "../traits/composition/conjunction.hpp"
 #include "../traits/composition/bool_constant.hpp"

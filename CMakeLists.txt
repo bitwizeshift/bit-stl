@@ -2,65 +2,73 @@ cmake_minimum_required(VERSION 3.1)
 
 enable_testing()
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
+set(BIT_STL_CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake/Modules")
+set(BIT_STL_CMAKE_FIND_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake/FindModules")
+set(BIT_STL_CMAKE_TEMPLATE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake/Templates")
+
+set(CMAKE_MODULE_PATH "${BIT_STL_CMAKE_MODULE_PATH}" "${CMAKE_MODULE_PATH}")
+
+##############################################################################
+# Project Options
+##############################################################################
+
+include(CMakeDependentOption)
+
+option(BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS "Include each header independently in a .cpp file to determine header self-containment" OFF)
+option(BIT_STL_COMPILE_UNIT_TESTS "Compile and run the unit tests for this library" OFF)
+option(BIT_STL_GENERATE_DOCS "Generates doxygen documentation" OFF)
+option(BIT_STL_INSTALL_DOCS "Install documentation for this library" OFF)
+option(BIT_STL_VERBOSE_CONFIGURE "Verbosely configures this library project" OFF)
+
+set(BIT_STL_DOXYGEN_OUTPUT_PATH "${CMAKE_CURRENT_BINARY_DIR}/doxygen" CACHE STRING "Output location for doxygen")
+
+##############################################################################
+# Project
+##############################################################################
+
+project("BitStl" LANGUAGES CXX)
+
+set(BIT_STL_VERSION_MAJOR 2 CACHE STRING "major version of Bit::stl" FORCE)
+set(BIT_STL_VERSION_MINOR 0 CACHE STRING "minor version of Bit::stl" FORCE)
+set(BIT_STL_VERSION_PATCH 0 CACHE STRING "patch version of Bit::stl" FORCE)
+
+set(BIT_STL_VERSION "${BIT_STL_VERSION_MAJOR}.${BIT_STL_VERSION_MINOR}.${BIT_STL_VERSION_PATCH}" CACHE STRING "version of bit::stl" FORCE)
+
+if( EXISTS "${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo.cmake" )
+  include("${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo.cmake")
+  conan_basic_setup(TARGETS)
+else()
+  # Setup backup path if Conan is not used
+  set(CMAKE_MODULE_PATH "${BIT_STL_CMAKE_FIND_MODULE_PATH}" "${CMAKE_MODULE_PATH}")
+endif()
+
+if( BIT_STL_VERBOSE_CONFIGURE )
+  message(STATUS "Bit::stl ${BIT_STL_VERSION}")
+endif()
 
 #-----------------------------------------------------------------------------
-# Project Setup
-#-----------------------------------------------------------------------------
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # default to debug when building CMake
 if( NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES )
   set(CMAKE_BUILD_TYPE DEBUG)
 endif()
 
-include(EnableCCache)
-
 # enable cacche to speed up compilations
+include(EnableCCache)
 enable_ccache()
 
-include(CMakeDependentOption)
-
-option(BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS "Include each header independently in a .cpp file to determine header self-containment" off)
-option(BIT_STL_COMPILE_UNIT_TESTS "Compile and run the unit tests for this library" off)
-option(BIT_STL_GENERATE_DOCUMENTATION "Generates doxygen documentation" off)
-option(BIT_STL_VERBOSE_CONFIGURE "Verbosely configures this library project" off)
-
-project("BitStl" LANGUAGES CXX)
-
-#-----------------------------------------------------------------------------
-# Version Info
 #-----------------------------------------------------------------------------
 
-set(BIT_STL_VERSION_MAJOR 2 CACHE STRING "major version of bit::stl" FORCE)
-set(BIT_STL_VERSION_MINOR 0 CACHE STRING "minor version of bit::stl" FORCE)
-set(BIT_STL_VERSION_PATCH 0 CACHE STRING "patch version of bit::stl" FORCE)
-
-set(BIT_STL_VERSION "${BIT_STL_VERSION_MAJOR}.${BIT_STL_VERSION_MINOR}.${BIT_STL_VERSION_PATCH}" CACHE STRING "version of bit::stl" FORCE)
-
-if( BIT_STL_VERBOSE_CONFIGURE )
-  message(STATUS "bit::stl ${BIT_STL_VERSION}")
-endif()
-
-#-----------------------------------------------------------------------------
-# bit::stl
-#-----------------------------------------------------------------------------
-
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED on)
-set(CMAKE_CXX_EXTENSIONS off)
-
-include(MakeVersionHeader)
-
-make_version_header("${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
-  MAJOR ${BIT_STL_VERSION_MAJOR}
-  MINOR ${BIT_STL_VERSION_MINOR}
-  PATCH ${BIT_STL_VERSION_PATCH}
-  PREFIX BIT_STL
-  SUFFIX "a"
-)
+# Create the version header
+configure_file( "${BIT_STL_CMAKE_TEMPLATE_PATH}/version.hpp.in"
+                "${CMAKE_CURRENT_BINARY_DIR}/include/bit/stl/version.hpp"
+                @ONLY )
 
 set(headers
-
   # Type Traits
   include/bit/stl/traits/composition/bool_constant.hpp
   include/bit/stl/traits/composition/conjunction.hpp
@@ -162,7 +170,6 @@ set(headers
   include/bit/stl/concepts/BidirectionalIterator.hpp
   include/bit/stl/concepts/Container.hpp
   include/bit/stl/concepts/ContiguousContainer.hpp
-  include/bit/stl/concepts/Destructible.hpp
   include/bit/stl/concepts/EqualityComparable.hpp
   include/bit/stl/concepts/ForwardIterator.hpp
   include/bit/stl/concepts/InputIterator.hpp
@@ -319,16 +326,17 @@ set(inline_headers
 )
 
 add_library(stl INTERFACE)
-add_library(bit::stl ALIAS stl)
+add_library(Bit::stl ALIAS stl)
 
 target_include_directories(stl INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+  $<INSTALL_INTERFACE:include>
 )
 
-#-----------------------------------------------------------------------------
-# bit::stl : Independence Tests
-#-----------------------------------------------------------------------------
+##############################################################################
+# Header Self-Containment Tests
+##############################################################################
 
 include(AddHeaderSelfContainmentTest)
 
@@ -337,7 +345,6 @@ if( BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS )
   # Add containment test and alias as 'bit::stl::header_self_containment_test'
   add_header_self_containment_test(stl_header_self_containment_test ${headers})
   target_sources(stl_header_self_containment_test PRIVATE ${inline_headers})
-  add_library(bit::stl::header_self_containment_test ALIAS stl_header_self_containment_test)
 
   if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR
       "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
@@ -348,38 +355,80 @@ if( BIT_STL_COMPILE_HEADER_SELF_CONTAINMENT_TESTS )
 
 endif()
 
-#-----------------------------------------------------------------------------
-# bit::stl : Unit Tests
-#-----------------------------------------------------------------------------
+##############################################################################
+# Unit Tests
+##############################################################################
 
 if( BIT_STL_COMPILE_UNIT_TESTS )
   add_subdirectory(test)
 endif()
 
-#-----------------------------------------------------------------------------
-# bit::stl : Documentation
-#-----------------------------------------------------------------------------
+##############################################################################
+# Documentation
+##############################################################################
 
-if( BIT_STL_GENERATE_DOCUMENTATION )
-  add_subdirectory(doc)
+if( BIT_STL_GENERATE_DOCS )
+  add_subdirectory(docs)
 endif()
 
-#-----------------------------------------------------------------------------
-# bit::stl : Export
+##############################################################################
+# Installation
+##############################################################################
+
+set(PACKAGE_NAME "BitStl")
+set(PACKAGE_VERSION "${BIT_STL_VERSION}")
+set(PACKAGE_VERSION_MAJOR "${BIT_STL_VERSION_MAJOR}")
+set(PACKAGE_VERSION_MINOR "${BIT_STL_VERSION_MINOR}")
+
+configure_file(
+  "${BIT_STL_CMAKE_TEMPLATE_PATH}/PackageConfigVersion.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}ConfigVersion.cmake"
+  @ONLY
+)
+
+configure_file(
+  "${BIT_STL_CMAKE_TEMPLATE_PATH}/PackageConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}Config.cmake"
+  @ONLY
+)
+
 #-----------------------------------------------------------------------------
 
-include(ExportLibrary)
+include(GNUInstallDirs)
 
-if( EXISTS "$ENV{BIT_HOME}" )
-  set(CMAKE_INSTALL_PREFIX "$ENV{BIT_HOME}")
+set(BIT_STL_CMAKE_CONFIG_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PACKAGE_NAME}")
+
+# Includes
+install(
+  DIRECTORY "include/"
+  DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+)
+install(
+  DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include/"
+  DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+)
+
+# Targets
+install(
+  TARGETS "stl"
+  EXPORT "${PACKAGE_NAME}Targets"
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+)
+install(
+  EXPORT "${PACKAGE_NAME}Targets"
+  NAMESPACE "Bit::"
+  DESTINATION "${BIT_STL_CMAKE_CONFIG_DESTINATION}"
+)
+install(
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}ConfigVersion.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}Config.cmake"
+  DESTINATION "${BIT_STL_CMAKE_CONFIG_DESTINATION}"
+)
+
+# Documentation
+if( BIT_STL_INSTALL_DOCS AND BIT_STL_GENERATE_DOCS )
+  install(
+    DIRECTORY "${BIT_STL_DOXYGEN_OUTPUT_PATH}/"
+    DESTINATION "${CMAKE_INSTALL_DOCDIR}"
+  )
 endif()
-
-export_library( TARGETS stl
-                PACKAGE Stl
-                VERSION ${BIT_STL_VERSION}
-                MAJOR_VERSION ${BIT_STL_VERSION_MAJOR}
-                MINOR_VERSION ${BIT_STL_VERSION_MINOR}
-                INCLUDE_PATHS "${CMAKE_CURRENT_LIST_DIR}/include"
-                              "${CMAKE_CURRENT_BINARY_DIR}/include"
-                NAMESPACE "bit::"
-                PREFIX_PACKAGE )

@@ -43,7 +43,7 @@ namespace bit {
 
     /// \brief Function object for performing bitwise xor.
     ///        Effectively calls operator^ on type T.
-    struct bit_or
+    struct bit_xor
     {
       template<typename T, typename U>
       constexpr auto operator()( T&& lhs, U&& rhs ) const noexcept
@@ -53,7 +53,7 @@ namespace bit {
 } // namespace bit
 
 template<typename T, typename U>
-inline constexpr auto bit::stl::bit_or::operator()( T&& lhs, U&& rhs )
+inline constexpr auto bit::stl::bit_xor::operator()( T&& lhs, U&& rhs )
   const noexcept
   -> decltype( std::forward<T>(lhs) ^ std::forward<U>(rhs) )
 {
