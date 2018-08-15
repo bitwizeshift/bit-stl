@@ -43,7 +43,7 @@ namespace bit {
 
     /// \brief Function object for performing bitwise not.
     ///        Effectively calls operator~ on type T.
-    struct bit_and
+    struct bit_not
     {
       template<typename T>
       constexpr auto operator()( T&& x ) const noexcept
@@ -53,7 +53,7 @@ namespace bit {
 } // namespace bit
 
 template<typename T>
-inline constexpr auto bit::stl::bit_and::operator()( T&& x )
+inline constexpr auto bit::stl::bit_not::operator()( T&& x )
   const noexcept
   -> decltype( ~std::forward<T>(x) )
 {
