@@ -43,7 +43,7 @@ set(sources
 
 add_executable(bit_stl_test ${sources})
 
-target_link_libraries(bit_stl_test PRIVATE "bit::stl" "philsquared::Catch")
+target_link_libraries(bit_stl_test PRIVATE "Bit::stl" "philsquared::Catch")
 
 #-----------------------------------------------------------------------------
 
